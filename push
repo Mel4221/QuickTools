@@ -1,0 +1,13 @@
+#check the status from git
+git status
+#add the files with changes
+git add -A
+#commit the files
+git commit -a
+#pull the changes from git
+git pull 
+#push the changes made locally 
+git push 
+#Done
+echo "Task Completed"; 
+
