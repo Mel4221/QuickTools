@@ -197,24 +197,32 @@ namespace QuickTools
 //////////// THIS AREA CONTROLS CONSOLE Profile  /////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 */
-            public static void Login()
+            public static string[] Login()
 			{
 				string name, password;
-				Get.Box("Singup", 4);
-				Get.Yellow("Type Your Information Please.", 3);
-				Get.Box("Name", 1);
+				Get.Box("Login");
+				Get.Yellow("Type Your Information Please.");
+				Get.Box("Name");
 				name = Get.TextInput();
 				Get.Box("Password");
 				Get.Red("Hidden For Privacy and Security");
 				Get.Hide();
 				password = Console.ReadLine();
 				Get.Reset();
+				if(name == "" || password == "")
+                  {
+                        Get.WrongIn("Name or password empty");
+                        Get.Clear();
+                        Login();                        
+                  }
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'
                   new User(name, password);
+                  string[] userData = { name, password };
+                  return userData; 
 #pragma warning restore RECS0026 // Possible unassigned object created by 'new'
             }
 
-            public static void SingUp()
+            public static string[] SingUp()
 			{
 				string name, lastName, password, dob, phone, email;
 				Get.Box("Singup", 4);
@@ -238,7 +246,9 @@ namespace QuickTools
 				password = Console.ReadLine();
 				Get.Reset();
 			    new User(name, lastName, password, dob, phone, email);
-			//  Get.Wait(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
+                  //  Get.Wait(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
+                  string[] userData = { name, lastName, password, dob, phone, email };
+                  return userData; 
 			}
 
 			/*
