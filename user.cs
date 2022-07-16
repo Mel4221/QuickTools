@@ -38,7 +38,7 @@ namespace QuickTools
 
 			public static void Data()
 			{
-				Get.Yellow();
+				Color.Yellow();
 				// title box 
 				Get.Box(" [ " + "Name" + " ] " + " [ " + "Last Name" + " ] " + " [ " + "Password" + " ] " + " [ " + "DOB" + " ] " + " [ " + "Phone" + " ] " + " [ " + "Email" + " ] ");
 				Get.Box(" [ " + Name + " ] " + " [ " + LatName + " ] " + " [ " + Password + " ] " + " [ " + Dob + " ] " + " [ " + Phone + " ] " + " [ " + Email + " ] ");
