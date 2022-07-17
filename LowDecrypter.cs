@@ -9,6 +9,18 @@ namespace QuickTools
         public static string Data = null;
         public static string DecryptFile(List<int> data)
         {
+
+                  /*
+                        this class and the LowEncrypter has something in particular
+                        they both do not require password tox` be decrypted byt they use
+                        the algorithom to be able to decrypt the data sucessfully
+                        and even thought for me is not effective as much
+                         i think that it can definily have a very good chance if is 
+                         optimized a bit plus the counderies and connections between them both 
+                         is not that healthy so i will be correcting that on the next update , lastly 
+                         this is just one section from the Encryptor i think that this can definetly be part of the 
+                         phase of the encryption process 
+                  */
  
             //variables needed 
 

@@ -42,6 +42,7 @@
     <Compile Include="decrypter.cs" />
     <Compile Include="LowDecrypter.cs" />
     <Compile Include="LowEncrypter.cs" />
+    <Compile Include="reader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
