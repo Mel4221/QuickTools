@@ -9,6 +9,20 @@ namespace QuickTools
        //////////// THIS AREA CONTROLS CONSOLE COLOR AND STYLE /////////////////////
        /////////////////////////////////////////////////////////////////////////////
      */
+    
+    
+    
+   public void Color(string color)
+   {
+          switch(color.ToLowerCase())
+          {
+            case "gray":
+              break ; 
+            default:
+              Get.Yellow("Incorrect Color Selection , That Color is not implemented yet : "+color); 
+              break; 
+          }
+   }
 
     // Cyan        
     // Gray
