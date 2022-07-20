@@ -6,6 +6,7 @@ namespace QuickTools
 {       
             public class Reader
             {
+
                     public static class Stored
                     {
                         public static string RowData = null;
@@ -22,9 +23,20 @@ namespace QuickTools
                   List<object> dataList = new List<object>();
                   byte[] dataBytes;
 
-               
-                       
-                        using (var reader = new StreamReader(file))
+                 if(file.Length <= 0)
+                  {
+                      
+                              try
+                              {
+                                          // just to try to throw an exception
+                              }
+                              finally
+                              {
+                                    throw new ArgumentException();
+                              }
+                      
+                  }
+                  using (var reader = new StreamReader(file))
                         {
                               /*
                                   // this is supposed to reade 
@@ -100,7 +112,8 @@ namespace QuickTools
                   using (StreamReader reader = new StreamReader(file))
                   {
                         data = reader.ReadToEnd();
-                        Stored.RowData = data;  
+                        Stored.RowData = data;
+                       
                   }
 
                   return data; 
