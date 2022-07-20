@@ -9,17 +9,42 @@ namespace QuickTools
        //////////// THIS AREA CONTROLS CONSOLE COLOR AND STYLE /////////////////////
        /////////////////////////////////////////////////////////////////////////////
      */
-    
-    
-    
-   public void Color(string color)
+     public Color()
+            {
+                             
+            }
+
+
+            public  Color(string color)
    {
-          switch(color.ToLowerCase())
+          switch(color.ToLower())
           {
             case "gray":
-              break ; 
-            default:
-              Get.Yellow("Incorrect Color Selection , That Color is not implemented yet : "+color); 
+            Gray();                              
+              break ;
+                        case "cyan":
+                              Cyan();
+                              break;
+                        case "red":
+                              Red();
+                              break;
+                        case "black":
+                              Black();
+                              break;
+                        case "blue":
+                              Blue();
+                              break;
+                        case "green":
+                              Green();
+                              break;
+                        case "yellow":
+                              Yellow();
+                              break;
+                        case "pink":
+                              Pink();
+                              break;
+                        default:
+              Yellow("Incorrect Color Selection , That Color is not implemented yet : "+color); 
               break; 
           }
    }
@@ -59,8 +84,8 @@ namespace QuickTools
     {
       Console.ForegroundColor = ConsoleColor.Green;
     }
-
-    public static void Yellow ()
+         
+            public static void Yellow ()
     {
       Console.ForegroundColor = ConsoleColor.Yellow;
     }
