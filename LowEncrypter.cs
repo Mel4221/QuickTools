@@ -10,6 +10,8 @@ namespace QuickTools
         public static byte[] DataBytes; 
         public static int DataLength = 0000;
         public static int DataHash = 0000;
+
+
         public static string EncryptFile(string onlyText)
         {
             // this are the main variables needed 

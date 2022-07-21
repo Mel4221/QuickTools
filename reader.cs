@@ -4,12 +4,13 @@ using System.Text;
 using System.Collections.Generic; 
 namespace QuickTools
 {       
+
             public class Reader
             {
 
                     public static class Stored
                     {
-                        public static string RowData = null;
+                  public static StringBuilder RowData = new StringBuilder(); 
                         public static List<string> ListData = new List<string>();
                         public static byte[] BytesData; 
                     }
@@ -20,9 +21,13 @@ namespace QuickTools
                     */
                     public static byte[] ReadFileBytes(string file)
                     {
+
+
+
+
                   List<object> dataList = new List<object>();
                   byte[] dataBytes;
-
+                  Stored.RowData.Clear(); 
                  if(file.Length <= 0)
                   {
                       
@@ -67,7 +72,9 @@ namespace QuickTools
                                                       if (currentValue != "")
                                                       {
                                                             dataList.Add(currentValue);
+                                                           // Stored.RowData.Append(currentValue);  
                                                             currentValue = "";
+
                                                             // Get.Wait(data[Char]); 
                                                       }
                                                       break;
@@ -88,7 +95,7 @@ namespace QuickTools
                         for (int indexer = 0; indexer < dataBytes.Length; indexer++)
                         {
                               dataBytes[indexer] = Convert.ToByte(dataList[indexer]);
-                              Stored.RowData += dataList[indexer] + ",";
+                              Stored.RowData.Append(dataList[indexer]+",");
                         }
                   }
                   catch(Exception e)
@@ -112,7 +119,7 @@ namespace QuickTools
                   using (StreamReader reader = new StreamReader(file))
                   {
                         data = reader.ReadToEnd();
-                        Stored.RowData = data;
+                        Stored.RowData.Append(data); 
                        
                   }
 

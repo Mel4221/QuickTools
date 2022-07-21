@@ -29,8 +29,10 @@ namespace QuickTools
             int foward = LowEncrypter.DataLength;
             // thiw will be the first time it will be decompress 
             byte[] firstDecompress = new byte[LowEncrypter.DataLength];
+                  //the LowEncrypter should not be called to decrypt the file it just makes no sence 
+                  // i don't know what was i thinking , but it can not be on that way 
 
-            for (int value = 0; value < LowEncrypter.DataLength; value++)
+            for (int value = 0; value < LowEncrypter.DataLength; value++)// this is not correct this is taking data from the wrong place
             {
                 firstDecompress[value] = LowEncrypter.DataBytes[foward-1];
                 firstDecompress[value] = Convert.ToByte(firstDecompress[value]^8);
