@@ -30,146 +30,222 @@ _____________________________________
 using System;
 using System.Collections.Generic;
 
-namespace QuickTools 
+namespace QuickTools
 {
-  public class CostumOptions
-  {
+
+
+      public class Options
+      {
 
 
 
-                public static string  SelectorR = " > ";
-                public static string SelectorL = " < ";
-                public static int CurrentSelection = 0 ;
-                public static int More; 
-                public static List<string> OptionList = new List<string>(); 
-                
-               
-               
-               
-               public static void Display()
-               {
-                   Get.Clear();
-                                  // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
+            public static string SelectorR = " > ";
+            public static string SelectorL = " < ";
+            public static int CurrentSelection = 0;
+            public static object Label = null;
+            public static int More;
+            public static List<string> OptionList = new List<string>();
 
-                            for(int option=0; option < OptionList.Count; option++)
-                            {
-                                   if(option == CurrentSelection)
-                                   {
-                                        Get.Label(SelectorL + OptionList[option] + SelectorR);
-                             
-                                   }else{
-                                        Get.Write(OptionList[option]);
-                                       
-                                   }
-                            }
-               }
-               public int Select()
-               {
-                        
-                    if(OptionList.Count > 0)
-                    {
-                            // HERE WILL BE THE SELECTION METHOD ITSELF 
-                           while(Get.KeyInput().ToString() != "Enter")
-                           {
-                               
-                                        switch(Get.Key)
-                                        {
-                                                case "UpArrow":
-                                                        // Up 
-                                                    //    Get.Write("Up");
-                                                        if(CurrentSelection == 0 ){
-                                                            // go to the button 
-                                                            // if you are at the top 
-                                                            // bring me to the end of the 
-                                                            // list if i keep going up 
-                                                            CurrentSelection = OptionList.Count-1; 
-                                                             
-                                                            Display();
-                                                        }else{
-                                                            CurrentSelection--;
-                                                             
-                                                            Display();
-                                                        }
-                                                break; 
-                                                
-                                                case "DownArrow":
-                                                        // Down
-                                                     //   Get.Write("Down");
-                                                            if(CurrentSelection == OptionList.Count-1)
-                                                            {
-                                                                //this should bring me to the top 
-                                                                CurrentSelection = 0; 
-                                                                Display();
-                                                            
-                                                            
-                                                            }else{
-                                                                CurrentSelection++; 
-                                                                
-                                                                Display(); 
-                                                            }
-                                                        
-                                                break; 
-                                                default:
-                                                    /*
-                                                    // in here it has to be added a switch that could 
-                                                    //handle the process on a better way with
-                                                    // the number handling since it seems a kind of crazy
-                                                    // that you can not press numbers to give a command 
-                                                    // in the order of the selection
-                                                    */
-                                                    
-                                                    // this implementation is not completed yet 
-                                                    switch(Get.IsNumber(Get.Key))
-                                                    {
-                                                            case true:
-                                                            // here it shoudl go to the option pressed by it self 
-                                                            Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  "); 
-                                                            Display(); 
-                                                            break; 
-                                                            
-                                                            case false:
-                                                            Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  "); 
-                                                            Display(); 
-                                                            break; 
-                                                    }
-                                                    
-                                                    
-                                                break; 
-                                                
-                                        }
-                           }
-                            
-                            
-                            
-                            Get.Box(OptionList[CurrentSelection]);
-                    }else{
-                            Color.Yellow("Either No more options or not set up yet ");
-                            Color.Green("For more help please visit: ");
-                            Color.Yellow("https://www.mbvapps.xyz/QuickTools/");
-                            
-                    }
-                    
-                       return CurrentSelection;          
-               }
-               
-               
-               public CostumOptions(string[] options)
-               {
-                        foreach(string option in options)
+
+
+
+            public static void Display()
+            {
+                  Get.Clear();
+                  // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
+                  Get.Yellow(Label);
+                  for (int option = 0; option < OptionList.Count; option++)
+                  {
+                        if (option == CurrentSelection)
                         {
-                            OptionList.Add(option);
+
+                              Get.Label(SelectorL + OptionList[option] + SelectorR);
+
                         }
-                        
-                            // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
-                            for(int opt=0; opt<OptionList.Count; opt++)
-                            {
-                                   if(opt == CurrentSelection)
-                                   {
-                                        Get.Label(" < "+OptionList[opt]+" > ");
-                                   }else{
-                                        Get.Write(OptionList[opt]);
-                                   }
-                            }
-               }
-  }
+                        else
+                        {
+
+                              Get.Write(OptionList[option]);
+
+                        }
+                  }
+            }
+            /// <summary>
+            /// Select this instance.
+            /// This instance is the one that start the 
+            /// Selection process so even thouth you may call
+            /// the Constructor you may need to also start the Selction 
+            /// with Select example
+            /// var app = new Options(string[] list||List<object/>||bool true || false);
+            /// app.Select(); 
+            /// </summary>
+            /// <returns>The select.</returns>
+            public virtual int Select()
+            {
+
+                  if (OptionList.Count > 0)
+                  {
+                        // HERE WILL BE THE SELECTION METHOD ITSELF 
+                        while (Get.KeyInput().ToString() != "Enter")
+                        {
+
+                              switch (Get.Key)
+                              {
+                                    case "UpArrow":
+                                          // Up 
+                                          //    Get.Write("Up");
+                                          if (CurrentSelection == 0)
+                                          {
+                                                // go to the button 
+                                                // if you are at the top 
+                                                // bring me to the end of the 
+                                                // list if i keep going up 
+                                                CurrentSelection = OptionList.Count - 1;
+
+                                                Display();
+                                          }
+                                          else
+                                          {
+                                                CurrentSelection--;
+
+                                                Display();
+                                          }
+                                          break;
+
+                                    case "DownArrow":
+                                          // Down
+                                          //   Get.Write("Down");
+                                          if (CurrentSelection == OptionList.Count - 1)
+                                          {
+                                                //this should bring me to the top 
+                                                CurrentSelection = 0;
+                                                Display();
+
+
+                                          }
+                                          else
+                                          {
+                                                CurrentSelection++;
+
+                                                Display();
+                                          }
+
+                                          break;
+                                    default:
+                                          /*
+                                          // in here it has to be added a switch that could 
+                                          //handle the process on a better way with
+                                          // the number handling since it seems a kind of crazy
+                                          // that you can not press numbers to give a command 
+                                          // in the order of the selection
+                                          */
+
+                                          // this implementation is not completed yet 
+                                          switch (Get.IsNumber(Get.Key))
+                                          {
+                                                case true:
+                                                      // here it shoudl go to the option pressed by it self 
+                                                      Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                      Display();
+                                                      break;
+
+                                                case false:
+                                                      Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                      Display();
+                                                      break;
+                                          }
+
+
+                                          break;
+
+                              }
+                        }
+
+
+
+                        Get.Box(OptionList[CurrentSelection]);
+                  }
+                  else
+                  {
+                        Color.Yellow("Either No more options or not set up yet ");
+                        Color.Green("For more help please visit: ");
+                        Color.Yellow("https://www.mbvapps.xyz/QuickTools/");
+
+                  }
+
+                  return CurrentSelection;
+            }
+
+
+            public Options(string[] options)
+            {
+                  Get.Yellow(Label);
+                  foreach (string option in options)
+                  {
+                        OptionList.Add(option);
+                  }
+
+                  // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
+                  for (int opt = 0; opt < OptionList.Count; opt++)
+                  {
+                        if (opt == CurrentSelection)
+                        {
+                              Get.Label(" < " + OptionList[opt] + " > ");
+                        }
+                        else
+                        {
+                              Get.Write(OptionList[opt]);
+                        }
+                  }
+            }
+
+
+            public Options(List<object> options)
+            {
+
+                  Get.Yellow(Label);
+                  foreach (string option in options)
+                  {
+                        OptionList.Add(option);
+                  }
+
+                  // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
+                  for (int opt = 0; opt < OptionList.Count; opt++)
+                  {
+                        if (opt == CurrentSelection)
+                        {
+                              Get.Label(" < " + OptionList[opt] + " > ");
+                        }
+                        else
+                        {
+                              Get.Write(OptionList[opt]);
+                        }
+                  }
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// If you would like to get basically an answer were the first shoudl be answer should be 
+            /// NO you shoudl just type new Options(true); other wise the order would be back wards
+            /// remember that the return type will be always the same location in the array 
+            /// so it you select now if you select the yes it will return 0 which is the position of in the array 
+            /// </summary>
+            /// <param name="type">If set to <c>true</c> type.</param>
+            public Options(bool type)
+            {
+                  if (type == true)
+                  {
+                        string[] option = { "No", "Yes" };
+                        new Options(option);
+                  }
+                  else
+                  {
+                        string[] option = { "Yes","No" };
+                        new Options(option);
+                  }
+            }
+
+
+
+
+      }
 }
