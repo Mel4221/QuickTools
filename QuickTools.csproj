@@ -46,6 +46,9 @@
     <Compile Include="writer.cs" />
     <Compile Include="binary.cs" />
     <Compile Include="BigFilesReader.cs" />
+    <Compile Include="console.cs" />
+    <Compile Include="logger.cs" />
+    <Compile Include="arrowKeysReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

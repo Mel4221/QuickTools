@@ -52,13 +52,28 @@ namespace QuickTools
                   }
             }
 
-            public static string Path = Directory.GetCurrentDirectory();
-            public static string DataPath = Directory.GetCurrentDirectory() + "/data/qt/"; 
+            private static string Path = Directory.GetCurrentDirectory();
+            public static string DataPath()
+            {
+
+                  string folder = Get.Path + "/data/qt/";
+                  if (Directory.Exists(folder) == true)
+                  {
+                        return folder;
+                  }
+                  else
+                  {
+                        Directory.CreateDirectory(folder);
+                        return folder; 
+                  } 
+
+            }
 
             // this generate a random byte 
             // between 0 to 250 
             // which could be use to create a 
             // key 
+
             static public byte RandomByte()
             {
                   Random rand = new Random();
@@ -117,6 +132,7 @@ namespace QuickTools
             properly 
             
                   */
+
             public static void SaveKey()
             {
                   string path, keyFile, qtDir; 
@@ -450,10 +466,16 @@ namespace QuickTools
 				Console.Write("\n" + msg + " ");
 				Get.Reset();
 			}
-
-			public static void Title(object msg)
+            public static void LabelSingle(object msg)
+            {
+                  Get.Reset();
+                  Color.Pink();
+                  Console.Write(msg); 
+                  Get.Reset();
+            }
+            public static void Title(object msg)
 			{
-				Console.WriteLine("\t" + msg);
+                  Console.Title = msg.ToString(); 
 			}
 
 			// this gives you the avility to 
@@ -655,16 +677,14 @@ namespace QuickTools
 				Get.Wait();
 			}
 
-			public static void Alert()
-			{
-				Console.ForegroundColor = ConsoleColor.Yellow;
-			}
+		
 
 			public static void Alert(object msg)
 			{
 				Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine(msg);
 				Console.ResetColor();
+                        Console.Beep();                  
 				Get.Wait();
 			}
 
