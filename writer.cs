@@ -99,7 +99,19 @@ namespace QuickTools
                                     Color.Yellow("This file could not be created , more details : "+e); 
                                 }
                         }
-                    
+
+            public static void Write(string file, object data)
+            {
+
+                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+                  {
+                        if (fs.CanWrite)
+                        {
+                              byte[] buffer = Encoding.ASCII.GetBytes(data.ToString());
+                              fs.Write(buffer, 0, buffer.Length);
+                        }
+                  }
             }
+      }
       
 }

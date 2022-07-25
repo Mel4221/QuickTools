@@ -136,18 +136,7 @@ namespace QuickTools
             }
 
 
-            public static void Write(string file,object data)
-            {
 
-                  using (FileStream fs = new FileStream(file,FileMode.Create,FileAccess.Write))
-                  {
-                                    if(fs.CanWrite)
-                        {
-                              byte[] buffer = Encoding.ASCII.GetBytes(data.ToString());
-                              fs.Write(buffer, 0, buffer.Length); 
-                        }
-                  }
-            }
             public static double ReadLength = 0000; 
             public static string Read(string file)
             {
