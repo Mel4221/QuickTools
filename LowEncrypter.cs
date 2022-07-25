@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * 
+ * The low encrypter and decrypter are still not to the level that i would say
+ * hey this  would be a chanlenge for sombody to hack in because it is just switcing order
+ * and Elevating to the power of a number which is not enoguth for security porpuses.
+*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 namespace QuickTools

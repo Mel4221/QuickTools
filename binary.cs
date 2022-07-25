@@ -1,3 +1,10 @@
+/*
+
+      this is only an example this and should be commented entiredly 
+
+
+
+
 using System;
 using System.IO;
 using System.Text;
@@ -51,3 +58,5 @@ class ConsoleApplication
     }
 }
 }
+
+*/

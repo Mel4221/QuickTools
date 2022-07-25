@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+            This class is a very good example that sometimes you don't need a tone of code
+            to have funtionality , and it can easily write up to 1G in written logs            
+*/
+using System;
 using System.IO;
 namespace QuickTools
 {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,6 +9,21 @@
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <PackageId>QuickTools</PackageId>
+    <PackageVersion>2001</PackageVersion>
+    <Authors>MBV</Authors>
+    <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageLicenseUrl>https://github.com/segmentio/is-url/blob/master/LICENSE-MIT</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Owners>MBV</Owners>
+    <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
+    <PackageReleaseNotes>New QuckTools Library for C# users </PackageReleaseNotes>
+    <Summary>C# Librarry</Summary>
+    <PackageTags>Tool</PackageTags>
+    <Title>QuickTools</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,13 +61,14 @@
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
     <Compile Include="binary.cs" />
-    <Compile Include="BigFilesReader.cs" />
     <Compile Include="console.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="arrowKeysReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
 </Project>
