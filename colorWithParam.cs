@@ -157,6 +157,45 @@ namespace QuickTools
     }
 
 
+            public static void Border(object content)
+            {
+                  string simbol = "*";
+                  string underLine = "";
+                  for (int i = 0; i <= content.ToString().Length + 3; i++)
+                  {
+                        Color.Yellow();
+                        C.Write(simbol);
+                        underLine += simbol;
+                  }
 
-  }
+                  Get.W("");// this write an space
+                  C.Write(simbol); // this write a single char
+                  Get.Reset();    // reset the color 
+                  C.Write(" " + content + " "); // write the content 
+                  Color.Yellow(); // get the yellow color again 
+                  C.Write(simbol);
+                  Get.W("");          // more space 
+                  Get.W(underLine);
+            }
+
+            public static void Border(object content, object simbol)
+            {
+
+                  string underLine = "";
+                  for (int i = 0; i <= content.ToString().Length + 3; i++)
+                  {
+                        Color.Yellow();
+                        C.Write(simbol);
+                        underLine += simbol;
+                  }
+                  Get.W("");// this write an space
+                  C.Write(simbol); // this write a single char
+                  Get.Reset();    // reset the color 
+                  C.Write(" " + content + " "); // write the content 
+                  Color.Yellow(); // get the yellow color again 
+                  C.Write(simbol);
+                  Get.W("");          // more space 
+                  Get.W(underLine);
+            }
+      }
 }

@@ -567,6 +567,10 @@ namespace QuickTools
 				Get.W(tabSpaces + underLine);
 			}
 
+
+                  
+                  
+
 			public static void Wrong()
 			{
 				Console.ForegroundColor = ConsoleColor.Red;
