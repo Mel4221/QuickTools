@@ -5,25 +5,34 @@ namespace QuickTools
 {
      public class Encrypter
       {
-            public static List<object> SecureData = new List<object>();
-            public static int InitialLength = 0;
-
-            public static void EncryptFile(object data, object pass)
+            //public static List<object> SecureData = new List<object>();
+            //public static int InitialLength = 0;// why do we need an initialLengeth ??? i mean it is nonsence 
+            //public static StringBuilder RowData = new StringBuilder(); 
+            //public static List<double> RowData = new List<double>(); 
+            public static void EncryptFile(string fileToEncrypt, object filePassword)
             {
-                  byte[] dataBytes = Encoding.ASCII.GetBytes(data.ToString());
-                  double passHash = pass.GetHashCode();
-                  InitialLength = dataBytes.Length;
-                  // Get.Alert("initial " + InitialLength);
-                  List<object> dataEncrypted = new List<object>();
+                  /*
+                        basically this works on the current way 
+                        it gets 2 parameters , the file that will 
+                        be enprited and then the password 
+                        and if the password fail the process will not be completed                        
 
-                  for (int value = 0; value < dataBytes.Length; value++)
+                  */
+                  byte[] dataBytes = Encoding.ASCII.GetBytes(Reader.Read(fileToEncrypt));
+                  double hash = filePassword.GetHashCode();
+                  List<double> dataEncrypted = new List<double>(); 
+                  for (int value =0; value<dataBytes.Length; value++)
                   {
-                        dataEncrypted.Add(dataBytes[value] * passHash);
-                        //dataEncrypted[value] = Convert.ToInt32(dataEncrypted[value]) * value; // not working 
-                        //Console.Write(dataEncrypted[value] + " ");
+                        dataEncrypted.Add(dataBytes[value] * hash);
+                         
                   }
-
-                  SecureData = dataEncrypted;
+                  StringBuilder str = new StringBuilder(); 
+                  foreach(double val in dataEncrypted)
+                  {
+                        //RowData.Add(val);
+                        str.Append(val + ",");
+                  }
+                  Writer.Write(fileToEncrypt,str.ToString());
             }
       }
 }

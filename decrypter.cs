@@ -6,21 +6,29 @@ namespace QuickTools
       public class Decrypter
       {
             // Decrypting 
-            public static void DeComplex(List<object> data, object password,int initialLength)
+            public static void DecryptFile(string fileToDecrypt,object filePassword)
             {
-                  //  pass = "SecurePaSecurePass1234SecurePass1234SecurePass1234SecurePass1234SecurePass1234SecurePass1234SecurePass1234ss1234"; 
-                  double hashPass = password.GetHashCode();
-                  byte[] dataDecrypted = new byte[initialLength];
 
-
-                  // Get.Alert(dataDecrypted.Length); 
-                  for (int value = 0; value < dataDecrypted.Length; value++)
+                // Writer.Write(fileToDecrypt, LowD.DecryptFile(fileToDecrypt));
+                  Reader.ReadArray(fileToDecrypt);
+                  List<string> data = Reader.Stored.ListData;  
+                  double hash = filePassword.GetHashCode();
+                  List<byte> RowData = new List<byte>(); 
+                  for(int value=0; value<data.Count; value++)
                   {
-                        dataDecrypted[value] = Convert.ToByte(Convert.ToDouble(data[value].ToString()) / hashPass);
-
+                        RowData.Add(Convert.ToByte(Convert.ToDouble(data[value]) / hash)); 
                   }
-                  Color.Yellow(Encoding.ASCII.GetString(dataDecrypted));
-            }
+
+                  byte[] finalData = new byte[RowData.Count]; 
+                  for(int val = 0; val<RowData.Count; val++)
+                  {
+                        finalData[val] = RowData[val]; 
+                  }
+                // Get.Wait(Encoding.ASCII.GetString(finalData)); 
+                  Writer.Write(fileToDecrypt, Encoding.ASCII.GetString(finalData)); 
+                  
+
+            }     
       }
 
 }

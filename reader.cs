@@ -34,6 +34,7 @@ namespace QuickTools
                   List<object> dataList = new List<object>();
                   byte[] dataBytes;
                   Stored.RowData.Clear();
+
                   EmptySpacesCount = 0;
                   if (file.Length <= 0)
                   {
@@ -80,6 +81,7 @@ namespace QuickTools
                                                 {
                                                       EmptySpacesCount++;
                                                       dataList.Add(currentValue);
+
                                                       // Stored.RowData.Append(currentValue);  
                                                       currentValue = "";
 
@@ -121,6 +123,90 @@ namespace QuickTools
 
             }
 
+
+                  /*
+                   Array Reader 
+                  */
+
+
+            public static List<string> ReadArray(string file)
+            {
+
+
+
+
+                  List<string> dataList = new List<string>();
+                        
+                  Stored.RowData.Clear();
+                  EmptySpacesCount = 0;
+                  if (file.Length <= 0)
+                  {
+
+                        try
+                        {
+                              // just to try to throw an exception
+                        }
+                        finally
+                        {
+                              throw new ArgumentException();
+                        }
+
+                  }
+                  using (var reader = new StreamReader(file))
+                  {
+                        /*
+                            // this is supposed to reade 
+                            // either an array of data 
+                            // or  any data in number decimal 
+                            // format and it has to return it in 
+                            // an array format aswell
+                        */
+                        //bool isNext = false;//
+                        string line;
+                        string currentValue = "";
+                        while (reader.Peek() >= 0)
+                        {
+                              line = reader.ReadLine();
+                              //Get.Wait(line);// for testing only  
+                              //this will loop over the entired line
+                              //to make sure that it takes only the
+                              // numbers from it 
+                              for (int Char = 0; Char < line.Length; Char++)
+                              {
+                                    switch (Get.IsNumber(line[Char]))
+                                    {
+                                          case true:
+                                                currentValue += line[Char];
+                                                break;
+
+                                          case false:
+                                                if (currentValue != "")
+                                                {
+                                                      EmptySpacesCount++;
+                                                      dataList.Add(currentValue);
+                                                      Stored.RowData.Append(currentValue);
+                                                      Stored.ListData.Add(currentValue); 
+                                                      // Stored.RowData.Append(currentValue);  
+                                                      currentValue = "";
+
+                                                      // Get.Wait(data[Char]); 
+                                                }
+                                                break;
+                                    }
+                                    //Get.Green(data[Char]); 
+                              }
+
+                              // Get.Green(data[0]); 
+                        }
+
+
+                  }
+
+         
+                  return dataList;
+
+
+            }
 
             public static string ReadFile(string file)
             {
