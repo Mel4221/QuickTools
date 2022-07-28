@@ -8,10 +8,12 @@ it is nothing related with the performance but more with relation with the
 action that it creates DATE OF UPDATE : 03/11/2022
 */
 using System;
+//using System.Security;            // has to be implemented 
 using System.Threading; 
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+//using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools
 {
@@ -44,19 +46,41 @@ namespace QuickTools
 
             }
 
+            public static void WaitTime()
+            {
+
+                  try
+                  {
+                        Thread.Sleep(1000);
+
+                  }
+                  catch (Exception e)
+                  {
+                        Get.Wrong(e);
+                  }
+
+
+            }
             public static void _(int sleepTime)
             {
                   if (sleepTime < 12000)
                   {
-                        Thread.Sleep(sleepTime);
+                        try
+                        {
+                              Thread.Sleep(sleepTime);
+                        }catch(Exception e)
+                        {
+                              Wrong(e); 
+                        }
                   }
             }
 
             private static string Path = Directory.GetCurrentDirectory();
+            
             public static string DataPath()
             {
 
-                  string folder = Get.Path + "/data/qt/";
+                  string folder = Get.Path + "data/qt/";
                   if (Directory.Exists(folder) == true)
                   {
                         return folder;
@@ -64,6 +88,7 @@ namespace QuickTools
                   else
                   {
                         Directory.CreateDirectory(folder);
+                       
                         return folder; 
                   } 
 

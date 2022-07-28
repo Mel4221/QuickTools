@@ -18,21 +18,37 @@ namespace QuickTools
                         and if the password fail the process will not be completed                        
 
                   */
-                  byte[] dataBytes = Encoding.ASCII.GetBytes(Reader.Read(fileToEncrypt));
-                  double hash = filePassword.GetHashCode();
-                  List<double> dataEncrypted = new List<double>(); 
-                  for (int value =0; value<dataBytes.Length; value++)
+                  Console.Title = "Encrypting File Please Wait...";
+                  Get.WaitTime(); 
+                  try
                   {
-                        dataEncrypted.Add(dataBytes[value] * hash);
-                         
-                  }
-                  StringBuilder str = new StringBuilder(); 
-                  foreach(double val in dataEncrypted)
+                        byte[] dataBytes = Encoding.ASCII.GetBytes(Reader.Read(fileToEncrypt));
+                        double hash = filePassword.GetHashCode();
+                        List<double> dataEncrypted = new List<double>();
+                        for (int value = 0; value < dataBytes.Length; value++)
+                        {
+                              dataEncrypted.Add(dataBytes[value] * hash + value);
+
+                              Console.Title = value.ToString(); 
+                        }
+                        StringBuilder finalData = new StringBuilder();
+                        foreach (double val in dataEncrypted)
+                        {
+                              //RowData.Add(val);
+                              finalData.Append(val + ",");
+                        }
+                        Writer.Write(fileToEncrypt, LowEncrypt.EncryptFile(finalData.ToString()));
+                        //done 
+
+                        Console.Title = "File Encrypted";
+                        Get.WaitTime(); 
+                   }
+                  catch
                   {
-                        //RowData.Add(val);
-                        str.Append(val + ",");
+                        Get.Wrong("Something went wrong while Encrypting the file "); 
+                        throw new InvalidOperationException("The File could not be Encrypted");
+
                   }
-                  Writer.Write(fileToEncrypt,str.ToString());
             }
       }
 }

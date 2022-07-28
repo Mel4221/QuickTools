@@ -12,9 +12,9 @@ using System.Collections.Generic;
 
 namespace QuickTools
 {
-      public class LowD
+      public class LowDecrypt
       {
-            public static string Data = null;
+            public static string RowData = null;
             public static string DecryptFile(string fileData)
             {
 
@@ -45,10 +45,10 @@ namespace QuickTools
 
                         foward--;
                   }
-                  Data = Encoding.ASCII.GetString(firstDecompress);
-
-
-                  return Encoding.ASCII.GetString(firstDecompress);
+                 string finalData = Encoding.ASCII.GetString(firstDecompress);
+                  RowData = finalData;
+                  // Get.Wait(Data); 
+                  return finalData; 
 
             }
       }
