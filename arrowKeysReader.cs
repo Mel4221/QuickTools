@@ -11,7 +11,7 @@
 using System;
 namespace QuickTools
 {
-      public class Key
+       class Key
       {
 
             private static int Position = 0;

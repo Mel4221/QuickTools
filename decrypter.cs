@@ -3,9 +3,23 @@ using System.Text;
 using System.Collections.Generic;
 namespace QuickTools
 {
+
+      /// <summary>
+      /// This class basically dencrypt the files and contaings 
+      /// 2 Methods 1  that read the encrypted that from the file
+      /// then it will decrypt the data and will write it back to the file
+      /// </summary>
       public class Decrypter
       {
 
+            /// <summary>
+            /// This Member Can not be Accest to due to 
+            /// it main funtionality is only to read the data from
+            /// the file and converted in a way that it can be 
+            /// desencrypted.
+            /// </summary>
+            /// <returns>The list.</returns>
+            /// <param name="file">File.</param>
             private static List<string> GetList(string file)
             {
 
@@ -22,7 +36,7 @@ namespace QuickTools
                         StringBuilder currentValue = new StringBuilder();
                         // looping to get each value from the array 
                         //title
-                        Console.Title = "Working With Task A: Byte Size :"+RowText.Length;
+                        //Console.Title = "Working With Task A: Byte Size :"+RowText.Length;
 
                         for (int value = 0; value < RowText.Length; value++)
                         {
@@ -59,9 +73,18 @@ namespace QuickTools
             }
 
 
-            // Decrypting 
-            public static void DecryptFile(string fileToDecrypt,object filePassword)
+            /// <summary>
+            /// This method basically works by passing the fileto it 
+            /// as the first argument then the password wich would end up
+            /// being written to the file passed in first place after desencrypting 
+            /// the file. 
+            /// </summary>
+            /// <param name="fileToDecrypt">File to decrypt.</param>
+            /// <param name="FilePassword">File password.</param>
+            public static void DecryptFile(string fileToDecrypt,object FilePassword)
             {
+
+                  string filePassword = FilePassword.ToString(); 
                   try
                   {
                         
@@ -74,16 +97,16 @@ namespace QuickTools
                         for (int value = 0; value < data.Count; value++)
                         {
                               //title
-                              Console.Title = "Working With Task B :"+ value; 
+                             // Console.Title = "Working With Task B :"+ value; 
 
-                              RowData.Add(Convert.ToByte(Convert.ToDouble(data[value]) / hash - value));
+                              RowData.Add(Convert.ToByte(Convert.ToDouble(data[value]) / hash));
                         }
 
                         byte[] finalData = new byte[RowData.Count];
                         for (int val = 0; val < RowData.Count; val++)
                         {
                               //title
-                              Console.Title = "Working With Task B :" + val;
+                            //  Console.Title = "Working With Task B :" + val;
                               finalData[val] = RowData[val];
 
                         }
