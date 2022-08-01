@@ -448,7 +448,12 @@ namespace QuickTools
                   }
 
             }
-
+                  /// <summary>
+                  /// TextInput Method ReadText from the Console and return text
+                  /// has magenta color design and also it send the current text
+                  /// to the Get.Text Field 
+                  /// </summary>
+                  /// <returns>The input.</returns>
 			public static string TextInput()
 			{
 				Get.LabelSide(">");
@@ -457,24 +462,34 @@ namespace QuickTools
 				Text = text;
 				return text;
 			}
-
+                  /// <summary>
+                  /// Shortcut for Console.Reset(); 
+                  /// </summary>
 			public static void Reset()
 			{
 				Console.ResetColor();
 			}
-
-			public static void Cle()
+            /// <summary>
+            ///shurtcut for Console.Clear(); 
+            /// </summary>
+            public static void Cle()
 			{
 				Console.Clear();
 			}
-
+                  /// <summary>
+                  /// shurtcut for Console.Clear(); 
+                  /// </summary>
 			public static void Clear()
 			{
 				Console.Clear();
 			}
 
-		
-
+		      
+                  /// <summary>
+                  /// Write text with background color in color magentaand some space around it 
+                  /// and seems like a type of a label and takes an argument of an object to avoid casting
+                  /// </summary>
+                  /// <param name="msg">Message.</param>
 			public static void Label(object msg)
 			{
 				Console.BackgroundColor = ConsoleColor.Magenta;

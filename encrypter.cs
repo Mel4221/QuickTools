@@ -27,7 +27,8 @@ namespace QuickTools
                         and if the password fail the process will not be completed                        
 
                   */
-                  string filePassword = FilePassword.ToString(); 
+                  string replaceEmptySpaces = FilePassword.ToString().Replace(" ", "");
+                  string filePassword = replaceEmptySpaces; 
                  Console.Title = "Encrypting File Please Wait...";
                   Get.WaitTime(); 
                   try
@@ -37,11 +38,12 @@ namespace QuickTools
                         List<double> dataEncrypted = new List<double>();
                         for (int value = 0; value < dataBytes.Length; value++)
                         {
-                              dataEncrypted.Add(dataBytes[value] * hash);
+                              dataEncrypted.Add(dataBytes[value] + hash);
 
                           //    Console.Title = value.ToString(); 
                         }
 
+                        dataEncrypted.Add(dataBytes.Length); // thiw will create the magic 
                         StringBuilder finalData = new StringBuilder();
                         foreach (double val in dataEncrypted)
                         {

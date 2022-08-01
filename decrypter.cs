@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Text;
 using System.Collections.Generic;
 namespace QuickTools
@@ -84,23 +87,25 @@ namespace QuickTools
             public static void DecryptFile(string fileToDecrypt,object FilePassword)
             {
 
-                  string filePassword = FilePassword.ToString(); 
+                  string replaceEmptySpaces = FilePassword.ToString().Replace(" ","");
+                  string filePassword = replaceEmptySpaces;
                   try
                   {
-                        
-                        // Writer.Write(fileToDecrypt, LowD.DecryptFile(fileToDecrypt));
-                        //Reader.ReadArray(LowDecrypt.DecryptFile(fileToDecrypt));
-                        List<string> data = GetList(fileToDecrypt);
+
+                  // Writer.Write(fileToDecrypt, LowD.DecryptFile(fileToDecrypt));
+                  //Reader.ReadArray(LowDecrypt.DecryptFile(fileToDecrypt));
+                  List<string> data = GetList(fileToDecrypt);
                         double hash = filePassword.GetHashCode();
                         List<byte> RowData = new List<byte>();
 
-                        for (int value = 0; value < data.Count; value++)
+                        for (int value = 0; value < data.Count-1; value++)
                         {
                               //title
                              // Console.Title = "Working With Task B :"+ value; 
 
-                              RowData.Add(Convert.ToByte(Convert.ToDouble(data[value]) / hash));
+                              RowData.Add(Convert.ToByte(Convert.ToDouble(data[value]) - hash));
                         }
+                      // Get.Wait(data.Count +" "+RowData.Count +" "+data[data.Count-1]); 
 
                         byte[] finalData = new byte[RowData.Count];
                         for (int val = 0; val < RowData.Count; val++)
@@ -113,11 +118,21 @@ namespace QuickTools
 
                         //finally gave me an error 
                         //  Color.Yellow("This is supposed to be clear Text : \n"+Encoding.ASCII.GetString(finalData)); 
-                        Writer.WriteFile(fileToDecrypt, Encoding.ASCII.GetString(finalData));
-                  }
-                  catch
+                        string textData = Encoding.ASCII.GetString(finalData);
+
+                       // Get.Wait(textData.Length + " " + data[data.Count]); 
+                        if (textData.Length == int.Parse(data[data.Count-1])) {
+                              Writer.WriteFile(fileToDecrypt,textData);
+                              
+                        }
+                        else
+                        {
+                              Color.Yellow("Incorrect Password");
+                        }
+                       }
+                       catch
                   {
-                        Color.Yellow("Incorrect Password"); 
+                  Color.Yellow("Incorrect Password"); 
 
                   }
             } 
