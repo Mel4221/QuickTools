@@ -48,6 +48,41 @@ namespace QuickTools
               break; 
           }
    }
+          public  Color(string color, object content)
+   {
+          switch(color.ToLower())
+          {
+            case "gray":
+            Gray();                              
+              break ;
+                        case "cyan":
+                              Cyan(content);
+                              break;
+                        case "red":
+                              Red(content);
+                              break;
+                        case "black":
+                              Black(content);
+                              break;
+                        case "blue":
+                              Blue(content);
+                              break;
+                        case "green":
+                              Green(content);
+                              break;
+                        case "yellow":
+                              Yellow(content);
+                              break;
+                        case "pink":
+                              Pink(content);
+                              break;
+                        default:
+              Yellow("Incorrect Color Selection , That Color is not implemented yet : "+color); 
+              break; 
+          }
+   }
+
+    
 
     // Cyan        
     // Gray
