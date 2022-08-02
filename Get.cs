@@ -9,7 +9,7 @@ action that it creates DATE OF UPDATE : 03/11/2022
 */
 using System;
 //using System.Security;            // has to be implemented 
-using System.Threading; 
+using System.Threading;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -21,16 +21,28 @@ namespace QuickTools
 
 
 
-		///////////////////////////////////////////////////////////
-		///////////////////////////////////////////////////////////
-		/////////////////*this is were the Class Get Starts *//////
-		///////////////////////////////////////////////////////////
-		///////////////////////////////////////////////////////////
-	
-		public  class Get:Color
-		{
+      ///////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////
+      /////////////////*this is were the Class Get Starts *//////
+      ///////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////
 
 
+      /// <summary>
+      /// Get The bigest class In Quicktools
+      /// does multiple stuff and contains must of the 
+      /// tools that started this Project.
+      /// </summary>
+      public class Get : Color
+      {
+
+            /// <summary>
+            /// WaitTime basically is an abstraction of 
+            /// System.Threading.Sleep(<paramref name="sleepTime"/>);
+            /// and it basically wait the time in it , it also 
+            /// contains a try catch just in case if something fails
+            /// </summary>
+            /// <param name="sleepTime">Sleep time.</param>
             public static void WaitTime(int sleepTime)
             {
 
@@ -38,14 +50,18 @@ namespace QuickTools
                   {
                         Thread.Sleep(sleepTime);
 
-                  }catch(Exception e )
+                  }
+                  catch (Exception e)
                   {
-                        Get.Wrong(e); 
+                        Get.Wrong(e);
                   }
 
 
             }
-
+            /// <summary>
+            /// Does the same than the waittime with no param 
+            /// but this only wait or sleep 1000 milliseconds 
+            /// </summary>
             public static void WaitTime()
             {
 
@@ -61,6 +77,11 @@ namespace QuickTools
 
 
             }
+            /// <summary>
+            /// This does the same thing than WaitTime with param but it actually
+            /// has a different name 
+            /// </summary>
+            /// <param name="sleepTime">Sleep time.</param>
             public static void _(int sleepTime)
             {
                   if (sleepTime < 12000)
@@ -68,15 +89,23 @@ namespace QuickTools
                         try
                         {
                               Thread.Sleep(sleepTime);
-                        }catch(Exception e)
+                        }
+                        catch (Exception e)
                         {
-                              Wrong(e); 
+                              Wrong(e);
                         }
                   }
             }
 
             private static string Path = Directory.GetCurrentDirectory();
-            
+            /// <summary>
+            /// This method Create a folder inside the root of the program
+            /// and create a folder that can be use for the program 
+            /// it work like this ProgramRoot/data/qt/...
+            /// also if the program has a folder that is already called data
+            /// it will not override it 
+            /// </summary>
+            /// <returns>string path </returns>
             public static string DataPath()
             {
 
@@ -88,9 +117,9 @@ namespace QuickTools
                   else
                   {
                         Directory.CreateDirectory(folder);
-                       
-                        return folder; 
-                  } 
+
+                        return folder;
+                  }
 
             }
 
@@ -99,6 +128,12 @@ namespace QuickTools
             // which could be use to create a 
             // key 
 
+            /// <summary>
+            /// it generate a random byte from 0 to 250
+            /// and it uses the Random.Next(min,max)
+            /// under it for it to work 
+            /// </summary>
+            /// <returns>Single Byte</returns>
             static public byte RandomByte()
             {
                   Random rand = new Random();
@@ -110,25 +145,42 @@ namespace QuickTools
                   return finalNumber;
 
             }
-            public static byte[] KeyGenerated = new byte[16]; 
+            /// <summary>
+            /// This  hold the key of 16 bits already generated
+            /// by the RandomByteKey() generator 
+            /// </summary>
+            public static byte[] KeyGenerated = new byte[16];
 
             /*
                   This method generate a 16 bits
                   key and it is sored either in the array 
                   or is stored in a keys.secure file 
             */
+            /// <summary>
+            /// Randoms the byte key generate a random byte key 
+            /// that could be used for encrypting and it has a 16 bits length
+            /// </summary>
+            /// <returns>The byte key.</returns>
             public static byte[] RandomByteKey()
             {
                   byte[] key = new byte[16];
 
-                  for (int index =0; index<key.Length; index++)
+                  for (int index = 0; index < key.Length; index++)
                   {
-                        key[index] = RandomByte(); 
+                        key[index] = RandomByte();
                   }
-                  KeyGenerated = key; 
-                  return key; 
+                  KeyGenerated = key;
+                  return key;
             }
-
+            /// <summary>
+            /// Randoms the byte key this works on the same way than RandomByteKey()
+            /// but if it is passed as argument true like RandomByteKey(true)
+            /// it will create a file and it will save it under the data/qt/secure.key
+            /// and on this version it DOES NOT ENCRYPT IT  so it has to be manually 
+            /// encrypted .
+            /// </summary>
+            /// <returns>byte[] array </returns>
+            /// <param name="autoSave">If set to <c>true</c> auto save.</param>
             public static byte[] RandomByteKey(bool autoSave)
             {
                   // if is not added the bool type will just return 
@@ -137,14 +189,14 @@ namespace QuickTools
 
                   if (autoSave == true)
                   {
-                       
+
                         for (int index = 0; index < key.Length; index++)
                         {
                               key[index] = RandomByte();
                         }
                         KeyGenerated = key;
                   }
-                  SaveKey(); 
+                  SaveKey();
                   return key;
             }
             /*
@@ -157,22 +209,28 @@ namespace QuickTools
             properly 
             
                   */
-
+            /// <summary>
+            /// This method can used manually
+            /// or automatically 
+            /// by calling directly the RandomByteKey(true); 
+            /// and adding the parameter the bool true 
+            /// for it to auto save the key 
+            /// </summary>
             public static void SaveKey()
             {
-                  string path, keyFile, qtDir; 
-                   path = Directory.GetCurrentDirectory();
-                   qtDir = "data/qt/";
-                   keyFile = "data/qt/secure.key";
+                  string path, keyFile, qtDir;
+                  path = Directory.GetCurrentDirectory();
+                  qtDir = "data/qt/";
+                  keyFile = "data/qt/secure.key";
                   if (Directory.Exists(qtDir) == false)
-                  {             
+                  {
                         Directory.CreateDirectory(qtDir);
-                        SaveKey();       
+                        SaveKey();
                   }
                   else
                   {
-                       
-                       
+
+
                         using (FileStream file = File.Create(keyFile))
                         {
 
@@ -183,12 +241,12 @@ namespace QuickTools
                                           writer.Write(key + ",");
                                     }
                               }
-                        } 
+                        }
 
-                       
+
                   }
 
-                   
+
             }
 
 
@@ -206,119 +264,174 @@ namespace QuickTools
 /////////////////////////////////////////////////////////////////////////////
 */
 
-
+            /// <summary>
+            ///  This basically just check if a name could be a valid
+            /// name for a file in windows mainly and it 
+            /// returns true if the check it is correct 
+            /// </summary>
+            /// <returns>True or False</returns>
             public static bool Check()
-			{
-				// Regex rueles for the allowed name types 
-				var rules = new Regex("^[a-zA-Z0-9_]*$");
+            {
+                  // Regex rueles for the allowed name types 
+                  var rules = new Regex("^[a-zA-Z0-9_]*$");
                   //conditions with an input 
                   // this basically just get the return 
                   // from the  the input and it convers it to 
                   // text to validate if it match the rules 
-                               
-				
-				      // if the name is blank is not a valid name actually 
-				if (rules.IsMatch(Get.Input().ToString()) && Get.input.ToString().Length > 0)
-				{
+
+
+                  // if the name is blank is not a valid name actually 
+                  if (rules.IsMatch(Get.Input().ToString()) && Get.input.ToString().Length > 0)
+                  {
                         //Valid Name
 
 
-                        return true; 
-				}
-				else
-				{
-					// invalid Name 
-					return false;
-				}
-			}
-			
-     
+                        return true;
+                  }
+                  else
+                  {
+                        // invalid Name 
+                        return false;
+                  }
+            }
+
+
             /*
 /////////////////////////////////////////////////////////////////////////////
 //////////// THIS AREA CONTROLS CONSOLE Profile  /////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 */
+
+
+            /// <summary>
+            /// This method has builded in it 
+            /// a very simple login user
+            /// ask for the login name
+            /// and password it also trys to 
+            /// hide the password but it is not super
+            /// secure
+            /// </summary>
+            /// <returns>string[] array name and password</returns>
             public static string[] Login()
-			{
-				string name, password;
-				Get.Box("Login");
-				Get.Yellow("Type Your Information Please.");
-				Get.Box("Name");
-				name = Get.TextInput();
-				Get.Box("Password");
-				Get.Red("Hidden For Privacy and Security");
-				Get.Hide();
-				password = Console.ReadLine();
-				Get.Reset();
-				if(name == "" || password == "")
+            {
+                  string name, password;
+                  Get.Box("Login");
+                  Get.Yellow("Type Your Information Please.");
+                  Get.Box("Name");
+                  name = Get.TextInput();
+                  Get.Box("Password");
+                  Get.Red("Hidden For Privacy and Security");
+                  Get.Hide();
+                  password = Console.ReadLine();
+                  Get.Reset();
+                  if (name == "" || password == "")
                   {
                         Get.WrongIn("Name or password empty");
                         Get.Clear();
-                        Login();                        
+                        Login();
                   }
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'
                   new User(name, password);
                   string[] userData = { name, password };
-                  return userData; 
+                  return userData;
 #pragma warning restore RECS0026 // Possible unassigned object created by 'new'
             }
-
+            /// <summary>
+            /// Very simple sing up which veryfy that the data
+            /// it is instroduced correctly 
+            /// is not super secure and it needs to be improved 
+            /// on farther versions 
+            /// </summary>
+            /// <returns>string[] array of the sing up data</returns>
             public static string[] SingUp()
-			{
-				string name, lastName, password, dob, phone, email;
-				Get.Box("Singup", 4);
-				Get.Yellow("Type Your Information Please.", 3);
-				Get.Box("Name", 1);
-				name = Get.TextInput();
-				Get.Box("Last Name", 1);
-				lastName = Get.TextInput();
-				Get.Box("Date of Birth", 1);
-				Get.Red("Hidden For Privacy and Security");
-				Get.Hide();
-				dob = Console.ReadLine();
-				Get.Reset();
-				Get.Box("Phone Number", 1);
-				phone = Get.TextInput();
-				Get.Box("Email Address", 1);
-				email = Get.TextInput();
-				Get.Box("Password");
-				Get.Red("Hidden For Privacy and Security");
-				Get.Hide();
-				password = Console.ReadLine();
-				Get.Reset();
-			    new User(name, lastName, password, dob, phone, email);
+            {
+                  string name, lastName, password, dob, phone, email;
+                  Get.Box("Singup", 4);
+                  Get.Yellow("Type Your Information Please.", 3);
+                  Get.Box("Name", 1);
+                  name = Get.TextInput();
+                  Get.Box("Last Name", 1);
+                  lastName = Get.TextInput();
+                  Get.Box("Date of Birth", 1);
+                  Get.Red("Hidden For Privacy and Security");
+                  Get.Hide();
+                  dob = Console.ReadLine();
+                  Get.Reset();
+                  Get.Box("Phone Number", 1);
+                  phone = Get.TextInput();
+                  Get.Box("Email Address", 1);
+                  email = Get.TextInput();
+                  Get.Box("Password");
+                  Get.Red("Hidden For Privacy and Security");
+                  Get.Hide();
+                  password = Console.ReadLine();
+                  Get.Reset();
+                  new User(name, lastName, password, dob, phone, email);
                   //  Get.Wait(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
                   string[] userData = { name, lastName, password, dob, phone, email };
-                  return userData; 
-			}
+                  return userData;
+            }
 
-			/*
-      /////////////////////////////////////////////////////////////////////////////
-      //////////// THIS AREA CONTROLS CONSOLE INPUT   /////////////////////////////
-      /////////////////////////////////////////////////////////////////////////////
-      */
-			public static string Text = "";
-			public static int Number = 0;
-			public static object input = "";
-			// this is the Input method which will retrun a number or text and 
-			// it just need to be treated as such 
-			public static string Key = "";
-			           
-			public static object KeyInput()
-			{
-			//	Get.LabelSide(">"); // just looks better damme it 
-			//	Console.Write(" ");
-			// it just did not make as much sence on 
-			//why would i want something that is pointing to 
-			// nothing because is just wating for a key to be pressed
-				var InputKey = Console.ReadKey();
-				Get.Clear();
-				// this will return a type of number or key 
-				// with the information from it like 1D1
-				string inputValue = InputKey.Key.ToString();
-				Key = inputValue;
-				return inputValue;
-			}
+            /*
+/////////////////////////////////////////////////////////////////////////////
+//////////// THIS AREA CONTROLS CONSOLE INPUT   /////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+*/
+
+
+            /// <summary>
+            /// Return the text taken by any of the fallowing 
+            /// Get.Input()
+            /// Get.InputText(); 
+            /// </summary>
+            public static string Text = "";
+            /// <summary>
+            /// Returns the Number taken by the fallowing
+            /// Get.Input();
+            /// Get.NumberInput(); 
+            /// </summary>
+            public static int Number = 0;
+            ///<summary>
+            /// Returns the text taken by
+            /// Get.Input();
+            /// </summary>           
+            public static object input = "";
+            // this is the Input method which will retrun a number or text and 
+            // it just need to be treated as such 
+            ///<summary>
+            /// Returns the Key from  the Get.KeyInput()
+            /// method 
+            ///</summary>           
+            public static string Key = "";
+            /// <summary>
+            /// This method gets the key pressed and it returns it 
+            /// on the same way it gets it , it also send it to the Key field
+            /// </summary>
+            /// <returns>object key pressed</returns>
+            public static object KeyInput()
+            {
+                  //	Get.LabelSide(">"); // just looks better damme it 
+                  //	Console.Write(" ");
+                  // it just did not make as much sence on 
+                  //why would i want something that is pointing to 
+                  // nothing because is just wating for a key to be pressed
+                  var InputKey = Console.ReadKey();
+                  Get.Clear();
+                  // this will return a type of number or key 
+                  // with the information from it like 1D1
+                  string inputValue = InputKey.Key.ToString();
+                  Key = inputValue;
+                  return inputValue;
+            }
+            ///<summary>
+            /// this does the same thing than the Get.KeyInput()
+            /// but it only works with numbers
+            /// it will only read and hold the numbers pressed and it will 
+            /// return them  or  it will send a copy to the fallowing fields
+            /// Get.Number
+            /// Get.Key
+            /// </summary> 
+            ///<returns>int Key Number</returns>          
             public static int KeyNumber()
             {
                   //    Get.LabelSide(">"); // just looks better damme it 
@@ -329,30 +442,30 @@ namespace QuickTools
                   var InputKey = Console.ReadKey();
                   Get.Clear();
                   int inputValue = 0000;// this has to be disabled 
-                                   
+
                   if (InputKey.Key.ToString().Length > 1)
                   {
                         try
                         {
-                              string input = InputKey.Key.ToString();
-                              string lastDigit = input[input.Length - 1].ToString();
+                              string inputVal = InputKey.Key.ToString();
+                              string lastDigit = inputVal[inputVal.Length - 1].ToString();
                               inputValue = int.Parse(lastDigit);
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
-                              Get.Alert(e);           
+                              Get.Alert(e);
                         }
                   }
                   else
                   {
-                        Get.WrongInput(InputKey);                        
+                        Get.WrongInput(InputKey);
                   }
 
                   // this will return a type of number or key 
                   // with the information from it like 1D1
 
-                     Key = inputValue.ToString(); // just in case                 
-                     Number = inputValue;          // if someone just rather to  use the key 
+                  Key = inputValue.ToString(); // just in case                 
+                  Number = inputValue;          // if someone just rather to  use the key 
                   return inputValue;
             }
 
@@ -360,41 +473,33 @@ namespace QuickTools
 
 
 
-
-            public static string InputChar = ">"; 
-			public static object Input()
-			{
-				Get.LabelSide(InputChar);
-				//Console.Write(" ");
-				bool isnumber;
-				string input = Console.ReadLine();
-				int number;
-				                 
-				isnumber = int.TryParse(input, out number);
-				
-				if (isnumber)
-				{
-					Number = number;
-					Get.input = number;
-					return number;
-				}
-				else
-				{
-					Get.input = input;
-					Get.Text = input;
-					return input;
-				}
-			}
-            public static object Input(object display)
+            /// <summary>
+            /// This is the char that is located at the biggining of the 
+            /// Get.Input() method and it has to be added a method where
+            /// it will save the char if is changed
+            /// </summary>
+            public static string InputChar = ">";
+            ///<summary>
+            /// This Method Get the input from the keyboard
+            /// and it returns an object and is an implementation of
+            /// Console.ReadLine();
+            /// Get.LabelSide()
+            /// int.TryParse();
+            /// all together 
+            /// </summary>           
+            /// <returns> Object input either number or text </returns>
+            public static object Input()
             {
-                  Get.Write(display);                 
+                                   
                   Get.LabelSide(InputChar);
-                  //Console.Write(" ");
+                  Get.Reset();                 
+                  Console.Write(" ");
                   bool isnumber;
-                                         
-                  string input = Console.ReadLine();
+                  string inputValue = Console.ReadLine();
                   int number;
-                  isnumber = int.TryParse(input, out number);
+
+                  isnumber = int.TryParse(inputValue, out number);
+
                   if (isnumber)
                   {
                         Number = number;
@@ -403,153 +508,195 @@ namespace QuickTools
                   }
                   else
                   {
-                        Get.input = input;
-                        Get.Text = input;
-                        return input;
+                        Get.input = inputValue;
+                        Get.Text = inputValue;
+                        return inputValue;
                   }
             }
-            public static bool IsNumber(object input)
+            ///<summary>
+            /// This Method does the same as Input() without any 
+            /// arguments but with the only diference that the char
+            /// on the side at the bigging could be edited 
+            /// like Get.Input("Write Your Name");
+            /// </summary>
+            /// <returns> object Input either text or number</returns>
+            public static object Input(object display)
             {
-                        string textInput = input.ToString();
-                        int number = 0; 
-                        bool isNumber = false; 
-                        
-                        isNumber = int.TryParse(textInput.Replace("D",""),out number);
-                       
-                      
-                       
-                       if(isNumber == true)
-                        {
-                            return true; 
-                        }else{
-                            return false; 
-                        }
-            }
-			public static int NumberInput()
-			{
-			                 
-				Get.LabelSide(">");
-				Console.Write(" ");
-				bool isnumber = false;
-#pragma warning disable RECS0117 // Local variable has the same name as a member and hides it
-                  string input = Console.ReadLine();
-#pragma warning restore RECS0117 // Local variable has the same name as a member and hides it
+                  Get.Write("");
+                  Get.LabelSide(display);
+                  Get.Reset();                  
+                  //Console.Write(" ");
+                  bool isnumber;
+
+                  string inputValue = Console.ReadLine();
                   int number;
-				isnumber = int.TryParse(input, out number);
-				if (isnumber)
-				{
-					Number = number;
+                  isnumber = int.TryParse(inputValue, out number);
+                  if (isnumber)
+                  {
+                        Number = number;
+                        Get.input = number;
                         return number;
                   }
                   else
                   {
-                        Get.WrongInput();                        
-                        return 0;                       
+                        Get.input = inputValue;
+                        Get.Text = inputValue;
+                        return inputValue;
+                  }
+            }
+                       /// <summary>
+                       /// This is a very generic Number Checker
+                       /// that veryfied if the input passed as an argument
+                       /// could be a number or not and it returns
+                       /// true or false if is or not a number
+                       /// </summary>
+                       /// <returns>Retursn True or False if is number : True if is not a number returns: false</returns>
+                       /// <param name="input">Input.</param>
+            public static bool IsNumber(object input)
+            {
+                  string textInput = input.ToString();
+                  int number = 0;
+                  bool isNumber = false;
+
+                  isNumber = int.TryParse(textInput.Replace("D", ""), out number);
+
+
+
+                  if (isNumber == true)
+                  {
+                        return true;
+                  }
+                  else
+                  {
+                        return false;
+                  }
+            }
+            public static int NumberInput()
+            {
+
+                  Get.LabelSide(">");
+                  Console.Write(" ");
+                  bool isnumber = false;
+#pragma warning disable RECS0117 // Local variable has the same name as a member and hides it
+                  string input = Console.ReadLine();
+#pragma warning restore RECS0117 // Local variable has the same name as a member and hides it
+                  int number;
+                  isnumber = int.TryParse(input, out number);
+                  if (isnumber)
+                  {
+                        Number = number;
+                        return number;
+                  }
+                  else
+                  {
+                        Get.WrongInput();
+                        return 0;
                   }
 
             }
-                  /// <summary>
-                  /// TextInput Method ReadText from the Console and return text
-                  /// has magenta color design and also it send the current text
-                  /// to the Get.Text Field 
-                  /// </summary>
-                  /// <returns>The input.</returns>
-			public static string TextInput()
-			{
-				Get.LabelSide(">");
-				Console.Write(" ");
-				string text = Console.ReadLine();
-				Text = text;
-				return text;
-			}
-                  /// <summary>
-                  /// Shortcut for Console.Reset(); 
-                  /// </summary>
-			public static void Reset()
-			{
-				Console.ResetColor();
-			}
+            /// <summary>
+            /// TextInput Method ReadText from the Console and return text
+            /// has magenta color design and also it send the current text
+            /// to the Get.Text Field 
+            /// </summary>
+            /// <returns>The input.</returns>
+            public static string TextInput()
+            {
+                  Get.LabelSide(">");
+                  Console.Write(" ");
+                  string text = Console.ReadLine();
+                  //input = text; //i dont think it may be a good idea                  
+                  Text = text;
+                  return text;
+            }
+            /// <summary>
+            /// Shortcut for Console.Reset(); 
+            /// </summary>
+            public static void Reset()
+            {
+                  Console.ResetColor();
+            }
             /// <summary>
             ///shurtcut for Console.Clear(); 
             /// </summary>
             public static void Cle()
-			{
-				Console.Clear();
-			}
-                  /// <summary>
-                  /// shurtcut for Console.Clear(); 
-                  /// </summary>
-			public static void Clear()
-			{
-				Console.Clear();
-			}
+            {
+                  Console.Clear();
+            }
+            /// <summary>
+            /// shurtcut for Console.Clear(); 
+            /// </summary>
+            public static void Clear()
+            {
+                  Console.Clear();
+            }
 
-		      
-                  /// <summary>
-                  /// Write text with background color in color magentaand some space around it 
-                  /// and seems like a type of a label and takes an argument of an object to avoid casting
-                  /// </summary>
-                  /// <param name="msg">Message.</param>
-			public static void Label(object msg)
-			{
-				Console.BackgroundColor = ConsoleColor.Magenta;
-				Console.ForegroundColor = ConsoleColor.White;
-				Console.Write(" " + msg + " ");
-                  Get.W("");                 
-				Get.Reset();
-			}
 
-			public static void LabelSide(object msg)
-			{
-				Console.BackgroundColor = ConsoleColor.Magenta;
-				Console.ForegroundColor = ConsoleColor.White;
-				Console.Write("\n" + msg + " ");
-				Get.Reset();
-			}
+            /// <summary>
+            /// Write text with background color in color magentaand some space around it 
+            /// and seems like a type of a label and takes an argument of an object to avoid casting
+            /// </summary>
+            /// <param name="msg">Message.</param>
+            public static void Label(object msg)
+            {
+                  Console.BackgroundColor = ConsoleColor.Magenta;
+                  Console.ForegroundColor = ConsoleColor.White;
+                  Console.Write(" " + msg + " ");
+                  Get.W("");
+                  Get.Reset();
+            }
+
+            public static void LabelSide(object msg)
+            {
+                  Console.BackgroundColor = ConsoleColor.Magenta;
+                  Console.ForegroundColor = ConsoleColor.White;
+                  Console.Write("\n" + msg + " ");
+                  Get.Reset();
+            }
             public static void LabelSingle(object msg)
             {
                   Get.Reset();
                   Color.Pink();
-                  Console.Write(msg); 
+                  Console.Write(msg);
                   Get.Reset();
             }
             public static void Title(object msg)
-			{
-                  Console.Title = msg.ToString(); 
-			}
-
-			// this gives you the avility to 
-			// deside how many tabs you want to include
-			// in the title 
-			public static void Title(object msg, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{
-					tabSpaces += spaces;
-				}
-
-				Console.WriteLine(tabSpaces + msg);
-			}
-
-			// Default box 
-			public static void Box(object content)
-			{
-				string simbol = "/";
-				string underLine = "";
-				for (int i = 0; i <= content.ToString().Length + 3; i++)
-				{
-					underLine += simbol;
-				}
-
-				Get.W(underLine);
-				Get.W(simbol + " " + content + " " + simbol);
-				Get.W(underLine);
-			}
-            public static void Box(object content,object simbol)
             {
-                 
+                  Console.Title = msg.ToString();
+            }
+
+            // this gives you the avility to 
+            // deside how many tabs you want to include
+            // in the title 
+            public static void Title(object msg, int tabs)
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  {
+                        tabSpaces += spaces;
+                  }
+
+                  Console.WriteLine(tabSpaces + msg);
+            }
+
+            // Default box 
+            public static void Box(object content)
+            {
+                  string simbol = "/";
+                  string underLine = "";
+                  for (int i = 0; i <= content.ToString().Length + 3; i++)
+                  {
+                        underLine += simbol;
+                  }
+
+                  Get.W(underLine);
+                  Get.W(simbol + " " + content + " " + simbol);
+                  Get.W(underLine);
+            }
+            public static void Box(object content, object simbol)
+            {
+
                   string underLine = "";
                   for (int i = 0; i <= content.ToString().Length + 3; i++)
                   {
@@ -562,187 +709,187 @@ namespace QuickTools
             }
             // with tabs 
             public static void Box(object content, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{
-					tabSpaces += spaces;
-				}
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  {
+                        tabSpaces += spaces;
+                  }
 
-				string simbol = "/";
-				string underLine = "";
-				for (int i = 0; i <= content.ToString().Length + 3; i++)
-				{
-					underLine += simbol;
-				}
+                  string simbol = "/";
+                  string underLine = "";
+                  for (int i = 0; i <= content.ToString().Length + 3; i++)
+                  {
+                        underLine += simbol;
+                  }
 
-				Get.W(tabSpaces + underLine);
-				Get.W(tabSpaces + simbol + " " + content + " " + simbol);
-				Get.W(tabSpaces + underLine);
-			}
+                  Get.W(tabSpaces + underLine);
+                  Get.W(tabSpaces + simbol + " " + content + " " + simbol);
+                  Get.W(tabSpaces + underLine);
+            }
 
-			// custom box 
-			public static void Box(object content, string simbol, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{ // you just want to add tabs 
-					// if there is tabs added 
-					if (tabs > 0)
-					{
-						tabSpaces += spaces;
-					}
-				}
+            // custom box 
+            public static void Box(object content, string simbol, int tabs)
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  { // you just want to add tabs 
+                    // if there is tabs added 
+                        if (tabs > 0)
+                        {
+                              tabSpaces += spaces;
+                        }
+                  }
 
-				string underLine = "";
-				for (int i = 0; i <= content.ToString().Length + 3; i++)
-				{
-					underLine += simbol;
-				}
+                  string underLine = "";
+                  for (int i = 0; i <= content.ToString().Length + 3; i++)
+                  {
+                        underLine += simbol;
+                  }
 
-				Get.W(tabSpaces + underLine);
-				Get.W(tabSpaces + simbol + " " + content + " " + simbol);
-				Get.W(tabSpaces + underLine);
-			}
+                  Get.W(tabSpaces + underLine);
+                  Get.W(tabSpaces + simbol + " " + content + " " + simbol);
+                  Get.W(tabSpaces + underLine);
+            }
 
 
-                  
-                  
 
-			public static void Wrong()
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Something Was Wrong!!!");
-				Console.ResetColor();
-				Get.Wait();
-			}
 
-			public static void Wrong(object text)
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("Something Was Wrong!!!");
-				Console.WriteLine("This" + ":=>>>> " + text);
-				Console.ResetColor();
-				Get.Wait();
-			}
 
-			public static void WrongIn()
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(" Wrong Input!!!");
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void Wrong()
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine("Something Was Wrong!!!");
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-			public static void WrongIn(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void Wrong(object text)
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine("Something Was Wrong!!!");
+                  Console.WriteLine("This" + ":=>>>> " + text);
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-			public static void WrongInput(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void WrongIn()
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine(" Wrong Input!!!");
+                  Console.ResetColor();
+                  Get.Wait();
+            }
+
+            public static void WrongIn(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
+                  Console.ResetColor();
+                  Get.Wait();
+            }
+
+            public static void WrongInput(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
+                  Console.ResetColor();
+                  Get.Wait();
+            }
             public static void WrongInput()
             {
                   // if one of the inputs is null it will return the other                  
-                  string msg = Get.Text.ToString() != "" ? Get.Text.ToString() : Get.input.ToString();                     
+                  string msg = Get.Text.ToString() != "" ? Get.Text.ToString() : Get.input.ToString();
                   Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg );
+                  Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
                   Console.ResetColor();
                   Get.Wait();
             }
 
             public static void NotFound()
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("File Not Founded");
-				Console.ResetColor();
-				Get.Wait();
-			}
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine("File Not Founded");
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-			public static void NotFound(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Console.WriteLine("This File Was Not Founded '{0}' ", msg);
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void NotFound(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Console.WriteLine("This File Was Not Founded '{0}' ", msg);
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-			public static void Wait()
-			{
-				Get.W("Type any key to continue");
-				Console.ReadKey();
-			}
+            public static void Wait()
+            {
+                  Get.W("Type any key to continue");
+                  Console.ReadKey();
+            }
 
-			// just for testin porpuses
-			public static void Wait(object Caller)
-			{
-				Get.W("Type any key to continue");
-				Get.Yellow("This Called me =>  '" + Caller + "'");
-				Console.ReadKey();
-			}
+            // just for testin porpuses
+            public static void Wait(object Caller)
+            {
+                  Get.W("Type any key to continue");
+                  Get.Yellow("This Called me =>  '" + Caller + "'");
+                  Console.ReadKey();
+            }
 
 
-			public static void Ok()
-			{
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine("OK");
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void Ok()
+            {
+                  Console.ForegroundColor = ConsoleColor.Green;
+                  Console.WriteLine("OK");
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-			public static void Good(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine(msg);
-				Console.ResetColor();
-			}
+            public static void Good(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Green;
+                  Console.WriteLine(msg);
+                  Console.ResetColor();
+            }
 
-			public static void Bad()
-			{
-				Console.ForegroundColor = ConsoleColor.Red;
-				Get.Wait();
-			}
+            public static void Bad()
+            {
+                  Console.ForegroundColor = ConsoleColor.Red;
+                  Get.Wait();
+            }
 
-			public static void Bad(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine(msg);
-				Console.ResetColor();
-				Get.Wait();
-			}
+            public static void Bad(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Green;
+                  Console.WriteLine(msg);
+                  Console.ResetColor();
+                  Get.Wait();
+            }
 
-		
 
-			public static void Alert(object msg)
-			{
-				Console.ForegroundColor = ConsoleColor.Yellow;
-				Console.WriteLine(msg);
-				Console.ResetColor();
-                        Console.Beep();                  
-				Get.Wait();
-			}
 
-			public static void Hide()
-			{
-				Console.ForegroundColor = ConsoleColor.Black;
-				Console.BackgroundColor = ConsoleColor.Black;
-			}
+            public static void Alert(object msg)
+            {
+                  Console.ForegroundColor = ConsoleColor.Yellow;
+                  Console.WriteLine(msg);
+                  Console.ResetColor();
+                  Console.Beep();
+                  Get.Wait();
+            }
 
-			public static void HideText()
-			{
-				Console.ForegroundColor = ConsoleColor.Black;
-				Console.BackgroundColor = ConsoleColor.Black;
-			}
+            public static void Hide()
+            {
+                  Console.ForegroundColor = ConsoleColor.Black;
+                  Console.BackgroundColor = ConsoleColor.Black;
+            }
+
+            public static void HideText()
+            {
+                  Console.ForegroundColor = ConsoleColor.Black;
+                  Console.BackgroundColor = ConsoleColor.Black;
+            }
 
             /*
   /////////////////////////////////////////////////////////////////////////////
@@ -756,44 +903,44 @@ namespace QuickTools
             }
 
             public static void W(object text)
-			{
-				Console.WriteLine(text);
-			}
+            {
+                  Console.WriteLine(text);
+            }
 
-			public static void Write(object text)
-			{
-				Console.WriteLine(text);
-			}
+            public static void Write(object text)
+            {
+                  Console.WriteLine(text);
+            }
 
-			public static void C(object text)
-			{
-				Console.WriteLine(text);
-			}
+            public static void C(object text)
+            {
+                  Console.WriteLine(text);
+            }
 
-			// here are the methods to write with tabs 
-			public static void W(object text, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{
-					tabSpaces += spaces;
-				}
+            // here are the methods to write with tabs 
+            public static void W(object text, int tabs)
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  {
+                        tabSpaces += spaces;
+                  }
 
-				Console.WriteLine(tabSpaces + text);
-			}
+                  Console.WriteLine(tabSpaces + text);
+            }
 
-			public static void Write(object text, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{
-					tabSpaces += spaces;
-				}
+            public static void Write(object text, int tabs)
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  {
+                        tabSpaces += spaces;
+                  }
 
-				Console.WriteLine(tabSpaces + text);
-			}
+                  Console.WriteLine(tabSpaces + text);
+            }
             public static void Wl(object text, int tabs)
             {
                   string spaces = "\t";
@@ -807,29 +954,29 @@ namespace QuickTools
             }
 
             public static void C(object text, int tabs)
-			{
-				string spaces = "\t";
-				string tabSpaces = "";
-				for (int i = 0; i <= tabs; i++)
-				{
-					tabSpaces += spaces;
-				}
+            {
+                  string spaces = "\t";
+                  string tabSpaces = "";
+                  for (int i = 0; i <= tabs; i++)
+                  {
+                        tabSpaces += spaces;
+                  }
 
-				Console.WriteLine(tabSpaces + text);
-			}
+                  Console.WriteLine(tabSpaces + text);
+            }
 
-			/*
-           here im just going to add some shortcuts for the console colors
-           sadly it will be for type string only 
-         */
-			/*
-          /////////////////////////////////////////////////////////////////////////////
-          //////////// THIS AREA CONTROLS CONSOLE JUST DOCUMENT INFOMATION ////////////
-          /////////////////////////////////////////////////////////////////////////////
-          */
-			public static string Version = "A032022";
-			private static string lastModified = "03/23/2022";
-			public static void About()
+            /*
+     here im just going to add some shortcuts for the console colors
+     sadly it will be for type string only 
+   */
+            /*
+    /////////////////////////////////////////////////////////////////////////////
+    //////////// THIS AREA CONTROLS CONSOLE JUST DOCUMENT INFOMATION ////////////
+    /////////////////////////////////////////////////////////////////////////////
+    */
+            public static string Version = "A032022";
+            private static string lastModified = "03/23/2022";
+            public static void About()
             {
 
                   Green();
@@ -862,27 +1009,27 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
 
 ");
 
-            //	Get.Label("QuickTools Version: " + version);
-            Get.W("Created By MBV");
-				Get.W("Last Update: " + lastModified);
-				Get.Wait();
-                  LastChanges();                
-			}
+                  //	Get.Label("QuickTools Version: " + version);
+                  Get.W("Created By MBV");
+                  Get.W("Last Update: " + lastModified);
+                  Get.Wait();
+                  LastChanges();
+            }
 
-			public static void LastChanges()
-			{
-				List<string> changes = new List<string>();
-				changes.Add("3/21/2022 update the nulls value that was required to remove them.");
-				changes.Add("updates on the colors and sides functions 'LabelSide added which will give a color and will have an space on the top.'");
-				changes.Add("3/23/2022 Today i will add the profile method and also the Designe of the pink color of the inputs");
-				changes.Add("5/23/2022 Today i will be retaking the project and deviding the system into lyers for it to be esier to grow ");
-				for (int change = 0; change < changes.Count; change++)
-				{
-					int number = change + 1;
-					Get.Yellow(number + ". " + changes[change]);
-				}
+            public static void LastChanges()
+            {
+                  List<string> changes = new List<string>();
+                  changes.Add("3/21/2022 update the nulls value that was required to remove them.");
+                  changes.Add("updates on the colors and sides functions 'LabelSide added which will give a color and will have an space on the top.'");
+                  changes.Add("3/23/2022 Today i will add the profile method and also the Designe of the pink color of the inputs");
+                  changes.Add("5/23/2022 Today i will be retaking the project and deviding the system into lyers for it to be esier to grow ");
+                  for (int change = 0; change < changes.Count; change++)
+                  {
+                        int number = change + 1;
+                        Get.Yellow(number + ". " + changes[change]);
+                  }
 
-				Get.Wait();
-			}
-		}
-	}
+                  Get.Wait();
+            }
+      }
+}

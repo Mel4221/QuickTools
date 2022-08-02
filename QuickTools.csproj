@@ -56,7 +56,6 @@
     <Compile Include="console.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="arrowKeysReader.cs" />
-    <Compile Include="byteLocker.cs" />
     <Compile Include="LoopInput.cs" />
     <Compile Include="NewImplementation.cs" />
   </ItemGroup>
