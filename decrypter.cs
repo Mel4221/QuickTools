@@ -8,6 +8,9 @@ namespace QuickTools
 {
 
       /// <summary>
+      /// ************
+      /// *NOT STABLE*
+      /// ************
       /// This class basically dencrypt the files and contaings 
       /// 2 Methods 1  that read the encrypted that from the file
       /// then it will decrypt the data and will write it back to the file

@@ -20,7 +20,7 @@ namespace QuickTools
       /// lack of simplicity
       /// </summary>
       private static List<string> Data = new List<string> ();
-      
+     
              
             /// <summary>
             ///  this can not be cause is handled only by the Start Method .

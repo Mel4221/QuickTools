@@ -13,28 +13,40 @@ namespace QuickTools
     // Cyan        
     // Gray 
 
-    
+    /// <summary>
+    /// Console the text using the name of the color 
+    /// </summary>
+    /// <param name="text">Text.</param>
     public static void Gray (object text)
     {
       Console.ForegroundColor = ConsoleColor.Gray;
       Console.WriteLine (text);
       Get.Reset ();
     }
-   
+   /// <summary>
+   /// <seealso cref="Gray(object)"/>
+   /// </summary>
+   /// <param name="text">Text.</param>
     public static void Cyan (object text)
     {
       Console.ForegroundColor = ConsoleColor.Cyan;
       Console.WriteLine (text);
       Get.Reset ();
     }
-  
-    public static void Red (object text)
+            /// <summary>
+            /// <seealso cref="Gray(object)"/>
+            /// </summary>
+            /// <param name="text">Text.</param>
+            public static void Red (object text)
     {
       Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine (text);
       Get.Reset ();
     }
-    
+    /// <summary>
+    /// Blue the specified text.
+    /// </summary>
+    /// <param name="text">Text.</param>
     public static void Blue (object text)
     {
       Console.ForegroundColor = ConsoleColor.Blue;
@@ -42,7 +54,10 @@ namespace QuickTools
       Get.Reset ();
     }
 
-   
+   /// <summary>
+   /// Green the specified text.
+   /// </summary>
+   /// <param name="text">Text.</param>
 
     public static void Green (object text)
     {
@@ -50,7 +65,11 @@ namespace QuickTools
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+                   /// <summary>
+                   /// Green the specified text and tabs.
+                   /// </summary>
+                   /// <param name="text">Text.</param>
+                   /// <param name="tabs">Tabs.</param>
     public static void Green (object text, int tabs)
     {
       Console.ForegroundColor = ConsoleColor.Green;
@@ -64,7 +83,11 @@ namespace QuickTools
       Console.WriteLine (tabSpaces + text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Black the specified text and tabs.
+            /// </summary>
+            /// <param name="text">Text.</param>
+            /// <param name="tabs">Tabs are refering to the \n char.</param>
         public static void Black(object text, int tabs)
     {
       Console.ForegroundColor = ConsoleColor.Black;
@@ -78,6 +101,10 @@ namespace QuickTools
       Console.WriteLine (tabSpaces + text);
       Get.Reset ();
     }
+              /// <summary>
+              /// Black the specified msg.
+              /// </summary>
+              /// <param name="msg">Message.</param>
         public static void Black (object msg)
     {
       Console.ForegroundColor = ConsoleColor.Black;
@@ -86,14 +113,21 @@ namespace QuickTools
     }
     
     
-
+            /// <summary>
+            /// Yellow the specified msg.
+            /// </summary>
+            /// <param name="msg">Message.</param>
     public static void Yellow (object msg)
     {
       Console.ForegroundColor = ConsoleColor.Yellow;
       Console.WriteLine (msg);
       Console.ResetColor ();
     }
-
+            /// <summary>
+            /// Yellow the specified text and tabs.
+            /// </summary>
+            /// <param name="text">Text.</param>
+            /// <param name="tabs">Tabs.</param>
     public static void Yellow (object text, int tabs)
     {
       Console.ForegroundColor = ConsoleColor.Yellow;
@@ -108,14 +142,20 @@ namespace QuickTools
       Get.Reset ();
     }
 
-    
+    /// <summary>
+    /// Pink the specified text.
+    /// </summary>
+    /// <param name="text">Text.</param>
     public static void Pink (object text)
     {
       Console.ForegroundColor = ConsoleColor.Magenta;
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Backs the yellow.
+            /// </summary>
+            /// <param name="text">Text.</param>
     public static void Back_Yellow (object text)
     {
       Console.BackgroundColor = ConsoleColor.Yellow;
@@ -123,7 +163,10 @@ namespace QuickTools
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Backs the red.
+            /// </summary>
+            /// <param name="text">Text.</param>
     public static void Back_Red (object text)
     {
       Console.BackgroundColor = ConsoleColor.Red;
@@ -131,7 +174,10 @@ namespace QuickTools
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Backs the blue.
+            /// </summary>
+            /// <param name="text">Text.</param>
     public static void Back_Blue (object text)
     {
       Console.BackgroundColor = ConsoleColor.Blue;
@@ -139,7 +185,10 @@ namespace QuickTools
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Backs the pink.
+            /// </summary>
+            /// <param name="text">Text.</param>
     public static void Back_Pink (object text)
     {
       Console.BackgroundColor = ConsoleColor.Magenta;
@@ -147,7 +196,10 @@ namespace QuickTools
       Console.WriteLine (text);
       Get.Reset ();
     }
-
+            /// <summary>
+            /// Backs the green.
+            /// </summary>
+            /// <param name="text">Text.</param>
     public static void Back_Green (object text)
     {
       Console.BackgroundColor = ConsoleColor.Green;
@@ -156,7 +208,10 @@ namespace QuickTools
       Get.Reset ();
     }
 
-
+            /// <summary>
+            /// Border the specified content.
+            /// </summary>
+            /// <param name="content">Content.</param>
             public static void Border(object content)
             {
                   string simbol = "*";
@@ -177,7 +232,11 @@ namespace QuickTools
                   Get.W("");          // more space 
                   Get.W(underLine);
             }
-
+            /// <summary>
+            /// Border the specified content and simbol.
+            /// </summary>
+            /// <param name="content">Content.</param>
+            /// <param name="simbol">Simbol.</param>
             public static void Border(object content, object simbol)
             {
 

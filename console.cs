@@ -15,52 +15,91 @@ namespace QuickTools
       /// they are basycally many language added but sadly there are some that only works 
       /// with a costructor example : new echo("content"); 
       /// </summary>
-
       public class C
       {     
+                  /// <summary>
+                  /// Log the specified input.
+                  /// </summary>
+                  /// <param name="input">Input.</param>
                   public static void Log(object input)
             {
                   Console.WriteLine(input);
             }
-
+            /// <summary>
+            /// Write to the console the specified input.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public static void W(object input)
             {
                   Console.Write(input);
             }
+            /// <summary>
+            /// Write the specified input.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public static void Write(object input)
             {
                   Console.Write(input);
             }
       }
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class console
       {
+            /// <summary>
+            /// Log the specified input.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public static void log(object input)
             {
                   Console.WriteLine(input); 
             }
       }
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class echo
       {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.echo"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public echo(object input)
             {
                   Console.WriteLine(input); 
             }
 
       }
-      //c 
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class printf
       {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.printf"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public printf(object input)
             {
                   Console.WriteLine(input);
             }
 
       }
-      //java
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class System
       {
+            /// <summary>
+            /// Print the text basically 
+            /// </summary>
             public static class Out
             {
+                  /// <summary>
+                  /// Println the specified input.
+                  /// </summary>
+                  /// <param name="input">Input.</param>
                   public static void println(object input)
                   {
                         Console.WriteLine(input);
@@ -68,32 +107,59 @@ namespace QuickTools
             }
       }
       //python && perl && R
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class print
-      {
+      {     
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.print"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public print(object input)
             {
                   Console.WriteLine(input);
             }
       }
       //ruby
+      /// <summary>
+      /// print the text inspired in ruby 
+      /// </summary>
       public class puts
       {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.puts"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public puts(object input)
             {
                   Console.WriteLine(input);
             }
       }
       //pascal 
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class writeln
       {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.writeln"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public writeln(object input)
             {
                   Console.WriteLine(input);
             }
       }
-
+      /// <summary>
+      /// Write to the console the specified input.
+      /// </summary>
       public class print_string
       {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.print_string"/> class.
+            /// </summary>
+            /// <param name="input">Input.</param>
             public print_string(object input)
             {
                   Console.WriteLine(input);

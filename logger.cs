@@ -6,6 +6,9 @@ using System;
 using System.IO;
 namespace QuickTools
 {
+      /// <summary>
+      /// This class create a quick way of writting logs inside QuickTools
+      /// </summary>
       public class Log
       {
             private static string CreateLogDir()
@@ -17,6 +20,11 @@ namespace QuickTools
 
                   return logsDir; 
             }
+            /// <summary>
+            /// Create a file tha will containe the event of the specified name and matter.
+            /// </summary>
+            /// <param name="name">Name.</param>
+            /// <param name="matter">Matter.</param>
             public static void Event(string name ,object matter)
             {
                   string logsDir = Get.DataPath() + "logs/"; 

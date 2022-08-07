@@ -11,7 +11,9 @@ using System.Collections.Generic;
 using System.Text;
 namespace QuickTools
 {
-
+      /// <summary>
+      /// This file slighly encrypt a file by confusing the bytes in it and later on it write the file with  those confused files 
+      /// </summary>
       public class LowEncrypt
       {
 

@@ -5,6 +5,9 @@ namespace QuickTools
 {
 
       ///<summary>
+      /// ************
+      /// *NOT STABLE*
+      /// ************
       /// This class Allwo you to Encrypt Files 
       /// And it has 1 method which takes 2 arguments
       /// and write to the file the encrypted text 
@@ -29,7 +32,7 @@ namespace QuickTools
                   */
                   string replaceEmptySpaces = FilePassword.ToString().Replace(" ", "");
                   string filePassword = replaceEmptySpaces; 
-                 Console.Title = "Encrypting File Please Wait...";
+                 Console.Title = "Encrypting Data Please Wait...";
                   Get.WaitTime(); 
                   try
                   {

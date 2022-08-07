@@ -36,6 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System.IO.Compression.ZipFile">
+      <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +63,8 @@
     <Compile Include="arrowKeysReader.cs" />
     <Compile Include="LoopInput.cs" />
     <Compile Include="NewImplementation.cs" />
+    <Compile Include="Zip.cs" />
+    <Compile Include="printList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

@@ -5,6 +5,9 @@ namespace QuickTools
       /// Color Class that contains an array of methods to give color to the console
       /// and they can be used like this Color.Red(object); 
       /// or just by initializing it  example : new Color("red"); .
+      /// lastly by calling the method without any parameter like : Color.Green();  
+      /// and until the Console.Reset(); is not provided it will keep going so 
+      /// if you use the Color.Green(); meke sure of using Get.Reset(); at the end of where you want it to stop giving that color.
       /// </summary>
       public partial class Color
       {

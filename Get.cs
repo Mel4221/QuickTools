@@ -97,7 +97,11 @@ namespace QuickTools
                   }
             }
 
-            private static string Path = Directory.GetCurrentDirectory();
+            /// <summary>
+            /// Abstraction for Directory.GetCurrentDirectory(); 
+            /// returns the current string path 
+            /// </summary>
+            public static string Path = Directory.GetCurrentDirectory()+"/";
             /// <summary>
             /// This method Create a folder inside the root of the program
             /// and create a folder that can be use for the program 
@@ -571,6 +575,11 @@ namespace QuickTools
                         return false;
                   }
             }
+
+            /// <summary>
+            /// Get the Number from the input introduced 
+            /// </summary>
+            /// <returns>The input.</returns>
             public static int NumberInput()
             {
 
@@ -589,8 +598,9 @@ namespace QuickTools
                   }
                   else
                   {
-                        Get.WrongInput();
-                        return 0;
+                        Yellow("Incorrect imput ,  ONLY numbers expected , and not maximum to "+int.MaxValue+" nor smallert to "+int.MinValue);                       
+                        throw new InvalidDataException(); 
+                        //return 0;
                   }
 
             }
@@ -645,7 +655,11 @@ namespace QuickTools
                   Get.W("");
                   Get.Reset();
             }
-
+            /// <summary>
+            /// simmilar to Console.Write
+            /// but prints to the console a text on magenta
+            /// </summary>
+            /// <param name="msg">Message content</param>
             public static void LabelSide(object msg)
             {
                   Console.BackgroundColor = ConsoleColor.Magenta;
@@ -653,6 +667,13 @@ namespace QuickTools
                   Console.Write("\n" + msg + " ");
                   Get.Reset();
             }
+             
+             
+            /// <summary>
+            /// Print Text on the side of the console using Console.Write
+            /// and gives it a Magenta color 
+            /// </summary>
+            /// <param name="msg">Message.</param>
             public static void LabelSingle(object msg)
             {
                   Get.Reset();
@@ -660,6 +681,10 @@ namespace QuickTools
                   Console.Write(msg);
                   Get.Reset();
             }
+                /// <summary>
+                /// Console.Title implementation 
+                /// </summary>
+                /// <param name="msg">Message.</param>
             public static void Title(object msg)
             {
                   Console.Title = msg.ToString();
@@ -668,6 +693,13 @@ namespace QuickTools
             // this gives you the avility to 
             // deside how many tabs you want to include
             // in the title 
+
+/// <summary>
+/// Console.WriteLine(object) implementation with \n to give the text more space
+/// to the right 
+/// </summary>
+/// <param name="msg">Message.</param>
+/// <param name="tabs">Tabs.</param>
             public static void Title(object msg, int tabs)
             {
                   string spaces = "\t";
@@ -681,6 +713,11 @@ namespace QuickTools
             }
 
             // Default box 
+
+/// <summary>
+/// Box the specified content.
+/// </summary>
+/// <param name="content">Content.</param>
             public static void Box(object content)
             {
                   string simbol = "/";
@@ -694,6 +731,11 @@ namespace QuickTools
                   Get.W(simbol + " " + content + " " + simbol);
                   Get.W(underLine);
             }
+                     /// <summary>
+                     /// Box the specified content and simbol.
+                     /// </summary>
+                     /// <param name="content">Content.</param>
+                     /// <param name="simbol">Simbol.</param>
             public static void Box(object content, object simbol)
             {
 
@@ -707,7 +749,12 @@ namespace QuickTools
                   Get.W(simbol + " " + content + " " + simbol);
                   Get.W(underLine);
             }
-            // with tabs 
+           
+           /// <summary>
+           /// Box the specified content and tabs.
+           /// </summary>
+           /// <param name="content">Content.</param>
+           /// <param name="tabs">Tabs.</param>
             public static void Box(object content, int tabs)
             {
                   string spaces = "\t";
@@ -730,6 +777,13 @@ namespace QuickTools
             }
 
             // custom box 
+
+/// <summary>
+/// Box the specified content, simbol and tabs.
+/// </summary>
+/// <param name="content">Content.</param>
+/// <param name="simbol">Simbol.</param>
+/// <param name="tabs">Tabs.</param>
             public static void Box(object content, string simbol, int tabs)
             {
                   string spaces = "\t";
@@ -757,32 +811,25 @@ namespace QuickTools
 
 
 
-
-            public static void Wrong()
-            {
-                  Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine("Something Was Wrong!!!");
-                  Console.ResetColor();
-                  Get.Wait();
-            }
-
+ 
+            /// <summary>
+            /// Write Text with Console.WriteLine add red color and wait for a key to be pressed 
+            /// </summary>
+            /// <param name="text">Text.</param>
             public static void Wrong(object text)
             {
                   Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine("Something Was Wrong!!!");
+                  Console.WriteLine("Something Went Really Wrong!!!");
                   Console.WriteLine("This" + ":=>>>> " + text);
                   Console.ResetColor();
                   Get.Wait();
             }
 
-            public static void WrongIn()
-            {
-                  Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine(" Wrong Input!!!");
-                  Console.ResetColor();
-                  Get.Wait();
-            }
 
+            /// <summary>
+            /// Write Text with Console.WriteLine add red color and wait for a key to be pressed 
+            /// </summary>
+            /// <param name="msg">Message.</param>
             public static void WrongIn(object msg)
             {
                   Console.ForegroundColor = ConsoleColor.Red;
@@ -790,7 +837,10 @@ namespace QuickTools
                   Console.ResetColor();
                   Get.Wait();
             }
-
+            /// <summary>
+            /// Write Text with Console.WriteLine add red color and wait for a key to be pressed 
+            /// </summary>
+            /// <param name="msg">Message.</param>
             public static void WrongInput(object msg)
             {
                   Console.ForegroundColor = ConsoleColor.Red;
@@ -798,24 +848,12 @@ namespace QuickTools
                   Console.ResetColor();
                   Get.Wait();
             }
-            public static void WrongInput()
-            {
-                  // if one of the inputs is null it will return the other                  
-                  string msg = Get.Text.ToString() != "" ? Get.Text.ToString() : Get.input.ToString();
-                  Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
-                  Console.ResetColor();
-                  Get.Wait();
-            }
 
-            public static void NotFound()
-            {
-                  Console.ForegroundColor = ConsoleColor.Red;
-                  Console.WriteLine("File Not Founded");
-                  Console.ResetColor();
-                  Get.Wait();
-            }
-
+     
+            /// <summary>
+            /// Alert Not found write the file that was not founded and print it on color red
+            /// </summary>
+            /// <param name="msg">Message.</param>
             public static void NotFound(object msg)
             {
                   Console.ForegroundColor = ConsoleColor.Red;
@@ -824,13 +862,25 @@ namespace QuickTools
                   Get.Wait();
             }
 
+
+
+            /// <summary>
+            /// Wait for a key to be pressed 
+            /// </summary>
             public static void Wait()
             {
                   Get.W("Type any key to continue");
                   Console.ReadKey();
             }
 
-            // just for testin porpuses
+           /// <summary>
+           /// Very similar to Console.ReadKey
+           /// but it has some content added to display
+           /// the Text from it and is basically used
+           /// to display the text witout closing the console
+           /// in some cases the console will close to quickly 
+           /// </summary>
+           /// <param name="Caller">Text Needed to be printed</param>
             public static void Wait(object Caller)
             {
                   Get.W("Type any key to continue");
@@ -838,7 +888,10 @@ namespace QuickTools
                   Console.ReadKey();
             }
 
-
+            /// <summary>
+            /// Literally Print a line saying ok 
+            /// on color green 
+            /// </summary>
             public static void Ok()
             {
                   Console.ForegroundColor = ConsoleColor.Green;
@@ -847,44 +900,36 @@ namespace QuickTools
                   Get.Wait();
             }
 
-            public static void Good(object msg)
-            {
-                  Console.ForegroundColor = ConsoleColor.Green;
-                  Console.WriteLine(msg);
-                  Console.ResetColor();
-            }
-
-            public static void Bad()
-            {
-                  Console.ForegroundColor = ConsoleColor.Red;
-                  Get.Wait();
-            }
-
-            public static void Bad(object msg)
-            {
-                  Console.ForegroundColor = ConsoleColor.Green;
-                  Console.WriteLine(msg);
-                  Console.ResetColor();
-                  Get.Wait();
-            }
-
-
-
+         
+            /// <summary>
+            /// Similar to Console.WriteLine(object); 
+            /// but add a box of color yellow saying alert
+            /// and the fallowing text that is pass as an argument
+            /// will be printed on yellow color 
+            /// </summary>
+            /// <param name="msg">Message Content</param>
             public static void Alert(object msg)
             {
+                                   
                   Console.ForegroundColor = ConsoleColor.Yellow;
+                  Box("Alert", "*",0);
                   Console.WriteLine(msg);
                   Console.ResetColor();
                   Console.Beep();
                   Get.Wait();
             }
-
+            /// <summary>
+            /// this is a very smallintent of  trying to hide the password
+            /// while is being pressed 
+            /// </summary>
             public static void Hide()
             {
                   Console.ForegroundColor = ConsoleColor.Black;
                   Console.BackgroundColor = ConsoleColor.Black;
             }
-
+            /// <summary>
+            /// This try to hide the text
+            /// </summary>
             public static void HideText()
             {
                   Console.ForegroundColor = ConsoleColor.Black;
@@ -897,27 +942,40 @@ namespace QuickTools
   /////////////////////////////////////////////////////////////////////////////
   */
             // quick WriteLine just as a quick method while im using an online editor 
-            public static void Wl(object text)
-            {
-                  Console.Write(text);
-            }
 
+         
+                  /// <summary>
+                  /// Console.WriteLine(object) shurtcut
+                  /// </summary>
+                  /// <param name="text">Text.</param>
             public static void W(object text)
             {
                   Console.WriteLine(text);
             }
-
+            /// <summary>
+            /// Write the specified text.
+            /// </summary>
+            /// <param name="text">Text.</param>
             public static void Write(object text)
             {
                   Console.WriteLine(text);
             }
-
+            /// <summary>
+            /// Write the specified text.
+            /// </summary>
+            /// <param name="text">Text.</param>
             public static void C(object text)
             {
                   Console.WriteLine(text);
             }
 
             // here are the methods to write with tabs 
+
+            /// <summary>
+            /// Write the specified text and tabs.
+            /// </summary>
+            /// <param name="text">Text.</param>
+            /// <param name="tabs">Tabs.</param>
             public static void W(object text, int tabs)
             {
                   string spaces = "\t";
@@ -929,7 +987,11 @@ namespace QuickTools
 
                   Console.WriteLine(tabSpaces + text);
             }
-
+            /// <summary>
+            /// Write the specified text and tabs.
+            /// </summary>
+            /// <param name="text">Text.</param>
+            /// <param name="tabs">Tabs.</param>
             public static void Write(object text, int tabs)
             {
                   string spaces = "\t";
@@ -941,18 +1003,14 @@ namespace QuickTools
 
                   Console.WriteLine(tabSpaces + text);
             }
-            public static void Wl(object text, int tabs)
-            {
-                  string spaces = "\t";
-                  string tabSpaces = "";
-                  for (int i = 0; i <= tabs; i++)
-                  {
-                        tabSpaces += spaces;
-                  }
 
-                  Console.WriteLine(tabSpaces + text);
-            }
 
+            /// <summary>
+            /// Write the specified text and tabs.
+            /// </summary>
+            /// <param name="text">Text.</param>
+            /// <param name="tabs">Tabs.</param>
+                       
             public static void C(object text, int tabs)
             {
                   string spaces = "\t";
@@ -974,8 +1032,14 @@ namespace QuickTools
     //////////// THIS AREA CONTROLS CONSOLE JUST DOCUMENT INFOMATION ////////////
     /////////////////////////////////////////////////////////////////////////////
     */
-            public static string Version = "A032022";
-            private static string lastModified = "03/23/2022";
+       ///    public static string Version = "A032022";
+        ///    private static string lastModified = "03/23/2022";
+        /// 
+
+                
+                /// <summary>
+                /// This Print QuickTools logo to the console , not really useful , but looks cool . 
+                /// </summary>
             public static void About()
             {
 
@@ -1010,14 +1074,16 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
 ");
 
                   //	Get.Label("QuickTools Version: " + version);
-                  Get.W("Created By MBV");
-                  Get.W("Last Update: " + lastModified);
-                  Get.Wait();
-                  LastChanges();
+                  Color.Green("Created By MBV");
+               //   Get.W("Last Update: " + lastModified);
+                 // Get.Wait();
+                 // LastChanges();
             }
 
-            public static void LastChanges()
+            private static void LastChanges()
             {
+            /*       
+             * Not longer needed 
                   List<string> changes = new List<string>();
                   changes.Add("3/21/2022 update the nulls value that was required to remove them.");
                   changes.Add("updates on the colors and sides functions 'LabelSide added which will give a color and will have an space on the top.'");
@@ -1030,6 +1096,8 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
                   }
 
                   Get.Wait();
+
+            */
             }
       }
 }
