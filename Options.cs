@@ -99,11 +99,13 @@ namespace QuickTools
             /// app.Select(); 
             /// </summary>
             /// <returns>The select.</returns>
-            public virtual int Select()
+            public virtual int Pick()
             {
 
                   if (OptionList.Count > 0)
                   {
+                        // the first display 
+                        Display(); 
                         // HERE WILL BE THE SELECTION METHOD ITSELF 
                         while (Get.KeyInput().ToString() != "Enter")
                         {
@@ -196,6 +198,16 @@ namespace QuickTools
             }
 
             /// <summary>
+            /// This initialization does not contains any implementation
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// </summary>
+            public Options()
+            {
+
+            }
+
+
+            /// <summary>
             /// Create the List of options by passing an array 
             /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
             /// </summary>
@@ -209,7 +221,7 @@ namespace QuickTools
                   }
 
                   // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
-                  for (int opt = 0; opt < OptionList.Count; opt++)
+                  /*for (int opt = 0; opt < OptionList.Count; opt++)
                   {
                         if (opt == CurrentSelection)
                         {
@@ -219,9 +231,49 @@ namespace QuickTools
                         {
                               Get.Write(OptionList[opt]);
                         }
-                  }
+                  }*/
             }
+            /// <summary>
+            /// This Options love simplicity so it shouses automatically and take out 
+            /// the simbols on the side 
+            /// </summary>
+            /// <param name="options"></param>
+            /// <param name="Simple"></param>
+            public Options(string[] options,bool Simple)
+            {
 
+                  if (Simple == true)
+                  {
+                        SelectorL = "";
+                        SelectorR = "";
+                        Color.Yellow(Label);
+                        foreach (string option in options)
+                        {
+                              OptionList.Add(option);
+                        }
+                        var opt = new Options();
+                        opt.Pick();
+                  }
+                  if(Simple == false)
+                  {
+#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
+                        new Options(options);
+#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
+                  }
+
+                  // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
+                  /*for (int opt = 0; opt < OptionList.Count; opt++)
+                  {
+                        if (opt == CurrentSelection)
+                        {
+                              Get.Label(" < " + OptionList[opt] + " > ");
+                        }
+                        else
+                        {
+                              Get.Write(OptionList[opt]);
+                        }
+                  }*/
+            }
             /// <summary>
             /// Create a list of options by passing a generic list 
             /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
@@ -230,14 +282,15 @@ namespace QuickTools
             public Options(List<object> options)
             {
 
-                  Get.Yellow(Label);
+                  Color.Yellow(Label);
                   foreach (string option in options)
                   {
                         OptionList.Add(option);
                   }
 
                   // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
-                  for (int opt = 0; opt < OptionList.Count; opt++)
+                
+                  /*  for (int opt = 0; opt < OptionList.Count; opt++)
                   {
                         if (opt == CurrentSelection)
                         {
@@ -247,7 +300,7 @@ namespace QuickTools
                         {
                               Get.Write(OptionList[opt]);
                         }
-                  }
+                  }*/
             }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
