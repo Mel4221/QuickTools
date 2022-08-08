@@ -33,27 +33,46 @@ using System.Collections.Generic;
 namespace QuickTools
 {
 
-
+      /// <summary>
+      /// The option class provide you an easy way to create a menu that can be used with the arrows up and down 
+      /// on a console eviroment .s
+      /// </summary>
       public class Options
       {
 
 
-
+            /// <summary>
+            /// This Control the Right simbol from the selector and the default simbol is ">"
+            /// </summary>
             public static string SelectorR = " > ";
+            /// <summary>
+            /// This Control the Left simbol from the selector and the default simbol is ">"
+            /// </summary>
             public static string SelectorL = " < ";
+            /// <summary>
+            /// This contains the initial selection or default 
+            /// </summary>
             public static int CurrentSelection = 0;
+            /// <summary>
+            /// The label that will be in top of the options
+            /// </summary>
             public static object Label = null;
-            public static int More;
+        
+                  /// <summary>
+                  /// Options List container 
+                  /// </summary>
             public static List<string> OptionList = new List<string>();
 
 
 
-
+            /// <summary>
+            /// Display the Options listed in the OptionsList 
+            /// </summary>
             public static void Display()
             {
                   Get.Clear();
                   // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
-                  Get.Yellow(Label);
+                  Color.Yellow(Label);
                   for (int option = 0; option < OptionList.Count; option++)
                   {
                         if (option == CurrentSelection)
@@ -71,7 +90,7 @@ namespace QuickTools
                   }
             }
             /// <summary>
-            /// Select this instance.
+            /// Select  the options listed and returns the number of the selection
             /// This instance is the one that start the 
             /// Selection process so even thouth you may call
             /// the Constructor you may need to also start the Selction 
@@ -176,10 +195,14 @@ namespace QuickTools
                   return CurrentSelection;
             }
 
-
+            /// <summary>
+            /// Create the List of options by passing an array 
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// </summary>
+            /// <param name="options">Options.</param>
             public Options(string[] options)
             {
-                  Get.Yellow(Label);
+                  Color.Yellow(Label);
                   foreach (string option in options)
                   {
                         OptionList.Add(option);
@@ -199,7 +222,11 @@ namespace QuickTools
                   }
             }
 
-
+            /// <summary>
+            /// Create a list of options by passing a generic list 
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// </summary>
+            /// <param name="options">Options.</param>
             public Options(List<object> options)
             {
 
@@ -235,12 +262,16 @@ namespace QuickTools
                   if (type == true)
                   {
                         string[] option = { "No", "Yes" };
+#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
                         new Options(option);
+#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
                   }
                   else
                   {
                         string[] option = { "Yes","No" };
+#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
                         new Options(option);
+#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
                   }
             }
 

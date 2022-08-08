@@ -4,6 +4,9 @@ using System.Text;
 using System.Collections.Generic; 
 namespace QuickTools
 {       
+      /// <summary>
+      /// Write content into files
+      /// </summary>
             public class Writer
             {
                         /*
@@ -18,7 +21,12 @@ namespace QuickTools
                             it also provides the option for you to pass  the data too , WriteFile also has an alert just in case if you would like
                             to do not override data so it will comfirm  it with the end user
                         */
-                        
+
+                  /// <summary>
+                  /// Writes the content passed into a file
+                  /// </summary>
+                  /// <param name="file">File.</param>
+                  /// <param name="data">Data.</param>
                         public static void WriteFile(string file,object data)
                         {
                             
@@ -40,7 +48,12 @@ namespace QuickTools
                                     }
                             }
                         }
-
+            /// <summary>
+            /// Writes the data into a file and if the last argument is true will Oveerride the content .
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="data">Data.</param>
+            /// <param name="OverriteOrCreate">If set to <c>true</c> overrite or create.</param>
             public static void WriteFile(string file, object data, bool OverriteOrCreate)
             {
                   if (OverriteOrCreate == true)
@@ -64,7 +77,11 @@ namespace QuickTools
                   }
             }
 
-
+            /// <summary>
+            /// Creates a file and write the content that is passed.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="data">Data.</param>
             public static void CreateFile(string fileName,object data)
                         {
                                 
@@ -90,6 +107,10 @@ namespace QuickTools
                                     Color.Yellow("This file could not be Wreated or Written, more details : "+e); 
                                 }
                         }
+            /// <summary>
+            /// Creates the file.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
                         public static void CreateFile(string fileName)
                         {
                                 try{
@@ -99,7 +120,11 @@ namespace QuickTools
                                     Color.Yellow("This file could not be created , more details : "+e); 
                                 }
                         }
-
+            /// <summary>
+            /// Write the content on a file and this use the FileStream on FileMode.Create and FileAccess.Write
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="data">Data.</param>
             public static void Write(string file, object data)
             {
 

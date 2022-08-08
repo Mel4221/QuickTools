@@ -24,8 +24,16 @@ namespace QuickTools
             // public static byte[] DataBytes;
             //public static int DataLength = 0000;
             //public static int DataHash = 0000;
+            /// <summary>
+            /// RowData is a field that contains the data in a entried string 
+            /// </summary>
             public static string RowData = null; 
 
+            /// <summary>
+            /// Encrypts the text that is passed as a string
+            /// </summary>
+            /// <returns>The file.</returns>
+            /// <param name="onlyText">text file or string text </param>
             public static string EncryptFile(string onlyText)
             {
 
@@ -63,12 +71,13 @@ namespace QuickTools
                                          //Encrypter.Data = finalData;
 
 
-
+                  /*
                   ///<summary>
                   /// this is the final result of the exponantial process of each bytes elevated to the power x 
                   // without any type of password this is done Only one time for now until im able to learn how to make 
                   // it for multiple times more effitiatly 
                   /// </summary>
+                  */
                   string finalData = Encoding.ASCII.GetString(switching);
                   RowData = finalData;
                   return finalData; 

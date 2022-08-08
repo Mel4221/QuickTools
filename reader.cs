@@ -4,14 +4,27 @@ using System.Text;
 using System.Collections.Generic;
 namespace QuickTools
 {
-
+      /// <summary>
+      /// This class Read Files content
+      /// </summary>
       public class Reader
       {
-
+            /// <summary>
+            /// This class save the Data from the Reader
+            /// </summary>
             public static class Stored
             {
-                  public static StringBuilder RowData = new StringBuilder();
+                  /// <summary>
+                  /// This Contain the Row Data into an stringBuilder
+                  /// </summary>
+                 public static StringBuilder RowData = new StringBuilder();
+                  /// <summary>
+                  /// contain The list data.
+                  /// </summary>
                   public static List<string> ListData = new List<string>();
+                  /// <summary>
+                  /// The bytes data.
+                  /// </summary>
                   public static byte[] BytesData;
             }
 
@@ -19,12 +32,21 @@ namespace QuickTools
                 This only provides the Bytes thar were
                 stored in a string file 
             */
-
+            /// <summary>
+            /// Contains the row data readed 
+            /// </summary>
             public static StringBuilder RowData = new StringBuilder();
+            /// <summary>
+            /// The empty spaces count in a file
+            /// </summary>
             public static double EmptySpacesCount = 0;
 
 
-
+            /// <summary>
+            /// Reads bytes stored into a file and return it 
+            /// </summary>
+            /// <returns>The stored bytes.</returns>
+            /// <param name="file">the files that contains the bytes.</param>
             public static byte[] ReadStoredBytes(string file)
             {
 
@@ -128,7 +150,11 @@ namespace QuickTools
                    Array Reader 
                   */
 
-
+                  /// <summary>
+                  /// Read and array that is listed on a file and retursn a Generic.List 
+                  /// </summary>
+                  /// <returns>The array.</returns>
+                  /// <param name="file">File.</param>
             public static List<string> ReadArray(string file)
             {
 
@@ -207,7 +233,11 @@ namespace QuickTools
 
 
             }
-
+            /// <summary>
+            /// Read the entired file and returns the text from it 
+            /// </summary>
+            /// <returns>The file.</returns>
+            /// <param name="file">File.</param>
             public static string ReadFile(string file)
             {
                   string data = null;
@@ -222,9 +252,17 @@ namespace QuickTools
             }
 
 
-
+            /// <summary>
+            /// Contais the length of the file that is being readed 
+            /// this uses the FileStream and is an astraction that has the FileMode.Open , and FileAccess.Read
+            /// </summary>
             public static double ReadLength = 0000; 
-            public static string Read(string file)
+           /// <summary>
+           /// Read a file and return the string data listed in it 
+           /// </summary>
+           /// <returns>The read.</returns>
+           /// <param name="file">File.</param>
+             public static string Read(string file)
             {
                   string data = null;
                   using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))

@@ -36,29 +36,41 @@ namespace QuickTools
             and you know what i will create  another class just because 
             that could be called on the same maner 
       */
+      /// <summary>
+      /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 
+      /// </summary>
       public class CreateRandom:New
       {
 
       }
+      /// <summary>
+      /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 
+      /// </summary>
       public class New
     {
+            /// <summary>
+            /// Contains the password Generated 
+            /// </summary>
       public static string Generated = null;
-      public static string[] LowerCase =
+            /// <summary>
+            /// This Contains the array of the 
+            /// </summary>
+      private static string[] LowerCase =
       { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 "n",
       "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
       };
-      public static string[] UpperCase =
+      private static string[] UpperCase =
       { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 "N",
       "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
       };
-      public static string[] Symbols =
+      private static string[] Symbols =
       { "!", "@", "%", "^", "&", "*", "=", "?", ".", ")", "(", "_", "+",
 "-", "*", "/",
       "+","`","~"
       };
-      public static int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+      private static int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
       /*
          //Lower 26
@@ -70,7 +82,10 @@ namespace QuickTools
      // this is the random selector 
       static Random ranOrder = new Random ();
 
-
+            /// <summary>
+            /// Generate a Random Passord with a max 9 digits
+            /// </summary>
+            /// <returns>The password.</returns>
       public static object Password ()
       {                        // this one will generate a minimum passowrd of 9 digits 
       string password = "";
@@ -118,7 +133,11 @@ namespace QuickTools
                   based on the input needed 
                   _____________________________________________                 
             */
-
+            /// <summary>
+            /// Generate a Password with the specified passwordLenght.
+            /// </summary>
+            /// <returns>The password.</returns>
+            /// <param name="passwordLenght">Password lenght.</param>
       public static object Password (int passwordLenght)
       {                       // this one will generate a minimum passowrd of 9 digits 
       
@@ -160,8 +179,14 @@ namespace QuickTools
       Generated = password.Replace (" ", "");
       return password.Replace (" ", "");
       }
-
-      public static int pin;
+            /// <summary>
+            /// The pin generated
+            /// </summary>
+     public static int pin;
+            /// <summary>
+            /// This Method create a random pin of 4 digits and return it 
+            /// </summary>
+            /// <returns>The pin.</returns>
       public static int Pin ()
       {
       string password = "".Replace (" ", "");
@@ -174,13 +199,24 @@ namespace QuickTools
 
           password += Numbers[number.Next (0, 9)];
         }
-      pin = int.Parse (password);
+                  pin = int.Parse(password);
+
       return int.Parse (password);
       }
-
+            /// <summary>
+            /// Create a pin of the specified length.
+            /// </summary>
+            /// <returns>The pin.</returns>
+            /// <param name="Level">Level.</param>
       public static object Pin (int Level)
       {
-      string password = "".Replace (" ", "");
+                  if(Level <= 0)
+                  {
+                        
+                        return "Invalid pin length"; 
+                  }
+
+                  string password = "".Replace (" ", "");
       Random number = new Random ();
 
       // this will change the order of the password
@@ -202,7 +238,12 @@ namespace QuickTools
 
             // public static string RowBytes = null;// dismmissed due to being extremedly slow 
             private static StringBuilder RowBytes = new StringBuilder();
-
+            /// <summary>
+            /// Create a Random Byte Array of the specified length 
+            /// and return it back on a byte array 
+            /// </summary>
+            /// <returns>The byte array.</returns>
+            /// <param name="arrayLength">Array length.</param>
             static public byte[] RandomByteArray(int arrayLength)
             {
 
@@ -238,6 +279,15 @@ namespace QuickTools
                 which change the size of the array wanted and also 
                 the range of each digits 
             */
+
+                  /// <summary>
+                  /// Create a random byte array and allow you to costumice the limits of the random numbers
+                  /// that will be into it 
+                  /// </summary>
+                  /// <returns>The byte array.</returns>
+                  /// <param name="arrayLength">Array length.</param>
+                  /// <param name="minimumRange">Minimum range.</param>
+                  /// <param name="maximumRange">Maximum range.</param>
             static public byte[] RandomByteArray(int arrayLength, int minimumRange, int maximumRange)
             {
                   byte[] array = new byte[arrayLength];
