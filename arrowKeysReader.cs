@@ -9,18 +9,69 @@
 
 
 using System;
+using System.Collections.Generic; 
 namespace QuickTools
 {
-       class Key
+      /// <summary>
+      /// 
+      /// </summary>
+       public class List
       {
+            /// <summary>
+            /// No Implementation ________
+            /// Initializes a new instance of the <see cref="T:QuickTools.List"/> class.
+            /// 
+            /// </summary>
+            public List()
+            {
+
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.List"/> class.
+            /// </summary>
+            /// <param name="rowList">Row list.</param>
+            public List(string rowList)
+            {
+
+            }
+            /// <summary>
+            /// Add the list to the Selection List __________
+            /// Initializes a new instance of the <see cref="T:QuickTools.List"/> class.
+            /// </summary>
+            /// <param name="list">List.</param>
+            public List(string[] list)
+            {
+                  foreach (string item in list)
+                  {
+                        SelectionList.Add(item);
+                  }
+            }
+            /// <summary>
+            /// Add the list to the Selection List __________
+            /// Initializes a new instance of the <see cref="T:QuickTools.List"/> class.
+            /// </summary>
+            /// <param name="list">List.</param>
+            public List(List<string> list)
+            {
+                  SelectionList = list; 
+            }
 
             private static int Position = 0;
-            // private static int Depth = 0; 
-            private static int ArrayLength = 0;
+            private static int Location = 0; 
+            // private static int Depth = 0;
+            /// <summary>
+            /// Contains the selection list 
+            /// </summary>
+            public static List<string> SelectionList = new List<string>();
+            /// <summary>
+            /// Contains the Row String that needs to be parsed into multiple pices 
+            /// </summary>
+            public string RowSelection = null; 
+           // private static int ArrayLength = 0;
             private static void DisplayArray()
             {
 
-                  int[] a = { 1, 2, 3, 4, 5 };
+               //   int[] a = { 1, 2, 3, 4, 5 };
 
                   /*
                    * 
@@ -31,30 +82,28 @@ namespace QuickTools
                   int[] e = { -3,-2,-1,0,1 };
                   int[] f = { -4,-3, -2,-1,0}; 
                   */
-                  ArrayLength = a.Length;
+              //   ArrayLength = SelectionList.Count;
                   C.Write("[");
-                  for (int i = 0; i < a.Length; i++)
+                  for (int i = 0; i < SelectionList.Count; i++)
                   {
 
-                        string comma = i < a.Length - 1 ? "," : "";
+                              
+                             
+                              Get.LabelSingle(SelectionList[Position]+",");
 
-                        if (a[i] == Position)
-                        {
-                              Get.LabelSingle(a[i] + comma);
-                        }
-                        else
-                        {
-                              C.Write(a[i] + comma);
-
-                        }
+                            
+                     
 
 
                   }
                   C.Write("]");
 
             }
-
-            public static int Read()
+            /// <summary>
+            /// Pick the string in the array or list. 
+            /// </summary>
+            /// <returns>The List selection.</returns>
+            public static int Pick()
             {
                   int x = 0;
 
@@ -78,29 +127,34 @@ namespace QuickTools
                               case "LeftArrow":
                                     if (Position == 0)
                                     {
-                                          Position = ArrayLength;
+                                          Position = SelectionList.Count;
+                                           Location = Position; 
                                     }
                                     else
                                     {
                                           Position--;
+                                          Location--; 
                                     }
                                     DisplayArray();
 
                                     break;
                               case "RightArrow":
-                                    if (Position == ArrayLength)
+                                    if (Position == SelectionList.Count)
                                     {
                                           Position = 0;
+                                          Location = 0; 
                                     }
                                     else
                                     {
                                           Position++;
+                                          Location++; 
                                     }
                                     DisplayArray();
                                     break;
                               default:
-
+                                    
                                     Get.Title("To Exit Press Escape");
+                                    DisplayArray(); 
                                     break;
                         }
                   }

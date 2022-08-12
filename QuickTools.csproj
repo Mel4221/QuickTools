@@ -65,6 +65,8 @@
     <Compile Include="NewImplementation.cs" />
     <Compile Include="Zip.cs" />
     <Compile Include="printList.cs" />
+    <Compile Include="OptionExt.cs" />
+    <Compile Include="DirecectionHandeler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

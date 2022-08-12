@@ -5,11 +5,11 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("QuickTools")]
-[assembly: AssemblyDescription("This program was created  as my first library , i hope is suefull ")]
+[assembly: AssemblyDescription("QuickTools Lybrary Developed on C# Languague")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MBV")]
 [assembly: AssemblyProduct("QuickTools Lybrary")]
-[assembly: AssemblyCopyright("MIT")]
+[assembly: AssemblyCopyright("Public Performing Right.")]
 [assembly: AssemblyTrademark("MIT")]
 [assembly: AssemblyCulture("")]
 
