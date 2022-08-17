@@ -67,6 +67,7 @@
     <Compile Include="printList.cs" />
     <Compile Include="OptionExt.cs" />
     <Compile Include="DirecectionHandeler.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

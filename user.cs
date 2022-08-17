@@ -12,32 +12,32 @@ namespace QuickTools
                   /// Gets or sets the name.
                   /// </summary>
                   /// <value>The name.</value>
-			public static string Name { get; set; }
+			public  string Name { get; set; }
             /// <summary>
             /// Gets or sets the last name 
             /// </summary>
             /// <value>The name of the lat.</value>
-			public static string LatName { get; set; }
+			public  string LatName { get; set; }
             /// <summary>
             /// Gets or sets the password.
             /// </summary>
             /// <value>The password.</value>
-			public static string Password { get; set; }
+			public    string Password { get; set; }
             /// <summary>
             /// Gets or sets the date of birth.
             /// </summary>
             /// <value>The dob.</value>
-			public static string Dob { get; set; }
+			public     string Dob { get; set; }
             /// <summary>
             /// Gets or sets the phone.
             /// </summary>
             /// <value>The phone.</value>
-			public static string Phone { get; set; }
+			public    string Phone { get; set; }
             /// <summary>
             /// Gets or sets the email.
             /// </summary>
             /// <value>The email.</value>
-			public static string Email { get; set; }
+			public    string Email { get; set; }
 
 			// this contructor is for the login 
             /// <summary>
@@ -48,8 +48,8 @@ namespace QuickTools
             /// <param name="password">Password.</param>
 			public User(string name, string password)
 			{
-				Name = name;
-				Password = password;
+				this.Name = name;
+				this.Password = password;
 			}
 
 			// this contructor is for the singup 
@@ -65,12 +65,12 @@ namespace QuickTools
             /// <param name="email">Email.</param>
 			public User(string name, string lastName, string password, string dob, string phone, string email)
 			{
-				Name = name;
-				LatName = lastName;
-				Password = password;
-				Dob = dob;
-				Phone = phone;
-				Email = email;
+				this.Name = name;
+				this.LatName = lastName;
+				this.Password = password;
+				this.Dob = dob;
+				this.Phone = phone;
+				this.Email = email;
 			}
                   /*
                         This used to print the data but this is not relevant
@@ -84,6 +84,23 @@ namespace QuickTools
 				Get.Wait();
 			}
 			*/
-		}
+            /// <summary>
+            /// Not Implemented
+            /// </summary>
+            public  User()
+            {
+
+            }
+            /// <summary>
+            /// Set the specified user data.
+            /// </summary>
+            /// <param name="user">User.</param>
+            public virtual void Set(User user)
+            {
+                  
+            }
+
+
+      }
 
 }

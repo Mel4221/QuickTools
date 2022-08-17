@@ -312,14 +312,14 @@ namespace QuickTools
             /// <param name="type">If set to <c>true</c> type.</param>
             public Options(bool type)
             {
-                  if (type == true)
+                  if (type == false)
                   {
                         string[] option = { "No", "Yes" };
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'
                         new Options(option);
 #pragma warning restore RECS0026 // Possible unassigned object created by 'new'
                   }
-                  else
+                  if(type == true)
                   {
                         string[] option = { "Yes","No" };
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'

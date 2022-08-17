@@ -38,17 +38,18 @@ namespace QuickTools
 
             /// <summary>
             /// WaitTime basically is an abstraction of 
-            /// System.Threading.Sleep(<paramref name="sleepTime"/>);
+            /// System.Threading.Sleep(<paramref name="milliSecondsOrseconds"/>);
             /// and it basically wait the time in it , it also 
             /// contains a try catch just in case if something fails
             /// </summary>
-            /// <param name="sleepTime">Sleep time.</param>
-            public static void WaitTime(int sleepTime)
+            /// <param name="milliSecondsOrseconds">Sleep time.</param>
+            public static void WaitTime(int milliSecondsOrseconds)
             {
 
                   try
                   {
-                        Thread.Sleep(sleepTime);
+                        
+                        Thread.Sleep(milliSecondsOrseconds);
 
                   }
                   catch (Exception e)
@@ -306,7 +307,7 @@ namespace QuickTools
 /////////////////////////////////////////////////////////////////////////////
 */
 
-
+                  /*
             /// <summary>
             /// This method has builded in it 
             /// a very simple login user
@@ -319,12 +320,12 @@ namespace QuickTools
             public static string[] Login()
             {
                   string name, password;
-                  Get.Box("Login");
-                  Get.Yellow("Type Your Information Please.");
-                  Get.Box("Name");
+                  Back_Green("Login");
+                  Yellow("Type Your Information Please.",1);
+                  Green("Name");
                   name = Get.TextInput();
-                  Get.Box("Password");
-                  Get.Red("Hidden For Privacy and Security");
+                  Green("Password");
+                  Red("Hidden For Privacy and Security");
                   Get.Hide();
                   password = Console.ReadLine();
                   Get.Reset();
@@ -340,41 +341,53 @@ namespace QuickTools
                   return userData;
 #pragma warning restore RECS0026 // Possible unassigned object created by 'new'
             }
-            /// <summary>
-            /// Very simple sing up which veryfy that the data
-            /// it is instroduced correctly 
-            /// is not super secure and it needs to be improved 
-            /// on farther versions 
-            /// </summary>
-            /// <returns>string[] array of the sing up data</returns>
-            public static string[] SingUp()
+           
+              public static string[] SingUp()
             {
-                  string name, lastName, password, dob, phone, email;
-                  Get.Box("Singup", 4);
-                  Get.Yellow("Type Your Information Please.", 3);
-                  Get.Box("Name", 1);
-                  name = Get.TextInput();
-                  Get.Box("Last Name", 1);
-                  lastName = Get.TextInput();
-                  Get.Box("Date of Birth", 1);
-                  Get.Red("Hidden For Privacy and Security");
-                  Get.Hide();
-                  dob = Console.ReadLine();
-                  Get.Reset();
-                  Get.Box("Phone Number", 1);
-                  phone = Get.TextInput();
-                  Get.Box("Email Address", 1);
-                  email = Get.TextInput();
-                  Get.Box("Password");
-                  Get.Red("Hidden For Privacy and Security");
+                  string name, lastName, password, dob, phone, email,repeated;
+                  Back_Green("Singup");
+                  Yellow("Type Your Information Please.",1);
+                  Green("Name");
+                  name = Get.Input().ToString();
+                  Green("Last Name");
+                  lastName = Get.Input().ToString();
+                  Green("Date of Birth");
+                  //Red("Hidden For Privacy and Security");
+                  //Get.Hide();
+                  dob = Get.Input().ToString();
+                  //Get.Reset();
+                  Green("Phone Number");
+                  phone = Get.Input().ToString();
+                  Green("Email Address");
+                  email = Get.Input().ToString();
+                  Green("Password");
+                  Red("Hidden For Privacy and Security");
                   Get.Hide();
                   password = Console.ReadLine();
                   Get.Reset();
-                  new User(name, lastName, password, dob, phone, email);
+                  Yellow("Repeat Password");
+                  Get.Hide();
+                  repeated = Console.ReadLine();
+                  Get.Reset();
+                  if (repeated == password)
+                  {
+#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
+                        new User(name, lastName, password, dob, phone, email);
+#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
+
+                  }
+                  if (repeated != password)
+                  {
+                        Yellow("Invalid Information , either missing or the password did not match");                       
+                       Wait();
+                        SingUp();                        
+                  }
+
                   //  Get.Wait(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
                   string[] userData = { name, lastName, password, dob, phone, email };
                   return userData;
             }
+            */
 
             /*
 /////////////////////////////////////////////////////////////////////////////
@@ -455,9 +468,10 @@ namespace QuickTools
                               string lastDigit = inputVal[inputVal.Length - 1].ToString();
                               inputValue = int.Parse(lastDigit);
                         }
-                        catch (Exception e)
+                        catch
                         {
-                              Get.Alert(e);
+                                                          
+                              KeyNumber(); 
                         }
                   }
                   else
@@ -517,6 +531,9 @@ namespace QuickTools
                         return inputValue;
                   }
             }
+
+
+     
             ///<summary>
             /// This Method does the same as Input() without any 
             /// arguments but with the only diference that the char
@@ -524,7 +541,7 @@ namespace QuickTools
             /// like Get.Input("Write Your Name");
             /// </summary>
             /// <returns> object Input either text or number</returns>
-            public static object Input(object display)
+            public static object Input(string display)
             {
                   Get.Write("");
                   Get.LabelSide(display);
@@ -614,6 +631,27 @@ namespace QuickTools
             {
                   Get.LabelSide(">");
                   Console.Write(" ");
+                                  
+                  string text = Console.ReadLine();
+                  //input = text; //i dont think it may be a good idea                  
+                  Text = text;
+                  return text;
+            }
+            /// <summary>
+            /// This Read text from the console and return it on an string format
+            /// it also has <see langword="async"/> label which is printed on top of it 
+            /// </summary>
+            /// <returns>The input.</returns>
+            /// <param name="textToDisplayOnTop">textToDisplayOnTop.</param>
+            public static string TextInput(string textToDisplayOnTop)
+            {
+                  Get.LabelSide(textToDisplayOnTop);
+                  //Console.WriteLine("");
+                  Get.Reset();
+                  Console.Write(" ");
+                  Get.LabelSide(">");
+                  Console.Write(" ");
+
                   string text = Console.ReadLine();
                   //input = text; //i dont think it may be a good idea                  
                   Text = text;
@@ -899,8 +937,45 @@ namespace QuickTools
                   Console.ResetColor();
                   Get.Wait();
             }
+            /// <summary>
+            /// This is just used when you need to see if some logic is working as spected
+            /// so each ok number provide a different color and each of them are from 0 to 4 
+            /// and the colors available are (Green, Yellow , Blue ,  Red , Cyan )
+            /// </summary>
+            /// <param name="colorNumber">Color number.</param>
+            public static void Ok(int colorNumber)
+            {
+                             
+                
+                switch(colorNumber)
+                  {
+                        case 0:
+                              Color.Green("OK");
+                              break;
 
-         
+                        case 1:
+                              Color.Yellow("OK");
+                              break;
+                        case 2:
+                              Color.Blue("OK");
+                              break;
+                        case 3:
+                              Color.Red("OK");
+                              break;
+                        case 4:
+                              Color.Cyan("OK");
+                              break;
+                        default:
+                              var get = new Get();                              
+                              Alert("Not Implemented a number for this method please only from 0 to 4 \n" +
+                              "Colors Availables are {Green , Yellow , Blue , Red , Cyan }");
+                              break;                             
+                  }
+
+                  Get.Wait();
+            }
+
+
             /// <summary>
             /// Similar to Console.WriteLine(object); 
             /// but add a box of color yellow saying alert
