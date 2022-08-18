@@ -14,7 +14,7 @@ namespace QuickTools
             private static string CreateLogDir()
             {
                   string logsDir = null;
-                  logsDir = Get.DataPath() + "logs/";
+                  logsDir = Get.Path + "data/qt/logs/";
                   Directory.CreateDirectory(logsDir); 
                  
 
@@ -27,29 +27,29 @@ namespace QuickTools
             /// <param name="matter">Matter.</param>
             public static void Event(string name ,object matter)
             {
-                  string logsDir = Get.DataPath() + "logs/"; 
-                     if (Directory.Exists(logsDir) == true)
-                  {
-                        string file = logsDir + name; 
-                        using (var fs = File.AppendText(file))
-                        {
-                              fs.WriteLine(matter);
-                        }
+                  string time = $"|*** Date Of The Event :{DateTime.Now} ***|\n\n\n";
 
+
+
+
+                  string path = CreateLogDir();
+                  string file = path + name; 
+
+                  if(File.Exists(file) == false)
+                  {
+                        Writer.Write(file, time+matter);
+                        return;
                   }
                   else
                   {
-                        // string file = CreateLogDir() + name;
-                        string file = logsDir + name;
 
-                        using (var fs = File.AppendText(file))
-                        {
+                        string previusContent = Reader.Read(file);
 
 
-                                    fs.WriteLine(matter);
-
-                        }
+                        string newContent = time+matter + previusContent;
+                        Writer.Write(file,newContent);
                   }
+
 
             }
       }

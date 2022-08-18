@@ -55,7 +55,7 @@ namespace QuickTools
                   {
 
                         switching[value] = dataBytes[back - 1];// this will switch the order of the bytes
-                        switching[value] = Convert.ToByte((switching[value] ^ 16));// thiw will elveate it to the power of 2
+                        switching[value] = Convert.ToByte((switching[value] ^ 8));// thiw will elveate it to the power of 2
 
                         back--;// decrementing the value of back to change the order of the bytes 
                   }

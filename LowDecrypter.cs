@@ -55,7 +55,7 @@ namespace QuickTools
                   {
                           
                         firstDecompress[value] = dataBytes[foward - 1];// backward order
-                        firstDecompress[value] = Convert.ToByte(firstDecompress[value] ^16);// matematical operation 
+                        firstDecompress[value] = Convert.ToByte(firstDecompress[value] ^ 16);// matematical operation 
 
 
                         foward--;

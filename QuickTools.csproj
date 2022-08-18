@@ -68,6 +68,10 @@
     <Compile Include="OptionExt.cs" />
     <Compile Include="DirecectionHandeler.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="AesDecrypt.cs" />
+    <Compile Include="AesEncrypt.cs" />
+    <Compile Include="Aes_Documents.cs" />
+    <Compile Include="Masking.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

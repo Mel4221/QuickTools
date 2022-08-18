@@ -166,12 +166,12 @@ namespace QuickTools
                                           {
                                                 case true:
                                                       // here it shoudl go to the option pressed by it self 
-                                                      Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                 //     Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
                                                       Display();
                                                       break;
 
                                                 case false:
-                                                      Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                  //    Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
                                                       Display();
                                                       break;
                                           }

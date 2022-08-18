@@ -27,7 +27,6 @@ namespace QuickTools
       ///////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////
 
-
       /// <summary>
       /// Get The bigest class In Quicktools
       /// does multiple stuff and contains must of the 
@@ -102,7 +101,7 @@ namespace QuickTools
             /// Abstraction for Directory.GetCurrentDirectory(); 
             /// returns the current string path 
             /// </summary>
-            public static string Path = Directory.GetCurrentDirectory()+"/";
+            public static string Path = Environment.CurrentDirectory+"/";
             /// <summary>
             /// This method Create a folder inside the root of the program
             /// and create a folder that can be use for the program 
@@ -1080,6 +1079,9 @@ namespace QuickTools
             }
 
 
+
+
+           
             /// <summary>
             /// Write the specified text and tabs.
             /// </summary>
@@ -1174,5 +1176,13 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
 
             */
             }
+      }
+
+      /// <summary>
+      /// Extention Of Get Due to Old Programs using this abstraction
+      /// </summary>
+      public class Do:Get
+      {
+
       }
 }
