@@ -33,7 +33,7 @@ namespace QuickTools
 
 
                   string path = CreateLogDir();
-                  string file = path + name; 
+                  string file = path + name+"log"; 
 
                   if(File.Exists(file) == false)
                   {
@@ -42,10 +42,9 @@ namespace QuickTools
                   }
                   else
                   {
-
+                        // get the text from the file
                         string previusContent = Reader.Read(file);
-
-
+                        // write the old text first then the new text 
                         string newContent = time+matter + previusContent;
                         Writer.Write(file,newContent);
                   }
