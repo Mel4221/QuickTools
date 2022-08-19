@@ -44,7 +44,7 @@ namespace QuickTools
                   {
                         // get the text from the file
                         string previusContent = Reader.Read(file);
-                        // write the old text first then the new text 
+                        // write the old text first then the new
                         string newContent = time+matter + previusContent;
                         Writer.Write(file,newContent);
                   }
