@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2001</PackageVersion>
+    <PackageVersion>2002</PackageVersion>
     <Authors>MBV</Authors>
     <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
     <PackOnBuild>true</PackOnBuild>
@@ -20,7 +20,8 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Owners>MBV</Owners>
     <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
-    <PackageReleaseNotes>New QuckTools Library for C# users </PackageReleaseNotes>
+    <PackageReleaseNotes>On This Update i have set up the bounderies of the application and must of it's methods are more stable and complete with the functionality that is needed , and if there is any bugs please submit it on my github , and it will be a pleasure to fix them ASAP  
+https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
     <Summary>C# Librarry</Summary>
     <PackageTags>Tool</PackageTags>
     <Title>QuickTools</Title>
@@ -32,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\QuickTools.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
@@ -78,5 +82,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
 </Project>

@@ -33,7 +33,7 @@ namespace QuickTools
 
 
                   string path = CreateLogDir();
-                  string file = path + name+"log"; 
+                  string file = path + name+".log"; 
 
                   if(File.Exists(file) == false)
                   {
