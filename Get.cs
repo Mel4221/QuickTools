@@ -51,9 +51,9 @@ namespace QuickTools
                         Thread.Sleep(milliSecondsOrseconds);
 
                   }
-                  catch (Exception e)
+                  catch(Exception)
                   {
-                        Get.Wrong(e);
+                        //Get.Wrong(e);
                   }
 
 
@@ -70,9 +70,9 @@ namespace QuickTools
                         Thread.Sleep(1000);
 
                   }
-                  catch (Exception e)
+                  catch (Exception)
                   {
-                        Get.Wrong(e);
+                        
                   }
 
 
@@ -90,9 +90,9 @@ namespace QuickTools
                         {
                               Thread.Sleep(sleepTime);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
-                              Wrong(e);
+                              //Wrong(e);
                         }
                   }
             }
