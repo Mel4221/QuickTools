@@ -1,19 +1,17 @@
 using System;
-using System.Text; 
-using System.IO;
-using System.Threading;
+using System.Text;
 using System.Collections.Generic;
 
 
 
-namespace QuickTools 
+namespace QuickTools
 {
       /// <summary>
       ///LoopInput allows you to keep getting an imput constantly in a Console Application
       ///and callect the entired input and return it in a single string or it can be access aswell
       /// by calling the LoopInput.Data.
       /// </summary>
-  public class LoopInput
+      public class LoopInput
   {     
       /// <summary>
       /// The Return Data will have to be provided by a method due to 

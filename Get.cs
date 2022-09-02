@@ -35,6 +35,17 @@ namespace QuickTools
       public class Get : Color
       {
 
+
+
+                  /*
+                   Console.BufferHeight
+                   Console.BufferWidth                 
+                  */
+
+
+
+
+
             /// <summary>
             /// WaitTime basically is an abstraction of 
             /// System.Threading.Sleep(<paramref name="milliSecondsOrseconds"/>);
@@ -584,6 +595,7 @@ namespace QuickTools
 
                   if (isNumber == true)
                   {
+                        Get.Number = number;                        
                         return true;
                   }
                   else
