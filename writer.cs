@@ -53,10 +53,10 @@ namespace QuickTools
             /// </summary>
             /// <param name="file">File.</param>
             /// <param name="data">Data.</param>
-            /// <param name="OverriteOrCreate">If set to <c>true</c> overrite or create.</param>
-            public static void WriteFile(string file, object data, bool OverriteOrCreate)
+            /// <param name="CanOverWrite">If set to <c>true</c> overrite or create.</param>
+            public static void WriteFile(string file, object data, bool CanOverWrite)
             {
-                  if (OverriteOrCreate == true)
+                  if (CanOverWrite == true)
                   {
                         // for testing porpuses: 
                         //Get.Box(path); 
@@ -71,12 +71,64 @@ namespace QuickTools
                         {
 
                               //      Get.Write("Overrided Was Process");
+                              /*
+
+                                    Create file already contains a validation method
+                                    if the file already exist so it is not needed to add a new one                                    
+
+                              */
                                     CreateFile(file, data);
 
                         }
                   }
             }
 
+
+
+            /// <summary>
+            /// This method writes to a file an entired array of type string
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="array">Array.</param>
+            public static void WriteArray( string fileName ,string[] array)
+            {
+                  StringBuilder content = new StringBuilder(); 
+                  for(int value= 0; value <array.Length; value++)
+                  {
+                        content.Append(array[value]+",");
+                  }
+                  Writer.Write(fileName, content.ToString()); 
+            }
+
+            /// <summary>
+            /// This method writes to a file an entired array of type int
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="array">Array.</param>
+            public static void WriteArray(string fileName, int[] array)
+            {
+                  StringBuilder content = new StringBuilder();
+                  for (int value = 0; value < array.Length; value++)
+                  {
+                        content.Append(array[value] + ",");
+                  }
+                  Writer.Write(fileName, content.ToString());
+            }
+
+            /// <summary>
+            /// This method writes to a file an entired array of type byte
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="array">Array.</param>
+            public static void WriteArray(string fileName, byte[] array)
+            {
+                  StringBuilder content = new StringBuilder();
+                  for (int value = 0; value < array.Length; value++)
+                  {
+                        content.Append(array[value] + ",");
+                  }
+                  Writer.Write(fileName, content.ToString());
+            }
             /// <summary>
             /// Creates a file and write the content that is passed.
             /// </summary>

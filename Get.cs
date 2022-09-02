@@ -640,13 +640,16 @@ namespace QuickTools
             /// <returns>The input.</returns>
             public static string TextInput()
             {
+                  /*              
                   Get.LabelSide(">");
                   Console.Write(" ");
                                   
                   string text = Console.ReadLine();
                   //input = text; //i dont think it may be a good idea                  
                   Text = text;
-                  return text;
+                  */             
+                  string textInput = Get.Input().ToString();
+                  return textInput; 
             }
             /// <summary>
             /// This Read text from the console and return it on an string format
