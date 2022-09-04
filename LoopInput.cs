@@ -17,13 +17,13 @@ namespace QuickTools
       /// The Return Data will have to be provided by a method due to 
       /// lack of simplicity
       /// </summary>
-      private static List<string> Data = new List<string> ();
+      private  List<string> Data = new List<string> ();
      
              
             /// <summary>
             ///  this can not be cause is handled only by the Start Method .
             /// </summary>
-     private static void PrintList()
+     private  void PrintList()
      {
                   Get.Clear();
 
@@ -52,7 +52,7 @@ namespace QuickTools
             /// text input equal to the fallowing "done", "exit","done","d"
             /// </summary>
             /// <returns>The InputData or rowdata callected by the Input.</returns>
-            public static string Start()
+            public  string Start()
             {
 
                   while (Get.TextInput() != ".")
@@ -65,7 +65,7 @@ namespace QuickTools
                               //here is the text that is added
                               // to the list and 
                               //call the PrintList()//method
-                              Data.Add(Get.Text);
+                              Data.Add(Get.Text+" ");
                               PrintList();
                         }
                         else
@@ -82,7 +82,7 @@ namespace QuickTools
             /// all the data in the List and it return into a row string
             /// </summary>
             /// <returns>The data.</returns>
-            public static string RowData()
+            public  string RowData()
             {
                   StringBuilder data = new StringBuilder();//where the date that will ber returned is stored 
                   /*
@@ -103,6 +103,37 @@ namespace QuickTools
 
                   return data.ToString();  
             }
+
+
+            /// <summary>
+            /// This Return each lines of the Loop Input that was captured 
+            /// </summary>
+            /// <returns>The lines.</returns>
+            public  string[] Lines()
+            {
+                  string[] data = new string[Data.Count]; 
+                  for (int value = 0; value < Data.Count; value++)
+                  {
+
+                        data[value] = Data[value]; 
+
+                        /*
+                        if (Data[value].LastIndexOf('.') == Data[value].Length - 1)
+                        {
+                          //   data.Append(Data[value] + Environment.NewLine + Environment.NewLine);
+                              
+                        }
+                        else
+                        {
+                           //  data.Append(Data[value]);
+                        }
+  */
+                    }
+
+
+                  return data; 
+            }
+
 
       }
 }

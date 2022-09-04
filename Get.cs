@@ -11,7 +11,6 @@ using System;
 //using System.Security;            // has to be implemented 
 using System.Threading;
 using System.IO;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 //using System.Security.Permissions;// it has to be implemented
 
@@ -443,13 +442,35 @@ namespace QuickTools
                   //why would i want something that is pointing to 
                   // nothing because is just wating for a key to be pressed
                   var InputKey = Console.ReadKey();
-                  Get.Clear();
+                  //Get.Clear();
                   // this will return a type of number or key 
                   // with the information from it like 1D1
                   string inputValue = InputKey.Key.ToString();
                   Key = inputValue;
                   return inputValue;
             }
+
+            /// <summary>
+            /// This method allows you to get the Character value 
+            /// and return it as anstring 
+            /// </summary>
+            /// <returns>The char.</returns>
+                  public static string KeyChar()
+            {
+                  //    Get.LabelSide(">"); // just looks better damme it 
+                  //    Console.Write(" ");
+                  // it just did not make as much sence on 
+                  //why would i want something that is pointing to 
+                  // nothing because is just wating for a key to be pressed
+                  var InputKey = Console.ReadKey();
+                  //Get.Clear();
+                  // this will return a type of number or key 
+                  // with the information from it like 1D1
+                  string inputValue = InputKey.KeyChar.ToString(); 
+                  Key = inputValue;
+                  return inputValue;
+            }
+
             ///<summary>
             /// this does the same thing than the Get.KeyInput()
             /// but it only works with numbers

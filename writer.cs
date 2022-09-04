@@ -146,10 +146,10 @@ namespace QuickTools
                                         
                                         
                                 Options.Label = "This File Exist '"+fileName+"' Would you like to override it?"; 
-                                var app = new Options(true||false); 
+                                var app = new Options(true); 
                                         
                                        
-                                       if(app.Pick() == 1)
+                                       if(app.Pick() == 0)
                                        {
                                            WriteFile(fileName,data); 
                                        }
