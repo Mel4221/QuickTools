@@ -1,4 +1,31 @@
 /*
+ *
+ *	This is a quick way to create simple menu on a console aplication 
+ *	by just adding the options like : 
+ *	string[] options = {"Red","Blue","Pink"};
+ *
+ *	var Options option = new Option(options); 
+ *	
+ *	switch(option.Pick())
+ *	{
+ *		case 0:
+ *				Color.Red("I like that one"); 
+ *		break; 
+ *
+ *		case 1:
+ *				Color.Blue("i like that one too"); 
+ *		break ; 
+ *
+ *		case 2: 
+ *				Color.Pink("That one is my favorite"); 
+ *		break ; 
+ *	} 
+ *	
+ *
+ *
+ *	I hope this can help on how it works 
+ *
+ *
         //this is an updated version of QuickTools Last Update : 03/10/2022
         //Get.Version();
     
@@ -8,10 +35,7 @@
             string[] optionsList = {"Messages","Contacs","Login","Logout"};
             new Options(optionsList);  
             Options.Select();
- 
-
-*/
-/*
+-----------------------------------------------------------------------------------
 _____________________________________
 This code has been reviewed today 7/1/2022 
 and i have founded a bug due to the simple fact that
