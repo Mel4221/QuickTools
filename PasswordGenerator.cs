@@ -86,7 +86,7 @@ namespace QuickTools
             /// Generate a Random Passord with a max 9 digits
             /// </summary>
             /// <returns>The password.</returns>
-      public static object Password ()
+      public static string Password ()
       {                        // this one will generate a minimum passowrd of 9 digits 
       string password = "";
       Random lower, upper, symbol, number;
@@ -138,7 +138,7 @@ namespace QuickTools
             /// </summary>
             /// <returns>The password.</returns>
             /// <param name="passwordLenght">Password lenght.</param>
-      public static object Password (int passwordLenght)
+      public static string Password (int passwordLenght)
       {                       // this one will generate a minimum passowrd of 9 digits 
       
       string password = "";
