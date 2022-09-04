@@ -61,13 +61,25 @@ namespace QuickTools
 
             }
             /// <summary>
+            /// Adds the item.
+            /// </summary>
+            /// <param name="tributeName">Tribute name.</param>
+            /// <param name="fileValue">File value.</param>
+            public void AddItem(string tributeName, string fileValue)
+            {
+                  AtributeName = tributeName;
+                  FileValue = fileValue; 
+            }
+            /// <summary>
             /// Add new  item.
             /// </summary>
             /// <param name="name">Name.</param>
             /// <param name="value">Value.</param>
             public void NewItem(string name,string value)
             {
+
                   string tag = $"<{name}>{value}</{name}>";
+
                 //  Writer.WriteFile("/data/qt/"+FileName,tag); 
             }
             /// <summary>

@@ -208,7 +208,7 @@ namespace QuickTools
             /// </summary>
             /// <returns>The pin.</returns>
             /// <param name="Level">Level.</param>
-      public static object Pin (int Level)
+      public static string Pin (int Level)
       {
                   if(Level <= 0)
                   {
