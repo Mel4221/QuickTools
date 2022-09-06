@@ -21,117 +21,127 @@ namespace QuickTools
       /// which seems to me  really anticated  and this one provides movements
       /// with all the arrow keys
       /// </summary>
-            public class ArrowKey
-            {
-                        private static double X = 0; 
-                        private static double Y = 0;
+      public class ArrowKey
+      {
+            /// <summary>
+            /// The x.
+            /// </summary>
+            public  int X = 0;
+            /// <summary>
+            /// The y.
+            /// </summary>
+            public  int Y = 0;
             /// <summary>
             /// This fields has direct acces but as it returns an array 
             /// the method GetLocation  can provide the number only in an object type 
             /// </summary>
-                        public static double[] Location  = {X,Y};
+            //public  int[] Location = { this.X, this.Y };
 
-                        private static void Up()
-                        {
-                            Y++; 
-                        }
-                        private static void Down()
-                        {
-                            Y--; 
-                        }
-                        private static void Left()
-                        {
-                            X--; 
-                        }
-                        private static void Right()
-                        {   
-                            X++; 
-                        }
+            private  void Up()
+            {
+                  Y++;
+            }
+            private  void Down()
+            {
+                  Y--;
+            }
+            private  void Left()
+            {
+                  X--;
+            }
+            private  void Right()
+            {
+                  X++;
+            }
 
-                        /// <summary>
-                        /// This method Returns the actual position from the 
-                        /// Fields X and Y 
-                        /// </summary>
-                        /// <returns>The location.</returns>
-                        public static object GetLocation()
-                         {
-                              return Location[0] + " " + Location[1]; 
-                         }
             /// <summary>
-            /// This method is the one that is public to move the keys 
-            /// </summary>
-            public   static void Move()
-                        {
-                                while(Get.KeyInput().ToString() != "Enter")
-                                {
-                                    switch(Get.Key)
-                                    {
-                                        case "UpArrow":
-                                            Up(); 
-                                            
-                                          //Color.Green(X+" "+Y); 
-                                        break; 
-                                        
-                                        case "DownArrow":
-                                            Down(); 
-                                            //Color.Green(X+" "+Y); 
-                                        break; 
-                                        
-                                        case "LeftArrow":
-                                        Left(); 
-                                         //Color.Green(X+" "+Y); 
-                                        break; 
-                                        
-                                        case "RightArrow":
-                                        Right(); 
-                                        //Color.Green(X+" "+Y); 
-                                        break; 
-                                        default:
-                                        
-                                        break; 
-                                        
-                                    }
-                                }
-                        }
-            /// <summary>
-            /// This does the same thing as the regular Move but you can spesified the  condition 
-            /// it has to be on type of string  remember that if your condition is a number it may not work 
-            /// sucessfully since the numbers from the keyboard is readed as 4D4 0r 9D9 so be carefull with that 
+            /// Capture the specified condition.
             /// </summary>
             /// <param name="condition">Condition.</param>
-            public static void Move(string condition)
+            public void Capture(string condition)
             {
-                  while (Get.KeyInput().ToString() != condition)
+
+                //  X = Console.BufferWidth - 1;
+                //  Y = Console.BufferHeight - 1;
+
+                  while (Get.Key != condition)
                   {
-                        switch (Get.Key)
+                        //     Console.Title = $"X: {X}  Y: {Y}";
+                        //    Console.SetCursorPosition(X, Y);
+                        //    Console.WriteLine("X");
+
+
+                        var app = Console.ReadKey();
+                        Get.Key = app.Key.ToString();
+                        switch (app.Key.ToString())
                         {
                               case "UpArrow":
-                                    Up();
-
-                                    //Color.Green(X + " " + Y);
+                                    //Up();
+                                    Y--;
+                                    //Color.Green(X+" "+Y); 
                                     break;
 
                               case "DownArrow":
-                                    Down();
-                                    //Color.Green(X + " " + Y);
+                                    // Down();
+                                    //Color.Green(X+" "+Y); 
+                                    Y++;
                                     break;
 
                               case "LeftArrow":
-                                    Left();
-                                    //Color.Green(X + " " + Y);
+                                    //  Left();
+                                    X--;
+                                    //Color.Green(X+" "+Y); 
                                     break;
 
                               case "RightArrow":
-                                    Right();
-                                    //Color.Green(X + " " + Y);
+                                    X++;
+                                    // Right();
+                                    //Color.Green(X+" "+Y); 
                                     break;
                               default:
 
                                     break;
 
+
                         }
+
+                        //Console.Title = $"X: {X}  Y: {Y}";
+
+                        //    Console.SetCursorPosition(X, Y);
+                        //    Console.WriteLine("X");
+
+
                   }
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// </summary>
+            public ArrowKey()
+            {
+                  
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// </summary>
+            /// <param name="intitialX">Intitial x.</param>
+            /// <param name="initialY">Initial y.</param>
+            public ArrowKey(int intitialX, int initialY)
+            {
+                  X = intitialX;
+                  Y = initialY; 
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// </summary>
+            /// <param name="intitialX">Intitial x.</param>
+            /// <param name="initialY">Initial y.</param>
+            /// <param name="SwitchUpDown">If set to <c>true</c> switch up down.</param>
+            public ArrowKey(int intitialX, int initialY,bool SwitchUpDown)
+            {
+                  X = intitialX;
+                  Y = initialY;
+                  
+            }
       }
 }

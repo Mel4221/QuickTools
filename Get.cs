@@ -137,92 +137,8 @@ namespace QuickTools
 
             }
 
-            // this generate a random byte 
-            // between 0 to 250 
-            // which could be use to create a 
-            // key 
 
-            /// <summary>
-            /// it generate a random byte from 0 to 250
-            /// and it uses the Random.Next(min,max)
-            /// under it for it to work 
-            /// </summary>
-            /// <returns>Single Byte</returns>
-            static public byte RandomByte()
-            {
-                  Random rand = new Random();
-                  int min = 0;
-                  int max = 250;
 
-                  int number = rand.Next(min, max);
-                  byte finalNumber = Convert.ToByte(number);
-                  return finalNumber;
-
-            }
-            /// <summary>
-            /// This  hold the key of 16 bits already generated
-            /// by the RandomByteKey() generator 
-            /// </summary>
-            public static byte[] KeyGenerated = new byte[16];
-
-            /*
-                  This method generate a 16 bits
-                  key and it is sored either in the array 
-                  or is stored in a keys.secure file 
-            */
-            /// <summary>
-            /// Randoms the byte key generate a random byte key 
-            /// that could be used for encrypting and it has a 16 bits length
-            /// </summary>
-            /// <returns>The byte key.</returns>
-            public static byte[] RandomByteKey()
-            {
-                  byte[] key = new byte[16];
-
-                  for (int index = 0; index < key.Length; index++)
-                  {
-                        key[index] = RandomByte();
-                  }
-                  KeyGenerated = key;
-                  return key;
-            }
-            /// <summary>
-            /// Randoms the byte key this works on the same way than RandomByteKey()
-            /// but if it is passed as argument true like RandomByteKey(true)
-            /// it will create a file and it will save it under the data/qt/secure.key
-            /// and on this version it DOES NOT ENCRYPT IT  so it has to be manually 
-            /// encrypted .
-            /// </summary>
-            /// <returns>byte[] array </returns>
-            /// <param name="autoSave">If set to <c>true</c> auto save.</param>
-            public static byte[] RandomByteKey(bool autoSave)
-            {
-                  // if is not added the bool type will just return 
-                  // a full of 0 byes
-                  byte[] key = new byte[16];
-
-                  if (autoSave == true)
-                  {
-
-                        for (int index = 0; index < key.Length; index++)
-                        {
-                              key[index] = RandomByte();
-                        }
-                        KeyGenerated = key;
-                  }
-                  SaveKey();
-                  return key;
-            }
-            /*
-            SaveKey 
-            basically is incharge of 
-            making sure that the thata is saved 
-            inside QuickTools data folder 
-            so if is not created 
-            it will create one to make sure that is saved
-            properly 
-            
-                  */
             /// <summary>
             /// This method can used manually
             /// or automatically 
@@ -233,7 +149,7 @@ namespace QuickTools
             public static void SaveKey()
             {
                   string path, keyFile, qtDir;
-                  path = Directory.GetCurrentDirectory();
+                  path = Get.Path;
                   qtDir = "data/qt/";
                   keyFile = "data/qt/secure.key";
                   if (Directory.Exists(qtDir) == false)
@@ -250,7 +166,7 @@ namespace QuickTools
 
                               using (StreamWriter writer = new StreamWriter(file))
                               {
-                                    foreach (byte key in KeyGenerated)
+                                    foreach (byte key in New.KeyGenerated)
                                     {
                                           writer.Write(key + ",");
                                     }
@@ -262,6 +178,12 @@ namespace QuickTools
 
 
             }
+
+
+
+
+
+
 
 
 

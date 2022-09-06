@@ -85,10 +85,15 @@ namespace QuickTools
                   /// <summary>
                   /// Options List container 
                   /// </summary>
-            public static List<string> OptionList = new List<string>();
+            private static List<string> OptionList = new List<string>();
 
-
-
+            /// <summary>
+            /// Clears All the options.
+            /// </summary>
+            public void ClearOptions()
+            {
+                  OptionList.Clear(); 
+            }
             /// <summary>
             /// Display the Options listed in the OptionsList 
             /// </summary>
