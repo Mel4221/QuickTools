@@ -57,7 +57,6 @@ https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
     <Compile Include="encrypter.cs" />
     <Compile Include="keyReader.cs" />
     <Compile Include="Traductor.cs" />
-    <Compile Include="LowEncrypter.cs" />
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
     <Compile Include="binary.cs" />
@@ -74,7 +73,6 @@ https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
     <Compile Include="AesDecrypt.cs" />
     <Compile Include="AesEncrypt.cs" />
     <Compile Include="Aes_Documents.cs" />
-    <Compile Include="Masking.cs" />
     <Compile Include="Cache.cs" />
   </ItemGroup>
   <ItemGroup>
