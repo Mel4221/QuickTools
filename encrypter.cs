@@ -66,5 +66,57 @@ namespace QuickTools
 
                   }
             }
-      }
+
+        /// <summary>
+        /// Encrypts the text using the password passed 
+        /// </summary>
+        /// <returns>The text.</returns>
+        /// <param name="plainText">Plain text.</param>
+        /// <param name="FilePassword">File password.</param>
+        public static string EncryptText(string plainText, object FilePassword)
+        {
+            /*
+                  basically this works on the current way 
+                  it gets 2 parameters , the file that will 
+                  be enprited and then the password 
+                  and if the password fail the process will not be completed                        
+
+            */
+            string replaceEmptySpaces = FilePassword.ToString().Replace(" ", "");
+            string filePassword = replaceEmptySpaces;
+            Console.Title = "Encrypting Data Please Wait...";
+            Get.WaitTime();
+            try
+            {
+                byte[] dataBytes = Encoding.ASCII.GetBytes(plainText);
+                double hash = filePassword.GetHashCode();
+                List<double> dataEncrypted = new List<double>();
+                for (int value = 0; value < dataBytes.Length; value++)
+                {
+                    dataEncrypted.Add(dataBytes[value] * hash);
+
+                    //    Console.Title = value.ToString(); 
+                }
+
+                dataEncrypted.Add(dataBytes.Length); // thiw will create the magic 
+                StringBuilder finalData = new StringBuilder();
+                foreach (double val in dataEncrypted)
+                {
+                    //RowData.Add(val);
+                    finalData.Append(val + ",");
+                }
+                 
+
+                //Console.Title = "File Encrypted";
+                Get.WaitTime();
+                return finalData.ToString(); 
+            }
+            catch
+            {
+                Get.Wrong("Something went wrong while Encrypting the file ");
+                throw new InvalidOperationException("The File could not be Encrypted");
+
+            }
+        }
+    }
 }
