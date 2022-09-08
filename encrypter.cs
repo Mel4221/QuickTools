@@ -67,6 +67,17 @@ namespace QuickTools
                   }
             }
 
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// Encrypts the text using the password passed 
         /// </summary>

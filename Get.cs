@@ -137,7 +137,9 @@ namespace QuickTools
 
             }
 
-
+                  private static string path = Get.Path;
+                  private static string qtDir = "data/qt/";
+                  private static string keyFile = "data/qt/secure.key";
 
             /// <summary>
             /// This method can used manually
@@ -148,10 +150,8 @@ namespace QuickTools
             /// </summary>
             public static void SaveKey()
             {
-                  string path, keyFile, qtDir;
-                  path = Get.Path;
-                  qtDir = "data/qt/";
-                  keyFile = "data/qt/secure.key";
+                 //string path, keyFile, qtDir;
+                  
                   if (Directory.Exists(qtDir) == false)
                   {
                         Directory.CreateDirectory(qtDir);
@@ -176,6 +176,32 @@ namespace QuickTools
 
                   }
 
+
+            }
+
+            /// <summary>
+            /// This Method gets the key bytes that were saved before by using the method 
+            /// before that was the method save key 
+            /// </summary>
+            /// <returns>The bytes saved.</returns>
+            public static byte[] KeyBytesSaved()
+            {
+                  try
+                  {
+
+                        byte[] keyBytes = null; 
+
+                        keyBytes = Reader.ReadStoredBytes(keyFile);
+
+
+                        return keyBytes;
+
+                  }catch(Exception)
+                  {
+
+                        Get.Alert("Either the key was not founded or there is not such a key ");
+                        return null; 
+                  }
 
             }
 
