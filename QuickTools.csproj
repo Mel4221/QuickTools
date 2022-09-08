@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2002</PackageVersion>
+    <PackageVersion>2003</PackageVersion>
     <Authors>MBV</Authors>
     <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
     <PackOnBuild>true</PackOnBuild>
@@ -20,8 +20,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Owners>MBV</Owners>
     <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
-    <PackageReleaseNotes>On This Update i have set up the bounderies of the application and must of it's methods are more stable and complete with the functionality that is needed , and if there is any bugs please submit it on my github , and it will be a pleasure to fix them ASAP  
-https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
+    <PackageReleaseNotes>The Secure class was added which contains an easy way to work with Aes Encryption .</PackageReleaseNotes>
     <Summary>C# Librarry</Summary>
     <PackageTags>Tool</PackageTags>
     <Title>QuickTools</Title>
