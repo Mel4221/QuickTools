@@ -48,18 +48,18 @@ namespace QuickTools
 
                         // Create an Aes object
                         // with the specified key and IV.
-                        using (Aes aesAlg = Aes.Create())
+                        using (Aes aes = Aes.Create())
                         {
-                              aesAlg.Key = Key;
-                              aesAlg.IV = IV;
+                              aes.Key = Key;
+                              aes.IV = IV;
 
                               // Create a decryptor to perform the stream transform.
-                              ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                              ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                               // Create the streams used for decryption.
-                              using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                              using (MemoryStream decryptorMem = new MemoryStream(cipherText))
                               {
-                                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                                    using (CryptoStream csDecrypt = new CryptoStream(decryptorMem, decryptor, CryptoStreamMode.Read))
                                     {
                                           using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                                           {
@@ -117,18 +117,18 @@ namespace QuickTools
 
                         // Create an Aes object
                         // with the specified key and IV.
-                        using (Aes aesAlg = Aes.Create())
+                        using (Aes aes = Aes.Create())
                         {
-                              aesAlg.Key = Key;
-                              aesAlg.IV = IV;
+                              aes.Key = Key;
+                              aes.IV = IV;
 
                               // Create a decryptor to perform the stream transform.
-                              ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                              ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                               // Create the streams used for decryption.
-                              using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                              using (MemoryStream decryptorMem = new MemoryStream(cipherText))
                               {
-                                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                                    using (CryptoStream csDecrypt = new CryptoStream(decryptorMem, decryptor, CryptoStreamMode.Read))
                                     {
                                           using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                                           {
