@@ -37,7 +37,7 @@ namespace QuickTools
                         // where the data will be stored 
                         List<string> data = new List<string>();
                         // getting the encrypted text 
-                        string RowText = LowDecrypt.DecryptFile(Reader.Read(file));
+                        string RowText = "";//LowDecrypt.DecryptFile(Reader.Read(file));
                         // where the text will be temporally stored
                         StringBuilder currentValue = new StringBuilder();
                         // looping to get each value from the array 

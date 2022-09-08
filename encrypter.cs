@@ -53,7 +53,7 @@ namespace QuickTools
                               //RowData.Add(val);
                               finalData.Append(val + ",");
                         }
-                        Writer.Write(fileToEncrypt, LowEncrypt.EncryptFile(finalData.ToString()));
+                       //W Writer.Write(fileToEncrypt, LowEncrypt.EncryptFile(finalData.ToString()));
                         //done 
 
                         //Console.Title = "File Encrypted";

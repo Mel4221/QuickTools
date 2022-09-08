@@ -56,8 +56,7 @@ https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
     <Compile Include="Get.cs" />
     <Compile Include="encrypter.cs" />
     <Compile Include="keyReader.cs" />
-    <Compile Include="decrypter.cs" />
-    <Compile Include="LowDecrypter.cs" />
+    <Compile Include="Traductor.cs" />
     <Compile Include="LowEncrypter.cs" />
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
