@@ -41,9 +41,6 @@ https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="mscorlib" />
-    <Reference Include="System.IO.Compression.ZipFile">
-      <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +62,6 @@ https://www.github.com/Mel4221/QuickTools/</PackageReleaseNotes>
     <Compile Include="arrowKeysReader.cs" />
     <Compile Include="LoopInput.cs" />
     <Compile Include="NewImplementation.cs" />
-    <Compile Include="Zip.cs" />
     <Compile Include="printList.cs" />
     <Compile Include="OptionExt.cs" />
     <Compile Include="DirecectionHandeler.cs" />
