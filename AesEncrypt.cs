@@ -7,13 +7,33 @@ using System.Security.Cryptography;
 
 namespace QuickTools
 {
-
+            /// <summary>
+            /// The secure class is a class that uses the Aes tecnology to encrypt data by using
+            /// a public key and a 
+            /// </summary>
         public partial class Secure
         {
 
 
 
-            private static byte[] CreatePassword(string password)
+
+
+
+
+
+
+
+            /// <summary>
+            /// This will contain the public key used to encrypt the file 
+            /// be carefull it will stay on memory ONLY 
+            /// </summary>
+            public byte[] PublicKey = null;
+            /// <summary>
+            /// This temporaly holds the public Key in an string format 
+            /// </summary>
+            public string RowPublicKey = null; 
+
+            private byte[] CreatePassword(string password)
             {
                   byte[] passByes  = null;
 
@@ -51,17 +71,28 @@ namespace QuickTools
 
 
             /// <summary>
-            /// Encrypt the specified plainText and password.
+            /// Encrypt the specified plainText with the password given 
+            /// please remember that you will need the Pulic key to Decrypt the text
+            /// THIS IS THE AUTOMATIC WAY OF DOING IT . 
             /// </summary>
             /// <returns>The encrypt.</returns>
             /// <param name="plainText">Plain text.</param>
             /// <param name="password">Password.</param>
-            public static byte[] Encrypt(string plainText, object password)
+            public byte[] Encrypt(string plainText, object password)
             {
                   try {
 
                         byte[] Key = CreatePassword(password.ToString());
                         byte[] IV = New.RandomByteKey(true);
+                        this.PublicKey = IV;
+
+                        Action action = () => {
+                        StringBuilder str = new StringBuilder(); 
+                        foreach (byte k in IV) 
+                        str.Append(k+",");
+                        this.RowPublicKey = str.ToString(); 
+                        };
+                        action();
 
                         // Check arguments.
                         if (plainText == null || plainText.Length <= 0)
@@ -74,16 +105,17 @@ namespace QuickTools
 
                         // Create an Aes object
                         // with the specified key and IV.
-                        using (Aes aesAlg = Aes.Create())
+                        using (Aes aes = Aes.Create())
                         {
 
 
 
-                              aesAlg.Key = Key;
-                              aesAlg.IV = IV;
+                              aes.Key = Key;
+                              aes.IV = IV;
+
 
                               // Create an encryptor to perform the stream transform.
-                              ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                              ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
                               // Create the streams used for encryption.
                               using (MemoryStream msEncrypt = new MemoryStream())
@@ -108,6 +140,110 @@ namespace QuickTools
                   }
             }
 
-        
-        }
+            private byte[] ManualKey = null;
+            private byte[] ManualIV = null;
+            private string ClearText = null; 
+            /// <summary>
+            /// This Encription Method is used when you initialize the class with 
+            /// the arguments  of text , key and iv  IF this is your first time using the class
+            /// please use the more simpler way 
+            /// </summary>
+            /// <returns>The encrypt.</returns>
+            public byte[] Encrypt()
+            {
+                  try
+                  {
+
+                        byte[] Key = ManualKey;
+                        byte[] IV = ManualIV; 
+                        this.PublicKey = IV;
+                        string plainText = this.ClearText; 
+
+                        Action action = () => {
+                              StringBuilder str = new StringBuilder();
+                              foreach (byte k in IV)
+                                    str.Append(k + ",");
+                              this.RowPublicKey = str.ToString();
+                        };
+                        action();
+
+                        // Check arguments.
+                        if (plainText == null || plainText.Length <= 0)
+                              return null;
+                        if (Key == null || Key.Length <= 0)
+                              return null;
+                        if (IV == null || IV.Length <= 0)
+                              return null;
+                        byte[] encrypted;
+
+                        // Create an Aes object
+                        // with the specified key and IV.
+                        using (Aes aes = Aes.Create())
+                        {
+
+
+
+                              aes.Key = Key;
+                              aes.IV = IV;
+
+
+                              // Create an encryptor to perform the stream transform.
+                              ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                              // Create the streams used for encryption.
+                              using (MemoryStream msEncrypt = new MemoryStream())
+                              {
+                                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                                    {
+                                          using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                                          {
+                                                //Write all data to the stream.
+                                                swEncrypt.Write(plainText);
+                                          }
+                                          encrypted = msEncrypt.ToArray();
+                                    }
+                              }
+                        }
+
+                        // Return the encrypted bytes from the memory stream.
+                        return encrypted;
+                  }
+                  catch (Exception)
+                  {
+                        return null;
+                  }
+            }
+
+
+
+
+
+
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.Secure"/> class.
+            /// </summary>
+            public Secure()
+            {
+                  //not implemented 
+            }
+
+
+
+
+            /// <summary>
+            /// This inizializtion gives you full controll of how to Encrypt the file 
+            /// </summary>
+            /// <param name="clearText">Clear text.</param>
+            /// <param name="key">Key.</param>
+            /// <param name="iv">Iv.</param>
+            public Secure(object clearText , byte[] key , byte[] iv)
+            {
+                  this.ManualKey = key;
+                  this.ManualIV = iv;
+                  this.ClearText = clearText.ToString(); 
+            }
+           
+
+      }
 }

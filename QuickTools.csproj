@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2003</PackageVersion>
+    <PackageVersion>2003.1</PackageVersion>
     <Authors>MBV</Authors>
     <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
     <PackOnBuild>true</PackOnBuild>
