@@ -22,7 +22,7 @@
     <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
     <PackageReleaseNotes>The Secure class was added which contains an easy way to work with Aes Encryption .</PackageReleaseNotes>
     <Summary>C# Librarry</Summary>
-    <PackageTags>Tool</PackageTags>
+    <PackageTags>tool console color short encrypt secure write read </PackageTags>
     <Title>QuickTools</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

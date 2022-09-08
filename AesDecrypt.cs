@@ -58,7 +58,7 @@ namespace QuickTools
 
                               // Create the streams used for decryption.
                               using (MemoryStream decryptorMem = new MemoryStream(cipherText))
-                              {
+                               {
                                     using (CryptoStream csDecrypt = new CryptoStream(decryptorMem, decryptor, CryptoStreamMode.Read))
                                     {
                                           using (StreamReader srDecrypt = new StreamReader(csDecrypt))
