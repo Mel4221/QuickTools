@@ -181,6 +181,41 @@ namespace QuickTools
             }
 
             /// <summary>
+            /// Save the key Generated on the given path 
+            /// </summary>
+            /// <param name="pathToSaveTheKey">Path to save the key.</param>
+            public static void SaveKey(string pathToSaveTheKey)
+            {
+                  //string path, keyFile, qtDir;
+
+                  if (Directory.Exists(pathToSaveTheKey) == false)
+                  {
+                        Directory.CreateDirectory(pathToSaveTheKey);
+                        SaveKey();
+                  }
+                  else
+                  {
+
+
+                        using (FileStream file = File.Create(keyFile))
+                        {
+
+                              using (StreamWriter writer = new StreamWriter(file))
+                              {
+                                    foreach (byte key in New.KeyGenerated)
+                                    {
+                                          writer.Write(key + ",");
+                                    }
+                              }
+                        }
+
+
+                  }
+
+
+            }
+
+            /// <summary>
             /// This Method gets the key bytes that were saved before by using the method 
             /// before that was the method save key 
             /// </summary>
@@ -206,8 +241,35 @@ namespace QuickTools
 
             }
 
+            /// <summary>
+            /// Read the string bytes stored in a file 
+            /// </summary>
+            /// <returns>The bytes saved.</returns>
+            /// <param name="path">Path.</param>
+            public static byte[] KeyBytesSaved(string path)
+            {
+                  try
+                  {
 
-     
+                        byte[] keyBytes = null;
+
+                        keyBytes = Reader.ReadStoredBytes(path);
+
+
+                        return keyBytes;
+
+                  }
+                  catch (Exception)
+                  {
+
+                        Get.Alert("Either the key was not founded or there is not such a key ");
+                        return null;
+                  }
+
+            }
+
+
+
 
 
 

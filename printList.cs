@@ -85,7 +85,7 @@ namespace QuickTools
             /// <param name="array">Array.</param>
             public static void List(byte[] array)
             {
-                  Get.Wait(array.Length);
+                 
                   for (int item = 0; item < array.Length; item++)
                   {
                         Color.Green(array[item]);

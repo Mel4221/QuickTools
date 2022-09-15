@@ -1,3 +1,11 @@
+/*
+
+    this was an intent to try to create a or simulate an encription Class 
+
+*/
+
+
+
 using System;
 using System.Text;
 using System.Collections.Generic;

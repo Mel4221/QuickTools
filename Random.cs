@@ -48,10 +48,12 @@ namespace QuickTools
       /// </summary>
       public class New
     {
+        
+
             /// <summary>
             /// Contains the password Generated 
             /// </summary>
-      public static string Generated = null;
+            public static string Generated = null;
             /// <summary>
             /// This Contains the array of the 
             /// </summary>
@@ -127,26 +129,29 @@ namespace QuickTools
       }
 
 
-            /*
-                  _____________________________________________           
-                  this is the secure password that is generated
-                  based on the input needed 
-                  _____________________________________________                 
-            */
-            /// <summary>
-            /// Generate a Password with the specified passwordLenght.
-            /// </summary>
-            /// <returns>The password.</returns>
-            /// <param name="passwordLenght">Password lenght.</param>
-      public static string Password (int passwordLenght)
+
+
+        /// <summary>
+        /// Password the specified passwordLenght and noSpecialSimbols.
+        /// </summary>
+        /// <returns>The password.</returns>
+        /// <param name="passwordLenght">Password lenght.</param>
+        /// <param name="noSpecialSimbols">If set to <c>true</c> no special simbols.</param>
+      public static string Password (int passwordLenght,bool noSpecialSimbols)
       {                       // this one will generate a minimum passowrd of 9 digits 
-      
-      string password = "";
-      Random lower, upper, symbol, number;
+
+                  if (noSpecialSimbols == false)
+                  {
+                        return Password(passwordLenght);
+                  }
+
+
+                  string password = "";
+      Random lower, upper,number;
 
       lower = new Random ();
       upper = new Random ();
-      symbol = new Random ();
+      //symbol = new Random ();
       number = new Random ();
 
       // this will change the order of the password
@@ -165,7 +170,7 @@ namespace QuickTools
             password += UpperCase[upper.Next (0, 26)];
             break;
             case 2:
-            password += Symbols[symbol.Next (0, 14)];
+           // password += Symbols[symbol.Next (0, 14)];
             break;
             case 3:
             password += Numbers[number.Next (0, 10)];
@@ -179,10 +184,116 @@ namespace QuickTools
       Generated = password.Replace (" ", "");
       return password.Replace (" ", "");
       }
+
+            /// <summary>
+            /// Generat Randoms text completly chunked together useful to create random passwords or anything that requires a long string of text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="textLength">Text length.</param>
+            public static string RandomText(int textLength)
+            {                       // this one will generate a minimum passowrd of 9 digits 
+
+                  int passwordLenght = textLength; 
+                  if (textLength <= 0)
+                  {
+                        textLength = 4; 
+                  }
+
+                  string password = "";
+                  Random lower, upper, number;
+
+                  lower = new Random();
+                  upper = new Random();
+                  //symbol = new Random ();
+                  number = new Random();
+
+                  // this will change the order of the password
+
+                  for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
+                  {
+                        int order = ranOrder.Next(0, 4);
+
+                        switch (order)
+                        {
+                              case 0:
+                                    password += LowerCase[lower.Next(0, 26)];
+
+                                    break;
+                              case 1:
+                                    password += UpperCase[upper.Next(0, 26)];
+                                    break;
+                              case 2:
+                                    // password += Symbols[symbol.Next (0, 14)];
+                                    break;
+                              case 3:
+                                    password += Numbers[number.Next(0, 10)];
+                                    break;
+                              default:
+                                    password += Numbers[number.Next(0, 10)];
+                                    break;
+
+                        }
+                  }
+                  Generated = password.Replace(" ", "");
+                  return password.Replace(" ", "");
+            }
+
+
+
+
+            /// <summary>
+            /// Password the specified passwordLenght.
+            /// </summary>
+            /// <returns>The password.</returns>
+            /// <param name="passwordLenght">Password lenght.</param>
+            public static string Password(int passwordLenght)
+            {                       // this one will generate a minimum passowrd of 9 digits 
+
+                  string password = "";
+                  Random lower, upper, symbol, number;
+
+                  lower = new Random();
+                  upper = new Random();
+                  symbol = new Random();
+                  number = new Random();
+
+                  // this will change the order of the password
+
+                  for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
+                  {
+                        int order = ranOrder.Next(0, 4);
+
+                        switch (order)
+                        {
+                              case 0:
+                                    password += LowerCase[lower.Next(0, 26)];
+
+                                    break;
+                              case 1:
+                                    password += UpperCase[upper.Next(0, 26)];
+                                    break;
+                              case 2:
+                                    password += Symbols[symbol.Next(0, 14)];
+                                    break;
+                              case 3:
+                                    password += Numbers[number.Next(0, 10)];
+                                    break;
+                              default:
+                                    password += Numbers[number.Next(0, 10)];
+                                    break;
+
+                        }
+                  }
+                  Generated = password.Replace(" ", "");
+                  return password.Replace(" ", "");
+            }
+
+
+
             /// <summary>
             /// The pin generated
             /// </summary>
-     public static int pin;
+            public static int pin;
             /// <summary>
             /// This Method create a random pin of 4 digits and return it 
             /// </summary>
@@ -403,16 +514,22 @@ namespace QuickTools
                   // a full of 0 byes
                   byte[] key = new byte[16];
 
-                  if (autoSave == true)
-                  {
-
+                        //fill the keys with a random byte
                         for (int index = 0; index < key.Length; index++)
                         {
                               key[index] = RandomByte();
                         }
                         KeyGenerated = key;
+
+                  //if autosave == true save the key 
+                  // location data/qt/secure.key
+                  if (autoSave == true)
+                  {
+                        Get.SaveKey();
+
                   }
-                  Get.SaveKey();
+
+                  // return the key 
                   return key;
             }
             /*

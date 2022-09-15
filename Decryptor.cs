@@ -1,5 +1,6 @@
 
 using System;
+using System.Text; 
 using System.IO;
 using System.Security.Cryptography;
 
@@ -17,7 +18,6 @@ namespace QuickTools
 
 
 
-
             /// <summary>
             /// Decrypt the specified cipherText text  with a password.
             /// and this is the AUTOMATIC way of doing it 
@@ -25,13 +25,14 @@ namespace QuickTools
             /// <returns>The decrypt.</returns>
             /// <param name="cipherText">Cipher text.</param>
             /// <param name="password">Password.</param>
-            public  string Decrypt(byte[] cipherText, object password)
+            /// <param name="iv">Iv.</param>
+            public string Decrypt(byte[] cipherText, object password,byte[] iv )
             {
 
                   try {
                         byte[] Key = CreatePassword(password.ToString());
-                        byte[] IV = Get.KeyBytesSaved();
-
+                        byte[] IV = iv;
+                        // = Encoding.ASCII.GetBytes(text);
 
 
                         // Check arguments.
@@ -83,6 +84,13 @@ namespace QuickTools
 
             }
 
+
+
+
+
+
+
+
             /// <summary>
             /// Decrypt the specified cipherText with password, Key and IV
             /// This is the manual way of Decrypting the data , please remember if you used the
@@ -90,10 +98,9 @@ namespace QuickTools
             /// </summary>
             /// <returns>The decrypt.</returns>
             /// <param name="cipherText">Cipher text.</param>
-            /// <param name="password">Password.</param>
             /// <param name="Key">Key.</param>
             /// <param name="IV">Iv.</param>
-            public string Decrypt(byte[] cipherText, object password, byte[] Key , byte[] IV)
+            public string Decrypt(byte[] cipherText,byte[] Key , byte[] IV)
             {
 
                   try
@@ -121,6 +128,7 @@ namespace QuickTools
                         {
                               aes.Key = Key;
                               aes.IV = IV;
+
 
                               // Create a decryptor to perform the stream transform.
                               ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
@@ -152,6 +160,19 @@ namespace QuickTools
 
 
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -18,8 +18,10 @@ namespace QuickTools
 
 
 
-
-
+            /// <summary>
+            /// This allow the encriptor to either try to save the scure key or not  and is set to FALSE <see langword="false"/>  by default for security reasons
+            /// </summary>
+            public bool AllowToSaveKey = false; 
 
 
 
@@ -83,7 +85,7 @@ namespace QuickTools
                   try {
 
                         byte[] Key = CreatePassword(password.ToString());
-                        byte[] IV = New.RandomByteKey(true);
+                        byte[] IV = New.RandomByteKey(AllowToSaveKey);
                         this.PublicKey = IV;
 
                         Action action = () => {
@@ -125,7 +127,7 @@ namespace QuickTools
                                           using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                                           {
                                                 //Write all data to the stream.
-                                                swEncrypt.Write(plainText);
+                                                swEncrypt.Write(plainText,0,plainText.Length);
                                           }
                                           encrypted = msEncrypt.ToArray();
                                     }
@@ -133,12 +135,24 @@ namespace QuickTools
                         }
 
                         // Return the encrypted bytes from the memory stream.
+                        //string text = Encoding.ASCII.GetString(encrypted);
                         return encrypted;
                   }catch(Exception)
                   {
                         return null; 
                   }
             }
+
+
+
+
+
+
+
+
+
+
+
 
             private byte[] ManualKey = null;
             private byte[] ManualIV = null;
@@ -198,7 +212,7 @@ namespace QuickTools
                                           using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                                           {
                                                 //Write all data to the stream.
-                                                swEncrypt.Write(plainText);
+                                                swEncrypt.Write(plainText,0,plainText.Length);
                                           }
                                           encrypted = msEncrypt.ToArray();
                                     }
@@ -206,7 +220,8 @@ namespace QuickTools
                         }
 
                         // Return the encrypted bytes from the memory stream.
-                        return encrypted;
+                        //string text = Encoding.ASCII.GetString(encrypted);
+                        return  encrypted;
                   }
                   catch (Exception)
                   {
@@ -232,7 +247,7 @@ namespace QuickTools
 
 
             /// <summary>
-            /// This inizializtion gives you full controll of how to Encrypt the file 
+            /// This inizializtion gives you full controll of how to Encrypter the file 
             /// </summary>
             /// <param name="clearText">Clear text.</param>
             /// <param name="key">Key.</param>

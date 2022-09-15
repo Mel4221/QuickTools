@@ -144,8 +144,7 @@ namespace QuickTools
 
 
             }
-
-
+            
                   /*
                    Array Reader 
                   */
@@ -197,6 +196,7 @@ namespace QuickTools
                               //this will loop over the entired line
                               //to make sure that it takes only the
                               // numbers from it 
+
                               for (int Char = 0; Char < line.Length; Char++)
                               {
                                     switch (Get.IsNumber(line[Char]))
