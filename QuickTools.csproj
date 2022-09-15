@@ -49,7 +49,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="mscorlib" />
-    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

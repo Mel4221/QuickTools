@@ -232,7 +232,7 @@ namespace QuickTools
             /// </summary>
             public Options()
             {
-
+                ClearOptions(); 
             }
 
 
@@ -243,6 +243,8 @@ namespace QuickTools
             /// <param name="options">Options.</param>
             public Options(string[] options)
             {
+
+                  ClearOptions(); 
                   Color.Yellow(Label);
                   foreach (string option in options)
                   {
@@ -270,6 +272,8 @@ namespace QuickTools
             /// <param name="Simple"></param>
             public Options(string[] options,bool Simple)
             {
+
+                ClearOptions(); 
 
                   if (Simple == true)
                   {
@@ -310,8 +314,8 @@ namespace QuickTools
             /// <param name="options">Options.</param>
             public Options(List<object> options)
             {
-
-                  Color.Yellow(Label);
+            ClearOptions();
+            Color.Yellow(Label);
                   foreach (string option in options)
                   {
                         OptionList.Add(option);
@@ -341,7 +345,9 @@ namespace QuickTools
             /// <param name="type">If set to <c>true</c> type.</param>
             public Options(bool type)
             {
-                  if (type == false)
+
+            ClearOptions();
+            if (type == false)
                   {
                         string[] option = { "No", "Yes" };
 #pragma warning disable RECS0026 // Possible unassigned object created by 'new'
