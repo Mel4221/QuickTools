@@ -107,6 +107,16 @@ namespace QuickTools
                         }
                   }
             }
+            
+            
+             /// <summary>
+            /// This method Returns the current path from the application
+            /// </summary>
+            /// <returns>Returns the current path</returns>
+            public static string CurrentPath()
+            {
+                return Path; 
+            }
 
             /// <summary>
             /// Abstraction for Directory.GetCurrentDirectory(); 
@@ -138,7 +148,7 @@ namespace QuickTools
 
             }
 
-                  private static string path = Get.Path;
+               //   private static string path = Get.Path;
                   private static string qtDir = "data/qt/";
                   private static string keyFile = "data/qt/secure.key";
 
@@ -1012,7 +1022,7 @@ namespace QuickTools
                               Color.Cyan("OK");
                               break;
                         default:
-                              var get = new Get();                              
+                             // var get = new Get();                              
                               Alert("Not Implemented a number for this method please only from 0 to 4 \n" +
                               "Colors Availables are {Green , Yellow , Blue , Red , Cyan }");
                               break;                             
