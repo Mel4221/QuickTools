@@ -1,4 +1,4 @@
-/*
+﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
 text. 
@@ -668,12 +668,36 @@ namespace QuickTools
                   }
                   else
                   {
-                        Yellow("Incorrect imput ,  ONLY numbers expected , and not maximum to "+int.MaxValue+" nor smallert to "+int.MinValue);                       
-                        throw new InvalidDataException(); 
-                        //return 0;
+                        Yellow("Incorrect imput ,  ONLY numbers expected , and not maximum to "+int.MaxValue+" nor smallert than "+int.MinValue);                       
+                        //throw new InvalidDataException(); 
+                        return 0;
                   }
 
             }
+
+
+
+             /// <summary>
+             /// Get a number in put and returns a double 
+             /// </summary>
+             /// <returns>The input.</returns>
+             /// <param name="BigNumber">If set to <c>true</c> big number.</param>
+            public static double NumberInput(bool BigNumber)
+            {
+
+                  Get.LabelSide(">");
+                  Console.Write(" ");
+                 //bool isnumber = false;
+#pragma warning disable RECS0117 // Local variable has the same name as a member and hides it
+                  string input = Console.ReadLine();
+#pragma warning restore RECS0117 // Local variable has the same name as a member and hides it
+                  double number = Convert.ToDouble(input);
+
+                  return number; 
+                       // Yellow("Incorrect imput"); 
+
+            }
+
             /// <summary>
             /// TextInput Method ReadText from the Console and return text
             /// has magenta color design and also it send the current text
