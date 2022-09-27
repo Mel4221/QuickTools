@@ -669,8 +669,8 @@ namespace QuickTools
                   else
                   {
                         Yellow("Incorrect imput ,  ONLY numbers expected , and not maximum to "+int.MaxValue+" nor smallert than "+int.MinValue);                       
-                        //throw new InvalidDataException(); 
-                        return 0;
+                        //throw new Inva\lidDataException(); 
+                        return int.MinValue;
                   }
 
             }
