@@ -75,6 +75,7 @@
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="Cache.cs" />
+    <Compile Include="EmptyCSharpFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
