@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2003.3</PackageVersion>
+    <PackageVersion>2003.4</PackageVersion>
     <Authors>MBV</Authors>
     <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
     <PackOnBuild>true</PackOnBuild>
@@ -20,9 +20,9 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Owners>MBV</Owners>
     <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
-    <PackageReleaseNotes>On this update many updates has been stablished and also a method in the class New has been added which is RandomText which create random text . without expesial simbols </PackageReleaseNotes>
+    <PackageReleaseNotes>Just small updates related with stability</PackageReleaseNotes>
     <Summary>C# Librarry</Summary>
-    <PackageTags>tool console color short encrypt secure write read </PackageTags>
+    <PackageTags>easy tool console color short encrypt secure write read </PackageTags>
     <Title>QuickTools</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -40,10 +40,6 @@
         </Command>
       </CustomCommands>
     </CustomCommands>
-    <LangVersion>Latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -75,7 +71,12 @@
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="Cache.cs" />
+<<<<<<< HEAD
     <Compile Include="EmptyCSharpFile.cs" />
+=======
+    <Compile Include="Input.cs" />
+    <Compile Include="Panel.cs" />
+>>>>>>> 64a281c5a0bb545a91560c307498bef1633c4c86
   </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

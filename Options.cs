@@ -364,6 +364,50 @@ namespace QuickTools
             }
 
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// </summary>
+            /// <param name="options">Options.</param>
+            /// <param name="typeOfOptions">Type of options.</param>
+            public Options(string[] options,string typeOfOptions)
+            {     
+                  switch(typeOfOptions.ToLower())
+                  {
+                                    case "list":
+                                    
+                                    ClearOptions();
+                                    SelectorL = "";
+                                    SelectorR = "";
+                                    Color.Yellow(Label);
+                                    foreach (string option in options)
+                                    {
+                                          OptionList.Add(option);
+                                    }
+
+                                    break;
+                  }
+            }
+
+
+            private void PrintList()
+            {
+                  for (int option = 0; option < OptionList.Count; option++)
+                  {
+                        Get.Write($"{option+1}. "+OptionList[option]);
+                  }
+            }
+            /// <summary>
+            /// Select The Option from the OptionList.
+            /// </summary>
+            /// <returns>The select.</returns>
+            public int Select()
+            {
+                  int selection = 0;
+                  PrintList(); // display options 
+                  selection = Get.NumberInput()-1; 
+
+                  return selection; 
+            }
 
 
       }
