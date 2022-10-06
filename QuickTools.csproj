@@ -71,13 +71,10 @@
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="Cache.cs" />
-<<<<<<< HEAD
     <Compile Include="EmptyCSharpFile.cs" />
-=======
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
->>>>>>> 64a281c5a0bb545a91560c307498bef1633c4c86
-  </ItemGroup>
+</ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
     <None Include="packages.config" />
