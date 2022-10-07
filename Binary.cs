@@ -28,7 +28,9 @@ using System.IO;
 namespace QuickTools
 
 {
-
+      /// <summary>
+      /// Binary Class Allows you to Handle Binary Data
+      /// </summary>
       class Binary
 
       {

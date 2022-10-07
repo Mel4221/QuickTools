@@ -58,7 +58,7 @@
     <Compile Include="Traductor.cs" />
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
-    <Compile Include="binary.cs" />
+    <Compile Include="Binary.cs" />
     <Compile Include="console.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="arrowKeysReader.cs" />
