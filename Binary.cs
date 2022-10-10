@@ -31,10 +31,15 @@ namespace QuickTools
       /// <summary>
       /// Binary Class Allows you to Handle Binary Data
       /// </summary>
-      class Binary
+      public partial class Binary
 
       {
-
+            /// <summary>
+            /// Copies the binary file.
+            /// </summary>
+            /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
+            /// <param name="srcfilename">Srcfilename.</param>
+            /// <param name="destfilename">Destfilename.</param>
             public static bool CopyBinaryFile(string srcfilename, string destfilename)
 
             {
@@ -95,6 +100,74 @@ namespace QuickTools
 
 
 
+
+            public static long CurrentStatus = 0; 
+            public static bool CopyBinaryFile(string srcfilename, string destfilename,Action Status)
+
+            {
+
+
+
+                  if (File.Exists(srcfilename) == false)
+
+                  {
+
+                        Console.WriteLine("Could not find the Source file");
+
+                        return false;
+
+                  }
+
+
+                  FileInfo file = new FileInfo(srcfilename);
+                   //FileSize = file.Length; 
+
+                  Stream s1 = File.Open(srcfilename, FileMode.Open);
+
+                  Stream s2 = File.Open(destfilename, FileMode.Create);
+
+                  BinaryReader f1 = new BinaryReader(s1);
+
+                  BinaryWriter f2 = new BinaryWriter(s2);
+
+
+
+                  while (true)
+
+                  {
+
+                        byte[] buf = new byte[10240];
+
+                        int sz = f1.Read(buf, 0, 10240);
+
+                        if (sz <= 0)
+
+                              break;
+
+                        f2.Write(buf, 0, sz);
+
+                        if (sz < 10240)
+
+                              break; // eof reached
+                        Status();
+
+                  }
+
+                  f1.Close();
+
+                  f2.Close();
+
+                  return true;
+
+            }
+
+
+            /// <summary>
+            /// Copies the text file.
+            /// </summary>
+            /// <returns><c>true</c>, if text file was copyed, <c>false</c> otherwise.</returns>
+            /// <param name="srcfilename">Srcfilename.</param>
+            /// <param name="destfilename">Destfilename.</param>
             public static bool CopyTextFile(string srcfilename, string destfilename)
 
             {

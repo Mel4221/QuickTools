@@ -2,6 +2,7 @@ using System;
 using System.Text; 
 using System.IO;
 using System.Security.Cryptography;
+using System.Diagnostics; 
 
 
 
@@ -35,7 +36,7 @@ namespace QuickTools
             /// </summary>
             public string RowPublicKey = null; 
 
-            private byte[] CreatePassword(string password)
+            public byte[] CreatePassword(string password)
             {
                   byte[] passByes  = null;
 
@@ -82,12 +83,14 @@ namespace QuickTools
             /// <param name="password">Password.</param>
             public byte[] Encrypt(string plainText, object password)
             {
-                  try {
+                 // try {
 
                         byte[] Key = CreatePassword(password.ToString());
                         byte[] IV = New.RandomByteKey(AllowToSaveKey);
                         this.PublicKey = IV;
-
+                        
+                        //Get.Wait($"Text: {plainText.Length} Key: {Key.Length} IV: {IV.Length}");
+                        /*
                         Action action = () => {
                         StringBuilder str = new StringBuilder(); 
                         foreach (byte k in IV) 
@@ -95,6 +98,7 @@ namespace QuickTools
                         this.RowPublicKey = str.ToString(); 
                         };
                         action();
+                        */                       
 
                         // Check arguments.
                         if (plainText == null || plainText.Length <= 0)
@@ -129,7 +133,7 @@ namespace QuickTools
                                                 //Write all data to the stream.
                                                 swEncrypt.Write(plainText,0,plainText.Length);
                                           }
-                                          encrypted = msEncrypt.ToArray();
+                                         encrypted = msEncrypt.ToArray();
                                     }
                               }
                         }
@@ -137,10 +141,10 @@ namespace QuickTools
                         // Return the encrypted bytes from the memory stream.
                         //string text = Encoding.ASCII.GetString(encrypted);
                         return encrypted;
-                  }catch(Exception)
-                  {
-                        return null; 
-                  }
+                 // }catch(Exception)
+                 // {
+                    //    return null; 
+                  //}
             }
 
 
@@ -167,7 +171,7 @@ namespace QuickTools
             {
                   try
                   {
-
+                        
                         byte[] Key = ManualKey;
                         byte[] IV = ManualIV; 
                         this.PublicKey = IV;

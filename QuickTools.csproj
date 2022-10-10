@@ -74,6 +74,7 @@
     <Compile Include="EmptyCSharpFile.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
+    <Compile Include="Binary.RW.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
