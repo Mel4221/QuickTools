@@ -159,17 +159,22 @@ namespace QuickTools
                                     Color.Yellow("This file could not be Wreated or Written, more details : "+e); 
                                 }
                         }
-            /// <summary>
-            /// Creates the file.
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-                        public static void CreateFile(string fileName)
+   
+
+                        /// <summary>
+                        /// Creates the file passed as an argument
+                        /// </summary>
+                        /// <returns>The file.</returns>
+                        /// <param name="fileName">File name.</param>
+                        public static string CreateFile(string fileName)
                         {
                                 try{
                                   using(FileStream fs = File.Create(fileName)){}
+                        return fileName;
                                 }catch(Exception e)
                                 {
-                                    Color.Yellow("This file could not be created , more details : "+e); 
+                                    Color.Yellow("This file could not be created , more details : "+e);
+                        return null; 
                                 }
                         }
             /// <summary>

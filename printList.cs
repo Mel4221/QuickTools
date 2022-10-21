@@ -34,6 +34,8 @@ namespace QuickTools
       /// </summary>
       public class Print
       {
+
+
             /// <summary>
             /// List the entire file array 
             /// </summary>
@@ -42,7 +44,7 @@ namespace QuickTools
             {
                   for(int item = 0; item<array.Length; item++)
                   {
-                        Color.Green(array[item]); 
+                        Color.Green($"{item+1}. "+array[item]); 
                   }
             }
 
@@ -65,7 +67,7 @@ namespace QuickTools
             {
                   for (int item = 0; item < array.Length; item++)
                   {
-                        Color.Green(array[item]);
+                        Color.Green($"{item+1}. "+array[item]);
                   }
             }
             /// <summary>
@@ -76,7 +78,7 @@ namespace QuickTools
             {
                   for (int item = 0; item < array.Length; item++)
                   {
-                        Color.Green(array[item]);
+                        Color.Green($"{item+1}. "+array[item]);
                   }
             }
             /// <summary>
@@ -88,7 +90,7 @@ namespace QuickTools
                  
                   for (int item = 0; item < array.Length; item++)
                   {
-                        Color.Green(array[item]);
+                        Color.Green($"{item+1}. "+array[item]);
                   }
             }
             /// <summary>
@@ -99,7 +101,7 @@ namespace QuickTools
             {
                   for (int item = 0; item < array.Length; item++)
                   {
-                        Color.Green(array[item]);
+                        Color.Green($"{item+1}. "+array[item]);
                   }
             }
 
@@ -111,7 +113,7 @@ namespace QuickTools
             {
                   for (int item = 0; item < array.Length; item++)
                   {
-                        Color.Green(array[item]);
+                        Color.Green($"{item+1}. "+array[item]);
                   }
             }
       }

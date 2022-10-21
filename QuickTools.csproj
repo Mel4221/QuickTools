@@ -54,7 +54,6 @@
     <Compile Include="colorWithParam.cs" />
     <Compile Include="user.cs" />
     <Compile Include="Get.cs" />
-    <Compile Include="keyReader.cs" />
     <Compile Include="Traductor.cs" />
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
