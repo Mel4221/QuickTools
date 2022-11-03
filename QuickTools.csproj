@@ -10,9 +10,9 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2003.4</PackageVersion>
+    <PackageVersion>2003.5</PackageVersion>
     <Authors>MBV</Authors>
-    <Description>QuickTools is c# library that helps programmer to have simple tools available when they need it more details about the library could be founded in github.com/Mel4221/QuickTools</Description>
+    <Description>Minimum Updates</Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -69,11 +69,11 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
-    <Compile Include="Cache.cs" />
     <Compile Include="EmptyCSharpFile.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="Binary.RW.cs" />
+    <Compile Include="BinaryReaderTester.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

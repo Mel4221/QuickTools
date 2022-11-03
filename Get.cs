@@ -42,8 +42,14 @@ namespace QuickTools
                    Console.BufferWidth                 
                   */
 
-
-
+                  /// <summary>
+                  /// Returns a line divition using the Enviroment.NewLine command. 
+                  /// </summary>
+                  /// <returns>The corresponding line for the console</returns>
+                  static string Line()
+            {
+                  return Environment.NewLine;
+            }
 
 
             /// <summary>
