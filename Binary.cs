@@ -45,7 +45,6 @@ namespace QuickTools
             {
 
 
-
                   if (File.Exists(srcfilename) == false)
 
                   {
@@ -111,11 +110,8 @@ namespace QuickTools
                   if (File.Exists(srcfilename) == false)
 
                   {
-
                         Console.WriteLine("Could not find the Source file");
-
                         return false;
-
                   }
 
 
