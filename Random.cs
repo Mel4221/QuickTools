@@ -25,13 +25,14 @@ action that it creates DATE OF UPDATE : 03/11/2022
     
 */
 using System;
-using System.Text; 
+using System.Text;
+using QuickTools.Colors; 
 namespace QuickTools
 {
 
 
 
-
+                                                      
 
       /// <summary>
       /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 

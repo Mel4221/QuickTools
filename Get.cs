@@ -13,11 +13,11 @@ using System.Threading;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using QuickTools.Colors;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools
 {
-
 
 
 
@@ -604,7 +604,7 @@ namespace QuickTools
                   Get.Write("");
                   Get.LabelSide(display);
                   Get.Reset();                  
-                  //Console.Write(" ");
+                  Console.Write(" ");
                   bool isnumber;
 
                   string inputValue = Console.ReadLine();

@@ -52,6 +52,7 @@ create on expexted behavior <<
 _____________________________________
 */
 using System;
+using QuickTools.Colors; 
 using System.Collections.Generic;
 
 namespace QuickTools

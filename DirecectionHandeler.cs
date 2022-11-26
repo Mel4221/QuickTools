@@ -9,10 +9,6 @@ action that it creates DATE OF UPDATE : 03/11/2022
 */
 using System;
 //using System.Security;            // has to be implemented 
-using System.Threading;
-using System.IO;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 //using System.Security.Permissions;// it has to be implemented
 namespace QuickTools
 {
@@ -98,9 +94,7 @@ namespace QuickTools
                                     // Right();
                                     //Color.Green(X+" "+Y); 
                                     break;
-                              default:
-
-                                    break;
+                              
 
 
                         }

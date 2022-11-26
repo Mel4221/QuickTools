@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using QuickTools.Colors; 
 using System.Collections.Generic;
 namespace QuickTools
 {
