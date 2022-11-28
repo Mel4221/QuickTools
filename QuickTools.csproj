@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Options.cs" />
-    <Compile Include="Random.cs" />
+    <Compile Include="IRandom.cs" />
     <Compile Include="colorNoParam.cs" />
     <Compile Include="colorWithParam.cs" />
     <Compile Include="user.cs" />
