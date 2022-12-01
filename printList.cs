@@ -83,6 +83,18 @@ namespace QuickTools
                   }
             }
             /// <summary>
+            /// List the specified array and noIndexer.
+            /// </summary>
+            /// <param name="array">Array.</param>
+            /// <param name="noIndexer">If set to <c>true</c> no indexer.</param>
+            public static void List(string[] array,bool noIndexer)
+            {
+                  for (int item = 0; item < array.Length; item++)
+                  {
+                        Color.Green(array[item]);
+                  }
+            }
+            /// <summary>
             /// List the entire file array 
             /// </summary>
             /// <param name="array">Array.</param>

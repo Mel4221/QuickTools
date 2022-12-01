@@ -182,6 +182,7 @@ namespace QuickTools
                                           }
 
                                           break;
+                               
                                     default:
                                           /*
                                           // in here it has to be added a switch that could 
@@ -220,13 +221,125 @@ namespace QuickTools
                   {
                         Color.Yellow("Either No more options or not set up yet ");
                         Color.Green("For more help please visit: ");
-                        Color.Yellow("https://www.mbvapps.xyz/QuickTools/");
+                        Color.Yellow("http://www.mbvapps.xyz/QuickTools/");
 
                   }
 
                   return CurrentSelection;
             }
 
+            /// <summary>
+            /// Pick the specified allowLateral.
+            /// </summary>
+            /// <returns>The pick.</returns>
+            /// <param name="allowLateral">If set to <c>true</c> allow lateral.</param>
+            public virtual int Pick(bool allowLateral)
+            {
+
+                  if (OptionList.Count > 0)
+                  {
+                        // the first display 
+                        Display();
+                        // HERE WILL BE THE SELECTION METHOD ITSELF 
+                        while (Get.KeyInput().ToString() != "Enter")
+                        {
+
+                              switch (Get.Key)
+                              {
+                                    case "UpArrow":
+                                          // Up 
+                                          //    Get.Write("Up");
+                                          if (CurrentSelection == 0)
+                                          {
+                                                // go to the button 
+                                                // if you are at the top 
+                                                // bring me to the end of the 
+                                                // list if i keep going up 
+                                                CurrentSelection = OptionList.Count - 1;
+
+                                                Display();
+                                          }
+                                          else
+                                          {
+                                                CurrentSelection--;
+
+                                                Display();
+                                          }
+                                          break;
+
+                                    case "DownArrow":
+                                          // Down
+                                          //   Get.Write("Down");
+                                          if (CurrentSelection == OptionList.Count - 1)
+                                          {
+                                                //this should bring me to the top 
+                                                CurrentSelection = 0;
+                                                Display();
+
+
+                                          }
+                                          else
+                                          {
+                                                CurrentSelection++;
+
+                                                Display();
+                                          }
+
+                                          break;
+                                    case "RightArrow":
+                                          return int.MaxValue;
+#pragma warning disable CS0162 // Unreachable code detected
+                                          break;
+#pragma warning restore CS0162 // Unreachable code detected
+                                    case "LeftArrow":
+                                          return int.MinValue;
+#pragma warning disable CS0162 // Unreachable code detected
+                                          break;
+#pragma warning restore CS0162 // Unreachable code detected
+                                    default:
+                                          /*
+                                          // in here it has to be added a switch that could 
+                                          //handle the process on a better way with
+                                          // the number handling since it seems a kind of crazy
+                                          // that you can not press numbers to give a command 
+                                          // in the order of the selection
+                                          */
+
+                                          // this implementation is not completed yet 
+                                          switch (Get.IsNumber(Get.Key))
+                                          {
+                                                case true:
+                                                      // here it shoudl go to the option pressed by it self 
+                                                      //     Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                      Display();
+                                                      break;
+
+                                                case false:
+                                                      //    Get.Alert("Not yet supporeted numbers nor letters to navegate just up and down plus enter to comfirm  ");
+                                                      Display();
+                                                      break;
+                                          }
+
+
+                                          break;
+
+                              }
+                        }
+
+
+
+                        Get.Box(OptionList[CurrentSelection]);
+                  }
+                  else
+                  {
+                        Color.Yellow("Either No more options or not set up yet ");
+                        Color.Green("For more help please visit: ");
+                        Color.Yellow("https://www.mbvapps.xyz/QuickTools/");
+
+                  }
+
+                  return CurrentSelection;
+            }
             /// <summary>
             /// This initialization does not contains any implementation
             /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.

@@ -545,7 +545,79 @@ namespace QuickTools
                   return inputValue;
             }
 
+            /// <summary>
+            /// Get the Input as an array the array.
+            /// </summary>
+            /// <returns>The array.</returns>
+            public static string[] InputArray()
+            {
 
+
+                  string[] input = Get.TextInput().Split(' ');
+
+                  //Print.List(input);
+
+                  Func<String[], String[]> F = (arr) => {
+                        String[] clearArr;
+                        List<string> list = new List<string>();
+                        for (int i = 0; i < arr.Length; i++)
+                        {
+                              if (arr[i] != "" && arr[i] != null)
+                              {
+                                    list.Add(arr[i]);
+                              }
+                        }
+
+                        clearArr = new string[list.Count];
+                        for (int val = 0; val < list.Count; val++)
+                        {
+                              clearArr[val] = list[val];
+                        }
+
+                        return clearArr;
+
+                  };
+
+                  return F(input); 
+                 //For testing Print.List(F(input));
+            }
+            /// <summary>
+            /// Get the Input as an array the array.
+            /// </summary>
+            /// <returns>The array.</returns>
+            /// <param name="label">Label.</param>
+            public static string[] InputArray(object label)
+            {
+
+
+                  string[] inputValue = Get.TextInput(label.ToString()).Split(' ');
+
+                 // Print.List(input);
+
+                  Func<String[], String[]> F = (arr) => {
+                        String[] clearArr;
+                        List<string> list = new List<string>();
+                        for (int i = 0; i < arr.Length; i++)
+                        {
+                              if (arr[i] != "" && arr[i] != null)
+                              {
+                                    list.Add(arr[i]);
+                              }
+                        }
+
+                        clearArr = new string[list.Count];
+                        for (int val = 0; val < list.Count; val++)
+                        {
+                              clearArr[val] = list[val];
+                        }
+
+                        return clearArr;
+
+                  };
+
+                  return F(inputValue);
+                  //For testing Print.List(F(input));
+            }
 
 
 
