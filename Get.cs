@@ -37,16 +37,28 @@ namespace QuickTools
 
 
 
-                  /*
-                   Console.BufferHeight
-                   Console.BufferWidth                 
-                  */
 
-                  /// <summary>
-                  /// Returns a line divition using the Enviroment.NewLine command. 
-                  /// </summary>
-                  /// <returns>The corresponding line for the console</returns>
-                  static string Line()
+            /// <summary>
+            /// Get the Porcent of the  specified current value from the  goal.
+            /// </summary>
+            /// <returns>The porcent.</returns>
+            /// <param name="current">Current.</param>
+            /// <param name="goal">Goal.</param>
+            public static double Porcent(double current , double goal )
+            {
+                  return Math.Round(( current / goal) * 100,1);
+            }
+
+            /*
+             Console.BufferHeight
+             Console.BufferWidth                 
+            */
+
+            /// <summary>
+            /// Returns a line divition using the Enviroment.NewLine command. 
+            /// </summary>
+            /// <returns>The corresponding line for the console</returns>
+            static string Line()
             {
                   return Environment.NewLine;
             }

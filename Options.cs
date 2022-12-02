@@ -87,7 +87,10 @@ namespace QuickTools
                   /// Options List container 
                   /// </summary>
             private static List<string> OptionList = new List<string>();
-
+            /// <summary>
+            /// This provide the access to the OptionList count for verification porpuses 
+            /// </summary>
+            public int Count = 0; 
             /// <summary>
             /// Clears All the options.
             /// </summary>
@@ -357,8 +360,8 @@ namespace QuickTools
             /// <param name="options">Options.</param>
             public Options(string[] options)
             {
-
-                  ClearOptions(); 
+                  ClearOptions();
+                  Count = options.Length;
                   Color.Yellow(Label);
                   foreach (string option in options)
                   {
@@ -387,7 +390,7 @@ namespace QuickTools
             public Options(string[] options,bool Simple)
             {
 
-                ClearOptions(); 
+                ClearOptions();
 
                   if (Simple == true)
                   {
@@ -428,8 +431,11 @@ namespace QuickTools
             /// <param name="options">Options.</param>
             public Options(List<object> options)
             {
-            ClearOptions();
-            Color.Yellow(Label);
+
+                  ClearOptions();
+                  Color.Yellow(Label);
+                  Count = options.Count;
+
                   foreach (string option in options)
                   {
                         OptionList.Add(option);
@@ -461,6 +467,7 @@ namespace QuickTools
             {
 
             ClearOptions();
+
             if (type == false)
                   {
                         string[] option = { "No", "Yes" };
