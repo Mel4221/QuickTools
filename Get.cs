@@ -593,6 +593,42 @@ namespace QuickTools
                   return F(input); 
                  //For testing Print.List(F(input));
             }
+
+
+
+
+            /// <summary>
+            /// Parses the text to a string array.
+            /// </summary>
+            /// <returns>The text to array.</returns>
+            /// <param name="words">Words.</param>
+            public static string[] ParseTextToArray(string words)
+            {
+                  string[] wordsArray = words.Split(' ');
+                                   
+                  Func<String[], String[]> F = (arr) => {
+                        String[] clearArr;
+                        List<string> list = new List<string>();
+                        for (int i = 0; i < arr.Length; i++)
+                        {
+                              if (arr[i] != "" && arr[i] != null)
+                              {
+                                    list.Add(arr[i]);
+                              }
+                        }
+
+                        clearArr = new string[list.Count];
+                        for (int val = 0; val < list.Count; val++)
+                        {
+                              clearArr[val] = list[val];
+                        }
+
+                        return clearArr;
+
+                  };
+
+                  return F(wordsArray); 
+            }
             /// <summary>
             /// Get the Input as an array the array.
             /// </summary>
