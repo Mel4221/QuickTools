@@ -851,11 +851,11 @@ namespace QuickTools
             /// <param name="textToDisplayOnTop">textToDisplayOnTop.</param>
             public static string TextInput(string textToDisplayOnTop)
             {
-                  Get.LabelSide(textToDisplayOnTop);
+                  //Get.LabelSide(textToDisplayOnTop);
                   //Console.WriteLine("");
                   Get.Reset();
                   Console.Write(" ");
-                  Get.LabelSide(">");
+                  Get.LabelSide(textToDisplayOnTop);
                   Console.Write(" ");
 
                   string text = Console.ReadLine();
