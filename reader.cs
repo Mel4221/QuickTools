@@ -10,41 +10,35 @@ namespace QuickTools
       /// </summary>
       public class Reader
       {
-            /// <summary>
-            /// This class save the Data from the Reader
-            /// </summary>
-            public static class Stored
-            {
-                  /// <summary>
-                  /// This Contain the Row Data into an stringBuilder
-                  /// </summary>
-                 public static StringBuilder RowData = new StringBuilder();
-                  /// <summary>
-                  /// contain The list data.
-                  /// </summary>
-                  public static List<string> ListData = new List<string>();
-                  /// <summary>
-                  /// The bytes data.
-                  /// </summary>
-                  public static byte[] BytesData;
-            }
+       
 
-            /*
-                This only provides the Bytes thar were
-                stored in a string file 
-            */
             /// <summary>
-            /// Contains the row data readed 
-            /// </summary>
-            public static StringBuilder RowData = new StringBuilder();
-            /// <summary>
-            /// The empty spaces count in a file
+            /// Holds the empty values in an array 
             /// </summary>
             public static double EmptySpacesCount = 0;
 
+            /// <summary>
+            /// Holds a row list of the string text readed by the reader
+            /// </summary>
+            public static StringBuilder RowData = new StringBuilder();
 
             /// <summary>
-            /// Reads bytes stored into a file and return it 
+            /// Holds a list of the data readed by the reader 
+            /// </summary>
+            public static List<string> ListData = new List<string>();
+
+
+            /// <summary>
+            /// Holds the bytes readed by the reader 
+            /// </summary>
+            public static byte[] BytesData;
+
+
+
+            /// <summary>
+            /// Reads bytes what could be considered a row array debided by semicollon that is saved on a file
+            /// for example if you get a list of numbers written on a file such as {1,2,3,4} you could get the value from the file 
+            /// stright to a byte[] array   
             /// </summary>
             /// <returns>The stored bytes.</returns>
             /// <param name="file">the files that contains the bytes.</param>
@@ -52,26 +46,26 @@ namespace QuickTools
             {
 
 
+                  if (file == null || file == "")
+                  {
+                        throw new Exception($"Invalid file input ");
+                  }
+
+                  if (!File.Exists(file))
+                  {
+                        throw new Exception($"The file {file} does not exsit or it was not founded");
+                  }
+
+
 
 
                   List<object> dataList = new List<object>();
                   byte[] dataBytes;
-                  Stored.RowData.Clear();
-
+                  RowData.Clear();
                   EmptySpacesCount = 0;
-                  if (file.Length <= 0)
-                  {
+           
 
-                        try
-                        {
-                              // just to try to throw an exception
-                        }
-                        finally
-                        {
-                              throw new ArgumentException();
-                        }
 
-                  }
                   using (var reader = new StreamReader(file))
                   {
                         /*
@@ -105,7 +99,7 @@ namespace QuickTools
                                                       EmptySpacesCount++;
                                                       dataList.Add(currentValue);
 
-                                                      // Stored.RowData.Append(currentValue);  
+                                                      // RowData.Append(currentValue);  
                                                       currentValue = "";
 
                                                       // Get.Wait(data[Char]); 
@@ -128,7 +122,7 @@ namespace QuickTools
                         for (int indexer = 0; indexer < dataBytes.Length; indexer++)
                         {
                               dataBytes[indexer] = Convert.ToByte(dataList[indexer]);
-                              Stored.RowData.Append(dataList[indexer] + ",");
+                              RowData.Append(dataList[indexer] + ",");
                         }
                   }
                   catch (Exception e)
@@ -136,7 +130,7 @@ namespace QuickTools
                         Color.Yellow("The Bytes where not on the correct format, more details :{ " + e + " }");
                   }
                   // passing values from the bytes readed                 
-                  Stored.BytesData = dataBytes;
+                  BytesData = dataBytes;
                   if (dataList.Count <= 0)
                   {
                         Color.Yellow("Not Valid bytes to read where found");
@@ -159,25 +153,20 @@ namespace QuickTools
             {
 
 
+                  if (file == null || file == "")
+                  {
+                        throw new Exception($"Invalid file input ");
+                  }
 
+                  if (!File.Exists(file))
+                  {
+                        throw new Exception($"The file {file} does not exsit or it was not founded");
+                  }
 
                   List<string> dataList = new List<string>();
-                        
-                  Stored.RowData.Clear();
+                  RowData.Clear();
                   EmptySpacesCount = 0;
-                  if (file.Length <= 0)
-                  {
-
-                        try
-                        {
-                              // just to try to throw an exception
-                        }
-                        finally
-                        {
-                              throw new ArgumentException();
-                        }
-
-                  }
+           
                   using (var reader = new StreamReader(file))
                   {
                         /*
@@ -211,9 +200,9 @@ namespace QuickTools
                                                 {
                                                       EmptySpacesCount++;
                                                       dataList.Add(currentValue);
-                                                      Stored.RowData.Append(currentValue);
-                                                      Stored.ListData.Add(currentValue); 
-                                                      // Stored.RowData.Append(currentValue);  
+                                                      RowData.Append(currentValue);
+                                                      ListData.Add(currentValue); 
+                                                      // RowData.Append(currentValue);  
                                                       currentValue = "";
 
                                                       // Get.Wait(data[Char]); 
@@ -241,11 +230,21 @@ namespace QuickTools
             /// <param name="file">File.</param>
             public static string ReadFile(string file)
             {
+                  if(file == null || file == "")
+                  {
+                        throw new Exception($"Invalid file input "); 
+                  }
+
+                  if (!File.Exists(file))
+                  {
+                        throw new Exception($"The file {file} does not exsit or it was not founded"); 
+                  }
+
                   string data = null;
                   using (StreamReader reader = new StreamReader(file))
                   {
                         data = reader.ReadToEnd();
-                        Stored.RowData.Append(data);
+                        RowData.Append(data);
 
                   }
 
@@ -265,6 +264,16 @@ namespace QuickTools
            /// <param name="file">File.</param>
              public static string Read(string file)
             {
+                  if (file == null || file == "")
+                  {
+                        throw new Exception($"Invalid file input ");
+                  }
+
+                  if (!File.Exists(file))
+                  {
+                        throw new Exception($"The file {file} does not exsit or it was not founded");
+                  }
+
                   string data = null;
                   using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                   {
@@ -279,6 +288,33 @@ namespace QuickTools
 
                   ReadLength = data.Length; 
                   return data; 
+            }
+
+            private string file;
+            private bool fileExist = false;
+            public Reader(object fileName)
+            {
+
+                  if (File.Exists(fileName.ToString()))
+                  {
+                        this.file = fileName.ToString();
+                        fileExist = true;
+                        return;
+                  }
+            }
+
+            /// <summary>
+            /// Read the file that has been spesified by the Constructur from Reader
+            /// and returns the string from it 
+            /// </summary>
+            /// <returns>The read.</returns>
+            public string Read()
+            {
+                  if(fileExist)
+                  {
+                        return Reader.Read(this.file); 
+                  }
+                  return null; 
             }
 
       }

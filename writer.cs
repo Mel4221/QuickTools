@@ -10,6 +10,7 @@ namespace QuickTools
             public class Writer
             {
                         /*
+                         * 12/07/2022 i added a new constructor around here                        
                             Modified Date: 07/21/2022
                             Editor : https://www.onlinegdb.com/fork/ss9o2_vdl
                             So lets start by i hate documenting but i know that without it i would never be able
@@ -192,6 +193,32 @@ namespace QuickTools
                               byte[] buffer = Encoding.ASCII.GetBytes(data.ToString());
                               fs.Write(buffer, 0, buffer.Length);
                         }
+                  }
+            }
+
+
+            private string fileName = null;
+            private string fileContent = null; 
+            /// <summary>
+            /// Allows you to initialize the writer with the value of the file name and the content of it 
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="contet">Contet.</param>
+            public Writer(string file,string contet)
+            {
+                  fileName = file;
+                  fileContent = contet; 
+            }
+
+
+            /// <summary>
+            /// Allows you to write the file with the content that was specified on the Inizialation 
+            /// </summary>
+            public void Write()
+            {
+                  if(fileName!= null && fileContent != null)
+                  {
+                        Writer.Write(fileName,fileContent); 
                   }
             }
       }

@@ -102,7 +102,7 @@ namespace QuickTools
             /// <returns>The password.</returns>
       public static string Password ()
       {                        // this one will generate a minimum passowrd of 9 digits 
-      string password = "";
+                  StringBuilder password = new StringBuilder(); 
       Random lower, upper, symbol, number;
 
       lower = new Random ();
@@ -118,27 +118,26 @@ namespace QuickTools
           switch (order)
             {
             case 0:
-            password += LowerCase[lower.Next (0, LowerCase.Length)];
-
+                  password.Append( LowerCase[lower.Next (0, LowerCase.Length)]);
             break;
             case 1:
-            password += UpperCase[upper.Next (0, UpperCase.Length)];
+                  password.Append(UpperCase[upper.Next (0, UpperCase.Length)]);
             break;
             case 2:
-            password += Symbols[symbol.Next (0, Symbols.Length)];
+                  password.Append(Symbols[symbol.Next (0, Symbols.Length)]);
             break;
             case 3:
-            password += Numbers[number.Next (0, Numbers.Length)];
+                  password.Append(Numbers[number.Next (0, Numbers.Length)]);
             break;
             default:
-            password += Numbers[number.Next (0, Numbers.Length)];
+                  password.Append(Numbers[number.Next (0, Numbers.Length)]);
             break;
 
             }
         }
-      Generated = password.Replace (" ", "");
-      return password.Replace (" ", "");
-      }
+                  Generated = password.ToString().Replace(" ", "");
+                  return password.ToString().Replace(" ", "");
+            }
 
 
 

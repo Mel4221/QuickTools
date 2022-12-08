@@ -90,7 +90,19 @@ namespace QuickTools
             /// <summary>
             /// This provide the access to the OptionList count for verification porpuses 
             /// </summary>
-            public int Count = 0; 
+            public int Count = 0;
+
+            /// <summary>
+            /// Gets the triguer.
+            /// </summary>
+            /// <value>The triguer.</value>
+            public static string Triguer { get; set;  }
+            /// <summary>
+            /// Gets a value indicating whether this <see cref="T:QuickTools.Options"/> is triguered.
+            /// </summary>
+            /// <value><c>true</c> if triguered; otherwise, <c>false</c>.</value>
+            public static bool Triguered { get; set; }
+
             /// <summary>
             /// Clears All the options.
             /// </summary>
@@ -299,6 +311,12 @@ namespace QuickTools
 #pragma warning disable CS0162 // Unreachable code detected
                                           break;
 #pragma warning restore CS0162 // Unreachable code detected
+                                    case "Escape":
+                                    case "Backspace":
+                                          Options.Triguer = Get.Key;
+                                          Options.Triguered = true; 
+
+                                          break; 
                                     default:
                                           /*
                                           // in here it has to be added a switch that could 
