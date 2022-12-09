@@ -76,6 +76,8 @@
     <Compile Include="Binary.RW.cs" />
     <Compile Include="BinaryReaderTester.cs" />
     <Compile Include="XmlHelper.cs" />
+    <Compile Include="CacheHandeler.cs" />
+    <Compile Include="CacheHandeler.Read&amp;Write.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
