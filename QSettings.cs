@@ -29,12 +29,32 @@ using System.Xml;
 using System.Collections.Generic; 
 namespace QuickTools
 {
+
+
+
       /// <summary>
       /// QSettings helps to create a settings model based on xml 
       /// it actually works pretty well and it is very simple to use 
       /// </summary>
       public class QSettings
-      {
+      {     
+            /// <summary>
+            /// Sedttigns Object
+            /// </summary>
+            public class Settings
+            {
+                  /// <summary>
+                  /// Gets or sets the key.
+                  /// </summary>
+                  /// <value>The key.</value>
+                  public string Key { get; set; }
+
+                  /// <summary>
+                  /// Gets or sets the value.
+                  /// </summary>
+                  /// <value>The value.</value>
+                  public string Value { get; set; }
+            }
             /// <summary>
             /// This contains the list of keys in the settings file 
             /// </summary>
@@ -44,6 +64,11 @@ namespace QuickTools
             /// This Will contain the values from the settings file 
             /// </summary>
             public List<string> Values;
+
+            /// <summary>
+            /// This will contains the list of settings
+            /// </summary>
+            public List<Settings> SettingsList; 
 
             /// <summary>
             /// Gets or sets the name of the file.
@@ -110,6 +135,9 @@ namespace QuickTools
             {
                   Keys = new List<string>();
                   Values = new List<string>();
+                  SettingsList = new List<Settings>();
+                  var obj = new Settings(); 
+
                   using (XmlReader reader = XmlReader.Create(FileName))
                   {
 
@@ -127,11 +155,14 @@ namespace QuickTools
                                           {
 
                                                 // Get.Green($"{reader.Name} {reader.GetAttribute(0)}");
+                                                string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
+                                                string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1); 
+                                                Keys.Add(key);
+                                                Values.Add(value);
+                                                obj.Key = key;
+                                                obj.Value = value;
+                                                SettingsList.Add(obj); 
 
-                                                Keys.Add(reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1));
-                                                Values.Add(reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1));
-
-                                                //  Get.Blue($"Key: {key} Value:  {value}");
 
                                           }
                                     }
@@ -145,6 +176,61 @@ namespace QuickTools
 
 
             }
+
+
+            /// <summary>
+            /// Load the specified file with the given name .
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            public void Load(string fileName)
+            {
+
+                  Keys = new List<string>();
+                  Values = new List<string>();
+                  SettingsList = new List<Settings>();
+                  //Settings obj = new Settings();
+
+
+                  using (XmlReader reader = XmlReader.Create(FileName))
+                  {
+
+
+                        while (reader.Read())
+                        {
+
+
+                              if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
+                              {
+                                    if (reader.HasAttributes)
+                                    {
+
+                                          if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
+                                          {
+
+                                                string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
+                                                string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
+
+                                                Keys.Add(key);
+                                                Values.Add(value);
+
+                                                SettingsList.Add(new Settings() {
+                                                      Key = key,
+                                                      Value = value
+                                                });
+                                          }
+                                    }
+
+                              }
+
+
+                        }
+                  }
+
+
+
+            }
+
+
             /// <summary>
             /// Add the specified key setting with the given  value.
             /// </summary>
@@ -157,14 +243,18 @@ namespace QuickTools
                   {
                         throw new Exception("This Key already exist");
                   }
-                  Document = new XmlDocument();
-                  Document.Load(FileName);
-                  XmlNode root = Document.FirstChild;
-                  XmlElement element = Document.CreateElement(ElementName);
-                  element.SetAttribute(key, $"[{key}]{value}");
-                  root.AppendChild(element);
-                  Document.Save(FileName);
-                  this.Load(); 
+                
+
+                        Document = new XmlDocument();
+                        Document.Load(FileName);
+                        XmlNode root = Document.FirstChild;
+                        XmlElement element = Document.CreateElement(ElementName);
+                        element.SetAttribute(key, $"[{key}]{value}");
+                        root.AppendChild(element);
+                        Document.Save(FileName);
+                        this.Load();
+
+               
             }
 
             /// <summary>
@@ -207,7 +297,7 @@ namespace QuickTools
 
                   using (XmlWriter writer = XmlWriter.Create(FileName, settings))
                   {
-                        writer.WriteStartElement("Settings");
+                        writer.WriteStartElement(GroupName);
                         writer.WriteEndElement();
                         writer.WriteEndDocument();
                         writer.Flush();
