@@ -33,7 +33,7 @@ namespace QuickTools
       /// This is a class that helps to make it easier to create
       /// and add content to the xml files 
       /// </summary>
-       class XmlHelper
+       public class XmlHelper
       {
 
             /// <summary>
@@ -184,6 +184,11 @@ namespace QuickTools
                   }
             }
 
+
+
+            private XmlReaderSettings settings = new XmlReaderSettings(); 
+
+
             /// <summary>
             /// Gets the atribute value.
             /// </summary>
@@ -198,12 +203,18 @@ namespace QuickTools
                   {
                         return null; 
                   }
-                  using (XmlReader reader = XmlReader.Create(fileName))
+
+
+                  this.settings.ConformanceLevel = ConformanceLevel.Fragment;
+
+                  using (XmlReader reader = XmlReader.Create(fileName,this.settings))
                   {
+                       
+
                         while (reader.Read())
                         {
 
-        
+                              Get.Green(reader.Name + " " + reader.GetAttribute(atribute)); 
 
                               if ((reader.NodeType == XmlNodeType.Element) && reader.Name == element)
                               {
@@ -250,7 +261,7 @@ namespace QuickTools
 
             }
 
-            public void Get()
+           public void GetSetting()
             {
                   XmlReaderSettings settings = new XmlReaderSettings();
                   settings.DtdProcessing = DtdProcessing.Parse;
