@@ -8,7 +8,8 @@ using System.Security.Cryptography;
 namespace QuickTools
 {
       /// <summary>
-      /// Secure.
+      /// The Secure class works pretty well so far on text DO NOT USE IT ON BINARY DATA IT COULD BREAK 
+      /// THE FILES    
       /// </summary>
     public partial class Secure 
     {

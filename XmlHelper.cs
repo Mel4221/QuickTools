@@ -29,11 +29,8 @@ using System.Xml;
 
 namespace QuickTools
 {
-      /// <summary>
-      /// This is a class that helps to make it easier to create
-      /// and add content to the xml files 
-      /// </summary>
-       public class XmlHelper
+
+       class XmlHelper
       {
 
             /// <summary>

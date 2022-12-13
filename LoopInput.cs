@@ -12,7 +12,7 @@ namespace QuickTools
       ///and callect the entired input and return it in a single string or it can be access aswell
       /// by calling the LoopInput.Data.
       /// </summary>
-      public class LoopInput
+       class LoopInput
   {     
       /// <summary>
       /// The Return Data will have to be provided by a method due to 
