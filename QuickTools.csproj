@@ -10,9 +10,9 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2003.5</PackageVersion>
+    <PackageVersion>2004</PackageVersion>
     <Authors>MBV</Authors>
-    <Description>Minimum Updates</Description>
+    <Description>Nes settings manager added to help to create settings without too much reading for documentation nor extra packages </Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -40,6 +40,10 @@
         </Command>
       </CustomCommands>
     </CustomCommands>
+    <LangVersion>Latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>

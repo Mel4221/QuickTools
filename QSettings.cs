@@ -62,28 +62,34 @@ namespace QuickTools
             /// </summary>
             /// <value>The name of the group.</value>
             public string GroupName { get; set; }
+
             private XmlDocument Document;
 
 
             /// <summary>
             /// Create the specified settings file with the given name .
             /// </summary>
-            /// <returns>The create.</returns>
-            /// <param name="fileName">File name.</param>
-            public bool Create(string fileName)
+            /// <returns> true if created was sucessfull otherwise flase </returns>
+            public bool Create()
             {
-
-                  if (File.Exists(fileName))
+                  if(FileName == null || FileName == "")
                   {
-                        return false;
+                        // throw new Exception("File name not spesified yet"); 
+                        return false; 
                   }
+                  if (File.Exists(FileName))
+                  {
+                        return false; 
+                        //throw new Exception($"{FileName} Already Exist"); 
+                  }
+
                   XmlWriterSettings settings = new XmlWriterSettings();
                   settings.Indent = true;
                   settings.IndentChars = ("    ");
                   settings.CloseOutput = true;
                   settings.OmitXmlDeclaration = true;
 
-                  using (XmlWriter writer = XmlWriter.Create(fileName, settings))
+                  using (XmlWriter writer = XmlWriter.Create(FileName, settings))
                   {
 
 
@@ -292,7 +298,35 @@ namespace QuickTools
                   FileName = "Settings.xml";
                   ElementName = "Setting";
                   GroupName = "Settings";
-                  Create(FileName);
+                  //Create();
+
+
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
+            /// with only the file name 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            public QSettings(string fileName)
+            {
+                  FileName = fileName; 
+                  ElementName = "Setting";
+                  GroupName = "Settings";
+                  //Create();
+
+
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="elementName">Element name.</param>
+            public QSettings(string fileName,string elementName)
+            {
+                  FileName = fileName;
+                  ElementName = elementName; 
+                  GroupName = "Settings";
+                  //Create();
 
 
             }
@@ -305,7 +339,7 @@ namespace QuickTools
             /// <param name="elementName">Element name.</param>
             public QSettings(string fileName, string groupName, string elementName)
             {
-                  this.Create(fileName);
+                 // this.Create();
                   FileName = fileName;
                   ElementName = elementName;
                   GroupName = groupName;
