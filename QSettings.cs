@@ -159,10 +159,12 @@ namespace QuickTools
                                                 string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1); 
                                                 Keys.Add(key);
                                                 Values.Add(value);
-                                                obj.Key = key;
-                                                obj.Value = value;
-                                                SettingsList.Add(obj); 
 
+                                                SettingsList.Add(new Settings()
+                                                {
+                                                      Key = key,
+                                                      Value = value
+                                                });
 
                                           }
                                     }
