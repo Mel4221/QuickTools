@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="CacheHandeler.cs" />
     <Compile Include="CacheHandeler.Read&amp;Write.cs" />
     <Compile Include="QSettings.cs" />
+    <Compile Include="MiniDB.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
