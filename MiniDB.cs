@@ -71,6 +71,14 @@ namespace QuickTools
 
 
             /// <summary>
+            /// This method will be available to be modefied by the user of the class  to handle the relations 
+            /// </summary>
+            public virtual void Relation()
+            {
+
+            }
+
+            /// <summary>
             /// Gets or sets the DBN ame.
             /// </summary>
             /// <value>The DBN ame.</value>
