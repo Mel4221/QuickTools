@@ -504,14 +504,16 @@ namespace QuickTools
             /// Create the specified Database.
             /// </summary>
             /// <param name="dbName">Db name.</param>
-            public void Create(string dbName)
+            public bool Create(string dbName)
             {
-
-                        if(this.Load(dbName) == false)
+                  bool created = this.Load(dbName);
+                  if (created == true)
+                        return false; 
+                  if(created == false)
                   {
                         Writer.Write(dbName, "");
-
                   }
+
 
 
 
@@ -531,21 +533,27 @@ namespace QuickTools
 
                         writer.Flush();
                   }
+
+                  return true; 
             }
 
 
             /// <summary>
             /// Create the DB file.
             /// </summary>
-            public void Create()
+            public bool Create()
             {
                   string dbName = DBName;
 
-                  if (this.Load(dbName) == false)
+                  bool created = this.Load(dbName);
+                  if (created == true)
+                        return false;
+                  if (created == false)
                   {
                         Writer.Write(dbName, "");
-
                   }
+
+
 
 
                   DBName = dbName;
@@ -564,6 +572,7 @@ namespace QuickTools
 
                         writer.Flush();
                   }
+                  return true; 
             }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> VERY IMPORTANT WHEN INITIALIZES LIKE THIS 
