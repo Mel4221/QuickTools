@@ -166,8 +166,31 @@ namespace QuickTools
 
             }
 
-               //   private static string path = Get.Path;
-                  private static string qtDir = "data/qt/";
+            /// <summary>
+            /// Create a data path if is not created and creates the directory given as a parameter
+            /// </summary>
+            /// <returns></returns>
+            /// <param name="newDirectory"></param>
+            public static string DataPath(string newDirectory)
+            {
+
+
+                  string folder = Get.Path + "data/qt/" + newDirectory; 
+                  if (Directory.Exists(folder) == true)
+                  {
+                        return folder;
+                  }
+                  else
+                  {
+                        Directory.CreateDirectory(folder);
+
+                        return folder;
+                  }
+
+            }
+
+            //   private static string path = Get.Path;
+            private static string qtDir = "data/qt/";
                   private static string keyFile = "data/qt/secure.key";
 
             /// <summary>

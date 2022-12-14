@@ -26,7 +26,9 @@
 using System;
 using System.Xml; 
 using System.Data;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.IO;
+
 namespace QuickTools
 {
 
@@ -339,68 +341,75 @@ namespace QuickTools
             /// <summary>
             /// Loads the data base 
             /// </summary>
-            public void Load()
+            public bool Load()
             {
 
                   DataBase = new List<DB>();
-
-                  using (XmlReader reader = XmlReader.Create(DBName))
+                  try
                   {
-
-
-                        while (reader.Read())
+                        using (XmlReader reader = XmlReader.Create(DBName))
                         {
 
 
-                              if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
+                              while (reader.Read())
                               {
-                                    if (reader.HasAttributes)
-                                    {
 
-                                          if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
+
+                                    if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
+                                    {
+                                          if (reader.HasAttributes)
                                           {
 
-                                                //string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
-                                                // string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
-                                                string key, value, relation, id, row, relationFase, subId;
-
-
-                                                row = reader.GetAttribute(0);
-
-                                                /*
-                                                    this clear the line of the key to get at the end the key , value relation and id 
-                                                    is a step by fases and a kind of hard to read but it works                                       
-                                                */
-                                                key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
-                                                value = row.Substring(row.IndexOf("]") + 1);
-                                                relationFase = row.Substring(row.IndexOf(":") + 1);
-                                                relation = relationFase.Substring(0, relationFase.IndexOf(":"));
-                                                subId = relationFase.Substring(relationFase.IndexOf(":") + 1);
-                                                id = subId.Substring(0, subId.IndexOf("]"));
-
-
-                                                DataBase.Add(new DB()
+                                                if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
                                                 {
 
-                                                      Key = key,
-                                                      Value = value,
-                                                      Identity = Convert.ToDouble(id),
-                                                      Relation = relation
-
-                                                });
-
-                                                ID = Convert.ToDouble(id);
-                                                //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
-                                                //Get.Wait();
+                                                      //string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
+                                                      // string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
+                                                      string key, value, relation, id, row, relationFase, subId;
 
 
+                                                      row = reader.GetAttribute(0);
+
+                                                      /*
+                                                          this clear the line of the key to get at the end the key , value relation and id 
+                                                          is a step by fases and a kind of hard to read but it works                                       
+                                                      */
+                                                      key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
+                                                      value = row.Substring(row.IndexOf("]") + 1);
+                                                      relationFase = row.Substring(row.IndexOf(":") + 1);
+                                                      relation = relationFase.Substring(0, relationFase.IndexOf(":"));
+                                                      subId = relationFase.Substring(relationFase.IndexOf(":") + 1);
+                                                      id = subId.Substring(0, subId.IndexOf("]"));
+
+
+                                                      DataBase.Add(new DB()
+                                                      {
+
+                                                            Key = key,
+                                                            Value = value,
+                                                            Identity = Convert.ToDouble(id),
+                                                            Relation = relation
+
+                                                      });
+
+                                                      ID = Convert.ToDouble(id);
+                                                      //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
+                                                      //Get.Wait();
+
+
+                                                }
                                           }
+
                                     }
 
+
                               }
-
-
                         }
+                        return true; 
+                  }
+                  catch
+                  {
+                        return false; 
                   }
             }
 
@@ -408,68 +417,78 @@ namespace QuickTools
             /// Load the specified database
             /// </summary>
             /// <param name="db">Db.</param>
-            public void Load(object db)
+            public bool Load(object db)
             {
                   DBName = db.ToString();
                   DataBase = new List<DB>();
-
-                  using (XmlReader reader = XmlReader.Create(DBName))
+                  bool loaded = false;
+                  try
                   {
-
-
-                        while (reader.Read())
+                        using (XmlReader reader = XmlReader.Create(DBName))
                         {
 
 
-                              if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
+                              while (reader.Read())
                               {
-                                    if (reader.HasAttributes)
-                                    {
 
-                                          if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
+
+                                    if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
+                                    {
+                                          if (reader.HasAttributes)
                                           {
 
-                                                //string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
-                                                // string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
-                                                string key, value, relation, id, row, relationFase, subId;
-
-
-                                                row = reader.GetAttribute(0);
-
-                                                /*
-                                                    this clear the line of the key to get at the end the key , value relation and id 
-                                                    is a step by fases and a kind of hard to read but it works                                       
-                                                */
-                                                key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
-                                                value = row.Substring(row.IndexOf("]") + 1);
-                                                relationFase = row.Substring(row.IndexOf(":") + 1);
-                                                relation = relationFase.Substring(0, relationFase.IndexOf(":"));
-                                                subId = relationFase.Substring(relationFase.IndexOf(":") + 1);
-                                                id = subId.Substring(0, subId.IndexOf("]"));
-
-
-                                                DataBase.Add(new DB()
+                                                if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
                                                 {
 
-                                                      Key = key,
-                                                      Value = value,
-                                                      Identity = Convert.ToDouble(id),
-                                                      Relation = relation
-
-                                                });
-
-                                                ID = Convert.ToDouble(id);
-                                                //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
-                                                //Get.Wait();
+                                                      //string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
+                                                      // string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
+                                                      string key, value, relation, id, row, relationFase, subId;
 
 
+                                                      row = reader.GetAttribute(0);
+
+                                                      /*
+                                                          this clear the line of the key to get at the end the key , value relation and id 
+                                                          is a step by fases and a kind of hard to read but it works                                       
+                                                      */
+                                                      key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
+                                                      value = row.Substring(row.IndexOf("]") + 1);
+                                                      relationFase = row.Substring(row.IndexOf(":") + 1);
+                                                      relation = relationFase.Substring(0, relationFase.IndexOf(":"));
+                                                      subId = relationFase.Substring(relationFase.IndexOf(":") + 1);
+                                                      id = subId.Substring(0, subId.IndexOf("]"));
+
+
+                                                      DataBase.Add(new DB()
+                                                      {
+
+                                                            Key = key,
+                                                            Value = value,
+                                                            Identity = Convert.ToDouble(id),
+                                                            Relation = relation
+
+                                                      });
+
+                                                      ID = Convert.ToDouble(id);
+                                                      //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
+                                                      //Get.Wait();
+
+
+                                                }
                                           }
+
                                     }
+
 
                               }
 
 
                         }
+
+                        return true;
+                  }catch
+                  {
+                        return loaded;    
                   }
             }
 
@@ -479,12 +498,48 @@ namespace QuickTools
             /// <param name="dbName">Db name.</param>
             public void Create(string dbName)
             {
-                  /*
-                  if ()
+
+                        if(this.Load(dbName) == false)
                   {
+                        Writer.Write(dbName, "");
 
                   }
-                  */
+
+
+
+                  DBName = dbName;
+                  XmlWriterSettings settings = new XmlWriterSettings();
+                  settings.Indent = true;
+                  settings.IndentChars = ("    ");
+                  settings.CloseOutput = true;
+                  settings.OmitXmlDeclaration = true;
+
+                  //Get.Wait(dbName); 
+                  using (XmlWriter writer = XmlWriter.Create(dbName, settings))
+                  {
+                        writer.WriteStartElement("DATA");
+                        writer.WriteEndElement();
+                        writer.WriteEndDocument();
+
+                        writer.Flush();
+                  }
+            }
+
+
+            /// <summary>
+            /// Create the DB file.
+            /// </summary>
+            public void Create()
+            {
+                  string dbName = DBName;
+
+                  if (this.Load(dbName) == false)
+                  {
+                        Writer.Write(dbName, "");
+
+                  }
+
+
                   DBName = dbName;
                   XmlWriterSettings settings = new XmlWriterSettings();
                   settings.Indent = true;
