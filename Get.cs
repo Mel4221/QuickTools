@@ -14,13 +14,14 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using QuickTools.Colors;
+using System.Diagnostics;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools
 {
 
 
-
+ 
       ///////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////
       /////////////////*this is were the Class Get Starts *//////
@@ -37,18 +38,28 @@ namespace QuickTools
 
 
 
+      
+
 
             /// <summary>
-            /// Get the Porcent of the  specified current value from the  goal.
+            /// Get the porcenrage status of the provided current time and goal 
             /// </summary>
-            /// <returns>The porcent.</returns>
+            /// <returns>The status.</returns>
             /// <param name="current">Current.</param>
             /// <param name="goal">Goal.</param>
-            public static double Porcent(double current , double goal )
+            public static string Status(object current, object goal)
             {
-                  return Math.Round(( current / goal) * 100,1);
-            }
+                  string status = null;
 
+                  double c = Convert.ToDouble(current);
+                  double g = Convert.ToDouble(goal);
+
+                  double s = Math.Round(c / g, 2) * 100;
+
+
+                  status = $"{s}%";
+                  return status;
+            }
             /*
              Console.BufferHeight
              Console.BufferWidth                 

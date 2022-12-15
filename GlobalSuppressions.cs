@@ -11,4 +11,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Common Practices and Code Improvements", "RECS0060:Warns when a culture-aware 'IndexOf' call is used by default.", Justification = "<Pending>", Scope = "member", Target = "~M:QuickTools.QSettings.Load(System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Common Practices and Code Improvements", "RECS0060:Warns when a culture-aware 'IndexOf' call is used by default.", Justification = "<Pending>", Scope = "member", Target = "~M:QuickTools.MiniDB.Load")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Common Practices and Code Improvements", "RECS0060:Warns when a culture-aware 'IndexOf' call is used by default.", Justification = "<Pending>", Scope = "member", Target = "~M:QuickTools.MiniDB.Load(System.Object)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Potential Code Quality Issues", "RECS0018:Comparison of floating point numbers with equality operator", Justification = "<Pending>", Scope = "member", Target = "~M:QuickTools.MiniDB.Find(System.String)~System.Collections.Generic.List{QuickTools.MiniDB.DB}")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Compiler Warnings", "RECS0081:Validate Xml docs", Justification = "<Pending>", Scope = "member", Target = "~M:QuickTools.MiniDB.Dispose")]
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using QuickTools.Colors; 
@@ -9,26 +10,77 @@ namespace QuickTools
       /// </summary>
             public class Writer
             {
-                        /*
-                         * 12/07/2022 i added a new constructor around here                        
-                            Modified Date: 07/21/2022
-                            Editor : https://www.onlinegdb.com/fork/ss9o2_vdl
-                            So lets start by i hate documenting but i know that without it i would never be able
-                            to keep up with the changes but the type of IDE that im using online does not help at 
-                            all and by mistake i deleted information that i was not suposed to delete , so i had to 
-                            try again on a prevuse back up , so lets do this again 
-                            Writer class is an abtraction of StreamWriter and FileStream which are useful to quckly create a file 
-                            there are 2 ways of using CreateFile since you can just pass the name of the file and it will create it
-                            it also provides the option for you to pass  the data too , WriteFile also has an alert just in case if you would like
-                            to do not override data so it will comfirm  it with the end user
-                        */
+            /*
+             * 12/07/2022 i added a new constructor around here                        
+                Modified Date: 07/21/2022
+                Editor : https://www.onlinegdb.com/fork/ss9o2_vdl
+                So lets start by i hate documenting but i know that without it i would never be able
+                to keep up with the changes but the type of IDE that im using online does not help at 
+                all and by mistake i deleted information that i was not suposed to delete , so i had to 
+                try again on a prevuse back up , so lets do this again 
+                Writer class is an abtraction of StreamWriter and FileStream which are useful to quckly create a file 
+                there are 2 ways of using CreateFile since you can just pass the name of the file and it will create it
+                it also provides the option for you to pass  the data too , WriteFile also has an alert just in case if you would like
+                to do not override data so it will comfirm  it with the end user
+            */
 
-                  /// <summary>
-                  /// Writes the content passed into a file
-                  /// </summary>
-                  /// <param name="file">File.</param>
-                  /// <param name="data">Data.</param>
-                        public static void WriteFile(string file,object data)
+
+            private static StringBuilder text = new StringBuilder(); 
+            /// <summary>
+            /// Converts to string a byte array 
+            /// </summary>
+            /// <returns>The to string.</returns>
+            /// <param name="array">Array.</param>
+            public static string ConvertToString(byte[] array)
+            {
+                  for(int value = 0; value < array.Length; value++)
+                  {
+                        text.Append(array[value] + ",");
+                  }
+
+                  return text.ToString(); 
+            }
+
+
+            /// <summary>
+            /// Converts to byte array.
+            /// </summary>
+            /// <returns>The to byte array.</returns>
+            /// <param name="rowString">Row string.</param>
+            public static byte[] ConvertToByteArray(string rowString)
+            {
+                  string current = "";
+                  List<string> temp = new List<string>();
+
+                  for(int value = 0; value < rowString.Length; value++)
+                  {
+                        if(rowString[value] != ',')
+                        {
+                              current += rowString[value]; 
+
+                        }if(rowString[value] == ',')
+                        {
+                              temp.Add(current);
+                              current = ""; 
+                        }
+                  }
+                  byte[] array = new byte[temp.Count]; 
+
+                  for(int back = 0; back < temp.Count; back++)
+                  {
+                        array[back] = Convert.ToByte(temp[back]);
+                  }
+
+                  return array; 
+
+            }
+
+            /// <summary>
+            /// Writes the content passed into a file
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="data">Data.</param>
+            public static void WriteFile(string file,object data)
                         {
                             
                             // for testing porpuses: 
@@ -83,6 +135,11 @@ namespace QuickTools
                         }
                   }
             }
+
+
+
+
+
 
 
 

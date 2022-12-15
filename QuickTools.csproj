@@ -84,7 +84,10 @@
     <Compile Include="CacheHandeler.cs" />
     <Compile Include="CacheHandeler.Read&amp;Write.cs" />
     <Compile Include="QSettings.cs" />
-    <Compile Include="MiniDB.cs" />
+    <Compile Include="MiniDB_Methods.cs" />
+    <Compile Include="MiniDB_Fields.cs" />
+    <Compile Include="MiniDB_Constructors.cs" />
+    <Compile Include="Check.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

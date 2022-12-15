@@ -22,18 +22,27 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-using System;
+// THE SOFTWARE.using System;
+using System; 
+using System.Diagnostics;
 using System.IO;
-namespace QuickTools
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security;
+using System.Security.Permissions;
 
+
+namespace QuickTools
 {
       /// <summary>
-      /// Binary Class Allows you to Handle Binary Data
+      /// Binary.
       /// </summary>
       public partial class Binary
-
       {
+            /// <summary>
+            /// The current status.
+            /// </summary>
+            public static long CurrentStatus;
             /// <summary>
             /// Copies the binary file.
             /// </summary>
@@ -41,123 +50,73 @@ namespace QuickTools
             /// <param name="srcfilename">Srcfilename.</param>
             /// <param name="destfilename">Destfilename.</param>
             public static bool CopyBinaryFile(string srcfilename, string destfilename)
-
             {
-
-
-                  if (File.Exists(srcfilename) == false)
-
+                  if (!File.Exists(srcfilename))
                   {
-
                         Console.WriteLine("Could not find the Source file");
-
                         return false;
-
                   }
-
-
-
-                  Stream s1 = File.Open(srcfilename, FileMode.Open);
-
-                  Stream s2 = File.Open(destfilename, FileMode.Create);
-
-
-
-                  BinaryReader f1 = new BinaryReader(s1);
-
-                  BinaryWriter f2 = new BinaryWriter(s2);
-
-
-
+                  Stream input = File.Open(srcfilename, FileMode.Open);
+                  FileStream output = File.Open(destfilename, FileMode.Create);
+                  BinaryReader binaryReader = new BinaryReader(input);
+                  BinaryWriter binaryWriter = new BinaryWriter(output);
                   while (true)
-
                   {
-
-                        byte[] buf = new byte[10240];
-
-                        int sz = f1.Read(buf, 0, 10240);
-
-                        if (sz <= 0)
-
+                        byte[] buffer = new byte[10240];
+                        int num = binaryReader.Read(buffer, 0, 10240);
+                        if (num <= 0)
+                        {
                               break;
-
-                        f2.Write(buf, 0, sz);
-
-                        if (sz < 10240)
-
-                              break; // eof reached
-
+                        }
+                        binaryWriter.Write(buffer, 0, num);
+                        if (num < 10240)
+                        {
+                              break;
+                        }
                   }
-
-                  f1.Close();
-
-                  f2.Close();
-
+                  binaryReader.Close();
+                  binaryWriter.Close();
                   return true;
-
             }
 
-
-
-
-            public static long CurrentStatus = 0; 
-            public static bool CopyBinaryFile(string srcfilename, string destfilename,Action Status)
-
+            /// <summary>
+            /// Copies the binary file.
+            /// </summary>
+            /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
+            /// <param name="srcfilename">Srcfilename.</param>
+            /// <param name="destfilename">Destfilename.</param>
+            /// <param name="Status">Status.</param>
+            public static bool CopyBinaryFile(string srcfilename, string destfilename, Action Status)
             {
-
-
-
-                  if (File.Exists(srcfilename) == false)
-
+                  if (!File.Exists(srcfilename))
                   {
                         Console.WriteLine("Could not find the Source file");
                         return false;
                   }
-
-
-                  FileInfo file = new FileInfo(srcfilename);
-                   //FileSize = file.Length; 
-
-                  Stream s1 = File.Open(srcfilename, FileMode.Open);
-
-                  Stream s2 = File.Open(destfilename, FileMode.Create);
-
-                  BinaryReader f1 = new BinaryReader(s1);
-
-                  BinaryWriter f2 = new BinaryWriter(s2);
-
-
-
+                  new FileInfo(srcfilename);
+                  Stream input = File.Open(srcfilename, FileMode.Open);
+                  FileStream output = File.Open(destfilename, FileMode.Create);
+                  BinaryReader binaryReader = new BinaryReader(input);
+                  BinaryWriter binaryWriter = new BinaryWriter(output);
                   while (true)
-
                   {
-
-                        byte[] buf = new byte[10240];
-
-                        int sz = f1.Read(buf, 0, 10240);
-
-                        if (sz <= 0)
-
+                        byte[] buffer = new byte[10240];
+                        int num = binaryReader.Read(buffer, 0, 10240);
+                        if (num <= 0)
+                        {
                               break;
-
-                        f2.Write(buf, 0, sz);
-
-                        if (sz < 10240)
-
-                              break; // eof reached
+                        }
+                        binaryWriter.Write(buffer, 0, num);
+                        if (num < 10240)
+                        {
+                              break;
+                        }
                         Status();
-
                   }
-
-                  f1.Close();
-
-                  f2.Close();
-
+                  binaryReader.Close();
+                  binaryWriter.Close();
                   return true;
-
             }
-
-
             /// <summary>
             /// Copies the text file.
             /// </summary>
@@ -165,58 +124,31 @@ namespace QuickTools
             /// <param name="srcfilename">Srcfilename.</param>
             /// <param name="destfilename">Destfilename.</param>
             public static bool CopyTextFile(string srcfilename, string destfilename)
-
             {
-
-
-
-                  if (File.Exists(srcfilename) == false)
-
+                  if (!File.Exists(srcfilename))
                   {
-
                         Console.WriteLine("Could not find the Source file");
-
                         return false;
-
                   }
-
-
-
-                  StreamReader f1 = new StreamReader(srcfilename);
-
-                  StreamWriter f2 = new StreamWriter(destfilename);
-
-
-
+                  StreamReader streamReader = new StreamReader(srcfilename);
+                  StreamWriter streamWriter = new StreamWriter(destfilename);
                   while (true)
-
                   {
-
-                        char[] buf = new char[1024];
-
-                        int sz = f1.Read(buf, 0, 1024);
-
-                        if (sz <= 0)
-
+                        char[] buffer = new char[1024];
+                        int num = streamReader.Read(buffer, 0, 1024);
+                        if (num <= 0)
+                        {
                               break;
-
-                        f2.Write(buf, 0, sz);
-
-                        if (sz < 1024)
-
-                              break; // eof reached
-
+                        }
+                        streamWriter.Write(buffer, 0, num);
+                        if (num < 1024)
+                        {
+                              break;
+                        }
                   }
-
-                  f1.Close();
-
-                  f2.Close();
-
+                  streamReader.Close();
+                  streamWriter.Close();
                   return true;
-
             }
-
-
-
       }
 }
