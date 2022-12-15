@@ -69,6 +69,39 @@ namespace QuickTools
                   {
                         return $"Key: {Key} Value: {Value} Relation: {Relation} Identity: {Identity}";
                   }
+
+                  /// <summary>
+                  /// Tos the string.
+                  /// </summary>
+                  /// <returns>The string.</returns>
+                  /// <param name="type"> json or xml </param>
+                  public string ToString(string type)
+                  {
+                        string obj = null;
+
+                        switch(type)
+                        {
+                              case "json":
+                                    obj = $"[ \n 'ID': {Identity}, \n 'Key': {Key}, \n 'Value': {Value}, \n 'Relation': {Relation}\n]".Replace("'",'"'.ToString()).Replace("[","{").Replace("]","}");
+                                    break;
+
+                              case "xml":
+                                    obj = $"<?xml version='1.0' encoding='UTF - 8'?>\n" +
+                                          "<DATA> \n"+
+                                    	      $" <ID> {Identity} </ID> \n" +
+                                    		$" <Key> {Key} </Key> \n"+
+                                                $" <Value> {Value} </Value> \n" +
+                                                $" <Relation> {Relation} </Relation> \n" +
+                                          "</DATA>".Replace("'", '"'.ToString()); 
+                                    break;
+                              default:
+                                    obj = this.ToString();
+                                    break; 
+                        }
+
+
+                        return obj; 
+                  }
             }
 
 
