@@ -201,6 +201,25 @@ namespace QuickTools
                   return null;
             }
 
+
+            /// <summary>
+            /// Get the keys that match the given key 
+            /// </summary>
+            /// <returns>The keys.</returns>
+            /// <param name="key">Key.</param>
+            public List<DB> GetKeys(object key)
+            {
+                  List<DB> temp = new List<DB>();
+                  for (int x = 0; x < DataBase.Count; x++)
+                  {
+                        if ((DataBase[x].Key).Equals(key))
+                        {
+                              temp.Add(DataBase[x]); 
+                        }
+                  }
+                  return temp; 
+            }
+
             /// <summary>
             /// Removes the key 
             /// </summary>
@@ -210,6 +229,13 @@ namespace QuickTools
             {
                   this.Load();
                   bool removed = false;
+                  if (this.SelectWhereKey(keyName.ToString()).Count > 1)
+                  {
+                        return removed; 
+                  }
+
+
+
                   try
                   {
                         for (int value = 0; value < DataBase.Count; value++)
@@ -301,19 +327,21 @@ namespace QuickTools
                   return temp; 
             }
          
+                  
+
             /// <summary>
             /// Updates the key value.
             /// </summary>
             /// <returns><c>true</c>, if key value was updated, <c>false</c> otherwise.</returns>
-            /// <param name="Key">Key.</param>
+            /// <param name="id">Identifier.</param>
             /// <param name="newValue">New value.</param>
-            public bool UpdateKeyValue(object Key, object newValue)
+            public bool UpdateKeyValue(int id, object newValue)
             {
                   bool refreshed = false;
 
                   for (int value = 0; value < DataBase.Count; value++)
                   {
-                        if ((DataBase[value].Key).Equals(Key))
+                        if ((DataBase[value].Identity).Equals(id))
                         {
                               DataBase[value].Value = newValue.ToString();
 
@@ -332,7 +360,8 @@ namespace QuickTools
 
 
             /// <summary>
-            /// Updates the key with the object DB
+            /// Updates the key with the object DB IT WILL ONLY UPDATE THE PROPERTIES THAT ARE NOT NULL SO 
+            /// IF THE OBJECT PROPERTY HAS DEFINED ONLY THE VALUE TO BE CHANGED , THE VALUE WILL BE THE ONLY CHANGED          
             /// </summary>
             /// <returns><c>true</c>, if key was updated, <c>false</c> otherwise.</returns>
             /// <param name="keyName">Key name.</param>
@@ -608,6 +637,7 @@ namespace QuickTools
             }
 
 
+
             /// <summary>
             /// Create the specified Database if returns true it means it was created sucessfully
             /// if ir returns false is that there is already a db named like that 
@@ -697,6 +727,22 @@ namespace QuickTools
             }
 
             /// <summary>
+            /// Gets the related.
+            /// </summary>
+            /// <returns>The related.</returns>
+            /// <param name="dbName">Db name.</param>
+            /// <param name="relation">Relation.</param>
+            public virtual List<DB> GetRelated(string dbName ,string relation)
+            {
+                  using (MiniDB db = new MiniDB(dbName))
+                  {
+                        List<DB> listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
+
+                        return listOfRelated;
+                  }
+            }
+
+            /// <summary>
             /// Matchs the related value with the objects  that are in the database 
             /// </summary>
             /// <returns>The value.</returns>
@@ -734,21 +780,103 @@ namespace QuickTools
                   }
                   return selected; 
             }
+
             /// <summary>
-            /// Selects the key that is in another db and return it 
+            /// Has the specified dbName and posibleValue.
             /// </summary>
-            /// <returns>The key.</returns>
+            /// <returns>The has.</returns>
             /// <param name="dbName">Db name.</param>
-            /// <param name="key">Key.</param>
-            public string SelectKey(string dbName ,string key)
+            /// <param name="posibleValue">Posible value.</param>
+            public bool Has(string dbName , string  posibleValue)
             {
-                  string selected = null;
+                  bool hasIt = false; 
                   using (MiniDB db = new MiniDB(dbName))
                   {
-                        db.Load();
-                        selected = db.GetKey(key); 
+                        db.Load(dbName);
+                        for (int x = 0; x < DataBase.Count; x++)
+                        {
+                              if (db.DataBase[x].Value == posibleValue)
+                              {
+                                    hasIt = true;
+                                    return hasIt; 
+                              }
+                        }
                   }
-                  return selected; 
+                  return hasIt; 
+            }
+
+            /// <summary>
+            /// Has the specified posibleValue.
+            /// </summary>
+            /// <returns>The has.</returns>
+            /// <param name="posibleValue">Posible value.</param>
+            public bool Has(string posibleValue)
+            {
+                  bool hasIt = false;
+                  using (MiniDB db = new MiniDB(DBName))
+                  {
+                        db.Load();
+                        for (int x = 0; x < DataBase.Count; x++)
+                        {
+                              if (db.DataBase[x].Value == posibleValue)
+                              {
+                                    hasIt = true;
+                                    return hasIt;
+                              }
+                        }
+                  }
+                  return hasIt;
+            }
+
+
+
+            /// <summary>
+            /// Checks if thereis a relation between the value and the given relation
+            /// Ises the related.
+            /// </summary>
+            /// <returns><c>true</c>, if related was ised, <c>false</c> otherwise.</returns>
+            /// <param name="dbName">Db name.</param>
+            /// <param name="value">Value.</param>
+            /// <param name="relation">Relation.</param>
+            public bool IsRelated(string dbName, string value, string relation)
+            {
+                  bool hasIt = false;
+                  using (MiniDB db = new MiniDB(dbName))
+                  {
+                        db.Load(dbName);
+                        for (int x = 0; x < DataBase.Count; x++)
+                        {
+                              if ((db.DataBase[x].Relation == relation ) && (value == db.DataBase[x].Value))
+                              {
+                                    hasIt = true;
+                                    return hasIt;
+                              }
+                        }
+                  }
+                  return hasIt;
+            }
+            /// <summary>
+            /// Ises the related.
+            /// </summary>
+            /// <returns><c>true</c>, if related was ised, <c>false</c> otherwise.</returns>
+            /// <param name="value">Value.</param>
+            /// <param name="relation">Relation.</param>
+            public bool IsRelated(string value, string relation)
+            {
+                  bool hasIt = false;
+                  using (MiniDB db = new MiniDB(DBName))
+                  {
+                        db.Load();
+                        for (int x = 0; x < DataBase.Count; x++)
+                        {
+                              if ((db.DataBase[x].Relation == relation) && (value == db.DataBase[x].Value))
+                              {
+                                    hasIt = true;
+                                    return hasIt;
+                              }
+                        }
+                  }
+                  return hasIt;
             }
 
             /// <summary>
@@ -774,6 +902,72 @@ namespace QuickTools
           
             }
 
+
+        
+
+            /// <summary>
+            /// Selects the where key.
+            /// </summary>
+            /// <returns>The where key.</returns>
+            /// <param name="value">Value.</param>
+            public virtual List<DB> SelectWhereKey(string value)
+            {
+                  using (MiniDB db = new MiniDB(this.DBName))
+                  {
+                               return db.DataBase.Where(a => a.Key == value).ToList();
+                  }
+                 
+            }
+
+            /// <summary>
+            /// Selects the where value.
+            /// </summary>
+            /// <returns><c>true</c>, if where value was selected, <c>false</c> otherwise.</returns>
+            /// <param name="dbName">Db name.</param>
+            /// <param name="value">Value.</param>
+            public virtual bool SelectWhereValue(string dbName , string value)
+            {
+                  bool val = false; 
+                  using (MiniDB db = new MiniDB(dbName))
+                  {
+                        var result = db.DataBase.Where(a => a.Value == value).ToList(); 
+
+                        if ((result != null) && (result[0].Value == value))
+                        {
+                              val = true;  
+                        }
+                  }
+                  return val;
+            }
+            /// <summary>
+            /// Selects all by value.
+            /// </summary>
+            /// <returns>The all by value.</returns>
+            /// <param name="value">Value.</param>
+            public virtual List<DB> SelectAllByValue(string value)
+            {
+
+                  using (MiniDB db = new MiniDB(this.DBName))
+                  {
+                        return db.DataBase.Where(a => a.Value == value).ToList(); 
+                  }
+
+            }
+            /// <summary>
+            /// Selects all by value.
+            /// </summary>
+            /// <returns>The all by value.</returns>
+            /// <param name="dbName">Db name.</param>
+            /// <param name="value">Value.</param>
+            public virtual List<DB> SelectAllByValue(string dbName, string value)
+            {
+
+                  using (MiniDB db = new MiniDB(dbName))
+                  {
+                        return db.DataBase.Where(a => a.Value == value).ToList();
+                  }
+
+            }
             /// <summary>
             /// Selects the by relation.
             /// </summary>
@@ -786,12 +980,8 @@ namespace QuickTools
 
                   using (MiniDB db = new MiniDB(dbName))
                   {
-                        // Get.Wait(dbName); 
-                        // Get.Wait(db.Load(dbName));
-                        db.Load(); 
                         listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
                   }
-
                   return listOfRelated;
             }
 

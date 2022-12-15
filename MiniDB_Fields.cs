@@ -67,9 +67,27 @@ namespace QuickTools
                   /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.</returns>
                   public override string ToString()
                   {
-                        return $"Key: {Key} Value: {Value} Relation: {Relation} Identity: {Identity}";
+                        return $"Identity: {Identity} Key: {Key} Value: {Value} Relation: {Relation} ";
                   }
 
+
+                  /// <summary>
+                  /// This will convert the object to an array
+                  /// </summary>
+                  /// <returns>Identity[0] Key[1] Value[2] Relation[3] </returns>
+                  public string[] ToStringArray()
+                  {
+                        string[] array = new string[4];
+
+                        array[0] = Identity.ToString();
+                        array[1] = Key;
+                        array[2] = Value;
+                        array[3] = Relation; 
+
+
+
+                        return array; 
+                  }
                   /// <summary>
                   /// Tos the string.
                   /// </summary>

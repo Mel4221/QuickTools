@@ -709,18 +709,37 @@ namespace QuickTools
             /// it will save the char if is changed
             /// </summary>
             public static string InputChar = ">";
-            ///<summary>
-            /// This Method Get the input from the keyboard
-            /// and it returns an object and is an implementation of
-            /// Console.ReadLine();
-            /// Get.LabelSide()
-            /// int.TryParse();
-            /// all together 
-            /// </summary>           
-            /// <returns> Object input either number or text </returns>
-            public static object Input()
+
+
+
+
+              
+              /// <summary>
+              /// Input type.
+              /// </summary>
+             public class InputType
             {
-                                   
+                   /// <summary>
+                   /// Gets or sets the text.
+                   /// </summary>
+                   /// <value>The text.</value>
+                  public string Text { get; set;}
+                  /// <summary>
+                  /// Gets or sets the number.
+                  /// </summary>
+                  /// <value>The number.</value>
+                  public int Number { get; set; }                        
+            }
+
+
+            /// <summary>
+            /// This Method Get the input from the keyboard
+            /// and it returns an object and is an implementation 
+            /// </summary>
+            /// <returns>The input.</returns>
+            public static InputType Input()
+            {
+
                   Get.LabelSide(InputChar);
                   Get.Reset();                 
                   Console.Write(" ");
@@ -734,47 +753,67 @@ namespace QuickTools
                   {
                         Number = number;
                         Get.input = number;
-                        return number;
+
+                        return new InputType()
+                        {
+                              Number = number,
+                              Text = number.ToString()                             
+                        }; 
                   }
                   else
                   {
                         Get.input = inputValue;
                         Get.Text = inputValue;
-                        return inputValue;
+                        return new InputType()
+                        {
+                              Text = inputValue
+                        };
                   }
             }
 
 
-     
-            ///<summary>
+
+
+
+            /// <summary>
             /// This Method does the same as Input() without any 
             /// arguments but with the only diference that the char
             /// on the side at the bigging could be edited 
-            /// like Get.Input("Write Your Name");
+            /// like Get.Input("Write Your Name");.
             /// </summary>
-            /// <returns> object Input either text or number</returns>
-            public static object Input(string display)
+            /// <returns>The input.</returns>
+            /// <param name="display">Display.</param>
+            public static InputType Input(string display)
             {
                   Get.Write("");
                   Get.LabelSide(display);
                   Get.Reset();                  
                   Console.Write(" ");
                   bool isnumber;
-
                   string inputValue = Console.ReadLine();
                   int number;
+
                   isnumber = int.TryParse(inputValue, out number);
+
                   if (isnumber)
                   {
                         Number = number;
                         Get.input = number;
-                        return number;
+
+                        return new InputType()
+                        {
+                              Number = number,
+                              Text = number.ToString()
+                        };
                   }
                   else
                   {
                         Get.input = inputValue;
                         Get.Text = inputValue;
-                        return inputValue;
+                        return new InputType()
+                        {
+                              Text = inputValue
+                        };
                   }
             }
                        /// <summary>
