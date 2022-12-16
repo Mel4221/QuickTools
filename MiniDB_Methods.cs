@@ -94,6 +94,59 @@ namespace QuickTools
                   return keyAdded;
 
             }
+
+
+            /// <summary>
+            /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
+            /// below i provide the benefits from using  this method 
+            /// Minutes: 2 Seconds: 28 Milliseconds: 354
+            /// Minutes: 3 Seconds: 53 Milliseconds: 761
+            /// Minutes: 5 Seconds: 34 Milliseconds: 55
+            /// with no repeated initialization
+            /// Minutes: 6 Seconds: 47 Milliseconds: 990
+            /// with repatead inizialation
+            /// </summary>
+            /// <returns><c>true</c>, if key was added, <c>false</c> otherwise.</returns>
+            /// <param name="key">Key.</param>
+            /// <param name="value">Value.</param>
+            /// <param name="relation">Relation.</param>
+            /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
+            public bool AddKey(string key, string value,string relation,bool autoLoad)
+            {
+                  bool keyAdded = false;
+
+
+                  if (autoLoad == true)
+                  {
+                        this.Load();
+                  }
+                  if ((AllowRepeatedKeys == false) && (relation == "NULL") &&  (ID  <= 0))
+                  {
+                        throw new Exception("RelationOrType is required or the AllowRepeatedKeys is Set to False or ID is not provided or set to 0");
+                  }
+                  if(Init == false)
+                  {
+                        Document = new XmlDocument();
+                        Document.Load(DBName);
+                        Init = true; 
+                  }
+                        ID++;
+                        XmlNode root = Document.FirstChild;
+                        XmlElement element = Document.CreateElement(KeysName);
+                        //key:relationship:hash
+                        element.SetAttribute("Value", $"[{key}:{relation}:{ID}]{value}");
+                        root.AppendChild(element);
+                        Document.Save(DBName);
+            
+
+                  keyAdded = true;
+                  if(autoLoad == true)
+                  {
+                        this.Load();
+                  }
+                  return keyAdded;
+
+            }
             /// <summary>
             /// Adds the key to the database 
             /// </summary>
@@ -201,9 +254,9 @@ namespace QuickTools
                         }
                         return new MiniDB.DB(); 
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n"+ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new MiniDB.DB();
                   }
             }
@@ -230,9 +283,9 @@ namespace QuickTools
                         }
                         return temp;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -343,9 +396,9 @@ namespace QuickTools
 
                         return temp;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -786,6 +839,95 @@ namespace QuickTools
             }
 
             /// <summary>
+            /// Removes all by value.
+            /// </summary>
+            /// <param name="value">Value.</param>
+            public void RemoveAllByValue(string value)
+            {
+                  this.Load();
+                  List<DB> temp = new List<DB>();
+                  this.Load();
+                  for (int x = 0; x < this.DataBase.Count; x++)
+                  {
+                        if (this.DataBase[x].Value != value)
+                        {
+                              temp.Add(DataBase[x]);
+                        }
+                        //Get.Red(DataBase[x].Relation); 
+                        Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+                  }
+                  this.DataBase.Clear();
+                  this.DataBase = temp;
+                  RefreshDB();
+
+            }
+            /// <summary>
+            /// Removes all by key.
+            /// </summary>
+            /// <param name="key">Key.</param>
+            public void RemoveAllByKey(string key)
+            {
+                  List<DB> temp = new List<DB>();
+                  this.Load();
+                  for (int x = 0; x < this.DataBase.Count; x++)
+                  {
+                        if (this.DataBase[x].Key != key)
+                        {
+                              temp.Add(DataBase[x]);
+                        }
+                        //Get.Red(DataBase[x].Relation); 
+                     //   Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+                  }
+                  this.DataBase.Clear();
+                  this.DataBase = temp;
+
+                  RefreshDB();
+            }
+            /// <summary>
+            /// Removes all by relation.
+            /// </summary>
+            /// <param name="relation">Relation.</param>
+            public void RemoveAllByRelation(string relation)
+            {
+                  List<DB> temp = new List<DB>(); 
+                  this.Load();
+                  for (int x = 0; x < this.DataBase.Count; x++)
+                  {
+                        if (this.DataBase[x].Relation != relation)
+                        {
+                              temp.Add(DataBase[x]); 
+                        }
+                        //Get.Red(DataBase[x].Relation); 
+                      //  Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+                  }
+                  this.DataBase.Clear();
+                  this.DataBase = temp; 
+                  RefreshDB();
+            }
+
+            /// <summary>
+            /// Removes  all by identifier.
+            /// </summary>
+            /// <param name="id">Identifier.</param>
+            public void RemoveAllbyId(int id)
+            {
+                  this.Load();
+                  List<DB> temp = new List<DB>();
+                  this.Load();
+                  for (int x = 0; x < this.DataBase.Count; x++)
+                  {
+                        if (this.DataBase[x].Identity != id)
+                        {
+                              temp.Add(DataBase[x]);
+                        }
+                        //Get.Red(DataBase[x].Relation); 
+                        Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+                  }
+                  this.DataBase.Clear();
+                  this.DataBase = temp;
+                  RefreshDB();
+            }
+            /// <summary>
             /// Gets the related objects that are in the database 
             /// </summary>
             /// <returns>The related.</returns>
@@ -798,10 +940,10 @@ namespace QuickTools
 
                         return listOfRelated;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
-                        return null;
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                        return new List<DB>();
                   }
             }
 
@@ -822,9 +964,9 @@ namespace QuickTools
                               return listOfRelated;
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -842,9 +984,9 @@ namespace QuickTools
 
                         return listOfRelated;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return null;
                   }
             }
@@ -997,9 +1139,9 @@ namespace QuickTools
                               // selected = db.GetKey(key);
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
 
@@ -1026,9 +1168,9 @@ namespace QuickTools
                               // selected = db.GetKey(key);
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
 
@@ -1051,9 +1193,9 @@ namespace QuickTools
                               return db.DataBase.Where(a => a.Key == value.ToString()).ToList();
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -1103,9 +1245,9 @@ namespace QuickTools
                         }
                         return dbValue = new DB(); 
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new DB();
                   }
             }
@@ -1123,9 +1265,9 @@ namespace QuickTools
                               return db.DataBase.Where(a => a.Value == value).ToList();
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -1145,9 +1287,9 @@ namespace QuickTools
                               return db.DataBase.Where(a => a.Value == value).ToList();
                         }
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
 
@@ -1170,9 +1312,9 @@ namespace QuickTools
                         }
                         return listOfRelated;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }
@@ -1194,9 +1336,9 @@ namespace QuickTools
                         }
                         return listOfRelated;
                   }
-                  catch (Exception ex)
+                  catch 
                   {
-                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                         return new List<DB>();
                   }
             }

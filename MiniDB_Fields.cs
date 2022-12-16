@@ -60,7 +60,7 @@ namespace QuickTools
                   /// </summary>
                   /// <value>The identity.</value>
                   public int Identity { get; set; }
-
+                  
                   /// <summary>
                   /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.
                   /// </summary>
@@ -157,8 +157,9 @@ namespace QuickTools
             /// <value><c>true</c> if allow repeated keys; otherwise, <c>false</c>.</value>
             public bool AllowRepeatedKeys { get; set; }
 
+
             /// <summary>
-            /// Gets or sets the path for the DB
+            /// Gets or sets the path.
             /// </summary>
             /// <value>The path.</value>
             public string Path { get; set;  }
