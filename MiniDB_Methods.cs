@@ -190,15 +190,22 @@ namespace QuickTools
             /// <param name="key">Key.</param>
             public DB GetKeyObject(object key)
             {
-                  for (int x = 0; x < DataBase.Count; x++)
+                  try
                   {
-                        if ((DataBase[x].Key).Equals(key))
+                        for (int x = 0; x < DataBase.Count; x++)
                         {
-                              return DataBase[x];
+                              if ((DataBase[x].Key).Equals(key))
+                              {
+                                    return DataBase[x];
+                              }
                         }
+                        return new MiniDB.DB(); 
                   }
-
-                  return null;
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n"+ex);
+                        return new MiniDB.DB();
+                  }
             }
 
 
@@ -209,15 +216,25 @@ namespace QuickTools
             /// <param name="key">Key.</param>
             public List<DB> GetKeys(object key)
             {
-                  List<DB> temp = new List<DB>();
-                  for (int x = 0; x < DataBase.Count; x++)
+                  try
                   {
-                        if ((DataBase[x].Key).Equals(key))
+
+
+                        List<DB> temp = new List<DB>();
+                        for (int x = 0; x < DataBase.Count; x++)
                         {
-                              temp.Add(DataBase[x]); 
+                              if ((DataBase[x].Key).Equals(key))
+                              {
+                                    temp.Add(DataBase[x]);
+                              }
                         }
+                        return temp;
                   }
-                  return temp; 
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
             }
 
             /// <summary>
@@ -260,33 +277,31 @@ namespace QuickTools
 
             }
 
+         
+
             /// <summary>
-            /// Removes the key with the index provideds
+            /// Removes the key.
             /// </summary>
             /// <returns><c>true</c>, if key was removed, <c>false</c> otherwise.</returns>
             /// <param name="KeyIndex">Key index.</param>
-            public bool RemoveKey( int KeyIndex)
+               public bool RemoveKey( int KeyIndex)
             {
                   this.Load();
                   bool removed = false;
-                  try
+                  //int KeyIndex = 1013;
+                  for (int x = 0; x <DataBase.Count; x++)
                   {
-                        if (DataBase.Contains(DataBase[KeyIndex]))
+                        if (DataBase[x].Identity == KeyIndex)
                         {
-                              DataBase.Remove(DataBase[KeyIndex]);
-                              this.RefreshDB(); 
-                              removed = true;
 
+                              DataBase.Remove(DataBase[x]);
+                              RefreshDB();
+                              //  removed = true;
+                              //return removed;
                         }
-                        return removed;
-                  }
-                  catch
-                  {
-                        return removed;
                   }
 
-
-
+                  return removed; 
             }
 
             /// <summary>
@@ -296,35 +311,43 @@ namespace QuickTools
             /// <param name="cratiria">Cratiria.</param>
             public List<DB> Find(string cratiria)
             {
-                  List<DB> temp = new List<DB>();
-
-                  for (var x = 0; x < DataBase.Count; x++)
+                  try
                   {
+                        List<DB> temp = new List<DB>();
 
-                        if (DataBase[x].Value == cratiria)
+                        for (var x = 0; x < DataBase.Count; x++)
                         {
-                              temp.Add(DataBase[x]);
-                        }
-                        if (DataBase[x].Key == cratiria)
-                        {
-                              temp.Add(DataBase[x]);
-                        }
-                        if (DataBase[x].Relation == cratiria)
-                        {
-                              temp.Add(DataBase[x]);
-                        }
-                        if (Get.IsNumber(cratiria))
-                        {
-                              if(DataBase[x].Identity == Convert.ToDouble(Get.Number))
+
+                              if (DataBase[x].Value == cratiria)
                               {
                                     temp.Add(DataBase[x]);
+                              }
+                              if (DataBase[x].Key == cratiria)
+                              {
+                                    temp.Add(DataBase[x]);
+                              }
+                              if (DataBase[x].Relation == cratiria)
+                              {
+                                    temp.Add(DataBase[x]);
+                              }
+                              if (Get.IsNumber(cratiria))
+                              {
+                                    if (DataBase[x].Identity == Convert.ToDouble(Get.Number))
+                                    {
+                                          temp.Add(DataBase[x]);
 
+                                    }
                               }
                         }
+
+
+                        return temp;
                   }
-
-
-                  return temp; 
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
             }
          
                   
@@ -406,6 +429,54 @@ namespace QuickTools
                   return refreshed;
 
             }
+
+            /// <summary>
+            /// Updates the key.
+            /// </summary>
+            /// <returns><c>true</c>, if key was updated, <c>false</c> otherwise.</returns>
+            /// <param name="keyId">Key identifier.</param>
+            /// <param name="key">Key.</param>
+            public bool UpdateKey(int keyId, DB key)
+            {
+
+
+                  bool refreshed = false;
+                  for (int x = 0; x < DataBase.Count; x++)
+                  {
+                        if ((DataBase[x].Identity).Equals(keyId))
+                        {
+                              if (key.Value != null)
+                              {
+                                    DataBase[x].Value = key.Value;
+                                    refreshed = true;
+                              }
+                              if (key.Key != null)
+                              {
+                                    DataBase[x].Key = key.Key;
+                                    refreshed = true;
+                              }
+                              if (key.Relation != null)
+                              {
+                                    DataBase[x].Relation = key.Relation;
+                                    refreshed = true;
+                              }
+                              if (key.Identity > 0)
+                              {
+                                    DataBase[x].Identity = key.Identity;
+                                    refreshed = true;
+                              }
+
+                              this.RefreshDB();
+                              return refreshed;
+                        }
+                  }
+
+
+
+                  return refreshed;
+
+            }
+
             /// <summary>
             /// Refreshs the DataBase.
             /// </summary>
@@ -490,12 +561,12 @@ namespace QuickTools
 
                                                             Key = key,
                                                             Value = value,
-                                                            Identity = Convert.ToDouble(id),
+                                                            Identity = int.Parse(id),
                                                             Relation = relation
 
                                                       });
 
-                                                      ID = Convert.ToDouble(id);
+                                                      ID = int.Parse(id);
                                                       //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
                                                       //Get.Wait();
 
@@ -568,12 +639,12 @@ namespace QuickTools
 
                                                             Key = key,
                                                             Value = value,
-                                                            Identity = Convert.ToDouble(id),
+                                                            Identity = Convert.ToInt32(id),
                                                             Relation = relation
 
                                                       });
 
-                                                      ID = Convert.ToDouble(id);
+                                                      ID = Convert.ToInt32(id);
                                                       //Get.Blue($"Key: {key} Value: {value} ID: {id} Relation: {relation}");
                                                       //Get.Wait();
 
@@ -721,9 +792,17 @@ namespace QuickTools
             /// <param name="relation">Relation.</param>
             public virtual List<DB> GetRelated(string relation)
             {
-                  List<DB> listOfRelated = this.DataBase.Where(a => a.Relation == relation ).ToList();
+                  try
+                  {
+                        List<DB> listOfRelated = this.DataBase.Where(a => a.Relation == relation).ToList();
 
-                  return listOfRelated; 
+                        return listOfRelated;
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return null;
+                  }
             }
 
             /// <summary>
@@ -734,11 +813,19 @@ namespace QuickTools
             /// <param name="relation">Relation.</param>
             public virtual List<DB> GetRelated(string dbName ,string relation)
             {
-                  using (MiniDB db = new MiniDB(dbName))
+                  try
                   {
-                        List<DB> listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
+                        using (MiniDB db = new MiniDB(dbName))
+                        {
+                              List<DB> listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
 
-                        return listOfRelated;
+                              return listOfRelated;
+                        }
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
                   }
             }
 
@@ -749,9 +836,17 @@ namespace QuickTools
             /// <param name="contains">Contains.</param>
             public virtual List<DB> MatchValue(string contains)
             {
-                  List<DB> listOfRelated = this.DataBase.Where(a => a.Value.Contains(contains)).ToList();
+                  try
+                  {
+                        List<DB> listOfRelated = this.DataBase.Where(a => a.Value.Contains(contains)).ToList();
 
-                  return listOfRelated;
+                        return listOfRelated;
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return null;
+                  }
             }
 
 
@@ -887,36 +982,80 @@ namespace QuickTools
             /// <param name="contains">Contains.</param>
             public virtual List<DB> SelectByValue(string dbName ,string contains)
             {
-                  List<DB> listOfRelated; 
-                  using (MiniDB db = new MiniDB(dbName))
+                  try
                   {
-                        //Get.Wait(dbName); 
-                        //Get.Wait(db.Load());
-                        db.Load();
-                        listOfRelated = db.DataBase.Where(a => a.Value.Contains(contains)).ToList();
+                        List<DB> listOfRelated;
+                        using (MiniDB db = new MiniDB(dbName))
+                        {
+                              //Get.Wait(dbName); 
+                              //Get.Wait(db.Load());
+                              db.Load();
+                              listOfRelated = db.DataBase.Where(a => a.Value.Contains(contains)).ToList();
 
-                        //Get.Wait(listOfRelated.Count); 
-                        return listOfRelated;
-                        // selected = db.GetKey(key);
+                              //Get.Wait(listOfRelated.Count); 
+                              return listOfRelated;
+                              // selected = db.GetKey(key);
+                        }
                   }
-          
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
+
+            }
+            /// <summary>
+            /// Selects the by value.
+            /// </summary>
+            /// <returns>The by value.</returns>
+            /// <param name="contains">Contains.</param>
+            public virtual List<DB> SelectByValue(string contains)
+            {
+                  try
+                  {
+                        List<DB> listOfRelated;
+                        using (MiniDB db = new MiniDB(this.DBName))
+                        {
+                              //Get.Wait(dbName); 
+                              //Get.Wait(db.Load());
+                              db.Load();
+                              listOfRelated = db.DataBase.Where(a => a.Value.Contains(contains)).ToList();
+
+                              //Get.Wait(listOfRelated.Count); 
+                              return listOfRelated;
+                              // selected = db.GetKey(key);
+                        }
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
+
             }
 
 
-        
+
 
             /// <summary>
             /// Selects the where key.
             /// </summary>
             /// <returns>The where key.</returns>
             /// <param name="value">Value.</param>
-            public virtual List<DB> SelectWhereKey(string value)
+            public virtual List<DB> SelectWhereKey(object value)
             {
-                  using (MiniDB db = new MiniDB(this.DBName))
+                  try
                   {
-                               return db.DataBase.Where(a => a.Key == value).ToList();
+                        using (MiniDB db = new MiniDB(this.DBName))
+                        {
+                              return db.DataBase.Where(a => a.Key == value.ToString()).ToList();
+                        }
                   }
-                 
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
             }
 
             /// <summary>
@@ -939,6 +1078,37 @@ namespace QuickTools
                   }
                   return val;
             }
+
+
+            /// <summary>
+            /// Selects the where value.
+            /// </summary>
+            /// <returns>The where value.</returns>
+            /// <param name="value">Value.</param>
+            public virtual DB SelectWhereValue(string value)
+            {
+                  DB dbValue;
+                  try
+                  {
+                       
+                        using (MiniDB db = new MiniDB(this.DBName))
+                        {
+                              var result = db.DataBase.Where(a => a.Value == value).ToList();
+
+                              if ((result != null) && (result[0].Value == value))
+                              {
+                                    dbValue = result[0];
+                                    return dbValue;
+                              }
+                        }
+                        return dbValue = new DB(); 
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new DB();
+                  }
+            }
             /// <summary>
             /// Selects all by value.
             /// </summary>
@@ -946,12 +1116,18 @@ namespace QuickTools
             /// <param name="value">Value.</param>
             public virtual List<DB> SelectAllByValue(string value)
             {
-
-                  using (MiniDB db = new MiniDB(this.DBName))
+                  try
                   {
-                        return db.DataBase.Where(a => a.Value == value).ToList(); 
+                        using (MiniDB db = new MiniDB(this.DBName))
+                        {
+                              return db.DataBase.Where(a => a.Value == value).ToList();
+                        }
                   }
-
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
             }
             /// <summary>
             /// Selects all by value.
@@ -961,10 +1137,18 @@ namespace QuickTools
             /// <param name="value">Value.</param>
             public virtual List<DB> SelectAllByValue(string dbName, string value)
             {
-
-                  using (MiniDB db = new MiniDB(dbName))
+                  try
                   {
-                        return db.DataBase.Where(a => a.Value == value).ToList();
+
+                        using (MiniDB db = new MiniDB(dbName))
+                        {
+                              return db.DataBase.Where(a => a.Value == value).ToList();
+                        }
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
                   }
 
             }
@@ -976,13 +1160,45 @@ namespace QuickTools
             /// <param name="relation">Relation.</param>
             public virtual List<DB> SelectByRelation(string dbName, string relation)
             {
-                  List<DB> listOfRelated;
-
-                  using (MiniDB db = new MiniDB(dbName))
+                  try
                   {
-                        listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
+                        List<DB> listOfRelated;
+
+                        using (MiniDB db = new MiniDB(dbName))
+                        {
+                              listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
+                        }
+                        return listOfRelated;
                   }
-                  return listOfRelated;
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
+            }
+
+            /// <summary>
+            /// Selects the by relation.
+            /// </summary>
+            /// <returns>The by relation.</returns>
+            /// <param name="relation">Relation.</param>
+            public virtual List<DB> SelectByRelation(object relation)
+            {
+                  try
+                  {
+                        List<DB> listOfRelated;
+
+                        using (MiniDB db = new MiniDB(this.DBName))
+                        {
+                              listOfRelated = db.DataBase.Where(a => a.Relation == relation.ToString()).ToList();
+                        }
+                        return listOfRelated;
+                  }
+                  catch (Exception ex)
+                  {
+                        Get.Yellow($"This has been an Exception that was cosed by an object being NULL or more likely due to the object was not founded so it will not be able to return nothing but an exception  the result of this will end up being null \n" + ex);
+                        return new List<DB>();
+                  }
             }
 
 

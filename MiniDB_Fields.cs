@@ -59,7 +59,7 @@ namespace QuickTools
                   /// Gets or sets the identity.
                   /// </summary>
                   /// <value>The identity.</value>
-                  public double Identity { get; set; }
+                  public int Identity { get; set; }
 
                   /// <summary>
                   /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.
@@ -169,7 +169,7 @@ namespace QuickTools
             /// Gets or sets the identifier.
             /// </summary>
             /// <value>The identifier.</value>
-            public double ID { get; set; }
+            public int ID { get; set; }
             XmlDocument Document;
 
             /// <summary>

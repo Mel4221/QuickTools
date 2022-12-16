@@ -1219,7 +1219,7 @@ namespace QuickTools
             /// <summary>
             /// This is just used when you need to see if some logic is working as spected
             /// so each ok number provide a different color and each of them are from 0 to 4 
-            /// and the colors available are (Green, Yellow , Blue ,  Red , Cyan )
+            /// and the colors available are (Green 0, Yellow 1, Blue 2,  Red 3, Cyan 4)
             /// </summary>
             /// <param name="colorNumber">Color number.</param>
             public static void Ok(int colorNumber)

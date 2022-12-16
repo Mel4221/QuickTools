@@ -27,7 +27,7 @@ namespace QuickTools
             /// Gets or sets the date of birth.
             /// </summary>
             /// <value>The dob.</value>
-			public     string Dob { get; set; }
+			public string Dob { get; set; }
             /// <summary>
             /// Gets or sets the phone.
             /// </summary>
@@ -72,22 +72,39 @@ namespace QuickTools
 				this.Phone = phone;
 				this.Email = email;
 			}
-                  /*
-                        This used to print the data but this is not relevant
-                  ______
-			private static void Data()
-			{
-				Color.Yellow();
-				// title box 
-				Get.Box(" [ " + "Name" + " ] " + " [ " + "Last Name" + " ] " + " [ " + "Password" + " ] " + " [ " + "DOB" + " ] " + " [ " + "Phone" + " ] " + " [ " + "Email" + " ] ");
-				Get.Box(" [ " + Name + " ] " + " [ " + LatName + " ] " + " [ " + Password + " ] " + " [ " + Dob + " ] " + " [ " + Phone + " ] " + " [ " + Email + " ] ");
-				Get.Wait();
-			}
-			*/
+
+
             /// <summary>
-            /// Not Implemented
+            /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.User"/>.
             /// </summary>
-            public  User()
+            /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.User"/>.</returns>
+            public override string ToString()
+            {
+                  return $"NAME: {this.Name} LASTNAME: {this.LatName} PASSWORD: {this.Password} DOB: {this.Dob} PHONE: {this.Phone} EMAIL: {this.Email}";
+            }
+            /// <summary>
+            /// Tos the string.
+            /// </summary>
+            /// <returns>The string.</returns>
+            /// <param name="type">Type.</param>
+            public string ToString(string type)
+            {     
+                  switch(type)
+                  {
+                        case "json":
+                              return $"[\n 'NAME': {this.Name} \n 'LASTNAME': {this.LatName} \n 'PASSWORD': {this.Password} \n 'DOB': {this.Dob} \n 'PHONE': {this.Phone} \n 'EMAIL': {this.Email} \n]".Replace("'", '"'.ToString()).Replace("[", "{").Replace("]", "}");
+                        case "xml":
+                              throw new Exception("xml not set up yet ");
+                        default:
+                              return $"NAME: {this.Name} LASTNAME: {this.LatName} PASSWORD: {this.Password} DOB: {this.Dob} PHONE: {this.Phone} EMAIL: {this.Email}";
+                  }
+            }
+
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.User"/> class.
+            /// </summary>
+            public User()
             {
 
             }
@@ -97,7 +114,12 @@ namespace QuickTools
             /// <param name="user">User.</param>
             public virtual void Set(User user)
             {
-                  
+                  this.Name = user.Name;
+                  this.Dob = user.Dob;
+                  this.Email = user.Email;
+                  this.LatName = user.LatName;
+                  this.Phone = user.Phone;
+                  this.Password = user.Password; 
             }
 
 

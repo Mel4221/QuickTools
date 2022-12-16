@@ -113,7 +113,7 @@ namespace QuickTools
             /// <param name="keyName">Key name.</param>
             /// <param name="relationOrType">Relation or type.</param>
             /// <param name="id">Identifier.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType, double id)
+            public MiniDB(string dbName, string keyName, string relationOrType, int id)
             {
                   KeysName = keyName;
                   RelationOrType = relationOrType;
@@ -132,7 +132,7 @@ namespace QuickTools
             /// <param name="relationOrType">Relation or type.</param>
             /// <param name="id">Identifier.</param>
             /// <param name="allowRepeatedKeys">If set to <c>true</c> allow repeated keys.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType, double id, bool allowRepeatedKeys)
+            public MiniDB(string dbName, string keyName, string relationOrType, int id, bool allowRepeatedKeys)
             {
                   DBName = dbName;
                   KeysName = keyName;
