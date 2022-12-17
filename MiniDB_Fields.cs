@@ -55,11 +55,11 @@ namespace QuickTools
                   /// <value>The relation.</value>
                   public string Relation { get; set; }
 
-                  /// <summary>
-                  /// Gets or sets the identity.
-                  /// </summary>
-                  /// <value>The identity.</value>
-                  public int Identity { get; set; }
+                 /// <summary>
+                 /// Gets or sets the identifier.
+                 /// </summary>
+                 /// <value>The identifier.</value>
+                  public int Id { get; set; }
                   
                   /// <summary>
                   /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.
@@ -67,19 +67,19 @@ namespace QuickTools
                   /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.</returns>
                   public override string ToString()
                   {
-                        return $"Identity: {Identity} Key: {Key} Value: {Value} Relation: {Relation} ";
+                        return $"Id: {Id} Key: {Key} Value: {Value} Relation: {Relation} ";
                   }
 
 
                   /// <summary>
                   /// This will convert the object to an array
                   /// </summary>
-                  /// <returns>Identity[0] Key[1] Value[2] Relation[3] </returns>
+                  /// <returns>Id[0] Key[1] Value[2] Relation[3] </returns>
                   public string[] ToStringArray()
                   {
                         string[] array = new string[4];
 
-                        array[0] = Identity.ToString();
+                        array[0] = Id.ToString();
                         array[1] = Key;
                         array[2] = Value;
                         array[3] = Relation; 
@@ -100,13 +100,13 @@ namespace QuickTools
                         switch(type)
                         {
                               case "json":
-                                    obj = $"[ \n 'ID': {Identity}, \n 'Key': {Key}, \n 'Value': {Value}, \n 'Relation': {Relation}\n]".Replace("'",'"'.ToString()).Replace("[","{").Replace("]","}");
+                                    obj = $"[ \n 'ID': {Id}, \n 'Key': {Key}, \n 'Value': {Value}, \n 'Relation': {Relation}\n]".Replace("'",'"'.ToString()).Replace("[","{").Replace("]","}");
                                     break;
 
                               case "xml":
                                     obj = $"<?xml version='1.0' encoding='UTF - 8'?>\n" +
                                           "<DATA> \n"+
-                                    	      $" <ID> {Identity} </ID> \n" +
+                                    	      $" <ID> {Id} </ID> \n" +
                                     		$" <Key> {Key} </Key> \n"+
                                                 $" <Value> {Value} </Value> \n" +
                                                 $" <Relation> {Relation} </Relation> \n" +
