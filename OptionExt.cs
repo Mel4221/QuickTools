@@ -57,7 +57,7 @@ namespace QuickTools
                   int[] f = { -4,-3, -2,-1,0}; 
                   */
                   ArrayLength = a.Length;
-                  C.Write("[");
+                  Get.Write("[");
                   for (int i = 0; i < a.Length; i++)
                   {
 
@@ -69,13 +69,13 @@ namespace QuickTools
                         }
                         else
                         {
-                              C.Write(a[i] + comma);
+                              Get.Write(a[i] + comma);
 
                         }
 
 
                   }
-                  C.Write("]");
+                  Get.Write("]");
 
             }
 

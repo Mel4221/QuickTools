@@ -83,7 +83,7 @@ namespace QuickTools
                   int[] f = { -4,-3, -2,-1,0}; 
                   */
               //   ArrayLength = SelectionList.Count;
-                  C.Write("[");
+                  Get.W("[");
                   for (int i = 0; i < SelectionList.Count; i++)
                   {
 
@@ -96,7 +96,7 @@ namespace QuickTools
 
 
                   }
-                  C.Write("]");
+                  Get.W("]");
 
             }
             /// <summary>

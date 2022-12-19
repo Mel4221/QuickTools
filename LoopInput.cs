@@ -56,7 +56,7 @@ namespace QuickTools
             public  string Start()
             {
 
-                  while (Get.TextInput() != ".")
+                  while (Get.Input().Text != ".")
                   {
                         if (Get.Text.ToLower() != "exit"&&
                             Get.Text.ToLower() != "done"&& 

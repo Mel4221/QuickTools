@@ -82,7 +82,7 @@ namespace Tester
             public void Write(object value, int x, int y)
             {
                   Console.SetCursorPosition(LocationX, LocationY);
-                  C.Write(value);
+                  Get.WL(value);
             }
       }
       /// <summary>

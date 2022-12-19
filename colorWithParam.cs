@@ -242,16 +242,16 @@ namespace QuickTools
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
                         {
                               Color.Yellow();
-                              C.Write(simbol);
+                              Get.Write(simbol);
                               underLine += simbol;
                         }
 
                         Get.W("");// this write an space
-                        C.Write(simbol); // this write a single char
+                        Get.Write(simbol); // this write a single char
                         Get.Reset();    // reset the color 
-                        C.Write(" " + content + " "); // write the content 
+                        Get.Write(" " + content + " "); // write the content 
                         Color.Yellow(); // get the yellow color again 
-                        C.Write(simbol);
+                        Get.Write(simbol);
                         Get.W("");          // more space 
                         Get.W(underLine);
                   }
@@ -267,15 +267,15 @@ namespace QuickTools
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
                         {
                               Color.Yellow();
-                              C.Write(simbol);
+                              Get.Write(simbol);
                               underLine += simbol;
                         }
                         Get.W("");// this write an space
-                        C.Write(simbol); // this write a single char
+                        Get.Write(simbol); // this write a single char
                         Get.Reset();    // reset the color 
-                        C.Write(" " + content + " "); // write the content 
+                        Get.Write(" " + content + " "); // write the content 
                         Color.Yellow(); // get the yellow color again 
-                        C.Write(simbol);
+                        Get.Write(simbol);
                         Get.W("");          // more space 
                         Get.W(underLine);
                   }

@@ -8,40 +8,13 @@
 using System;
 namespace QuickTools
 {
-
-      /// <summary>
+ 
       /// this was created entrily for fun 
       ///  but it could be usful if you hate to write Consol.WriteLine("content"); 
       /// they are basycally many language added but sadly there are some that only works 
       /// with a costructor example : new echo("content"); 
-      /// </summary>
-      public class C
-      {     
-                  /// <summary>
-                  /// Log the specified input.
-                  /// </summary>
-                  /// <param name="input">Input.</param>
-                  public static void Log(object input)
-            {
-                  Console.WriteLine(input);
-            }
-            /// <summary>
-            /// Write to the console the specified input.
-            /// </summary>
-            /// <param name="input">Input.</param>
-            public static void W(object input)
-            {
-                  Console.Write(input);
-            }
-            /// <summary>
-            /// Write the specified input.
-            /// </summary>
-            /// <param name="input">Input.</param>
-            public static void Write(object input)
-            {
-                  Console.Write(input);
-            }
-      }
+    
+
       /// <summary>
       /// Write to the console the specified input.
       /// </summary>
