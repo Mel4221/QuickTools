@@ -8,7 +8,7 @@ namespace QuickTools
       /// <summary>
       /// This class Read Files content
       /// </summary>
-      public class Reader
+      public class Reader:IDisposable
       {
        
 
@@ -292,6 +292,10 @@ namespace QuickTools
 
             private string file;
             private bool fileExist = false;
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.Reader"/> class.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
             public Reader(object fileName)
             {
 
@@ -316,6 +320,48 @@ namespace QuickTools
                   }
                   return null; 
             }
+
+            #region IDisposable Support
+            private bool disposedValue = false; // To detect redundant calls
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="disposing"></param>
+            protected virtual void Dispose(bool disposing)
+            {
+                  if (!disposedValue)
+                  {
+                        if (disposing)
+                        {
+                              // TODO: dispose managed state (managed objects).
+                        }
+
+                        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                        // TODO: set large fields to null.
+
+                        disposedValue = true;
+                  }
+            }
+
+            // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+            // ~Reader() {
+            //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            //   Dispose(false);
+            // }
+
+                  /// <summary>
+                  /// Releases all resource used by the <see cref="T:QuickTools.Reader"/> object.
+                  /// </summary>
+                  /// <see cref="T:QuickTools.Reader"/> so the garbage collector can reclaim the memory that the
+            public void Dispose()
+            {
+                  // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+                  Dispose(true);
+                  // TODO: uncomment the following line if the finalizer is overridden above.
+                  // GC.SuppressFinalize(this);
+            }
+            #endregion
+
 
       }
 }

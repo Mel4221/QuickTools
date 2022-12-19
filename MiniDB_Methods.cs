@@ -162,11 +162,12 @@ namespace QuickTools
                   {
                         this.Load();
                   }
-                  if ((this.GetKey(key) != null) && (AllowRepeatedKeys == false) || (RelationOrType == "NULL"))
+                  if ((this.GetKey(key) != null))
                    {
-                        return keyAdded; 
-                   }
-                
+                        if (AllowRepeatedKeys == false) return keyAdded;
+
+                  }
+
                   ID++;
                   Document = new XmlDocument();
                   Document.Load(DBName);
@@ -198,9 +199,9 @@ namespace QuickTools
                   {
                         this.Load();
                   }
-                  if ((this.GetKey(key) != null) && (AllowRepeatedKeys == false) || (RelationOrType == "NULL"))
+                  if ((this.GetKey(key) != null))
                   {
-                        return keyAdded;
+                        if((AllowRepeatedKeys == false))return keyAdded;
                   }
                   ID++;
                   Document = new XmlDocument();
@@ -252,12 +253,12 @@ namespace QuickTools
                                     return DataBase[x];
                               }
                         }
-                        return new MiniDB.DB(); 
+                        return new DB();  
                   }
                   catch 
                   {
                         Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new MiniDB.DB();
+                        return new DB(); 
                   }
             }
 

@@ -51,22 +51,24 @@ namespace QuickTools
                   DBName = Path + dbName; 
                   this.Load();
             }
+       
+
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
             /// </summary>
             /// <param name="dbName">Db name.</param>
-            /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-            public MiniDB(string dbName, bool autoLoad)
+            /// <param name="defaultPath">If set to <c>true</c> default path.</param>
+            public MiniDB(string dbName, bool defaultPath)
             {
                   KeysName = "Key";
                   RelationOrType = "NULL";
                   ID = 1000;
-                  DBName = Path + dbName;
-                  if (autoLoad)
+                  if (defaultPath)
                   {
-
-                        this.Load();
+                        Path = Get.DataPath("db/");
                   }
+                  DBName = Path + dbName;
+                  this.Load();
 
             }
 
