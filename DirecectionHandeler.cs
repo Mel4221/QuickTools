@@ -22,30 +22,30 @@ namespace QuickTools
             /// <summary>
             /// The x.
             /// </summary>
-            public  int X = 0;
+            public int X = 0;
             /// <summary>
             /// The y.
             /// </summary>
-            public  int Y = 0;
+            public int Y = 0;
             /// <summary>
             /// This fields has direct acces but as it returns an array 
             /// the method GetLocation  can provide the number only in an object type 
             /// </summary>
             //public  int[] Location = { this.X, this.Y };
 
-            private  void Up()
+            private void Up()
             {
                   Y++;
             }
-            private  void Down()
+            private void Down()
             {
                   Y--;
             }
-            private  void Left()
+            private void Left()
             {
                   X--;
             }
-            private  void Right()
+            private void Right()
             {
                   X++;
             }

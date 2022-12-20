@@ -679,7 +679,14 @@ namespace QuickTools
                   /// <value>The number.</value>
                   public int Number { get; set; }
 
-
+                  /// <summary>
+                  /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Get.InputType"/>.
+                  /// </summary>
+                  /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Get.InputType"/>.</returns>
+                  public override string ToString()
+                  {
+                        return this.Text;
+                  }
 
             }
 
@@ -1224,7 +1231,14 @@ namespace QuickTools
                   Console.WriteLine(text);
             }
 
-
+            /// <summary>
+            /// Writes the line
+            /// </summary>
+            /// <param name="text">Text.</param>
+            public static void WriteL(object text)
+            {
+                  Console.WriteLine(text);
+            }
             /// <summary>
             /// Write the specified text and tabs.
             /// </summary>

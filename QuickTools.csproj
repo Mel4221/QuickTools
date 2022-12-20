@@ -89,6 +89,8 @@
     <Compile Include="MiniDB_Constructors.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="DB.cs" />
+    <Compile Include="CProgressBar.cs" />
+    <Compile Include="DownloadManager.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />
