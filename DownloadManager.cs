@@ -39,7 +39,7 @@ namespace QuickTools
       public class DownloadManager
       {
             private volatile bool _completed;
-
+     
             /// <summary>
             /// Downloads the file.
             /// </summary>
@@ -47,10 +47,7 @@ namespace QuickTools
             /// <param name="location">Location.</param>
             public void DownloadFile(string address, string location)
             {
-                  if (address == "" || location == "")
-                  {
-                        throw new ArgumentException("Incorrect Arguments Were provided  or JUST NOT PROVIDED AT ALL "); 
-                  }
+             
                   WebClient client = new WebClient();
                   Uri Uri = new Uri(address);
                   _completed = false;
@@ -110,6 +107,8 @@ namespace QuickTools
                   client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
                   client.DownloadFileAsync(Uri, location);
 
+                  Get.Wait(); 
+                  Environment.Exit(0); 
             }
 
 

@@ -124,12 +124,13 @@ namespace QuickTools
                         {
 
                               Get.Label(SelectorL + OptionList[option] + SelectorR);
+                              Get.Write("\n"); 
 
                         }
                         else
                         {
 
-                              Get.Write(OptionList[option]);
+                              Console.WriteLine(OptionList[option]);
 
                         }
                   }

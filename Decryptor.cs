@@ -164,18 +164,5 @@ namespace QuickTools
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
 }

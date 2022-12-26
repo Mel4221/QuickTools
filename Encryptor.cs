@@ -12,7 +12,7 @@ namespace QuickTools
             /// The secure class is a class that uses the Aes tecnology to encrypt data by using
             /// a public key and a 
             /// </summary>
-        public partial class Secure
+        public partial class Secure:IDisposable
         {
 
 
@@ -23,6 +23,12 @@ namespace QuickTools
             /// This allow the encriptor to either try to save the scure key or not  and is set to FALSE <see langword="false"/>  by default for security reasons
             /// </summary>
             public bool AllowToSaveKey = false; 
+
+            /// <summary>
+            /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Secure"/> use saved key.
+            /// </summary>
+            /// <value><c>true</c> if use saved key; otherwise, <c>false</c>.</value>
+            public bool UseSavedKey { get; set; }
 
 
 
@@ -36,11 +42,11 @@ namespace QuickTools
             /// </summary>
             public string RowPublicKey = null; 
 
-            public byte[] CreatePassword(string password)
+            public byte[] CreatePassword(object password)
             {
                   byte[] passByes  = null;
 
-                  byte[] array = Encoding.ASCII.GetBytes(password);
+                  byte[] array = Encoding.ASCII.GetBytes(password.ToString());
                   if (array.Length <16)
                   {
 
@@ -54,7 +60,7 @@ namespace QuickTools
                   else
                   {
                         passByes = new byte[16];
-                        byte[] bigerArray = Encoding.ASCII.GetBytes(password);
+                        byte[] bigerArray = Encoding.ASCII.GetBytes(password.ToString());
 
                         for (int value=0; value < passByes.Length; value++)
                         {
@@ -84,10 +90,10 @@ namespace QuickTools
             public byte[] Encrypt(string plainText, object password)
             {
                  // try {
-
-                        byte[] Key = CreatePassword(password.ToString());
-                        byte[] IV = New.RandomByteKey(AllowToSaveKey);
-                        this.PublicKey = IV;
+                  
+                  byte[] Key = CreatePassword(password.ToString());
+                  byte[] IV = UseSavedKey == false ? New.RandomByteKey(AllowToSaveKey) : Get.KeyBytesSaved(); 
+                  this.PublicKey = IV;
                         
                         //Get.Wait($"Text: {plainText.Length} Key: {Key.Length} IV: {IV.Length}");
                         /*
@@ -262,7 +268,42 @@ namespace QuickTools
                   this.ManualIV = iv;
                   this.ClearText = clearText.ToString(); 
             }
-           
+
+            #region IDisposable Support
+            private bool disposedValue = false; // To detect redundant calls
+
+            protected virtual void Dispose(bool disposing)
+            {
+                  if (!disposedValue)
+                  {
+                        if (disposing)
+                        {
+                              // TODO: dispose managed state (managed objects).
+                        }
+
+                        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                        // TODO: set large fields to null.
+
+                        disposedValue = true;
+                  }
+            }
+
+            // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+            // ~Secure() {
+            //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            //   Dispose(false);
+            // }
+
+            // This code added to correctly implement the disposable pattern.
+            public void Dispose()
+            {
+                  // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+                  Dispose(true);
+                  // TODO: uncomment the following line if the finalizer is overridden above.
+                  // GC.SuppressFinalize(this);
+            }
+            #endregion
+
 
       }
 }

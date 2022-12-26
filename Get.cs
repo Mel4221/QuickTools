@@ -201,8 +201,8 @@ namespace QuickTools
             }
 
             //   private static string path = Get.Path;
-            private static string qtDir = "data/qt/";
-                  private static string keyFile = "data/qt/secure.key";
+            private static string qtDir = "data/qt/keys/";
+                  private static string keyFile = qtDir+"secure.key";
 
             /// <summary>
             /// This method can used manually
@@ -413,7 +413,7 @@ namespace QuickTools
                   Get.Reset();
                   if (name == "" || password == "")
                   {
-                        Get.WrongIn("Name or password empty");
+                       Console.WriterongIn("Name or password empty");
                         Get.Clear();
                         Login();
                   }
@@ -465,7 +465,7 @@ namespace QuickTools
                         SingUp();                        
                   }
 
-                  //  Get.Wait(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
+                  // Console.Write(name+" "+lastName + " " +password + " " +dob + " " +phone + " " +email);
                   string[] userData = { name, lastName, password, dob, phone, email };
                   return userData;
             }
@@ -744,7 +744,7 @@ namespace QuickTools
             /// <param name="display">Display.</param>
             public static InputType Input(string display)
             {
-                  Get.Write("");
+                 Console.Write("");
                   Get.LabelSide(display);
                   Get.Reset();                  
                   Console.Write(" ");
@@ -884,7 +884,7 @@ namespace QuickTools
                   Console.BackgroundColor = ConsoleColor.Magenta;
                   Console.ForegroundColor = ConsoleColor.White;
                   Console.Write(" " + msg + " ");
-                  Get.W("");
+                 Console.Write("");
                   Get.Reset();
             }
             /// <summary>
@@ -959,9 +959,9 @@ namespace QuickTools
                         underLine += simbol;
                   }
 
-                  Get.W(underLine);
-                  Get.W(simbol + " " + content + " " + simbol);
-                  Get.W(underLine);
+                 Console.WriteLine(underLine);
+                 Console.WriteLine(simbol + " " + content + " " + simbol);
+                 Console.WriteLine(underLine);
             }
                      /// <summary>
                      /// Box the specified content and simbol.
@@ -977,16 +977,16 @@ namespace QuickTools
                         underLine += simbol;
                   }
 
-                  Get.W(underLine);
-                  Get.W(simbol + " " + content + " " + simbol);
-                  Get.W(underLine);
+                  Console.WriteLine(underLine);
+                  Console.Write(simbol + " " + content + " " + simbol);
+                  Console.WriteLine(underLine);
             }
-           
-           /// <summary>
-           /// Box the specified content and tabs.
-           /// </summary>
-           /// <param name="content">Content.</param>
-           /// <param name="tabs">Tabs.</param>
+
+            /// <summary>
+            /// Box the specified content and tabs.
+            /// </summary>
+            /// <param name="content">Content.</param>
+            /// <param name="tabs">Tabs.</param>
             public static void Box(object content, int tabs)
             {
                   string spaces = "\t";
@@ -1003,9 +1003,9 @@ namespace QuickTools
                         underLine += simbol;
                   }
 
-                  Get.W(tabSpaces + underLine);
-                  Get.W(tabSpaces + simbol + " " + content + " " + simbol);
-                  Get.W(tabSpaces + underLine);
+                 Console.WriteLine(tabSpaces + underLine);
+                 Console.Write(tabSpaces + simbol + " " + content + " " + simbol);
+                 Console.WriteLine(tabSpaces + underLine);
             }
 
             // custom box 
@@ -1035,9 +1035,9 @@ namespace QuickTools
                         underLine += simbol;
                   }
 
-                  Get.W(tabSpaces + underLine);
-                  Get.W(tabSpaces + simbol + " " + content + " " + simbol);
-                  Get.W(tabSpaces + underLine);
+                 Console.Write(tabSpaces + underLine);
+                 Console.Write(tabSpaces + simbol + " " + content + " " + simbol);
+                 Console.Write(tabSpaces + underLine);
             }
 
 
@@ -1054,7 +1054,7 @@ namespace QuickTools
                   Console.WriteLine("Something Went Really Wrong!!!");
                   Console.WriteLine("This" + ":=>>>> " + text);
                   Console.ResetColor();
-                  Get.Wait();
+              //   Console.Write();
             }
 
 
@@ -1067,7 +1067,7 @@ namespace QuickTools
                   Console.ForegroundColor = ConsoleColor.Red;
                   Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
                   Console.ResetColor();
-                  Get.Wait();
+               //  Console.Write();
             }
             /// <summary>
             /// Write Text with Console.WriteLine add red color and wait for a key to be pressed 
@@ -1078,7 +1078,7 @@ namespace QuickTools
                   Console.ForegroundColor = ConsoleColor.Red;
                   Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
                   Console.ResetColor();
-                  Get.Wait();
+               //  Console.Write();
             }
 
      
@@ -1091,7 +1091,7 @@ namespace QuickTools
                   Console.ForegroundColor = ConsoleColor.Red;
                   Console.WriteLine("This File Was Not Founded '{0}' ", msg);
                   Console.ResetColor();
-                  Get.Wait();
+            //     Console.Write();
             }
 
 
@@ -1101,7 +1101,7 @@ namespace QuickTools
             /// </summary>
             public static void Wait()
             {
-                  Get.W("Type any key to continue");
+                 Console.Write("Type any key to continue");
                   Console.ReadKey();
             }
 
@@ -1115,7 +1115,7 @@ namespace QuickTools
            /// <param name="Caller">Text Needed to be printed</param>
             public static void Wait(object Caller)
             {
-                  Get.W("Type any key to continue");
+                 Console.Write("Type any key to continue");
                   Get.Yellow("This Called me =>  '" + Caller + "'");
                   Console.ReadKey();
             }
@@ -1129,7 +1129,7 @@ namespace QuickTools
                   Console.ForegroundColor = ConsoleColor.Green;
                   Console.WriteLine("OK");
                   Console.ResetColor();
-                  Get.Wait();
+                 Console.Write("");
             }
             /// <summary>
             /// This is just used when you need to see if some logic is working as spected
@@ -1166,7 +1166,7 @@ namespace QuickTools
                               break;                             
                   }
 
-                  Get.Wait();
+              //   Console.Write();
             }
 
 
@@ -1185,7 +1185,7 @@ namespace QuickTools
                   Console.WriteLine(msg);
                   Console.ResetColor();
                   Console.Beep();
-                  Get.Wait();
+              //  Console.Write();
             }
             /// <summary>
             /// this is a very smallintent of  trying to hide the password
@@ -1319,8 +1319,8 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
 
                   //	Get.Label("QuickTools Version: " + version);
                   Color.Green("Created By MBV");
-               //   Get.W("Last Update: " + lastModified);
-                 // Get.Wait();
+               //  Console.Write("Last Update: " + lastModified);
+                 //Console.Write();
                  // LastChanges();
             }
 
@@ -1339,7 +1339,7 @@ Q:::::::QQ::::::::Q u:::::::::::::::uui::::::ic:::::::cccccc:::::ck::::::k k::::
                         Get.Yellow(number + ". " + changes[change]);
                   }
 
-                  Get.Wait();
+                 Console.Write();
 
             */
             }

@@ -66,20 +66,29 @@ namespace QuickTools
             /// Contains the password Generated 
             /// </summary>
             public static string Generated = null;
+
+
             /// <summary>
-            /// This Contains the array of the 
+            /// Array Of Words LowerCase
             /// </summary>
-      private static string[] LowerCase =
+            public static string[] LowerCase =
       { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 "n",
       "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
       };
-      private static string[] UpperCase =
+
+            /// <summary>
+            /// Array Of Words Upercase
+            /// </summary>
+            public static string[] UpperCase =
       { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 "N",
       "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-      };
-      private static string[] Symbols =
+      }; 
+      /// <summary>
+      /// Array Of Symbols
+      /// </summary>
+      public static string[] Symbols =
       { "!", "@", "%", "^", "&", "*", "=", "?", ".", ")", "(", "_", "+",
 "-", "*", "/",
       "+","`","~"
@@ -259,6 +268,12 @@ namespace QuickTools
             }
 
 
+            /// <summary>
+            /// Randoms the text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="textLength">Text length.</param>
+            /// <param name="callBack">Call back.</param>
             public static string RandomText(double textLength,Action callBack)
             {                       // this one will generate a minimum passowrd of 9 digits 
 

@@ -25,56 +25,6 @@ namespace QuickTools
             */
 
 
-            private static StringBuilder text = new StringBuilder(); 
-            /// <summary>
-            /// Converts to string a byte array 
-            /// </summary>
-            /// <returns>The to string.</returns>
-            /// <param name="array">Array.</param>
-            public static string ConvertToString(byte[] array)
-            {
-                  for(int value = 0; value < array.Length; value++)
-                  {
-                        text.Append(array[value] + ",");
-                  }
-
-                  return text.ToString(); 
-            }
-
-
-            /// <summary>
-            /// Converts to byte array.
-            /// </summary>
-            /// <returns>The to byte array.</returns>
-            /// <param name="rowString">Row string.</param>
-            public static byte[] ConvertToByteArray(string rowString)
-            {
-                  string current = "";
-                  List<string> temp = new List<string>();
-
-                  for(int value = 0; value < rowString.Length; value++)
-                  {
-                        if(rowString[value] != ',')
-                        {
-                              current += rowString[value]; 
-
-                        }if(rowString[value] == ',')
-                        {
-                              temp.Add(current);
-                              current = ""; 
-                        }
-                  }
-                  byte[] array = new byte[temp.Count]; 
-
-                  for(int back = 0; back < temp.Count; back++)
-                  {
-                        array[back] = Convert.ToByte(temp[back]);
-                  }
-
-                  return array; 
-
-            }
-
             /// <summary>
             /// Writes the content passed into a file
             /// </summary>

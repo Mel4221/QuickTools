@@ -91,6 +91,8 @@
     <Compile Include="DB.cs" />
     <Compile Include="CProgressBar.cs" />
     <Compile Include="DownloadManager.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="IConvert.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

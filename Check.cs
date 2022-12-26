@@ -73,5 +73,15 @@ namespace QuickTools
                   Milliseconds = sw.Elapsed.Milliseconds;
                   return $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}"; 
             }
+
+
+            /// <summary>
+            /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Check"/>.
+            /// </summary>
+            /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Check"/>.</returns>
+            public override string ToString()
+            {
+                  return base.ToString();
+            }
       }
 }
