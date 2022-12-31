@@ -42,12 +42,18 @@ namespace QuickTools
             /// </summary>
             public string RowPublicKey = null; 
 
+
+            /// <summary>
+            /// Creates the password Based on the given input to be able to be addes as a key for the Encription or decription
+            /// </summary>
+            /// <returns>The password.</returns>
+            /// <param name="password">Password.</param>
             public byte[] CreatePassword(object password)
             {
                   byte[] passByes  = null;
 
                   byte[] array = Encoding.ASCII.GetBytes(password.ToString());
-                  if (array.Length <16)
+                  if (array.Length < 16)
                   {
 
                         passByes = new byte[16];
@@ -74,8 +80,6 @@ namespace QuickTools
 
                  
             }
-
-
 
 
 
@@ -157,6 +161,19 @@ namespace QuickTools
 
 
 
+            /// <summary>
+            /// Encrypts the text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="text">Text.</param>
+            /// <param name="password">Password.</param>
+            public string EncryptText(string text , object password)
+            {
+                  this.AllowToSaveKey = true; 
+                  byte[] data = this.Encrypt(text, password);
+
+                 return IConvert.BytesToString(data); 
+            }
 
 
 

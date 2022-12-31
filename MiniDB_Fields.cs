@@ -34,7 +34,7 @@ namespace QuickTools
       {
 
 
-
+        
 
             /// <summary>
             /// This method will be available to be modefied by the user of the class  to handle the relations 

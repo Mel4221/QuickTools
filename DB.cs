@@ -31,11 +31,12 @@ namespace QuickTools
             /// </summary>
             public class DB
             {
-                  /// <summary>
-                  /// Gets or sets the key.
-                  /// </summary>
-                  /// <value>The key.</value>
-                  public string Key { get; set; }
+    
+            /// <summary>
+            /// Gets or sets the key.
+            /// </summary>
+            /// <value>The key.</value>
+            public string Key { get; set; }
 
                   /// <summary>
                   /// Gets or sets the value.
@@ -106,6 +107,16 @@ namespace QuickTools
                                                 $" <Relation> {Relation} </Relation> \n" +
                                           "</DATA>".Replace("'", '"'.ToString());
                                     break;
+                              case "hot":
+                              /*
+                              <DATA>
+                                    <Key Value="[time:date:1001]12/28/2022 11:02:11 PM" />
+                              </DATA>
+
+                              */
+                              obj = $"<Key Value='[{this.Key}:{this.Relation}:{this.Id}]{this.Value}'/>".Replace("'",'"'.ToString());
+
+                              break;
                               default:
                                     obj = this.ToString();
                                     break;

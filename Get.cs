@@ -1081,7 +1081,34 @@ namespace QuickTools
                //  Console.Write();
             }
 
-     
+
+            /// <summary>
+            /// Gets an input without showing it on the screen
+            /// </summary>
+            /// <returns>The password.</returns>
+            public static string Password()
+            {
+                  string password = null;
+                                   
+                  while(true)
+                  {
+                       // Get.Clear();                       
+                        Console.SetCursorPosition(0,Console.CursorTop);
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.BackgroundColor = ConsoleColor.Black;                       
+                        var word = Console.ReadKey();
+                        password += word.KeyChar.ToString();
+
+                        if (word.Key.ToString() == "Enter")
+                        {
+
+                              break;
+                        }
+                  }
+
+                  Get.Reset();
+                  return password;                 
+            }
             /// <summary>
             /// Alert Not found write the file that was not founded and print it on color red
             /// </summary>
@@ -1115,8 +1142,10 @@ namespace QuickTools
            /// <param name="Caller">Text Needed to be printed</param>
             public static void Wait(object Caller)
             {
-                 Console.Write("Type any key to continue");
-                  Get.Yellow("This Called me =>  '" + Caller + "'");
+                  //Console.Write("Type any key to continue");
+                  //Get.Yellow("This Called me =>  '" + Caller + "'");
+                  Console.WriteLine("Info");
+                  Get.Yellow(Caller);                  
                   Console.ReadKey();
             }
 

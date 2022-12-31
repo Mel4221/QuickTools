@@ -85,8 +85,13 @@ namespace QuickTools
 
             }
 
-
-
+            /// <summary>
+            /// Decrypts the text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="text">Text.</param>
+            /// <param name="password">Password.</param>
+            public string DecryptText(string text, object password) => this.Decrypt(IConvert.StringToBytesArray(text), this.CreatePassword(password), Get.KeyBytesSaved());
 
 
 

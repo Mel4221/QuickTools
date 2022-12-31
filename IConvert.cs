@@ -33,8 +33,101 @@ namespace QuickTools
       /// <summary>
       /// IConvert provides a list of costums covertions methods 
       /// </summary>
-      public class IConvert<Type>
+      public class IConvert
       {
+
+            public class ToType<Type>
+            {
+
+                  /// <summary>
+                  ///Convert the given array type to a list with the same type 
+                  /// </summary>
+                  /// <returns>The to list.</returns>
+                  /// <param name="array">Array.</param>
+                  public List<Type> ArrayToList(Type[] array)
+                  {
+                        List<Type> data = new List<Type>();
+                        if (array.Length > 0)
+                        {
+                              for (int value = 0; value < array.Length; value++)
+                              {
+                                    data.Add(array[value]);
+                              }
+                        }
+
+                        return data;
+                  }
+
+                  /// <summary>
+                  ///Convert the given array type to a list with the same type but this method is an static method 
+                  /// </summary>
+                  /// <returns>The list.</returns>
+                  /// <param name="array">Array.</param>
+                  public static List<Type> ToList(Type[] array)
+                  {
+                        List<Type> data = new List<Type>();
+                        if (array.Length > 0)
+                        {
+                              for (int value = 0; value < array.Length; value++)
+                              {
+                                    data.Add(array[value]);
+                              }
+                        }
+
+                        return data;
+                  }
+
+                  /// <summary>
+                  /// 
+                  /// </summary>
+                  /// <returns></returns>
+                  /// <param name="list"></param>
+                  public Type[] ListToArray(List<Type> list)
+                  {
+                        Type[] array;
+
+                        if (list.Count > 0)
+                        {
+                              array = new Type[list.Count];
+
+                              for (int value = 0; value < list.Count; value++)
+                              {
+                                    array[value] = list[value];
+                              }
+
+                              return array;
+                        }
+
+
+                        return new Type[10];
+                  }
+
+                  /// <summary>
+                  /// Tos the array.
+                  /// </summary>
+                  /// <returns>The array.</returns>
+                  /// <param name="list">List.</param>
+                  public static Type[] ToArray(List<Type> list)
+                  {
+                        Type[] array;
+
+                        if (list.Count > 0)
+                        {
+                              array = new Type[list.Count];
+
+                              for (int value = 0; value < list.Count; value++)
+                              {
+                                    array[value] = list[value];
+                              }
+                              return array;
+                        }
+
+
+                        return new Type[10];
+                  }
+            }
+
+
 
             private static StringBuilder text = new StringBuilder();
          
@@ -71,48 +164,11 @@ namespace QuickTools
                   
 
             /// <summary>
-            ///Convert the given array type to a list with the same type 
+            /// Strings to bytes array.
             /// </summary>
-            /// <returns>The to list.</returns>
-            /// <param name="array">Array.</param>
-            public List<Type> ArrayToList(Type[] array)
-            {
-                  List<Type> data = new List<Type>(); 
-                  if(array.Length > 0)
-                  {
-                        for(int value =0; value < array.Length; value++)
-                        {
-                              data.Add(array[value]); 
-                        }
-                  }
-
-                  return data; 
-            }
-
-            /// <summary>
-            ///Convert the given array type to a list with the same type but this method is an static method 
-            /// </summary>
-            /// <returns>The list.</returns>
-            /// <param name="array">Array.</param>
-            public static List<Type> ToList(Type[] array)
-            {
-                  List<Type> data = new List<Type>();
-                  if (array.Length > 0)
-                  {
-                        for (int value = 0; value < array.Length; value++)
-                        {
-                              data.Add(array[value]);
-                        }
-                  }
-
-                  return data;
-            }
-            /// <summary>
-            /// Strings to array.
-            /// </summary>
-            /// <returns>The to array.</returns>
+            /// <returns>The to bytes array.</returns>
             /// <param name="rowString">Row string.</param>
-            public static byte[] StringToArray(string rowString)
+            public static byte[] StringToBytesArray(string rowString)
             {
                   string current = "";
                   List<string> temp = new List<string>();

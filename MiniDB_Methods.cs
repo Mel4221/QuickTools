@@ -29,7 +29,8 @@ using System.Linq;
 using System.Data;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading; 
+using System.Threading;
+using System.Text;
 
 namespace QuickTools
 {
@@ -58,7 +59,7 @@ namespace QuickTools
             /// <param name="key">Key.</param>
             /// <param name="value">Value.</param>
             /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-            public bool AddKey(string key, string value,bool autoLoad)
+            public bool AddKey(object key, object value,bool autoLoad)
             {
                   bool keyAdded = false;
 
@@ -96,6 +97,45 @@ namespace QuickTools
             }
 
 
+
+            /// <summary>
+            /// Adds the key on hot and you later desides when to write it to the db file 
+            /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
+            /// addition 
+            /// </summary>
+            /// <param name="key">Key.</param>
+            /// <param name="value">Value.</param>
+            /// <param name="relation">Relation.</param>
+            public void AddKeyOnHot(object key, object value,object relation)
+            {
+                  this.ID++;
+                  this.DataBase.Add(new DB()
+                  {
+                        Id = this.ID,
+                        Key = key.ToString(),
+                        Value = value.ToString(),
+                        Relation = relation.ToString()
+                  });
+
+            }
+
+            private StringBuilder container = new StringBuilder(); 
+            /// <summary>
+            /// This saves the Database that is on memory to the database file 
+            /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
+            /// addition 
+            /// </summary>
+            public void HotRefresh()
+            {
+                  container.Append("<DATA>\n");
+                  for(int index =0;index<this.DataBase.Count; index++)
+                  {
+                        container.Append(this.DataBase[index].ToString("hot")+"\n");
+                  }
+                  container.Append("</DATA>\n");
+                  Writer.Write(this.DBName,container.ToString());
+            }
+
             /// <summary>
             /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
             /// below i provide the benefits from using  this method 
@@ -111,7 +151,7 @@ namespace QuickTools
             /// <param name="value">Value.</param>
             /// <param name="relation">Relation.</param>
             /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-            public bool AddKey(string key, string value,string relation,bool autoLoad)
+            public bool AddKey(object key, object value,object relation,bool autoLoad)
             {
                   bool keyAdded = false;
 
@@ -120,7 +160,7 @@ namespace QuickTools
                   {
                         this.Load();
                   }
-                  if ((AllowRepeatedKeys == false) && (relation == "NULL") &&  (ID  <= 0))
+                  if ((AllowRepeatedKeys == false) && ((string)relation == "NULL") &&  (ID  <= 0))
                   {
                         throw new Exception("RelationOrType is required or the AllowRepeatedKeys is Set to False or ID is not provided or set to 0");
                   }
@@ -183,6 +223,42 @@ namespace QuickTools
                   return keyAdded; 
 
             }
+
+
+
+
+            /// <summary>
+            /// Adds the key and returns the value that was added
+            /// </summary>
+            /// <returns>The key.</returns>
+            /// <param name="key">Key.</param>
+            /// <param name="value">Value.</param>
+            /// <param name="relation">Relation.</param>
+            public DB AddKey(string key, string value, string relation)
+            {
+               
+
+                  ID++;
+                  Document = new XmlDocument();
+                  Document.Load(DBName);
+                  XmlNode root = Document.FirstChild;
+                  XmlElement element = Document.CreateElement(KeysName);
+                  //key:relationship:hash
+                  element.SetAttribute("Value", $"[{key}:{relation}:{ID}]{value}");
+                  root.AppendChild(element);
+                  Document.Save(DBName);
+                  this.Load();
+
+                  return new DB
+                  {
+                        Key = key,
+                        Relation = RelationOrType,
+                        Id = ID,
+                        Value = Value 
+                  };
+
+            }
+
             /// <summary>
             /// Adds the key.
             /// </summary>
