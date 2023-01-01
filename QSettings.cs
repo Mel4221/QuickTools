@@ -359,11 +359,11 @@ namespace QuickTools
             }
 
             /// <summary>
-            /// Update the specified setting with the a new Value.
+            /// Updates the setting with the given value 
             /// </summary>
             /// <param name="setting">Setting.</param>
             /// <param name="newValue">New value.</param>
-            public void Update(string setting, string newValue)
+            public void UpdateSetting(string setting, object newValue)
             {
                   this.Load();
                   for (int value = 0; value < Keys.Count; value++)
@@ -371,7 +371,7 @@ namespace QuickTools
                         if (Keys[value] == setting)
                         {
 
-                              Values[value] = newValue;
+                              Values[value] = newValue.ToString();
                               this.Refresh();
                               break;
                         }
@@ -401,6 +401,11 @@ namespace QuickTools
             /// <param name="fileName">File name.</param>
             public QSettings(string fileName)
             {
+
+                  if (!fileName.Contains("."))
+                  {
+                        fileName += ".xml";
+                  }
                   FileName = fileName; 
                   ElementName = "Setting";
                   GroupName = "Settings";
@@ -415,6 +420,10 @@ namespace QuickTools
             /// <param name="elementName">Element name.</param>
             public QSettings(string fileName,string elementName)
             {
+                  if (!fileName.Contains("."))
+                  {
+                        fileName += ".xml";
+                  }
                   FileName = fileName;
                   ElementName = elementName; 
                   GroupName = "Settings";
