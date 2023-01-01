@@ -234,11 +234,11 @@ namespace QuickTools
 
 
             /// <summary>
-            /// Add the specified key setting with the given  value.
+            /// Adds the setting with the given key and value 
             /// </summary>
             /// <param name="key">Key.</param>
             /// <param name="value">Value.</param>
-            public void Add(string key, object value)
+            public void AddSetting(string key, object value)
             {
                   //Get.Wait(this.GetSetting(key));
                   if (this.GetSetting(key) != null)

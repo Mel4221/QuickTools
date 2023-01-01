@@ -36,8 +36,14 @@ namespace QuickTools
       public class IConvert
       {
 
+            /// <summary>
+            /// This class convert some type of special methos that convert to  any type of a array to the same type of list 
+            /// and the same backwards 
+            /// </summary>
             public class ToType<Type>
             {
+
+
 
                   /// <summary>
                   ///Convert the given array type to a list with the same type 
