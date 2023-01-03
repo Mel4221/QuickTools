@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -122,6 +122,27 @@ namespace QuickTools
                   }
                   Writer.Write(fileName, content.ToString());
             }
+
+
+
+            /// <summary>
+            /// Writs the given buffer to the file 
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="buffer">Buffer.</param>
+            public static void IWrite(string file, byte[] buffer)
+            {
+                  if (File.Exists(file) == true)
+                  {
+                        File.Delete(file);
+                  }
+                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+                  {
+                        fs.Write(buffer, 0, buffer.Length);
+                  }
+            }
+
+
 
             /// <summary>
             /// This method writes to a file an entired array of type byte

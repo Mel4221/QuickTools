@@ -78,7 +78,6 @@
     <Compile Include="EmptyCSharpFile.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
-    <Compile Include="Binary.RW.cs" />
     <Compile Include="BinaryReaderTester.cs" />
     <Compile Include="XmlHelper.cs" />
     <Compile Include="CacheHandeler.cs" />
@@ -93,6 +92,7 @@
     <Compile Include="DownloadManager.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="IConvert.cs" />
+    <Compile Include="SecureBinary.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

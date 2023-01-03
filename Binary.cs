@@ -24,12 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.using System;
 using System; 
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Security.Permissions;
+
 
 
 namespace QuickTools
@@ -150,5 +146,105 @@ namespace QuickTools
                   streamWriter.Close();
                   return true;
             }
+
+
+
+            private static MemoryStream Memory;
+            static byte[] Buffer;
+
+
+            /// <summary>
+            /// Moves the file.
+            /// </summary>
+            /// <returns><c>true</c>, if file was moved, <c>false</c> otherwise.</returns>
+            /// <param name="pointA">Point a.</param>
+            /// <param name="pointB">Point b.</param>
+            public static bool MoveFile(string pointA, string pointB)
+            {
+                  bool wasSucessfull = true;
+                  if (!File.Exists(pointA))
+                  {
+                        throw new FileNotFoundException("The file in point A was not founded: " + pointA);
+
+                  }
+
+                  byte[] a = QuickTools.Reader.IRead(pointA);
+
+                  Binary.Writer(pointB, a);
+
+                  byte[] b = QuickTools.Reader.IRead(pointB);
+
+                  if (!CheckFileIntegrity(a, b))
+                  {
+                        throw new IOException("The File was moved but it is Curropted");
+                  }
+
+                  File.Delete(pointA);
+
+                  return wasSucessfull;
+            }
+
+
+            /// <summary>
+            /// Reader the specified file.
+            /// </summary>
+            /// <returns>The reader.</returns>
+            /// <param name="file">File.</param>
+            public static byte[] Reader(string file)
+            {
+                  using (Memory = new MemoryStream(QuickTools.Reader.IRead(file)))
+                  {
+                        Buffer = new byte[Memory.Length];
+                        using (BinaryReader binary = new BinaryReader(Memory))
+                        {
+
+                              binary.Read(Buffer, 0, Buffer.Length);
+
+                        }
+                  }
+
+                  return Buffer;
+            }
+
+
+            /// <summary>
+            /// Checks the file integrity.
+            /// </summary>
+            /// <returns><c>true</c>, if file integrity was checked, <c>false</c> otherwise.</returns>
+            /// <param name="a">The alpha component.</param>
+            /// <param name="b">The blue component.</param>
+            public static bool CheckFileIntegrity(byte[] a, byte[] b)
+            {
+                  bool isSafe = true;
+
+                  for (int i = 0; i < a.Length; i++)
+                  {
+
+                        if (a[i] != b[i])
+                        {
+                              return false;
+                        }
+                  }
+
+                  return isSafe;
+            }
+
+
+            /// <summary>
+            /// Writer the specified file and buffer.
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="buffer">Buffer.</param>
+            public static void Writer(string file, byte[] buffer)
+            {
+                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+                  {
+                        using (BinaryWriter writer = new BinaryWriter(fs))
+                        {
+                              fs.Write(buffer, 0, buffer.Length);
+                        }
+                  }
+            }
+
       }
 }

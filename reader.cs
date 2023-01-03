@@ -33,7 +33,8 @@ namespace QuickTools
             /// </summary>
             public static byte[] BytesData;
 
-
+            public static int CurrentOpration;
+            public static int CurrentGoal;
 
             /// <summary>
             /// Reads bytes what could be considered a row array debided by semicollon that is saved on a file
@@ -81,12 +82,15 @@ namespace QuickTools
                         while (reader.Peek() >= 0)
                         {
                               line = reader.ReadLine();
+
+                              CurrentGoal = line.Length;
                               //Get.Wait(line);// for testing only  
                               //this will loop over the entired line
                               //to make sure that it takes only the
                               // numbers from it 
                               for (int Char = 0; Char < line.Length; Char++)
                               {
+                                    CurrentOpration = Char; 
                                     switch (Get.IsNumber(line[Char]))
                                     {
                                           case true:
@@ -139,16 +143,48 @@ namespace QuickTools
 
 
             }
-            
-                  /*
-                   Array Reader 
-                  */
 
-                  /// <summary>
-                  /// Read and array that is listed on a file and retursn a Generic.List 
-                  /// </summary>
-                  /// <returns>The array.</returns>
-                  /// <param name="file">File.</param>
+            /// <summary>
+            /// Holds The buffer from IRead Method 
+            /// </summary>
+            public static byte[] Buffer;
+
+
+            /// <summary>
+            /// Reads a file and returs the bytes from it 
+            /// </summary>
+            /// <returns>The ead.</returns>
+            /// <param name="file">File.</param>
+            public static byte[] IRead(string file)
+            {
+                  int n;
+                  using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+                  {
+                        Buffer = new byte[fs.Length];
+                       // IReadCurrentGoal = Buffer.Length;
+                        int x = 0; 
+                        while (true)
+                        {
+                              n = fs.Read(Buffer, 0, (int)fs.Length);
+                              x++;
+                         //     IReadCurrentStatus = x; 
+                              if (n == 0)
+                              {
+                                    break;
+                              }
+                        }
+                  }
+                  return Buffer;
+            }
+            /*
+             Array Reader 
+            */
+
+            /// <summary>
+            /// Read and array that is listed on a file and retursn a Generic.List 
+            /// </summary>
+            /// <returns>The array.</returns>
+            /// <param name="file">File.</param>
             public static List<string> ReadArray(string file)
             {
 
@@ -186,9 +222,10 @@ namespace QuickTools
                               //this will loop over the entired line
                               //to make sure that it takes only the
                               // numbers from it 
-
+                              CurrentGoal = line.Length;
                               for (int Char = 0; Char < line.Length; Char++)
                               {
+                                    CurrentOpration = Char; 
                                     switch (Get.IsNumber(line[Char]))
                                     {
                                           case true:

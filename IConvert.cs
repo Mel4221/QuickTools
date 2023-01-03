@@ -36,6 +36,10 @@ namespace QuickTools
       public class IConvert
       {
 
+
+
+
+
             /// <summary>
             /// This class convert some type of special methos that convert to  any type of a array to the same type of list 
             /// and the same backwards 
@@ -43,7 +47,7 @@ namespace QuickTools
             public class ToType<Type>
             {
 
-
+           
 
                   /// <summary>
                   ///Convert the given array type to a list with the same type 
@@ -63,6 +67,9 @@ namespace QuickTools
 
                         return data;
                   }
+
+
+
 
                   /// <summary>
                   ///Convert the given array type to a list with the same type but this method is an static method 
@@ -167,7 +174,30 @@ namespace QuickTools
 
             }
 
-                  
+            /// <summary>
+            /// Gets or sets the convertion status.
+            /// </summary>
+            /// <value>The convertion status.</value>
+            protected static string ConvertionStatus { get; set; }
+            /// <summary>
+            ///  convert bytes to a char array 
+            /// </summary>
+            /// <returns>The char array.</returns>
+            /// <param name="bytes">Bytes.</param>
+            public static char[] ToCharArray(byte[] bytes)
+            {
+
+                  char[] chars = new char[bytes.Length];
+                  for (int i = 0; i < bytes.Length; i++)
+                  {
+                        chars[i] = Convert.ToChar(bytes[i]);
+                        ConvertionStatus = Get.Status(i, bytes.Length);
+                  }
+
+
+                  return chars;
+            }
+
 
             /// <summary>
             /// Strings to bytes array.
