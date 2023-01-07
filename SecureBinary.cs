@@ -31,16 +31,17 @@ namespace QuickTools
 {
       public partial class Secure
       {
+         
 
             /// <summary>
             /// The default key.
             /// </summary>
-            public byte[] DefaultKey = new byte[16];
+            public byte[] DefaultKey { get; set; }
 
             /// <summary>
             /// The default iv.
             /// </summary>
-            public byte[] DefaultIV = new byte[16];
+            public byte[] DefaultIV { get; set; }
 
 
             /// <summary>

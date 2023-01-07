@@ -162,11 +162,11 @@ namespace QuickTools
                   {
                         Buffer = new byte[fs.Length];
                        // IReadCurrentGoal = Buffer.Length;
-                        int x = 0; 
+                       // int x = 0; 
                         while (true)
                         {
                               n = fs.Read(Buffer, 0, (int)fs.Length);
-                              x++;
+                            //  x++;
                          //     IReadCurrentStatus = x; 
                               if (n == 0)
                               {

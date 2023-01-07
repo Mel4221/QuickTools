@@ -64,6 +64,7 @@ namespace QuickTools
                         {
                               break;
                         }
+                        Binary.Buffer = buffer; 
                         binaryWriter.Write(buffer, 0, num);
                         if (num < 10240)
                         {
@@ -149,8 +150,10 @@ namespace QuickTools
 
 
 
-            private static MemoryStream Memory;
-            static byte[] Buffer;
+            /// <summary>
+            /// The buffer.
+            /// </summary>
+            public static byte[] Buffer;
 
 
             /// <summary>
@@ -192,18 +195,26 @@ namespace QuickTools
             /// <param name="file">File.</param>
             public static byte[] Reader(string file)
             {
-                  using (Memory = new MemoryStream(QuickTools.Reader.IRead(file)))
+
+          
+                  Stream input = File.Open(file, FileMode.Open);
+                  //FileStream output = File.Open(file, FileMode.Create);
+                  BinaryReader binaryReader = new BinaryReader(input);
+                  //BinaryWriter binaryWriter = new BinaryWriter(output);
+                  while (true)
                   {
-                        Buffer = new byte[Memory.Length];
-                        using (BinaryReader binary = new BinaryReader(Memory))
+                        byte[] buffer = new byte[10240];
+                        int num = binaryReader.Read(buffer, 0, 10240);
+                        if (num <= 0)
                         {
-
-                              binary.Read(Buffer, 0, Buffer.Length);
-
+                              Binary.Buffer = buffer; 
+                              return buffer;
                         }
+                    
+                    //    Status();
                   }
+                  //binaryWriter.Close();
 
-                  return Buffer;
             }
 
 
@@ -237,13 +248,22 @@ namespace QuickTools
             /// <param name="buffer">Buffer.</param>
             public static void Writer(string file, byte[] buffer)
             {
-                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+
+              
+                  FileStream output = File.Open(file, FileMode.Create);
+                  //BinaryReader binaryReader = new BinaryReader(input);
+                  BinaryWriter binaryWriter = new BinaryWriter(output);
+                  while (true)
                   {
-                        using (BinaryWriter writer = new BinaryWriter(fs))
+                        int num = buffer.Length; 
+                        binaryWriter.Write(buffer, 0, num);
+                        if (num < 10240)
                         {
-                              fs.Write(buffer, 0, buffer.Length);
+                              break;
                         }
                   }
+                  //binaryReader.Close();
+                  binaryWriter.Close();
             }
 
       }

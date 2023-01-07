@@ -10,9 +10,9 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2004.5</PackageVersion>
+    <PackageVersion>2005</PackageVersion>
     <Authors>MBV</Authors>
-    <Description>Minimum updates to the current version </Description>
+    <Description>a Binary Encriptor plus multiple convertion methos were added </Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -51,6 +51,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Updater.cs" />
     <Compile Include="IConvert.cs" />
     <Compile Include="SecureBinary.cs" />
+    <Compile Include="Is.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

@@ -318,7 +318,8 @@ namespace QuickTools
             /// </summary>
             public Secure()
             {
-                  //not implemented 
+                 DefaultKey = new byte[16];
+                  DefaultIV = new byte[16];
             }
 
 
