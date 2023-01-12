@@ -79,7 +79,7 @@
     <Compile Include="EmptyCSharpFile.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
-    <Compile Include="BinaryReaderTester.cs" />
+    <Compile Include="BinaryDumper.cs" />
     <Compile Include="XmlHelper.cs" />
     <Compile Include="CacheHandeler.cs" />
     <Compile Include="CacheHandeler.Read&amp;Write.cs" />

@@ -144,7 +144,7 @@ namespace QuickTools
 
             public void RemoveElement(string fileName,string element)
             {
-                  string value = null;
+                 // string value = null;
                   List<string> elements = new List<string>();
                   List<string> atributes = new List<string>();
                   List<string> values = new List<string>();

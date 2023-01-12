@@ -84,6 +84,14 @@ namespace QuickTools
 
 
             }
+
+            /// <summary>
+            /// Decrypt the specified bytes, password and iv.
+            /// </summary>
+            /// <returns>The decrypt.</returns>
+            /// <param name="bytes">Bytes.</param>
+            /// <param name="password">Password.</param>
+            /// <param name="iv">Iv.</param>
             public string Decrypt(byte[] bytes, byte[] password, byte[] iv)
             {
 

@@ -24,6 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System; 
+
+/// <summary>
+/// Recursive file search.
+/// </summary>
 public class RecursiveFileSearch
 {
       static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();

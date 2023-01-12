@@ -33,7 +33,13 @@ namespace QuickTools
             /// </summary>
             public static byte[] BytesData;
 
+            /// <summary>
+            /// The current opration.
+            /// </summary>
             public static int CurrentOpration;
+            /// <summary>
+            /// The current goal.
+            /// </summary>
             public static int CurrentGoal;
 
             /// <summary>

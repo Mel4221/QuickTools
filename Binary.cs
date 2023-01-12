@@ -154,7 +154,10 @@ namespace QuickTools
             /// The buffer.
             /// </summary>
             public static byte[] Buffer;
-
+            /// <summary>
+            /// Gets the length from the reader 
+            /// </summary>
+            public static int Length; 
 
             /// <summary>
             /// Moves the file.
@@ -207,7 +210,8 @@ namespace QuickTools
                         int num = binaryReader.Read(buffer, 0, 10240);
                         if (num <= 0)
                         {
-                              Binary.Buffer = buffer; 
+                              Binary.Buffer = buffer;
+                              Length = buffer.Length; 
                               return buffer;
                         }
                     

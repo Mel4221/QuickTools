@@ -81,7 +81,13 @@ namespace QuickTools
                  
             }
 
-
+            /// <summary>
+            /// Encrypt the specified bytes, with password and IV.
+            /// </summary>
+            /// <returns>The encrypt.</returns>
+            /// <param name="bytes">Bytes.</param>
+            /// <param name="password">Password.</param>
+            /// <param name="IV">Iv.</param>
             public byte[] Encrypt(byte[] bytes , byte[] password , byte[] IV)
             {
                   if(bytes.Length == 0 || password.Length == 0 || IV.Length == 0)
@@ -341,6 +347,10 @@ namespace QuickTools
             #region IDisposable Support
             private bool disposedValue = false; // To detect redundant calls
 
+            /// <summary>
+            /// Dispose the specified disposing.
+            /// </summary>
+            /// <param name="disposing">If set to <c>true</c> disposing.</param>
             protected virtual void Dispose(bool disposing)
             {
                   if (!disposedValue)
@@ -357,13 +367,14 @@ namespace QuickTools
                   }
             }
 
-            // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-            // ~Secure() {
-            //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            //   Dispose(false);
-            // }
+        
 
-            // This code added to correctly implement the disposable pattern.
+
+            /// <summary>
+            /// Releases all resource used by the <see cref="T:QuickTools.Secure"/> object.
+            /// </summary>
+            /// 
+            /// 
             public void Dispose()
             {
                   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.

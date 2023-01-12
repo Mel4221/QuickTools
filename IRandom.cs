@@ -1,4 +1,4 @@
-/*
+﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
 text. 
@@ -206,7 +206,9 @@ namespace QuickTools
       }
 
 
-
+            /// <summary>
+            /// The random text counter.
+            /// </summary>
             public static double RandomTextCounter = 0; 
             /// <summary>
             /// Generat Randoms text completly chunked together useful to create random passwords or anything that requires a long string of text.

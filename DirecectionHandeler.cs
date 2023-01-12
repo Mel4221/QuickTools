@@ -1,4 +1,4 @@
-/*
+﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
 text. 
@@ -172,6 +172,12 @@ namespace QuickTools
 
                   }
             }
+            /// <summary>
+            /// Capture the specified condition, triguer and callBack.
+            /// </summary>
+            /// <param name="condition">Condition.</param>
+            /// <param name="triguer">Triguer.</param>
+            /// <param name="callBack">Call back.</param>
             public void Capture(string condition, Action triguer , Action callBack)
             {
 
@@ -234,6 +240,14 @@ namespace QuickTools
                   callBack(); 
             }
 
+            /// <summary>
+            /// Capture the specified condition, triguer, callBack, limitX and limitY.
+            /// </summary>
+            /// <param name="condition">Condition.</param>
+            /// <param name="triguer">Triguer.</param>
+            /// <param name="callBack">Call back.</param>
+            /// <param name="limitX">Limit x.</param>
+            /// <param name="limitY">Limit y.</param>
             public void Capture(string condition, Action triguer, Action callBack , int[] limitX, int[] limitY)
             {
 
