@@ -95,6 +95,7 @@
     <Compile Include="IConvert.cs" />
     <Compile Include="SecureBinary.cs" />
     <Compile Include="Is.cs" />
+    <Compile Include="Connector.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

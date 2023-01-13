@@ -57,7 +57,13 @@ namespace QuickTools
             /// </summary>
             public  void Start()
             {
-                  sw = Stopwatch.StartNew();
+                  try
+                  {
+                        sw = Stopwatch.StartNew();
+                  }catch(Exception ex)
+                  {
+                        throw new Exception("There Was an error Starting the Check Start"+"\n"+ex);
+                  }
             }
 
             /// <summary>
@@ -67,11 +73,19 @@ namespace QuickTools
             public string Stop()
             {
 
-                  sw.Stop();
-                  Seconds = sw.Elapsed.Seconds;
-                  Minutes = sw.Elapsed.Minutes;
-                  Milliseconds = sw.Elapsed.Milliseconds;
-                  return $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}"; 
+                  try
+                  {
+                        sw.Stop();
+                        Seconds = sw.Elapsed.Seconds;
+                        Minutes = sw.Elapsed.Minutes;
+                        Milliseconds = sw.Elapsed.Milliseconds;
+                        return $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}";
+                  }
+                  catch (Exception ex)
+                  {
+                        throw new Exception("There Was an error Stoping  the Check  so please make sure that the check started sucessfully" + "\n" + ex);
+                  }
+               
             }
 
 
