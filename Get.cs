@@ -706,6 +706,14 @@ namespace QuickTools
                   string inputValue = Console.ReadLine();
                   int number;
 
+
+                  var inputParser = new InputParser();
+                  if (inputParser.HasCommands(inputValue))
+                  {
+                        inputParser.Parse(); 
+                        return new InputType(); 
+                  }
+
                   isnumber = int.TryParse(inputValue, out number);
 
                   if (isnumber)
@@ -744,6 +752,7 @@ namespace QuickTools
             /// <param name="display">Display.</param>
             public static InputType Input(string display)
             {
+                          
                  Console.Write("");
                   Get.LabelSide(display);
                   Get.Reset();                  
