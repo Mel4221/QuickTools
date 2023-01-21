@@ -38,8 +38,30 @@ namespace QuickTools
 
 
 
-      
+            /// <summary>
+            /// Loop the specified actionMethod forever
+            /// </summary>
+            /// <param name="actionMethod">Action method.</param>
+            public static void Loop(Action actionMethod)
+            {
+                  while (true)
+                  {
+                        actionMethod(); 
+                  }
+            }
 
+            /// <summary>
+            /// Loop the specified actionMethod until the condition is meet.
+            /// </summary>
+            /// <param name="actionMethod">Action method.</param>
+            /// <param name="untilConditionIsMeet">Until condition is meet.</param>
+            public static void Loop(Action actionMethod,Func<bool> untilConditionIsMeet)
+            {
+                  while (untilConditionIsMeet())
+                  {
+                        actionMethod();
+                  }
+            }
 
             /// <summary>
             /// Get the porcenrage status of the provided current time and goal 
@@ -577,41 +599,6 @@ namespace QuickTools
                  //For testing Print.List(F(input));
             }
 
-
-
-
-            /// <summary>
-            /// Parses the text to a string array.
-            /// </summary>
-            /// <returns>The text to array.</returns>
-            /// <param name="words">Words.</param>
-            public static string[] ParseTextToArray(string words)
-            {
-                  string[] wordsArray = words.Split(' ');
-                                   
-                  Func<String[], String[]> F = (arr) => {
-                        String[] clearArr;
-                        List<string> list = new List<string>();
-                        for (int i = 0; i < arr.Length; i++)
-                        {
-                              if (arr[i] != "" && arr[i] != null)
-                              {
-                                    list.Add(arr[i]);
-                              }
-                        }
-
-                        clearArr = new string[list.Count];
-                        for (int val = 0; val < list.Count; val++)
-                        {
-                              clearArr[val] = list[val];
-                        }
-
-                        return clearArr;
-
-                  };
-
-                  return F(wordsArray); 
-            }
             /// <summary>
             /// Get the Input as an array the array.
             /// </summary>
@@ -678,7 +665,11 @@ namespace QuickTools
                   /// </summary>
                   /// <value>The number.</value>
                   public int Number { get; set; }
-
+                  /// <summary>
+                  /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Get.InputType"/> is bool.
+                  /// </summary>
+                  /// <value><c>true</c> if bool; otherwise, <c>false</c>.</value>
+                  public bool Bool { get; set;}
                   /// <summary>
                   /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Get.InputType"/>.
                   /// </summary>
@@ -704,14 +695,14 @@ namespace QuickTools
                   Console.Write(" ");
                   bool isnumber;
                   string inputValue = Console.ReadLine();
-                  int number;
 
+                  int number;
 
                   var inputParser = new InputParser();
                   if (inputParser.HasCommands(inputValue))
                   {
-                        inputParser.Parse(); 
-                        return new InputType(); 
+                        inputParser.Parse();
+                        return inputParser.ReturnType; 
                   }
 
                   isnumber = int.TryParse(inputValue, out number);

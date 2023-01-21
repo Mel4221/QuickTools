@@ -61,6 +61,7 @@ namespace QuickTools
                         /// </summary>
                         /// <value>The URL.</value>
                         public string Url { get; set; }
+
                         
                         /// <summary>
                         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Net.QHttp"/> notify status.
@@ -88,13 +89,31 @@ namespace QuickTools
                         public List<Header> Headers { get; set; }
 
                
+                  /// <summary>
+                  /// Parses to google question.
+                  /// </summary>
+                  /// <returns>The to google question.</returns>
+                  /// <param name="question">Question.</param>
+                        public string ParseToGoogleQuestion(string question)
+                  {
+                       if(IConvert.TextToArray(question).Length > 1)
+                        {
+                              string temporalString = "";
+                              foreach (string words in IConvert.TextToArray(question))
+                              {
+                                    temporalString += words + "+";
+                              }
+                              return $"https://www.google.com/search?q={temporalString}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8";
+                        }
+                        return $"https://www.google.com/search?q={question}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8";
+                  }
+                  //q = $"https://www.google.com/search?q={question}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8"; 
 
-
-                              /// <summary>
-                              /// Makes a Get request method to the given and returns the string response 
-                              /// </summary>
-                              /// <returns>The get.</returns>
-                              public string Get()
+                  /// <summary>
+                  /// Makes a Get request method to the given and returns the string response 
+                  /// </summary>
+                  /// <returns>The get.</returns>
+                  public string Get()
                               {
 
                         //string context = "context=Data Source=data1.cwzysvw0mxjn.us-east-2.rds.amazonaws.com;Initial Catalog=ManSys;Persist Security Info=True;User ID=admin;Password=Dmelqui20181";

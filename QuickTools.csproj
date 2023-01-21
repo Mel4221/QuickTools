@@ -96,8 +96,10 @@
     <Compile Include="SecureBinary.cs" />
     <Compile Include="Is.cs" />
     <Compile Include="QHttp.cs" />
-    <Compile Include="ConnectorGet.cs" />
+    <Compile Include="QNet.cs" />
     <Compile Include="InputParser.cs" />
+    <Compile Include="QInput.cs" />
+    <Compile Include="InputClassExt.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="notes-from-tester.txt" />

@@ -44,7 +44,7 @@ namespace QuickTools
                                     Options.Label = "The current File does not Exist : '"+file+"' Would you like to create it ?";    
                                     var option = new Options(true||false);
                                      
-                                    if(option.Pick() == 1)
+                                    if(option.Pick() == 0)
                                     {
                                         CreateFile(file,data); 
                                     }

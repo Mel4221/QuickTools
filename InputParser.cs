@@ -32,9 +32,14 @@ namespace QuickTools
       /// <summary>
       /// Input parser.
       /// </summary>
-      public class InputParser
+      public partial class InputParser
       {
 
+            /// <summary>
+            /// Gets or sets the type of the return.
+            /// </summary>
+            /// <value>The type of the return.</value>
+            public Get.InputType ReturnType { get; set; }
             private string[] Commands;
 
             /// <summary>
@@ -63,10 +68,12 @@ namespace QuickTools
                               if (input.Substring(0, qtl) == this.QTCommand)
                               {
                                     has = true;
-                                    this.Commands = Get.ParseTextToArray(input.Substring(qtl)); 
-                                    return has; 
+                                    this.Commands = IConvert.TextToArray(input.Substring(qtl));
                                     //Get.Ok(2); 
                                     //Get.Blue($"{input.Substring(qtl)}");
+                                    //foreach (string str in this.Commands) Get.Blue(str); 
+                                    return has;
+
                               }
                         }
                   }
@@ -75,12 +82,13 @@ namespace QuickTools
                   return has; 
             }
 
-            private string ReadCommands(int from , int until)
+            private string ReadCommands(int from)
             {
-                  StringBuilder text = new StringBuilder(); 
-                  for(int i=from; i<until; i++)
+                  StringBuilder text = new StringBuilder();
+                  for (int i = from; i < Commands.Length; i++)
                   {
-                        text.Append(Commands[from] + " "); 
+                        text.Append(Commands[i] + " ");
+                        //Get.Blue(this.Commands[i]); 
                   }
                   return text.ToString(); 
             }
@@ -104,23 +112,27 @@ namespace QuickTools
 
                         switch (action)
                         {
+                              case "random":
+                              case "rand":
+                                          
+                                    break; 
                               case "get":
+
                                     switch (type) 
                                     {
-                                          case "clear":
-                                          case "c": 
+                                             case "clear":
+                                      
                                                 Get.Clear(); 
                                                 break; 
                                           case "box":
-                                                Get.Box(this.ReadCommands(2,Commands.Length)); 
+                                                //foreach (string str in this.Commands) Get.Yellow(str); 
+
+                                                Get.Box(this.ReadCommands(2)); 
                                                 break;
                                           case "F":
                                                 switch(arg)
                                                 {
-                                                      case "text":
-                                                      case "t":
-                                                            Get.Box(param); 
-                                                            break;
+                   
 
                                                       default:
                                                             Color.Red($"Invalid Argument Command: {arg} at: {action} > {type} > '{arg}'");
@@ -128,7 +140,7 @@ namespace QuickTools
                                                 }
                                                 break; 
                                           default:
-                                                Color.Red($"Invalid Type Command: {type} at: {action} > '{type}' > {arg}");
+                                                Color.Red($"Invalid Type : {type} at: {action} > '{type}' > {arg}");
                                                 break; 
                                     }
                                     break;
@@ -163,15 +175,17 @@ namespace QuickTools
                               while (true)
                               {
                                     string input = $"{inputParser.QTCommand} {Get.Input().Text}"; 
-                                    if(input == "exit")
+                                    if(input == $"{inputParser.QTCommand} exit")
                                     {
                                           break; 
                                     }
-                                    Get.Wait(input); 
+                                    //Get.Wait(input); 
                                     if(inputParser.HasCommands(input))
                                     {
                                           inputParser.Parse(); 
                                     }
+                                    //Get.Wait(input); 
+                                    //foreach (string str in inputParser.Commands) Get.Blue(str); 
                               }
 
                               return status; 

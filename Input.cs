@@ -1,114 +1,141 @@
 ﻿using System;
+using System.Text; 
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using QuickTools;
-namespace Tester
+namespace QuickTools
 {
       /// <summary>
-      /// This handles an imput handler that execute a function while is reading input
+      /// This is a class that allows a console application to take multiple lines of text respecting the spaces and simbols
       /// </summary>
-      public class Input
+      public partial class Input
       {
-            /// <summary>
-            /// The key .
-            /// </summary>
-            public string Key = null;
-            /// <summary>
-            /// The key char.
-            /// </summary>
-            public string KeyChar = null;
-            /// <summary>
-            /// The input list.
-            /// </summary>
-            public LinkedList<string> InputList = new LinkedList<string>();
 
+            private List<string> ContentList = new List<string>();
+            /// <summary>
+            /// The margin.
+            /// </summary>
+            public int Margin = 1;
 
             /// <summary>
-            /// Read this The Input letter by letter.
+            /// The cursor simbol.
             /// </summary>
-            public static void Read(Action functionToCheck)
+            public char CursorSimbol = '|';
+
+            /// <summary>
+            /// The display input.
+            /// </summary>
+            public Action<object> DisplayInput;
+
+            /// <summary>
+            /// The input display.
+            /// </summary>
+            public Action<object> InputDisplay;
+
+            /// <summary>
+            /// Text this instance.
+            /// </summary>
+            /// <returns>The text.</returns>
+            public string Text()
             {
-                  var input = new Input();
-
-                  while (input.Key != "Enter")
+                  StringBuilder str = new StringBuilder();
+                  for (int ch = 0; ch < ContentList.Count; ch++)
                   {
-
-
-                        var key = Console.ReadKey();
-                        Get.Clear();
-                        input.Key = key.Key.ToString();
-                        input.KeyChar = key.KeyChar.ToString();
-
-                        // Get.Wait(Key);
-                        // if is backspace well you should delete the last one 
-                        if (input.Key == "Backspace")
-                        {
-                              input.InputList.RemoveLast();
-                              //InputList.Remove(KeyChar);
-                              // Get.Red(KeyChar); 
-
-                        }
-                        if (input.Key != "Backspace")
-                        {
-                              input.InputList.AddLast(input.KeyChar);
-                        }
-                        //Color.Green(Key + " " + KeyChar);
-                        functionToCheck();
+                        str.Append(ContentList[ch]);
                   }
+                  return str.ToString();
             }
 
 
             /// <summary>
-            /// Read this The Input letter by letter.
+            /// Parse the specified keyInput.
             /// </summary>
-            public void Read()
+            /// <param name="keyInput">Key input.</param>
+            public void Parse(QInput.KeyInfo keyInput)
             {
+                  string key, modif, cha;
 
+                  key = keyInput.Key.ToString();
+                  modif = keyInput.Modifiers.ToString();
+                  cha = keyInput.KeyChar.ToString();
 
-                  while (this.Key != "Enter")
+                  if (modif == "0")
                   {
-
-
-                        var key = Console.ReadKey();
-                        Get.Clear();
-                        this.Key = key.Key.ToString();
-                        this.KeyChar = key.KeyChar.ToString();
-
-                        // Get.Wait(Key);
-                        // if is backspace well you should delete the last one 
-                        if (this.Key == "Backspace")
+                        switch (key)
                         {
-                              InputList.RemoveLast();
-                              //InputList.Remove(KeyChar);
-                              // Get.Red(KeyChar); 
+                              case "LeftArrow":
+                              case "RightArrow":
+                              case "UpArrow":
+                              case "DownArrow":
+                                    //ArrowsHandeler(key);
+                                    break;
+                              case "Spacebar":
+                                    ContentList.Add("\t");
+                                    this.X = this.ContentList.Count;
+                                    break;
+                              case "Backspace":
+                                    if (ContentList.Count > 0) ContentList.RemoveAt(ContentList.Count - 1);
+                                    break;
 
+
+                              default:
+
+                                    ContentList.Add(cha);
+                                    this.X = this.ContentList.Count;
+                                    Console.Title = Text();
+                                    break;
                         }
-                        if (Key != "Backspace")
-                        {
-                              InputList.AddLast(KeyChar);
-                        }
-                        //Color.Green(Key + " " + KeyChar);
-                        FunctionToCheck();
+                        return;
+                  }
+                  else
+                  {
+                        ContentList.Add(key);
+                        this.X = this.ContentList.Count;
+                        return;
                   }
             }
 
-
-            private Action FunctionToCheck;
+            private string Tabs(int tabs)
+            {
+                  StringBuilder tabsList = new StringBuilder();
+                  for (int i = 0; i < tabs; i++)
+                  {
+                        tabsList.Append("\t");
+                  }
+                  return tabsList.ToString();
+            }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="T:Tester.Input"/> class.
+            /// The QInput instanse.
+            /// </summary>
+            public QInput QInputInstanse = new QInput();
+           
+
+            /// <summary>
+            /// Read this instance.
+            /// </summary>
+            /// <returns>The read.</returns>
+            public string Read()
+            {
+
+                  QInputInstanse.ReadingCallBack = (item) => {
+                        this.Parse(item);
+                        Get.Clear();
+
+                        this.DisplayInput(this.Text());
+                        return null;
+                  };
+                  QInputInstanse.Start();
+                  return this.Text();
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.Input"/> class.
             /// </summary>
             public Input()
             {
-
+                  //Get.Green(" "+this.Text()+""); 
+                  this.DisplayInput = (content) => {
+                        Get.Green($"{Tabs(Margin)}{content}{this.CursorSimbol}{Tabs(Margin)}");
+                  };
             }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:Tester.Input"/> class.
-            /// </summary>
-            public Input(Action functionToCheck)
-            {
-                  FunctionToCheck = functionToCheck;
-            }
-
       }
 }

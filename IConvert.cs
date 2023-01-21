@@ -143,7 +143,39 @@ namespace QuickTools
 
 
             private static StringBuilder text = new StringBuilder();
-         
+
+            /// <summary>
+            /// Converts the Text to string array 
+            /// </summary>
+            /// <returns>The to array.</returns>
+            /// <param name="words">Words.</param>
+            public static string[] TextToArray(string words)
+            {
+                  string[] wordsArray = words.Split(' ');
+
+                  Func<String[], String[]> F = (arr) => {
+                        String[] clearArr;
+                        List<string> list = new List<string>();
+                        for (int i = 0; i < arr.Length; i++)
+                        {
+                              if (arr[i] != "" && arr[i] != null)
+                              {
+                                    list.Add(arr[i]);
+                              }
+                        }
+
+                        clearArr = new string[list.Count];
+                        for (int val = 0; val < list.Count; val++)
+                        {
+                              clearArr[val] = list[val];
+                        }
+
+                        return clearArr;
+
+                  };
+
+                  return F(wordsArray);
+            }
 
             /// <summary>
             /// Byteses to string.
