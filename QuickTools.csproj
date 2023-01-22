@@ -72,7 +72,7 @@
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
     <Compile Include="RecursiveFileSearch.cs" />
-    <Compile Include="Input.cs" />
+    <Compile Include="CInput.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="BinaryDumper.cs" />
     <Compile Include="QSettings.cs" />

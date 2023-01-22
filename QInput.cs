@@ -70,7 +70,7 @@ namespace QuickTools
             /// <summary>
             /// The reading call back.
             /// </summary>
-            public Func<KeyInfo, KeyInfo> ReadingCallBack = (item) => { return null; };
+            public Func<KeyInfo, KeyInfo> ReadingCallBack = (item) => { return item; };
 
 
             /// <summary>
@@ -115,11 +115,11 @@ namespace QuickTools
             }
 
 
-            private void DisplayLabel()
-            {
-                  Get.Title(this.Label);
-                  DisplayAction(this.Label);
-            }
+            /// <summary>
+            /// Contains the method which handles the display mecanisim 
+            /// </summary>
+            public virtual void DisplayLabel() => DisplayAction(this.Label);           
+
 
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QInput"/> class.

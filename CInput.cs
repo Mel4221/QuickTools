@@ -45,11 +45,8 @@ namespace QuickTools
             }
 
 
-            /// <summary>
-            /// Parse the specified keyInput.
-            /// </summary>
-            /// <param name="keyInput">Key input.</param>
-            public void Parse(QInput.KeyInfo keyInput)
+         
+            private void Parse(QInput.KeyInfo keyInput)
             {
                   string key, modif, cha;
 
@@ -93,7 +90,12 @@ namespace QuickTools
                   }
             }
 
-            private string Tabs(int tabs)
+            /// <summary>
+            /// Allows you to get a dinamic amount of tabs and returns it into an string format
+            /// </summary>
+            /// <returns>The tabs.</returns>
+            /// <param name="tabs">Tabs.</param>
+            public string Tabs(int tabs)
             {
                   StringBuilder tabsList = new StringBuilder();
                   for (int i = 0; i < tabs; i++)
@@ -113,9 +115,9 @@ namespace QuickTools
             /// Read this instance.
             /// </summary>
             /// <returns>The read.</returns>
-            public string Read()
+            public virtual string Read()
             {
-
+                  //this.QInputInstanse.
                   QInputInstanse.ReadingCallBack = (item) => {
                         this.Parse(item);
                         Get.Clear();
