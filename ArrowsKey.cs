@@ -17,7 +17,7 @@ namespace QuickTools
       /// which seems to me  really anticated  and this one provides movements
       /// with all the arrow keys
       /// </summary>
-      public class ArrowKey
+      public class ArrowsKey
       {
             /// <summary>
             /// The x.
@@ -316,29 +316,29 @@ namespace QuickTools
             }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowsKey"/> class.
             /// </summary>
-            public ArrowKey()
+            public ArrowsKey()
             {
                   
             }
             /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowsKey"/> class.
             /// </summary>
             /// <param name="intitialX">Intitial x.</param>
             /// <param name="initialY">Initial y.</param>
-            public ArrowKey(int intitialX, int initialY)
+            public ArrowsKey(int intitialX, int initialY)
             {
                   X = intitialX;
                   Y = initialY; 
             }
             /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowKey"/> class.
+            /// Initializes a new instance of the <see cref="T:QuickTools.ArrowsKey"/> class.
             /// </summary>
             /// <param name="intitialX">Intitial x.</param>
             /// <param name="initialY">Initial y.</param>
             /// <param name="SwitchUpDown">If set to <c>true</c> switch up down.</param>
-            public ArrowKey(int intitialX, int initialY,bool SwitchUpDown)
+            public ArrowsKey(int intitialX, int initialY,bool SwitchUpDown)
             {
                   X = intitialX;
                   Y = initialY;

@@ -67,7 +67,7 @@
     <Compile Include="console.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="printList.cs" />
-    <Compile Include="ArrowKey.cs" />
+    <Compile Include="ArrowsKey.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
