@@ -251,7 +251,7 @@ namespace QuickTools
 
                               using (StreamWriter writer = new StreamWriter(file))
                               {
-                                    foreach (byte key in New.KeyGenerated)
+                                    foreach (byte key in IRandom.KeyGenerated)
                                     {
                                           writer.Write(key + ",");
                                     }
@@ -286,7 +286,7 @@ namespace QuickTools
 
                               using (StreamWriter writer = new StreamWriter(file))
                               {
-                                    foreach (byte key in New.KeyGenerated)
+                                    foreach (byte key in IRandom.KeyGenerated)
                                     {
                                           writer.Write(key + ",");
                                     }

@@ -34,31 +34,18 @@ namespace QuickTools
 
                                                       
 
-      /// <summary>
-      /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 
-      /// </summary>
-      public class IRandom:New
-      {
-
-      }
+     
       /*
-            The class new it is the one who will containe multiple methods
-            that will handle new random data 
-            The name was changed due to making more sence if is called like 
-            and you know what i will create  another class just because 
-            that could be called on the same maner 
+       
       */
+   
       /// <summary>
-      /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 
+      /// The class new it is the one who will containe multiple methodthat will handle new random data 
+      /// The name was changed due to making more sence if is called like 
+      /// and you know what i will create  another class just because 
+      /// that could be called on the same maner 
       /// </summary>
-      public class CreateRandom:New
-      {
-
-      }
-      /// <summary>
-      /// This Class create random Passwords or Pin and the Passwords contains letters,symbols and numbers 
-      /// </summary>
-      public class New
+      public class IRandom
     {
         
 

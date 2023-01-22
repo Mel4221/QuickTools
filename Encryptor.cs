@@ -153,7 +153,7 @@ namespace QuickTools
                  // try {
                   
                   byte[] Key = CreatePassword(password.ToString());
-                  byte[] IV = UseSavedKey == false ? New.RandomByteKey(AllowToSaveKey) : Get.KeyBytesSaved(); 
+                  byte[] IV = UseSavedKey == false ? IRandom.RandomByteKey(AllowToSaveKey) : Get.KeyBytesSaved(); 
                   this.PublicKey = IV;
                         
                         //Get.Wait($"Text: {plainText.Length} Key: {Key.Length} IV: {IV.Length}");

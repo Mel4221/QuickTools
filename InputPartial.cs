@@ -26,12 +26,12 @@
 using System;
 namespace QuickTools
 {
-           
-                  public partial class Input
-                  {
+
+      public partial class Input
+      {
 
 
-                        private int X;
+            private int X;
                         //private int Y;
                         private void DisplayEditor()
                         {

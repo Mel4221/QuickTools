@@ -61,28 +61,20 @@
     <Compile Include="colorWithParam.cs" />
     <Compile Include="user.cs" />
     <Compile Include="Get.cs" />
-    <Compile Include="Traductor.cs" />
     <Compile Include="reader.cs" />
     <Compile Include="writer.cs" />
     <Compile Include="Binary.cs" />
     <Compile Include="console.cs" />
     <Compile Include="logger.cs" />
-    <Compile Include="arrowKeysReader.cs" />
-    <Compile Include="LoopInput.cs" />
-    <Compile Include="NewImplementation.cs" />
     <Compile Include="printList.cs" />
-    <Compile Include="OptionExt.cs" />
-    <Compile Include="DirecectionHandeler.cs" />
+    <Compile Include="ArrowKey.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Decryptor.cs" />
     <Compile Include="Encryptor.cs" />
-    <Compile Include="EmptyCSharpFile.cs" />
+    <Compile Include="RecursiveFileSearch.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Panel.cs" />
     <Compile Include="BinaryDumper.cs" />
-    <Compile Include="XmlHelper.cs" />
-    <Compile Include="CacheHandeler.cs" />
-    <Compile Include="CacheHandeler.Read&amp;Write.cs" />
     <Compile Include="QSettings.cs" />
     <Compile Include="MiniDB_Methods.cs" />
     <Compile Include="MiniDB_Fields.cs" />
@@ -91,7 +83,6 @@
     <Compile Include="DB.cs" />
     <Compile Include="CProgressBar.cs" />
     <Compile Include="DownloadManager.cs" />
-    <Compile Include="Updater.cs" />
     <Compile Include="IConvert.cs" />
     <Compile Include="SecureBinary.cs" />
     <Compile Include="Is.cs" />
@@ -99,12 +90,12 @@
     <Compile Include="QNet.cs" />
     <Compile Include="InputParser.cs" />
     <Compile Include="QInput.cs" />
-    <Compile Include="InputClassExt.cs" />
+    <Compile Include="InputPartial.cs" />
 </ItemGroup>
   <ItemGroup>
-    <None Include="notes-from-tester.txt" />
     <None Include="packages.config" />
     <None Include="encrypter.intent" />
+    <None Include="Decriptor.intent" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
