@@ -90,7 +90,7 @@
     <Compile Include="QNet.cs" />
     <Compile Include="InputParser.cs" />
     <Compile Include="QInput.cs" />
-    <Compile Include="InputPartial.cs" />
+    <Compile Include="CInputPartial.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

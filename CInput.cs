@@ -62,7 +62,7 @@ namespace QuickTools
                               case "RightArrow":
                               case "UpArrow":
                               case "DownArrow":
-                                    //ArrowsHandeler(key);
+                                    ArrowsHandeler(key);
                                     break;
                               case "Spacebar":
                                     ContentList.Add("\t");
@@ -77,7 +77,7 @@ namespace QuickTools
 
                                     ContentList.Add(cha);
                                     this.X = this.ContentList.Count;
-                                    Console.Title = Text();
+                                    //Console.Title = Text();
                                     break;
                         }
                         return;

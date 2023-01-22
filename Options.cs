@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *	This is a quick way to create simple menu on a console aplication 
  *	by just adding the options like : 
@@ -505,7 +505,8 @@ namespace QuickTools
 
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            /// Initializes a new instance of the <see cref="T:QuickTools.Options"/> 
+            /// so far the only type listed is list 
             /// </summary>
             /// <param name="options">Options.</param>
             /// <param name="typeOfOptions">Type of options.</param>
@@ -514,7 +515,6 @@ namespace QuickTools
                   switch(typeOfOptions.ToLower())
                   {
                                     case "list":
-                                    
                                     ClearOptions();
                                     SelectorL = "";
                                     SelectorR = "";
