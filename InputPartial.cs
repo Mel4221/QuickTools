@@ -27,7 +27,7 @@ using System;
 namespace QuickTools
 {
 
-      public partial class Input
+      public partial class CInput
       {
 
 

@@ -6,7 +6,7 @@ namespace QuickTools
       /// <summary>
       /// This is a class that allows a console application to take multiple lines of text respecting the spaces and simbols
       /// </summary>
-      public partial class Input
+      public partial class CInput
       {
 
             private List<string> ContentList = new List<string>();
@@ -130,7 +130,7 @@ namespace QuickTools
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.Input"/> class.
             /// </summary>
-            public Input()
+            public CInput()
             {
                   //Get.Green(" "+this.Text()+""); 
                   this.DisplayInput = (content) => {
