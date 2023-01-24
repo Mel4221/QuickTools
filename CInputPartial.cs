@@ -35,6 +35,7 @@ namespace QuickTools
                         //private int Y;
                         private void DisplayEditor()
                         {
+
                               string[] array = IConvert.ToType<string>.ToArray(this.ContentList);
                               for (int word = 0; word < array.Length; word++)
                               {
@@ -45,15 +46,31 @@ namespace QuickTools
                         }
                         private void ArrowsHandeler(string key)
                         {
-
+                              int index = 0;
+                              string temp = null;
                               switch (key)
                               {
                                     case "LeftArrow":
+                                    
+                                    ArrayWalker.Array = IConvert.ToType<string>.ToArray(this.ContentList);
+                                    index = ArrayWalker.Walk();
+                                    if (this.ContentList.Count >= index) temp = this.ContentList[index]; 
+                                    Get.Blue($"Index: {index} Content List Reference: {temp}");
+
+                                    this.ContentList = IConvert.ToType<string>.ToList(this.ArrayWalker.Array);
+                                    Get.Wait($"Arrows Current X: {ArrayWalker.Arrows.X} Converted To List: {this.ContentList[index]} Length: {this.ContentList.Count}");
+                                    //this.ArrayWalker = new ArrayWalker(); 
 
                                           break;
                                     case "RightArrow":
 
+                                    ArrayWalker.Array = IConvert.ToType<string>.ToArray(this.ContentList);
+                                    index = ArrayWalker.Walk();
+                                    if (this.ContentList.Count >= index) temp = this.ContentList[index];
+                                    Get.Wait($"Index: {index} Content List Reference: {temp}");
+                                    //this.ArrayWalker = new ArrayWalker();
                                           break;
+
                                     case "UpArrow":
 
                                           break;

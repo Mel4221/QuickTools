@@ -50,7 +50,6 @@
     <Reference Include="System" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +90,8 @@
     <Compile Include="InputParser.cs" />
     <Compile Include="QInput.cs" />
     <Compile Include="CInputPartial.cs" />
+    <Compile Include="ArrayWalker.cs" />
+    <Compile Include="FilesMaper.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

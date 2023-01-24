@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using System.Xml;
-using System.Data;
 using System.Collections.Generic;
 using System.IO;
 namespace QuickTools

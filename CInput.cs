@@ -10,6 +10,8 @@ namespace QuickTools
       {
 
             private List<string> ContentList = new List<string>();
+            private ArrayWalker ArrayWalker = new ArrayWalker(); 
+
             /// <summary>
             /// The margin.
             /// </summary>

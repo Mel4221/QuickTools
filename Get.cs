@@ -695,15 +695,9 @@ namespace QuickTools
                   Console.Write(" ");
                   bool isnumber;
                   string inputValue = Console.ReadLine();
-
                   int number;
 
-                  var inputParser = new InputParser();
-                  if (inputParser.HasCommands(inputValue))
-                  {
-                        inputParser.Parse();
-                        return inputParser.ReturnType; 
-                  }
+ 
 
                   isnumber = int.TryParse(inputValue, out number);
 
@@ -786,16 +780,15 @@ namespace QuickTools
             public static bool IsNumber(object input)
             {
                   string textInput = input.ToString();
-                  int number = 0;
+                  double number = 0;
                   bool isNumber = false;
 
-                  isNumber = int.TryParse(textInput.Replace("D", ""), out number);
+                  isNumber = double.TryParse(textInput.Replace("D", ""), out number);
 
 
 
                   if (isNumber == true)
                   {
-                        Get.Number = number;                        
                         return true;
                   }
                   else

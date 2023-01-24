@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTools", "QuickTools.csproj", "{264AC135-0E28-4D44-9BD8-CB6F10CF4C3D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1B98C66D-7710-4782-8C57-D8944D45957E}"
-	ProjectSection(SolutionItems) = preProject
-		InputParser_Parser_Methods..cs = InputParser_Parser_Methods..cs
-		QInput.cs = QInput.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

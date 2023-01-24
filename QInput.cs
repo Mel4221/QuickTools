@@ -1,4 +1,4 @@
-﻿using System; 
+﻿using System;
 namespace QuickTools
 {
       /// <summary>
@@ -118,7 +118,7 @@ namespace QuickTools
             /// <summary>
             /// Contains the method which handles the display mecanisim 
             /// </summary>
-            public virtual void DisplayLabel() => DisplayAction(this.Label);           
+            public virtual void DisplayLabel() => DisplayAction(this.Label);
 
 
             /// <summary>

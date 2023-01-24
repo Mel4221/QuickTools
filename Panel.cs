@@ -28,7 +28,7 @@ using QuickTools;
 using static System.Console;
 using System.Collections.Generic;
 
-namespace Tester
+namespace QuickTools
 {
       /// <summary>
       /// Panel body.
