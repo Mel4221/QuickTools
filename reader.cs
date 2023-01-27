@@ -65,6 +65,7 @@ namespace QuickTools
 
 
 
+             
 
                   List<object> dataList = new List<object>();
                   byte[] dataBytes;
@@ -149,6 +150,27 @@ namespace QuickTools
 
 
             }
+
+
+            /// <summary>
+            /// Files to byte array.
+            /// </summary>
+            /// <returns>The to byte array.</returns>
+            /// <param name="fileName">File name.</param>
+            public static byte[] FileToByteArray(string fileName)
+            {
+                  byte[] fileData = null;
+
+                  using (FileStream fs = File.OpenRead(fileName))
+                  {
+                        using (BinaryReader binaryReader = new BinaryReader(fs))
+                        {
+                              fileData = binaryReader.ReadBytes((int)fs.Length);
+                        }
+                  }
+                  return fileData;
+            }
+
 
             /// <summary>
             /// Holds The buffer from IRead Method 

@@ -97,6 +97,14 @@ namespace QuickTools
 
 
 
+            private void FeedBack(object value)
+            {
+                  if (this.Interactive)
+                  {
+                        Get.Yellow($"Info: {value} \n");
+                  }
+            }
+
             /// <summary>
             /// Adds the key on hot and you later desides when to write it to the db file 
             /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
@@ -375,10 +383,7 @@ namespace QuickTools
             {
                   this.Load();
                   bool removed = false;
-                  if (this.SelectWhereKey(keyName.ToString()).Count > 1)
-                  {
-                        return removed; 
-                  }
+               
 
 
 
@@ -1134,19 +1139,52 @@ namespace QuickTools
             /// </summary>
             /// <returns>The where key.</returns>
             /// <param name="value">Value.</param>
-            public virtual List<DB> SelectWhereKey(object value)
+            public virtual DB SelectWhereKey(object value)
             {
                   try
                   {
-                        using (MiniDB db = new MiniDB(this.DBName))
+                        for(int db = 0; db < this.DataBase.Count; db++)
                         {
-                              return db.DataBase.Where(a => a.Key == value.ToString()).ToList();
+                              if(DataBase[db].Key == value.ToString())
+                              {
+                                    return DataBase[db]; 
+                              }
                         }
+                        return new DB(); 
                   }
                   catch 
                   {
                         Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new List<DB>();
+                        return new DB();
+                  }
+            }
+
+
+
+            /// <summary>
+            /// Selecs the allt where key.
+            /// </summary>
+            /// <returns>The allt where key.</returns>
+            /// <param name="value">Value.</param>
+            public virtual List<DB> SelecAlltWhereKey(object value)
+            {
+                  try
+                  {
+                        List<DB> dbList = new List<DB>(); 
+                        for (int db = 0; db < this.DataBase.Count; db++)
+                        {
+                              if (DataBase[db].Key == value.ToString())
+                              {
+                                    dbList.Add(DataBase[db]); 
+                              }
+                        }
+
+                        return dbList;
+                  }
+                  catch
+                  {
+                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                        return new List<DB>(); 
                   }
             }
 
@@ -1276,17 +1314,16 @@ namespace QuickTools
                   try
                   {
 
-                        using (MiniDB db = new MiniDB(this.DBName))
-                        {
-                              for (int x = 0; x < db.DataBase.Count; x++)
+                      
+                              for (int x = 0; x < this.DataBase.Count; x++)
                               {
-                                    if (db.DataBase[x].Id == Id)
+                                    if (this.DataBase[x].Id == Id)
                                     {
-                                          return db.DataBase[x];
+                                          return this.DataBase[x];
                                     }
                               }
 
-                        }
+                     
                         return new DB();
                   }
                   catch

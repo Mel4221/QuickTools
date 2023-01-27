@@ -63,6 +63,12 @@ namespace QuickTools
 
 
             /// <summary>
+            /// Gets or sets a value indicating whether this <see cref="T:QuickTools.MiniDB"/> is interactive.
+            /// </summary>
+            /// <value><c>true</c> if interactive; otherwise, <c>false</c>.</value>
+            public bool Interactive { get; set; }
+
+            /// <summary>
             /// Gets or sets the path.
             /// </summary>
             /// <value>The path.</value>

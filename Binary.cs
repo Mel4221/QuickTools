@@ -224,7 +224,7 @@ namespace QuickTools
 
             /// <summary>
             /// Checks the file integrity.
-            /// </summary>
+            /// </summary>x`
             /// <returns><c>true</c>, if file integrity was checked, <c>false</c> otherwise.</returns>
             /// <param name="a">The alpha component.</param>
             /// <param name="b">The blue component.</param>
@@ -253,21 +253,12 @@ namespace QuickTools
             public static void Writer(string file, byte[] buffer)
             {
 
-              
-                  FileStream output = File.Open(file, FileMode.Create);
-                  //BinaryReader binaryReader = new BinaryReader(input);
-                  BinaryWriter binaryWriter = new BinaryWriter(output);
-                  while (true)
-                  {
-                        int num = buffer.Length; 
-                        binaryWriter.Write(buffer, 0, num);
-                        if (num < 10240)
-                        {
-                              break;
-                        }
-                  }
-                  //binaryReader.Close();
-                  binaryWriter.Close();
+                
+
+                   BinaryWriter writer = new BinaryWriter(new FileStream(file,FileMode.Create));
+                   writer.Write(buffer); 
+                 
+                        
             }
 
       }

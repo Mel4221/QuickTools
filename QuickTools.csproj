@@ -92,6 +92,8 @@
     <Compile Include="CInputPartial.cs" />
     <Compile Include="ArrayWalker.cs" />
     <Compile Include="FilesMaper.cs" />
+    <Compile Include="QZip.cs" />
+    <Compile Include="QZipArchive.cs" />
 </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

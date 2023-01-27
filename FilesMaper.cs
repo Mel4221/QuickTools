@@ -37,12 +37,12 @@ namespace QuickTools
             /// <summary>
             /// Contains the list of directoys founded 
             /// </summary>
-            public List<string> DirectoryList = new List<string>();
+            public List<string> DirectoryList { get; set; }
 
             /// <summary>
             /// Contains the list of files founded 
             /// </summary>
-            public List<string> FileList = new List<string>();
+            public List<string> FileList { get; set; }
 
 
 
@@ -102,10 +102,34 @@ namespace QuickTools
 
 
             /// <summary>
+            /// Parse the specified path.
+            /// </summary>
+            /// <param name="path">Path.</param>
+            public void Parse(string path)
+            {
+                  string[] dirs = Directory.GetDirectories(path); 
+                  for (int x = 0; x < dirs.Length; x++)
+                  {
+                        //Get.Green(dirs[x]);
+                        this.DirectoryList.Add(dirs[x]);
+                        Get.Green(dirs[x]);
+                        this.GetFiles(dirs[x]);
+                        this.GetDirs(Directory.GetDirectories(dirs[x]));
+
+                  }
+
+                  //Get.Wait($"Dirs Count: {DirectoryList.Count}"); 
+
+            }
+
+
+            /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.FilesMaper"/> class.
             /// </summary>
             public FilesMaper()
             {
+                  this.DirectoryList = new List<string>();
+                  this.FileList      = new List<string>();
 
             }
       }

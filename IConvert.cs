@@ -146,38 +146,36 @@ namespace QuickTools
 
             private static StringBuilder text = new StringBuilder();
 
+
+            /// <summary>
+            /// This takes an sring array which is verify if it has empty spaces and it returns it back without any empty spaces
+            /// </summary> 
+            public static Func<String[], String[]> ArrayJutifyer = (arr) => {
+                  String[] clearArr;
+                  List<string> list = new List<string>();
+                  for (int i = 0; i < arr.Length; i++)
+                  {
+                        if (arr[i] != "" && arr[i] != null)
+                        {
+                              list.Add(arr[i]);
+                        }
+                  }
+
+                  clearArr = new string[list.Count];
+                  for (int val = 0; val < list.Count; val++)
+                  {
+                        clearArr[val] = list[val];
+                  }
+
+                  return clearArr;
+
+            };
             /// <summary>
             /// Converts the Text to string array 
             /// </summary>
             /// <returns>The to array.</returns>
             /// <param name="words">Words.</param>
-            public static string[] TextToArray(string words)
-            {
-                  string[] wordsArray = words.Split(' ');
-
-                  Func<String[], String[]> F = (arr) => {
-                        String[] clearArr;
-                        List<string> list = new List<string>();
-                        for (int i = 0; i < arr.Length; i++)
-                        {
-                              if (arr[i] != "" && arr[i] != null)
-                              {
-                                    list.Add(arr[i]);
-                              }
-                        }
-
-                        clearArr = new string[list.Count];
-                        for (int val = 0; val < list.Count; val++)
-                        {
-                              clearArr[val] = list[val];
-                        }
-
-                        return clearArr;
-
-                  };
-
-                  return F(wordsArray);
-            }
+            public static string[] TextToArray(string words) => ArrayJutifyer(words.Split(' '));
 
             /// <summary>
             /// Byteses to string.
