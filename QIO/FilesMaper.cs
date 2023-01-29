@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using System.IO;
-using QuickTools.Core;
 using System.Collections.Generic;
 using QuickTools.QCore;
 

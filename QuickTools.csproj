@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,6 +9,20 @@
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <PackageId>2006.0</PackageId>
+    <PackageVersion>6.0.0.0</PackageVersion>
+    <Authors>MBV</Authors>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Owners>MBV</Owners>
+    <PackageProjectUrl>https://github.com/Mel4221</PackageProjectUrl>
+    <PackageReleaseNotes>This Version is a modulare version which has every single Class Devided by it's onwn NameSpaces as it was supposed to be on version one but as the code grew up it was more than required to do the change to a modular class </PackageReleaseNotes>
+    <Summary>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Summary>
+    <PackageTags>tools secure QuickTools </PackageTags>
+    <Title>QuickTools</Title>
+    <Description>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,4 +113,5 @@
     <None Include="QCore\setting.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
 </Project>
