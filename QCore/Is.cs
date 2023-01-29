@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System.Runtime.InteropServices;
-namespace QuickTools.Core
+namespace QuickTools.QCore
 {
       /// <summary>
       /// This Class provides a group of methods that Ares statics and provide a type of checks 

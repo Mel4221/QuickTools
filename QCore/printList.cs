@@ -26,7 +26,7 @@
 using System;
 using QuickTools.QColors; 
 using System.Collections.Generic; 
-namespace QuickTools.Core
+namespace QuickTools.QCore
 {
       /// <summary>
       /// Print print a list of the array that is passed through 
