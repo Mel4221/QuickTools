@@ -23,29 +23,49 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using System;
+using System.IO;
+namespace QuickTools.QIO
+{
+      public partial class Binary
+      {
 
-// Information about this assembly is defined by the following attributes. 
-// Change them to the values specific to your project.
+            public static void Writer(string file , byte[] data)
+            {
 
-[assembly: AssemblyTitle("QuickTools")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MBV")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("MIT")]
-[assembly: AssemblyTrademark("MIT")]
-[assembly: AssemblyCulture("")]
+              
 
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
+                  Stream s2 = File.Open(file, FileMode.Create);
 
-[assembly: AssemblyVersion("1.0.*")]
+                  BinaryWriter f2 = new BinaryWriter(s2);
+                  
 
-// The following attributes are used to specify the signing key for the assembly, 
-// if desired. See the Mono documentation for more information about signing.
 
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
+                  while (true)
+
+                  {
+
+
+                        byte[] buf = new byte[10240];
+
+                        int sz = data.Length; 
+
+                        if (sz <= 0)
+
+                              break;
+
+                        f2.Write(buf, 0, sz);
+
+                        if (sz < 10240)
+
+                              break; // eof reached
+
+                  }
+
+                 
+                  f2.Close();
+
+                 
+            }
+      }
+}

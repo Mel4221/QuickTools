@@ -1,105 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{264AC135-0E28-4D44-9BD8-CB6F10CF4C3D}</ProjectGuid>
+    <ProjectGuid>{45BBD18E-98E5-4C79-A3A9-227732E85875}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <PackageId>QuickTools</PackageId>
-    <PackageVersion>2005</PackageVersion>
-    <Authors>MBV</Authors>
-    <Description>a Binary Encriptor plus multiple convertion methos were added </Description>
-    <PackOnBuild>true</PackOnBuild>
-    <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageLicenseUrl>https://github.com/segmentio/is-url/blob/master/LICENSE-MIT</PackageLicenseUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Owners>MBV</Owners>
-    <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
-    <PackageReleaseNotes>Just small updates related with stability</PackageReleaseNotes>
-    <Summary>C# Librarry</Summary>
-    <PackageTags>easy tool console color short encrypt secure write read </PackageTags>
-    <Title>QuickTools</Title>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\QuickTools.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>BeforeBuild</type>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
-    <LangVersion>Latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="IRandom.cs" />
-    <Compile Include="colorNoParam.cs" />
-    <Compile Include="colorWithParam.cs" />
-    <Compile Include="user.cs" />
-    <Compile Include="Get.cs" />
-    <Compile Include="reader.cs" />
-    <Compile Include="writer.cs" />
-    <Compile Include="Binary.cs" />
-    <Compile Include="console.cs" />
-    <Compile Include="logger.cs" />
-    <Compile Include="printList.cs" />
-    <Compile Include="ArrowsKey.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Decryptor.cs" />
-    <Compile Include="Encryptor.cs" />
-    <Compile Include="RecursiveFileSearch.cs" />
-    <Compile Include="CInput.cs" />
-    <Compile Include="Panel.cs" />
-    <Compile Include="BinaryDumper.cs" />
-    <Compile Include="QSettings.cs" />
-    <Compile Include="MiniDB_Methods.cs" />
-    <Compile Include="MiniDB_Fields.cs" />
-    <Compile Include="MiniDB_Constructors.cs" />
-    <Compile Include="Check.cs" />
-    <Compile Include="DB.cs" />
-    <Compile Include="CProgressBar.cs" />
-    <Compile Include="DownloadManager.cs" />
-    <Compile Include="IConvert.cs" />
-    <Compile Include="SecureBinary.cs" />
-    <Compile Include="Is.cs" />
-    <Compile Include="QHttp.cs" />
-    <Compile Include="QNet.cs" />
-    <Compile Include="InputParser.cs" />
-    <Compile Include="QInput.cs" />
-    <Compile Include="CInputPartial.cs" />
-    <Compile Include="ArrayWalker.cs" />
-    <Compile Include="FilesMaper.cs" />
-    <Compile Include="QZip.cs" />
-    <Compile Include="QZipArchive.cs" />
-</ItemGroup>
+    <Compile Include="QColors\colorWithParam.cs" />
+    <Compile Include="QColors\colorNoParam.cs" />
+    <Compile Include="QCore\GlobalSuppressions.cs" />
+    <Compile Include="QCore\Check.cs" />
+    <Compile Include="QCore\Get.cs" />
+    <Compile Include="QCore\IRandom.cs" />
+    <Compile Include="QCore\IConvert.cs" />
+    <Compile Include="QCore\Is.cs" />
+    <Compile Include="QCore\printList.cs" />
+    <Compile Include="QConsole\ArrayWalker.cs" />
+    <Compile Include="QConsole\ArrowsKey.cs" />
+    <Compile Include="QConsole\CInput.cs" />
+    <Compile Include="QConsole\CInputPartial.cs" />
+    <Compile Include="QConsole\console.cs" />
+    <Compile Include="QConsole\CProgressBar.cs" />
+    <Compile Include="QConsole\DirecectionHandeler.cs" />
+    <Compile Include="QIO\InputParser.cs" />
+    <Compile Include="QConsole\LoopInput.cs" />
+    <Compile Include="QConsole\Options.cs" />
+    <Compile Include="QConsole\Panel.cs" />
+    <Compile Include="QConsole\QInput.cs" />
+    <Compile Include="QData\MiniDB_Methods.cs" />
+    <Compile Include="QData\DB.cs" />
+    <Compile Include="QData\MiniDB_Constructors.cs" />
+    <Compile Include="QData\MiniDB_Fields.cs" />
+    <Compile Include="QData\QSettings.cs" />
+    <Compile Include="QData\user.cs" />
+    <Compile Include="QData\XmlHelper.cs" />
+    <Compile Include="QIO\BinaryReaderTester.cs" />
+    <Compile Include="QIO\Binary.RW.cs" />
+    <Compile Include="QIO\Binary.cs" />
+    <Compile Include="QIO\BinaryDumper.cs" />
+    <Compile Include="QIO\RecursiveFileSearch.cs" />
+    <Compile Include="QIO\Logger.cs" />
+    <Compile Include="QIO\FilesMaper.cs" />
+    <Compile Include="QIO\reader.cs" />
+    <Compile Include="QIO\QZip.cs" />
+    <Compile Include="QIO\QZipArchive.cs" />
+    <Compile Include="QIO\writer.cs" />
+    <Compile Include="QNet\DownloadManager.cs" />
+    <Compile Include="QNet\QHttp.cs" />
+    <Compile Include="QNet\QNet.cs" />
+    <Compile Include="QSecurity\Decryptor.cs" />
+    <Compile Include="QSecurity\Encryptor.cs" />
+    <Compile Include="QSecurity\LowEncrypter.cs" />
+    <Compile Include="QSecurity\SecureBinary.cs" />
+    <Compile Include="QSecurity\Traductor.cs" />
+  </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="encrypter.intent" />
-    <None Include="Decriptor.intent" />
+    <Folder Include="QColors\" />
+    <Folder Include="QConsole\" />
+    <Folder Include="QCore\" />
+    <Folder Include="QData\" />
+    <Folder Include="QIO\" />
+    <Folder Include="QNet\" />
+    <Folder Include="Script\" />
+    <Folder Include="QSecurity\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QCore\encrypter.intent" />
+    <None Include="QCore\notes-from-tester.txt" />
+    <None Include="QCore\Decriptor.intent" />
+    <None Include="QCore\setting.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
 </Project>
