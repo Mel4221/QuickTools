@@ -60,10 +60,7 @@ namespace QuickTools.QIO
                               this.GetDirs(Directory.GetDirectories(dirs[x]));
                         }
                   }
-                  else
-                  {
-                        return;
-                  }
+             
 
             }
 
@@ -134,5 +131,7 @@ namespace QuickTools.QIO
                   this.FileList      = new List<string>();
 
             }
-      }
+   
+
+    }
 }

@@ -33,7 +33,7 @@ namespace QuickTools.QIO
       /// <summary>
       /// Binary.
       /// </summary>
-      public partial class Binary
+      public class Binary
       {
             /// <summary>
             /// The current status.
@@ -174,13 +174,13 @@ namespace QuickTools.QIO
 
                   }
 
-                  byte[] a = QuickTools.QIO.Reader.IRead(pointA);
+            byte[] a = Binary.Reader(pointA); 
 
                   Binary.Writer(pointB, a);
 
-                  byte[] b = QuickTools.QIO.Reader.IRead(pointB);
+                  byte[] b = Binary.Reader(pointB);
 
-                  if (!CheckFileIntegrity(a, b))
+                if(!CheckFileIntegrity(a, b))
                   {
                         throw new IOException("The File was moved but it is Curropted");
                   }
@@ -191,35 +191,25 @@ namespace QuickTools.QIO
             }
 
 
-            /// <summary>
-            /// Reader the specified file.
-            /// </summary>
-            /// <returns>The reader.</returns>
-            /// <param name="file">File.</param>
-            public static byte[] Reader(string file)
+        /// <summary>
+        /// Reader the specified file.
+        /// </summary>
+        /// <returns>The reader.</returns>
+        /// <param name="file">File.</param>
+        public static byte[] Reader(string file)
+        {
+
+            int fileLengh = File.ReadAllBytes(file).Length;
+            byte[] bytes = new byte[fileLengh]; 
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
             {
-
-
-                  Stream input = File.Open(file, FileMode.Open);
-                  //FileStream output = File.Open(file, FileMode.Create);
-                  BinaryReader binaryReader = new BinaryReader(input);
-                  //BinaryWriter binaryWriter = new BinaryWriter(output);
-                  while (true)
-                  {
-                        byte[] buffer = new byte[10240];
-                        int num = binaryReader.Read(buffer, 0, 10240);
-                        if (num <= 0)
-                        {
-                              Binary.Buffer = buffer;
-                              Length = buffer.Length;
-                              return buffer;
-                        }
-
-                        //    Status();
-                  }
-                  //binaryWriter.Close();
-
+                using (BinaryReader reader = new BinaryReader(fs))
+                {
+                    reader.Read(bytes,0,fileLengh);
+                    return bytes; 
+                }
             }
+        }
 
 
             /// <summary>
@@ -244,7 +234,23 @@ namespace QuickTools.QIO
                   return isSafe;
             }
 
- 
+            public static void Writer(string file,byte[] bytes)
+        {
+            if (File.Exists(file)) File.Delete(file); 
 
-      }
+
+            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+            {
+                using (BinaryWriter writer = new BinaryWriter(fs))
+                {
+
+                     writer.Write(bytes, 0, bytes.Length);
+
+                }
+            }
+        }
+
+
+
+    }
 }

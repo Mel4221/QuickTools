@@ -29,8 +29,6 @@ using QuickTools.QCore;
 using System.IO;
 using System.Net;
 
-namespace QuickTools.Net
-{
 
       namespace QuickTools.QNet
       {
@@ -342,4 +340,3 @@ namespace QuickTools.Net
             }
 
       }
-}

@@ -30,9 +30,7 @@ using System.Text;
 using QuickTools.QCore;
 
 
-namespace QuickTools.Net
-{
-      namespace QuickTools.QNet
+   namespace QuickTools.QNet
       {
 
 
@@ -229,7 +227,7 @@ namespace QuickTools.Net
             }
       }
 
-}
+
 
 
 

@@ -125,22 +125,7 @@ namespace QuickTools.QIO
 
 
 
-            /// <summary>
-            /// Writs the given buffer to the file 
-            /// </summary>
-            /// <param name="file">File.</param>
-            /// <param name="buffer">Buffer.</param>
-            public static void IWrite(string file, byte[] buffer)
-            {
-                  if (File.Exists(file) == true)
-                  {
-                        File.Delete(file);
-                  }
-                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
-                  {
-                        fs.Write(buffer, 0, buffer.Length);
-                  }
-            }
+
 
 
 

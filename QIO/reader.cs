@@ -180,32 +180,7 @@ namespace QuickTools.QIO
             public static byte[] Buffer;
 
 
-            /// <summary>
-            /// Reads a file and returs the bytes from it 
-            /// </summary>
-            /// <returns>The ead.</returns>
-            /// <param name="file">File.</param>
-            public static byte[] IRead(string file)
-            {
-                  int n;
-                  using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
-                  {
-                        Buffer = new byte[fs.Length];
-                       // IReadCurrentGoal = Buffer.Length;
-                       // int x = 0; 
-                        while (true)
-                        {
-                              n = fs.Read(Buffer, 0, (int)fs.Length);
-                            //  x++;
-                         //     IReadCurrentStatus = x; 
-                              if (n == 0)
-                              {
-                                    break;
-                              }
-                        }
-                  }
-                  return Buffer;
-            }
+          
             /*
              Array Reader 
             */

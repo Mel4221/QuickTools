@@ -77,7 +77,6 @@
     <Compile Include="QData\user.cs" />
     <Compile Include="QData\XmlHelper.cs" />
     <Compile Include="QIO\BinaryReaderTester.cs" />
-    <Compile Include="QIO\Binary.RW.cs" />
     <Compile Include="QIO\Binary.cs" />
     <Compile Include="QIO\BinaryDumper.cs" />
     <Compile Include="QIO\RecursiveFileSearch.cs" />
@@ -95,6 +94,10 @@
     <Compile Include="QSecurity\LowEncrypter.cs" />
     <Compile Include="QSecurity\SecureBinary.cs" />
     <Compile Include="QSecurity\Traductor.cs" />
+    <Compile Include="Script\Interpreter\QInterpreter_Constructors.cs" />
+    <Compile Include="Script\Interpreter\QInterpreter_Files.cs" />
+    <Compile Include="Script\Interpreter\QInterpreter_Methods.cs" />
+    <Compile Include="Script\Interpreter\QInterpreter_Fields.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

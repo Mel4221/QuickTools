@@ -24,48 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.IO;
-namespace QuickTools.QIO
+namespace QScript.Interpreter
 {
-      public partial class Binary
+      public partial class QInterpreter
       {
-
-            public static void Writer(string file , byte[] data)
-            {
-
-              
-
-                  Stream s2 = File.Open(file, FileMode.Create);
-
-                  BinaryWriter f2 = new BinaryWriter(s2);
-                  
-
-
-                  while (true)
-
+            private string[] Arguments; 
+            private string Top = @"
+                  using System;
+                  using System.IO;
+                  using QuickTools;
+                  using System.Text;
+                  using QuickTools.QNet;
+                  using QuickTools.Colors;
+                  namespace QScript
                   {
+                        public class MainEntry
+                        {
+
+                              static void Main(string[] args)
+                              {
+            ";
 
 
-                        byte[] buf = new byte[10240];
-
-                        int sz = data.Length; 
-
-                        if (sz <= 0)
-
-                              break;
-
-                        f2.Write(buf, 0, sz);
-
-                        if (sz < 10240)
-
-                              break; // eof reached
-
+            private string Button = @"
+                              }
+                        }
                   }
+            ";
 
-                 
-                  f2.Close();
+            public string Body { get; set; }
 
-                 
-            }
+
       }
 }
