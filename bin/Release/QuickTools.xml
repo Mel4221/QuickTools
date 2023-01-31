@@ -344,6 +344,17 @@
             <returns>The code.</returns>
             <param name="bytes">Bytes.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.HashCode(System.String,System.Int32)">
+            <summary>
+            This has the same level of security of <see cref="M:QuickTools.QCore.Get.HashCode(System.String)"/>
+            which measn that is not secure enough so if you need encription
+            please refer to <see cref="T:QuickTools.QSecurity.Secure"/>
+            </summary>
+            <param name="text"></param>
+            <param name="length"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
         <member name="M:QuickTools.QCore.Get.HashCode(System.String)">
             <summary>   
             This Creates a hash code based on the given input 

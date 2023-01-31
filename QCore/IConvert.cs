@@ -218,16 +218,22 @@ namespace QuickTools.QCore
             /// <param name="bytes">Bytes.</param>
             public static char[] ToCharArray(byte[] bytes)
             {
+            try
+            {
 
-                  char[] chars = new char[bytes.Length];
-                  for (int i = 0; i < bytes.Length; i++)
-                  {
-                        chars[i] = Convert.ToChar(bytes[i]);
-                        ConvertionStatus = Get.Status(i, bytes.Length);
-                  }
+                char[] chars = new char[bytes.Length];
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    chars[i] = Convert.ToChar(bytes[i]);
+                    ConvertionStatus = Get.Status(i, bytes.Length);
+                }
 
 
-                  return chars;
+                return chars;
+            }catch(Exception e)
+            {
+                throw e; 
+            }
             }
 
 
@@ -269,7 +275,7 @@ namespace QuickTools.QCore
                   catch (Exception ex)
                   {
                         Color.Yellow("It Looks like the row string could not be converted to bytes \n" + ex);
-                        return new byte[100];// just to give it a value not really that it does anything special 
+                        throw ex;// new byte[100];// just to give it a value not really that it does anything special 
                   }
 
             }

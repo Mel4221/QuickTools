@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using QuickTools.QIO;
 using QuickTools.QColors;
 using System.Diagnostics;
+using System.Linq;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -82,6 +83,7 @@ namespace QuickTools.QCore
 
             status = $"{s}%";
             return status;
+
         }
         /*
          Console.BufferHeight
@@ -122,6 +124,46 @@ namespace QuickTools.QCore
         }
 
 
+        /// <summary>
+        /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>
+        /// which measn that is not secure enough so if you need encription
+        /// please refer to <see cref="QuickTools.QSecurity.Secure"/>
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static double HashCode(string text,int length)
+        {
+
+            if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
+            if (length == 0) length = text.Length;
+            //if (length )
+
+            byte[] bytes = new byte[length];
+            byte[] str = System.Text.Encoding.ASCII.GetBytes(text); ;
+            double x = 0;
+            double seed = 7;
+            int max = str.Length;
+            int indexer = 0; 
+            //filling
+            for(int f = 0; f <bytes.Length; f++)
+            {
+                if(indexer == max)
+                {
+                    indexer = 0; 
+                }
+                bytes[f] = str[indexer];
+                indexer++; 
+            }
+
+            //creating hash
+            for (int item = 0; item < bytes.Length; item++)
+            {
+                x += ((seed * bytes[item]) + item);
+            }
+            return x;
+        }
         /// <summary>   
         /// This Creates a hash code based on the given input 
         /// be carefull using this as a security method since 
