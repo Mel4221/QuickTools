@@ -65,7 +65,7 @@ namespace QuickTools.QCore
                         throw new Exception("There Was an error Starting the Check Start"+"\n"+ex);
                   }
             }
-
+            private string STringResults; 
             /// <summary>
             /// Stop this instance.
             /// </summary>
@@ -79,9 +79,10 @@ namespace QuickTools.QCore
                         Seconds = sw.Elapsed.Seconds;
                         Minutes = sw.Elapsed.Minutes;
                         Milliseconds = sw.Elapsed.Milliseconds;
-                        return $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}";
-                  }
-                  catch (Exception ex)
+                        STringResults =  $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}";
+                return STringResults; 
+            }
+            catch (Exception ex)
                   {
                         throw new Exception("There Was an error Stoping  the Check  so please make sure that the check started sucessfully" + "\n" + ex);
                   }

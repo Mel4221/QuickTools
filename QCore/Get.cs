@@ -108,14 +108,17 @@ namespace QuickTools.QCore
         /// <param name="bytes">Bytes.</param>
         public static double HashCode(byte[] bytes)
         {
-            double x = 0;
-            double seed = 7;
+            if (bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
+            
+                double x = 0;
+                double seed = 7;
 
-            for (int item = 0; item < bytes.Length; item++)
-            {
-                x += ((seed * bytes[item]) + item);
-            }
-            return x;
+                for (int item = 0; item < bytes.Length; item++)
+                {
+                    x += ((seed * bytes[item]) + item);
+                }
+                return x;
+          
         }
 
 
@@ -128,6 +131,8 @@ namespace QuickTools.QCore
         /// <param name="text">Text.</param>
         public static double HashCode(string text)
         {
+            if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
+
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(text); 
             double x = 0;
             double seed = 7;
