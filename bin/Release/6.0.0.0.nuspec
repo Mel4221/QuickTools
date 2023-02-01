@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata minClientVersion="">
+    <id>6.0.0.0</id>
+    <version>6.0.0</version>
+    <title>QuickTools</title>
+    <authors>MBV</authors>
+    <owners>MBV</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Mel4221</projectUrl>
+    <description>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</description>
+    <summary>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</summary>
+    <releaseNotes>This Version is a modulare version which has every single Class Devided by it's onwn NameSpaces as it was supposed to be on version one but as the code grew up it was more than required to do the change to a modular class </releaseNotes>
+    <copyright></copyright>
+    <language>en</language>
+    <tags>tools secure QuickTools </tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.7" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.7" />
+      <frameworkAssembly assemblyName="System.Runtime.InteropServices.RuntimeInformation" targetFramework=".NETFramework4.7" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.7" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="/home/mel/Documents/csharp/QuickTools/bin/Release/QuickTools.dll" target="lib/net47/QuickTools.dll" />
+  </files>
+</package>
