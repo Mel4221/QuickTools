@@ -246,10 +246,7 @@ namespace QuickTools.QIO
         }
 
 
-            public Binary()
-            {
-
-            }
+           
       }
 
 }

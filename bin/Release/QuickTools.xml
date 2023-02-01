@@ -2721,11 +2721,6 @@
             The buffer.
             </summary>
         </member>
-        <member name="F:QuickTools.QIO.Binary.Length">
-            <summary>
-            Gets the length from the reader 
-            </summary>
-        </member>
         <member name="F:QuickTools.QIO.Binary.Chunck">
             <summary>
             The chunck.
@@ -2775,6 +2770,21 @@
             Gets or sets the speed unit default is set to kbs
             </summary>
             <value>The speed unit.</value>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.AllowMegabytesAsDefault">
+            <summary>
+            The allow megabytes as default.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.CallBackAction">
+            <summary>
+            The call back function.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
+            </summary>
         </member>
         <member name="T:QuickTools.QIO.FileDumper">
             <summary>

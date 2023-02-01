@@ -32,15 +32,12 @@ namespace QuickTools.QIO
             /// <summary>
             /// The current status.
             /// </summary>
-            public static long CurrentStatus;
+            public  long CurrentStatus;
             /// <summary>
             /// The buffer.
             /// </summary>
             public byte[] Buffer;
-            /// <summary>
-            /// Gets the length from the reader 
-            /// </summary>
-            public static int Length;
+      
             /// <summary>
             /// The chunck.
             /// </summary>
@@ -87,7 +84,7 @@ namespace QuickTools.QIO
             /// Gets or sets the speed chars.
             /// </summary>
             /// <value>The speed chars.</value>
-            public string SpeedChars = "Kb"; 
+            public string SpeedChars = "Kbs"; 
 
             /// <summary>
             /// Gets or sets the speed unit default is set to kbs
@@ -95,7 +92,42 @@ namespace QuickTools.QIO
             /// <value>The speed unit.</value>
             public int SpeedUnit = 8;
 
-         
 
+            /// <summary>
+            /// The allow megabytes as default.
+            /// </summary>
+            public bool AllowMegabytesAsDefault;
+
+            /// <summary>
+            /// The call back function.
+            /// </summary>
+            public Action<long,long,long> CallBackAction;
+ 
+
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
+            /// </summary>
+            public Binary()
+            {
+                  this.CallBackAction = (a,b,c) =>
+                  {
+                      
+                  };
+            }
       }
 }
+
+/*
+              return new Binary()
+                        {
+                              FileName = this.FileName,
+                              CurrentStatus = this.CurrentStatus,
+                              Buffer = this.Buffer,
+                              Chunck = this.Chunck,
+                              AllowDebugger = this.AllowDebugger,
+                              ReadSpeed = this.ReadSpeed,
+                              SpeedChars = this.SpeedChars,
+                              SpeedUnit = this.SpeedUnit
+                        };
+*/

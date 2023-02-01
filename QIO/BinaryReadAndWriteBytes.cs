@@ -87,7 +87,9 @@ namespace QuickTools.QIO
                                     status++;
                                     //stopwatch.Stop();
                                     long t = stopwatch.ElapsedMilliseconds == 0 ? 1 : stopwatch.ElapsedMilliseconds;
-                                    this.ReadSpeed = (current * this.SpeedUnit) / t; 
+                                    this.ReadSpeed = this.CheckForAllwed((current * this.SpeedUnit) / t); 
+
+                                    this.CallBackAction(current,fileSize,stopwatch.ElapsedMilliseconds);
                               }
 
                         }
@@ -95,6 +97,20 @@ namespace QuickTools.QIO
                   }
             }
 
+
+
+            private long CheckForAllwed(long value)
+            {
+                  if(this.AllowMegabytesAsDefault == true)
+                  {
+                        this.SpeedChars = "MBs";
+                        return value / 1000;
+                  }
+                  else
+                  {
+                        return value; 
+                  }
+            }
 
             /// <summary>
             /// Print the specified current proses  remaining but only if <see cref="QuickTools.QIO.Binary.AllowDebugger"/>.
@@ -108,6 +124,7 @@ namespace QuickTools.QIO
                         string x = Get.Status(current, fileSize - 1);
                         if (s != x)
                         {
+                              Get.Clear(); 
                               s = Get.Status(current, fileSize - 1);
                               Get.Green($"Speed: {this.ReadSpeed}{this.SpeedChars}  {s}");
                         }
