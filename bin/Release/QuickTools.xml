@@ -2685,6 +2685,14 @@
             <param name="a">The alpha component.</param>
             <param name="b">The blue component.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.CheckFileIntegrity(System.String,System.String)">
+            <summary>
+            Checks the file integrity.
+            </summary>
+            <returns><c>true</c>, if file integrity was checked, <c>false</c> otherwise.</returns>
+            <param name="fileA">File a.</param>
+            <param name="fileB">File b.</param>
+        </member>
         <member name="M:QuickTools.QIO.Binary.Writer(System.String,System.Byte[])">
             <summary>
             Writer the specified file and bytes.
@@ -2779,6 +2787,11 @@
         <member name="F:QuickTools.QIO.Binary.CallBackAction">
             <summary>
             The call back function.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.ByteCallback">
+            <summary>
+            This function returns a byte as it reads it 
             </summary>
         </member>
         <member name="M:QuickTools.QIO.Binary.#ctor">

@@ -43,6 +43,8 @@ namespace QuickTools.QIO
             /// </summary>
             public int Chunck = 1024;
 
+            public long Blocks { get; set; }
+
             /// <summary>
             /// The current.
             /// </summary>
@@ -102,6 +104,11 @@ namespace QuickTools.QIO
             /// The call back function.
             /// </summary>
             public Action<long,long,long> CallBackAction;
+
+            /// <summary>
+            /// This function returns a byte as it reads it 
+            /// </summary>
+            public Func<byte,byte> ByteCallback; 
  
 
 
@@ -114,6 +121,7 @@ namespace QuickTools.QIO
                   {
                       
                   };
+                  this.ByteCallback = (b) => { return b; };
             }
       }
 }

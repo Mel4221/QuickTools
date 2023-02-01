@@ -72,9 +72,10 @@ namespace QuickTools.QIO
                                     if (status == Chunck)
                                     {
                                           BytesList.Add(this.Buffer);
-                                          //BytesList.AddLast(this.Buffer); 
-
+                                          this.ByteCallback(x);
+                                          this.Blocks++; 
                                           status = 0;
+                                          //BytesList.AddLast(this.Buffer);// this was testing ListLink to see if it could be faster
                                           this.Buffer = new byte[Chunck];
                                     }
                                   

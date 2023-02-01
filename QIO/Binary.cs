@@ -35,7 +35,24 @@ namespace QuickTools.QIO
       /// </summary>
       public partial class Binary
       {
-           
+
+
+
+            public static bool IsBigFile(string file)
+            {
+                  if (!File.Exists(file)) throw new FileNotFoundException(); 
+
+                  try
+                  {
+                        File.ReadAllBytes(file);
+                        return false; 
+                  }
+                  catch
+                  {
+                        return true;; 
+                  }
+            }
+
             /// <summary>
             /// Copies the binary file.
             /// </summary>
@@ -188,17 +205,17 @@ namespace QuickTools.QIO
         /// <param name="file">File.</param>
         public static byte[] Reader(string file)
         {
-
-            int fileLengh = File.ReadAllBytes(file).Length;
-            byte[] bytes = new byte[fileLengh]; 
-            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
-            {
-                using (BinaryReader reader = new BinaryReader(fs))
-                {
-                    reader.Read(bytes,0,fileLengh);
-                    return bytes; 
-                }
-            }
+               
+                        int fileLengh = File.ReadAllBytes(file).Length;
+                        byte[] bytes = new byte[fileLengh];
+                        using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+                        {
+                              using (BinaryReader reader = new BinaryReader(fs))
+                              {
+                                    reader.Read(bytes, 0, fileLengh);
+                                    return bytes;
+                              }
+                        }
         }
 
 
@@ -210,6 +227,32 @@ namespace QuickTools.QIO
             /// <param name="b">The blue component.</param>
             public static bool CheckFileIntegrity(byte[] a, byte[] b)
             {
+                  bool isSafe = true;
+
+                  for (int i = 0; i < a.Length; i++)
+                  {
+
+                        if (a[i] != b[i])
+                        {
+                              return false;
+                        }
+                  }
+
+                  return isSafe;
+            }
+
+
+
+            /// <summary>
+            /// Checks the file integrity.
+            /// </summary>
+            /// <returns><c>true</c>, if file integrity was checked, <c>false</c> otherwise.</returns>
+            /// <param name="fileA">File a.</param>
+            /// <param name="fileB">File b.</param>
+            public static bool CheckFileIntegrity(string fileA, string fileB)
+            {
+                  byte[] a = Binary.Reader(fileA);
+                  byte[] b = Binary.Reader(fileB);
                   bool isSafe = true;
 
                   for (int i = 0; i < a.Length; i++)
