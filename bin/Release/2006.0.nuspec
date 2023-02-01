@@ -21,11 +21,15 @@
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.7" />
       <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.7" />
-      <frameworkAssembly assemblyName="System.Runtime.InteropServices.RuntimeInformation" targetFramework=".NETFramework4.7" />
       <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.7" />
     </frameworkAssemblies>
+    <contentFiles>
+      <files include="contentFiles/any/net47/setting.ico" />
+    </contentFiles>
   </metadata>
   <files>
     <file src="/home/mel/Documents/csharp/QuickTools/bin/Release/QuickTools.dll" target="lib/net47/QuickTools.dll" />
+    <file src="/home/mel/Documents/csharp/QuickTools/bin/Release/QuickTools.xml" target="lib/net47/QuickTools.xml" />
+    <file src="/home/mel/Documents/csharp/QuickTools/setting.ico" target="contentFiles/any/net47/setting.ico" />
   </files>
 </package>

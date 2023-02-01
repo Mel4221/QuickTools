@@ -29,27 +29,22 @@ namespace QuickTools.QIO
             /// <param name="matter">Matter.</param>
             public static void Event(string name, object matter)
             {
-                  string time = $"|*** Date Of The Event :{DateTime.Now} ***|\n\n\n";
-
-
+                  string date = $"|*** Date Of The Event :{DateTime.Now} ***|\n\n\n";
+                  string message = date + matter; 
 
 
                   string path = CreateLogDir();
                   string file = path + name + ".log";
 
-                  if (File.Exists(file) == false)
+                  using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                   {
-                        Writer.Write(file, time + matter);
-                        return;
+                        byte[] bytes = System.Text.Encoding.ASCII.GetBytes(message);
+                        using (BinaryWriter writer = new BinaryWriter(stream))
+                        {
+                              writer.Write(bytes, 0, bytes.Length); 
+                        }
                   }
-                  else
-                  {
-                        // get the text from the file
-                        string previusContent = Reader.Read(file);
-                        // write the old text first then the new
-                        string newContent = time + matter + previusContent;
-                        Writer.Write(file, newContent);
-                  }
+
 
 
             }
@@ -69,18 +64,13 @@ namespace QuickTools.QIO
                   string path = CreateLogDir();
                   string file = path + nameOfThefile + ".log";
 
-                  if (File.Exists(file) == false)
+                  using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                   {
-                        Writer.Write(file, matter);
-                        return;
-                  }
-                  else
-                  {
-                        // get the text from the file
-                        string previusContent = Reader.Read(file);
-                        // write the old text first then the new
-                        string newContent = matter + previusContent;
-                        Writer.Write(file, newContent);
+                        byte[] bytes = System.Text.Encoding.ASCII.GetBytes(matter.ToString());
+                        using (BinaryWriter writer = new BinaryWriter(stream))
+                        {
+                              writer.Write(bytes, 0, bytes.Length);
+                        }
                   }
 
 
