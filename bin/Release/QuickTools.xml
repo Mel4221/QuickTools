@@ -2609,14 +2609,32 @@
             </summary>
             <param name="commands">Commands.</param>
         </member>
+        <member name="T:QuickTools.QIO.FileDummper">
+            <summary>
+            Dumps the Files data 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.FileDummper.CHUNK_SIZE">
+            <summary>
+            The size of the chunk.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileDummper.Dump(System.String[])">
+            <summary>
+            Dump the specified args.
+            </summary>
+            <param name="args">Arguments.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileDummper.DumpBytes(System.Byte[],System.Int32)">
+            <summary>
+            Dumps the bytes.
+            </summary>
+            <param name="bdata">Bdata.</param>
+            <param name="len">Length.</param>
+        </member>
         <member name="T:QuickTools.QIO.Binary">
             <summary>
             Binary.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.Binary.CurrentStatus">
-            <summary>
-            The current status.
             </summary>
         </member>
         <member name="M:QuickTools.QIO.Binary.CopyBinaryFile(System.String,System.String)">
@@ -2644,16 +2662,6 @@
             <param name="srcfilename">Srcfilename.</param>
             <param name="destfilename">Destfilename.</param>
         </member>
-        <member name="F:QuickTools.QIO.Binary.Buffer">
-            <summary>
-            The buffer.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.Binary.Length">
-            <summary>
-            Gets the length from the reader 
-            </summary>
-        </member>
         <member name="M:QuickTools.QIO.Binary.MoveFile(System.String,System.String)">
             <summary>
             Moves the file.
@@ -2676,6 +2684,97 @@
             <returns><c>true</c>, if file integrity was checked, <c>false</c> otherwise.</returns>
             <param name="a">The alpha component.</param>
             <param name="b">The blue component.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Writer(System.String,System.Byte[])">
+            <summary>
+            Writer the specified file and bytes.
+            </summary>
+            <param name="file">File.</param>
+            <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.ReadBytes(System.String)">
+            <summary>
+            Reads the bytes.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Print(System.Int64,System.Int64)">
+            <summary>
+            Print the specified current proses  remaining but only if <see cref="P:QuickTools.QIO.Binary.AllowDebugger"/>.
+            </summary>
+            <param name="current">Current.</param>
+            <param name="fileSize">File size.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.WriteBytes(System.String)">
+            <summary>
+            This Process Writes the Bytes of the list but remember is very slow 
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.CurrentStatus">
+            <summary>
+            The current status.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.Buffer">
+            <summary>
+            The buffer.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.Length">
+            <summary>
+            Gets the length from the reader 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.Chunck">
+            <summary>
+            The chunck.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.Current">
+            <summary>
+            The current.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.Counter">
+            <summary>
+            The counter.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.BytesList">
+            <summary>
+            The bytes list.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.Binary.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.Binary"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QIO.Binary.FileName">
+            <summary>
+            Gets or sets the name of the file.
+            </summary>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:QuickTools.QIO.Binary.ReadSpeed">
+            <summary>
+            Gets or sets the read speed.
+            </summary>
+            <value>The read speed.</value>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.SpeedChars">
+            <summary>
+            Gets or sets the speed chars.
+            </summary>
+            <value>The speed chars.</value>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.SpeedUnit">
+            <summary>
+            Gets or sets the speed unit default is set to kbs
+            </summary>
+            <value>The speed unit.</value>
         </member>
         <member name="T:QuickTools.QIO.FileDumper">
             <summary>

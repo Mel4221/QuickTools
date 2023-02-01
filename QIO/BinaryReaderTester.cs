@@ -11,10 +11,22 @@ using System.Text;
 namespace QuickTools.QIO
 {
 
-      public class DumpFileSample
+
+      /// <summary>
+      /// Dumps the Files data 
+      /// </summary>
+      public class FileDummper
       {
-            private static readonly int CHUNK_SIZE = 1024;
-            public static void Main(String[] args)
+            /// <summary>
+            /// The size of the chunk.
+            /// </summary>
+            public static readonly int CHUNK_SIZE = 1024;
+
+            /// <summary>
+            /// Dump the specified args.
+            /// </summary>
+            /// <param name="args">Arguments.</param>
+            public static void Dump(String[] args)
             {
                   if ((args.Length == 0) || !File.Exists(args[0]))
                   {
@@ -43,6 +55,11 @@ namespace QuickTools.QIO
                   }
             }
 
+            /// <summary>
+            /// Dumps the bytes.
+            /// </summary>
+            /// <param name="bdata">Bdata.</param>
+            /// <param name="len">Length.</param>
             public static void DumpBytes(byte[] bdata, int len)
             {
 

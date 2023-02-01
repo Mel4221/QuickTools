@@ -1,0 +1,147 @@
+﻿//
+// ${Melquiceded Balbi Villanueva}
+//
+// Author:
+//       ${Melquiceded} <${melquiceded.balbi@gmail.com}>
+//
+// Copyright (c) ${2089} MIT
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+using System;
+using System.IO;
+using System.Collections.Generic;
+using QuickTools.QCore;
+using System.Diagnostics;
+
+namespace QuickTools.QIO
+{
+
+
+      public partial class Binary
+      {
+
+          
+            /// <summary>
+            /// Reads the bytes.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            public void ReadBytes(string fileName)
+            {
+
+                  if (!File.Exists(fileName)) { throw new FileNotFoundException(); }
+
+                  BytesList = new List<byte[]>();
+                  //BytesList = new LinkedList<byte[]>(); 
+                  using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                  {
+                        long fileSize = stream.Length;
+                        long current = 0;
+                        Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start();
+
+
+                        using (BinaryReader reader = new BinaryReader(stream))
+                        {
+                              int status = 0;
+                              this.Buffer = new byte[Chunck];
+                              while (current < fileSize)
+                              {
+
+
+
+
+
+                                    byte x = reader.ReadByte();
+
+                                    if (status == Chunck)
+                                    {
+                                          BytesList.Add(this.Buffer);
+                                          //BytesList.AddLast(this.Buffer); 
+
+                                          status = 0;
+                                          this.Buffer = new byte[Chunck];
+                                    }
+                                  
+                                          Print(current, fileSize);
+
+
+
+                                    this.Buffer[status] = x;
+                                    current++;
+                                    status++;
+                                    //stopwatch.Stop();
+                                    long t = stopwatch.ElapsedMilliseconds == 0 ? 1 : stopwatch.ElapsedMilliseconds;
+                                    this.ReadSpeed = (current * this.SpeedUnit) / t; 
+                              }
+
+                        }
+                        stopwatch.Stop(); 
+                  }
+            }
+
+
+            /// <summary>
+            /// Print the specified current proses  remaining but only if <see cref="QuickTools.QIO.Binary.AllowDebugger"/>.
+            /// </summary>
+            /// <param name="current">Current.</param>
+            /// <param name="fileSize">File size.</param>
+            public void Print(long current, long fileSize)
+            {
+                  if(AllowDebugger)
+                  {
+                        string x = Get.Status(current, fileSize - 1);
+                        if (s != x)
+                        {
+                              s = Get.Status(current, fileSize - 1);
+                              Get.Green($"Speed: {this.ReadSpeed}{this.SpeedChars}  {s}");
+                        }
+                  }
+
+            }
+
+
+
+            /// <summary>
+            /// This Process Writes the Bytes of the list but remember is very slow 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            public void WriteBytes(string fileName)
+            {
+                  using (FileStream stream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                  {
+                        Buffer = new byte[Chunck];
+                        using (BinaryWriter writer = new BinaryWriter(stream))
+                        {
+                              for (int b = 0; b < BytesList.Count; b++)
+                              {
+                                    writer.Write(BytesList[b], 0, BytesList[b].Length);
+                                    Print(b, BytesList.Count);
+                                    //writer.Write(BytesList.First.Value, 0, BytesList.First.Value.Length);
+                                    //BytesList.RemoveFirst(); 
+                              }
+                        }
+                  }
+            }
+
+            public Binary(string fileName)
+            {
+
+            }
+      }
+}

@@ -65,6 +65,8 @@ namespace QuickTools.QCore
             }
         }
 
+
+
         /// <summary>
         /// Get the porcenrage status of the provided current time and goal 
         /// </summary>

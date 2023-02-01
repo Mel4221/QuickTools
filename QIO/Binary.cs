@@ -33,12 +33,9 @@ namespace QuickTools.QIO
       /// <summary>
       /// Binary.
       /// </summary>
-      public class Binary
+      public partial class Binary
       {
-            /// <summary>
-            /// The current status.
-            /// </summary>
-            public static long CurrentStatus;
+           
             /// <summary>
             /// Copies the binary file.
             /// </summary>
@@ -56,6 +53,7 @@ namespace QuickTools.QIO
                   FileStream output = File.Open(destfilename, FileMode.Create);
                   BinaryReader binaryReader = new BinaryReader(input);
                   BinaryWriter binaryWriter = new BinaryWriter(output);
+                  Binary binary = new Binary(); 
                   while (true)
                   {
                         byte[] buffer = new byte[10240];
@@ -64,7 +62,7 @@ namespace QuickTools.QIO
                         {
                               break;
                         }
-                        Binary.Buffer = buffer;
+                        binary.Buffer = buffer;
                         binaryWriter.Write(buffer, 0, num);
                         if (num < 10240)
                         {
@@ -150,15 +148,7 @@ namespace QuickTools.QIO
 
 
 
-            /// <summary>
-            /// The buffer.
-            /// </summary>
-            public static byte[] Buffer;
-            /// <summary>
-            /// Gets the length from the reader 
-            /// </summary>
-            public static int Length;
-
+           
             /// <summary>
             /// Moves the file.
             /// </summary>
@@ -174,7 +164,7 @@ namespace QuickTools.QIO
 
                   }
 
-            byte[] a = Binary.Reader(pointA); 
+                   byte[] a = Binary.Reader(pointA); 
 
                   Binary.Writer(pointB, a);
 
@@ -234,6 +224,11 @@ namespace QuickTools.QIO
                   return isSafe;
             }
 
+            /// <summary>
+            /// Writer the specified file and bytes.
+            /// </summary>
+            /// <param name="file">File.</param>
+            /// <param name="bytes">Bytes.</param>
             public static void Writer(string file,byte[] bytes)
         {
             if (File.Exists(file)) File.Delete(file); 
@@ -251,6 +246,10 @@ namespace QuickTools.QIO
         }
 
 
+            public Binary()
+            {
 
-    }
+            }
+      }
+
 }

@@ -33,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -99,6 +100,8 @@
     <Compile Include="Script\Interpreter\QInterpreter_Files.cs" />
     <Compile Include="Script\Interpreter\QInterpreter_Methods.cs" />
     <Compile Include="Script\Interpreter\QInterpreter_Fields.cs" />
+    <Compile Include="QIO\BinaryReadAndWriteBytes.cs" />
+    <Compile Include="QIO\Binary_Fields.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />
