@@ -33,7 +33,7 @@ namespace QuickTools.QIO
       {
             static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();
 
-            static void Main()
+            static void Search()
             {
                   // Start with drives if you have to search the entire computer.
                   string[] drives = Environment.GetLogicalDrives();

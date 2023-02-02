@@ -102,6 +102,7 @@
     <Compile Include="Script\Interpreter\QInterpreter_Fields.cs" />
     <Compile Include="QIO\BinaryReadAndWriteBytes.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
+    <Compile Include="QIO\QBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />

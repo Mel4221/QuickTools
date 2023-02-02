@@ -274,7 +274,7 @@ namespace QuickTools.QIO
             /// <param name="bytes">Bytes.</param>
             public static void Writer(string file,byte[] bytes)
         {
-            if (File.Exists(file)) File.Delete(file); 
+         //   if (File.Exists(file)) File.Delete(file); 
 
 
             using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
