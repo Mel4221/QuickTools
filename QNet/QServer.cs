@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Collections.Generic;
 using System.IO; 
 using System.Net;
 using System.Text;
@@ -34,78 +35,78 @@ using QuickTools.QCore;
       {
 
 
-            /// <summary>
-            /// Provides a listener connection from out bound http request 
-            /// </summary>
-            public partial class QServer:IDisposable
-            {
+    /// <summary>
+    /// Provides a listener connection from out bound http request 
+    /// </summary>
+    public partial class QServer : IDisposable
+    {
 
 
 
-                  /// <summary>
-                  /// Gets or sets the URL.
-                  /// </summary>
-                  /// <value>The URL.</value>
-                  public string URL { get; set; }
-                  /// <summary>
-                  /// Gets or sets the port.
-                  /// </summary>
-                  /// <value>The port.</value>
-                  public int Port { get; set; }
-                  /// <summary>
-                  /// The address.
-                  /// </summary>
-                  public readonly string Address;
-                  /// <summary>
-                  /// The protocol.
-                  /// </summary>
-                  public string[] Protocol = { "https://", "http://" };
-                  /// <summary>
-                  /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QServer"/> secure protocol.
-                  /// </summary>
-                  /// <value><c>true</c> if secure protocol; otherwise, <c>false</c>.</value>
-                  public bool SecureProtocol = false;
+        /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>The URL.</value>
+        public string URL { get; set; }
+        /// <summary>
+        /// Gets or sets the port.
+        /// </summary>
+        /// <value>The port.</value>
+        public int Port { get; set; }
+        /// <summary>
+        /// The address.
+        /// </summary>
+        public readonly string Address;
+        /// <summary>
+        /// The protocol.
+        /// </summary>
+        public string[] Protocol = { "https://", "http://" };
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QServer"/> secure protocol.
+        /// </summary>
+        /// <value><c>true</c> if secure protocol; otherwise, <c>false</c>.</value>
+        public bool SecureProtocol = false;
 
-                  /// <summary>
-                  /// Gets or sets the request URL.
-                  /// </summary>
-                  /// <value>The request URL.</value>
-                  public string RequestUrl { get; set; }
+        /// <summary>
+        /// Gets or sets the request URL.
+        /// </summary>
+        /// <value>The request URL.</value>
+        public string RequestUrl { get; set; }
 
-                  /// <summary>
-                  /// The response function.
-                  /// </summary>
-                  public Func<string, byte[]> ResponseFunction = (item) => { return new byte[0]; };
+        /// <summary>
+        /// The response function.
+        /// </summary>
+        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { return new byte[0]; };
 
 
-                  /// <summary>
-                  /// Converts to html.
-                  /// </summary>
-                  /// <returns>The to html.</returns>
-                  /// <param name="htmlContent">Html content.</param>
-                  public byte[] ConvertToHtml(string htmlContent)
-                  {
-                string html = $"<!DOCTYPE html>" +
-                              $"<html>" +
-                              $"{htmlContent}" +
-                              "</html>";
-                        return Encoding.ASCII.GetBytes(html);
-                  }
+        /// <summary>
+        /// Converts to html.
+        /// </summary>
+        /// <returns>The to html.</returns>
+        /// <param name="htmlContent">Html content.</param>
+        public byte[] ConvertToHtml(string htmlContent)
+        {
+            string html = $"<!DOCTYPE html>" +
+                          $"<html>" +
+                          $"{htmlContent}" +
+                          "</html>";
+            return Encoding.ASCII.GetBytes(html);
+        }
         /// <summary>
         /// This Convert to bytes the html and javascript given 
         /// </summary>
         /// <param name="htmlContenst"></param>
         /// <param name="javascriptContent"></param>
         /// <returns></returns>
-        public byte[] ConvertToHtml(string htmlContenst,string javascriptContent)
+        public byte[] ConvertToHtml(string htmlContenst, string javascriptContent)
         {
-            string html = 
+            string html =
                   $"<!DOCTYPE html>" +
                   $"<html>" +
                   $"{htmlContenst}" +
                   $"<script>" +
                   $"{javascriptContent}" +
-                  $"</script" +
+                  $"</script>" +
                   "</html>";
             return Encoding.ASCII.GetBytes(html);
         }
@@ -118,7 +119,7 @@ using QuickTools.QCore;
         /// <param name="cssContent"></param>
         /// <param name="javascriptContent"></param>
         /// <returns></returns>
-        public byte[] ConvertToHtml(string htmlContenst,string cssContent, string javascriptContent)
+        public byte[] ConvertToHtml(string htmlContenst, string cssContent, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -129,7 +130,7 @@ using QuickTools.QCore;
                   $"{htmlContenst}" +
                   $"<script>" +
                   $"{javascriptContent}" +
-                  $"</script" +
+                  $"</script>" +
                   "</html>";
             return Encoding.ASCII.GetBytes(html);
         }
@@ -140,24 +141,44 @@ using QuickTools.QCore;
         /// <returns>The to row.</returns>
         /// <param name="stringContent">String content.</param>
         public byte[] ConvertToRow(string stringContent)
-                  {
-                        return Encoding.ASCII.GetBytes(stringContent);
-                  }
+        {
+            return Encoding.ASCII.GetBytes(stringContent);
+        }
+
+        public class ResponseHeader
+        {
+            public string Key;
+            public string Value;
+        }
+        public List<ResponseHeader> ResponseHeaders= new List<ResponseHeader>();
+        public Func<List<ResponseHeader>> SetResponseHeadersList = () => { return new List<ResponseHeader>(); }; 
 
                   /// <summary>
                   /// Listen For a request
                   /// </summary>
                   public void Listen()
                   {
+      //List<List<List<List<List<List<List<List<List<List<List<List<int>>>>>>>>>>>> list;
+                        
+
                         Get.Green($"Listening At: {this.Address}");
                         HttpListener listener = new HttpListener();
-                        listener.UnsafeConnectionNtlmAuthentication = SecureProtocol ? false : true;
+                        listener.UnsafeConnectionNtlmAuthentication = SecureProtocol == false ? false : true;
                         listener.Prefixes.Add(this.Address);
                         listener.Start();
                         HttpListenerContext context = listener.GetContext();
                         HttpListenerRequest request = context.Request;
                         HttpListenerResponse response = context.Response;
-                        byte[] buffer = ResponseFunction(request.RawUrl.Substring(1));
+                        List<ResponseHeader> headers = SetResponseHeadersList();
+                        if (headers.Count > 0)
+                        {
+                            foreach (var header in headers)
+                            {
+                                response.Headers.Add(header.Key, header.Value);
+                            }
+                        }
+                        Get.Wait($"Headers Count: {ResponseHeaders.Count}  Header: {response.Headers.Count} ");
+                         byte[] buffer = ResponseFunction(request);
                         response.ContentLength64 = buffer.Length;
                         Stream output = response.OutputStream;
                         output.Write(buffer, 0, buffer.Length);
