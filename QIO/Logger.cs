@@ -36,7 +36,7 @@ namespace QuickTools.QIO
                   string path = CreateLogDir();
                   string file = path + name + ".log";
 
-                  using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                  using (FileStream stream = new FileStream(file, FileMode.Append,FileAccess.Write))
                   {
                         byte[] bytes = System.Text.Encoding.ASCII.GetBytes(message);
                         using (BinaryWriter writer = new BinaryWriter(stream))
@@ -64,7 +64,7 @@ namespace QuickTools.QIO
                   string path = CreateLogDir();
                   string file = path + nameOfThefile + ".log";
 
-                  using (FileStream stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                  using (FileStream stream = new FileStream(file, FileMode.Append, FileAccess.Write))
                   {
                         byte[] bytes = System.Text.Encoding.ASCII.GetBytes(matter.ToString());
                         using (BinaryWriter writer = new BinaryWriter(stream))
