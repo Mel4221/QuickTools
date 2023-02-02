@@ -3278,6 +3278,23 @@
             <returns>The to html.</returns>
             <param name="htmlContent">Html content.</param>
         </member>
+        <member name="M:QuickTools.QNet.QServer.ConvertToHtml(System.String,System.String)">
+            <summary>
+            This Convert to bytes the html and javascript given 
+            </summary>
+            <param name="htmlContenst"></param>
+            <param name="javascriptContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QNet.QServer.ConvertToHtml(System.String,System.String,System.String)">
+            <summary>
+            This allows you to add the 3 main components from a HtmlDocument
+            </summary>
+            <param name="htmlContenst"></param>
+            <param name="cssContent"></param>
+            <param name="javascriptContent"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QNet.QServer.ConvertToRow(System.String)">
             <summary>
             Converts to row string 

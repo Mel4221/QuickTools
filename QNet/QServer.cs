@@ -85,18 +85,61 @@ using QuickTools.QCore;
                   /// <param name="htmlContent">Html content.</param>
                   public byte[] ConvertToHtml(string htmlContent)
                   {
-                        string html = $"<html>" +
-                              $"{htmlContent.Replace("'", '"'.ToString())}" +
+                string html = $"<!DOCTYPE html>" +
+                              $"<html>" +
+                              $"{htmlContent}" +
                               "</html>";
                         return Encoding.ASCII.GetBytes(html);
                   }
+        /// <summary>
+        /// This Convert to bytes the html and javascript given 
+        /// </summary>
+        /// <param name="htmlContenst"></param>
+        /// <param name="javascriptContent"></param>
+        /// <returns></returns>
+        public byte[] ConvertToHtml(string htmlContenst,string javascriptContent)
+        {
+            string html = 
+                  $"<!DOCTYPE html>" +
+                  $"<html>" +
+                  $"{htmlContenst}" +
+                  $"<script>" +
+                  $"{javascriptContent}" +
+                  $"</script" +
+                  "</html>";
+            return Encoding.ASCII.GetBytes(html);
+        }
 
-                  /// <summary>
-                  /// Converts to row string 
-                  /// </summary>
-                  /// <returns>The to row.</returns>
-                  /// <param name="stringContent">String content.</param>
-                  public byte[] ConvertToRow(string stringContent)
+
+        /// <summary>
+        /// This allows you to add the 3 main components from a HtmlDocument
+        /// </summary>
+        /// <param name="htmlContenst"></param>
+        /// <param name="cssContent"></param>
+        /// <param name="javascriptContent"></param>
+        /// <returns></returns>
+        public byte[] ConvertToHtml(string htmlContenst,string cssContent, string javascriptContent)
+        {
+            string html =
+                  $"<!DOCTYPE html>" +
+                  $"<html>" +
+                  $"<style>" +
+                  $"{cssContent}" +
+                  $"</style>" +
+                  $"{htmlContenst}" +
+                  $"<script>" +
+                  $"{javascriptContent}" +
+                  $"</script" +
+                  "</html>";
+            return Encoding.ASCII.GetBytes(html);
+        }
+
+        /// <summary>
+        /// Converts to row string 
+        /// </summary>
+        /// <returns>The to row.</returns>
+        /// <param name="stringContent">String content.</param>
+        public byte[] ConvertToRow(string stringContent)
                   {
                         return Encoding.ASCII.GetBytes(stringContent);
                   }
