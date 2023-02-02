@@ -3227,70 +3227,70 @@
             <param name="url">URL.</param>
             <param name="fileName">File name.</param>
         </member>
-        <member name="T:QuickTools.QNet.Connector">
+        <member name="T:QuickTools.QNet.QServer">
             <summary>
             Provides a listener connection from out bound http request 
             </summary>
         </member>
-        <member name="P:QuickTools.QNet.Connector.URL">
+        <member name="P:QuickTools.QNet.QServer.URL">
             <summary>
             Gets or sets the URL.
             </summary>
             <value>The URL.</value>
         </member>
-        <member name="P:QuickTools.QNet.Connector.Port">
+        <member name="P:QuickTools.QNet.QServer.Port">
             <summary>
             Gets or sets the port.
             </summary>
             <value>The port.</value>
         </member>
-        <member name="F:QuickTools.QNet.Connector.Address">
+        <member name="F:QuickTools.QNet.QServer.Address">
             <summary>
             The address.
             </summary>
         </member>
-        <member name="F:QuickTools.QNet.Connector.Protocol">
+        <member name="F:QuickTools.QNet.QServer.Protocol">
             <summary>
             The protocol.
             </summary>
         </member>
-        <member name="F:QuickTools.QNet.Connector.SecureProtocol">
+        <member name="F:QuickTools.QNet.QServer.SecureProtocol">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.Connector"/> secure protocol.
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QServer"/> secure protocol.
             </summary>
             <value><c>true</c> if secure protocol; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QNet.Connector.RequestUrl">
+        <member name="P:QuickTools.QNet.QServer.RequestUrl">
             <summary>
             Gets or sets the request URL.
             </summary>
             <value>The request URL.</value>
         </member>
-        <member name="F:QuickTools.QNet.Connector.ResponseFunction">
+        <member name="F:QuickTools.QNet.QServer.ResponseFunction">
             <summary>
             The response function.
             </summary>
         </member>
-        <member name="M:QuickTools.QNet.Connector.ConvertToHtml(System.String)">
+        <member name="M:QuickTools.QNet.QServer.ConvertToHtml(System.String)">
             <summary>
             Converts to html.
             </summary>
             <returns>The to html.</returns>
             <param name="htmlContent">Html content.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.ConvertToRow(System.String)">
+        <member name="M:QuickTools.QNet.QServer.ConvertToRow(System.String)">
             <summary>
             Converts to row string 
             </summary>
             <returns>The to row.</returns>
             <param name="stringContent">String content.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.Listen">
+        <member name="M:QuickTools.QNet.QServer.Listen">
             <summary>
             Listen For a request
             </summary>
         </member>
-        <member name="M:QuickTools.QNet.Connector.#ctor(System.String,System.Int32,System.Boolean)">
+        <member name="M:QuickTools.QNet.QServer.#ctor(System.String,System.Int32,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
             </summary>
@@ -3298,31 +3298,31 @@
             <param name="port">Port.</param>
             <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.#ctor(System.String,System.Int32)">
+        <member name="M:QuickTools.QNet.QServer.#ctor(System.String,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
             </summary>
             <param name="url">URL.</param>
             <param name="port">Port.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.#ctor(System.String)">
+        <member name="M:QuickTools.QNet.QServer.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
             </summary>
             <param name="url">URL.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.#ctor">
+        <member name="M:QuickTools.QNet.QServer.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
             </summary>
         </member>
-        <member name="M:QuickTools.QNet.Connector.Dispose(System.Boolean)">
+        <member name="M:QuickTools.QNet.QServer.Dispose(System.Boolean)">
             <summary>
             Dispose the specified disposing.
             </summary>
             <param name="disposing">If set to <c>true</c> disposing.</param>
         </member>
-        <member name="M:QuickTools.QNet.Connector.Dispose">
+        <member name="M:QuickTools.QNet.QServer.Dispose">
             <summary>
             Releases all resource used by the <see cref="T:QuickTools.Net.Connector"/> object.
             </summary>

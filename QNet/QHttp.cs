@@ -24,174 +24,285 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.IO; 
-using System.Net;
-using System.Text;
+using System.Collections.Generic;
 using QuickTools.QCore;
+using System.IO;
+using System.Net;
 
 
-   namespace QuickTools.QNet
+      namespace QuickTools.QNet
       {
 
-
             /// <summary>
-            /// Provides a listener connection from out bound http request 
+            /// Get Request Method
             /// </summary>
-            public partial class Connector:IDisposable
-            {
-
-
-
-                  /// <summary>
-                  /// Gets or sets the URL.
-                  /// </summary>
-                  /// <value>The URL.</value>
-                  public string URL { get; set; }
-                  /// <summary>
-                  /// Gets or sets the port.
-                  /// </summary>
-                  /// <value>The port.</value>
-                  public int Port { get; set; }
-                  /// <summary>
-                  /// The address.
-                  /// </summary>
-                  public readonly string Address;
-                  /// <summary>
-                  /// The protocol.
-                  /// </summary>
-                  public string[] Protocol = { "https://", "http://" };
-                  /// <summary>
-                  /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Connector"/> secure protocol.
-                  /// </summary>
-                  /// <value><c>true</c> if secure protocol; otherwise, <c>false</c>.</value>
-                  public bool SecureProtocol = false;
-
-                  /// <summary>
-                  /// Gets or sets the request URL.
-                  /// </summary>
-                  /// <value>The request URL.</value>
-                  public string RequestUrl { get; set; }
-
-                  /// <summary>
-                  /// The response function.
-                  /// </summary>
-                  public Func<string, byte[]> ResponseFunction = (item) => { return new byte[0]; };
-
-
-                  /// <summary>
-                  /// Converts to html.
-                  /// </summary>
-                  /// <returns>The to html.</returns>
-                  /// <param name="htmlContent">Html content.</param>
-                  public byte[] ConvertToHtml(string htmlContent)
+            public class QHttp:IDisposable
                   {
-                        string html = $"<html>" +
-                              $"{htmlContent.Replace("'", '"'.ToString())}" +
-                              "</html>";
-                        return Encoding.ASCII.GetBytes(html);
+                              /// <summary>
+                              /// Header.
+                              /// </summary>
+                                 public  class Header
+                              {
+                                          /// <summary>
+                                          /// Gets or sets the key.
+                                          /// </summary>
+                                          /// <value>The key.</value>
+                                    public string Key { get; set; }
+                                          /// <summary>
+                                          /// Gets or sets the value.
+                                          /// </summary>
+                                          /// <value>The value.</value>
+                                    public string Value { get; set; }
+                              }
+                        
+                        /// <summary>
+                        /// Gets or sets the URL.
+                        /// </summary>
+                        /// <value>The URL.</value>
+                        public string Url { get; set; }
+
+                        
+                        /// <summary>
+                        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Net.QHttp"/> notify status.
+                        /// </summary>
+                        /// <value><c>true</c> if notify status; otherwise, <c>false</c>.</value>
+                        public bool NotifyStatus { get; set; }
+                        
+                        /// <summary>
+                        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Net.QHttp"/> require
+                        /// server certicate.
+                        /// </summary>
+                        /// <value><c>true</c> if require server certicate; otherwise, <c>false</c>.</value>
+                        public bool RequireServerCerticate { get; set; }
+                        
+                        /// <summary>
+                        /// Gets or sets the response.
+                        /// </summary>
+                        /// <value>The response.</value>
+                        public HttpWebResponse Response { get; set; }
+                        
+                        /// <summary>
+                        /// Gets or sets the headers.
+                        /// </summary>
+                        /// <value>The headers.</value>
+                        public List<Header> Headers { get; set; }
+
+               
+                  /// <summary>
+                  /// Parses to google question.
+                  /// </summary>
+                  /// <returns>The to google question.</returns>
+                  /// <param name="question">Question.</param>
+                        public string ParseToGoogleQuestion(string question)
+                  {
+                       if(IConvert.TextToArray(question).Length > 1)
+                        {
+                              string temporalString = "";
+                              foreach (string words in IConvert.TextToArray(question))
+                              {
+                                    temporalString += words + "+";
+                              }
+                              return $"https://www.google.com/search?q={temporalString}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8";
+                        }
+                        return $"https://www.google.com/search?q={question}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8";
+                  }
+                  //q = $"https://www.google.com/search?q={question}&aqs=chrome..69i57.5024j0j15&sourceid=chrome&ie=UTF-8"; 
+
+                  /// <summary>
+                  /// Makes a Get request method to the given and returns the string response 
+                  /// </summary>
+                  /// <returns>The get.</returns>
+                  public string Get()
+                              {
+
+                        //string context = "context=Data Source=data1.cwzysvw0mxjn.us-east-2.rds.amazonaws.com;Initial Catalog=ManSys;Persist Security Info=True;User ID=admin;Password=Dmelqui20181";
+                        try
+                        {
+                              Uri link = new Uri(Url);
+
+
+
+                              if (NotifyStatus == true) Console.Title = "Stablishing Connection...";
+                              // string connection = null;
+
+                              WebRequest request = WebRequest.Create(link);
+                              if (this.Headers.Count > 0)
+                              {
+                                    foreach (Header header in Headers)
+                                    {
+                                          request.Headers[header.Key] = header.Value;
+                                    }
+                              }
+
+
+                              request.Method = "GET";
+
+                              if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+                              HttpWebResponse response = null;
+
+                              response = (HttpWebResponse)request.GetResponse();
+
+                              string result = null;
+                              using (Stream stream = response.GetResponseStream())
+                              {
+                                    StreamReader reader = new StreamReader(stream);
+                                    result = reader.ReadToEnd();
+                              }
+                              return result;
+
+                        }
+                        catch (WebException e)
+                        {
+                              return $"It looks like something went wrong more info: \n {e.Message}";
+                        }
+                        catch(UriFormatException e)
+                        {
+                              return $"The URL provided is not valid \n {e.Message}"; 
+                        }
+                        catch (Exception e)
+                        {
+                              return $"There Was an error processing the request and it could not be process , please verify your internet and try again later more info: \n {e.Message}"; 
+                        }
+
                   }
 
-                  /// <summary>
-                  /// Converts to row string 
-                  /// </summary>
-                  /// <returns>The to row.</returns>
-                  /// <param name="stringContent">String content.</param>
-                  public byte[] ConvertToRow(string stringContent)
-                  {
-                        return Encoding.ASCII.GetBytes(stringContent);
-                  }
 
                   /// <summary>
-                  /// Listen For a request
+                  /// Get the specified url.
                   /// </summary>
-                  public void Listen()
-                  {
-                        Get.Green($"Listening At: {this.Address}");
-                        HttpListener listener = new HttpListener();
-                        listener.UnsafeConnectionNtlmAuthentication = SecureProtocol ? false : true;
-                        listener.Prefixes.Add(this.Address);
-                        listener.Start();
-                        HttpListenerContext context = listener.GetContext();
-                        HttpListenerRequest request = context.Request;
-                        HttpListenerResponse response = context.Response;
-                        byte[] buffer = ResponseFunction(request.RawUrl.Substring(1));
-                        response.ContentLength64 = buffer.Length;
-                        Stream output = response.OutputStream;
-                        output.Write(buffer, 0, buffer.Length);
-                        this.RequestUrl = request.RawUrl.Substring(1);
-                        output.Close();
-                        listener.Stop();
-                  }
-
-
-
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-                  /// </summary>
+                  /// <returns>The get.</returns>
                   /// <param name="url">URL.</param>
-                  /// <param name="port">Port.</param>
-                  /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
-                  public Connector(string url, int port, bool secureProtocol)
+                  public string Get(string url)
                   {
 
+                        //string context = "context=Data Source=data1.cwzysvw0mxjn.us-east-2.rds.amazonaws.com;Initial Catalog=ManSys;Persist Security Info=True;User ID=admin;Password=Dmelqui20181";
+                        try
+                        {
+                              Uri link = new Uri(url);
 
-                        this.Port = port;
-                        this.URL = url;
-                        this.SecureProtocol = secureProtocol;
-                        string protocol = SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                        this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                        //Get.Wait(Address); 
+
+
+                              if (NotifyStatus == true) Console.Title = "Stablishing Connection...";
+                              // string connection = null;
+
+                              WebRequest request = WebRequest.Create(link);
+                              if (this.Headers.Count > 0)
+                              {
+                                    foreach (Header header in Headers)
+                                    {
+                                          request.Headers[header.Key] = header.Value;
+                                    }
+                              }
+
+
+                              request.Method = "GET";
+
+                              if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+                              HttpWebResponse response = null;
+
+                              response = (HttpWebResponse)request.GetResponse();
+
+                              string result = null;
+                              using (Stream stream = response.GetResponseStream())
+                              {
+                                    StreamReader reader = new StreamReader(stream);
+                                    result = reader.ReadToEnd();
+                              }
+                              return result;
+
+                        }
+                        catch (WebException e)
+                        {
+                              return $"It looks like something went wrong more info: \n {e.Message}";
+                        }
+                        catch (UriFormatException e)
+                        {
+                              return $"The URL provided is not valid \n {e.Message}";
+                        }
+                        catch (Exception e)
+                        {
+                              return $"There Was an error processing the request and it could not be process , please verify your internet and try again later more info: \n {e.Message}";
+                        }
+
                   }
 
                   /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
+                  /// Get the specified url and callBackFunction.
                   /// </summary>
+                  /// <returns>The get.</returns>
                   /// <param name="url">URL.</param>
-                  /// <param name="port">Port.</param>
-                  public Connector(string url, int port)
+                  /// <param name="callBackFunction">Call back function.</param>
+                  public string Get(string url,Func<string,byte[]> callBackFunction)
                   {
 
-                        this.Port = port;
-                        this.URL = url;
-                        string protocol = SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                        this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                  }
+                        //string context = "context=Data Source=data1.cwzysvw0mxjn.us-east-2.rds.amazonaws.com;Initial Catalog=ManSys;Persist Security Info=True;User ID=admin;Password=Dmelqui20181";
+                        try
+                        {
+                              Uri link = new Uri(url);
 
+
+
+                              if (NotifyStatus == true) Console.Title = "Stablishing Connection...";
+                              // string connection = null;
+
+                              WebRequest request = WebRequest.Create(link);
+                              if (this.Headers.Count > 0)
+                              {
+                                    foreach (Header header in Headers)
+                                    {
+                                          request.Headers[header.Key] = header.Value;
+                                    }
+                              }
+
+
+                              request.Method = "GET";
+
+                              if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+                              HttpWebResponse response = null;
+
+                              response = (HttpWebResponse)request.GetResponse();
+
+                              string result = null;
+                              using (Stream stream = response.GetResponseStream())
+                              {
+                                    StreamReader reader = new StreamReader(stream);
+                                    result = reader.ReadToEnd();
+                              }
+                              if(!callBackFunction.Equals(null))
+                              {
+                                    callBackFunction(result); 
+                              }
+                              return result;
+
+                        }
+                        catch (WebException e)
+                        {
+                              return $"It looks like something went wrong more info: \n {e.Message}";
+                        }
+                        catch (UriFormatException e)
+                        {
+                              return $"The URL provided is not valid \n {e.Message}";
+                        }
+                        catch (Exception e)
+                        {
+                              return $"There Was an error processing the request and it could not be process , please verify your internet and try again later more info: \n {e.Message}";
+                        }
+
+                  }
 
                   /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
+                  /// Initializes a new instance of the <see cref="T:QuickTools.Net.QHttp"/> class.
                   /// </summary>
-                  /// <param name="url">URL.</param>
-                  public Connector(string url)
-                  {
-
-                        this.Port = 4251;
-                        this.URL = url;
-                        string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                        this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                        //Get.Yellow($"{this.SecureProtocol} : {this.Protocol[0]} : {this.Protocol[1]}");
-                        //Get.Wait(this.Address);
-                  }
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-                  /// </summary>
-                  public Connector()
-                  {
-
-                        this.Port = 4251;
-                        this.URL = "localhost";
-                        string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                        this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                        //Get.Yellow($"{this.SecureProtocol} : {this.Protocol[0]} : {this.Protocol[1]}");
-                        //Get.Wait(this.Address);
-
-
-                  }
+                  public QHttp()
+                        {
+                              Headers = new List<Header>(); 
+                        }
 
                   #region IDisposable Support
                   private bool disposedValue = false; // To detect redundant calls
-
-
 
                   /// <summary>
                   /// Dispose the specified disposing.
@@ -213,10 +324,12 @@ using QuickTools.QCore;
                         }
                   }
 
-                   /// <summary>
-                   /// Releases all resource used by the <see cref="T:QuickTools.Net.Connector"/> object.
-                   /// </summary>
-                  public void Dispose()
+
+
+                  /// <summary>
+                  /// Releases all resource used by the <see cref="T:QuickTools.Net.QHttp"/> object.
+                  /// </summary>
+                   public void Dispose()
                   {
                         // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
                         Dispose(true);
@@ -225,115 +338,5 @@ using QuickTools.QCore;
                   }
                   #endregion
             }
+
       }
-
-
-
-
-
-
-/*
-
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-            /// </summary>
-            /// <param name="url">URL.</param>
-            /// <param name="port">Port.</param>
-            /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
-            /// <param name="F">F.</param>
-            public Connector(string url, int port, bool secureProtocol, Func<string,string> F)
-            {
-         
-                  this.ResponseAction = F;
-                  this.Port = port;
-                  this.URL = url;
-                  this.SecureProtocol = secureProtocol;
-                  string protocol = SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                  this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                  //Get.Wait(Address); 
-            }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-            /// </summary>
-            /// <param name="url">URL.</param>
-            /// <param name="port">Port.</param>
-            /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
-            public Connector(string url, int port,bool secureProtocol)
-            {
-                  Func<string,string> F = (item) => {
-                        Get.Yellow("Not Request handeler set up ");
-                        return null;
-                  };
-                  this.ResponseAction = F;
-                  this.RequestAction = F; 
-                  this.Port = port;
-                  this.URL = url;
-                  this.SecureProtocol = secureProtocol; 
-                  string protocol = SecureProtocol==true? this.Protocol[0] : this.Protocol[1];
-                  this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                  //Get.Wait(Address); 
-            }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-            /// </summary>
-            /// <param name="url">URL.</param>
-            /// <param name="port">Port.</param>
-            public Connector(string url, int port)
-            {
-                  Func<string, string> F = (item) => {
-                        Get.Yellow("Not Request handeler set up ");
-                        return null;
-                  };
-                  this.ResponseAction = F;
-                  this.RequestAction = F;
-                  this.Port = port;
-                  this.URL = url; 
-                  string protocol = SecureProtocol==true? this.Protocol[0] : this.Protocol[1];
-                  this.Address = $"{protocol}{this.URL}:{this.Port}/";
-            }
-
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-            /// </summary>
-            /// <param name="url">URL.</param>
-            public Connector(string url)
-            {
-                  Func<string, string> F = (item) => {
-                        Get.Yellow("Not Request handeler set up ");
-                        return null;
-                  };
-                  this.ResponseAction = F;
-                  this.RequestAction = F;
-                  this.Port = 4251;
-                  this.URL = url;
-                  string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
-                  this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                  //Get.Yellow($"{this.SecureProtocol} : {this.Protocol[0]} : {this.Protocol[1]}");
-                  //Get.Wait(this.Address);
-            }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-            /// </summary>
-            public Connector()
-            {
-                  Func<string, string> F = (item) => {
-                        Get.Yellow("Not Request handeler set up ");
-                        return null;
-                  };
-                  this.ResponseAction = F;
-                  this.RequestAction = F;
-                  this.Port = 4251;
-                  this.URL = "localhost";
-                  string protocol = this.SecureProtocol==true? this.Protocol[0] : this.Protocol[1];
-                  this.Address = $"{protocol}{this.URL}:{this.Port}/";
-                  //Get.Yellow($"{this.SecureProtocol} : {this.Protocol[0]} : {this.Protocol[1]}");
-                  //Get.Wait(this.Address);
-
-
-            }
-      
-            
-      */

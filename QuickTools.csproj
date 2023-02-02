@@ -89,8 +89,8 @@
     <Compile Include="QIO\QZipArchive.cs" />
     <Compile Include="QIO\writer.cs" />
     <Compile Include="QNet\DownloadManager.cs" />
+    <Compile Include="QNet\QServer.cs" />
     <Compile Include="QNet\QHttp.cs" />
-    <Compile Include="QNet\QNet.cs" />
     <Compile Include="QSecurity\Decryptor.cs" />
     <Compile Include="QSecurity\Encryptor.cs" />
     <Compile Include="QSecurity\LowEncrypter.cs" />
