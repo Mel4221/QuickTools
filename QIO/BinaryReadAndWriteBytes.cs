@@ -43,7 +43,7 @@ namespace QuickTools.QIO
             /// <param name="fileName">File name.</param>
             public void ReadBytes(string fileName)
             {
-
+                    //throw exeption if there is not a file 
                   if (!File.Exists(fileName)) { throw new FileNotFoundException(); }
 
                   BytesList = new List<byte[]>();
@@ -62,9 +62,6 @@ namespace QuickTools.QIO
                               this.Buffer = new byte[Chunck];
                               while (current < fileSize)
                               {
-
-
-
 
 
                                     byte x = reader.ReadByte();
