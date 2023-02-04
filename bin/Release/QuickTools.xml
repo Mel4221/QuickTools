@@ -308,6 +308,12 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.Loop(System.Delegate)">
+            <summary>
+            Loop the specified actionMethod forever
+            </summary>
+            <param name="actionMethod">Action method.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Status(System.Object,System.Object)">
             <summary>
             Get the porcenrage status of the provided current time and goal 
@@ -579,7 +585,10 @@
         </member>
         <member name="M:QuickTools.QCore.Get.Clear">
             <summary>
-            shurtcut for Console.Clear(); 
+            This method started as a shurtcut from <see cref="M:System.Console.Clear"/>
+            But not any longer this method now Clear every single <see cref="T:System.Char"/>
+            in the console and uses inside to for loops and as reference to get the widows size <see cref="P:System.Console.BufferWidth"/>
+            and <see cref="P:System.Console.BufferHeight"/> and to remove the chars <see cref="M:System.Console.SetCursorPosition(System.Int32,System.Int32)"/>
             </summary>
         </member>
         <member name="M:QuickTools.QCore.Get.Label(System.Object)">

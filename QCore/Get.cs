@@ -181,7 +181,11 @@ namespace QuickTools.QCore
         public static void WaitTime(int milliSecondsOrseconds)
         {
 
-            try
+                  if(milliSecondsOrseconds < 1000)
+                  {
+                        milliSecondsOrseconds = milliSecondsOrseconds * 1000; 
+                  }
+                  try
             {
 
                 Thread.Sleep(milliSecondsOrseconds);
@@ -933,21 +937,49 @@ character in order for it to return a valid name
             Console.ResetColor();
         }
 
-        /// <summary>
-        /// shurtcut for Console.Clear(); 
-        /// </summary>
-        public static void Clear()
-        {
-            Console.Clear();
-        }
+            static int X;
+            static int Y;
+            /// <summary>
+            /// This method started as a shurtcut from <see cref="System.Console.Clear"/>
+            /// But not any longer this method now Clear every single <see cref="System.Char"/>
+            /// in the console and uses inside to for loops and as reference to get the widows size <see cref="System.Console.BufferWidth"/>
+            /// and <see cref="System.Console.BufferHeight"/> and to remove the chars <see cref="System.Console.SetCursorPosition(int, int)"/>
+            /// </summary>
+            public static void Clear()
+            {
+                  X = Console.BufferWidth;
+                  Y = Console.BufferHeight;
+                  for (int x = 0; x < X; x++)
+                  {
+                        int y = 0;
+                        while (y < Y)
+                        {
+                              Console.SetCursorPosition(x, y);
+                              Console.Write(" ");
+                              y++;
+                        }
+                  }
+                  for (int y = 0; y < Y; y++)
+                  {
+                        int x = 0;
+                        while (x < X)
+                        {
+                              Console.SetCursorPosition(x, y);
+                              Console.Write(" ");
+                              x++;
+                        }
+                  }
 
 
-        /// <summary>
-        /// Write text with background color in color magentaand some space around it 
-        /// and seems like a type of a label and takes an argument of an object to avoid casting
-        /// </summary>
-        /// <param name="msg">Message.</param>
-        public static void Label(object msg)
+            }
+
+
+            /// <summary>
+            /// Write text with background color in color magentaand some space around it 
+            /// and seems like a type of a label and takes an argument of an object to avoid casting
+            /// </summary>
+            /// <param name="msg">Message.</param>
+            public static void Label(object msg)
         {
             Console.BackgroundColor = ConsoleColor.Magenta;
             Console.ForegroundColor = ConsoleColor.White;
@@ -1214,6 +1246,7 @@ character in order for it to return a valid name
             //Get.Yellow("This Called me =>  '" + Caller + "'");
             Console.WriteLine("Info");
             Get.Yellow(Caller);
+                  Get.White("Type any key to continue");                 
             Console.ReadKey();
         }
 

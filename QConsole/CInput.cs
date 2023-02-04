@@ -66,7 +66,12 @@ namespace QuickTools.QConsole
                               case "RightArrow":
                               case "UpArrow":
                               case "DownArrow":
-                                    ArrowsHandeler(key);
+
+                                    Get.Title("Key Not supported yet");
+                                    Console.Beep();
+                                    Get.WaitTime(1000);
+                                    Get.Title("");
+                                    //ArrowsHandeler(key);
                                     break;
                               case "Spacebar":
                                     ContentList.Add("\t");
