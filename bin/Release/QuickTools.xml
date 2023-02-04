@@ -308,19 +308,6 @@
             tools that started this Project.
             </summary>
         </member>
-        <member name="M:QuickTools.QCore.Get.Loop(System.Action)">
-            <summary>
-            Loop the specified actionMethod forever
-            </summary>
-            <param name="actionMethod">Action method.</param>
-        </member>
-        <member name="M:QuickTools.QCore.Get.Loop(System.Action,System.Func{System.Boolean})">
-            <summary>
-            Loop the specified actionMethod until the condition is meet.
-            </summary>
-            <param name="actionMethod">Action method.</param>
-            <param name="untilConditionIsMeet">Until condition is meet.</param>
-        </member>
         <member name="M:QuickTools.QCore.Get.Status(System.Object,System.Object)">
             <summary>
             Get the porcenrage status of the provided current time and goal 

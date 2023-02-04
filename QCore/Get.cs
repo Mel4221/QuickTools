@@ -38,33 +38,20 @@ namespace QuickTools.QCore
     public class Get : Color
     {
 
-
-
+      
         /// <summary>
         /// Loop the specified actionMethod forever
         /// </summary>
         /// <param name="actionMethod">Action method.</param>
-        public static void Loop(Action actionMethod)
+        public static void Loop(Delegate actionMethod)
         {
             while (true)
             {
-                actionMethod();
+                        actionMethod.DynamicInvoke();
             }
         }
 
-        /// <summary>
-        /// Loop the specified actionMethod until the condition is meet.
-        /// </summary>
-        /// <param name="actionMethod">Action method.</param>
-        /// <param name="untilConditionIsMeet">Until condition is meet.</param>
-        public static void Loop(Action actionMethod, Func<bool> untilConditionIsMeet)
-        {
-            while (untilConditionIsMeet())
-            {
-                actionMethod();
-            }
-        }
-
+  
 
 
         /// <summary>
@@ -76,16 +63,12 @@ namespace QuickTools.QCore
         public static string Status(object current, object goal)
         {
             string status = null;
-
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
-
             double s = Math.Round(c / g, 2) * 100;
-
-
             status = $"{s}%";
             return status;
-
+                 
         }
         /*
          Console.BufferHeight
