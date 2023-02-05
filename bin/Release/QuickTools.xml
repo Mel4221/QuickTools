@@ -301,6 +301,17 @@
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Check"/>.</returns>
         </member>
+        <member name="M:QuickTools.QCore.Check.Dispose(System.Boolean)">
+            <summary>
+            Dispose the specified disposing.
+            </summary>
+            <param name="disposing">If set to <c>true</c> disposing.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Check.Dispose">
+            <summary>
+            Releases all resource used by the <see cref="T:QuickTools.QCore.Check"/> object.
+            </summary>
+        </member>
         <member name="T:QuickTools.QCore.Get">
             <summary>
             Get The bigest class In Quicktools
@@ -585,11 +596,23 @@
         </member>
         <member name="M:QuickTools.QCore.Get.Clear">
             <summary>
+            Clear the console
+            </summary>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Clear(System.Boolean)">
+            <summary>
             This method started as a shurtcut from <see cref="M:System.Console.Clear"/>
             But not any longer this method now Clear every single <see cref="T:System.Char"/>
             in the console and uses inside to for loops and as reference to get the widows size <see cref="P:System.Console.BufferWidth"/>
             and <see cref="P:System.Console.BufferHeight"/> and to remove the chars <see cref="M:System.Console.SetCursorPosition(System.Int32,System.Int32)"/>
             </summary>
+            <param name="F">If set to <c>true</c> f.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.ClearAfter(System.Object)">
+            <summary>
+            Clears the after the content given 
+            </summary>
+            <param name="content">Content.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.Label(System.Object)">
             <summary>

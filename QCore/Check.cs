@@ -30,7 +30,7 @@ namespace QuickTools.QCore
    /// <summary>
    /// This is an abstraction of Stoop Watch which provide some functionalities from the same class
    /// </summary>
-      public class Check
+      public class Check:IDisposable
       {
 
             private Stopwatch sw;
@@ -59,8 +59,10 @@ namespace QuickTools.QCore
             {
                   try
                   {
+                        sw = new Stopwatch();
                         sw = Stopwatch.StartNew();
-                  }catch(Exception ex)
+                  }
+                  catch(Exception ex)
                   {
                         throw new Exception("There Was an error Starting the Check Start"+"\n"+ex);
                   }
@@ -80,6 +82,7 @@ namespace QuickTools.QCore
                         Minutes = sw.Elapsed.Minutes;
                         Milliseconds = sw.Elapsed.Milliseconds;
                         STringResults =  $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}";
+                        sw = new Stopwatch(); 
                 return STringResults; 
             }
             catch (Exception ex)
@@ -96,7 +99,45 @@ namespace QuickTools.QCore
             /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Check"/>.</returns>
             public override string ToString()
             {
-                  return base.ToString();
+                  return STringResults; 
             }
+
+            #region IDisposable Support
+            private bool disposedValue = false; // To detect redundant calls
+
+
+            /// <summary>
+            /// Dispose the specified disposing.
+            /// </summary>
+            /// <param name="disposing">If set to <c>true</c> disposing.</param>
+            protected virtual void Dispose(bool disposing)
+            {
+                  if (!disposedValue)
+                  {
+                        if (disposing)
+                        {
+                              // TODO: dispose managed state (managed objects).
+                        }
+
+                        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                        // TODO: set large fields to null.
+
+                        disposedValue = true;
+                  }
+            }
+
+            /// <summary>
+            /// Releases all resource used by the <see cref="T:QuickTools.QCore.Check"/> object.
+            /// </summary>
+            public void Dispose()
+            {
+                  // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+                  Dispose(true);
+                  // TODO: uncomment the following line if the finalizer is overridden above.
+                  // GC.SuppressFinalize(this);
+            }
+            #endregion
+
+
       }
 }

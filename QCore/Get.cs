@@ -17,6 +17,7 @@ using QuickTools.QIO;
 using QuickTools.QColors;
 using System.Diagnostics;
 using System.Linq;
+using QuickTools.QConsole;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -937,6 +938,17 @@ character in order for it to return a valid name
             Console.ResetColor();
         }
 
+
+
+            /// <summary>
+            /// Clear the console
+            /// </summary>
+            public static void Clear()
+            {
+                  Console.Clear();                 
+            }
+
+
             static int X;
             static int Y;
             /// <summary>
@@ -945,7 +957,8 @@ character in order for it to return a valid name
             /// in the console and uses inside to for loops and as reference to get the widows size <see cref="System.Console.BufferWidth"/>
             /// and <see cref="System.Console.BufferHeight"/> and to remove the chars <see cref="System.Console.SetCursorPosition(int, int)"/>
             /// </summary>
-            public static void Clear()
+            /// <param name="F">If set to <c>true</c> f.</param>
+            public static void Clear(bool F)
             {
                   X = Console.BufferWidth;
                   Y = Console.BufferHeight;
@@ -969,10 +982,26 @@ character in order for it to return a valid name
                               x++;
                         }
                   }
-
+                                   
+                  Console.SetCursorPosition(0,0);
 
             }
+                       
+                       
+           /// <summary>
+           /// Clears the after the content given 
+           /// </summary>
+           /// <param name="content">Content.</param>
+            public static void ClearAfter(object content)
+            {
+                  string message = content.ToString();
 
+                  Console.SetCursorPosition(0, 0);
+                  Console.Write(new CInput().Tabs(message.Length));
+                  Console.SetCursorPosition(0, 0);
+                  Console.Write(content); 
+            }
+                       
 
             /// <summary>
             /// Write text with background color in color magentaand some space around it 
