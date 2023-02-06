@@ -47,7 +47,32 @@ namespace QuickTools.QCore
             public class ToType<Type>
             {
 
-           
+                  /// <summary>
+                  /// This method mekes sure that there is no value that 
+                  /// is returned that is empty 
+                  /// </summary>
+                  public static Func<Type[], Type[]> ArrayJutifyer = (arr) => {
+                        Type[] clearArr;
+                        List<Type> list = new List<Type>();
+                        for (long i = 0; i < arr.Length; i++)
+                        {
+                              if (arr[i] != null)
+                              {
+                                    list.Add(arr[i]);
+                              }
+                        }
+
+                        clearArr = new Type[list.Count];
+                        for (int val = 0; val < list.Count; val++)
+                        {
+                              clearArr[val] = list[val];
+                        }
+
+                        return clearArr;
+
+                  };
+
+
 
                   /// <summary>
                   ///Convert the given array type to a list with the same type 
@@ -205,6 +230,24 @@ namespace QuickTools.QCore
 
 
             }
+
+
+
+
+            /// <summary>
+            /// Converts To the ASCII encuding
+            /// </summary>
+            /// <returns>The ASCII.</returns>
+            /// <param name="content">Content.</param>
+            public static byte[] ToASCII(object content) => Encoding.ASCII.GetBytes(content.ToString());
+
+            /// <summary>
+            /// Convert to string the given bytes 
+            /// </summary>
+            /// <returns>The string.</returns>
+            /// <param name="content">Content.</param>
+            public static string ToString(byte[] content) => Encoding.ASCII.GetString(content);
+
 
             /// <summary>
             /// Gets or sets the convertion status.

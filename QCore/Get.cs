@@ -278,12 +278,36 @@ namespace QuickTools.QCore
 
         }
 
-        /// <summary>
-        /// Create a data path if is not created and creates the directory given as a parameter
-        /// </summary>
-        /// <returns></returns>
-        /// <param name="newDirectory"></param>
-        public static string DataPath(string newDirectory)
+
+
+
+            /// <summary>
+            /// Removes the file name extention.
+            /// </summary>
+            /// <returns>The file name extention.</returns>
+            /// <param name="fileName">File name.</param>
+            public static string RemoveFileNameExtention(string fileName)
+            {
+                  return fileName.Substring(0, fileName.IndexOf('.'));
+            }
+
+            /// <summary>
+            /// Gets the Files  name from the path.
+            /// </summary>
+            /// <returns>The name from path.</returns>
+            /// <param name="path">Path.</param>
+            public static string FileNameFromPath(string path)
+            {
+                  return path.Substring(path.LastIndexOf('/') + 1);
+            }
+
+
+            /// <summary>
+            /// Create a data path if is not created and creates the directory given as a parameter
+            /// </summary>
+            /// <returns></returns>
+            /// <param name="newDirectory"></param>
+            public static string DataPath(string newDirectory)
         {
 
 

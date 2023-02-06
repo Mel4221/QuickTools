@@ -145,12 +145,28 @@ using QuickTools.QCore;
             return Encoding.ASCII.GetBytes(stringContent);
         }
 
+            /// <summary>
+            /// Response header.
+            /// </summary>
         public class ResponseHeader
         {
+                  /// <summary>
+                  /// The key.
+                  /// </summary>
             public string Key;
+            /// <summary>
+            /// The value.
+            /// </summary>
             public string Value;
         }
+            /// <summary>
+            /// The response headers.
+            /// </summary>
         public List<ResponseHeader> ResponseHeaders= new List<ResponseHeader>();
+        
+            /// <summary>
+            /// 
+            /// </summary>
         public Func<List<ResponseHeader>> SetResponseHeadersList = () => { return new List<ResponseHeader>(); }; 
 
                   /// <summary>
@@ -185,6 +201,7 @@ using QuickTools.QCore;
                         this.RequestUrl = request.RawUrl.Substring(1);
                         output.Close();
                         listener.Stop();
+                        
                   }
 
 

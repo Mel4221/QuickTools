@@ -412,6 +412,20 @@
             </summary>
             <returns>string path </returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.RemoveFileNameExtention(System.String)">
+            <summary>
+            Removes the file name extention.
+            </summary>
+            <returns>The file name extention.</returns>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.FileNameFromPath(System.String)">
+            <summary>
+            Gets the Files  name from the path.
+            </summary>
+            <returns>The name from path.</returns>
+            <param name="path">Path.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
             <summary>
             Create a data path if is not created and creates the directory given as a parameter
@@ -957,6 +971,12 @@
             and the same backwards 
             </summary>
         </member>
+        <member name="F:QuickTools.QCore.IConvert.ToType`1.ArrayJutifyer">
+            <summary>
+            This method mekes sure that there is no value that 
+            is returned that is empty 
+            </summary>
+        </member>
         <member name="M:QuickTools.QCore.IConvert.ToType`1.ArrayToList(`0[])">
              <summary>
             Convert the given array type to a list with the same type 
@@ -1003,6 +1023,20 @@
             </summary>
             <returns>The to string.</returns>
             <param name="array">Array.</param>
+        </member>
+        <member name="M:QuickTools.QCore.IConvert.ToASCII(System.Object)">
+            <summary>
+            Converts To the ASCII encuding
+            </summary>
+            <returns>The ASCII.</returns>
+            <param name="content">Content.</param>
+        </member>
+        <member name="M:QuickTools.QCore.IConvert.ToString(System.Byte[])">
+            <summary>
+            Convert to string the given bytes 
+            </summary>
+            <returns>The string.</returns>
+            <param name="content">Content.</param>
         </member>
         <member name="P:QuickTools.QCore.IConvert.ConvertionStatus">
             <summary>
@@ -3320,6 +3354,31 @@
             </summary>
             <returns>The to row.</returns>
             <param name="stringContent">String content.</param>
+        </member>
+        <member name="T:QuickTools.QNet.QServer.ResponseHeader">
+            <summary>
+            Response header.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QServer.ResponseHeader.Key">
+            <summary>
+            The key.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QServer.ResponseHeader.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QServer.ResponseHeaders">
+            <summary>
+            The response headers.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QServer.SetResponseHeadersList">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:QuickTools.QNet.QServer.Listen">
             <summary>
