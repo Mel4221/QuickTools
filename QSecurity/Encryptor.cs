@@ -15,10 +15,7 @@ namespace QuickTools.QSecurity
       /// </summary>
       public partial class Secure:IDisposable
         {
-
-
-
-
+        
 
             /// <summary>
             /// This allow the encriptor to either try to save the scure key or not  and is set to FALSE <see langword="false"/>  by default for security reasons
