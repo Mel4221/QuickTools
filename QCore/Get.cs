@@ -44,11 +44,11 @@ namespace QuickTools.QCore
         /// Loop the specified actionMethod forever
         /// </summary>
         /// <param name="actionMethod">Action method.</param>
-        public static void Loop(Delegate actionMethod)
+        public static void Loop(Action actionMethod)
         {
             while (true)
             {
-                        actionMethod.DynamicInvoke();
+                        actionMethod(); 
             }
         }
 

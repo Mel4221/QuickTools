@@ -37,7 +37,11 @@ namespace QuickTools.QIO
       {
 
 
-
+            /// <summary>
+            /// Check if the file is biig
+            /// </summary>
+            /// <returns><c>true</c>, if big file was ised, <c>false</c> otherwise.</returns>
+            /// <param name="file">File.</param>
             public static bool IsBigFile(string file)
             {
                   if (!File.Exists(file)) throw new FileNotFoundException(); 
@@ -204,18 +208,17 @@ namespace QuickTools.QIO
         /// <returns>The reader.</returns>
         /// <param name="file">File.</param>
         public static byte[] Reader(string file)
-        {
-               
-                        int fileLengh = File.ReadAllBytes(file).Length;
-                        byte[] bytes = new byte[fileLengh];
-                        using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
-                        {
-                              using (BinaryReader reader = new BinaryReader(fs))
-                              {
-                                    reader.Read(bytes, 0, fileLengh);
-                                    return bytes;
-                              }
-                        }
+        {         
+            int fileLengh = File.ReadAllBytes(file).Length;
+            byte[] bytes = new byte[fileLengh];
+            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+            {
+                  using (BinaryReader reader = new BinaryReader(fs))
+                  {
+                        reader.Read(bytes, 0, fileLengh);
+                        return bytes;
+                  }
+            }
         }
 
 
@@ -228,7 +231,6 @@ namespace QuickTools.QIO
             public static bool CheckFileIntegrity(byte[] a, byte[] b)
             {
                   bool isSafe = true;
-
                   for (int i = 0; i < a.Length; i++)
                   {
 
@@ -237,7 +239,6 @@ namespace QuickTools.QIO
                               return false;
                         }
                   }
-
                   return isSafe;
             }
 
@@ -257,7 +258,6 @@ namespace QuickTools.QIO
 
                   for (int i = 0; i < a.Length; i++)
                   {
-
                         if (a[i] != b[i])
                         {
                               return false;
@@ -273,20 +273,18 @@ namespace QuickTools.QIO
             /// <param name="file">File.</param>
             /// <param name="bytes">Bytes.</param>
             public static void Writer(string file,byte[] bytes)
-        {
-         //   if (File.Exists(file)) File.Delete(file); 
-
-
-            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
             {
-                using (BinaryWriter writer = new BinaryWriter(fs))
-                {
+        
+                  using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write))
+                  {
+                      using (BinaryWriter writer = new BinaryWriter(fs))
+                      {
 
-                     writer.Write(bytes, 0, bytes.Length);
+                           writer.Write(bytes, 0, bytes.Length);
 
-                }
+                      }
+                  }
             }
-        }
 
 
            

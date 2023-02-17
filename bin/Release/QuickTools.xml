@@ -319,7 +319,7 @@
             tools that started this Project.
             </summary>
         </member>
-        <member name="M:QuickTools.QCore.Get.Loop(System.Delegate)">
+        <member name="M:QuickTools.QCore.Get.Loop(System.Action)">
             <summary>
             Loop the specified actionMethod forever
             </summary>
@@ -2662,33 +2662,17 @@
             </summary>
             <param name="commands">Commands.</param>
         </member>
-        <member name="T:QuickTools.QIO.FileDummper">
-            <summary>
-            Dumps the Files data 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.FileDummper.CHUNK_SIZE">
-            <summary>
-            The size of the chunk.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QIO.FileDummper.Dump(System.String[])">
-            <summary>
-            Dump the specified args.
-            </summary>
-            <param name="args">Arguments.</param>
-        </member>
-        <member name="M:QuickTools.QIO.FileDummper.DumpBytes(System.Byte[],System.Int32)">
-            <summary>
-            Dumps the bytes.
-            </summary>
-            <param name="bdata">Bdata.</param>
-            <param name="len">Length.</param>
-        </member>
         <member name="T:QuickTools.QIO.Binary">
             <summary>
             Binary.
             </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.IsBigFile(System.String)">
+            <summary>
+            Check if the file is biig
+            </summary>
+            <returns><c>true</c>, if big file was ised, <c>false</c> otherwise.</returns>
+            <param name="file">File.</param>
         </member>
         <member name="M:QuickTools.QIO.Binary.CopyBinaryFile(System.String,System.String)">
             <summary>
@@ -2772,6 +2756,12 @@
             </summary>
             <param name="fileName">File name.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="F:QuickTools.QIO.Binary.CurrentStatus">
             <summary>
             The current status.
@@ -2784,7 +2774,7 @@
         </member>
         <member name="F:QuickTools.QIO.Binary.Chunck">
             <summary>
-            The chunck.
+            The chunck size is default to (1024 X 1024) = 1048576
             </summary>
         </member>
         <member name="F:QuickTools.QIO.Binary.Current">

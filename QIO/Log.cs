@@ -31,8 +31,6 @@ namespace QuickTools.QIO
             {
                   string date = $"|*** Date Of The Event :{DateTime.Now} ***|\n\n\n";
                   string message = date + matter; 
-
-
                   string path = CreateLogDir();
                   string file = path + name + ".log";
 

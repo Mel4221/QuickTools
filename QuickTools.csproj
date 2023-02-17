@@ -9,8 +9,8 @@
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <PackageId>2006.0</PackageId>
-    <PackageVersion>6.0.0.0</PackageVersion>
+    <PackageId>QuickTools</PackageId>
+    <PackageVersion>2006.0</PackageVersion>
     <Authors>MBV</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -23,6 +23,7 @@
     <Title>QuickTools</Title>
     <Description>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
     <PackOnBuild>true</PackOnBuild>
+    <PackageIconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</PackageIconUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,11 +79,10 @@
     <Compile Include="QData\QSettings.cs" />
     <Compile Include="QData\user.cs" />
     <Compile Include="QData\XmlHelper.cs" />
-    <Compile Include="QIO\BinaryReaderTester.cs" />
     <Compile Include="QIO\Binary.cs" />
-    <Compile Include="QIO\BinaryDumper.cs" />
+    <Compile Include="QIO\Binary_Dumper.cs" />
     <Compile Include="QIO\RecursiveFileSearch.cs" />
-    <Compile Include="QIO\Logger.cs" />
+    <Compile Include="QIO\Log.cs" />
     <Compile Include="QIO\FilesMaper.cs" />
     <Compile Include="QIO\reader.cs" />
     <Compile Include="QIO\QZip.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="QSecurity\LowEncrypter.cs" />
     <Compile Include="QSecurity\SecureBinary.cs" />
     <Compile Include="QSecurity\Traductor.cs" />
-    <Compile Include="QIO\BinaryReadAndWriteBytes.cs" />
+    <Compile Include="QIO\Binary_Read_Write.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\QBox.cs" />
   </ItemGroup>

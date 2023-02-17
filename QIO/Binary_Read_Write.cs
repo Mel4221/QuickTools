@@ -45,55 +45,59 @@ namespace QuickTools.QIO
             {
                     //throw exeption if there is not a file 
                   if (!File.Exists(fileName)) { throw new FileNotFoundException(); }
-
-                  BytesList = new List<byte[]>();
-                  //BytesList = new LinkedList<byte[]>(); 
-                  using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-                  {
-                        long fileSize = stream.Length;
-                        long current = 0;
                         Stopwatch stopwatch = new Stopwatch();
                         stopwatch.Start();
 
 
-                        using (BinaryReader reader = new BinaryReader(stream))
+                  long current, size;
+
+                  FileStream stream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
+                  BinaryReader reader = new BinaryReader(stream);
+                  Binary.BytesList = new List<byte[]>();
+
+                  size = stream.Length;
+                  current = 0;
+
+                  while(current < size)
                         {
-                              int status = 0;
-                              this.Buffer = new byte[Chunck];
-                              while (current < fileSize)
-                              {
-
-
-                                    byte x = reader.ReadByte();
-
-                                    if (status == Chunck)
-                                    {
-                                          BytesList.Add(this.Buffer);
-                                          this.ByteCallback(x);
-                                          this.Blocks++; 
-                                          status = 0;
-                                          //BytesList.AddLast(this.Buffer);// this was testing ListLink to see if it could be faster
-                                          this.Buffer = new byte[Chunck];
-                                    }
-                                  
-                                          Print(current, fileSize);
-
-
-
-                                    this.Buffer[status] = x;
-                                    current++;
-                                    status++;
-                                    //stopwatch.Stop();
-                                    long t = stopwatch.ElapsedMilliseconds == 0 ? 1 : stopwatch.ElapsedMilliseconds;
-                                    this.ReadSpeed = this.CheckForAllwed((current * this.SpeedUnit) / t); 
-
-                                    this.CallBackAction(current,fileSize,stopwatch.ElapsedMilliseconds);
-                              }
-
+                        stream.Seek(current , SeekOrigin.Begin);
+                        this.Buffer = new byte[this.Chunck];
+                        reader.Read(this.Buffer , 0 , this.Buffer.Length);
+                        Blocks++;
+                        current += this.Chunck;
+                        BytesList.Add(this.Buffer);
+                        Get.Green(Get.Status(current , size));
                         }
-                        stopwatch.Stop(); 
+
+
+                  /*
+
+                                      BytesList.Add(this.Buffer);
+                                      this.ByteCallback(x);
+                                      this.Blocks++; 
+                                      status = 0;
+                                      //BytesList.AddLast(this.Buffer);// this was testing ListLink to see if it could be faster
+                                      this.Buffer = new byte[Chunck];
+                                }
+
+                                      Print(current, fileSize);
+
+
+
+                                this.Buffer[status] = x;
+                                current++;
+                                status++;
+                                //stopwatch.Stop();
+                                long t = stopwatch.ElapsedMilliseconds == 0 ? 1 : stopwatch.ElapsedMilliseconds;
+                                this.ReadSpeed = this.CheckForAllwed((current * this.SpeedUnit) / t); 
+
+                                this.CallBackAction(current,fileSize,stopwatch.ElapsedMilliseconds);
+
+
+                      stopwatch.Stop(); 
+              */
+
                   }
-            }
 
 
 
@@ -154,9 +158,13 @@ namespace QuickTools.QIO
                   }
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
             public Binary(string fileName)
             {
-
+                  this.FileName = fileName; 
             }
       }
 }

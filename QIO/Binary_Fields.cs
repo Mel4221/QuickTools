@@ -37,11 +37,11 @@ namespace QuickTools.QIO
             /// The buffer.
             /// </summary>
             public byte[] Buffer;
-      
+
             /// <summary>
-            /// The chunck.
+            /// The chunck size is default to (1024 X 1024) = 1048576
             /// </summary>
-            public int Chunck = 1024;
+            public int Chunck = 1024 * 1024; 
 
             public long Blocks { get; set; }
 

@@ -224,24 +224,3 @@ namespace QuickTools.QIO
             }
       }
 }
-
-/*
-                                          switch (type) 
-                                    {
-                                          case "":
-                                                switch(arg)
-                                                {
-                                                      case "":
-
-                                                            break;
-
-                                                      default:
-                                                            Color.Red($"Invalid Argument Command: {arg} at: {action} > {type} > '{arg}'");
-                                                            break; 
-                                                }
-                                                break; 
-                                          default:
-                                                Color.Red($"Invalid Type Command: {type} at: {action} > '{type}' > {arg}");
-                                                break; 
-                                    }
-*/
