@@ -105,6 +105,26 @@ namespace QuickTools.QConsole
             public static bool Triguered { get; set; }
 
             /// <summary>
+            /// The color of the text.
+            /// </summary>
+            public ConsoleColor TextColor = ConsoleColor.White;
+
+            /// <summary>
+            /// The color of the back.
+            /// </summary>
+            public ConsoleColor BackColor = ConsoleColor.Black;
+
+            /// <summary>
+            /// The color of the label back.
+            /// </summary>
+            public ConsoleColor LabelBackColor = ConsoleColor.Magenta;
+
+            /// <summary>
+            /// The color of the label text.
+            /// </summary>
+            public ConsoleColor LabelTextColor = ConsoleColor.White; 
+
+            /// <summary>
             /// Clears All the options.
             /// </summary>
             public void ClearOptions()
@@ -114,9 +134,9 @@ namespace QuickTools.QConsole
             /// <summary>
             /// Display the Options listed in the OptionsList 
             /// </summary>
-            public static void Display()
+            public void Display()
             {
-                  Get.Clear();
+                  Get.Clear(true);
                   // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
                   Color.Yellow(Label);
                   for (int option = 0; option < OptionList.Count; option++)
@@ -124,13 +144,14 @@ namespace QuickTools.QConsole
                         if (option == CurrentSelection)
                         {
 
-                              Get.Label(SelectorL + OptionList[option] + SelectorR);
+                              Get.Label(SelectorL + OptionList[option] + SelectorR,this.LabelBackColor, this.LabelTextColor);
                               Get.Write("\n"); 
 
                         }
                         else
                         {
-
+                              Console.BackgroundColor = this.BackColor;
+                              Console.ForegroundColor = this.TextColor; 
                               Console.WriteLine(OptionList[option]);
 
                         }

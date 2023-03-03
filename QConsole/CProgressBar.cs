@@ -38,33 +38,45 @@
             /// The type of the dots.
             /// </summary>
             public string DotsType = ".";
+            private string currentPorcent;
+
             /// <summary>
             /// Display the specified current and goal.
             /// </summary>
             /// <param name="current">Current.</param>
             /// <param name="goal">Goal.</param>
-            public void Display(int current, int goal)
-            {
+            public void Display(int current , int goal)
+                  {
 
                   //Console.SetCursorPosition(0, 0); 
-                  Get.Clear(); 
-                  Get.Black();
+                   
+                       
 
-                        string status = Get.Status(current, goal);
-                        Get.Label(status);
-                        Get.Write("[");
-                        Get.Green();
-                        Get.Write(dots);
-                        Get.Reset();
-                        if (current == goal)
+                        string status = Get.Status(current , goal);
+                        if(this.currentPorcent == status)
                         {
-                              Get.Write("]\n");
+                              return;
                         }
+                        if(this.currentPorcent != status)
+                        {
+                              this.currentPorcent = status;
+                              Get.Clear();
+                        }
+                              Get.Label(status);
+                              Get.Write("[");
+                              Get.Green();
+                              Get.Write(dots);
+                              Get.Reset();
+                              if(current == goal)
+                                    {
+                                    Get.Write("]\n");
+                                    }
 
-                        Dots(status);
-               
+                              Dots(status);
 
-            }
+
+
+                  }
 
             void Dots(string status)
             {

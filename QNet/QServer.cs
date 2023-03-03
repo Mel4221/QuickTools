@@ -112,14 +112,14 @@ using QuickTools.QCore;
         }
 
 
-        /// <summary>
-        /// This allows you to add the 3 main components from a HtmlDocument
-        /// </summary>
-        /// <param name="htmlContenst"></param>
-        /// <param name="cssContent"></param>
-        /// <param name="javascriptContent"></param>
-        /// <returns></returns>
-        public byte[] ConvertToHtml(string htmlContenst, string cssContent, string javascriptContent)
+            /// <summary>
+            /// This allows you to add the 3 main components from a HtmlDocument
+            /// </summary>
+            /// <param name="htmlContent"></param>
+            /// <param name="cssContent"></param>
+            /// <param name="javascriptContent"></param>
+            /// <returns></returns>
+            public byte[] ConvertToHtml(string htmlContent, string cssContent, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -127,7 +127,7 @@ using QuickTools.QCore;
                   $"<style>" +
                   $"{cssContent}" +
                   $"</style>" +
-                  $"{htmlContenst}" +
+                  $"{htmlContent}" +
                   $"<script>" +
                   $"{javascriptContent}" +
                   $"</script>" +
@@ -150,7 +150,7 @@ using QuickTools.QCore;
             /// </summary>
         public class ResponseHeader
         {
-                  /// <summary>
+                   /// <summary>
                   /// The key.
                   /// </summary>
             public string Key;
@@ -169,12 +169,14 @@ using QuickTools.QCore;
             /// </summary>
         public Func<List<ResponseHeader>> SetResponseHeadersList = () => { return new List<ResponseHeader>(); }; 
 
+                  
+
                   /// <summary>
-                  /// Listen For a request
+                  /// Listen for a request and return the string clear request  
                   /// </summary>
-                  public void Listen()
+                  /// <returns>The listen.</returns>
+                  public HttpListenerRequest Listen()
                   {
-      //List<List<List<List<List<List<List<List<List<List<List<List<int>>>>>>>>>>>> list;
                         
 
                         Get.Green($"Listening At: {this.Address}");
@@ -193,7 +195,7 @@ using QuickTools.QCore;
                                 response.Headers.Add(header.Key, header.Value);
                             }
                         }
-                        Get.Wait($"Headers Count: {ResponseHeaders.Count}  Header: {response.Headers.Count} ");
+                        //Get.Wait($"Headers Count: {ResponseHeaders.Count}  Header: {response.Headers.Count} ");
                          byte[] buffer = ResponseFunction(request);
                         response.ContentLength64 = buffer.Length;
                         Stream output = response.OutputStream;
@@ -201,7 +203,7 @@ using QuickTools.QCore;
                         this.RequestUrl = request.RawUrl.Substring(1);
                         output.Close();
                         listener.Stop();
-                        
+                  return request; 
                   }
 
 

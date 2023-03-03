@@ -53,7 +53,7 @@ namespace QuickTools.QIO
 
                   FileStream stream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
                   BinaryReader reader = new BinaryReader(stream);
-                  Binary.BytesList = new List<byte[]>();
+                  this.BufferList = new List<byte[]>();
 
                   size = stream.Length;
                   current = 0;
@@ -65,8 +65,14 @@ namespace QuickTools.QIO
                         reader.Read(this.Buffer , 0 , this.Buffer.Length);
                         Blocks++;
                         current += this.Chunck;
-                        BytesList.Add(this.Buffer);
-                        Get.Green(Get.Status(current , size));
+                        this.BufferList.Add(this.Buffer);
+                        this.CallBackAction(current,size,Blocks);
+                        this.BufferCallBack(this.Buffer); 
+                               if(AllowDebugger == true)
+                              {
+                              Get.Green(Get.Status(current , size));
+
+                              }
                         }
 
 
@@ -147,10 +153,10 @@ namespace QuickTools.QIO
                         Buffer = new byte[Chunck];
                         using (BinaryWriter writer = new BinaryWriter(stream))
                         {
-                              for (int b = 0; b < BytesList.Count; b++)
+                              for (int b = 0; b < BufferList.Count; b++)
                               {
-                                    writer.Write(BytesList[b], 0, BytesList[b].Length);
-                                    Print(b, BytesList.Count);
+                                    writer.Write(BufferList[b], 0, BufferList[b].Length);
+                                    Print(b, BufferList.Count);
                                     //writer.Write(BytesList.First.Value, 0, BytesList.First.Value.Length);
                                     //BytesList.RemoveFirst(); 
                               }

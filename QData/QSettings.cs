@@ -26,6 +26,7 @@
 using System;
 using System.IO; 
 using System.Xml;
+using QuickTools.QCore; 
 using System.Collections.Generic;
 namespace QuickTools.QData
 {
@@ -38,6 +39,7 @@ namespace QuickTools.QData
       /// </summary>
       public class QSettings
       {     
+
             /// <summary>
             /// Sedttigns Object
             /// </summary>
@@ -55,6 +57,12 @@ namespace QuickTools.QData
                   /// <value>The value.</value>
                   public string Value { get; set; }
             }
+
+            /// <summary>
+            /// Gets or sets the default path.
+            /// </summary>
+            /// <value>The default path.</value>
+            public string DefaultPath { get; set; }
             /// <summary>
             /// This contains the list of keys in the settings file 
             /// </summary>
@@ -387,13 +395,15 @@ namespace QuickTools.QData
             /// </summary>
             public QSettings()
             {
-                  FileName = "Settings.xml";
                   ElementName = "Setting";
                   GroupName = "Settings";
+                  this.DefaultPath = QuickTools.QCore.Get.DataPath("settings/");
+                  FileName = $"{this.DefaultPath}Settings.xml";
+
                   //Create();
 
 
-            }
+                  }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
             /// with only the file name 
@@ -409,10 +419,12 @@ namespace QuickTools.QData
                   FileName = fileName; 
                   ElementName = "Setting";
                   GroupName = "Settings";
+                  this.DefaultPath = Get.DataPath("settings/");
+                  this.FileName = $"{this.DefaultPath}{fileName}";
                   //Create();
 
 
-            }
+                  }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
             /// </summary>
@@ -427,10 +439,12 @@ namespace QuickTools.QData
                   FileName = fileName;
                   ElementName = elementName; 
                   GroupName = "Settings";
-                  //Create();
+                  this.DefaultPath = Get.DataPath("settings/");
+                  this.FileName = $"{this.DefaultPath}{fileName}";
 
 
-            }
+
+                  }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
             /// The settings will have to be manually ajusted 
@@ -444,10 +458,14 @@ namespace QuickTools.QData
                   FileName = fileName;
                   ElementName = elementName;
                   GroupName = groupName;
+                  this.DefaultPath = Get.DataPath("settings/");
+                  this.FileName = $"{this.DefaultPath}{fileName}";
+
+
+
+                  }
+
+
 
             }
-
-
-
-      }
 }

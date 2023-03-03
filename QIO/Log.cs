@@ -71,8 +71,12 @@ namespace QuickTools.QIO
                         }
                   }
 
-
-
             }
-      }
+            /// <summary>
+            /// Logs the given message to the given file 
+            /// </summary>
+            /// <param name="logFile">Log file.</param>
+            /// <param name="message">Message.</param>
+            public static void Message(string logFile , string message) => Event(logFile , message); 
+            }
 }

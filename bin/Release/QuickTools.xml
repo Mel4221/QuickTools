@@ -628,6 +628,14 @@
             </summary>
             <param name="content">Content.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.Label(System.Object,System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Label the specified msg, backColor and foreColor.
+            </summary>
+            <param name="msg">Message.</param>
+            <param name="backColor">Back color.</param>
+            <param name="foreColor">Fore color.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Label(System.Object)">
             <summary>
             Write text with background color in color magentaand some space around it 
@@ -749,6 +757,13 @@
             and the colors available are (Green 0, Yellow 1, Blue 2,  Red 3, Cyan 4)
             </summary>
             <param name="colorNumber">Color number.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Bytes(System.Object)">
+            <summary>
+            gets the Bytes of the specified Object.
+            </summary>
+            <returns>The bytes.</returns>
+            <param name="Object">Object.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.Alert(System.Object)">
             <summary>
@@ -1585,6 +1600,26 @@
             </summary>
             <value><c>true</c> if triguered; otherwise, <c>false</c>.</value>
         </member>
+        <member name="F:QuickTools.QConsole.Options.TextColor">
+            <summary>
+            The color of the text.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.BackColor">
+            <summary>
+            The color of the back.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.LabelBackColor">
+            <summary>
+            The color of the label back.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.LabelTextColor">
+            <summary>
+            The color of the label text.
+            </summary>
+        </member>
         <member name="M:QuickTools.QConsole.Options.ClearOptions">
             <summary>
             Clears All the options.
@@ -2372,6 +2407,12 @@
             </summary>
             <value>The value.</value>
         </member>
+        <member name="P:QuickTools.QData.QSettings.DefaultPath">
+            <summary>
+            Gets or sets the default path.
+            </summary>
+            <value>The default path.</value>
+        </member>
         <member name="F:QuickTools.QData.QSettings.Keys">
             <summary>
             This contains the list of keys in the settings file 
@@ -2787,9 +2828,9 @@
             The counter.
             </summary>
         </member>
-        <member name="F:QuickTools.QIO.Binary.BytesList">
+        <member name="F:QuickTools.QIO.Binary.BufferList">
             <summary>
-            The bytes list.
+            The list of chucks.
             </summary>
         </member>
         <member name="P:QuickTools.QIO.Binary.AllowDebugger">
@@ -2832,7 +2873,7 @@
             The call back function.
             </summary>
         </member>
-        <member name="F:QuickTools.QIO.Binary.ByteCallback">
+        <member name="F:QuickTools.QIO.Binary.BufferCallBack">
             <summary>
             This function returns a byte as it reads it 
             </summary>
@@ -2889,6 +2930,13 @@
             </summary>
             <param name="nameOfThefile">Name of thefile.</param>
             <param name="matter">Matter.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Log.Message(System.String,System.String)">
+            <summary>
+            Logs the given message to the given file 
+            </summary>
+            <param name="logFile">Log file.</param>
+            <param name="message">Message.</param>
         </member>
         <member name="T:QuickTools.QIO.FilesMaper">
             <summary>
@@ -3235,6 +3283,23 @@
             Releases all resource used by the <see cref="T:QuickTools.Writer"/> object.
             </summary>
         </member>
+        <member name="F:QuickTools.QIO.Pack.FileExtention">
+            <summary>
+            set the file extention , and the default is set to be row
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Pack.PackFile(System.String)">
+            <summary>
+            Packs the file.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Pack.UnPackFile(System.String)">
+            <summary>
+            Unpack the pack file.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="T:QuickTools.QNet.DownloadManager">
             <summary>
             Download manager.
@@ -3333,7 +3398,7 @@
             <summary>
             This allows you to add the 3 main components from a HtmlDocument
             </summary>
-            <param name="htmlContenst"></param>
+            <param name="htmlContent"></param>
             <param name="cssContent"></param>
             <param name="javascriptContent"></param>
             <returns></returns>
@@ -3372,8 +3437,9 @@
         </member>
         <member name="M:QuickTools.QNet.QServer.Listen">
             <summary>
-            Listen For a request
+            Listen for a request and return the string clear request  
             </summary>
+            <returns>The listen.</returns>
         </member>
         <member name="M:QuickTools.QNet.QServer.#ctor(System.String,System.Int32,System.Boolean)">
             <summary>

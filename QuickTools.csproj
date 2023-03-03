@@ -99,6 +99,7 @@
     <Compile Include="QIO\Binary_Read_Write.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\QBox.cs" />
+    <Compile Include="QIO\Pack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />

@@ -202,6 +202,12 @@ namespace QuickTools.QCore
             /// <param name="words">Words.</param>
             public static string[] TextToArray(string words) => ArrayJutifyer(words.Split(' '));
 
+
+          
+
+
+             
+
             /// <summary>
             /// Byteses to string.
             /// </summary>
@@ -214,6 +220,9 @@ namespace QuickTools.QCore
                         for (int value = 0; value < array.Length; value++)
                         {
                               text.Append(array[value] + ",");
+                              //Console.WriteLine($"Running Process: {Get.Status(value , array.Length)}");
+
+
                         }
 
                         return text.ToString();

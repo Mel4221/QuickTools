@@ -28,11 +28,11 @@ using System.Collections.Generic;
 namespace QuickTools.QIO
 {
       public partial class Binary
-      {
+            {
             /// <summary>
             /// The current status.
             /// </summary>
-            public  long CurrentStatus;
+            public long CurrentStatus;
             /// <summary>
             /// The buffer.
             /// </summary>
@@ -41,7 +41,7 @@ namespace QuickTools.QIO
             /// <summary>
             /// The chunck size is default to (1024 X 1024) = 1048576
             /// </summary>
-            public int Chunck = 1024 * 1024; 
+            public int Chunck = 1024 * 1024;
 
             public long Blocks { get; set; }
 
@@ -56,9 +56,9 @@ namespace QuickTools.QIO
             public int Counter = 0;
 
             /// <summary>
-            /// The bytes list.
+            /// The list of chucks.
             /// </summary>
-            public static List<byte[]> BytesList;
+            public List<byte[]> BufferList;
             //public static LinkedList<byte[]> BytesList; 
             private string s;
 
@@ -86,7 +86,7 @@ namespace QuickTools.QIO
             /// Gets or sets the speed chars.
             /// </summary>
             /// <value>The speed chars.</value>
-            public string SpeedChars = "Kbs"; 
+            public string SpeedChars = "Kbs";
 
             /// <summary>
             /// Gets or sets the speed unit default is set to kbs
@@ -103,12 +103,12 @@ namespace QuickTools.QIO
             /// <summary>
             /// The call back function.
             /// </summary>
-            public Action<long,long,long> CallBackAction;
+            public Action<long , long , long> CallBackAction;
 
             /// <summary>
             /// This function returns a byte as it reads it 
             /// </summary>
-            public Func<byte,byte> ByteCallback; 
+            public Func<byte[],byte[]> BufferCallBack;
  
 
 
@@ -121,7 +121,7 @@ namespace QuickTools.QIO
                   {
                       
                   };
-                  this.ByteCallback = (b) => { return b; };
+                  this.BufferCallBack = (b) => { return b; };
             }
       }
 }

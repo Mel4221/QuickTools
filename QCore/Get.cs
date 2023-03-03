@@ -991,6 +991,7 @@ character in order for it to return a valid name
                         int y = 0;
                         while (y < Y)
                         {
+                              Console.CursorVisible = false;                              
                               Console.SetCursorPosition(x, y);
                               Console.Write(" ");
                               y++;
@@ -1001,6 +1002,7 @@ character in order for it to return a valid name
                         int x = 0;
                         while (x < X)
                         {
+                              Console.CursorVisible = false;
                               Console.SetCursorPosition(x, y);
                               Console.Write(" ");
                               x++;
@@ -1027,6 +1029,20 @@ character in order for it to return a valid name
             }
                        
 
+            /// <summary>
+            /// Label the specified msg, backColor and foreColor.
+            /// </summary>
+            /// <param name="msg">Message.</param>
+            /// <param name="backColor">Back color.</param>
+            /// <param name="foreColor">Fore color.</param>
+            public static void Label(object msg,ConsoleColor backColor,ConsoleColor foreColor)
+                  {
+                  Console.BackgroundColor = backColor;
+                  Console.ForegroundColor = foreColor;
+                  Console.Write(" " + msg + " ");
+                  Console.Write("");
+                  Get.Reset();
+                  }
             /// <summary>
             /// Write text with background color in color magentaand some space around it 
             /// and seems like a type of a label and takes an argument of an object to avoid casting
@@ -1113,7 +1129,7 @@ character in order for it to return a valid name
             }
 
             Console.WriteLine(underLine);
-            Console.WriteLine(simbol + " " + content + " " + simbol);
+            Console.Write(simbol + " " + content + " " + simbol);
             Console.WriteLine(underLine);
         }
         /// <summary>
@@ -1353,22 +1369,30 @@ character in order for it to return a valid name
         }
 
 
-        /// <summary>
-        /// Similar to Console.WriteLine(object); 
-        /// but add a box of color yellow saying alert
-        /// and the fallowing text that is pass as an argument
-        /// will be printed on yellow color 
-        /// </summary>
-        /// <param name="msg">Message Content</param>
-        public static void Alert(object msg)
-        {
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Box("Alert", "*", 0);
+
+                        /// <summary>
+                        /// gets the Bytes of the specified Object.
+                        /// </summary>
+                        /// <returns>The bytes.</returns>
+                        /// <param name="Object">Object.</param>
+                  public static byte[] Bytes(object Object)
+                  {
+                        return System.Text.Encoding.ASCII.GetBytes(Object.ToString());                  
+                  }
+            /// <summary>
+            /// Similar to Console.WriteLine(object); 
+            /// but add a box of color yellow saying alert
+            /// and the fallowing text that is pass as an argument
+            /// will be printed on yellow color 
+            /// </summary>
+            /// <param name="msg">Message Content</param>
+            public static void Alert(object msg)
+        {
+            Get.Yellow();                  
             Console.WriteLine(msg);
-            Console.ResetColor();
             Console.Beep();
-            //  Console.Write();
+            Get.Wait(); 
         }
         /// <summary>
         /// this is a very smallintent of  trying to hide the password
