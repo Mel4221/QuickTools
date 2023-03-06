@@ -31,17 +31,56 @@ using QuickTools.QData;
 
 namespace QuickTools.QIO
 {
+      /// <summary>
+      /// Create a type of box which will be containing files similar to winrar or zip
+      /// </summary>
       public class QBox
       {
+
+            /// <summary>
+            /// The operator open.
+            /// </summary>
             public byte OperatorOpen = 58; //:
+
+            /// <summary>
+            /// The operator close.
+            /// </summary>
             public byte OperatorClose = 59;//;
+
+            /// <summary>
+            /// The length of the file.
+            /// </summary>
             public long FileLength;
+
+            /// <summary>
+            /// Block.
+            /// </summary>
             public class Block : QBox
             {
+                  /// <summary>
+                  /// The key.
+                  /// </summary>
                   public byte[] Key;
+
+                  /// <summary>
+                  /// The value.
+                  /// </summary>
                   public byte[] Value;
+
+                  /// <summary>
+                  /// The relation.
+                  /// </summary>
                   public byte[] Relation;
+
+                  /// <summary>
+                  /// The identifier.
+                  /// </summary>
                   public byte[] ID;
+
+                  /// <summary>
+                  /// Tos the db.
+                  /// </summary>
+                  /// <returns>The db.</returns>
                   public DB ToDB()
                   {
 
@@ -54,14 +93,30 @@ namespace QuickTools.QIO
                         };
                   }
             }
+
+
+            /// <summary>
+            /// The blocks.
+            /// </summary>
             public List<Block> Blocks;
 
 
+
+            /// <summary>
+            /// Gets the text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="bytes">Bytes.</param>
             public string GetText(byte[] bytes)
             {
                   return Encoding.ASCII.GetString(bytes);
             }
 
+            /// <summary>
+            /// Prints the text.
+            /// </summary>
+            /// <returns>The text.</returns>
+            /// <param name="bytes">Bytes.</param>
             private string PrintText(byte[] bytes)
             {
 
@@ -70,6 +125,11 @@ namespace QuickTools.QIO
                   return content;
             }
 
+
+            /// <summary>
+            /// Reads the blocks.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
             public void ReadBlocks(string fileName)
             {
                   byte[] array = Binary.Reader(fileName);

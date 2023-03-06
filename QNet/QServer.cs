@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.IO; 
 using System.Net;
 using System.Text;
+using System.Threading;
 using QuickTools.QCore;
 
 
@@ -36,7 +37,9 @@ using QuickTools.QCore;
 
 
     /// <summary>
-    /// Provides a listener connection from out bound http request 
+    /// Provides a listener connection from out bound http request
+    /// sadly currently it only support text and pictures , for some reason currently im not able to set up a mode for it to be able to support
+    /// videos nor music properly  
     /// </summary>
     public partial class QServer : IDisposable
     {
@@ -135,12 +138,29 @@ using QuickTools.QCore;
             return Encoding.ASCII.GetBytes(html);
         }
 
-        /// <summary>
-        /// Converts to row string 
-        /// </summary>
-        /// <returns>The to row.</returns>
-        /// <param name="stringContent">String content.</param>
-        public byte[] ConvertToRow(string stringContent)
+                  /// <summary>
+                  /// Loads the files.
+                  /// </summary>
+                  /// <returns>The files.</returns>
+                  /// <param name="htmlFile">Html file.</param>
+                  /// <param name="cssFile">Css file.</param>
+                  /// <param name="javascriptFile">Javascript file.</param>
+                  public byte[] LoadFiles(string htmlFile,string cssFile,string javascriptFile)
+                  {
+                       if(!File.Exists(htmlFile) || !File.Exists(cssFile) || !File.Exists(javascriptFile))
+                        {
+                              throw new FileNotFoundException(); 
+                        }
+                  return ConvertToHtml(File.ReadAllText(htmlFile) , File.ReadAllText(cssFile) , File.ReadAllText(javascriptFile)); 
+                  }
+
+
+            /// <summary>
+            /// Converts to row string 
+            /// </summary>
+            /// <returns>The to row.</returns>
+            /// <param name="stringContent">String content.</param>
+            public byte[] ConvertToRow(string stringContent)
         {
             return Encoding.ASCII.GetBytes(stringContent);
         }
@@ -195,14 +215,27 @@ using QuickTools.QCore;
                                 response.Headers.Add(header.Key, header.Value);
                             }
                         }
-                        //Get.Wait($"Headers Count: {ResponseHeaders.Count}  Header: {response.Headers.Count} ");
-                         byte[] buffer = ResponseFunction(request);
-                        response.ContentLength64 = buffer.Length;
-                        Stream output = response.OutputStream;
-                        output.Write(buffer, 0, buffer.Length);
+
                         this.RequestUrl = request.RawUrl.Substring(1);
+                  byte[] buffer = ResponseFunction(request);
+                  response.ContentLength64 = buffer.Length;
+
+                  var thread = new Thread(() =>
+                  {
+                        Stream output = response.OutputStream;
+                        output.Write(buffer , 0 , buffer.Length);
                         output.Close();
                         listener.Stop();
+                  });
+                  thread.Start(); 
+                        while(true)
+                        {
+                              if(thread.IsAlive == false)
+                              {
+                                    break; 
+                              }
+                        }
+
                   return request; 
                   }
 

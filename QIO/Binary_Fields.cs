@@ -43,6 +43,11 @@ namespace QuickTools.QIO
             /// </summary>
             public int Chunck = 1024 * 1024;
 
+
+            /// <summary>
+            /// Gets or sets the blocks.
+            /// </summary>
+            /// <value>The blocks.</value>
             public long Blocks { get; set; }
 
             /// <summary>
@@ -68,7 +73,11 @@ namespace QuickTools.QIO
             /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
             public bool AllowDebugger { get; set; }
 
-
+            /// <summary>
+            /// Gets or sets the debugger status message and as default should return just Reading + CurrentPorcent% if <see cref="AllowDebugger"/> is set to true
+            /// </summary>
+            /// <value>The debugger status message.</value>
+            public string DebuggerStatusMessage = "Reading..."; 
             /// <summary>
             /// Gets or sets the name of the file.
             /// </summary>

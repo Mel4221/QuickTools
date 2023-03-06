@@ -70,7 +70,7 @@ namespace QuickTools.QIO
                         this.BufferCallBack(this.Buffer); 
                                if(AllowDebugger == true)
                               {
-                              Get.Green(Get.Status(current , size));
+                              Get.Green($"{this.DebuggerStatusMessage}{Get.Status(current , size)}");
 
                               }
                         }

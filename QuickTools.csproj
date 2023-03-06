@@ -100,6 +100,8 @@
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\QBox.cs" />
     <Compile Include="QIO\Pack.cs" />
+    <Compile Include="QCore\Make.cs" />
+    <Compile Include="QCore\Get_FileSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />

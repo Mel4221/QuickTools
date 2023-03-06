@@ -824,6 +824,46 @@
             This Print QuickTools logo to the console , not really useful , but looks cool . 
             </summary>
         </member>
+        <member name="T:QuickTools.QCore.Get.SizeType">
+            <summary>
+            Size type.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QCore.Get.SizeType.GB">
+            <summary>
+            gigabyte
+            </summary>
+        </member>
+        <member name="F:QuickTools.QCore.Get.SizeType.MB">
+            <summary>
+            megabyte
+            </summary>
+        </member>
+        <member name="F:QuickTools.QCore.Get.SizeType.KB">
+            <summary>
+            kilobyte
+            </summary>
+        </member>
+        <member name="F:QuickTools.QCore.Get.SizeType.B">
+            <summary>
+            byte
+            </summary>
+        </member>
+        <member name="M:QuickTools.QCore.Get.FileSize(System.String,QuickTools.QCore.Get.SizeType)">
+            <summary>
+            Files the size.
+            </summary>
+            <returns>The size.</returns>
+            <param name="fileName">File name.</param>
+            <param name="size">Size.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.FileSize(System.String)">
+            <summary>
+            gets Files the size.
+            </summary>
+            <returns>The size.</returns>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="T:QuickTools.QCore.Do">
             <summary>
             Extention Of Get Due to Old Programs using this abstraction
@@ -1128,6 +1168,30 @@
             List the entire file array 
             </summary>
             <param name="array">Array.</param>
+        </member>
+        <member name="T:QuickTools.QCore.Make">
+            <summary>
+             Contains a list of shurtcuts to some IO functions 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QCore.Make.Directory(System.String)">
+            <summary>
+            Directory the specified directoryName.
+            </summary>
+            <param name="directoryName">Directory name.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Make.File(System.String)">
+            <summary>
+            File the specified fileName.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Make.File(System.String,System.Byte[])">
+            <summary>
+            File the specified fileName and content.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="content">Content.</param>
         </member>
         <member name="T:QuickTools.QConsole.ArrayWalker">
             <summary>
@@ -2715,6 +2779,14 @@
             <returns><c>true</c>, if big file was ised, <c>false</c> otherwise.</returns>
             <param name="file">File.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.CreateZeroFile(System.String,System.Int32)">
+            <summary>
+            Creates a file full of zeros of the given GB size 
+            for what reason , i mean is here so just use it on what you consider the best 
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="GbSize">Gb size.</param>
+        </member>
         <member name="M:QuickTools.QIO.Binary.CopyBinaryFile(System.String,System.String)">
             <summary>
             Copies the binary file.
@@ -2778,6 +2850,15 @@
             <param name="file">File.</param>
             <param name="bytes">Bytes.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.Write(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write the specified file with the given  bytes,  from the given position  until the given position 
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="bytes">Bytes.</param>
+            <param name="from">From.</param>
+            <param name="until">Until.</param>
+        </member>
         <member name="M:QuickTools.QIO.Binary.ReadBytes(System.String)">
             <summary>
             Reads the bytes.
@@ -2818,6 +2899,12 @@
             The chunck size is default to (1024 X 1024) = 1048576
             </summary>
         </member>
+        <member name="P:QuickTools.QIO.Binary.Blocks">
+            <summary>
+            Gets or sets the blocks.
+            </summary>
+            <value>The blocks.</value>
+        </member>
         <member name="F:QuickTools.QIO.Binary.Current">
             <summary>
             The current.
@@ -2838,6 +2925,12 @@
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.Binary"/> allow debugger.
             </summary>
             <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.DebuggerStatusMessage">
+            <summary>
+            Gets or sets the debugger status message and as default should return just Reading + CurrentPorcent% if <see cref="P:QuickTools.QIO.Binary.AllowDebugger"/> is set to true
+            </summary>
+            <value>The debugger status message.</value>
         </member>
         <member name="P:QuickTools.QIO.Binary.FileName">
             <summary>
@@ -2911,6 +3004,11 @@
             </summary>
             <param name="bdata">Bdata.</param>
             <param name="len">Length.</param>
+        </member>
+        <member name="T:QuickTools.QIO.RecursiveFileSearch">
+            <summary>
+            Recursive file search.
+            </summary>
         </member>
         <member name="T:QuickTools.QIO.Log">
             <summary>
@@ -3283,10 +3381,98 @@
             Releases all resource used by the <see cref="T:QuickTools.Writer"/> object.
             </summary>
         </member>
+        <member name="T:QuickTools.QIO.QBox">
+            <summary>
+            Create a type of box which will be containing files similar to winrar or zip
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.OperatorOpen">
+            <summary>
+            The operator open.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.OperatorClose">
+            <summary>
+            The operator close.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.FileLength">
+            <summary>
+            The length of the file.
+            </summary>
+        </member>
+        <member name="T:QuickTools.QIO.QBox.Block">
+            <summary>
+            Block.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.Block.Key">
+            <summary>
+            The key.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.Block.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.Block.Relation">
+            <summary>
+            The relation.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.Block.ID">
+            <summary>
+            The identifier.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.QBox.Block.ToDB">
+            <summary>
+            Tos the db.
+            </summary>
+            <returns>The db.</returns>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.Blocks">
+            <summary>
+            The blocks.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.QBox.GetText(System.Byte[])">
+            <summary>
+            Gets the text.
+            </summary>
+            <returns>The text.</returns>
+            <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QIO.QBox.PrintText(System.Byte[])">
+            <summary>
+            Prints the text.
+            </summary>
+            <returns>The text.</returns>
+            <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QIO.QBox.ReadBlocks(System.String)">
+            <summary>
+            Reads the blocks.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="T:QuickTools.QIO.Pack">
+            <summary>
+            Creates a row string of the bytes from the given file  
+            </summary>
+        </member>
         <member name="F:QuickTools.QIO.Pack.FileExtention">
             <summary>
             set the file extention , and the default is set to be row
             </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Pack.PackFile(System.String,System.Boolean)">
+            <summary>
+            Packs the file and if you want to remove the other file you could just pass true as an argument 
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="removeSourceFile">If set to <c>true</c> keep old file.</param>
         </member>
         <member name="M:QuickTools.QIO.Pack.PackFile(System.String)">
             <summary>
@@ -3299,6 +3485,13 @@
             Unpack the pack file.
             </summary>
             <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Pack.UnPackFile(System.String,System.Boolean)">
+            <summary>
+            un pack the file and also allows you to remove the source 
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="removeSource">If set to <c>true</c> remove source.</param>
         </member>
         <member name="T:QuickTools.QNet.DownloadManager">
             <summary>
@@ -3337,7 +3530,9 @@
         </member>
         <member name="T:QuickTools.QNet.QServer">
             <summary>
-            Provides a listener connection from out bound http request 
+            Provides a listener connection from out bound http request
+            sadly currently it only support text and pictures , for some reason currently im not able to set up a mode for it to be able to support
+            videos nor music properly  
             </summary>
         </member>
         <member name="P:QuickTools.QNet.QServer.URL">
@@ -3402,6 +3597,15 @@
             <param name="cssContent"></param>
             <param name="javascriptContent"></param>
             <returns></returns>
+        </member>
+        <member name="M:QuickTools.QNet.QServer.LoadFiles(System.String,System.String,System.String)">
+            <summary>
+            Loads the files.
+            </summary>
+            <returns>The files.</returns>
+            <param name="htmlFile">Html file.</param>
+            <param name="cssFile">Css file.</param>
+            <param name="javascriptFile">Javascript file.</param>
         </member>
         <member name="M:QuickTools.QNet.QServer.ConvertToRow(System.String)">
             <summary>

@@ -36,7 +36,7 @@ namespace QuickTools.QCore
     /// does multiple stuff and contains must of the 
     /// tools that started this Project.
     /// </summary>
-    public class Get : Color
+    public partial class Get : Color
     {
 
       
@@ -51,17 +51,14 @@ namespace QuickTools.QCore
                         actionMethod(); 
             }
         }
-
-  
-
-
-        /// <summary>
-        /// Get the porcenrage status of the provided current time and goal 
-        /// </summary>
-        /// <returns>The status.</returns>
-        /// <param name="current">Current.</param>
-        /// <param name="goal">Goal.</param>
-        public static string Status(object current, object goal)
+                
+            /// <summary>
+            /// Get the porcenrage status of the provided current time and goal 
+            /// </summary>
+            /// <returns>The status.</returns>
+            /// <param name="current">Current.</param>
+            /// <param name="goal">Goal.</param>
+            public static string Status(object current, object goal)
         {
             string status = null;
             double c = Convert.ToDouble(current);

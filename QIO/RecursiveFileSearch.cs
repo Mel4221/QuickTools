@@ -28,7 +28,9 @@ using System.IO;
 namespace QuickTools.QIO
 {
 
-
+      /// <summary>
+      /// Recursive file search.
+      /// </summary>
       public class RecursiveFileSearch
       {
             static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();

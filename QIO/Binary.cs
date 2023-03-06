@@ -57,6 +57,52 @@ namespace QuickTools.QIO
                   }
             }
 
+
+
+
+
+
+
+            /// <summary>
+            /// Creates a file full of zeros of the given GB size 
+            /// for what reason , i mean is here so just use it on what you consider the best 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="GbSize">Gb size.</param>
+            public static void CreateZeroFile(string fileName , int GbSize)
+                  {
+                  if(File.Exists(fileName))
+                        {
+                        File.Delete(fileName);
+                        }
+                  if(!File.Exists(fileName))
+                        {
+                        using(FileStream create = File.Create(fileName))
+                              {
+
+                              }
+                        }
+
+                  int gb = GbSize * 1024;
+                  using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
+                        {
+                        byte[] bytes = new byte[1024 * 1024];
+                        BinaryWriter binary = new BinaryWriter(fs);
+                        QuickTools.QCore.Get.Green("Working...");
+
+                        for(int rounds = 0 ; rounds < gb ; rounds++)
+                              {
+
+                              binary.Write(bytes , 0 , bytes.Length);
+
+
+                              }
+                        QuickTools.QCore.Get.Ok();
+                        }
+
+                  }
+
+
             /// <summary>
             /// Copies the binary file.
             /// </summary>
@@ -286,8 +332,21 @@ namespace QuickTools.QIO
                   }
             }
 
+            /// <summary>
+            /// Write the specified file with the given  bytes,  from the given position  until the given position 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="bytes">Bytes.</param>
+            /// <param name="from">From.</param>
+            /// <param name="until">Until.</param>
+            public static void Write(string fileName ,byte[] bytes , int from , int until)
+                 {
+                  BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create,FileAccess.Write));
+                  writer.Write(bytes , from , until);
+                  }
 
-           
-      }
+
+
+            }
 
 }

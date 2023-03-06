@@ -28,22 +28,55 @@ using System.IO;
 using QuickTools.QCore;
 namespace QuickTools.QIO
       {
+      /// <summary>
+      /// Creates a row string of the bytes from the given file  
+      /// </summary>
       public class Pack
             {
             /// <summary>
             /// set the file extention , and the default is set to be row
             /// </summary>
-            public string FileExtention = "row";
+            public string FileExtention = "rowpack";
 
 
+            /// <summary>
+            /// Packs the file and if you want to remove the other file you could just pass true as an argument 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="removeSourceFile">If set to <c>true</c> keep old file.</param>
+            public void PackFile(string fileName , bool removeSourceFile)
+                  {
+                        if(File.Exists(fileName))
+                        {
+                        byte[] bytes = Binary.Reader(fileName);
+                        Writer.Write($"{fileName}.{this.FileExtention}" , IConvert.BytesToString(bytes));
+                        if(removeSourceFile == true)
+                              {
+                              File.Delete(fileName); 
+                              }
+                        return;
+                        }
+                        else
+                        {
+                        throw new FileNotFoundException(fileName); 
+                        }
+                  }
             /// <summary>
             /// Packs the file.
             /// </summary>
             /// <param name="fileName">File name.</param>
             public void PackFile(string fileName)
                   {
-                  byte[] bytes = Binary.Reader(fileName);
-                  Writer.Write($"{fileName}.{this.FileExtention}" ,IConvert.BytesToString(bytes));
+                  if(File.Exists(fileName))
+                        {
+                        byte[] bytes = Binary.Reader(fileName);
+                        Writer.Write($"{fileName}.{this.FileExtention}" , IConvert.BytesToString(bytes));
+                        return;
+                        }
+                  else
+                        {
+                        throw new FileNotFoundException(fileName);
+                        }
                   }
             /// <summary>
             /// Unpack the pack file.
@@ -51,10 +84,40 @@ namespace QuickTools.QIO
             /// <param name="fileName">File name.</param>
             public void UnPackFile(string fileName)
                   {
-
-                  string file = fileName.Substring(0 , fileName.LastIndexOf('.'));
-                  Binary.Writer(file , IConvert.StringToBytesArray(Reader.Read(fileName)));
-                  File.Delete(fileName);
+                  if(File.Exists(fileName))
+                        {
+                        string file = fileName.Substring(0 , fileName.LastIndexOf('.'));
+                        Binary.Writer(file , IConvert.StringToBytesArray(Reader.Read(fileName)));
+                        File.Delete(fileName);
+                        return;
+                        }
+                  else
+                        {
+                        throw new FileNotFoundException(fileName); 
+                        }
+                  }
+            /// <summary>
+            /// un pack the file and also allows you to remove the source 
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="removeSource">If set to <c>true</c> remove source.</param>
+            public void UnPackFile(string fileName , bool removeSource)
+                  {
+                  if(File.Exists(fileName))
+                        {
+                        string file = fileName.Substring(0 , fileName.LastIndexOf('.'));
+                        Binary.Writer(file , IConvert.StringToBytesArray(Reader.Read(fileName)));
+                        File.Delete(fileName);
+                        if(removeSource == true)
+                              {
+                              File.Delete(fileName); 
+                              }
+                        return;
+                        }
+                  else
+                        {
+                        throw new FileNotFoundException(fileName);
+                        }
                   }
             }
       }
