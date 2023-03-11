@@ -2990,6 +2990,14 @@
             Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
             </summary>
         </member>
+        <member name="M:QuickTools.QIO.Binary.Bind(System.Byte[],System.Byte[])">
+            <summary>
+            Bind the specified bufferA and bufferB.
+            </summary>
+            <returns>The bind.</returns>
+            <param name="bufferA">Buffer a.</param>
+            <param name="bufferB">Buffer b.</param>
+        </member>
         <member name="T:QuickTools.QIO.FileDumper">
             <summary>
             File dumper.
@@ -4008,6 +4016,11 @@
             </summary>
             <value>The trojan file.</value>
         </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultFilnalLabelIdentity">
+            <summary>
+            The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
+            </summary>
+        </member>
         <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
@@ -4018,6 +4031,68 @@
             <summary>
             Pulls the payload from trojan File
             </summary>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="trojanFile">Trojan file.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+            <param name="description">Description.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+            <param name="description">Description.</param>
+            <param name="date">Date.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+            <param name="description">Description.</param>
+            <param name="date">Date.</param>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+            <param name="description">Description.</param>
+            <param name="date">Date.</param>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+            <param name="trojanFile">Trojan file.</param>
         </member>
     </members>
 </doc>

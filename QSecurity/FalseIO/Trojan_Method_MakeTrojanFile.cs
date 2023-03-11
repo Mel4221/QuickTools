@@ -45,7 +45,7 @@ namespace QuickTools.QSecurity.FalseIO
             public void MakeTrojanFile()
                   {
                   byte[] trojan, load, pack, metadata;
-                  string file, payload, fake, description, str, str2;
+                  string file, payload, fake, description, str, str2, date;
                   int indexer, len;
 
                   if(this.TrojanFile == "" || !File.Exists(this.TrojanFile))
@@ -59,13 +59,14 @@ namespace QuickTools.QSecurity.FalseIO
 
                   file = this.TrojanFile;
                   payload = this.Payload; 
-                  fake = $"Trojan_{file}";
-                  description = this.Description; 
-
+                  fake = $"{this.DefaultFilnalLabelIdentity}{file}";
+                  description = this.Description;
+                  date = this.Date == "" ? DateTime.Now.ToString() : this.Date;
                   trojan = Binary.Reader(file);
                   load = Binary.Reader(payload);
+
                   //start from meta data and this is just trying to get the metadata just in the right format
-                  str = $":{payload};:{trojan.Length};:{load.Length};:{description};:{DateTime.Now};";
+                  str = $":{payload};:{trojan.Length};:{load.Length};:{description};:{date};";
                   len = $":{str.Length};".Length;
                   str2 = str + $":{len + str.Length};";
                   //end from metadata preparaation 

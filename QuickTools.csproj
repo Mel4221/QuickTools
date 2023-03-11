@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2006.0</PackageVersion>
+    <PackageVersion>2006.5</PackageVersion>
     <Authors>MBV</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -105,6 +105,8 @@
     <Compile Include="QSecurity\FalseIO\Trojan_Method_MakeTrojanFile.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Fields.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_PullTrojanFile.cs" />
+    <Compile Include="QIO\BytesBinder.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Constructors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />

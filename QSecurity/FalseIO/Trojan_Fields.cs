@@ -28,12 +28,13 @@ namespace QuickTools.QSecurity.FalseIO
       {
             public partial class Trojan
             {
+    
 
-                  /// <summary>
-                  /// Gets or sets the payload.
-                  /// </summary>
-                  /// <value>The payload.</value>
-                  public string Payload { get; set; }
+            /// <summary>
+            /// Gets or sets the payload.
+            /// </summary>
+            /// <value>The payload.</value>
+            public string Payload { get; set; }
                   
                   /// <summary>
                   /// Gets or sets the index start.
@@ -71,6 +72,11 @@ namespace QuickTools.QSecurity.FalseIO
                   /// </summary>
                   /// <value>The trojan file.</value>
                     public string TrojanFile { get; set; }
+                  
+            /// <summary>
+            /// The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
+            /// </summary>
+                  public string DefaultFilnalLabelIdentity = "Trojan_";
 
             /// <summary>
             /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.

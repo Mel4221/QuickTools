@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata minClientVersion="">
     <id>QuickTools</id>
-    <version>2006.0.0</version>
+    <version>2006.5.0</version>
     <title>QuickTools</title>
     <authors>MBV</authors>
     <owners>MBV</owners>
