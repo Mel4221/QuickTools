@@ -18,6 +18,7 @@ using QuickTools.QColors;
 using System.Diagnostics;
 using System.Linq;
 using QuickTools.QConsole;
+using System.Security.Cryptography;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -131,39 +132,57 @@ namespace QuickTools.QCore
 
 
 
-        /// <summary>
-        /// This Creates a hash code based on the given input 
-        /// be carefull using this as a security method since 
-        /// this macanisim is too simple and it could be broken easely
-        /// </summary>
-        /// <returns>The code.</returns>
-        /// <param name="bytes">Bytes.</param>
-        public static double HashCode(byte[] bytes)
-        {
-            if (bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
-            
-                double x = 0;
-                double seed = 7;
+            /// <summary>
+            /// This Creates a hash code based on the given input 
+            /// be carefull using this as a security method since 
+            /// this macanisim is too simple and it could be broken easely
+            /// </summary>
+            /// <returns>The code.</returns>
+            /// <param name="bytes">Bytes.</param>
+            public static double HashCode(byte[] bytes)
+                  {
+                  if(bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
 
-                for (int item = 0; item < bytes.Length; item++)
-                {
-                    x += ((seed * bytes[item]) + item);
-                }
-                return x;
-          
-        }
+                  double x = 0;
+                  double seed = 7;
+
+                  for(int item = 0 ; item < bytes.Length ; item++)
+                        {
+                        x += ((seed * bytes[item]) + item);
+                        }
+                  return x;
+
+                  }
 
 
-        /// <summary>
-        /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>
-        /// which measn that is not secure enough so if you need encription
-        /// please refer to <see cref="QuickTools.QSecurity.Secure"/>
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static double HashCode(string text,int length)
+                  /// <summary>
+                  /// Hashs the code256.
+                  /// </summary>
+                  /// <returns>The code256.</returns>
+                  /// <param name="bytes">Bytes.</param>
+                  public static double HashCode256(byte[] bytes)
+                  {
+                        string strHash = null;
+                        using(SHA256 sha = SHA256.Create())
+                        {
+                        byte[] hash = sha.ComputeHash(bytes);
+                        foreach(var ch in hash)
+                              {
+                              strHash += ch;  
+                              }
+                        }
+                  return Convert.ToDouble(strHash); 
+                  }
+            /// <summary>
+            /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>
+            /// which measn that is not secure enough so if you need encription
+            /// please refer to <see cref="QuickTools.QSecurity.Secure"/>
+            /// </summary>
+            /// <param name="text"></param>
+            /// <param name="length"></param>
+            /// <returns></returns>
+            /// <exception cref="ArgumentNullException"></exception>
+            public static double HashCode(string text,int length)
         {
 
             if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
