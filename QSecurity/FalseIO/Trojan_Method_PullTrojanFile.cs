@@ -131,7 +131,15 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
                         }
                   //Stage 4 Writting File
-
+                        if(this.DefaultDeletePayloadFromFile == true)
+                        {
+                              Binary.Write(trojanFile , payload , 0 , int.Parse(trojan.IndexStart));
+                        }
+                        if(this.DefaultDeleteSourceFile == true)
+                        {
+                              Binary.Write(trojanFile , new byte[payload.Length] , 0 , payload.Length);
+                              File.Delete(trojanFile); 
+                        }
 
                   Binary.Write(IRandom.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 

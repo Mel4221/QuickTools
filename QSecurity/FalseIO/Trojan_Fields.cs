@@ -77,6 +77,15 @@ namespace QuickTools.QSecurity.FalseIO
             /// The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
             /// </summary>
                   public string DefaultFilnalLabelIdentity = "Trojan_";
+            /// <summary>
+            /// The default delete source payload.
+            /// </summary>
+            public bool DefaultDeleteSourceFile = false;
+
+            /// <summary>
+            /// The default delete payload from file.
+            /// </summary>
+            public bool DefaultDeletePayloadFromFile = false;
 
             /// <summary>
             /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
