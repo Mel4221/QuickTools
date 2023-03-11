@@ -35,10 +35,10 @@ namespace QuickTools.QSecurity.FalseIO
                   /// <value>The payload.</value>
                   public string Payload { get; set; }
                   
-            /// <summary>
-            /// Gets or sets the index start.
-            /// </summary>
-            /// <value>The index start.</value>
+                  /// <summary>
+                  /// Gets or sets the index start.
+                  /// </summary>
+                  /// <value>The index start.</value>
                   public string IndexStart { get; set; }
                  
                   /// <summary>

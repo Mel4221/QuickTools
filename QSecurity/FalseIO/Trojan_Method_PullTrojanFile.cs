@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using QuickTools.QCore;
 using QuickTools.QIO;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace QuickTools.QSecurity.FalseIO
       {
@@ -130,7 +131,9 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
                         }
                   //Stage 4 Writting File
-                  Binary.Write(trojan.Payload , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
+
+
+                  Binary.Write(IRandom.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
             }

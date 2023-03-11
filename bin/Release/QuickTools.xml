@@ -884,6 +884,13 @@
             that could be called on the same maner 
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.IRandom.OnlyChars(System.String)">
+            <summary>
+            Very Slow method that only allows chars  to be print
+            </summary>
+            <returns>The chars.</returns>
+            <param name="word">Word.</param>
+        </member>
         <member name="F:QuickTools.QCore.IRandom.Generated">
             <summary>
             Contains the password Generated 
