@@ -864,6 +864,13 @@
             <returns>The size.</returns>
             <param name="fileName">File name.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.FileSize(System.Byte[])">
+            <summary>
+            Gets the size fo a file from the buffer
+            </summary>
+            <returns>The size.</returns>
+            <param name="buffer">Buffer.</param>
+        </member>
         <member name="T:QuickTools.QCore.Do">
             <summary>
             Extention Of Get Due to Old Programs using this abstraction
@@ -3938,6 +3945,72 @@
             </summary>
             <returns>The binary.</returns>
             <param name="plainBytes">Plain bytes.</param>
+        </member>
+        <member name="T:QuickTools.QSecurity.FalseIO.Trojan">
+            <summary>
+            The Trojan class does not create a Virus or anything like creatting a maleware but it can create a file that will 
+            look like a regular file but inside it it could contain the data given to it  as a payload. 
+            The name of the class is Trojan Mainly for how a trojan virus will behave
+            </summary>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.MakeTrojanFile">
+            <summary>
+            Makes the trojan file.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Payload">
+            <summary>
+            Gets or sets the payload.
+            </summary>
+            <value>The payload.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.IndexStart">
+            <summary>
+            Gets or sets the index start.
+            </summary>
+            <value>The index start.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.IndexEnd">
+            <summary>
+            Gets or sets the index end.
+            </summary>
+            <value>The index end.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Date">
+            <summary>
+            Gets or sets the date.
+            </summary>
+            <value>The date.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>
+            allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.TrojanFile">
+            <summary>
+            Gets or sets the trojan file.
+            </summary>
+            <value>The trojan file.</value>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.</returns>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.PullPayloadFromTrojan">
+            <summary>
+            Pulls the payload from trojan File
+            </summary>
         </member>
     </members>
 </doc>

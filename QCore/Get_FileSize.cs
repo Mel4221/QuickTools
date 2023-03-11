@@ -108,6 +108,36 @@ namespace QuickTools.QCore
 
                   return fileSize;
                   }
+
+
+            /// <summary>
+            /// Gets the size fo a file from the buffer
+            /// </summary>
+            /// <returns>The size.</returns>
+            /// <param name="buffer">Buffer.</param>
+            public static string FileSize(byte[] buffer)
+                  {
+                  string fileSize = null;
+                  var fileStream = IConvert.ToString(buffer); 
+                  if((fileStream.Length / 1024 / 1024 / 1024) != 0)
+                        {
+                        fileSize = $"{fileStream.Length / 1024 / 1024 / 1024}GB";
+                        return fileSize;
+                        }
+                  if((fileStream.Length / 1024 / 1024) != 0)
+                        {
+                        fileSize = $"{fileStream.Length / 1024 / 1024 }MB";
+                        return fileSize;
+                        }
+                  if((fileStream.Length / 1024) != 0)
+                        {
+                        fileSize = $"{fileStream.Length / 1024 }KB";
+                        return fileSize;
+                        }
+                  fileSize = $"{fileStream.Length }B";
+
+                  return fileSize;
+                  }
             }
 
  
