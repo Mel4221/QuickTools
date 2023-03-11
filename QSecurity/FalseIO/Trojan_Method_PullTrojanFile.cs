@@ -141,7 +141,7 @@ namespace QuickTools.QSecurity.FalseIO
                               File.Delete(trojanFile); 
                         }
 
-                  Binary.Write(IRandom.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
+                  Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
             }

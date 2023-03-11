@@ -49,51 +49,7 @@ namespace QuickTools.QCore
     {
         
 
-           /// <summary>
-           /// Very Slow method that only allows chars  to be print
-           /// </summary>
-           /// <returns>The chars.</returns>
-           /// <param name="word">Word.</param>
-            public static string OnlyChars(string word)
-                  {
-                  string str = null;
-                        for(int ch = 0 ; ch <word.Length ; ch++)
-                        {
-                             foreach(var w in LowerCase)
-                              {
-                                    if(w == word[ch].ToString())
-                                    {
-                                          str += word[ch];
-                                          break; 
-                                    }
-                              }
-                              foreach(var w in UpperCase)
-                              {
-                                    if(w == word[ch].ToString())
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        foreach(var w in Symbols)
-                              {
-                              if(w == word[ch].ToString())
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        foreach(var w in Numbers)
-                              {
-                                    if(w.ToString() == word[ch].ToString())
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        }
-                  return str; 
-                  }
+ 
             /// <summary>
             /// Contains the password Generated 
             /// </summary>
@@ -125,7 +81,7 @@ namespace QuickTools.QCore
 "-", "*", "/",
       "+","`","~"
       };
-      private static int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+      public static int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
       /*
          //Lower 26

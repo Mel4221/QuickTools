@@ -39,12 +39,59 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
-      
-        /// <summary>
-        /// Loop the specified actionMethod forever
-        /// </summary>
-        /// <param name="actionMethod">Action method.</param>
-        public static void Loop(Action actionMethod)
+
+
+            /// <summary>
+            /// Very Slow method that only allows chars  to be print
+            /// </summary>
+            /// <returns>The chars.</returns>
+            /// <param name="word">Word.</param>
+            public static string OnlyChars(string word)
+                  {
+                  string str = null;
+                  for(int ch = 0 ; ch < word.Length ; ch++)
+                        {
+                        foreach(var w in IRandom.LowerCase)
+                              {
+                              if(w == word[ch].ToString())
+                                    {
+                                    str += word[ch];
+                                    break;
+                                    }
+                              }
+                        foreach(var w in IRandom.UpperCase)
+                              {
+                              if(w == word[ch].ToString())
+                                    {
+                                    str += word[ch];
+                                    break;
+                                    }
+                              }
+                        foreach(var w in IRandom.Symbols)
+                              {
+                              if(w == word[ch].ToString())
+                                    {
+                                    str += word[ch];
+                                    break;
+                                    }
+                              }
+                        foreach(var w in IRandom.Numbers)
+                              {
+                              if(w.ToString() == word[ch].ToString())
+                                    {
+                                    str += word[ch];
+                                    break;
+                                    }
+                              }
+                        }
+                  return str;
+                  }
+
+            /// <summary>
+            /// Loop the specified actionMethod forever
+            /// </summary>
+            /// <param name="actionMethod">Action method.</param>
+            public static void Loop(Action actionMethod)
         {
             while (true)
             {
