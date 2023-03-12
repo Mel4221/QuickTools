@@ -160,7 +160,7 @@ namespace QuickTools.QCore
                   /// </summary>
                   /// <returns>The code256.</returns>
                   /// <param name="bytes">Bytes.</param>
-                  public static double HashCode256(byte[] bytes)
+                  public static string HashCode256(byte[] bytes)
                   {
                         string strHash = null;
                         using(SHA256 sha = SHA256.Create())
@@ -171,7 +171,27 @@ namespace QuickTools.QCore
                               strHash += ch;  
                               }
                         }
-                  return Convert.ToDouble(strHash); 
+                  return strHash;
+                  }
+
+                  /// <summary>
+                  /// Hashs the code256.
+                  /// </summary>
+                  /// <returns>The code256.</returns>
+                  /// <param name="content">Content.</param>
+                  public static string HashCode256(object content)
+                  {
+                  string strHash = null;
+                  byte[] bytes = IConvert.ToASCII(content); 
+                  using(SHA256 sha = SHA256.Create())
+                        {
+                        byte[] hash = sha.ComputeHash(bytes);
+                        foreach(var ch in hash)
+                              {
+                              strHash += ch;
+                              }
+                        }
+                  return strHash;
                   }
             /// <summary>
             /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>

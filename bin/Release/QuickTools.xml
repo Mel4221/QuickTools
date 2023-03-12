@@ -319,6 +319,13 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.OnlyChars(System.String)">
+            <summary>
+            Very Slow method that only allows chars  to be print
+            </summary>
+            <returns>The chars.</returns>
+            <param name="word">Word.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Loop(System.Action)">
             <summary>
             Loop the specified actionMethod forever
@@ -347,6 +354,20 @@
             </summary>
             <returns>The code.</returns>
             <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.HashCode256(System.Byte[])">
+            <summary>
+            Hashs the code256.
+            </summary>
+            <returns>The code256.</returns>
+            <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.HashCode256(System.Object)">
+            <summary>
+            Hashs the code256.
+            </summary>
+            <returns>The code256.</returns>
+            <param name="content">Content.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.HashCode(System.String,System.Int32)">
             <summary>
@@ -883,13 +904,6 @@
             and you know what i will create  another class just because 
             that could be called on the same maner 
             </summary>
-        </member>
-        <member name="M:QuickTools.QCore.IRandom.OnlyChars(System.String)">
-            <summary>
-            Very Slow method that only allows chars  to be print
-            </summary>
-            <returns>The chars.</returns>
-            <param name="word">Word.</param>
         </member>
         <member name="F:QuickTools.QCore.IRandom.Generated">
             <summary>
@@ -4019,6 +4033,16 @@
         <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultFilnalLabelIdentity">
             <summary>
             The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
+            </summary>
+        </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultDeleteSourceFile">
+            <summary>
+            The default delete source payload.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultDeletePayloadFromFile">
+            <summary>
+            The default delete payload from file.
             </summary>
         </member>
         <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ToString">
