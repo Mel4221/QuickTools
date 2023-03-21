@@ -26,7 +26,9 @@
 using System;
 using System.Text;
 using QuickTools.QColors; 
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Threading;
+
 namespace QuickTools.QCore
 {
 
@@ -203,42 +205,130 @@ namespace QuickTools.QCore
             public static string[] TextToArray(string words) => ArrayJutifyer(words.Split(' '));
 
 
-          
 
 
-             
 
+
+
+            static object f;
+            static object b; 
             /// <summary>
-            /// Byteses to string.
+            /// Converts the bytes given to a row string of bytes but is slow 
             /// </summary>
             /// <returns>The to string.</returns>
             /// <param name="array">Array.</param>
             public static string BytesToString(byte[] array)
             {
                   try
-                  {
-                        for (int value = 0; value < array.Length; value++)
                         {
-                              text.Append(array[value] + ",");
-                              //Console.WriteLine($"Running Process: {Get.Status(value , array.Length)}");
+
+                        Thread foward, back;
+                        StringBuilder str1, str2;
+                        int fw, bc, len, half;
+                        bool trigerA, trigerB;
+                        len = array.Length;
+                        half = len / 2;
+                        fw = 0;
+                        bc = 0;
+                        trigerA = false;
+                        trigerB = false;
+                        str1 = new StringBuilder();
+                        str2 = new StringBuilder();
+                        if(len != (half + half))
+                              {
+                              // Get.Ok();
+                              fw = half + 1;
+                              bc = len;
+
+                              }
+                        if(len == (half + half))
+                              {
+                              fw = half;
+                              bc = len;
+                              }
+                        //Get.Wait();
+                        foward = new Thread(() =>
+                        {
+                              for(int i = 0 ; i < fw ; i++)
+                                    {
+                                    //  Get.Green(i);
+                                    f = i;
+                                    str1.Append(array[i] + ",");
+
+                                    }
+                              trigerA = true;
+                        });
+
+                        back = new Thread(() =>
+                        {
+                              for(int i = half ; i < len ; i++)
+                                    {
+                                    //  Get.Red(i);
+                                    b = i;
+                                    str2.Append(array[i] + ",");
+
+                                    }
+                              trigerB = true;
+                        });
+
+                        foward.Start();
+                        back.Start();
 
 
+                        while(true)
+                              {
+
+                                   // Get.Green($"F: {f} B: {b} Size: {array.Length}  A:{Get.Status(f , b)} ");
+
+                                    if(trigerA == true && trigerB == true)
+                                    {
+                                          return str1.ToString() + str2.ToString();
+                                    //Writer.Write("test.txt" , str);
+                                     }
+                              //Thread.Sleep(5000);
+
+                              }
                         }
-
-                        return text.ToString();
-                  }
-                  catch (Exception ex)
-                  {
+                  catch(Exception ex)
+                        {
                         Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
                         return null;
-                  }
-
-
-
-
+                        }
 
 
             }
+
+            /// <summary>
+            /// Converts the bytes given to a row string of bytes but is slow if showDebuger is equal to true it will print the status of the buffer to the console
+            /// </summary>
+            /// <returns>The to string.</returns>
+            /// <param name="array">Array.</param>
+            /// <param name="showDebuger">If set to <c>true</c> show debuger.</param>
+            public static string BytesToString(byte[] array,bool showDebuger)
+                  {
+                  try
+                        {
+                        for(int value = 0 ; value < array.Length ; value++)
+                              {
+                              text.Append(array[value] + ",");
+                              //Console.WriteLine($"Running Process: {Get.Status(value , array.Length)}");
+                                    if(showDebuger == true)
+                                    {
+                                          Get.Green(Get.Status(value , array.Length));
+                                    }     
+
+                              }
+
+                        return text.ToString();
+                        }
+                  catch(Exception ex)
+                        {
+                        Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
+                        return null;
+                        }
+
+
+                  }
 
 
 

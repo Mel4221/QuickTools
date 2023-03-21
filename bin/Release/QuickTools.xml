@@ -1102,10 +1102,18 @@
         </member>
         <member name="M:QuickTools.QCore.IConvert.BytesToString(System.Byte[])">
             <summary>
-            Byteses to string.
+            Converts the bytes given to a row string of bytes but is slow 
             </summary>
             <returns>The to string.</returns>
             <param name="array">Array.</param>
+        </member>
+        <member name="M:QuickTools.QCore.IConvert.BytesToString(System.Byte[],System.Boolean)">
+            <summary>
+            Converts the bytes given to a row string of bytes but is slow if showDebuger is equal to true it will print the status of the buffer to the console
+            </summary>
+            <returns>The to string.</returns>
+            <param name="array">Array.</param>
+            <param name="showDebuger">If set to <c>true</c> show debuger.</param>
         </member>
         <member name="M:QuickTools.QCore.IConvert.ToASCII(System.Object)">
             <summary>
@@ -2807,6 +2815,15 @@
             <returns><c>true</c>, if big file was ised, <c>false</c> otherwise.</returns>
             <param name="file">File.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.CopyBuffer(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Copies the buffer and returns it 
+            </summary>
+            <returns>The buffer.</returns>
+            <param name="buffer">Buffer.</param>
+            <param name="from">From.</param>
+            <param name="until">Until.</param>
+        </member>
         <member name="M:QuickTools.QIO.Binary.CreateZeroFile(System.String,System.Int32)">
             <summary>
             Creates a file full of zeros of the given GB size 
@@ -3758,6 +3775,17 @@
             server certicate.
             </summary>
             <value><c>true</c> if require server certicate; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:QuickTools.QNet.QHttp.ResponseBuffer">
+            <summary>
+            The response buffer.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QHttp.RequestMethod">
+            <summary>
+            Gets or sets the request method.
+            </summary>
+            <value>The request method.</value>
         </member>
         <member name="P:QuickTools.QNet.QHttp.Response">
             <summary>

@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using QuickTools.QCore;
 using System.IO;
 using System.Net;
+using System.ComponentModel;
 
 
       namespace QuickTools.QNet
@@ -74,13 +75,24 @@ using System.Net;
                         /// </summary>
                         /// <value><c>true</c> if require server certicate; otherwise, <c>false</c>.</value>
                         public bool RequireServerCerticate { get; set; }
-                        
+
+                        /// <summary>
+                        /// The response buffer.
+                        /// </summary>
+                        public byte[] ResponseBuffer;
+
+                        /// <summary>
+                        /// Gets or sets the request method.
+                        /// </summary>
+                        /// <value>The request method.</value>
+                        public string RequestMethod = "GET";
+
                         /// <summary>
                         /// Gets or sets the response.
                         /// </summary>
                         /// <value>The response.</value>
                         public HttpWebResponse Response { get; set; }
-                        
+                                    
                         /// <summary>
                         /// Gets or sets the headers.
                         /// </summary>
@@ -115,7 +127,6 @@ using System.Net;
                   public string Get()
                               {
 
-                        //string context = "context=Data Source=data1.cwzysvw0mxjn.us-east-2.rds.amazonaws.com;Initial Catalog=ManSys;Persist Security Info=True;User ID=admin;Password=Dmelqui20181";
                         try
                         {
                               Uri link = new Uri(Url);
@@ -135,17 +146,18 @@ using System.Net;
                               }
 
 
-                              request.Method = "GET";
+                              request.Method = this.RequestMethod; 
 
                               if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                               HttpWebResponse response = null;
 
                               response = (HttpWebResponse)request.GetResponse();
-
+                              
                               string result = null;
                               using (Stream stream = response.GetResponseStream())
                               {
+
                                     StreamReader reader = new StreamReader(stream);
                                     result = reader.ReadToEnd();
                               }
@@ -196,7 +208,7 @@ using System.Net;
                               }
 
 
-                              request.Method = "GET";
+                              request.Method = this.RequestMethod;  
 
                               if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
@@ -209,6 +221,7 @@ using System.Net;
                               {
                                     StreamReader reader = new StreamReader(stream);
                                     result = reader.ReadToEnd();
+                            
                               }
                               return result;
 
@@ -257,7 +270,7 @@ using System.Net;
                               }
 
 
-                              request.Method = "GET";
+                              request.Method = this.RequestMethod;
 
                               if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
@@ -270,6 +283,9 @@ using System.Net;
                               {
                                     StreamReader reader = new StreamReader(stream);
                                     result = reader.ReadToEnd();
+                                    
+                                    
+                                   
                               }
                               if(!callBackFunction.Equals(null))
                               {

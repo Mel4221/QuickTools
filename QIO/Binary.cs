@@ -58,8 +58,26 @@ namespace QuickTools.QIO
             }
 
 
-
-
+            /// <summary>
+            /// Copies the buffer and returns it 
+            /// </summary>
+            /// <returns>The buffer.</returns>
+            /// <param name="buffer">Buffer.</param>
+            /// <param name="from">From.</param>
+            /// <param name="until">Until.</param>
+            public static byte[] CopyBuffer(byte[] buffer , int from , int until)
+                  {
+                  if(from > until && until != from)
+                        {
+                        throw new Exception("The Start can not be greater nor equal than the Final point");
+                        }
+                  byte[] array = new byte[from + until];
+                  for(int item = from ; item < until ; item++)
+                        {
+                        array[item] = buffer[item];
+                        }
+                  return array;
+                  }
 
 
 
