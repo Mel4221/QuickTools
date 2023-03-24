@@ -210,8 +210,8 @@ namespace QuickTools.QCore
 
 
 
-            static object f;
-            static object b; 
+            static int f;
+            static int b; 
             /// <summary>
             /// Converts the bytes given to a row string of bytes but is slow 
             /// </summary>
@@ -308,24 +308,83 @@ namespace QuickTools.QCore
                   {
                   try
                         {
-                        for(int value = 0 ; value < array.Length ; value++)
+
+                        Thread foward, back;
+                        StringBuilder str1, str2;
+                        int fw, bc, len, half;
+                        bool trigerA, trigerB;
+                        len = array.Length;
+                        half = len / 2;
+                        fw = 0;
+                        bc = 0;
+                        trigerA = false;
+                        trigerB = false;
+                        str1 = new StringBuilder();
+                        str2 = new StringBuilder();
+                        if(len != (half + half))
                               {
-                              text.Append(array[value] + ",");
-                              //Console.WriteLine($"Running Process: {Get.Status(value , array.Length)}");
-                                    if(showDebuger == true)
-                                    {
-                                          Get.Green(Get.Status(value , array.Length));
-                                    }     
+                              // Get.Ok();
+                              fw = half + 1;
+                              bc = len;
 
                               }
+                        if(len == (half + half))
+                              {
+                              fw = half;
+                              bc = len;
+                              }
+                        //Get.Wait();
+                        foward = new Thread(() =>
+                        {
+                              for(int i = 0 ; i < fw ; i++)
+                                    {
+                                    //  Get.Green(i);
+                                    f = i;
+                                    str1.Append(array[i] + ",");
 
-                        return text.ToString();
+                                    }
+                              trigerA = true;
+                        });
+
+                        back = new Thread(() =>
+                        {
+                              for(int i = half ; i < len ; i++)
+                                    {
+                                    //  Get.Red(i);
+                                    b = i;
+                                    str2.Append(array[i] + ",");
+
+                                    }
+                              trigerB = true;
+                        });
+
+                        foward.Start();
+                        back.Start();
+
+
+                        while(true)
+                              {
+
+                              Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f,half)}");
+
+                              if(trigerA == true && trigerB == true)
+                                    {
+                                    break;
+
+                                    //Writer.Write("test.txt" , str);
+                                    }
+
+                            
+
+                              }
+                        return str1.ToString() + str2.ToString();
                         }
                   catch(Exception ex)
                         {
                         Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
                         return null;
                         }
+
 
 
                   }
