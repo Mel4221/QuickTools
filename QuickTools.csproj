@@ -107,6 +107,7 @@
     <Compile Include="QSecurity\FalseIO\Trojan_Method_PullTrojanFile.cs" />
     <Compile Include="QIO\BytesBinder.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Constructors.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />

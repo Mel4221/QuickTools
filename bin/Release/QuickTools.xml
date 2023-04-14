@@ -326,6 +326,17 @@
             <returns>The chars.</returns>
             <param name="word">Word.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.Break">
+            <summary>
+            Break this instance.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Break(System.Object)">
+            <summary>
+            Break the specified message.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Loop(System.Action)">
             <summary>
             Loop the specified actionMethod forever

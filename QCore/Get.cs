@@ -88,17 +88,42 @@ namespace QuickTools.QCore
                   return str;
                   }
 
+
+
+            /// <summary>
+            /// Break this instance.
+            /// </summary>
+            public static void Break()
+                  {
+                        throw new Exception("Task Completed");
+                  }
+
+            /// <summary>
+            /// Break the specified message.
+            /// </summary>
+            /// <param name="message">Message.</param>
+            public static void Break(object message)
+                  {
+                        throw new Exception(message.ToString());
+                  }
             /// <summary>
             /// Loop the specified actionMethod forever
             /// </summary>
             /// <param name="actionMethod">Action method.</param>
             public static void Loop(Action actionMethod)
         {
-            while (true)
-            {
-                        actionMethod(); 
-            }
-        }
+                  try
+                        {
+                        while(true)
+                              {
+                                    actionMethod();
+                              }
+                        }
+                        catch
+                        {
+                              //Get.Write($"Message: {ex.Message}\n");
+                        }
+                  }
                 
             /// <summary>
             /// Get the porcenrage status of the provided current time and goal 
