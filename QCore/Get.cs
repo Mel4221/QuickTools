@@ -90,10 +90,10 @@ namespace QuickTools.QCore
 
 
 
-            /// <summary>
-            /// Break this instance.
-            /// </summary>
-            public static void Break()
+                  /// <summary>
+                  /// Break this instance.
+                  /// </summary>
+                  public static void Break()
                   {
                         throw new Exception("Task Completed");
                   }

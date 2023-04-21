@@ -48,6 +48,32 @@ namespace QuickTools.QIO
 
 
 
+                   
+            /// <summary>
+            /// Move the specified from origen to the given destination.
+            /// </summary>
+            /// <param name="origen">Origen.</param>
+            /// <param name="destination">Destination.</param>
+                  public void Move(string origen , string destination)
+                  {
+                        if(destination.LastIndexOf("/") == -1)
+                              {
+                                    
+                              }
+                         Directory.Move(origen , $"{destination}{Get.FolderFromPath(origen)}");
+                  }
+
+            /// <summary>
+            /// Move the specified from origen to the given destination.
+            /// </summary>
+            /// <param name="origen">Origen.</param>
+            /// <param name="destination">Destination.</param>
+            public void MoveHere(string origen , string destination)
+                  {
+                        Directory.Move(origen , $"{destination}{Get.FolderFromPath(origen)}");
+                  }
+
+
             private void GetDirs(string[] dirs)
             {
                   if (dirs.Length > 0)

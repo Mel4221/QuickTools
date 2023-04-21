@@ -3122,6 +3122,20 @@
             Contains the list of files founded 
             </summary>
         </member>
+        <member name="M:QuickTools.QIO.FilesMaper.Move(System.String,System.String)">
+            <summary>
+            Move the specified from origen to the given destination.
+            </summary>
+            <param name="origen">Origen.</param>
+            <param name="destination">Destination.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.MoveHere(System.String,System.String)">
+            <summary>
+            Move the specified from origen to the given destination.
+            </summary>
+            <param name="origen">Origen.</param>
+            <param name="destination">Destination.</param>
+        </member>
         <member name="M:QuickTools.QIO.FilesMaper.Parse(System.String[])">
             <summary>
             Parse the list of directories given to a list of files and directories 
