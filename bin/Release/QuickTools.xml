@@ -458,6 +458,13 @@
             <returns>The name from path.</returns>
             <param name="path">Path.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.FolderFromPath(System.String)">
+            <summary>
+            Parse Folders from path.
+            </summary>
+            <returns>The from path.</returns>
+            <param name="path">Path.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
             <summary>
             Create a data path if is not created and creates the directory given as a parameter

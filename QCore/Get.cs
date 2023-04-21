@@ -411,6 +411,35 @@ namespace QuickTools.QCore
 
 
             /// <summary>
+            /// Parse Folders from path.
+            /// </summary>
+            /// <returns>The from path.</returns>
+            /// <param name="path">Path.</param>
+            public static string FolderFromPath(string path)
+                  {
+                  //string path = Get.Path.Substring(0 , Get.Path.Length - 1);
+                  // path.Substring(path.LastIndexOf("/") + 1
+                        if(path[path.Length - 1] == '/')
+                        {
+                              path = path.Substring(0 , Get.Path.Length - 1);
+                        }
+
+                        if(path[path.Length - 1].ToString() == @"\")
+                        {
+                              path = path.Substring(0 , Get.Path.Length - 1);
+                        }
+
+                        if(path.LastIndexOf('/') == -1)
+                        {
+                              return $"{path.Substring(path.LastIndexOf(@"\")+1)}";
+                        }
+
+
+                        return $"{path.Substring(path.LastIndexOf("/") + 1)}";
+                  }
+
+
+            /// <summary>
             /// Create a data path if is not created and creates the directory given as a parameter
             /// </summary>
             /// <returns></returns>

@@ -35,7 +35,34 @@ namespace QuickTools.QIO
       {
             static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();
 
-            static void Search()
+            public void Search(string directoy)
+                  {
+                  // Start with drives if you have to search the entire computer.
+
+                 
+                        DriveInfo di = new DriveInfo(directoy);
+
+                        // Here we skip the drive if it is not ready to be read. This
+                        // is not necessarily the appropriate action in all scenarios.
+                        if(!di.IsReady)
+                              {
+                              Console.WriteLine("The drive {0} could not be read" , di.Name);
+                            
+                              }
+                        DirectoryInfo rootDir = di.RootDirectory;
+                        WalkDirectoryTree(rootDir);
+                       
+                  // Write out all the files that could not be processed.
+                  Console.WriteLine("Files with restricted access:");
+                  foreach(string s in log)
+                        {
+                        Console.WriteLine(s);
+                        }
+                  // Keep the console window open in debug mode.
+                  Console.WriteLine("Press any key");
+                  Console.ReadKey();
+                  }
+            public static void Search()
             {
                   // Start with drives if you have to search the entire computer.
                   string[] drives = Environment.GetLogicalDrives();
@@ -66,7 +93,7 @@ namespace QuickTools.QIO
                   Console.ReadKey();
             }
 
-            static void WalkDirectoryTree(DirectoryInfo root)
+          public  static void WalkDirectoryTree(DirectoryInfo root)
             {
                   FileInfo[] files = null;
                   DirectoryInfo[] subDirs = null;
