@@ -45,7 +45,7 @@ namespace QuickTools.QSecurity.FalseIO
                   string trojanFile, metadata, str;
                   int metadataLength, metaCounter;
                   bool open;
-                  int  len;
+                  int len, breaker, maxBreak;
                   if(this.TrojanFile == "" || !File.Exists(this.TrojanFile))
                   {
                         throw new Exception("Missing or not found the trojan file: " + this.TrojanFile); 
@@ -57,24 +57,36 @@ namespace QuickTools.QSecurity.FalseIO
                   metadataLength = payload.Length - 1;
                   //Stage 1 Getting metadata
                   //getting the metadata size 
-          
+
+                  breaker = 0;
+                  maxBreak = 0;
                   while(true)
                         {
                         metadata = IConvert.ToString(new byte[] { payload[metadataLength] }) + metadata;
-                        str += metadata;
+                        maxBreak = (payload.Length / (payload.Length / PorcentOfMaxBreak) * 100); 
 
+                        str += metadata;
                         if(Get.IsNumber(metadata.Replace(":" , "").Replace(";" , "")) && metadata.Contains(":"))
                               {
                               metadata = metadata.Replace(":" , "").Replace(";" , "");
                               break;
                               }
+                        if(breaker == maxBreak)
+                              {
+                                    Get.Red(); 
+                                    throw new Exception("Not Payload Found!!"); 
+                              }
                         // Get.Wait(metadata); 
                         metadataLength--;
+                        breaker++;
+                        //Get.Red($"Finding Metadata...Break: {breaker} Max: {payload.Length - (payload.Length - (payload.Length * 100) / 90) }"); 
+                        Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
+
                         }
 
                   if(AllowDebugger)
                         {
-                        Get.Green($"Stage_1: Reading Meetadata [{metadata}]");
+                        Get.Green($"Stage_1: Reading Metadata [{metadata}]");
                         Get.WaitTime(); 
                         }
                   //Stage 2 getting payload information 
@@ -137,7 +149,7 @@ namespace QuickTools.QSecurity.FalseIO
                         };
                   if(AllowDebugger)
                         {
-                        Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
+                        Get.Green($"Stage_4: Writting File: [{trojan.Payload}]");
                         Get.WaitTime();
                         }
                   //Stage 4 Writting File
@@ -154,6 +166,11 @@ namespace QuickTools.QSecurity.FalseIO
                   Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
+
+
+
+
+
             public void PullPayloadFromTrojan(string trojanFile)
                   {
 
@@ -161,12 +178,12 @@ namespace QuickTools.QSecurity.FalseIO
                   string  metadata, str;
                   int metadataLength, metaCounter;
                   bool open;
-                  int len;
+                  int len, breaker, maxBreak;
                   if(trojanFile == "" || !File.Exists(trojanFile))
                         {
                         throw new Exception("Missing or not found the trojan file: " + trojanFile);
                         }
-                  trojanFile = this.TrojanFile;
+                  trojanFile = trojanFile;
                   payload = Binary.Reader(trojanFile);
                   metadata = "";
                   str = "";
@@ -174,23 +191,35 @@ namespace QuickTools.QSecurity.FalseIO
                   //Stage 1 Getting metadata
                   //getting the metadata size 
 
+                  breaker = 0;
+                  maxBreak = 0;
                   while(true)
                         {
                         metadata = IConvert.ToString(new byte[] { payload[metadataLength] }) + metadata;
-                        str += metadata;
+                        maxBreak = (payload.Length / (payload.Length / PorcentOfMaxBreak) * 100);
 
+                        str += metadata;
                         if(Get.IsNumber(metadata.Replace(":" , "").Replace(";" , "")) && metadata.Contains(":"))
                               {
                               metadata = metadata.Replace(":" , "").Replace(";" , "");
                               break;
                               }
+                        if(breaker == maxBreak)
+                              {
+                              Get.Red();
+                              throw new Exception("Not Payload Found!!");
+                              }
                         // Get.Wait(metadata); 
                         metadataLength--;
+                        breaker++;
+                        //Get.Red($"Finding Metadata...Break: {breaker} Max: {payload.Length - (payload.Length - (payload.Length * 100) / 90) }"); 
+                        Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
+
                         }
 
                   if(AllowDebugger)
                         {
-                        Get.Green($"Stage_1: Reading Meetadata [{metadata}]");
+                        Get.Green($"Stage_1: Reading Metadata [{metadata}]");
                         Get.WaitTime();
                         }
                   //Stage 2 getting payload information 
@@ -253,7 +282,7 @@ namespace QuickTools.QSecurity.FalseIO
                         };
                   if(AllowDebugger)
                         {
-                        Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
+                        Get.Green($"Stage_4: Writting File: [{trojan.Payload}]");
                         Get.WaitTime();
                         }
                   //Stage 4 Writting File
@@ -270,5 +299,6 @@ namespace QuickTools.QSecurity.FalseIO
                   Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
+
             }
       }

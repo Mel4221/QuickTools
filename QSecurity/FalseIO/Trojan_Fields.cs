@@ -72,11 +72,16 @@ namespace QuickTools.QSecurity.FalseIO
                   /// </summary>
                   /// <value>The trojan file.</value>
                     public string TrojanFile { get; set; }
-                  
+            /// <summary>
+            /// This Defines when it will understand that if has reached enought 
+            /// intents to find the Payload , so it try to find it in the last 20% of the file as default
+            /// </summary>
+            public int PorcentOfMaxBreak = 20; 
+
             /// <summary>
             /// The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
             /// </summary>
-                  public string DefaultFilnalLabelIdentity = "Trojan_";
+            public string DefaultFilnalLabelIdentity = "Trojan_";
             /// <summary>
             /// The default delete source payload.
             /// </summary>

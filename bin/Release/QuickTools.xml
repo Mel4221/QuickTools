@@ -4096,6 +4096,12 @@
             </summary>
             <value>The trojan file.</value>
         </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.PorcentOfMaxBreak">
+            <summary>
+            This Defines when it will understand that if has reached enought 
+            intents to find the Payload , so it try to find it in the last 20% of the file as default
+            </summary>
+        </member>
         <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultFilnalLabelIdentity">
             <summary>
             The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
