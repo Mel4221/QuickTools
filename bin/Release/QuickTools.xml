@@ -3136,6 +3136,12 @@
             <param name="origen">Origen.</param>
             <param name="destination">Destination.</param>
         </member>
+        <member name="M:QuickTools.QIO.FilesMaper.GetFiles(System.String)">
+            <summary>
+            Gets the files.
+            </summary>
+            <param name="path">Path.</param>
+        </member>
         <member name="M:QuickTools.QIO.FilesMaper.Parse(System.String[])">
             <summary>
             Parse the list of directories given to a list of files and directories 

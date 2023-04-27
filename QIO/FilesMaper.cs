@@ -27,6 +27,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using QuickTools.QCore;
+using System.Linq;
 
 namespace QuickTools.QIO
 {
@@ -54,13 +55,13 @@ namespace QuickTools.QIO
             /// </summary>
             /// <param name="origen">Origen.</param>
             /// <param name="destination">Destination.</param>
-                  public void Move(string origen , string destination)
+                  public static void Move(string origen , string destination)
                   {
                         if(destination.LastIndexOf("/") == -1)
                               {
                                     
                               }
-                         Directory.Move(origen , $"{destination}{Get.FolderFromPath(origen)}");
+                         Directory.Move(origen.Replace("'" , ""), $"{destination}{Get.FolderFromPath(origen.Replace("'" , ""))}");
                   }
 
             /// <summary>
@@ -68,9 +69,9 @@ namespace QuickTools.QIO
             /// </summary>
             /// <param name="origen">Origen.</param>
             /// <param name="destination">Destination.</param>
-            public void MoveHere(string origen , string destination)
+            public static void MoveHere(string origen , string destination)
                   {
-                        Directory.Move(origen , $"{destination}{Get.FolderFromPath(origen)}");
+                        Directory.Move(origen.Replace("'" , "") , $"{destination}{Get.FolderFromPath(origen.Replace("'" , ""))}");
                   }
 
 
@@ -92,14 +93,17 @@ namespace QuickTools.QIO
 
 
 
-            private void GetFiles(string path)
+            /// <summary>
+            /// Gets the files.
+            /// </summary>
+            /// <param name="path">Path.</param>
+            public string[] GetFiles(string path)
             {
-                  string[] files = Directory.GetFiles(path);
-                  for (int file = 0; file < files.Length; file++)
-                  {
-                        this.FileList.Add(files[file]);
-                        Get.Yellow(files[file]);
-                  }
+                  List<string> files = Directory.EnumerateFiles(path).ToList<string>();
+                  this.FileList = new List<string>();
+                  this.FileList = files;
+
+                  return IConvert.ToType<string>.ToArray(files);
             }
 
 

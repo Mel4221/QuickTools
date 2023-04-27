@@ -25,6 +25,7 @@
 // THE SOFTWARE.using System;
 using System;
 using System.IO;
+using QuickTools.QCore;
 
 
 
@@ -106,14 +107,15 @@ namespace QuickTools.QIO
                         {
                         byte[] bytes = new byte[1024 * 1024];
                         BinaryWriter binary = new BinaryWriter(fs);
-                        QuickTools.QCore.Get.Green("Working...");
+                        QColors.Color.Green($"Making Zero File:");
+                        QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
 
+                        Get.WaitTime(2);
                         for(int rounds = 0 ; rounds < gb ; rounds++)
                               {
 
                               binary.Write(bytes , 0 , bytes.Length);
-
-
+                              Get.Green(Get.Status(rounds , gb)); 
                               }
                         QuickTools.QCore.Get.Ok();
                         }

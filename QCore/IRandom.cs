@@ -458,6 +458,36 @@ namespace QuickTools.QCore
                   return array;
             }
 
+
+            static public byte[] RandomByteArray(int arrayLength,bool printStatus)
+                  {
+
+                  // initialize an array to store the bytes later 
+                  byte[] array = new byte[arrayLength];
+                  //RowBytes = ""; //making sure that the RowBytes are empty 
+                  // loop to full the array based on the Length
+                  for(int value = 0 ; value < array.Length ; value++)
+                        {
+                        Random rand = new Random();
+                        int min = 0;
+                        int max = 250;
+                        // create a random number based on the 
+                        // size allowed for a byte 
+                        int number = rand.Next(min , max);
+                        // converting the number to bytes 
+                        byte finalNumber = Convert.ToByte(number);
+                        // adding the bytes 
+                        array[value] = finalNumber;
+                        RowBytes.Append(array[value] + ",");
+                        //RowBytes += array[value]+","; 
+                        if(printStatus == true)
+                              {
+                              Get.Green(Get.Status(value , arrayLength));
+                              }
+                        }
+                  return array;
+                  }
+
             /*
                 this fallows the same comsept from the one in the top
                 the only diffrents are that 
@@ -469,14 +499,14 @@ namespace QuickTools.QCore
                 the range of each digits 
             */
 
-                  /// <summary>
-                  /// Create a random byte array and allow you to costumice the limits of the random numbers
-                  /// that will be into it 
-                  /// </summary>
-                  /// <returns>The byte array.</returns>
-                  /// <param name="arrayLength">Array length.</param>
-                  /// <param name="minimumRange">Minimum range.</param>
-                  /// <param name="maximumRange">Maximum range.</param>
+            /// <summary>
+            /// Create a random byte array and allow you to costumice the limits of the random numbers
+            /// that will be into it 
+            /// </summary>
+            /// <returns>The byte array.</returns>
+            /// <param name="arrayLength">Array length.</param>
+            /// <param name="minimumRange">Minimum range.</param>
+            /// <param name="maximumRange">Maximum range.</param>
             static public byte[] RandomByteArray(int arrayLength, int minimumRange, int maximumRange)
             {
                   byte[] array = new byte[arrayLength];

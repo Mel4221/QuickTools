@@ -74,7 +74,8 @@ namespace QuickTools.QSecurity.FalseIO
 
                   if(AllowDebugger)
                         {
-                        Get.Green($"Stage1: Reading Meetadata [{metadata}]");
+                        Get.Green($"Stage_1: Reading Meetadata [{metadata}]");
+                        Get.WaitTime(); 
                         }
                   //Stage 2 getting payload information 
                   //getting the entired line of metadata 
@@ -93,7 +94,11 @@ namespace QuickTools.QSecurity.FalseIO
                   metadata = str;
                   str = null;
                   open = false;
-
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage_2: Checking Metadata");
+                        Get.WaitTime();
+                        }
                   //Stage 3 Reading Properties
                   List<string> info = new List<string>();
                   for(len = 0 ; len < metadata.Length ; len++)
@@ -118,7 +123,11 @@ namespace QuickTools.QSecurity.FalseIO
 
 
                   //:exelBook.pdf;:243758;:17364199;:;:3/11/2023 4:17:27 AM;:60;
-
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage_3: Building Metadata");
+                        Get.WaitTime();
+                        }
                   Trojan trojan = new Trojan()
                         {
                         Payload = info[0] ,
@@ -129,9 +138,10 @@ namespace QuickTools.QSecurity.FalseIO
                   if(AllowDebugger)
                         {
                         Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
+                        Get.WaitTime();
                         }
                   //Stage 4 Writting File
-                        if(this.DefaultDeletePayloadFromFile == true)
+                  if(this.DefaultDeletePayloadFromFile == true)
                         {
                               Binary.Write(trojanFile , payload , 0 , int.Parse(trojan.IndexStart));
                         }
@@ -139,6 +149,122 @@ namespace QuickTools.QSecurity.FalseIO
                         {
                               Binary.Write(trojanFile , new byte[payload.Length] , 0 , payload.Length);
                               File.Delete(trojanFile); 
+                        }
+
+                  Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
+
+                  }
+            public void PullPayloadFromTrojan(string trojanFile)
+                  {
+
+                  byte[] payload;
+                  string  metadata, str;
+                  int metadataLength, metaCounter;
+                  bool open;
+                  int len;
+                  if(trojanFile == "" || !File.Exists(trojanFile))
+                        {
+                        throw new Exception("Missing or not found the trojan file: " + trojanFile);
+                        }
+                  trojanFile = this.TrojanFile;
+                  payload = Binary.Reader(trojanFile);
+                  metadata = "";
+                  str = "";
+                  metadataLength = payload.Length - 1;
+                  //Stage 1 Getting metadata
+                  //getting the metadata size 
+
+                  while(true)
+                        {
+                        metadata = IConvert.ToString(new byte[] { payload[metadataLength] }) + metadata;
+                        str += metadata;
+
+                        if(Get.IsNumber(metadata.Replace(":" , "").Replace(";" , "")) && metadata.Contains(":"))
+                              {
+                              metadata = metadata.Replace(":" , "").Replace(";" , "");
+                              break;
+                              }
+                        // Get.Wait(metadata); 
+                        metadataLength--;
+                        }
+
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage_1: Reading Meetadata [{metadata}]");
+                        Get.WaitTime();
+                        }
+                  //Stage 2 getting payload information 
+                  //getting the entired line of metadata 
+                  metaCounter = 0;
+                  str = null;
+                  for(int meta = payload.Length ; meta > 0 ; meta--)
+                        {
+                        str = IConvert.ToString(new byte[] { payload[meta - 1] }) + str;
+
+                        if(metaCounter == int.Parse(metadata))
+                              {
+                              break;
+                              }
+                        metaCounter++;
+                        }
+                  metadata = str;
+                  str = null;
+                  open = false;
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage_2: Checking Metadata");
+                        Get.WaitTime();
+                        }
+                  //Stage 3 Reading Properties
+                  List<string> info = new List<string>();
+                  for(len = 0 ; len < metadata.Length ; len++)
+                        {
+
+                        if(metadata[len] == ':')
+                              {
+                              open = true;
+                              }
+                        if(metadata[len] != ':' && metadata[len] != ';')
+                              {
+                              str += metadata[len];
+                              }
+                        if(metadata[len] == ';' && open == true)
+                              {
+                              info.Add(str);
+                              str = null;
+                              open = false;
+                              }
+
+                        }
+
+
+                  //:exelBook.pdf;:243758;:17364199;:;:3/11/2023 4:17:27 AM;:60;
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage_3: Building Metadata");
+                        Get.WaitTime();
+                        }
+                  Trojan trojan = new Trojan()
+                        {
+                        Payload = info[0] ,
+                        IndexStart = info[1] ,
+                        IndexEnd = info[2] ,
+                        Description = info[3]
+                        };
+                  if(AllowDebugger)
+                        {
+                        Get.Green($"Stage4: Writting File: [{trojan.Payload}]");
+                        Get.WaitTime();
+                        }
+                  //Stage 4 Writting File
+                  if(this.DefaultDeletePayloadFromFile == true)
+                        {
+                        Binary.Write(trojanFile , payload , 0 , int.Parse(trojan.IndexStart));
+                        }
+                  if(this.DefaultDeleteSourceFile == true)
+                        {
+                        Binary.Write(trojanFile , new byte[payload.Length] , 0 , payload.Length);
+                        File.Delete(trojanFile);
                         }
 
                   Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));

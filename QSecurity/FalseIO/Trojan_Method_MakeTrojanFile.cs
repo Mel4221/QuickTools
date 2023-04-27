@@ -78,8 +78,11 @@ namespace QuickTools.QSecurity.FalseIO
                   if(this.AllowDebugger)
                         {
                         Get.Yellow($"MetaData: {IConvert.ToString(metadata)}");
+                        Get.WaitTime(); 
                         Get.Yellow($"Sorce File: {file} Size: {Get.FileSize(file)} Payload Size: {Get.FileSize(payload)}");
+                        Get.WaitTime(); 
                         Get.Yellow($"Total Load: {Get.FileSize(pack)}");
+                        Get.WaitTime(); 
                         }
                   for(int tr = 0 ; tr < trojan.Length ; tr++)
                         {
