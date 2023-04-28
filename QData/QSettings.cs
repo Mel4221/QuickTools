@@ -381,19 +381,54 @@ namespace QuickTools.QData
 
                               Values[value] = newValue.ToString();
                               this.Refresh();
-                              break;
+                                return; 
+                    
                         }
                   }
+            throw new Exception("Setting Not Found"); 
+
+            }
+        
+
+
+
+        /// <summary>
+        /// This version actually adds the setting if it does not find it 
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <param name="newValue"></param>
+        /// <param name="addIfNotExiist"></param>
+        public void UpdateSetting(string setting, object newValue, bool addIfNotExiist)
+        {
+            this.Load();
+            
+            for (int value = 0; value < Keys.Count; value++)
+            {
+                if (Keys[value] == setting)
+                {
+
+                    Values[value] = newValue.ToString();
+                    this.Refresh();
+                    return;
+
+                }
+            }
+            if(addIfNotExiist == true)
+            {
+                this.AddSetting(setting,newValue);
             }
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
-            /// The fallowing settings are applied as default : 
-            /// FileName = "Settings.xml";
-            /// ElementName = "Setting";
-            /// GroupName = "Settings";
-            /// </summary>
-            public QSettings()
+        }
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
+        /// The fallowing settings are applied as default : 
+        /// FileName = "Settings.xml";
+        /// ElementName = "Setting";
+        /// GroupName = "Settings";
+        /// </summary>
+        public QSettings()
             {
                   ElementName = "Setting";
                   GroupName = "Settings";
