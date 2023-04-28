@@ -311,12 +311,13 @@ namespace QuickTools.QCore
 
                         Thread foward, back;
                         StringBuilder str1, str2;
-                        int fw, bc, len, half;
+                        int fw, bc, len, half, breaker; 
                         bool trigerA, trigerB;
                         len = array.Length;
                         half = len / 2;
                         fw = 0;
                         bc = 0;
+                        breaker = 0; 
                         trigerA = false;
                         trigerB = false;
                         str1 = new StringBuilder();
@@ -361,28 +362,40 @@ namespace QuickTools.QCore
                         foward.Start();
                         back.Start();
 
-
+                        
                         while(true)
                               {
+                    if (showDebuger == true)
+                    {
+                        Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}");
+                    }
 
-                              Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f,half)}");
-
-                              if(trigerA == true && trigerB == true)
+                    if (trigerA == true && trigerB == true || breaker == len)
                                     {
+                                        foward.Abort();
+                                        back.Abort(); 
+                                        if(showDebuger == true)
+                                        {
+                            Get.Yellow($"Killed Or Completed:  A:[{trigerA}] B:[{trigerB}] Breaker:[{breaker}] BreakerAprox:[{len}]");
+                                        }
                                     break;
 
                                     //Writer.Write("test.txt" , str);
                                     }
 
-                            
+                                breaker++; 
 
                               }
                         return str1.ToString() + str2.ToString();
                         }
                   catch(Exception ex)
                         {
-                        Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
-                        return null;
+                        if(showDebuger == true)
+                {
+                    Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
+
+                }
+                return null;
                         }
 
 

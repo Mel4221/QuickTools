@@ -420,6 +420,16 @@ namespace QuickTools.QData
 
         }
 
+        /// <summary>
+        /// Delete the settings file
+        /// </summary>
+        public void DeleteSettingsFile()
+        {
+            if (File.Exists(this.FileName))
+            {
+                File.Delete(this.FileName); 
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.

@@ -2613,6 +2613,19 @@
             <param name="setting">Setting.</param>
             <param name="newValue">New value.</param>
         </member>
+        <member name="M:QuickTools.QData.QSettings.UpdateSetting(System.String,System.Object,System.Boolean)">
+            <summary>
+            This version actually adds the setting if it does not find it 
+            </summary>
+            <param name="setting"></param>
+            <param name="newValue"></param>
+            <param name="addIfNotExiist"></param>
+        </member>
+        <member name="M:QuickTools.QData.QSettings.DeleteSettingsFile">
+            <summary>
+            Delete the settings file
+            </summary>
+        </member>
         <member name="M:QuickTools.QData.QSettings.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
