@@ -93,6 +93,11 @@ namespace QuickTools.QSecurity.FalseIO
             public bool DefaultDeletePayloadFromFile = false;
 
             /// <summary>
+            /// The current stage not-started means that no process is being reported 
+            /// </summary>
+            public string CurrentStage = "not-started";
+
+            /// <summary>
             /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
             /// </summary>
             /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.</returns>

@@ -81,7 +81,7 @@ namespace QuickTools.QSecurity.FalseIO
                         breaker++;
                         //Get.Red($"Finding Metadata...Break: {breaker} Max: {payload.Length - (payload.Length - (payload.Length * 100) / 90) }"); 
                         Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
-
+                        this.CurrentStage = $"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]"; 
                         }
 
                   if(AllowDebugger)
@@ -89,6 +89,8 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_1: Reading Metadata [{metadata}]");
                         Get.WaitTime(); 
                         }
+                        this.CurrentStage = $"Stage_1: Reading Metadata [{metadata}]";
+
                   //Stage 2 getting payload information 
                   //getting the entired line of metadata 
                   metaCounter = 0;
@@ -111,6 +113,8 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_2: Checking Metadata");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_2: Checking Metadata";
+
                   //Stage 3 Reading Properties
                   List<string> info = new List<string>();
                   for(len = 0 ; len < metadata.Length ; len++)
@@ -140,6 +144,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_3: Building Metadata");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_3: Building Metadata";
                   Trojan trojan = new Trojan()
                         {
                         Payload = info[0] ,
@@ -152,6 +157,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_4: Writting File: [{trojan.Payload}]");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_4: Writting File: [{trojan.Payload}]";
                   //Stage 4 Writting File
                   if(this.DefaultDeletePayloadFromFile == true)
                         {
@@ -214,7 +220,7 @@ namespace QuickTools.QSecurity.FalseIO
                         breaker++;
                         //Get.Red($"Finding Metadata...Break: {breaker} Max: {payload.Length - (payload.Length - (payload.Length * 100) / 90) }"); 
                         Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
-
+                        this.CurrentStage = $"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]";
                         }
 
                   if(AllowDebugger)
@@ -222,6 +228,8 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_1: Reading Metadata [{metadata}]");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_1: Reading Metadata [{metadata}]";
+
                   //Stage 2 getting payload information 
                   //getting the entired line of metadata 
                   metaCounter = 0;
@@ -244,6 +252,8 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_2: Checking Metadata");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_2: Checking Metadata";
+
                   //Stage 3 Reading Properties
                   List<string> info = new List<string>();
                   for(len = 0 ; len < metadata.Length ; len++)
@@ -273,6 +283,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_3: Building Metadata");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_3: Building Metadata";
                   Trojan trojan = new Trojan()
                         {
                         Payload = info[0] ,
@@ -285,6 +296,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.Green($"Stage_4: Writting File: [{trojan.Payload}]");
                         Get.WaitTime();
                         }
+                  this.CurrentStage = $"Stage_4: Writting File: [{trojan.Payload}]";
                   //Stage 4 Writting File
                   if(this.DefaultDeletePayloadFromFile == true)
                         {

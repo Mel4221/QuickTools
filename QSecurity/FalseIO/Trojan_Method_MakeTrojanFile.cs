@@ -77,13 +77,14 @@ namespace QuickTools.QSecurity.FalseIO
 
                   if(this.AllowDebugger)
                         {
-                        Get.Yellow($"MetaData: {IConvert.ToString(metadata)}");
+                        Get.Yellow($"MetaData: [{IConvert.ToString(metadata)}]");
                         Get.WaitTime(); 
-                        Get.Yellow($"Sorce File: {file} Size: {Get.FileSize(file)} Payload Size: {Get.FileSize(payload)}");
+                        Get.Yellow($"Sorce File: [{file}] Size: [{Get.FileSize(file)}] Payload Size: [{Get.FileSize(payload)}]");
                         Get.WaitTime(); 
-                        Get.Yellow($"Total Load: {Get.FileSize(pack)}");
+                        Get.Yellow($"Total Load: [{Get.FileSize(pack)}]");
                         Get.WaitTime(); 
                         }
+                  this.CurrentStage = $"Building Metadata: {IConvert.ToString(metadata)} Sorce File: {file} Payload Size: {Get.FileSize(payload)}";
                   for(int tr = 0 ; tr < trojan.Length ; tr++)
                         {
                         pack[tr] = trojan[tr];
@@ -112,6 +113,8 @@ namespace QuickTools.QSecurity.FalseIO
                         {
                         Get.Yellow($"Completed Sucessfully: [ {Get.HashCode(trojan) != Get.HashCode(pack)} ] ");
                         }
+                  this.CurrentStage = $"{Get.HashCode(trojan) != Get.HashCode(pack)}"; 
+
                   }
             }
       }

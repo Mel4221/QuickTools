@@ -4117,6 +4117,11 @@
             The default delete payload from file.
             </summary>
         </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.CurrentStage">
+            <summary>
+            The current stage not-started means that no process is being reported 
+            </summary>
+        </member>
         <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
