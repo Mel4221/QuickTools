@@ -298,6 +298,7 @@ using QuickTools.QCore;
                         this.URL = "localhost";
                         string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
                         this.Address = $"{protocol}{this.URL}:{this.Port}/";
+                        
                         //Get.Yellow($"{this.SecureProtocol} : {this.Protocol[0]} : {this.Protocol[1]}");
                         //Get.Wait(this.Address);
 
