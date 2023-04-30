@@ -151,7 +151,8 @@ namespace QuickTools.QIO
                                           {
                                           Get.Green($"Files Hash  A: {hashA} B: {hashB}  Are The File Equal: {hashA == hashB}");
                                           }
-                                    currupted = false; 
+                                    currupted = false;
+                                    return currupted; 
                                     }
                               break;
                               }

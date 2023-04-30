@@ -3056,11 +3056,6 @@
             This function returns a byte as it reads it 
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.Binary.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
-            </summary>
-        </member>
         <member name="M:QuickTools.QIO.Binary.Bind(System.Byte[],System.Byte[])">
             <summary>
             Bind the specified bufferA and bufferB.
@@ -3082,6 +3077,27 @@
             <returns><c>true</c>, if corrupted was ised, <c>false</c> otherwise.</returns>
             <param name="file">File.</param>
             <param name="secondFile">Second file.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.disposedValue">
+            <summary>
+            The disposed value.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Dispose(System.Boolean)">
+            <summary>
+            Dispose the specified disposing.
+            </summary>
+            <param name="disposing">If set to <c>true</c> disposing.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Dispose">
+            <summary>
+            Releases all resource used by the <see cref="T:QuickTools.QIO.Binary"/> object.
+            </summary>
         </member>
         <member name="T:QuickTools.QIO.FileDumper">
             <summary>

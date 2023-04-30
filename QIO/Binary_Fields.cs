@@ -136,17 +136,6 @@ namespace QuickTools.QIO
  
 
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.QIO.Binary"/> class.
-            /// </summary>
-            public Binary()
-            {
-                  this.CallBackAction = (a,b,c) =>
-                  {
-                      
-                  };
-                  this.BufferCallBack = (b) => { return b; };
-            }
       }
 }
 
