@@ -37,45 +37,7 @@ namespace QuickTools.QIO
       {
 
           
-            /// <summary>
-            /// Reads the bytes.
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-            public void ReadBytes(string fileName)
-            {
-                    //throw exeption if there is not a file 
-                  if (!File.Exists(fileName)) { throw new FileNotFoundException(); }
-                        Stopwatch stopwatch = new Stopwatch();
-                        stopwatch.Start();
-
-
-                  long current, size;
-
-                  FileStream stream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
-                  BinaryReader reader = new BinaryReader(stream);
-                  this.BufferList = new List<byte[]>();
-
-                  size = stream.Length;
-                  current = 0;
-
-                  while(current < size)
-                        {
-                        stream.Seek(current , SeekOrigin.Begin);
-                        this.Buffer = new byte[this.Chunck];
-                        reader.Read(this.Buffer , 0 , this.Buffer.Length);
-                        Blocks++;
-                        current += this.Chunck;
-                        this.BufferList.Add(this.Buffer);
-                        this.CallBackAction(current,size,Blocks);
-                        this.BufferCallBack(this.Buffer); 
-                               if(AllowDebugger == true)
-                              {
-                              Get.Green($"{this.DebuggerStatusMessage}{Get.Status(current , size)}");
-
-                              }
-                        }
-
-
+         
                   /*
 
                                       BytesList.Add(this.Buffer);
@@ -103,7 +65,7 @@ namespace QuickTools.QIO
                       stopwatch.Stop(); 
               */
 
-                  }
+             
 
 
 

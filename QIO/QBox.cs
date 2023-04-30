@@ -48,6 +48,12 @@ namespace QuickTools.QIO
             public byte OperatorClose = 59;//;
 
             /// <summary>
+            /// The allow debugger.
+            /// </summary>
+            public bool AllowDebugger = false;
+
+
+            /// <summary>
             /// The length of the file.
             /// </summary>
             public long FileLength;
@@ -125,6 +131,7 @@ namespace QuickTools.QIO
                   return content;
             }
 
+            
 
             /// <summary>
             /// Reads the blocks.
@@ -177,8 +184,11 @@ namespace QuickTools.QIO
                         }
 
 
-
-                  }
+                        if(AllowDebugger == true)
+                              {
+                              Get.Green(Get.Status(_byte , FileLength-1));
+                              }
+                        }
 
 
 

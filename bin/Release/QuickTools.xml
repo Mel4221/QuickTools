@@ -2935,12 +2935,6 @@
             <param name="from">From.</param>
             <param name="until">Until.</param>
         </member>
-        <member name="M:QuickTools.QIO.Binary.ReadBytes(System.String)">
-            <summary>
-            Reads the bytes.
-            </summary>
-            <param name="fileName">File name.</param>
-        </member>
         <member name="M:QuickTools.QIO.Binary.Print(System.Int64,System.Int64)">
             <summary>
             Print the specified current proses  remaining but only if <see cref="P:QuickTools.QIO.Binary.AllowDebugger"/>.
@@ -3002,6 +2996,11 @@
             </summary>
             <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         </member>
+        <member name="F:QuickTools.QIO.Binary.AllowListAllocation">
+            <summary>
+            The allow list allocation.
+            </summary>
+        </member>
         <member name="F:QuickTools.QIO.Binary.DebuggerStatusMessage">
             <summary>
             Gets or sets the debugger status message and as default should return just Reading + CurrentPorcent% if <see cref="P:QuickTools.QIO.Binary.AllowDebugger"/> is set to true
@@ -3032,9 +3031,19 @@
             </summary>
             <value>The speed unit.</value>
         </member>
+        <member name="F:QuickTools.QIO.Binary.FileHash">
+            <summary>
+            It provide the file hash 
+            </summary>
+        </member>
         <member name="F:QuickTools.QIO.Binary.AllowMegabytesAsDefault">
             <summary>
             The allow megabytes as default.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.Binary.StatusText">
+            <summary>
+            Returns the status on a text format 
             </summary>
         </member>
         <member name="F:QuickTools.QIO.Binary.CallBackAction">
@@ -3059,6 +3068,20 @@
             <returns>The bind.</returns>
             <param name="bufferA">Buffer a.</param>
             <param name="bufferB">Buffer b.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.ReadBytes(System.String)">
+            <summary>
+            Reads the bytes.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.IsCorrupted(System.String,System.String)">
+            <summary>
+            This module allows you to make sure that files are equal no matter the size from them
+            </summary>
+            <returns><c>true</c>, if corrupted was ised, <c>false</c> otherwise.</returns>
+            <param name="file">File.</param>
+            <param name="secondFile">Second file.</param>
         </member>
         <member name="T:QuickTools.QIO.FileDumper">
             <summary>
@@ -3498,6 +3521,11 @@
         <member name="F:QuickTools.QIO.QBox.OperatorClose">
             <summary>
             The operator close.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.QBox.AllowDebugger">
+            <summary>
+            The allow debugger.
             </summary>
         </member>
         <member name="F:QuickTools.QIO.QBox.FileLength">

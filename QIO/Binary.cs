@@ -105,7 +105,8 @@ namespace QuickTools.QIO
                   int gb = GbSize * 1024;
                   using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
                         {
-                        byte[] bytes = new byte[1024 * 1024];
+                        byte[] bytes = Get.Bytes(IRandom.RandomText(1024 * 1024));
+                        
                         BinaryWriter binary = new BinaryWriter(fs);
                         QColors.Color.Green($"Making Zero File:");
                         QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");

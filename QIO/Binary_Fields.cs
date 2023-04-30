@@ -74,10 +74,15 @@ namespace QuickTools.QIO
             public bool AllowDebugger { get; set; }
 
             /// <summary>
+            /// The allow list allocation.
+            /// </summary>
+            public bool AllowListAllocation = true; 
+
+            /// <summary>
             /// Gets or sets the debugger status message and as default should return just Reading + CurrentPorcent% if <see cref="AllowDebugger"/> is set to true
             /// </summary>
             /// <value>The debugger status message.</value>
-            public string DebuggerStatusMessage = "Reading..."; 
+            public string DebuggerStatusMessage = "Reading "; 
             /// <summary>
             /// Gets or sets the name of the file.
             /// </summary>
@@ -103,11 +108,21 @@ namespace QuickTools.QIO
             /// <value>The speed unit.</value>
             public int SpeedUnit = 8;
 
+            /// <summary>
+            /// It provide the file hash 
+            /// </summary>
+            public long FileHash; 
 
             /// <summary>
             /// The allow megabytes as default.
             /// </summary>
             public bool AllowMegabytesAsDefault;
+
+
+            /// <summary>
+            /// Returns the status on a text format 
+            /// </summary>
+            public string StatusText; 
 
             /// <summary>
             /// The call back function.

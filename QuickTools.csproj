@@ -108,6 +108,7 @@
     <Compile Include="QIO\BytesBinder.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Constructors.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="QIO\Binary_ReadBytes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="setting.ico" />
