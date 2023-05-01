@@ -274,30 +274,34 @@ namespace QuickTools.QConsole
                                     {
                                           Y--;
                                     }
-                                   
                                     triguer();
                                     //Color.Green(X+" "+Y); 
                                     break;
-
                               case "DownArrow":
                                     // Down();
                                     //Color.Green(X+" "+Y); 
 
-                                    Y++;
+                                    if(Y != limitY[1])
+                                          {
+                                                Y++;
+                                          }
                                     triguer();
-
                                     break;
-
                               case "LeftArrow":
                                     //  Left();
-                                    X--;
+                                    if(X != limitX[0])
+                                          {
+                                                X--;
+                                          }
                                     triguer();
-
                                     //Color.Green(X+" "+Y); 
                                     break;
 
                               case "RightArrow":
-                                    X++;
+                                    if(X != limitX[1])
+                                          {
+                                                X++;
+                                          }
                                     triguer();
                                     // Right();
                                     //Color.Green(X+" "+Y); 
