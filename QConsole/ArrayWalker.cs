@@ -27,7 +27,7 @@ using System;
 using QuickTools.QCore;
 using QuickTools.QColors;
 namespace QuickTools.QConsole
-{
+      {
 
       /// <summary>
       /// Array walker.
