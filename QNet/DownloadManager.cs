@@ -62,10 +62,11 @@ namespace QuickTools.QNet
             /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
             public bool DownloadCompleted { get { return _completed; } }
 
-            private CProgressBar ProgressBar = new CProgressBar();
+            private QProgressBar ProgressBar;
 
             private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
             {
+                 this.ProgressBar = new QProgressBar();
                   ProgressBar.Display(e.ProgressPercentage, 100);
             }
 

@@ -31,7 +31,7 @@
       /// <summary>
       /// Creates a ProgressBar that is used on console application
       /// </summary>
-       public class CProgressBar
+       public class QProgressBar
       {
             StringBuilder dots = new StringBuilder();
             /// <summary>
