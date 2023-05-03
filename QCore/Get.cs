@@ -47,7 +47,7 @@ namespace QuickTools.QCore
             /// </summary>
             /// <returns>The chars.</returns>
             /// <param name="word">Word.</param>
-            public static string OnlyChars(string word)
+            public static string FilterOnlyChars(string word)
                   {
                   string str = null;
                   for(int ch = 0 ; ch < word.Length ; ch++)
@@ -290,23 +290,22 @@ namespace QuickTools.QCore
         public static void WaitTime(int milliSecondsOrseconds)
         {
 
-                  if(milliSecondsOrseconds < 1000)
-                  {
+
                         milliSecondsOrseconds = milliSecondsOrseconds * 1000; 
-                  }
+                 
                   try
             {
 
                 Thread.Sleep(milliSecondsOrseconds);
 
             }
-            catch (Exception)
-            {
-                //Get.Wrong(e);
-            }
+                  catch(Exception e)
+                        {
+                        Get.Wrong(e);
+                        }
 
+                  }
 
-        }
         /// <summary>
         /// Does the same than the waittime with no param 
         /// but this only wait or sleep 1000 milliseconds 
@@ -319,13 +318,13 @@ namespace QuickTools.QCore
                 Thread.Sleep(1000);
 
             }
-            catch (Exception)
-            {
+                  catch(Exception e)
+                        {
+                        Get.Wrong(e);
+                        }
 
-            }
 
-
-        }
+                  }
         /// <summary>
         /// This does the same thing than WaitTime with param but it actually
         /// has a different name 
@@ -333,17 +332,15 @@ namespace QuickTools.QCore
         /// <param name="sleepTime">Sleep time.</param>
         public static void _(int sleepTime)
         {
-            if (sleepTime < 12000)
-            {
-                try
-                {
-                    Thread.Sleep(sleepTime);
-                }
-                catch (Exception)
-                {
-                    //Wrong(e);
-                }
-            }
+
+                  try
+                        {
+                        Thread.Sleep(sleepTime);
+                        }
+                  catch(Exception e) 
+                        {
+                              Get.Wrong(e);
+                        }
         }
 
 
@@ -1174,11 +1171,11 @@ character in order for it to return a valid name
             /// <param name="foreColor">Fore color.</param>
             public static void Label(object msg,ConsoleColor backColor,ConsoleColor foreColor)
                   {
-                  Console.BackgroundColor = backColor;
-                  Console.ForegroundColor = foreColor;
-                  Console.Write(" " + msg + " ");
-                  Console.Write("");
-                  Get.Reset();
+                        Console.BackgroundColor = backColor;
+                        Console.ForegroundColor = foreColor;
+                        Console.Write(" " + msg + " ");
+                        Console.Write("");
+                        Get.Reset();
                   }
             /// <summary>
             /// Write text with background color in color magentaand some space around it 

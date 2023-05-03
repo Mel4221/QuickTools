@@ -5,7 +5,7 @@ namespace QuickTools.QConsole
       /// <summary>
       /// Creates an object handeler for the Input object
       /// </summary>
-      public class QInput
+       class QInput
       {
 
             /// <summary>

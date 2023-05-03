@@ -319,7 +319,7 @@
             tools that started this Project.
             </summary>
         </member>
-        <member name="M:QuickTools.QCore.Get.OnlyChars(System.String)">
+        <member name="M:QuickTools.QCore.Get.FilterOnlyChars(System.String)">
             <summary>
             Very Slow method that only allows chars  to be print
             </summary>
@@ -1539,6 +1539,11 @@
         <member name="F:QuickTools.QConsole.QProgressBar.DotsType">
             <summary>
             The type of the dots.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.QProgressBar.DotsCount">
+            <summary>
+            The dots count that will be displaid
             </summary>
         </member>
         <member name="M:QuickTools.QConsole.QProgressBar.Display(System.Int32,System.Int32)">

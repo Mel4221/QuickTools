@@ -38,6 +38,12 @@
             /// The type of the dots.
             /// </summary>
             public string DotsType = ".";
+
+            /// <summary>
+            /// The dots count that will be displaid
+            /// </summary>
+            public int DotsCount = 10; 
+
             private string currentPorcent;
 
             /// <summary>
@@ -80,7 +86,7 @@
 
             void Dots(string status)
             {
-                  int porcent = int.Parse(status.Replace("%", "")) / 10;
+                  int porcent = int.Parse(status.Replace("%", "")) / this.DotsCount;
                   dots.Clear();
                   for (int dot = 0; dot < porcent; dot++)
                   {

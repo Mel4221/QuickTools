@@ -117,7 +117,7 @@ namespace QuickTools.QConsole
             /// <summary>
             /// The QInput instanse.
             /// </summary>
-            public QInput QInputInstanse = new QInput();
+             QInput QInputInstanse = new QInput();
            
 
             /// <summary>

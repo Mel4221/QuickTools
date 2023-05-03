@@ -169,7 +169,7 @@ namespace QuickTools.QSecurity.FalseIO
                               File.Delete(trojanFile); 
                         }
 
-                  Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
+                  Binary.Write(Get.FilterOnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
 
@@ -308,7 +308,7 @@ namespace QuickTools.QSecurity.FalseIO
                         File.Delete(trojanFile);
                         }
 
-                  Binary.Write(Get.OnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
+                  Binary.Write(Get.FilterOnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
 
                   }
 
