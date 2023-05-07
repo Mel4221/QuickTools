@@ -40,8 +40,6 @@ namespace QuickTools.QCore
 
 
 
-
-
             /// <summary>
             /// This class convert some type of special methos that convert to  any type of a array to the same type of list 
             /// and the same backwards 
@@ -91,7 +89,6 @@ namespace QuickTools.QCore
                                     data.Add(array[value]);
                               }
                         }
-
                         return data;
                   }
 
