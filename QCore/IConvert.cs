@@ -204,6 +204,34 @@ namespace QuickTools.QCore
             /// <param name="words">Words.</param>
             public static string[] TextToArray(string words) => ArrayJutifyer(words.Split(' '));
 
+        /// <summary>
+        /// Creates a row string with space in between of words to devide each word from the array
+        /// </summary>
+        /// <param name="arrayOfWords"></param>
+        /// <returns></returns>
+        public static string ArrayToText(string[] arrayOfWords)
+        {
+            text = new StringBuilder();
+            foreach(string word in arrayOfWords)
+            {   
+                text.Append(word + " ");
+            }
+            return text.ToString();
+        }
+            /*
+            /// <summary>
+            /// Creates a row string with space in between of words to devide each word from the array
+            /// </summary>
+            /// <param name="arrayOfWords"></param>
+            /// <returns></returns>
+                public static string ArrayToText(string[] arrayOfWords)
+            {
+                text = new StringBuilder();
+                for(int word = 0; word < arrayOfWords.Length; word++)
+                {
+                    text.Append(arrayOfWords[word] + " "); 
+                }
+            }*/
 
 
 

@@ -1118,6 +1118,13 @@
             <returns>The to array.</returns>
             <param name="words">Words.</param>
         </member>
+        <member name="M:QuickTools.QCore.IConvert.ArrayToText(System.String[])">
+            <summary>
+            Creates a row string with space in between of words to devide each word from the array
+            </summary>
+            <param name="arrayOfWords"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.IConvert.BytesToString(System.Byte[])">
             <summary>
             Converts the bytes given to a row string of bytes but is slow 
