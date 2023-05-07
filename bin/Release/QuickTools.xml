@@ -1955,37 +1955,6 @@
             Initializes a new instance of the <see cref="T:QuickTools.QInput"/> class.
             </summary>
         </member>
-        <member name="T:QuickTools.QData.DataCacher">
-            <summary>
-            provides a diferent way to cache the data on a way that the data does get deleted right after if is not required
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.DataCacher.Path">
-            <summary>
-            contains the path to get to the cache
-            </summary>
-        </member>
-        <member name="F:QuickTools.QData.DataCacher.CacheFile">
-            <summary>
-            contains the Cache file 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.DataCacher.RemoveCache(System.String)">
-            <summary>
-            Removes the  cache 
-            </summary>
-            <param name="key"></param>
-        </member>
-        <member name="M:QuickTools.QData.DataCacher.ClearCache">
-            <summary>
-            Clear all cache stored
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.DataCacher.#ctor">
-            <summary>
-            Initialise the class
-            </summary>
-        </member>
         <member name="T:QuickTools.QData.Error">
             <summary>
             This class provide a template for an error object

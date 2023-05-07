@@ -503,7 +503,7 @@ namespace QuickTools.QData
                   FileName = fileName;
                   ElementName = elementName;
                   GroupName = groupName;
-                  this.DefaultPath = Get.DataPath("settings/");
+                  this.DefaultPath = Get.DataPath("settings");
                   this.FileName = $"{this.DefaultPath}{fileName}";
 
 

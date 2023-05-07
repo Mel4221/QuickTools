@@ -357,7 +357,7 @@ namespace QuickTools.QCore
         /// Abstraction for Directory.GetCurrentDirectory(); 
         /// returns the current string path 
         /// </summary>
-        public static string Path = Environment.CurrentDirectory + "/";
+        public static string Path = Environment.CurrentDirectory +Slash();
         /// <summary>
         /// This method Create a folder inside the root of the program
         /// and create a folder that can be use for the program 
@@ -369,7 +369,7 @@ namespace QuickTools.QCore
         public static string DataPath()
         {
 
-            string folder = Get.Path + "data/qt/";
+            string folder = $"{Get.Path}data{Slash()}qt{Slash()}";
             if (Directory.Exists(folder) == true)
             {
                 return folder;
@@ -436,6 +436,25 @@ namespace QuickTools.QCore
                   }
 
 
+            public static bool IsWindow()
+        {
+            bool isWindow = true;
+            string[] info = IConvert.TextToArray(System.Environment.OSVersion.ToString());
+            //Microsoft Windows NT 6.2.9200.0
+            if (info[0] == "Microsoft")
+            {
+                return isWindow;
+            }if (info[1] == "Windows")
+            {
+                return isWindow;
+            }
+            else
+            {
+                isWindow = false;
+                return isWindow; 
+            }
+        }
+
             /// <summary>
             /// Create a data path if is not created and creates the directory given as a parameter
             /// </summary>
@@ -443,9 +462,8 @@ namespace QuickTools.QCore
             /// <param name="newDirectory"></param>
             public static string DataPath(string newDirectory)
         {
-
-
-            string folder = Get.Path + "data/qt/" + newDirectory;
+            string bar = Slash();
+            string folder = $"{Get.Path}data{bar}qt{bar}{newDirectory}{Slash()}";
             if (Directory.Exists(folder) == true)
             {
                 return folder;
@@ -460,9 +478,23 @@ namespace QuickTools.QCore
         }
 
         //   private static string path = Get.Path;
-        private static string qtDir = "data/qt/keys/";
+        private static string qtDir =$"data{Slash()}qt{Slash()}keys{Slash()}";
         private static string keyFile = qtDir + "secure.key";
 
+        public static string Slash()
+        {
+            string path = null;
+            switch (IsWindow())
+            {
+                case true:
+                    path = @"\";
+                    break;
+                case false:
+                    path = "/";
+                    break; 
+            }
+            return path;
+        }
         /// <summary>
         /// This method can used manually
         /// or automatically 
