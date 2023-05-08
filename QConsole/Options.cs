@@ -136,7 +136,7 @@ namespace QuickTools.QConsole
             /// </summary>
             public void Display()
             {
-                  Get.Clear(true);
+                  Get.Clear();
                   // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS
                   Color.Yellow(Label);
                   for (int option = 0; option < OptionList.Count; option++)
@@ -259,7 +259,7 @@ namespace QuickTools.QConsole
                   {
                         Color.Yellow("Either No more options or not set up yet ");
                         Color.Green("For more help please visit: ");
-                        Color.Yellow("http://www.mbvapps.xyz/QuickTools/");
+                        Color.Yellow("https://github.com/Mel4221/QuickTools.git");
 
                   }
 
