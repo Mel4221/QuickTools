@@ -281,6 +281,16 @@
             SEt the current path 
             </summary>
         </member>
+        <member name="F:QuickTools.QConsole.ShellInput.TextSimbol">
+            <summary>
+            the tag that stars before the text 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.ShellInput.AtSimbol">
+            <summary>
+            the at simbol in between the name of the machine and the user 
+            </summary>
+        </member>
         <member name="F:QuickTools.QConsole.ShellInput.UserBackGrondColor">
             <summary>
             background color from the user name 
@@ -309,6 +319,26 @@
         <member name="F:QuickTools.QConsole.ShellInput.ProgramTextColor">
             <summary>
             Provides the color for the program label color  
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.ShellInput.SimbolBackGroundColor">
+            <summary>
+            the color for the simbol 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.ShellInput.SimbolTextColor">
+            <summary>
+            the color for the text of the simbol 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.ShellInput.AtSimbolTextColor">
+            <summary>
+            the color 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.ShellInput.AtSimbolBackGroundColor">
+            <summary>
+            the background color 
             </summary>
         </member>
         <member name="M:QuickTools.QConsole.ShellInput.StartInput">
