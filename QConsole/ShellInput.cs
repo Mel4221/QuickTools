@@ -64,7 +64,12 @@ namespace QuickTools.QConsole
         /// <summary>
         /// the at simbol in between the name of the machine and the user 
         /// </summary>
-        public string AtSimbol = "@"; 
+        public string AtSimbol = "@";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Notifications = "#";
 
         /// <summary>
         /// background color from the user name 
@@ -147,6 +152,10 @@ namespace QuickTools.QConsole
             Console.ForegroundColor = this.PathTextColor;
             Console.Write(this.CurrentPath);
             Get.Reset();
+            Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($" ({this.Notifications}) ");
             Console.WriteLine(" ");
             Console.BackgroundColor = this.SimbolBackGroundColor;
             Console.ForegroundColor = this.SimbolTextColor;

@@ -90,24 +90,27 @@ namespace QuickTools.QCore
 
 
 
-                  /// <summary>
-                  /// Break this instance.
-                  /// </summary>
-                  public static void Break()
+        /// <summary>
+        /// Breaks any given loop by throwing an exception that if is not handled could throw an exception saying that the task failed sucessfully LOL
+        /// <see cref="System.Exception()"/>
+        /// </summary>
+        public static void Break()
                   {
                         throw new Exception("Task Completed");
                   }
 
-            /// <summary>
-            /// Break the specified message.
-            /// </summary>
-            /// <param name="message">Message.</param>
-            public static void Break(object message)
+        /// <summary>
+        /// Breaks any given loop by throwing an exception that if is not handled could throw an exception saying that the task failed sucessfully LOL
+        /// <see cref="System.Exception()"/>
+        /// </summary>
+        /// <param name="message">Message.</param>
+        public static void Break(object message)
                   {
                         throw new Exception(message.ToString());
                   }
             /// <summary>
-            /// Loop the specified actionMethod forever
+            /// Loop the specified actionMethod forever or until an exception happens usually 
+            /// could be also ended when forced by <see cref="Get.Break()"/>
             /// </summary>
             /// <param name="actionMethod">Action method.</param>
             public static void Loop(Action actionMethod)

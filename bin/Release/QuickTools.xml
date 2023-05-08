@@ -291,6 +291,11 @@
             the at simbol in between the name of the machine and the user 
             </summary>
         </member>
+        <member name="F:QuickTools.QConsole.ShellInput.Notifications">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:QuickTools.QConsole.ShellInput.UserBackGrondColor">
             <summary>
             background color from the user name 
@@ -1130,18 +1135,21 @@
         </member>
         <member name="M:QuickTools.QCore.Get.Break">
             <summary>
-            Break this instance.
+            Breaks any given loop by throwing an exception that if is not handled could throw an exception saying that the task failed sucessfully LOL
+            <see cref="M:System.Exception.#ctor"/>
             </summary>
         </member>
         <member name="M:QuickTools.QCore.Get.Break(System.Object)">
             <summary>
-            Break the specified message.
+            Breaks any given loop by throwing an exception that if is not handled could throw an exception saying that the task failed sucessfully LOL
+            <see cref="M:System.Exception.#ctor"/>
             </summary>
             <param name="message">Message.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.Loop(System.Action)">
             <summary>
-            Loop the specified actionMethod forever
+            Loop the specified actionMethod forever or until an exception happens usually 
+            could be also ended when forced by <see cref="M:QuickTools.QCore.Get.Break"/>
             </summary>
             <param name="actionMethod">Action method.</param>
         </member>
