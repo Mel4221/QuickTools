@@ -65,7 +65,7 @@
     <Compile Include="QConsole\CInputPartial.cs" />
     <Compile Include="QConsole\console.cs" />
     <Compile Include="QConsole\QProgressBar.cs" />
-    <Compile Include="QData\CacheData.cs" />
+    <Compile Include="QData\DataCacher.cs" />
     <Compile Include="QData\Error.cs" />
     <Compile Include="QIO\InputParser.cs" />
     <Compile Include="QConsole\LoopInput.cs" />

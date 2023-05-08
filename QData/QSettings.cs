@@ -442,8 +442,8 @@ namespace QuickTools.QData
             {
                   ElementName = "Setting";
                   GroupName = "Settings";
-                  this.DefaultPath = QuickTools.QCore.Get.DataPath("settings/");
-                  FileName = $"{this.DefaultPath}Settings.xml";
+            this.DefaultPath = Get.DataPath("settings");
+            FileName = $"{this.DefaultPath}Settings.xml";
 
                   //Create();
 
@@ -464,8 +464,8 @@ namespace QuickTools.QData
                   FileName = fileName; 
                   ElementName = "Setting";
                   GroupName = "Settings";
-                  this.DefaultPath = Get.DataPath("settings/");
-                  this.FileName = $"{this.DefaultPath}{fileName}";
+            this.DefaultPath = Get.DataPath("settings");
+            this.FileName = $"{this.DefaultPath}{fileName}";
                   //Create();
 
 
@@ -484,8 +484,8 @@ namespace QuickTools.QData
                   FileName = fileName;
                   ElementName = elementName; 
                   GroupName = "Settings";
-                  this.DefaultPath = Get.DataPath("settings/");
-                  this.FileName = $"{this.DefaultPath}{fileName}";
+            this.DefaultPath = Get.DataPath("settings");
+            this.FileName = $"{this.DefaultPath}{fileName}";
 
 
 
@@ -508,9 +508,28 @@ namespace QuickTools.QData
 
 
 
-                  }
-
-
-
             }
+
+        /// <summary>
+        /// Initalize instance 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="groupName"></param>
+        /// <param name="elementName"></param>
+        /// <param name="defaultPath"></param>
+        public QSettings(string fileName, string groupName, string elementName,string defaultPath)
+        {
+            // this.Create();
+            FileName = fileName;
+            ElementName = elementName;
+            GroupName = groupName;
+            this.DefaultPath = defaultPath;
+            this.FileName = $"{this.DefaultPath}{fileName}";
+
+
+
+        }
+
+
+    }
 }
