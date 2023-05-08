@@ -297,7 +297,7 @@ namespace QuickTools.QIO
                 if (text[ch] != separator)
                 {
 
-                    if (temp[temp.Length-1].ToString() !=  )
+                 //   if (temp[temp.Length-1].ToString() !=  )
                     temp += text[ch];
 
                 }
