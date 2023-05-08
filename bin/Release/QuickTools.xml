@@ -3298,6 +3298,15 @@
             <returns>The array.</returns>
             <param name="file">File.</param>
         </member>
+        <member name="M:QuickTools.QIO.Reader.ReadArray(System.String,System.Char)">
+            <summary>
+            Read and array that is listed on a file and retursn a Generic.List 
+            </summary>
+            <param name="file"></param>
+            <param name="separator"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="M:QuickTools.QIO.Reader.ReadFile(System.String)">
             <summary>
             Read the entired file and returns the text from it 

@@ -121,17 +121,21 @@ namespace QuickTools.QCore
                         }
                         catch
                         {
-                              //Get.Write($"Message: {ex.Message}\n");
+                            //Get.Write($"Message: {ex.Message}\n");
+                            return;
                         }
                   }
-                
-            /// <summary>
-            /// Get the porcenrage status of the provided current time and goal 
-            /// </summary>
-            /// <returns>The status.</returns>
-            /// <param name="current">Current.</param>
-            /// <param name="goal">Goal.</param>
-            public static string Status(object current, object goal)
+
+        
+   
+
+        /// <summary>
+        /// Get the porcenrage status of the provided current time and goal 
+        /// </summary>
+        /// <returns>The status.</returns>
+        /// <param name="current">Current.</param>
+        /// <param name="goal">Goal.</param>
+        public static string Status(object current, object goal)
         {
             string status = null;
             double c = Convert.ToDouble(current);
@@ -1389,7 +1393,7 @@ character in order for it to return a valid name
             Console.WriteLine("Something Went Really Wrong!!!");
             Console.WriteLine("This" + ":=>>>> " + text);
             Console.ResetColor();
-            //   Console.Write();
+            Get.Wait();
         }
 
 
@@ -1403,6 +1407,7 @@ character in order for it to return a valid name
             Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
             Console.ResetColor();
             //  Console.Write();
+            Get.Wait();
         }
         /// <summary>
         /// Write Text with Console.WriteLine add red color and wait for a key to be pressed 
@@ -1414,6 +1419,7 @@ character in order for it to return a valid name
             Console.WriteLine(" Wrong Input!!!, this is not a valid input: '{0}' ", msg);
             Console.ResetColor();
             //  Console.Write();
+            Get.Wait();
         }
 
 

@@ -180,11 +180,8 @@ namespace QuickTools.QIO
             public static byte[] Buffer;
 
 
-          
-            /*
-             Array Reader 
-            */
-
+           
+            
             /// <summary>
             /// Read and array that is listed on a file and retursn a Generic.List 
             /// </summary>
@@ -265,12 +262,60 @@ namespace QuickTools.QIO
 
 
             }
-            /// <summary>
-            /// Read the entired file and returns the text from it 
-            /// </summary>
-            /// <returns>The file.</returns>
-            /// <param name="file">File.</param>
-            public static string ReadFile(string file)
+
+
+
+        /// <summary>
+        /// Read and array that is listed on a file and retursn a Generic.List 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string[] ReadArray(string file, char separator)
+        {
+
+
+            if (!File.Exists(file))
+            {
+                throw new Exception($"The file {file} does not exsit or it was not founded");
+            }
+            List<string> list = new List<string>();
+            string text = Reader.Read(file);
+            string temp = " ";
+              
+            for (int ch = 0; ch < text.Length; ch++)
+            {
+
+
+                if (text[ch] == separator)
+                {
+                    //Get.Wait(temp);
+                    list.Add(temp);
+                    temp = "";
+                }
+                if (text[ch] != separator)
+                {
+
+                    if (temp[temp.Length-1].ToString() !=  )
+                    temp += text[ch];
+
+                }
+
+            }
+            // removing extra spaces 
+            
+
+            return IConvert.ToType<string>.ToArray(list);
+
+        }
+
+        /// <summary>
+        /// Read the entired file and returns the text from it 
+        /// </summary>
+        /// <returns>The file.</returns>
+        /// <param name="file">File.</param>
+        public static string ReadFile(string file)
             {
                   if(file == null || file == "")
                   {
@@ -306,11 +351,7 @@ namespace QuickTools.QIO
            /// <param name="file">File.</param>
              public static string Read(string file)
             {
-                  if (file == null || file == "")
-                  {
-                        throw new Exception($"Invalid file input ");
-                  }
-
+                 
                   if (!File.Exists(file))
                   {
                         throw new Exception($"The file {file} does not exsit or it was not founded");
