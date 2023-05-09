@@ -2297,7 +2297,9 @@
         </member>
         <member name="M:QuickTools.QData.MiniDB.RefreshDB">
             <summary>
-            Refreshs the DataBase.
+            Refreshs the DataBase
+            was hidden due to a mayor issue while refreshing the db manually by calling this method from outside the class
+            used to drop and remove the entired db so until the bug is founnded this class most be hidden 
             </summary>
         </member>
         <member name="M:QuickTools.QData.MiniDB.Load">
@@ -3269,6 +3271,11 @@
         <member name="T:QuickTools.QIO.Log">
             <summary>
             This class create a quick way of writting logs inside QuickTools
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.Log.ClearLogs">
+            <summary>
+            Delete's all the logs 
             </summary>
         </member>
         <member name="M:QuickTools.QIO.Log.Event(System.String,System.Object)">

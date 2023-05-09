@@ -204,7 +204,7 @@ namespace QuickTools.QData
             public bool AddKey(object key, object value)
             {
                   bool keyAdded = false;
-
+                //_AddKey
 
                   if(ResentLoaded == false)
                   {
@@ -624,9 +624,11 @@ namespace QuickTools.QData
             }
 
             /// <summary>
-            /// Refreshs the DataBase.
+            /// Refreshs the DataBase
+            /// was hidden due to a mayor issue while refreshing the db manually by calling this method from outside the class
+            /// used to drop and remove the entired db so until the bug is founnded this class most be hidden 
             /// </summary>
-            public bool RefreshDB()
+             bool RefreshDB()
             {
                   bool refreshed = false; 
                   XmlWriterSettings settings = new XmlWriterSettings();
