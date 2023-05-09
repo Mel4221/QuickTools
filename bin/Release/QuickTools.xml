@@ -261,6 +261,11 @@
             <param name="textColor">Text color.</param>
             <param name="backgroundColor">Background color.</param>
         </member>
+        <member name="T:QuickTools.QConsole.ShellInput">
+            <summary>
+            Creates a shell and returns the input as a plain text 
+            </summary>
+        </member>
         <member name="F:QuickTools.QConsole.ShellInput.UserName">
             <summary>
             set the user name 
@@ -1073,21 +1078,6 @@
             Get The bigest class In Quicktools
             does multiple stuff and contains must of the 
             tools that started this Project.
-            </summary>
-        </member>
-        <member name="T:QuickTools.QCore.Get.LsData">
-            <summary>
-            Contains the Object with the 2 types of data collected 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QCore.Get.LsData.Files">
-            <summary>
-            the list of files 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QCore.Get.LsData.Directorys">
-            <summary>
-            the list of directoryes 
             </summary>
         </member>
         <member name="M:QuickTools.QCore.Get.Ls(System.String)">

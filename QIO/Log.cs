@@ -19,12 +19,7 @@ namespace QuickTools.QIO
         private static string CreateLogDir()
         {
             string logsDir = null;
-            logsDir = Get.DataPath($"data{Get.Slash()}qt{Get.Slash()}logs");
-            Directory.CreateDirectory(logsDir);
-
-
-            // Get.Wait(Directory.Exists(logsDir));
-
+            logsDir = Get.DataPath("logs");
             return logsDir;
         }
 

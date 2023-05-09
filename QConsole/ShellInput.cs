@@ -32,6 +32,10 @@ using QuickTools.QCore;
 
 namespace QuickTools.QConsole
 {
+
+    /// <summary>
+    /// Creates a shell and returns the input as a plain text 
+    /// </summary>
     public class ShellInput
     {
 
@@ -130,6 +134,7 @@ namespace QuickTools.QConsole
         {
             string input;
             input = null;
+            Console.WriteLine();
             Console.BackgroundColor = this.UserBackGrondColor;
             Console.ForegroundColor = this.UserTextColor;
             Console.Write($"{this.UserName}") ;
@@ -208,7 +213,9 @@ namespace QuickTools.QConsole
             this.PathTextColor = ConsoleColor.Yellow;
             this.ProgramBBackGroundColor = ConsoleColor.Black;
             this.ProgramTextColor = ConsoleColor.Magenta;
-        
+            this.SimbolBackGroundColor = ConsoleColor.Magenta;
+            this.SimbolTextColor = ConsoleColor.White;
+
         }
     }
 }
