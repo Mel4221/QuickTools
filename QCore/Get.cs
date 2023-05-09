@@ -410,7 +410,7 @@ namespace QuickTools.QCore
             /// <param name="path">Path.</param>
             public static string FileNameFromPath(string path)
             {
-                  return path.Substring(path.LastIndexOf('/') + 1);
+                  return path.Substring(path.LastIndexOf(Get.Slash()) + 1);
             }
 
 

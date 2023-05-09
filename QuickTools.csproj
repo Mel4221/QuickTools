@@ -54,6 +54,7 @@
     <Compile Include="QColors\colorWithParam.cs" />
     <Compile Include="QColors\colorNoParam.cs" />
     <Compile Include="QConsole\ShellInput.cs" />
+    <Compile Include="QCore\Get_Console_Command_ls.cs" />
     <Compile Include="QCore\GlobalSuppressions.cs" />
     <Compile Include="QCore\Check.cs" />
     <Compile Include="QCore\Get.cs" />
