@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+ 
 namespace QuickTools.QSecurity.FalseIO
       {
             public partial class Trojan
@@ -91,7 +92,11 @@ namespace QuickTools.QSecurity.FalseIO
             /// The default delete payload from file.
             /// </summary>
             public bool DefaultDeletePayloadFromFile = false;
-
+ 
+                /// <summary>
+                /// Coontains some information about the trojan file 
+                /// </summary>
+             public string MetadData; 
             /// <summary>
             /// The current stage not-started means that no process is being reported 
             /// </summary>

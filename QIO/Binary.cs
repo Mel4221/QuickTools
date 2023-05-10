@@ -59,6 +59,39 @@ namespace QuickTools.QIO
             }
 
 
+        /// <summary>
+        /// Try to destroy the file but is not very effective
+        /// for security reason please use another option "/>
+        /// </summary>
+        /// <param name="file"></param>
+            public static void Destroy(string file)
+        {
+            long fileSize = 0;
+            int size = 0;
+            using(var _file = new FileStream(file, FileMode.Open)){
+               if(_file.Length  == 0)
+                {
+                    fileSize = 1024; 
+                }if(_file.Length > 0)
+                {
+                    fileSize = _file.Length;
+                }
+              
+            }
+              if(fileSize > int.MaxValue)
+            {
+                size = int.MaxValue; 
+            }
+              if(fileSize < int.MaxValue)
+            {
+                size = int.Parse(fileSize.ToString()); 
+            }
+            Binary.Writer(file, new byte[size]);
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            File.Delete(file); 
+        }
+
             /// <summary>
             /// Copies the buffer and returns it 
             /// </summary>

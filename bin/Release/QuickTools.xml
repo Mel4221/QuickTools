@@ -1095,6 +1095,26 @@
             <param name="dateFormat"></param>
             <returns></returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.Print(System.Object,System.Object)">
+            <summary>
+            Gets a value printed with it's key 
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.PrintSystemVars(System.Collections.IDictionary)">
+            <summary>
+            Prints the system variables given to it 
+            </summary>
+            <param name="variables"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.PrintSystemVars(System.Collections.IDictionary,System.String)">
+            <summary>
+            Prints the system variables given to it and save them on a given file
+            </summary>
+            <param name="variables"></param>
+            <param name="fileToSaveThem"></param>
+        </member>
         <member name="M:QuickTools.QCore.Get.FilterOnlyChars(System.String)">
             <summary>
             Very Slow method that only allows chars  to be print
@@ -1129,6 +1149,14 @@
             <returns>The status.</returns>
             <param name="current">Current.</param>
             <param name="goal">Goal.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.StatusNumber(System.Object,System.Object)">
+            <summary>
+            Get the porcenrage status of the provided current time and goal 
+            </summary>
+            <param name="current"></param>
+            <param name="goal"></param>
+            <returns></returns>
         </member>
         <member name="M:QuickTools.QCore.Get.Line">
             <summary>
@@ -3001,6 +3029,13 @@
             <returns><c>true</c>, if big file was ised, <c>false</c> otherwise.</returns>
             <param name="file">File.</param>
         </member>
+        <member name="M:QuickTools.QIO.Binary.Destroy(System.String)">
+            <summary>
+            Try to destroy the file but is not very effective
+            for security reason please use another option "/>
+            </summary>
+            <param name="file"></param>
+        </member>
         <member name="M:QuickTools.QIO.Binary.CopyBuffer(System.Byte[],System.Int32,System.Int32)">
             <summary>
             Copies the buffer and returns it 
@@ -4274,6 +4309,7 @@
             The name of the class is Trojan Mainly for how a trojan virus will behave
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:QuickTools.QSecurity.FalseIO.Trojan.RemovePayload(System.String)" -->
         <member name="M:QuickTools.QSecurity.FalseIO.Trojan.MakeTrojanFile">
             <summary>
             Makes the trojan file.
@@ -4341,6 +4377,11 @@
         <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultDeletePayloadFromFile">
             <summary>
             The default delete payload from file.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.MetadData">
+            <summary>
+            Coontains some information about the trojan file 
             </summary>
         </member>
         <member name="F:QuickTools.QSecurity.FalseIO.Trojan.CurrentStage">

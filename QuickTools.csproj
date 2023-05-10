@@ -95,6 +95,8 @@
     <Compile Include="QNet\QHttp.cs" />
     <Compile Include="QSecurity\Decryptor.cs" />
     <Compile Include="QSecurity\Encryptor.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_ReadInfo.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_RemovePayload.cs" />
     <Compile Include="QSecurity\LowEncrypter.cs" />
     <Compile Include="QSecurity\SecureBinary.cs" />
     <Compile Include="QSecurity\Traductor.cs" />

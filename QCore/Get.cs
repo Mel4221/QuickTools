@@ -19,6 +19,7 @@ using System.Diagnostics;
 using System.Linq;
 using QuickTools.QConsole;
 using System.Security.Cryptography;
+using System.Collections;
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -40,14 +41,73 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
+        /// <summary>
+        /// Gets a value printed with it's key 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public static void Print(object key , object value)
+        {
+            Get.Green();
+            Get.Write($" {key} ");
+            Get.Reset();
+            Get.Write("=");
+            Get.Yellow();
+            Get.Write($" {value} ");
+            Get.WriteL("");
+        }
 
 
-            /// <summary>
-            /// Very Slow method that only allows chars  to be print
-            /// </summary>
-            /// <returns>The chars.</returns>
-            /// <param name="word">Word.</param>
-            public static string FilterOnlyChars(string word)
+
+        /// <summary>
+        /// Prints the system variables given to it 
+        /// </summary>
+        /// <param name="variables"></param>
+        public static void PrintSystemVars(IDictionary variables)
+        {
+            foreach (DictionaryEntry item in variables)
+            {
+                Print(item.Key, item.Value);
+            }
+        }
+
+        /// <summary>
+        /// Prints the system variables given to it and save them on a given file
+        /// </summary>
+        /// <param name="variables"></param>
+        /// <param name="fileToSaveThem"></param>
+        public static void PrintSystemVars(IDictionary variables,string fileToSaveThem)
+        {
+            string SystemInfo = null;
+            foreach (DictionaryEntry item in variables)
+            {
+                Print(item.Key, item.Value);
+                SystemInfo += $"{item.Key} = {item.Value}\n\n";
+
+            }
+            if (fileToSaveThem == "" || fileToSaveThem == null)
+            {
+                fileToSaveThem = $"{Get.Path}SystemInfo.txt"; 
+            }
+            Writer.Write(fileToSaveThem, SystemInfo);
+
+        }
+
+
+        /*
+                 string SystemInfo = null;
+            SystemInfo += $"{item.Key} = {item.Value}\n\n";
+            // Get.Green($"Variable: {v.Keys} Value: {v.Values}");
+            Writer.Write($"{Get.Path}SystemInfo.txt", SystemInfo);
+         */
+
+
+        /// <summary>
+        /// Very Slow method that only allows chars  to be print
+        /// </summary>
+        /// <returns>The chars.</returns>
+        /// <param name="word">Word.</param>
+        public static string FilterOnlyChars(string word)
                   {
                   string str = null;
                   for(int ch = 0 ; ch < word.Length ; ch++)
@@ -147,6 +207,23 @@ namespace QuickTools.QCore
             status = $"{s}%";
             return status;
                  
+        }
+
+        /// <summary>
+        /// Get the porcenrage status of the provided current time and goal 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="goal"></param>
+        /// <returns></returns>
+        public static double StatusNumber(object current, object goal)
+        {
+            string status = null;
+            double c = Convert.ToDouble(current);
+            double g = Convert.ToDouble(goal);
+            double s = Math.Round(c / g, 2) * 100;
+
+            return s;
+
         }
         /*
          Console.BufferHeight
