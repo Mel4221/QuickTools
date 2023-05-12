@@ -89,6 +89,11 @@ namespace QuickTools.QSecurity.FalseIO
             public bool DefaultDeleteSourceFile = false;
 
             /// <summary>
+            /// deletes the payload file after being used
+            /// </summary>
+            public bool DefaultRemovePayloadSourceFile = false; 
+
+            /// <summary>
             /// The default delete payload from file.
             /// </summary>
             public bool DefaultDeletePayloadFromFile = false;

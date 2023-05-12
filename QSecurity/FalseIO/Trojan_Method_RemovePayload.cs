@@ -123,7 +123,7 @@ namespace QuickTools.QSecurity.FalseIO
             this.CurrentStage = $"Stage_3: Building Metadata";
             Trojan trojan = new Trojan()
             {
-                Payload = info[0],
+                Payload = info[0].Substring(1),
                 IndexStart = info[1],
                 IndexEnd = info[2],
                 Description = info[3]
@@ -135,11 +135,11 @@ namespace QuickTools.QSecurity.FalseIO
             }
             this.CurrentStage = $"Stage_4: Writting File: [{trojan.Payload}]";
             //Stage 4 Writting File
-            this.DefaultDeletePayloadFromFile = true;
-            if (this.DefaultDeletePayloadFromFile == true)
-            {
+            //this.DefaultDeletePayloadFromFile = true;
+            //if (this.DefaultDeletePayloadFromFile == true)
+            //{
                 Binary.Write(trojanFile, payload, 0, int.Parse(trojan.IndexStart));
-            }
+            //}
             if (this.DefaultDeleteSourceFile == true)
             {
                 Binary.Write(trojanFile, new byte[payload.Length], 0, payload.Length);

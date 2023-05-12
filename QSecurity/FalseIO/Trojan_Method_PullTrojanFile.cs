@@ -147,7 +147,7 @@ namespace QuickTools.QSecurity.FalseIO
                   this.CurrentStage = $"Stage_3: Building Metadata";
                   Trojan trojan = new Trojan()
                         {
-                        Payload = info[0] ,
+                        Payload = info[0].Substring(1) ,
                         IndexStart = info[1] ,
                         IndexEnd = info[2] ,
                         Description = info[3]
@@ -168,16 +168,17 @@ namespace QuickTools.QSecurity.FalseIO
                               Binary.Write(trojanFile , new byte[payload.Length] , 0 , payload.Length);
                               File.Delete(trojanFile); 
                         }
+            //info[0].Substring(info[0].IndexOf("_") + 1, info[0].Length - 1)
+           // string packfile = trojan.Payload.Substring(trojan.Payload.IndexOf("_") + 1, trojan.Payload.Length - 2);
+            Binary.Write(trojan.Payload.Substring(0), payload, int.Parse(trojan.IndexStart), int.Parse(trojan.IndexEnd));
 
-                  Binary.Write(Get.FilterOnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
-
-                  }
-
-
-
+        }
 
 
-            public void PullPayloadFromTrojan(string trojanFile)
+
+
+
+        public void PullPayloadFromTrojan(string trojanFile)
                   {
 
                   byte[] payload;
@@ -189,7 +190,7 @@ namespace QuickTools.QSecurity.FalseIO
                         {
                         throw new Exception("Missing or not found the trojan file: " + trojanFile);
                         }
-                  trojanFile = trojanFile;
+                 // trojanFile = trojanFile;
                   payload = Binary.Reader(trojanFile);
                   metadata = "";
                   str = "";
@@ -286,7 +287,7 @@ namespace QuickTools.QSecurity.FalseIO
                   this.CurrentStage = $"Stage_3: Building Metadata";
                   Trojan trojan = new Trojan()
                         {
-                        Payload = info[0] ,
+                        Payload = info[0].Substring(1),
                         IndexStart = info[1] ,
                         IndexEnd = info[2] ,
                         Description = info[3]
@@ -308,9 +309,9 @@ namespace QuickTools.QSecurity.FalseIO
                         File.Delete(trojanFile);
                         }
 
-                  Binary.Write(Get.FilterOnlyChars(trojan.Payload) , payload , int.Parse(trojan.IndexStart) , int.Parse(trojan.IndexEnd));
-
-                  }
+           // string packfile = trojan.Payload.Substring(trojan.Payload.IndexOf("_") + 1, trojan.Payload.Length - 2);
+            Binary.Write(trojan.Payload.Substring(0), payload, int.Parse(trojan.IndexStart), int.Parse(trojan.IndexEnd));
+        }
 
             }
       }

@@ -235,6 +235,10 @@ namespace QuickTools.QCore
 
 
 
+
+         
+           // public static StringToBytes
+
             static int f;
             static int b; 
             /// <summary>
@@ -244,92 +248,109 @@ namespace QuickTools.QCore
             /// <param name="array">Array.</param>
             public static string BytesToString(byte[] array)
             {
-                  try
+            try
+            {
+                //GC.Collect();
+                Thread foward, back;
+                StringBuilder str1, str2;
+                int fw, bc, len, half, breaker;
+                bool trigerA, trigerB;
+                len = array.Length;
+                half = len / 2;
+                fw = 0;
+                bc = 0;
+                breaker = 0;
+                trigerA = false;
+                trigerB = false;
+                str1 = new StringBuilder();
+                str2 = new StringBuilder();
+                if (len != (half + half))
+                {
+                    // Get.Ok();
+                    fw = half + 1;
+                    bc = len;
+
+                }
+                if (len == (half + half))
+                {
+                    fw = half;
+                    bc = len;
+                }
+                //Get.Wait();
+                foward = new Thread(() =>
+                {
+                    for (int i = 0; i < fw; i++)
+                    {
+                        //  Get.Green(i);
+                        f = i;
+                        str1.Append(array[i] + ",");
+
+                    }
+                    trigerA = true;
+                });
+
+                back = new Thread(() =>
+                {
+                    for (int i = half; i < len; i++)
+                    {
+                        //  Get.Red(i);
+                        b = i;
+                        str2.Append(array[i] + ",");
+
+                    }
+                    trigerB = true;
+                });
+
+                foward.Start();
+                back.Start();
+
+
+                while (true)
+                {
+                    if (true != true)
+                    {
+                        Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}");
+                    }
+
+                    if (trigerA == true && trigerB == true || breaker == len)
+                    {
+                        foward.Abort();
+                        back.Abort();
+                        if (true != true)
                         {
-
-                        Thread foward, back;
-                        StringBuilder str1, str2;
-                        int fw, bc, len, half;
-                        bool trigerA, trigerB;
-                        len = array.Length;
-                        half = len / 2;
-                        fw = 0;
-                        bc = 0;
-                        trigerA = false;
-                        trigerB = false;
-                        str1 = new StringBuilder();
-                        str2 = new StringBuilder();
-                        if(len != (half + half))
-                              {
-                              // Get.Ok();
-                              fw = half + 1;
-                              bc = len;
-
-                              }
-                        if(len == (half + half))
-                              {
-                              fw = half;
-                              bc = len;
-                              }
-                        //Get.Wait();
-                        foward = new Thread(() =>
-                        {
-                              for(int i = 0 ; i < fw ; i++)
-                                    {
-                                    //  Get.Green(i);
-                                    f = i;
-                                    str1.Append(array[i] + ",");
-
-                                    }
-                              trigerA = true;
-                        });
-
-                        back = new Thread(() =>
-                        {
-                              for(int i = half ; i < len ; i++)
-                                    {
-                                    //  Get.Red(i);
-                                    b = i;
-                                    str2.Append(array[i] + ",");
-
-                                    }
-                              trigerB = true;
-                        });
-
-                        foward.Start();
-                        back.Start();
-
-
-                        while(true)
-                              {
-
-                                   // Get.Green($"F: {f} B: {b} Size: {array.Length}  A:{Get.Status(f , b)} ");
-
-                                    if(trigerA == true && trigerB == true)
-                                    {
-                                          return str1.ToString() + str2.ToString();
-                                    //Writer.Write("test.txt" , str);
-                                     }
-                              //Thread.Sleep(5000);
-
-                              }
+                            Get.Yellow($"Killed Or Completed:  A:[{trigerA}] B:[{trigerB}] Breaker:[{breaker}] BreakerAprox:[{len}]");
                         }
-                  catch(Exception ex)
-                        {
-                        Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
-                        return null;
-                        }
+                        break;
 
+                        //Writer.Write("test.txt" , str);
+                    }
 
+                    breaker++;
+
+                }
+                return str1.ToString() + str2.ToString();
+            }
+            catch (Exception ex)
+            {
+                if (true != true)
+                {
+                    Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
+
+                }
+                return null;
             }
 
-            /// <summary>
-            /// Converts the bytes given to a row string of bytes but is slow if showDebuger is equal to true it will print the status of the buffer to the console
-            /// </summary>
-            /// <returns>The to string.</returns>
-            /// <param name="array">Array.</param>
-            /// <param name="showDebuger">If set to <c>true</c> show debuger.</param>
-            public static string BytesToString(byte[] array,bool showDebuger)
+
+
+        }
+
+        /// <summary>
+        /// Converts the bytes given to a row string of bytes but is slow if showDebuger is equal to true it will print the status of the buffer to the console
+        /// </summary>
+        /// <returns>The to string.</returns>
+        /// <param name="array">Array.</param>
+        /// <param name="showDebuger">If set to <c>true</c> show debuger.</param>
+        public static string BytesToString(byte[] array,bool showDebuger)
                   {
                   try
                         {
@@ -445,11 +466,100 @@ namespace QuickTools.QCore
             public static string ToString(byte[] content) => Encoding.ASCII.GetString(content);
 
 
+
             /// <summary>
-            /// Gets or sets the convertion status.
+            /// Gets a text arrray  like 200,2,4,5,0 and convert it into it's equivalent in text 
             /// </summary>
-            /// <value>The convertion status.</value>
-            protected static string ConvertionStatus { get; set; }
+            /// <param name="array"></param>
+            /// <returns></returns>
+            public static string ToText(string array)
+            {
+                    List<byte> bytes = new List<byte>(); 
+                    int current, goal;
+                    string  text,ch;
+                    text = null;
+                    goal = array.Length;
+                    ch = "";
+                    for(current = 0; current<goal; current++)
+                    {
+                        switch (Get.IsNumber(array[current]))
+                        {
+                            case true:
+                                      ch += array[current]; 
+                                break;
+                            case false:
+                                    if (ch != "")
+                                    {
+                                        bytes.Add(byte.Parse(int.Parse(ch).ToString()));
+                                        ch  = "";
+                                    }
+                                break;
+                        }
+                            
+                    }
+                    text = IConvert.ToString(IConvert.ToType<byte>.ToArray(bytes));
+                    return text; 
+        
+            }
+
+
+
+        /// <summary>
+        /// Gets a text arrray  like 200,2,4,5,0 and convert it into it's equivalent in text 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="debugger"></param>
+        /// <returns></returns>
+        public static string ToText(string array, bool debugger)
+        {
+            List<byte> bytes = new List<byte>();
+            int current, goal;
+            string text, ch;
+            text = null;
+            goal = array.Length;
+            ch = "";
+            for (current = 0; current < goal; current++)
+            {
+                switch (Get.IsNumber(array[current]))
+                {
+                    case true:
+                        ch += array[current];
+                        break;
+                    case false:
+                        if (ch != "")
+                        {
+                            bytes.Add(byte.Parse(int.Parse(ch).ToString()));
+                           
+                            if (debugger)
+                            {
+                                Get.Yellow(ch);
+                            }
+                            ch = "";
+                        }
+                        break;
+                }
+                if (debugger)
+                {
+                    Get.Green(Get.Status(current, goal));
+                }
+
+            }
+            if (debugger)
+            {
+                Get.Yellow($"Array: {array}");
+            }
+            text = IConvert.ToString(IConvert.ToType<byte>.ToArray(bytes));
+            return text;
+
+        }
+
+
+
+        /// <summary>
+        /// Gets or sets the convertion status.
+        /// </summary>
+        /// <value>The convertion status.</value>
+        protected static string ConvertionStatus { get; set; }
             /// <summary>
             ///  convert bytes to a char array 
             /// </summary>

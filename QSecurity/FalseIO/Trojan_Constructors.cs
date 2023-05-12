@@ -35,12 +35,21 @@ namespace QuickTools.QSecurity.FalseIO
                   {
 
                   }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
-            /// </summary>
-            /// <param name="payload">Payload.</param>
-            /// <param name="trojanFile">Trojan file.</param>
-            public Trojan(string payload ,string trojanFile)
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+        /// </summary>
+        /// <param name="trojanFile"></param>
+        public Trojan(string trojanFile)
+        {
+            this.TrojanFile = trojanFile;
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+        /// </summary>
+        /// <param name="payload">Payload.</param>
+        /// <param name="trojanFile">Trojan file.</param>
+        public Trojan(string payload ,string trojanFile)
                   {
                         this.Payload = payload;
                         this.TrojanFile = trojanFile;

@@ -35,6 +35,12 @@ namespace QuickTools.QSecurity.FalseIO
 {
     public partial class Trojan
     {
+
+        /// <summary>
+        /// reads the information from the trojan file  if there is any information in it 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public Trojan ReadInfo()
         {
 
@@ -136,15 +142,18 @@ namespace QuickTools.QSecurity.FalseIO
 
 
             //:exelBook.pdf;:243758;:17364199;:;:3/11/2023 4:17:27 AM;:60;
-            if (AllowDebugger)
+            if (this.AllowDebugger)
             {
                 Get.Green($"Stage_3: Building Metadata");
                 Get.WaitTime();
             }
             this.CurrentStage = $"Stage_3: Building Metadata";
+            // string str = file.Substring(file.IndexOf("_")+1,file.Length-1);
+        
+
             return new Trojan()
             {
-                Payload = info[0],
+                Payload = info[0].Substring(0),
                 IndexStart = info[1],
                 IndexEnd = info[2],
                 Description = info[3],
