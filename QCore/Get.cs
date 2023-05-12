@@ -41,6 +41,9 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
+
+        
+
         /// <summary>
         /// Gets a value printed with it's key 
         /// </summary>
@@ -497,10 +500,34 @@ namespace QuickTools.QCore
             /// <returns>The from path.</returns>
             /// <param name="path">Path.</param>
             public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
-                  
 
+        /// <summary>
+        /// This method allows you to get the clear path fixed to the operating system that you 
+        /// are working with in this case windows and linux are the only one  that this has being tested 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string FixPath(string path)
+        {
+            string clearPath, str;
+            clearPath = "";
+            str = null;
+            int current, goal;
+            goal = path.Length;
+            for (current = 0; current < goal; current++)
+            {
+                str = path[current].ToString();
+                if (path[current].ToString() == @"\" || path[current].ToString() == "/")
+                {
+                    str = Get.Slash();
+                }
+                clearPath += str;
+            }
 
-            public static bool IsWindow()
+            return clearPath;
+        }
+
+        public static bool IsWindow()
         {
             bool isWindow = true;
             string[] info = IConvert.TextToArray(System.Environment.OSVersion.ToString());

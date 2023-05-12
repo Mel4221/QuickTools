@@ -1272,6 +1272,14 @@
             <returns>The from path.</returns>
             <param name="path">Path.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.FixPath(System.String)">
+            <summary>
+            This method allows you to get the clear path fixed to the operating system that you 
+            are working with in this case windows and linux are the only one  that this has being tested 
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
             <summary>
             Create a data path if is not created and creates the directory given as a parameter
