@@ -181,6 +181,9 @@ namespace QuickTools.QConsole
                               switch (Get.Key)
                               {
                                     case "UpArrow":
+                        case "e":
+                        case "E":
+
                                           // Up 
                                           //    Get.Write("Up");
                                           if (CurrentSelection == 0)
@@ -202,9 +205,11 @@ namespace QuickTools.QConsole
                                           break;
 
                                     case "DownArrow":
-                                          // Down
-                                          //   Get.Write("Down");
-                                          if (CurrentSelection == OptionList.Count - 1)
+                        case "R":
+                        case "r":
+                            // Down
+                            //   Get.Write("Down");
+                            if (CurrentSelection == OptionList.Count - 1)
                                           {
                                                 //this should bring me to the top 
                                                 CurrentSelection = 0;

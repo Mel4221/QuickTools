@@ -155,15 +155,56 @@ namespace QuickTools.QIO
                         }
 
                   }
+        public static void CreateZeroFile(string fileName, int GbSize,bool allowDebugger)
+        {
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+            if (!File.Exists(fileName))
+            {
+                using (FileStream create = File.Create(fileName))
+                {
+
+                }
+            }
+
+            int gb = GbSize * 1024;
+            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+            {
+                byte[] bytes = Get.Bytes(IRandom.RandomText(1024 * 1024));
+
+                BinaryWriter binary = new BinaryWriter(fs);
+                if (allowDebugger)
+                {
+                    QColors.Color.Green($"Making Zero File:");
+                    QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
+                }
+
+                Get.WaitTime(2);
+                for (int rounds = 0; rounds < gb; rounds++)
+                {
+
+                    binary.Write(bytes, 0, bytes.Length);
+                    if (allowDebugger)
+                    {
+                        Get.Green(Get.Status(rounds, gb));
+                        QuickTools.QCore.Get.Ok();
 
 
-            /// <summary>
-            /// Copies the binary file.
-            /// </summary>
-            /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
-            /// <param name="srcfilename">Srcfilename.</param>
-            /// <param name="destfilename">Destfilename.</param>
-            public static bool CopyBinaryFile(string srcfilename, string destfilename)
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Copies the binary file.
+        /// </summary>
+        /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
+        /// <param name="srcfilename">Srcfilename.</param>
+        /// <param name="destfilename">Destfilename.</param>
+        public static bool CopyBinaryFile(string srcfilename, string destfilename)
             {
                   if (!File.Exists(srcfilename))
                   {

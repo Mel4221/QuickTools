@@ -1265,6 +1265,13 @@
             <returns>The name from path.</returns>
             <param name="path">Path.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.FileExention(System.String)">
+            <summary>
+            Gets the file extention and returns it back
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.FolderFromPath(System.String)">
             <summary>
             Gets the path from the given file 

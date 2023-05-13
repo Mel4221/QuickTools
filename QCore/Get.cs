@@ -493,13 +493,20 @@ namespace QuickTools.QCore
                   return path.Substring(path.LastIndexOf(Get.Slash()) + 1);
             }
 
+        /// <summary>
+        /// Gets the file extention and returns it back
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string FileExention(string file) => file.Substring(file.LastIndexOf(".") + 1);
 
-            /// <summary>
-            /// Gets the path from the given file 
-            /// </summary>
-            /// <returns>The from path.</returns>
-            /// <param name="path">Path.</param>
-            public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
+
+        /// <summary>
+        /// Gets the path from the given file 
+        /// </summary>
+        /// <returns>The from path.</returns>
+        /// <param name="path">Path.</param>
+        public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
 
         /// <summary>
         /// This method allows you to get the clear path fixed to the operating system that you 
@@ -1378,7 +1385,7 @@ character in order for it to return a valid name
         /// <param name="content">Content.</param>
         public static void Box(object content)
         {
-            string simbol = "/";
+            string simbol = "*";
             string underLine = "";
             for (int i = 0; i <= content.ToString().Length + 3; i++)
             {
@@ -1386,7 +1393,7 @@ character in order for it to return a valid name
             }
 
             Console.WriteLine(underLine);
-            Console.Write(simbol + " " + content + " " + simbol);
+            Console.Write(simbol + " " + content + " " + simbol+"\n");
             Console.WriteLine(underLine);
         }
         /// <summary>
@@ -1404,7 +1411,7 @@ character in order for it to return a valid name
             }
 
             Console.WriteLine(underLine);
-            Console.Write(simbol + " " + content + " " + simbol);
+            Console.Write(simbol + " " + content + " " + simbol + "\n");
             Console.WriteLine(underLine);
         }
 
@@ -1478,6 +1485,7 @@ character in order for it to return a valid name
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Something Went Really Wrong!!!");
+            Get.Yellow();
             Console.WriteLine("This" + ":=>>>> " + text);
             Console.ResetColor();
             Get.Wait();

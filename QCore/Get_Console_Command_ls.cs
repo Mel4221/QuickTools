@@ -2,6 +2,8 @@
 using System.Threading;
 using System.IO;
 using QuickTools.QIO;
+using QuickTools.QColors;
+
 namespace QuickTools.QCore
 {
     public partial class Get
@@ -28,12 +30,40 @@ namespace QuickTools.QCore
             try
             {
                 for (file = 0; file < files.Length; file++)
-                {
-                    
-                    Get.Red();
+                { 
+
+                   
+
                     if (File.Exists((files[file])))
                     {
-                        Get.Write($"{Get.FileNameFromPath(files[file])} ");
+                        string f = $"{Get.FileNameFromPath(files[file])}";
+                        switch (Get.FileExention(f))
+                        {
+                            case "exe":
+                            case "bin":
+                                Get.Green();
+                                Get.Write(f);
+                                break;
+                            case "txt":
+                            case "xml":
+                            case "html":
+                                Get.Yellow();
+                                Get.Write(f);
+                                break;
+                            case "jpg":
+                            case "png":
+                            case "mp4":
+                            case "mp3":
+                                Get.Pink();
+                                Get.Write(f);
+                                break; 
+                            default:
+                                Get.White();
+                                Get.Write(f);
+                                break; 
+                        }
+                      
+
                         if (change <= 4)
                         {
                             change++;
@@ -60,8 +90,34 @@ namespace QuickTools.QCore
                     Get.Red();
                     if (Directory.Exists(directory[folder]))
                     {
-                        Get.Blue($"{Get.FileNameFromPath(directory[folder])} ");
-                        if (change <= 4)
+                      
+                        string f = $"{Get.FileNameFromPath(directory[folder])}{Get.Slash()}";
+                        switch (Get.FileExention(f))
+                        {
+                            case "exe":
+                            case "bin":
+                                Get.Green();
+                                Get.Write(f);
+                                break;
+                            case "txt":
+                            case "xml":
+                            case "html":
+                                Get.Yellow();
+                                Get.Write(f);
+                                break;
+                            case "jpg":
+                            case "png":
+                            case "mp4":
+                            case "mp3":
+                                Get.Pink();
+                                Get.Write(f);
+                                break;
+                            default:
+                                Get.White();
+                                Get.Write(f);
+                                break;
+                        }
+                                if (change <= 4)
                         {
                             change++;
                         }
@@ -107,6 +163,7 @@ namespace QuickTools.QCore
                         Get.Write($" {File.GetLastWriteTime(files[file]).ToString(dateFormat)} ");
                         Get.Red();
                         Get.Write($" {Get.FileNameFromPath(files[file])} ");
+
                         if (change <= 1)
                         {
                             change++;
@@ -135,7 +192,7 @@ namespace QuickTools.QCore
                         Get.Yellow();
                         Get.Write($" {Directory.GetLastWriteTime(directory[folder]).ToString(dateFormat)} ");
                         Get.Red();
-                        Get.Blue($" {Get.FileNameFromPath(directory[folder])} ");
+                        Get.Blue($" {Get.FileNameFromPath(directory[folder])}{Get.Slash()}");
                         if (change <= 1)
                         {
                             change++;
