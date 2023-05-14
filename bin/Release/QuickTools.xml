@@ -1095,6 +1095,22 @@
             <param name="dateFormat"></param>
             <returns></returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.MatchFileExtention(System.String,System.String)">
+            <summary>
+            trys to match the file type extention
+            </summary>
+            <param name="file"></param>
+            <param name="test"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Ls(System.String,System.String,System.Boolean)">
+            <summary>
+            only prints the one that meet the type 
+            </summary>
+            <param name="path"></param>
+            <param name="printType"></param>
+            <param name="printOnlyType"></param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Print(System.Object,System.Object)">
             <summary>
             Gets a value printed with it's key 

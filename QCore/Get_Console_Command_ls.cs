@@ -18,6 +18,8 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static void Ls(string path)
         {
+            Get.WriteL(" ");
+
             string[] files = new FilesMaper().GetFiles(path);
             string[] directory = Directory.GetDirectories(path);
             int change, file, folder;
@@ -145,6 +147,8 @@ namespace QuickTools.QCore
                     }
           
                 }
+                Get.WriteL(" ");
+
             }
             catch
             {
@@ -169,6 +173,8 @@ namespace QuickTools.QCore
             file = 0;
             change = 0;
             folder = 0;
+            Get.WriteL(" ");
+
             try
             {
                 for (file = 0; file < files.Length; file++)
@@ -252,6 +258,7 @@ namespace QuickTools.QCore
                         }
                     }
                 }
+                Get.WriteL(" ");
 
             }
             catch
@@ -281,12 +288,110 @@ namespace QuickTools.QCore
                         }
                     }
                 }
+                Get.WriteL(" ");
+
             }
             catch
             {
                 Get.Red($"Directorys or Directory Not Founc {directory[folder]}");
             }
            
+        }
+
+        /// <summary>
+        /// trys to match the file type extention
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="test"></param>
+        /// <returns></returns>
+       public static bool MatchFileExtention(string file, string test) => Get.FileExention(file) == Get.FileExention(test);
+
+
+
+        /// <summary>
+        /// only prints the one that meet the type 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="printType"></param>
+        /// <param name="printOnlyType"></param>
+        public static void Ls(string path,string printType,bool printOnlyType)
+        {
+            Get.WriteL(" ");
+
+            string[] files = new FilesMaper().GetFiles(path);
+            //string[] directory = new FilesMaper().GetDirs(path);
+            foreach(string file in files)
+            {
+                if (Get.MatchFileExtention(file, printType))
+                {
+                    string f = Get.FileNameFromPath(file);
+                    switch (Get.FileExention(file))
+                    {
+                        case "exe":
+                            Get.Green();
+                            Get.Write(f);
+                            break;
+                        case "bin":
+                        case "pdf":
+                        case "doc":
+                        case "docx":
+                        case "iso":
+                        case "rar":
+                        case "zip":
+                            Get.Red();
+                            Get.Write(f);
+                            break;
+                        case "py":
+                        case "bash":
+                        case "bat":
+                            Color.Cyan();
+                            Get.Write(f);
+                            break;
+                        case "config":
+                        case "log":
+                        case "xml":
+                        case "db":
+                        case "html":
+                        case "css":
+                        case "js":
+                        case "cs":
+                            Color.Yellow();
+                            Get.Write(f);
+                            break;
+                        case "jpg":
+                        case "png":
+                        case "mp4":
+                        case "mp3":
+                        case "mov":
+                        case "webm":
+                        case "mkv":
+                        case "flv":
+                        case "avi":
+                        case "vob":
+                        case "gif":
+                        case "ogv":
+                        case "ogg":
+                        case "gifv":
+                        case "wmv":
+                        case "m4p":
+                        case "svb":
+                        case "jpeg":
+                        case "bmp":
+                        case "ico":
+                        case "svg":
+                            Get.Pink();
+                            Get.Write(f);
+                            break;
+                        default:
+                            Get.White();
+                            Get.Write(f);
+                            break;
+
+                    }
+                    Get.WriteL(" ");
+                } 
+            }
+
         }
 
     }
