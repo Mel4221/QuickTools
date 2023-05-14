@@ -509,6 +509,53 @@ namespace QuickTools.QCore
         public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
 
         /// <summary>
+        /// Gets the relative path from the given path by taking your current path in consideration
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>the relative path string </returns>
+        public static string RelativePath(string path)
+        {
+            string relative, currentPath, str, fullPath;
+            relative = null;
+            currentPath = Get.Path;
+            str = "";
+            for (int ch = 0; ch < path.Length; ch++)
+            {
+                if (path[ch].ToString() == Get.Slash())
+                {
+                    str += $"..{Get.Slash()}";
+                }
+            }
+            fullPath = $"{currentPath}{str}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+            relative = fullPath;
+            Get.Red(fullPath);
+            return relative;
+        }
+
+        /// <summary>
+        /// Gets the relative path from the given path by taking your current path in consideration
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>the relative path string </returns>
+        public static string RelativePath(string path ,string currentPath)
+        {
+            string relative, str, fullPath;
+            relative = null;
+            
+            str = "";
+            for (int ch = 0; ch < path.Length; ch++)
+            {
+                if (path[ch].ToString() == Get.Slash())
+                {
+                    str += $"..{Get.Slash()}";
+                }
+            }
+            fullPath = $"{currentPath}{str}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+            relative = fullPath;
+            Get.Red(fullPath);
+            return relative;
+        }
+        /// <summary>
         /// This method allows you to get the clear path fixed to the operating system that you 
         /// are working with in this case windows and linux are the only one  that this has being tested 
         /// </summary>

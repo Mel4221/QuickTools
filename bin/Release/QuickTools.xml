@@ -1295,6 +1295,20 @@
             <returns>The from path.</returns>
             <param name="path">Path.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.RelativePath(System.String)">
+            <summary>
+            Gets the relative path from the given path by taking your current path in consideration
+            </summary>
+            <param name="path"></param>
+            <returns>the relative path string </returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.RelativePath(System.String,System.String)">
+            <summary>
+            Gets the relative path from the given path by taking your current path in consideration
+            </summary>
+            <param name="path"></param>
+            <returns>the relative path string </returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.FixPath(System.String)">
             <summary>
             This method allows you to get the clear path fixed to the operating system that you 
