@@ -69,6 +69,8 @@
     <Compile Include="QConsole\QProgressBar.cs" />
     <Compile Include="QData\DataCacher.cs" />
     <Compile Include="QData\Error.cs" />
+    <Compile Include="QIO\FilesMaper_Constructors.cs" />
+    <Compile Include="QIO\FilesMaper_Fields.cs" />
     <Compile Include="QIO\InputParser.cs" />
     <Compile Include="QConsole\LoopInput.cs" />
     <Compile Include="QConsole\Options.cs" />

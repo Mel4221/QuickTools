@@ -36,24 +36,61 @@ namespace QuickTools.QCore
 
                     if (File.Exists((files[file])))
                     {
-                        string f = $"{Get.FileNameFromPath(files[file])}";
-                        switch (Get.FileExention(f))
+                        string f = $"{Get.FileNameFromPath(files[file])}\t";
+                        switch (Get.FileExention(files[file]))
                         {
                             case "exe":
-                            case "bin":
                                 Get.Green();
                                 Get.Write(f);
+                                break; 
+                            case "bin":
+                            case "pdf":
+                            case "doc":
+                            case "docx":
+                            case "iso":
+                            case "rar":
+                            case "zip":
+                                Get.Red();
+                                Get.Write(f);
                                 break;
-                            case "txt":
+                            case "py":
+                            case "bash":
+                            case "bat":
+                                Color.Cyan();
+                                Get.Write(f);
+                                break;
+                            case "config":
+                            case "log":
                             case "xml":
+                            case "db":
                             case "html":
-                                Get.Yellow();
+                            case "css":
+                            case "js":
+                            case "cs":
+                                Color.Yellow();
                                 Get.Write(f);
                                 break;
                             case "jpg":
                             case "png":
                             case "mp4":
                             case "mp3":
+                            case "mov":
+                            case "webm":
+                            case "mkv":
+                            case "flv":
+                            case "avi":
+                            case "vob":
+                            case "gif":
+                            case "ogv":
+                            case "ogg":
+                            case "gifv":
+                            case "wmv":
+                            case "m4p":
+                            case "svb":
+                            case "jpeg":
+                            case "bmp":
+                            case "ico":
+                            case "svg":
                                 Get.Pink();
                                 Get.Write(f);
                                 break; 
@@ -91,32 +128,11 @@ namespace QuickTools.QCore
                     if (Directory.Exists(directory[folder]))
                     {
                       
-                        string f = $"{Get.FileNameFromPath(directory[folder])}{Get.Slash()}";
-                        switch (Get.FileExention(f))
-                        {
-                            case "exe":
-                            case "bin":
-                                Get.Green();
+                        string f = $" {Get.FileNameFromPath(directory[folder])}{Get.Slash()} ";
+                         
+                                Get.Blue();
                                 Get.Write(f);
-                                break;
-                            case "txt":
-                            case "xml":
-                            case "html":
-                                Get.Yellow();
-                                Get.Write(f);
-                                break;
-                            case "jpg":
-                            case "png":
-                            case "mp4":
-                            case "mp3":
-                                Get.Pink();
-                                Get.Write(f);
-                                break;
-                            default:
-                                Get.White();
-                                Get.Write(f);
-                                break;
-                        }
+                      
                                 if (change <= 4)
                         {
                             change++;
@@ -161,9 +177,70 @@ namespace QuickTools.QCore
                     {
                         Get.Yellow();
                         Get.Write($" {File.GetLastWriteTime(files[file]).ToString(dateFormat)} ");
-                        Get.Red();
-                        Get.Write($" {Get.FileNameFromPath(files[file])} ");
 
+                        string f = $" {Get.FileNameFromPath(files[file])} ";
+                        switch (Get.FileExention(files[file]))
+                        {
+                            case "exe":
+                                Get.Green();
+                                Get.Write(f);
+                                break;
+                            case "bin":
+                            case "pdf":
+                            case "doc":
+                            case "docx":
+                            case "iso":
+                            case "rar":
+                            case "zip":
+                                Get.Red();
+                                Get.Write(f);
+                                break;
+                            case "py":
+                            case "bash":
+                            case "bat":
+                                Color.Cyan();
+                                Get.Write(f);
+                                break;
+                            case "config":
+                            case "log":
+                            case "xml":
+                            case "db":
+                            case "html":
+                            case "css":
+                            case "js":
+                            case "cs":
+                                Color.Yellow();
+                                Get.Write(f);
+                                break;
+                            case "jpg":
+                            case "png":
+                            case "mp4":
+                            case "mp3":
+                            case "mov":
+                            case "webm":
+                            case "mkv":
+                            case "flv":
+                            case "avi":
+                            case "vob":
+                            case "gif":
+                            case "ogv":
+                            case "ogg":
+                            case "gifv":
+                            case "wmv":
+                            case "m4p":
+                            case "svb":
+                            case "jpeg":
+                            case "bmp":
+                            case "ico":
+                            case "svg":
+                                Get.Pink();
+                                Get.Write(f);
+                                break;
+                            default:
+                                Get.White();
+                                Get.Write(f);
+                                break;
+                        }
                         if (change <= 1)
                         {
                             change++;
