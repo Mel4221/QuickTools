@@ -515,22 +515,63 @@ namespace QuickTools.QCore
         /// <returns>the relative path string </returns>
         public static string RelativePath(string path)
         {
-            string relative, currentPath, str, fullPath;
-            relative = null;
+            string relative, currentPath, slash, fullPath, newPath;
+            int pLength, cLenght;
+            bool refersToDisk = false;
             currentPath = Get.Path;
-            str = "";
-            for (int ch = 0; ch < path.Length; ch++)
+            pLength = path.Length;
+            cLenght = currentPath.Length;
+            relative = null;
+            newPath = null;
+            fullPath = null;
+            slash = "";
+            if (IsDriveChar(path))
+            {
+                pLength = cLenght;
+                newPath = path;
+                path = currentPath;
+                refersToDisk = true;
+            }
+            for (int ch = 0; ch < pLength; ch++)
             {
                 if (path[ch].ToString() == Get.Slash())
                 {
-                    str += $"..{Get.Slash()}";
+                    slash += $"..{Get.Slash()}";
                 }
             }
-            fullPath = $"{currentPath}{str}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+            if (!refersToDisk)
+            {
+                fullPath = $"{currentPath}{slash}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+
+            }
+            if (refersToDisk)
+            {
+                fullPath = $"{currentPath}{slash}";
+            }
             relative = fullPath;
-            Get.Red(fullPath);
+           // Get.Red(fullPath);
             return relative;
         }
+
+        /// <summary>
+        /// Checks if the path given looks like a drive letter on windwos 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsDriveChar(string path)
+        {
+            bool isChar = false;
+            if (path.Length >= 2)
+            {
+                if (path[1] == ':')
+                {
+                    isChar = true;
+                }
+            }
+            return isChar;
+        }
+
+
 
         /// <summary>
         /// Gets the relative path from the given path by taking your current path in consideration
@@ -539,20 +580,41 @@ namespace QuickTools.QCore
         /// <returns>the relative path string </returns>
         public static string RelativePath(string path ,string currentPath)
         {
-            string relative, str, fullPath;
+            string relative, slash, fullPath, newPath;
+            int pLength, cLenght;
+            bool refersToDisk = false;
+            //currentPath = Get.Path;
+            pLength = path.Length;
+            cLenght = currentPath.Length;
             relative = null;
-            
-            str = "";
-            for (int ch = 0; ch < path.Length; ch++)
+            newPath = null;
+            fullPath = null;
+            slash = "";
+            if (IsDriveChar(path))
+            {
+                pLength = cLenght;
+                newPath = path;
+                path = currentPath;
+                refersToDisk = true;
+            }
+            for (int ch = 0; ch < pLength; ch++)
             {
                 if (path[ch].ToString() == Get.Slash())
                 {
-                    str += $"..{Get.Slash()}";
+                    slash += $"..{Get.Slash()}";
                 }
             }
-            fullPath = $"{currentPath}{str}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+            if (!refersToDisk)
+            {
+                fullPath = $"{currentPath}{slash}{path.Substring(path.IndexOf(Get.Slash()) + 1)}";
+
+            }
+            if (refersToDisk)
+            {
+                fullPath = $"{currentPath}{slash}";
+            }
             relative = fullPath;
-            Get.Red(fullPath);
+           // Get.Red(fullPath);
             return relative;
         }
         /// <summary>

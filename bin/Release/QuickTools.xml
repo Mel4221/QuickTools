@@ -1302,6 +1302,13 @@
             <param name="path"></param>
             <returns>the relative path string </returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.IsDriveChar(System.String)">
+            <summary>
+            Checks if the path given looks like a drive letter on windwos 
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.RelativePath(System.String,System.String)">
             <summary>
             Gets the relative path from the given path by taking your current path in consideration
@@ -3032,6 +3039,12 @@
             Initializes a new instance of the <see cref="T:QuickTools.FilesMaper"/> class.
             </summary>
         </member>
+        <member name="M:QuickTools.QIO.FilesMaper.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.FilesMaper"/> class.
+            </summary>
+            <param name="path"></param>
+        </member>
         <member name="P:QuickTools.QIO.FilesMaper.DirectoryList">
             <summary>
             Contains the list of directoys founded 
@@ -3040,6 +3053,16 @@
         <member name="P:QuickTools.QIO.FilesMaper.FileList">
             <summary>
             Contains the list of files founded 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.FilesMaper.FileErrors">
+            <summary>
+            Collect All The Current Files Error that are encountered by the maper 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.FilesMaper.DirectoriesError">
+            <summary>
+            Collect All The Current Files Error that are encountered by the maper 
             </summary>
         </member>
         <member name="F:QuickTools.QIO.FilesMaper.Path">
@@ -3055,6 +3078,11 @@
         <member name="F:QuickTools.QIO.FilesMaper.Directories">
             <summary>
             constins the list of Directories
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.FilesMaper.AllowDebugger">
+            <summary>
+            allows to print the status of the current file search 
             </summary>
         </member>
         <member name="M:QuickTools.QIO.FilesMaper.GetFiles(System.String)">

@@ -38,10 +38,6 @@ namespace QuickTools.QIO
       {
 
 
-
-
-
-
             /// <summary>
             /// Gets the files from the given path
             /// </summary>
@@ -60,28 +56,187 @@ namespace QuickTools.QIO
 
             private void ProcessDirectory(string targetDirectory)
             {
+            if (this.AllowDebugger)
+            {
+                Get.Blue(targetDirectory);
+            }
                 this.Directories.Add(targetDirectory);
 
-                // Process the list of files found in the directory.
-                string[] fileEntries = this.GetFiles(targetDirectory);
+            // Process the list of files found in the directory.
+            string[] fileEntries;
+            try
+            {
+                fileEntries = this.GetFiles(targetDirectory);
+
+
                 foreach (string fileName in fileEntries)
                 {
-                    
+
                     ProcessFile(fileName);
                 }
 
                 // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = this.GetDirs(targetDirectory);
-                foreach (string subdirectory in subdirectoryEntries)
+                try
                 {
+                    string[] subdirectoryEntries = this.GetDirs(targetDirectory);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
 
-                    ProcessDirectory(subdirectory);
-                   // Get.Blue(subdirectory);
+                        ProcessDirectory(subdirectory);
+                        // Get.Blue(subdirectory);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string error = $"File Error: {ex.Message}";
+                    if (this.AllowDebugger)
+                    {
+                        Get.Red(error);
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    this.FileErrors.Add(error);
 
                 }
             }
+            catch(Exception ex)
+            {
+                string error = $"Directory Error: {ex.Message}";
+                if (this.AllowDebugger)
+                {
+                    Get.Red(error);
+                }
+                this.DirectoriesError.Add(error);
+            }
+        }
               void ProcessFile(string path)
             {
+            if (this.AllowDebugger)
+            {
+                Get.Yellow(path);
+            }
               //  Get.Yellow(path);
                 this.Files.Add(path);
             }
@@ -101,6 +256,7 @@ namespace QuickTools.QIO
                     if (File.Exists(path))
                     {
                         // This path is a file
+
                         ProcessFile(path);
                     }
  

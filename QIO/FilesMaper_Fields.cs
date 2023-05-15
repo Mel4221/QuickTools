@@ -11,13 +11,21 @@ namespace QuickTools.QIO
         /// <summary>
         /// Contains the list of directoys founded 
         /// </summary>
-        public List<string> DirectoryList { get; set; }
+          List<string> DirectoryList { get; set; }
 
         /// <summary>
         /// Contains the list of files founded 
         /// </summary>
-        public List<string> FileList { get; set; }
+          List<string> FileList { get; set; }
+        /// <summary>
+        /// Collect All The Current Files Error that are encountered by the maper 
+        /// </summary>
+        public List<string> FileErrors;
 
+        /// <summary>
+        /// Collect All The Current Files Error that are encountered by the maper 
+        /// </summary>
+        public List<string> DirectoriesError; 
         /// <summary>
         /// gets or set the path where the map will start 
         /// </summary>
@@ -32,5 +40,10 @@ namespace QuickTools.QIO
         /// constins the list of Directories
         /// </summary>
         public List<string> Directories;
+
+        /// <summary>
+        /// allows to print the status of the current file search 
+        /// </summary>
+        public bool AllowDebugger; 
     }
 }
