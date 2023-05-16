@@ -60,6 +60,7 @@ namespace QuickTools.QIO
             {
                 Get.Blue(targetDirectory);
             }
+
                 this.Directories.Add(targetDirectory);
 
             // Process the list of files found in the directory.

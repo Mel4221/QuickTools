@@ -225,8 +225,13 @@ namespace QuickTools.QConsole
                                           }
 
                                           break;
-                               
-                                    default:
+                        case "Escape":
+                        case "Backspace":
+                            Options.Triguer = Get.Key;
+                            Options.Triguered = true;
+                            Get.Break();
+                            break;
+                        default:
                                           /*
                                           // in here it has to be added a switch that could 
                                           //handle the process on a better way with
@@ -342,8 +347,8 @@ namespace QuickTools.QConsole
                                     case "Escape":
                                     case "Backspace":
                                           Options.Triguer = Get.Key;
-                                          Options.Triguered = true; 
-
+                                          Options.Triguered = true;
+                            Get.Break();
                                           break; 
                                     default:
                                           /*
