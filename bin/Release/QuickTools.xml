@@ -261,6 +261,56 @@
             <param name="textColor">Text color.</param>
             <param name="backgroundColor">Background color.</param>
         </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.Capture">
+            <summary>
+            Capture this instance.
+            </summary>
+            <returns>The capture.</returns>
+        </member>
+        <member name="T:QuickTools.QConsole.Emulation.QVim.KeyInfo">
+            <summary>
+            Contains the ConsoleKeyInfo data 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QConsole.Emulation.QVim.KeyInfo.Key">
+            <summary>
+            Gets or sets the key.
+            </summary>
+            <value>The key.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.Emulation.QVim.KeyInfo.KeyChar">
+            <summary>
+            Gets or sets the key char.
+            </summary>
+            <value>The key char.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.Emulation.QVim.KeyInfo.Modifiers">
+            <summary>
+            Gets or sets the modifiers.
+            </summary>
+            <value>The modifiers.</value>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.KeyInfo.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QInput.KeyInfo"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QInput.KeyInfo"/>.</returns>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.ExeuteCommand(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Exeute the given commmand 
+            rmemeber adding the Execute case command here only will not automatically run it 
+            you first have to add it to the <see cref="!:Tester.QVim.HasCommand(KeyInfo)"/>
+            for it to be added first as a condition then you can add it here  
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.RunArrowsFunctions(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Runs the action depending on the direction 
+            </summary>
+            <param name="key"></param>
+        </member>
         <member name="T:QuickTools.QConsole.ShellInput">
             <summary>
             Creates a shell and returns the input as a plain text 
@@ -1751,7 +1801,7 @@
             <summary>
             Files the size.
             </summary>
-            <returns>The size.</returns>
+            <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
             <param name="fileName">File name.</param>
             <param name="size">Size.</param>
         </member>
@@ -1759,14 +1809,21 @@
             <summary>
             gets Files the size.
             </summary>
-            <returns>The size.</returns>
+            <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
             <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.FileSize(System.Int64)">
+            <summary>
+            gets Files the size.
+            </summary>
+            <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
+            <param name="length">the length of the file with it's given Data Size such as GB , MB ,KB or B </param>
         </member>
         <member name="M:QuickTools.QCore.Get.FileSize(System.Byte[])">
             <summary>
             Gets the size fo a file from the buffer
             </summary>
-            <returns>The size.</returns>
+            <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
             <param name="buffer">Buffer.</param>
         </member>
         <member name="T:QuickTools.QCore.Check">
@@ -1851,6 +1908,11 @@
         <member name="F:QuickTools.QCore.IRandom.Symbols">
             <summary>
             Array Of Symbols
+            </summary>
+        </member>
+        <member name="F:QuickTools.QCore.IRandom.Numbers">
+            <summary>
+            Contains an array of all the numbers allwed on the  IRandom
             </summary>
         </member>
         <member name="M:QuickTools.QCore.IRandom.Password">

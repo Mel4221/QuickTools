@@ -62,7 +62,7 @@ namespace QuickTools.QIO
             }
                 this.Directories.Add(targetDirectory);
 
-            // Process the list of files found in the directory.
+                // Process the list of files found in the directory.
             string[] fileEntries;
             try
             {

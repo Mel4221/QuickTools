@@ -208,12 +208,19 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static string ArrayToText(string[] arrayOfWords)
         {
-            text = new StringBuilder();
-            foreach(string word in arrayOfWords)
-            {   
-                text.Append(word + " ");
+            try
+            {
+                text = new StringBuilder();
+                foreach (string word in arrayOfWords)
+                {
+                    text.Append(word + " ");
+                }
+                return text.ToString();
             }
-            return text.ToString();
+            catch
+            {
+                return null;
+            }
         }
             /*
             /// <summary>

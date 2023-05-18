@@ -86,7 +86,7 @@ namespace QuickTools.QConsole
                   var obj = Console.ReadKey();
 
                   return new KeyInfo()
-                  {
+                  {         
                         Key = obj.Key,
                         KeyChar = obj.KeyChar,
                         Modifiers = obj.Modifiers
