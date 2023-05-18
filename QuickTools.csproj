@@ -53,6 +53,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QColors\colorWithParam.cs" />
     <Compile Include="QColors\colorNoParam.cs" />
+    <Compile Include="QConsole\Emulation\QVim.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Constructors.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Fields.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Actions.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Conditionals.cs" />
     <Compile Include="QConsole\ShellInput.cs" />
     <Compile Include="QCore\Get_Console_Command_ls.cs" />
     <Compile Include="QCore\GlobalSuppressions.cs" />
@@ -118,6 +123,7 @@
     <Compile Include="QIO\Binary_Constructors.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="clown.ico" />
     <Content Include="setting.ico" />
   </ItemGroup>
   <ItemGroup>

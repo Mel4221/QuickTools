@@ -172,7 +172,49 @@ namespace QuickTools.QConsole
             Get.Reset();
             return input;
         }
-        
+        public string StartInput(Func<string> inputFunctionType)
+        {
+            string input;
+            input = null;
+            Console.WriteLine();
+            Console.BackgroundColor = this.UserBackGrondColor;
+            Console.ForegroundColor = this.UserTextColor;
+            Console.Write($"{this.UserName}");
+
+            Console.BackgroundColor = this.AtSimbolBackGroundColor;
+            Console.ForegroundColor = this.AtSimbolTextColor;
+            Console.Write(AtSimbol);
+
+            Console.BackgroundColor = this.UserBackGrondColor;
+            Console.ForegroundColor = this.UserTextColor;
+            Console.Write($"{this.ComputerName}");
+            Console.Write(" ");
+            Get.Reset();
+            Console.BackgroundColor = this.ProgramBBackGroundColor;
+            Console.ForegroundColor = this.ProgramTextColor;
+            Console.Write($"{this.ProgramName}");
+            Get.Reset();
+            Console.Write(" ");
+            Console.BackgroundColor = this.PathBackGround;
+            Console.ForegroundColor = this.PathTextColor;
+            Console.Write(this.CurrentPath);
+            Get.Reset();
+            Console.Write(" ");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($" ({this.Notifications}) ");
+            Console.WriteLine(" ");
+            Console.BackgroundColor = this.SimbolBackGroundColor;
+            Console.ForegroundColor = this.SimbolTextColor;
+            Console.Write($" {this.TextSimbol} ");
+            Get.Reset();
+            Console.Write(" ");
+            input = inputFunctionType();
+
+            Get.Reset();
+            return input;
+        }
+
 
 
         /// <summary>

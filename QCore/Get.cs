@@ -51,6 +51,7 @@ namespace QuickTools.QCore
         /// <param name="value"></param>
         public static void Print(object key , object value)
         {
+            Get.WriteL("");
             Get.Green();
             Get.Write($" {key} ");
             Get.Reset();
@@ -117,7 +118,7 @@ namespace QuickTools.QCore
                         {
                         foreach(var w in IRandom.LowerCase)
                               {
-                              if(w == word[ch].ToString())
+                              if(w == word[ch])
                                     {
                                     str += word[ch];
                                     break;
@@ -125,7 +126,7 @@ namespace QuickTools.QCore
                               }
                         foreach(var w in IRandom.UpperCase)
                               {
-                              if(w == word[ch].ToString())
+                              if(w == word[ch])
                                     {
                                     str += word[ch];
                                     break;
@@ -133,7 +134,7 @@ namespace QuickTools.QCore
                               }
                         foreach(var w in IRandom.Symbols)
                               {
-                              if(w == word[ch].ToString())
+                              if(w == word[ch])
                                     {
                                     str += word[ch];
                                     break;
@@ -141,7 +142,7 @@ namespace QuickTools.QCore
                               }
                         foreach(var w in IRandom.Numbers)
                               {
-                              if(w.ToString() == word[ch].ToString())
+                              if(w == word[ch])
                                     {
                                     str += word[ch];
                                     break;
@@ -508,6 +509,56 @@ namespace QuickTools.QCore
         /// <param name="path">Path.</param>
         public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
 
+        public static void PrintDisks()
+        {
+
+            DriveInfo[] drives = DriveInfo.GetDrives();
+            string name, label;
+            string free, used, total, format, error;
+            error = null;
+            foreach (DriveInfo drive in drives)
+            {
+                try
+                {
+                    name = drive.Name;
+                    label = drive.VolumeLabel;
+                    total = Get.FileSize(drive.TotalSize);
+                    used = Get.FileSize(drive.TotalSize - drive.AvailableFreeSpace);
+                    free = Get.FileSize(drive.AvailableFreeSpace);
+                    format = drive.DriveFormat;
+
+                    Get.WriteL("");
+
+                    Get.Green();
+                    Get.Write($"{name} ");
+                    Get.Yellow();
+                    Get.Write($"{label} ");
+                    Get.Green();
+                    Get.Write($"Size: {total} ");
+                    Get.Red();
+                    Get.Write($"Used: {used} ");
+                    Get.Green();
+                    Get.Write($"Free Space: {free} ");
+                    Get.Pink();
+                    Get.Write($"Format: {format} ");
+
+                    Get.WriteL("");
+                    // Get.Green($"{drive.VolumeLabel} {drive.Name} {drive.VolumeLabel} {drive.AvailableFreeSpace} {drive.TotalSize}");
+                }
+                catch (Exception ex)
+                {
+                    error = ex.Message;
+                }
+
+            }
+
+            if (error != null)
+            {
+
+                Get.Red($"\n Not all devises are listed due to: {error}");
+            }
+
+        }
         /// <summary>
         /// Gets the relative path from the given path by taking your current path in consideration
         /// </summary>

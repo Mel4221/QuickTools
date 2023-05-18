@@ -59,29 +59,34 @@ namespace QuickTools.QCore
             /// <summary>
             /// Array Of Words LowerCase
             /// </summary>
-            public static string[] LowerCase =
-      { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-"n",
-      "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+            public static readonly char[] LowerCase =
+      { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+'n',
+      'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
       };
 
             /// <summary>
             /// Array Of Words Upercase
             /// </summary>
-            public static string[] UpperCase =
-      { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-"N",
-      "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+            public static readonly char[] UpperCase =
+      { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+'N',
+      'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
       }; 
       /// <summary>
       /// Array Of Symbols
       /// </summary>
-      public static string[] Symbols =
-      { "!", "@", "%", "^", "&", "*", "=", "?", ".", ")", "(", "_", "+",
-"-", "*", "/",
-      "+","`","~"
+      public static readonly char[] Symbols =
+      { '!', '@', '%', '^', '&', '*', '=', '?', '.', ')', '(', '_', '+',
+'-', '*', '/',
+      '+','`','~'
       };
-      public static int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+
+
+        /// <summary>
+        /// Contains an array of all the numbers allwed on the  IRandom
+        /// </summary>
+      public static  readonly int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
       /*
          //Lower 26

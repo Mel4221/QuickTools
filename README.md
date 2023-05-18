@@ -59,6 +59,27 @@ IRandom or New or CreateRandom:
 	New.Pin(); or New.Pin(32)
 	New.Password() or New.Password(16)
 	
+	
+	I have to work on the documentation yet but still working to improve on this Library  
+	here are the current usings on the testing and the future newer versions 
+
+
+> using QuickTools.QIO;
+
+> using QuickTools.QNet;
+
+> using QuickTools.QData;
+
+> using QuickTools.QCore;
+
+> using QuickTools.QColors;
+
+> using QuickTools.QConsole;
+
+> using QuickTools.QSecurity;
+
+> using QuickTools.QSecurity.FalseIO; 
+
 
 ...
 

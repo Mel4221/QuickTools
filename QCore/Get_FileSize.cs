@@ -7,7 +7,7 @@
 // Copyright (c) ${2089} MIT
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
+// of this software and associated documentation S (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
@@ -51,13 +51,13 @@ namespace QuickTools.QCore
                   /// </summary>
                   B
                   }
-            /// <summary>
-            /// Files the size.
-            /// </summary>
-            /// <returns>The size.</returns>
-            /// <param name="fileName">File name.</param>
-            /// <param name="size">Size.</param>
-            public static string FileSize(string fileName , SizeType size)
+        /// <summary>
+        /// Files the size.
+        /// </summary>
+        /// <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
+        /// <param name="fileName">File name.</param>
+        /// <param name="size">Size.</param>
+        public static string FileSize(string fileName , SizeType size)
                   {
                   string fileSize = null;
                   var fileStream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
@@ -78,14 +78,15 @@ namespace QuickTools.QCore
                         }
                   return fileSize;
                   }
-                  
 
-                              /// <summary>
-                              /// gets Files the size.
-                              /// </summary>
-                              /// <returns>The size.</returns>
-                              /// <param name="fileName">File name.</param>
-                     public static string FileSize(string fileName)
+
+        /// <summary>
+        /// gets Files the size.
+        /// </summary>
+        /// <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
+        /// <param name="fileName">File name.</param>
+
+        public static string FileSize(string fileName)
                   {
                   string fileSize = null;
                   var fileStream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
@@ -110,12 +111,43 @@ namespace QuickTools.QCore
                   }
 
 
-            /// <summary>
-            /// Gets the size fo a file from the buffer
-            /// </summary>
-            /// <returns>The size.</returns>
-            /// <param name="buffer">Buffer.</param>
-            public static string FileSize(byte[] buffer)
+
+
+
+        /// <summary>
+        /// gets Files the size.
+        /// </summary>
+        /// <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
+        /// <param name="length">the length of the file with it's given Data Size such as GB , MB ,KB or B </param>
+        public static string FileSize(long length)
+        {
+            string fileSize = null; 
+            if ((length / 1024 / 1024 / 1024) != 0)
+            {
+                fileSize = $"{length / 1024 / 1024 / 1024}GB";
+                return fileSize;
+            }
+            if ((length / 1024 / 1024) != 0)
+            {
+                fileSize = $"{length / 1024 / 1024}MB";
+                return fileSize;
+            }
+            if ((length / 1024) != 0)
+            {
+                fileSize = $"{length / 1024}KB";
+                return fileSize;
+            }
+            fileSize = $"{length}B";
+
+            return fileSize;
+        }
+
+        /// <summary>
+        /// Gets the size fo a file from the buffer
+        /// </summary>
+        /// <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
+        /// <param name="buffer">Buffer.</param>
+        public static string FileSize(byte[] buffer)
                   {
                   string fileSize = null;
                   var fileStream = IConvert.ToString(buffer); 
