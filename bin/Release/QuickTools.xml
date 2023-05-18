@@ -311,6 +311,13 @@
             </summary>
             <param name="key"></param>
         </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasArrows(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            provides the check to validate if the current key precess is an arrow key 
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:QuickTools.QConsole.ShellInput">
             <summary>
             Creates a shell and returns the input as a plain text 
