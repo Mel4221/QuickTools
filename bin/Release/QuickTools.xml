@@ -414,6 +414,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.String})">
+            <summary>
+            Start the shell mode 
+            </summary>
+            <param name="inputFunctionType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.ConsoleKeyInfo})">
+            <summary>
+            please avoid using this verions 
+            </summary>
+            <param name="KeyPressCallBack"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QConsole.ShellInput.#ctor(System.String,System.String)">
             <summary>
             Initialization from the class
@@ -650,22 +664,6 @@
         <member name="M:QuickTools.QConsole.printf.#ctor(System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.printf"/> class.
-            </summary>
-            <param name="input">Input.</param>
-        </member>
-        <member name="T:QuickTools.QConsole.System">
-            <summary>
-            Write to the console the specified input.
-            </summary>
-        </member>
-        <member name="T:QuickTools.QConsole.System.Out">
-            <summary>
-            Print the text basically 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.System.Out.println(System.Object)">
-            <summary>
-            Println the specified input.
             </summary>
             <param name="input">Input.</param>
         </member>

@@ -62,23 +62,23 @@ namespace QuickTools.QConsole
       /// <summary>
       /// Write to the console the specified input.
       /// </summary>
-      public class System
-      {
-            /// <summary>
-            /// Print the text basically 
-            /// </summary>
-            public static class Out
-            {
-                  /// <summary>
-                  /// Println the specified input.
-                  /// </summary>
-                  /// <param name="input">Input.</param>
-                  public static void println(object input)
-                  {
-                        Console.WriteLine(input);
-                  }
-            }
-      }
+      //  class System
+      //{
+      //      /// <summary>
+      //      /// Print the text basically 
+      //      /// </summary>
+      //      public static class Out
+      //      {
+      //            /// <summary>
+      //            /// Println the specified input.
+      //            /// </summary>
+      //            /// <param name="input">Input.</param>
+      //            public static void println(object input)
+      //            {
+      //                  Console.WriteLine(input);
+      //            }
+      //      }
+      //}
       //python && perl && R
       /// <summary>
       /// Write to the console the specified input.

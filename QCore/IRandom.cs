@@ -86,7 +86,7 @@ namespace QuickTools.QCore
         /// <summary>
         /// Contains an array of all the numbers allwed on the  IRandom
         /// </summary>
-      public static  readonly int[] Numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+      public static  readonly int[] Numbers = { 1, 8, 3, 4 , 0 , 6, 7, 2, 9, 5 };
 
       /*
          //Lower 26
