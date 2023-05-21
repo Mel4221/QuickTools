@@ -348,7 +348,7 @@ namespace QuickTools.QCore
                         //Writer.Write("test.txt" , str);
                     }
 
-                    breaker++;
+                    //breaker++;
 
                 }
                 return str1.ToString() + str2.ToString();
@@ -360,7 +360,7 @@ namespace QuickTools.QCore
                     Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
 
                 }
-                return null;
+                return str1.ToString() + str2.ToString();
             }
 
 
@@ -461,7 +461,7 @@ namespace QuickTools.QCore
                         //Writer.Write("test.txt" , str);
                     }
 
-                    breaker++;
+                    //breaker++;
 
                 }
                 return str1.ToString() + str2.ToString();
