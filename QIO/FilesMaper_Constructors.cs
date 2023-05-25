@@ -20,6 +20,7 @@ namespace QuickTools.QIO
             this.FileList = new List<string>();
             this.FileErrors = new List<string>();
             this.DirectoriesError = new List<string>();
+            this.Path = null;
     }
 
 

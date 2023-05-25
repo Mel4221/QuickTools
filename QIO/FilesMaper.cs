@@ -97,127 +97,6 @@ namespace QuickTools.QIO
                     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     this.FileErrors.Add(error);
 
                 }
@@ -242,6 +121,37 @@ namespace QuickTools.QIO
                 this.Files.Add(path);
             }
 
+        /// <summary>
+        /// This search recursivly for files that match the given file extention
+        /// </summary>
+        /// <returns></returns>
+        public List<string> MapOnlyFiles(string fileExtention)
+        {
+
+            if (fileExtention == null || fileExtention == "" )
+            {
+                throw new ArgumentException($"The Given file extention is not valid {fileExtention} ");
+            }
+
+            FilesMaper map = new FilesMaper(this.Path);
+            List<string> files = new List<string>();
+            map.Map();
+           if(map.Files.Count != 0)
+            {
+                for (int f = 0; f < map.Files.Count; f++)
+                {
+                    if (Get.FileExention(map.Files[f]) == Get.FileExention(fileExtention))
+                    {
+                        files.Add(map.Files[f]);
+                        if (this.AllowDebugger)
+                        {
+                            Get.Yellow(map.Files[f]);
+                        }
+                    }
+                }
+            }
+            return files; 
+        }
         /// <summary>
         /// reads the path annd load all the files and directorys that it find allong the way
         /// </summary>
@@ -272,6 +182,7 @@ namespace QuickTools.QIO
           
             }
 
+       
 
         /// <summary>
         /// reads the path annd load all the files and directorys that it find allong the way

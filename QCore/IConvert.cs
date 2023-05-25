@@ -250,6 +250,12 @@ namespace QuickTools.QCore
 
         static int f;
         static int b;
+
+        /// <summary>
+        /// Provides's the access to the current status of the given opeartion 
+        /// not all the methods returns an operation status . 
+        /// </summary>
+        public static string OpartionStatus;
         /// <summary>
         /// Converts the bytes given to a row string of bytes but is slow 
         /// </summary>
@@ -264,6 +270,7 @@ namespace QuickTools.QCore
                 StringBuilder str1, str2;
                 int fw, bc, len, half, breaker;
                 bool trigerA, trigerB, isNotHalf, showDebuger;
+                string status; 
                 len = array.Length;
                 half = len / 2;
                 fw = 0;
@@ -273,6 +280,7 @@ namespace QuickTools.QCore
                 trigerB = false;
                 isNotHalf = false;
                 showDebuger = false;
+                status = null;
                 str1 = new StringBuilder();
                 str2 = new StringBuilder();
             try
@@ -330,18 +338,22 @@ namespace QuickTools.QCore
 
                 while (true)
                 {
+                    status = $"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}";
                     if (showDebuger == true)
                     {
-                        Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}");
+                        Get.Green(status);
                     }
+
+                    IConvert.OpartionStatus = status; 
 
                     if (trigerA == true && trigerB == true || breaker == len)
                     {
                         foward.Abort();
                         back.Abort();
+                        status = $"Completed:  Thread A:[{trigerA}] Thread B:[{trigerB}] Breaker:[{breaker}] Length:[{len}]"; 
                         if (showDebuger == true)
                         {
-                            Get.Yellow($"Killed Or Completed:  A:[{trigerA}] B:[{trigerB}] Breaker:[{breaker}] BreakerAprox:[{len}]");
+                            Get.Yellow(status);
                         }
                         break;
 
@@ -380,7 +392,8 @@ namespace QuickTools.QCore
                 Thread foward, back;
                 StringBuilder str1, str2;
                 int fw, bc, len, half, breaker;
-                bool trigerA, trigerB, isNotHalf; 
+                bool trigerA, trigerB, isNotHalf;
+                string status;
                 len = array.Length;
                 half = len / 2;
                 fw = 0;
@@ -388,7 +401,8 @@ namespace QuickTools.QCore
                 breaker = 0;
                 trigerA = false;
                 trigerB = false;
-                isNotHalf = false; 
+                isNotHalf = false;
+                status = null;
                 str1 = new StringBuilder();
                 str2 = new StringBuilder();
 
@@ -443,18 +457,22 @@ namespace QuickTools.QCore
 
                 while (true)
                 {
+                    status = $"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}";
                     if (showDebuger == true)
                     {
-                        Get.Green($"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}");
+                        Get.Green(status);
                     }
+
+                    IConvert.OpartionStatus = status;
 
                     if (trigerA == true && trigerB == true || breaker == len)
                     {
                         foward.Abort();
                         back.Abort();
+                        status = $"Completed:  Thread A:[{trigerA}] Thread B:[{trigerB}] Breaker:[{breaker}] Length:[{len}]";
                         if (showDebuger == true)
                         {
-                            Get.Yellow($"Killed Or Completed:  A:[{trigerA}] B:[{trigerB}] Breaker:[{breaker}] BreakerAprox:[{len}]");
+                            Get.Yellow(status);
                         }
                         break;
 

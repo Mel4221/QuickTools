@@ -1987,6 +1987,14 @@
             <returns>The byte array.</returns>
             <param name="arrayLength">Array length.</param>
         </member>
+        <member name="M:QuickTools.QCore.IRandom.RandomByteArray(System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="arrayLength"></param>
+            <param name="printStatus"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.IRandom.RandomByteArray(System.Int32,System.Int32,System.Int32)">
             <summary>
             Create a random byte array and allow you to costumice the limits of the random numbers
@@ -2101,6 +2109,12 @@
             </summary>
             <param name="arrayOfWords"></param>
             <returns></returns>
+        </member>
+        <member name="F:QuickTools.QCore.IConvert.OpartionStatus">
+            <summary>
+            Provides's the access to the current status of the given opeartion 
+            not all the methods returns an operation status . 
+            </summary>
         </member>
         <member name="M:QuickTools.QCore.IConvert.BytesToString(System.Byte[])">
             <summary>
@@ -3164,6 +3178,12 @@
             Gets the directosy 
             </summary>
             <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.MapOnlyFiles(System.String)">
+            <summary>
+            This search recursivly for files that match the given file extention
+            </summary>
             <returns></returns>
         </member>
         <member name="M:QuickTools.QIO.FilesMaper.Map">
