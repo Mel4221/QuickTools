@@ -311,12 +311,11 @@ namespace QuickTools.QData
             {
                   for (int x = 0; x < DataBase.Count; x++)
                   {
-                        if ((DataBase[x].Key).Equals(key))
+                        if (DataBase[x].Key == key.ToString())
                         {
                               return DataBase[x].Value;
                         }
                   }
-
                   return null;
             }
 
@@ -332,10 +331,10 @@ namespace QuickTools.QData
                   {
                         for (int x = 0; x < DataBase.Count; x++)
                         {
-                              if ((DataBase[x].Key).Equals(key))
-                              {
-                                    return DataBase[x];
-                              }
+                                if (DataBase[x].Key == key.ToString())
+                               {
+                                return DataBase[x];
+                               }
                         }
                         return new DB();  
                   }
@@ -361,9 +360,9 @@ namespace QuickTools.QData
                         List<DB> temp = new List<DB>();
                         for (int x = 0; x < DataBase.Count; x++)
                         {
-                              if ((DataBase[x].Key).Equals(key))
-                              {
-                                    temp.Add(DataBase[x]);
+                    if (DataBase[x].Key == key.ToString())
+                    {
+                        temp.Add(DataBase[x]);
                               }
                         }
                         return temp;
@@ -392,9 +391,9 @@ namespace QuickTools.QData
                   {
                         for (int value = 0; value < DataBase.Count; value++)
                         {
-                              if ((DataBase[value].Key).Equals(keyName))
-                              {
-                                    DataBase.Remove(DataBase[value]);
+                    if (DataBase[value].Key == keyName.ToString())
+                    {
+                        DataBase.Remove(DataBase[value]);
                                     removed = true; 
                                     this.RefreshDB();
                                     return removed;
@@ -470,7 +469,6 @@ namespace QuickTools.QData
                                     if (DataBase[x].Id == Convert.ToDouble(Get.Number))
                                     {
                                           temp.Add(DataBase[x]);
-
                                     }
                               }
                         }

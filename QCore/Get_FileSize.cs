@@ -49,8 +49,13 @@ namespace QuickTools.QCore
                   /// <summary>
                   /// byte
                   /// </summary>
-                  B
-                  }
+                  B,
+            /// <summary>
+            /// byte
+            /// </summary>
+            IntConvertible
+
+        }
         /// <summary>
         /// Files the size.
         /// </summary>
@@ -72,6 +77,9 @@ namespace QuickTools.QCore
                         case SizeType.KB:
                               fileSize = $"{fileStream.Length / 1024 }KB";
                               break;
+                        case SizeType.IntConvertible:
+                              fileSize = fileStream.Length.ToString(); 
+                            break; 
                         default:
                               fileSize = $"{fileStream.Length }B";
                               break; 

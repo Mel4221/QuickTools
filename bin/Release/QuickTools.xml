@@ -1166,6 +1166,13 @@
             <param name="printType"></param>
             <param name="printOnlyType"></param>
         </member>
+        <member name="M:QuickTools.QCore.Get.LoopInput(System.String)">
+            <summary>
+            Returns an array of the given input
+            </summary>
+            <param name="label"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.Print(System.Object,System.Object)">
             <summary>
             Gets a value printed with it's key 
@@ -1802,6 +1809,11 @@
             byte
             </summary>
         </member>
+        <member name="F:QuickTools.QCore.Get.SizeType.IntConvertible">
+            <summary>
+            byte
+            </summary>
+        </member>
         <member name="M:QuickTools.QCore.Get.FileSize(System.String,QuickTools.QCore.Get.SizeType)">
             <summary>
             Files the size.
@@ -2342,6 +2354,30 @@
         <member name="P:QuickTools.QData.Error.ExceptionRecived">
             <summary>
             Gets or set the Exception 
+            </summary>
+        </member>
+        <member name="T:QuickTools.QData.Key">
+            <summary>
+            contains the format for the the key >
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString(System.String)">
+            <summary>
+            this returns the text into 2 main formats html and json 
+            it will return the formatinto a key and value that will be understood by html
+            and also by json engine 
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="P:QuickTools.QData.KeyManager.FileName">
+            <summary>
+            provides the file name for the file containing the keys
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.KeyManager.FileExt">
+            <summary>
+            Provides the file extention for the key File 
             </summary>
         </member>
         <member name="T:QuickTools.QData.MiniDB">
@@ -4547,13 +4583,13 @@
             </summary>
             <value>The index end.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Description">
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.Description">
             <summary>
             Gets or sets the description.
             </summary>
             <value>The description.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Date">
+        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.Date">
             <summary>
             Gets or sets the date.
             </summary>

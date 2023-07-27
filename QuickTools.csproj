@@ -74,6 +74,7 @@
     <Compile Include="QConsole\QProgressBar.cs" />
     <Compile Include="QData\DataCacher.cs" />
     <Compile Include="QData\Error.cs" />
+    <Compile Include="QData\KeyManager.cs" />
     <Compile Include="QIO\FilesMaper_Constructors.cs" />
     <Compile Include="QIO\FilesMaper_Fields.cs" />
     <Compile Include="QIO\InputParser.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="QIO\QZip.cs" />
     <Compile Include="QIO\QZipArchive.cs" />
     <Compile Include="QIO\writer.cs" />
+    <Compile Include="QMath\QMath.cs" />
     <Compile Include="QNet\DownloadManager.cs" />
     <Compile Include="QNet\QServer.cs" />
     <Compile Include="QNet\QHttp.cs" />

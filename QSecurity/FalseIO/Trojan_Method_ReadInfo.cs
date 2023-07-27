@@ -63,7 +63,7 @@ namespace QuickTools.QSecurity.FalseIO
 
             breaker = 0;
             maxBreak = 0;
-            while (true)
+            while (true) // djaksdkkdmd dkkk dkkd dkkkd FF FF hh
             {
                 metadata = IConvert.ToString(new byte[] { payload[metadataLength] }) + metadata;
                 maxBreak = (payload.Length / (payload.Length / PorcentOfMaxBreak) * 100);

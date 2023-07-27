@@ -48,18 +48,18 @@ namespace QuickTools.QSecurity.FalseIO
                   /// </summary>
                   /// <value>The index end.</value>
                     public string IndexEnd { get; set; }
-                  
-                  /// <summary>
-                  /// Gets or sets the description.
-                  /// </summary>
-                  /// <value>The description.</value>
-                  public string Description { get; set; }
-                  
-                  /// <summary>
-                  /// Gets or sets the date.
-                  /// </summary>
-                  /// <value>The date.</value>
-                  public string Date { get; set; }
+
+                /// <summary>
+                /// Gets or sets the description.
+                /// </summary>
+                /// <value>The description.</value>
+                public string Description = "not-given";
+
+                /// <summary>
+                /// Gets or sets the date.
+                /// </summary>
+                /// <value>The date.</value>
+                public string Date = DateTime.Now.ToString("M/dd/y h:m:s"); 
                   
                   /// <summary>
                   /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>
@@ -97,11 +97,11 @@ namespace QuickTools.QSecurity.FalseIO
             /// The default delete payload from file.
             /// </summary>
             public bool DefaultDeletePayloadFromFile = false;
- 
-                /// <summary>
-                /// Coontains some information about the trojan file 
-                /// </summary>
-             public string MetadData; 
+
+            /// <summary>
+            /// Coontains some information about the trojan file 
+            /// </summary>
+            public string MetadData = "not-given"; 
             /// <summary>
             /// The current stage not-started means that no process is being reported 
             /// </summary>
@@ -111,6 +111,6 @@ namespace QuickTools.QSecurity.FalseIO
             /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
             /// </summary>
             /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.</returns>
-            public override string ToString() => $"Payload: {this.Payload} IndexStart: {this.IndexStart} IndexEnd: {this.IndexEnd} Description: {this.Description} CreatedDate: {this.Date}";
+            public override string ToString() => $"Payload: {this.Payload} IndexStart: {this.IndexStart} IndexEnd: {this.IndexEnd} Description: {this.Description} Created_Date: {this.Date}";
             }
       }

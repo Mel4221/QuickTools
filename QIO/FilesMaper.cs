@@ -216,23 +216,83 @@ namespace QuickTools.QIO
 
             }
 
+          string[] MapFiles(string folderPath)
+        {
+             if (folderPath == "" || folderPath == null)
+            {
+                throw new Exception("The  path can not be empty");
+            }
+            this.Path = folderPath;
+            foreach (string path in this.GetFiles(this.Path))
+            {
+                if (File.Exists(path))
+                {
+                    // This path is a file
+                    ProcessFile(path);
+                }
+
+            }
+            foreach (string path in this.GetDirs(this.Path))
+            {
+                if (Directory.Exists(path))
+                {
+                    ProcessDirectory(path);
+                }
+            }
+
+            if(this.FileList.Count != 0)
+            {
+                return this.FileList.ToArray();
+            }
+            return new string[] { }; 
+
+        }
+
+
+
+
+          string[] MapFolders(string folderPath)
+        {
+            if (folderPath == "" || folderPath == null)
+            {
+                throw new Exception("The  path can not be empty");
+            }
+            this.Path = folderPath;
+            foreach (string path in this.GetFiles(this.Path))
+            {
+                if (File.Exists(path))
+                {
+                    // This path is a file
+                    ProcessFile(path);
+                }
+
+            }
+            foreach (string path in this.GetDirs(this.Path))
+            {
+                if (Directory.Exists(path))
+                {
+                    ProcessDirectory(path);
+                }
+            }
+
+            if (this.FileList.Count != 0)
+            {
+                return this.DirectoryList.ToArray();
+            }
+            return new string[] { };
+
+        }
 
 
 
 
 
-
-
-
-
-
-                   
-            /// <summary>
-            /// Move the specified from origen to the given destination.
-            /// </summary>
-            /// <param name="origen">Origen.</param>
-            /// <param name="destination">Destination.</param>
-                  public static void Move(string origen , string destination)
+        /// <summary>
+        /// Move the specified from origen to the given destination.
+        /// </summary>
+        /// <param name="origen">Origen.</param>
+        /// <param name="destination">Destination.</param>
+        public static void Move(string origen , string destination)
                   {
                         if(destination.LastIndexOf("/") == -1)
                               {

@@ -42,8 +42,38 @@ namespace QuickTools.QCore
     {
 
 
-        
-
+        /// <summary>
+        /// Returns an array of the given input
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        public static string[] LoopInput(string label)
+        {
+            string[] input;
+            string line = null;
+            List<string> text = new List<string>();
+            while (true)
+            {
+                line = Get.Input(label).Text;
+                if(line != "")
+                {
+                    text.Add(line); 
+                }
+                if (line == "")
+                {
+                    break; 
+                }
+            }
+            if(text.Count > 0)
+            {
+                return IConvert.ToType<string>.ToArray(text); 
+            }
+            else
+            {
+                return null; 
+            }
+          
+        }
         /// <summary>
         /// Gets a value printed with it's key 
         /// </summary>
@@ -179,19 +209,12 @@ namespace QuickTools.QCore
             /// <param name="actionMethod">Action method.</param>
             public static void Loop(Action actionMethod)
         {
-                  try
-                        {
-                        while(true)
-                              {
-                                    actionMethod();
-                              }
-                        }
-                        catch
-                        {
-                            //Get.Write($"Message: {ex.Message}\n");
-                            return;
-                        }
-                  }
+    
+                while (true)
+                {
+                    actionMethod(); 
+                }
+        }
 
         
    

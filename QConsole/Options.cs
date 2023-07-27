@@ -143,10 +143,14 @@ namespace QuickTools.QConsole
                   {
                         if (option == CurrentSelection)
                         {
-
+                               
                               Get.Label(SelectorL + OptionList[option] + SelectorR,this.LabelBackColor, this.LabelTextColor);
-                              Get.Write("\n"); 
+                              Get.Write("\n");
+                                //this is just a work around the issue with the option list not showing 
+                                // the one that is currently selected due to how many options are in the list. 
+                                // posible fix is just to display until 10 options or as many as are supported on the screen
 
+                              Get.Title($">{OptionList[option]}");
                         }
                         else
                         {
