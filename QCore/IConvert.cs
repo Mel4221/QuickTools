@@ -648,7 +648,20 @@ namespace QuickTools.QCore
             List<string> temp = new List<string>();
             try
             {
-
+                //go around to the current bug that it has if it starts
+                //with , it will regect the format
+                if (rowString[0] == ',')
+                {
+                    rowString =  rowString.Substring(1); 
+                }
+                //go around to the current bug that it has if it starts
+                //with , it will regect the format
+                if (rowString[rowString.Length-1] != ',')
+                {
+                    rowString += ",";
+                }
+                //maknig sure that there is not spaces in it 
+                rowString = rowString.Replace(" ", ""); 
 
                 for (int value = 0; value < rowString.Length; value++)
                 {
