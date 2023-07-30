@@ -697,25 +697,10 @@ namespace QuickTools.QCore
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string FixPath(string path)
-        {
-            string clearPath, str;
-            clearPath = "";
-            str = null;
-            int current, goal;
-            goal = path.Length;
-            for (current = 0; current < goal; current++)
-            {
-                str = path[current].ToString();
-                if (path[current].ToString() == @"\" || path[current].ToString() == "/")
-                {
-                    str = Get.Slash();
-                }
-                clearPath += str;
-            }
+        public static string FixPath(string path) => Get.IsWindow() == true ? path.Replace("/", Get.Slash()) : path.Replace(@"\", Get.Slash()); 
+       
 
-            return clearPath;
-        }
+        
 
         public static bool IsWindow()
         {

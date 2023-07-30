@@ -24,6 +24,7 @@
     <Description>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</PackageIconUrl>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
