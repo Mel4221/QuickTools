@@ -24,7 +24,6 @@
     <Description>This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
     <PackOnBuild>true</PackOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</PackageIconUrl>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,7 +112,7 @@
     <Compile Include="QIO\Binary_Read_Write.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\QBox.cs" />
-    <Compile Include="QIO\Pack.cs" />
+    <Compile Include="QIO\RowPack.cs" />
     <Compile Include="QCore\Make.cs" />
     <Compile Include="QCore\Get_FileSize.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_MakeTrojanFile.cs" />

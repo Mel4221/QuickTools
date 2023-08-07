@@ -692,7 +692,7 @@ namespace QuickTools.QCore
             return relative;
         }
         /// <summary>
-        /// This method allows you to get the clear path fixed to the operating system that you 
+        /// This method allows you to get the clear path fixed tto the operating system that you 
         /// are working with in this case windows and linux are the only one  that this has being tested 
         /// </summary>
         /// <param name="path"></param>

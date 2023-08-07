@@ -26,25 +26,86 @@
 using System;
 using System.IO;
 using QuickTools.QCore;
+using QuickTools.QSecurity;
+
 namespace QuickTools.QIO
       {
       /// <summary>
       /// Creates a row string of the bytes from the given file  
       /// </summary>
-      public class Pack
+      public class RowPack
             {
             /// <summary>
             /// set the file extention , and the default is set to be row
             /// </summary>
             public string FileExtention = "rowpack";
+           
+            public void PackFileWithPassword(string fileName , object password)
+            {
+                byte[] bytes = Binary.Reader(fileName);
+                byte[] str = Get.Bytes(IConvert.BytesToString(bytes)); 
+                byte[] encrypted = new Secure().Encrypt(str,new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+                Writer.Write($"{fileName}.{this.FileExtention}", IConvert.BytesToString(encrypted));
+            }
+        public void PackFileWithPassword(string fileName, object password,bool removeSourceFile)
+        {
+            byte[] bytes, encrypted;
+            try
+            {
+                bytes = Binary.Reader(fileName);
+            }
+            catch
+            {
+                throw new Exception("Error While Reading the file"); 
+            }
+            try
+            {
+                byte[] str = Get.Bytes(IConvert.BytesToString(bytes));
+                encrypted = new Secure().Encrypt(str, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
 
+            }
+            catch
+            {
+                throw new Exception("Either the password is incorrect or file is currupted"); 
+            }
+                Writer.Write($"{fileName}.{this.FileExtention}", IConvert.BytesToString(encrypted));
+            if (removeSourceFile == true)
+            {
+                File.Delete(fileName);
+            }
+        }
 
-            /// <summary>
-            /// Packs the file and if you want to remove the other file you could just pass true as an argument 
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-            /// <param name="removeSourceFile">If set to <c>true</c> keep old file.</param>
-            public void PackFile(string fileName , bool removeSourceFile)
+        public void UnPackWithPassword(string fileName,object password)
+        {
+            string data, str; 
+            byte[] bytes, decrypted;
+            data = Reader.Read(fileName);
+            bytes = IConvert.StringToBytesArray(data);
+            str = new Secure().Decrypt(bytes, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+            decrypted = IConvert.StringToBytesArray(str);
+            Binary.Writer(fileName.Substring(0, fileName.LastIndexOf('.')), decrypted); 
+        }
+        public void UnPackWithPassword(string fileName, object password,bool removeSourceFile)
+        {
+            string data, str;
+            byte[] bytes, decrypted;
+            data = Reader.Read(fileName);
+            bytes = IConvert.StringToBytesArray(data);
+            str = new Secure().Decrypt(bytes, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+            decrypted = IConvert.StringToBytesArray(str);
+            Binary.Writer(fileName.Substring(0, fileName.LastIndexOf('.')), decrypted);
+            if (removeSourceFile == true)
+            {
+                File.Delete(fileName);
+            }
+        }
+
+        /// <summary>
+        /// Packs the file and if you want to remove the other file you could just pass true as an argument 
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="removeSourceFile">If set to <c>true</c> keep old file.</param>
+        public void PackFile(string fileName , bool removeSourceFile)
                   {
                         if(File.Exists(fileName))
                         {
@@ -58,7 +119,7 @@ namespace QuickTools.QIO
                         }
                         else
                         {
-                        throw new FileNotFoundException(fileName); 
+                            throw new FileNotFoundException(fileName); 
                         }
                   }
             /// <summary>
