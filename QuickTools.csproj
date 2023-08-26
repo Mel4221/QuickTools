@@ -58,6 +58,9 @@
     <Compile Include="QConsole\Emulation\QVim_Fields.cs" />
     <Compile Include="QConsole\Emulation\QVim_Methods_Actions.cs" />
     <Compile Include="QConsole\Emulation\QVim_Methods_Conditionals.cs" />
+    <Compile Include="QConsole\Options_Constructors.cs" />
+    <Compile Include="QConsole\Options_Fields.cs" />
+    <Compile Include="QConsole\Options_NewDisplay.cs" />
     <Compile Include="QConsole\ShellInput.cs" />
     <Compile Include="QCore\Get_Console_Command_ls.cs" />
     <Compile Include="QCore\GlobalSuppressions.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="QData\KeyManager.cs" />
     <Compile Include="QIO\FilesMaper_Constructors.cs" />
     <Compile Include="QIO\FilesMaper_Fields.cs" />
+    <Compile Include="QIO\FileTrimer.cs" />
     <Compile Include="QIO\InputParser.cs" />
     <Compile Include="QConsole\LoopInput.cs" />
     <Compile Include="QConsole\Options.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="QNet\DownloadManager.cs" />
     <Compile Include="QNet\QServer.cs" />
     <Compile Include="QNet\QHttp.cs" />
+    <Compile Include="QNet\QShare.cs" />
     <Compile Include="QSecurity\Decryptor.cs" />
     <Compile Include="QSecurity\Encryptor.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_ReadInfo.cs" />

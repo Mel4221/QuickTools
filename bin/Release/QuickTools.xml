@@ -318,6 +318,180 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="T:QuickTools.QConsole.Options">
+            <summary>
+            The option class provide you an easy way to create a menu that can be used with the arrows up and down 
+            on a console eviroment .s
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor">
+            <summary>
+            This initialization does not contains any implementation
+            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[])">
+            <summary>
+            Create the List of options by passing an array 
+            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            </summary>
+            <param name="options">Options.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[],System.Boolean)">
+            <summary>
+            This Options love simplicity so it shouses automatically and take out 
+            the simbols on the side 
+            </summary>
+            <param name="options"></param>
+            <param name="Simple"></param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Create a list of options by passing a generic list 
+            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            </summary>
+            <param name="options">Options.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
+            If you would like to get basically an answer were the first shoudl be answer should be 
+            NO you shoudl just type new Options(true); other wise the order would be back wards
+            remember that the return type will be always the same location in the array 
+            so it you select now if you select the yes it will return 0 which is the position of in the array 
+            </summary>
+            <param name="type">If set to <c>true</c> type.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[],System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.Options"/> 
+            so far the only type listed is list 
+            </summary>
+            <param name="options">Options.</param>
+            <param name="typeOfOptions">Type of options.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.#ctor(System.Func{System.String,System.Boolean},System.String,System.String,System.Object,System.Collections.Generic.List{System.String},System.ConsoleColor,System.ConsoleColor,System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Allows to set all the values for the Class
+            </summary>
+            <param name="exitTrigerFunction"></param>
+            <param name="selectorR"></param>
+            <param name="selectorL"></param>
+            <param name="label"></param>
+            <param name="optionList"></param>
+            <param name="textColor"></param>
+            <param name="backColor"></param>
+            <param name="labelBackColor"></param>
+            <param name="labelTextColor"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.SelectorR">
+            <summary>
+            This Control the Right simbol from the selector and the default simbol is ">"
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.SelectorL">
+            <summary>
+            This Control the Left simbol from the selector and the default simbol is ">"
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.CurrentSelection">
+            <summary>
+            This contains the initial selection or default 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.Label">
+            <summary>
+            The label that will be in top of the options
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.OptionList">
+            <summary>
+            Options List container 
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.Count">
+            <summary>
+            This provide the access to the OptionList count for verification porpuses 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QConsole.Options.Triguer">
+            <summary>
+            Gets the triguer.
+            </summary>
+            <value>The triguer.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.Options.Triguered">
+            <summary>
+            Gets a value indicating whether this <see cref="T:QuickTools.Options"/> is triguered.
+            </summary>
+            <value><c>true</c> if triguered; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.TextColor">
+            <summary>
+            The color of the text.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.BackColor">
+            <summary>
+            The color of the back.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.LabelBackColor">
+            <summary>
+            The color of the label back.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Options.LabelTextColor">
+            <summary>
+            The color of the label text.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QConsole.Options.MaxItems">
+            <summary>
+            By default the value is Console.BufferHeight -1; 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QConsole.Options.Current">
+            <summary>
+            Current Selection
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.ClearOptions">
+            <summary>
+            Clears All the options.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.Display">
+            <summary>
+            Display the Options listed in the OptionsList 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.Pick">
+            <summary>
+            Select  the options listed and returns the number of the selection
+            This instance is the one that start the 
+            Selection process so even thouth you may call
+            the Constructor you may need to also start the Selction 
+            with Select example
+            var app = new Options(string[] list||List<object/>||bool true || false);
+            app.Select(); 
+            </summary>
+            <returns>The select.</returns>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.Pick(System.Boolean)">
+            <summary>
+            Pick the specified allowLateral.
+            </summary>
+            <returns>The pick.</returns>
+            <param name="allowLateral">If set to <c>true</c> allow lateral.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Options.Select">
+            <summary>
+            Select The Option from the OptionList.
+            </summary>
+            <returns>The select.</returns>
+        </member>
         <member name="T:QuickTools.QConsole.ShellInput">
             <summary>
             Creates a shell and returns the input as a plain text 
@@ -578,60 +752,6 @@
             <param name="initialY">Initial y.</param>
             <param name="SwitchUpDown">If set to <c>true</c> switch up down.</param>
         </member>
-        <member name="T:QuickTools.QConsole.CInput">
-            <summary>
-            This is a class that allows a console application to take multiple lines of text respecting the spaces and simbols
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.CInput.Margin">
-            <summary>
-            The margin.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.CInput.CursorSimbol">
-            <summary>
-            The cursor simbol.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.CInput.DisplayInput">
-            <summary>
-            The display input.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.CInput.InputDisplay">
-            <summary>
-            The input display.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.CInput.Text">
-            <summary>
-            Text this instance.
-            </summary>
-            <returns>The text.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.CInput.Tabs(System.Int32)">
-            <summary>
-            Allows you to get a dinamic amount of tabs and returns it into an string format
-            </summary>
-            <returns>The tabs.</returns>
-            <param name="tabs">Tabs.</param>
-        </member>
-        <member name="F:QuickTools.QConsole.CInput.QInputInstanse">
-            <summary>
-            The QInput instanse.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.CInput.Read">
-            <summary>
-            Read this instance.
-            </summary>
-            <returns>The read.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.CInput.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.Input"/> class.
-            </summary>
-        </member>
         <member name="T:QuickTools.QConsole.console">
             this was created entrily for fun 
              but it could be usful if you hate to write Consol.WriteLine("content"); 
@@ -761,374 +881,6 @@
             <param name="dots">Dots.</param>
             <param name="label">Label.</param>
             <param name="noStatusPorcent">If set to <c>true</c> no status porcent.</param>
-        </member>
-        <member name="T:QuickTools.QConsole.LoopInput">
-             <summary>
-            LoopInput allows you to keep getting an imput constantly in a Console Application
-            and callect the entired input and return it in a single string or it can be access aswell
-             by calling the LoopInput.Data.
-             </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.LoopInput.Data">
-            <summary>
-            The Return Data will have to be provided by a method due to 
-            lack of simplicity
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.LoopInput.PrintList">
-            <summary>
-             this can not be cause is handled only by the Start Method .
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.LoopInput.Start">
-            <summary>
-            Start is basically a while loop that contains the Get.TextInput to collect
-            the input and the loop just repeat it until the key period "."  is entered or if the 
-            text input equal to the fallowing "done", "exit","done","d"
-            </summary>
-            <returns>The InputData or rowdata callected by the Input.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.LoopInput.RowData">
-            <summary>
-            RowData method is a method that callects
-            all the data in the List and it return into a row string
-            </summary>
-            <returns>The data.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.LoopInput.Lines">
-            <summary>
-            This Return each lines of the Loop Input that was captured 
-            </summary>
-            <returns>The lines.</returns>
-        </member>
-        <member name="T:QuickTools.QConsole.Options">
-            <summary>
-            The option class provide you an easy way to create a menu that can be used with the arrows up and down 
-            on a console eviroment .s
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.SelectorR">
-            <summary>
-            This Control the Right simbol from the selector and the default simbol is ">"
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.SelectorL">
-            <summary>
-            This Control the Left simbol from the selector and the default simbol is ">"
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.CurrentSelection">
-            <summary>
-            This contains the initial selection or default 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.Label">
-            <summary>
-            The label that will be in top of the options
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.OptionList">
-            <summary>
-            Options List container 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.Count">
-            <summary>
-            This provide the access to the OptionList count for verification porpuses 
-            </summary>
-        </member>
-        <member name="P:QuickTools.QConsole.Options.Triguer">
-            <summary>
-            Gets the triguer.
-            </summary>
-            <value>The triguer.</value>
-        </member>
-        <member name="P:QuickTools.QConsole.Options.Triguered">
-            <summary>
-            Gets a value indicating whether this <see cref="T:QuickTools.Options"/> is triguered.
-            </summary>
-            <value><c>true</c> if triguered; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.TextColor">
-            <summary>
-            The color of the text.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.BackColor">
-            <summary>
-            The color of the back.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.LabelBackColor">
-            <summary>
-            The color of the label back.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.Options.LabelTextColor">
-            <summary>
-            The color of the label text.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.ClearOptions">
-            <summary>
-            Clears All the options.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.Display">
-            <summary>
-            Display the Options listed in the OptionsList 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.Pick">
-            <summary>
-            Select  the options listed and returns the number of the selection
-            This instance is the one that start the 
-            Selection process so even thouth you may call
-            the Constructor you may need to also start the Selction 
-            with Select example
-            var app = new Options(string[] list||List<object/>||bool true || false);
-            app.Select(); 
-            </summary>
-            <returns>The select.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.Pick(System.Boolean)">
-            <summary>
-            Pick the specified allowLateral.
-            </summary>
-            <returns>The pick.</returns>
-            <param name="allowLateral">If set to <c>true</c> allow lateral.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor">
-            <summary>
-            This initialization does not contains any implementation
-            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[])">
-            <summary>
-            Create the List of options by passing an array 
-            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
-            </summary>
-            <param name="options">Options.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[],System.Boolean)">
-            <summary>
-            This Options love simplicity so it shouses automatically and take out 
-            the simbols on the side 
-            </summary>
-            <param name="options"></param>
-            <param name="Simple"></param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor(System.Collections.Generic.List{System.Object})">
-            <summary>
-            Create a list of options by passing a generic list 
-            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
-            </summary>
-            <param name="options">Options.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.Options"/> class.
-            If you would like to get basically an answer were the first shoudl be answer should be 
-            NO you shoudl just type new Options(true); other wise the order would be back wards
-            remember that the return type will be always the same location in the array 
-            so it you select now if you select the yes it will return 0 which is the position of in the array 
-            </summary>
-            <param name="type">If set to <c>true</c> type.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.#ctor(System.String[],System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.Options"/> 
-            so far the only type listed is list 
-            </summary>
-            <param name="options">Options.</param>
-            <param name="typeOfOptions">Type of options.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Options.Select">
-            <summary>
-            Select The Option from the OptionList.
-            </summary>
-            <returns>The select.</returns>
-        </member>
-        <member name="T:QuickTools.QConsole.PanelBody">
-            <summary>
-            Panel body.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Name">
-            <summary>
-            The name.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Text">
-            <summary>
-            The text.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Index">
-            <summary>
-            The index.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Length">
-            <summary>
-            The length.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.LocationX">
-            <summary>
-            The location x.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.LocationY">
-            <summary>
-            The location y.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Color">
-            <summary>
-            The color.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.Y">
-            <summary>
-            The y.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.PanelBody.X">
-            <summary>
-            The x.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.PanelBody.Write(System.Object,System.Int32,System.Int32)">
-            <summary>
-            Write the specified value, x and y.
-            </summary>
-            <param name="value">Value.</param>
-            <param name="x">The x coordinate.</param>
-            <param name="y">The y coordinate.</param>
-        </member>
-        <member name="T:QuickTools.QConsole.Panel">
-            <summary>
-            Panel.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Panel.AddItem(System.String,System.String)">
-            <summary>
-            Adds the item.
-            </summary>
-            <param name="name">Name.</param>
-            <param name="text">Text.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Panel.Display">
-            <summary>
-            Display this instance.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Panel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Tester.Panel"/> class.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.Panel.#ctor(System.Object)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Tester.Panel"/> class.
-            </summary>
-            <param name="text">Text.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.Panel.#ctor(System.Object,System.Int32,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Tester.Panel"/> class.
-            </summary>
-            <param name="text">Text.</param>
-            <param name="locationX">Location x.</param>
-            <param name="locationY">Location y.</param>
-        </member>
-        <member name="T:QuickTools.QConsole.QInput">
-            <summary>
-            Creates an object handeler for the Input object
-            </summary>
-        </member>
-        <member name="T:QuickTools.QConsole.QInput.KeyInfo">
-            <summary>
-            Contains the ConsoleKeyInfo data 
-            </summary>
-        </member>
-        <member name="P:QuickTools.QConsole.QInput.KeyInfo.Key">
-            <summary>
-            Gets or sets the key.
-            </summary>
-            <value>The key.</value>
-        </member>
-        <member name="P:QuickTools.QConsole.QInput.KeyInfo.KeyChar">
-            <summary>
-            Gets or sets the key char.
-            </summary>
-            <value>The key char.</value>
-        </member>
-        <member name="P:QuickTools.QConsole.QInput.KeyInfo.Modifiers">
-            <summary>
-            Gets or sets the modifiers.
-            </summary>
-            <value>The modifiers.</value>
-        </member>
-        <member name="M:QuickTools.QConsole.QInput.KeyInfo.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QInput.KeyInfo"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QInput.KeyInfo"/>.</returns>
-        </member>
-        <member name="F:QuickTools.QConsole.QInput.DefaultTrigerKey">
-            <summary>
-            The default triger key.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.QInput.Label">
-            <summary>
-            The label.
-            </summary>
-        </member>
-        <member name="P:QuickTools.QConsole.QInput.AllowDislayLabel">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QInput"/> allow dislay label.
-            </summary>
-            <value><c>true</c> if allow dislay label; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="F:QuickTools.QConsole.QInput.ExitCondition">
-            <summary>
-            The exit condition.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.QInput.DisplayAction">
-            <summary>
-            The display action.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QConsole.QInput.ReadingCallBack">
-            <summary>
-            The reading call back.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.QInput.Capture">
-            <summary>
-            Capture this instance.
-            </summary>
-            <returns>The capture.</returns>
-        </member>
-        <member name="M:QuickTools.QConsole.QInput.Start">
-            <summary>
-            Start this instance.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.QInput.DisplayLabel">
-            <summary>
-            Contains the method which handles the display mecanisim 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.QInput.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QInput"/> class.
-            </summary>
         </member>
         <member name="T:QuickTools.QCore.Get">
             <summary>
@@ -2284,9 +2036,10 @@
             contains the path to get to the cache
             </summary>
         </member>
-        <member name="F:QuickTools.QData.DataCacher.CacheFile">
+        <member name="P:QuickTools.QData.DataCacher.CacheFile">
             <summary>
-            contains the Cache file 
+            contains the Cache file
+            QuickToolsCache.xml
             </summary>
         </member>
         <member name="M:QuickTools.QData.DataCacher.Cach(System.String,System.String)">
@@ -3207,6 +2960,20 @@
         <member name="M:QuickTools.QIO.FilesMaper.GetFiles(System.String)">
             <summary>
             Gets the files from the given path
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.RetroMapFiles(System.String)">
+            <summary>
+            Get all the files retroactively from a path.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.RetroMapFolders(System.String)">
+            <summary>
+            Get all the directories retroactively from a path.
             </summary>
             <param name="path"></param>
             <returns></returns>
@@ -4234,6 +4001,12 @@
             </summary>
             <returns>The listen.</returns>
         </member>
+        <member name="M:QuickTools.QNet.QServer.Listen(System.Func{System.Net.HttpListenerRequest,System.Net.HttpListenerResponse,System.Boolean},System.Net.HttpListenerResponse)">
+            <summary>
+            Listen for a request and does not return the request the string clear request  
+            </summary>
+            <param name="ListenUntilFunctionIsMeet"></param>
+        </member>
         <member name="M:QuickTools.QNet.QServer.#ctor(System.String,System.Int32,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
@@ -4377,6 +4150,26 @@
         <member name="M:QuickTools.QNet.QHttp.Dispose">
             <summary>
             Releases all resource used by the <see cref="T:QuickTools.Net.QHttp"/> object.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QShare.Server">
+            <summary>
+            QServer is by default on all the settings 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QShare.Http">
+            <summary>
+            All the settings are by default
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QShare.AllowDebugger">
+            <summary>
+            allow to display messages as the program runs
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QShare.BufferSize">
+            <summary>
+            by default is 1024*1024 which is 10MB
             </summary>
         </member>
         <member name="T:QuickTools.QSecurity.Secure">

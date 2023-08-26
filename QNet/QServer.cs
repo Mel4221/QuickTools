@@ -80,8 +80,7 @@ using QuickTools.QCore;
         /// The response function.
         /// </summary>
         public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { return new byte[0]; };
-
-
+         
         /// <summary>
         /// Converts to html.
         /// </summary>
@@ -240,14 +239,28 @@ using QuickTools.QCore;
                   }
 
 
+        /// <summary>
+        /// Listen for a request and does not return the request the string clear request  
+        /// </summary>
+        /// <param name="ListenUntilFunctionIsMeet"></param>
+        public void Listen(Func<HttpListenerRequest, HttpListenerResponse, bool> ListenUntilFunctionIsMeet, HttpListenerResponse response)
+        {
+            
+            Func<HttpListenerRequest> F = () => { return Listen(); };
+            while (ListenUntilFunctionIsMeet(F(), response))
+            {
 
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-                  /// </summary>
-                  /// <param name="url">URL.</param>
-                  /// <param name="port">Port.</param>
-                  /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
-                  public QServer(string url, int port, bool secureProtocol)
+            }
+            
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
+        /// </summary>
+        /// <param name="url">URL.</param>
+        /// <param name="port">Port.</param>
+        /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
+        public QServer(string url, int port, bool secureProtocol)
                   {
 
 

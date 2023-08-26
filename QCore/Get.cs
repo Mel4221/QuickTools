@@ -1450,12 +1450,12 @@ character in order for it to return a valid name
            /// Clears the after the content given 
            /// </summary>
            /// <param name="content">Content.</param>
-            public static void ClearAfter(object content)
+             static void ClearAfter(object content)
             {
                   string message = content.ToString();
-
+            throw new NotImplementedException("This Method is currently not mantained");
                   Console.SetCursorPosition(0, 0);
-                  Console.Write(new CInput().Tabs(message.Length));
+                  //Console.Write(new CInput().Tabs(message.Length));
                   Console.SetCursorPosition(0, 0);
                   Console.Write(content); 
             }

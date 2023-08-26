@@ -45,13 +45,35 @@ namespace QuickTools.QIO
             /// <returns></returns>
             public string[] GetFiles(string path) => Directory.GetFiles(path);
             
+        /// <summary>
+        /// Get all the files retroactively from a path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+            public string[] RetroMapFiles(string path)
+            {
+                this.Path = path;
+                this.Map();
+                return this.Files.ToArray(); 
+            }
 
-            /// <summary>
-            /// Gets the directosy 
-            /// </summary>
-            /// <param name="path"></param>
-            /// <returns></returns>
-            public string[] GetDirs(string path) => Directory.GetDirectories(path);
+        /// <summary>
+        /// Get all the directories retroactively from a path.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public string[] RetroMapFolders(string path)
+        {
+            this.Path = path;
+            this.Map();
+            return this.Directories.ToArray();
+        }
+        /// <summary>
+        /// Gets the directosy 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public string[] GetDirs(string path) => Directory.GetDirectories(path);
             
 
             private void ProcessDirectory(string targetDirectory)
