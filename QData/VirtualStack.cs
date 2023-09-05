@@ -31,7 +31,12 @@ namespace QuickTools.QData
         /// <summary>
         /// Contains the property that make the object to be treated as a contant
         /// </summary>
-        public bool IsConstant { get; set; } = false; 
+        public bool IsConstant { get; set; } = false;
+
+        /// <summary>
+        /// Defines if the variable is a function
+        /// </summary>
+        public bool IsFunction { get; set; } = false; 
 
         /// <summary>
         /// Returns the string value of the Object
@@ -47,7 +52,7 @@ namespace QuickTools.QData
     /// This class provide a virtual way to store values of variables assing in a 
     /// format that gives access to the memory and could be modify in the run
     /// </summary>
-    public class Stack
+    public class VirtualStack
     {
         /// <summary>
         /// By default the name is "Stack.dump"
@@ -61,13 +66,13 @@ namespace QuickTools.QData
         /// </summary>
         /// <param name="variable"></param>
         /// <returns></returns>
-        public string GetVariable(string variable)
+        public Variable GetVariable(string variable)
         {
             foreach (Variable v in this.Variables)
             {
                 if (v.Name == variable)
                 {
-                    return v.Value;
+                    return v;
                 }
             }
             return null;
@@ -82,11 +87,14 @@ namespace QuickTools.QData
         {
             for (int item = 0; item<this.Variables.Count; item++)
             {
-                if (this.Variables[item].Name == variable && 
-                    this.Variables[item].IsConstant == false)
+                if (this.Variables[item].Name == variable)
                 {
                     this.Variables[item].Value = newValue;
                     break;
+                }
+                if (this.Variables[item].IsConstant == true)
+                {
+                    throw new Exception($"{variable} is a constant and the value can no be updated.");
                 }
             }
 

@@ -920,6 +920,27 @@
             <param name="printType"></param>
             <param name="printOnlyType"></param>
         </member>
+        <member name="M:QuickTools.QCore.Get.Open(System.String)">
+            <summary>
+            Open a file 
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Open(System.String,System.String)">
+            <summary>
+            Open a file with the given arguments
+            </summary>
+            <param name="file"></param>
+            <param name="arguments"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Open(System.String,System.String,System.Boolean)">
+            <summary>
+            Open a file
+            </summary>
+            <param name="file"></param>
+            <param name="arguments"></param>
+            <param name="waitForExit"></param>
+        </member>
         <member name="M:QuickTools.QCore.Get.LoopInput(System.String)">
             <summary>
             Returns an array of the given input
@@ -1139,6 +1160,12 @@
             </summary>
             <param name="path"></param>
             <returns></returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.IsWindow">
+            <summary>
+            Ises the window.
+            </summary>
+            <returns><c>true</c>, if window was ised, <c>false</c> otherwise.</returns>
         </member>
         <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
             <summary>
@@ -1596,6 +1623,25 @@
             </summary>
             <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
             <param name="buffer">Buffer.</param>
+        </member>
+        <member name="P:QuickTools.QCore.Get.HumanDelay">
+            <summary>
+            Gets or sets the printing speed; 
+            </summary>
+            <value>The human delay.</value>
+        </member>
+        <member name="P:QuickTools.QCore.Get.AllowDebbuger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QCore.Get"/> allow debbuger.
+            </summary>
+            <value><c>true</c> if allow debbuger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QCore.Get.FileSize(System.String[])">
+            <summary>
+            Get the total file size of all the files provided
+            </summary>
+            <returns>The size.</returns>
+            <param name="files">Files.</param>
         </member>
         <member name="T:QuickTools.QCore.Check">
             <summary>
@@ -2161,38 +2207,43 @@
             Contains the property that make the object to be treated as a contant
             </summary>
         </member>
+        <member name="P:QuickTools.QData.Variable.IsFunction">
+            <summary>
+            Defines if the variable is a function
+            </summary>
+        </member>
         <member name="M:QuickTools.QData.Variable.ToString">
             <summary>
             Returns the string value of the Object
             </summary>
             <returns></returns>
         </member>
-        <member name="T:QuickTools.QData.Stack">
+        <member name="T:QuickTools.QData.VirtualStack">
             <summary>
             This class provide a virtual way to store values of variables assing in a 
             format that gives access to the memory and could be modify in the run
             </summary>
         </member>
-        <member name="P:QuickTools.QData.Stack.DumpFileName">
+        <member name="P:QuickTools.QData.VirtualStack.DumpFileName">
             <summary>
             By default the name is "Stack.dump"
             </summary>
         </member>
-        <member name="M:QuickTools.QData.Stack.GetVariable(System.String)">
+        <member name="M:QuickTools.QData.VirtualStack.GetVariable(System.String)">
             <summary>
             Gets the value from the value from the variable in the stack
             </summary>
             <param name="variable"></param>
             <returns></returns>
         </member>
-        <member name="M:QuickTools.QData.Stack.UpdateVariable(System.String,System.String)">
+        <member name="M:QuickTools.QData.VirtualStack.UpdateVariable(System.String,System.String)">
             <summary>
             updates the value of the variable in the stack
             </summary>
             <param name="variable"></param>
             <param name="newValue"></param>
         </member>
-        <member name="M:QuickTools.QData.Stack.SetVariable(System.String,System.String)">
+        <member name="M:QuickTools.QData.VirtualStack.SetVariable(System.String,System.String)">
             <summary>
             Set the variable with the given value
             </summary>
@@ -2200,13 +2251,13 @@
             <param name="value"></param>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:QuickTools.QData.Stack.SetVariable(QuickTools.QData.Variable)">
+        <member name="M:QuickTools.QData.VirtualStack.SetVariable(QuickTools.QData.Variable)">
             <summary>
             Set the variable with the given value
             </summary>
             <param name="variable"></param>
         </member>
-        <member name="M:QuickTools.QData.Stack.SetConstant(System.String,System.String)">
+        <member name="M:QuickTools.QData.VirtualStack.SetConstant(System.String,System.String)">
             <summary>
             Set a constant value that can not be change allong the program life
             </summary>
@@ -2214,12 +2265,12 @@
             <param name="value"></param>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:QuickTools.QData.Stack.Flush">
+        <member name="M:QuickTools.QData.VirtualStack.Flush">
             <summary>
             Clear the stack 
             </summary>
         </member>
-        <member name="M:QuickTools.QData.Stack.Dump">
+        <member name="M:QuickTools.QData.VirtualStack.Dump">
             <summary>
             Creates a dump file with the information that is listed in the memory
             of the stack
@@ -3938,6 +3989,56 @@
             </summary>
             <param name="fileName">File name.</param>
             <param name="removeSource">If set to <c>true</c> remove source.</param>
+        </member>
+        <member name="T:QuickTools.QIO.FileShreder">
+            <summary>
+            This Class provides the methods to be able to delete a file by rewritting pregenerated text over it
+            of the size of the file then delete it as a way to clear the data from it permanetly
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Files">
+            <summary>
+            Gets or sets the files.
+            </summary>
+            <value>The files.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.AllowDebbuger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FileShreder"/> allow debbuger.
+            </summary>
+            <value><c>true</c> if allow debbuger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.HumanDelay">
+            <summary>
+            Gets or sets the human delay which allows the printing time to be slower 
+            to be audited if required and by default is set to 500 seconds
+            </summary>
+            <value>The human delay.</value>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.EvalSize(System.String[])">
+            <summary>
+            Evaluetes the total size of files that will be deleted but coudl messure also the 
+            size of all the files selected or provided
+            </summary>
+            <returns>The size.</returns>
+            <param name="files">Files.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.Delete">
+            <summary>
+            Delete all the files listed on <see cref="T:QuickTools.QIO.FileShreder.Files"/>
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.FileShreder"/> class.
+            </summary>
+            <param name="files">Files.</param>
         </member>
         <member name="T:QuickTools.QNet.DownloadManager">
             <summary>
