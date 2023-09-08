@@ -318,16 +318,37 @@ namespace QuickTools.QCore
             return Environment.NewLine;
         }
 
-
-
+            
             /// <summary>
-            /// This Creates a hash code based on the given input 
-            /// be carefull using this as a security method since 
-            /// this macanisim is too simple and it could be broken easely
+            /// Gets a hash code from a file no matter the size
             /// </summary>
-            /// <returns>The code.</returns>
-            /// <param name="bytes">Bytes.</param>
-            public static double HashCode(byte[] bytes)
+            /// <returns>The code from file.</returns>
+            /// <param name="fileName">File name.</param>
+            public static double HashCodeFromFile(string fileName) 
+            {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            double hash = 0;
+            Binary binary = new Binary();
+            binary.ReadBytes(fileName); 
+
+            foreach(byte[] bytes in binary.BufferList)
+            {
+                hash += Get.HashCode(bytes);
+            }
+
+            return hash; 
+            }
+                
+
+        /// <summary>
+        /// This Creates a hash code based on the given input 
+        /// be carefull using this as a security method since 
+        /// this macanisim is too simple and it could be broken easely
+        /// </summary>
+        /// <returns>The code.</returns>
+        /// <param name="bytes">Bytes.</param>
+        public static double HashCode(byte[] bytes)
                   {
                   if(bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
 

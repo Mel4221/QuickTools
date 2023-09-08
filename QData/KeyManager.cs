@@ -1,10 +1,9 @@
 ﻿using QuickTools.QIO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
+using QuickTools.QCore; 
+using System.IO; 
 namespace QuickTools.QData
 {
 
@@ -48,7 +47,7 @@ namespace QuickTools.QData
 
     public class KeyManager : Key
     {
-        StringBuilder builder = new StringBuilder();
+        private StringBuilder builder = new StringBuilder();
 
         /// <summary>
         /// provides the file name for the file containing the keys
@@ -68,13 +67,24 @@ namespace QuickTools.QData
         {
 
         }
-        public void WriteKeys(List<Key> keys, string fileName)
+
+        /// <summary>
+        /// Writes the keys to the provide file 
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="keys">Keys.</param>
+        public void WriteKeys(string fileName, List<Key> keys)
         {
             keys.ForEach((key) => {
                 this.builder.Append($"{key.Name}{key.KeyAssingChar}{key.Value}{key.KeyTerminatorChar}\n");
             });
             Writer.Write(fileName, this.builder.ToString());
         }
+
+        /// <summary>
+        /// Writes the keys.
+        /// </summary>
+        /// <param name="keys">Keys.</param>
         public void WriteKeys(List<Key> keys)
         {
             keys.ForEach((key) => {
@@ -87,17 +97,26 @@ namespace QuickTools.QData
             List<Key> keys = new List<Key>();
             return keys;
         }
-        public List<Key> ReadKeys(string input)
+
+       /// <summary>
+       /// Reads the keys from the provided file
+       /// </summary>
+       /// <returns>The keys.</returns>
+       /// <param name="keyFile">Key file.</param>
+        public List<Key> ReadKeys(string keyFile)
         {
+            if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
             try
-            {
+            { 
                 List<Key> keys = new List<Key>();
-                string key, temp;
+                string key, temp, input; 
                 char term, assing;
                 key = "";
                 temp = "";
+                input = Reader.Read(keyFile); 
                 term = this.KeyTerminatorChar;
                 assing = this.KeyAssingChar;
+
                 for (int ch = 0; ch<input.Length; ch++)
                 {
                     if (input[ch] == assing)
@@ -109,9 +128,10 @@ namespace QuickTools.QData
                     {
                         keys.Add(new Key()
                         {
-                            Name = key.Replace(" ", ""),
+                            Name = key.Replace(" ", "").Replace("\n","").Replace("\t",""),
                             Value = temp
                         });
+                        //Get.Wait($"{key} : {temp}"); 
                         temp = "";
                     }
                     if (input[ch] != assing && input[ch] != term)
@@ -121,12 +141,12 @@ namespace QuickTools.QData
 
                 }
 
-
+                this.FileName = keyFile;
                 return keys;
             }
             catch
             {
-                throw new Exception("The Keys were not on the correct format or damage");
+                throw new Exception("The Keys were not on the correct format or damaged");
             }
         }
     }

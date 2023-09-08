@@ -1017,6 +1017,13 @@
             </summary>
             <returns>The corresponding line for the console</returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.HashCodeFromFile(System.String)">
+            <summary>
+            Gets a hash code from a file no matter the size
+            </summary>
+            <returns>The code from file.</returns>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.HashCode(System.Byte[])">
             <summary>
             This Creates a hash code based on the given input 
@@ -2181,6 +2188,26 @@
             Provides the file extention for the key File 
             </summary>
         </member>
+        <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.String,System.Collections.Generic.List{QuickTools.QData.Key})">
+            <summary>
+            Writes the keys to the provide file 
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="keys">Keys.</param>
+        </member>
+        <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.Collections.Generic.List{QuickTools.QData.Key})">
+            <summary>
+            Writes the keys.
+            </summary>
+            <param name="keys">Keys.</param>
+        </member>
+        <member name="M:QuickTools.QData.KeyManager.ReadKeys(System.String)">
+            <summary>
+            Reads the keys from the provided file
+            </summary>
+            <returns>The keys.</returns>
+            <param name="keyFile">Key file.</param>
+        </member>
         <member name="T:QuickTools.QData.Variable">
             <summary>
             this is a class that represent a variable wich contains it's name and value
@@ -3042,6 +3069,155 @@
             Set this instance.
             </summary>
         </member>
+        <member name="T:QuickTools.QData.FileChoper">
+            <summary>
+            This class take a file and devided into the given amount of files
+            reducing the size of it into a very small chucks of itself
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.BinaryObj">
+            <summary>
+            Gets or sets the binary object.
+            </summary>
+            <value>The binary.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.AllowDebuger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QTester.Program6.FileChoper"/> allow debuger.
+            </summary>
+            <value><c>true</c> if allow debuger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.EncryptChunks">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QTester.Program6.FileChoper"/> encrypt chunks.
+            </summary>
+            <value><c>true</c> if encrypt chunks; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Password">
+            <summary>
+            Gets or sets the password for the chunks
+            </summary>
+            <value>The password.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.OutputPath">
+            <summary>
+            Gets or sets the output path and by default is set to row/
+            </summary>
+            <value>The output path.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.ChopFileExtention">
+            <summary>
+            Gets or sets the chop file which contains the information about how to read
+            the file and how to rebuild it or Join it again 
+            </summary>
+            <value>The chop file.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.FileExtention">
+            <summary>
+            Gets or sets the file extention and by default is set to .chunck
+            </summary>
+            <value>The file extention.</value>
+        </member>
+        <member name="T:QuickTools.QData.FileChoper.Metadata">
+            <summary>
+            Contains the Metadata object 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.FileName">
+            <summary>
+            Gets or sets the name of the file.
+            </summary>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.FileHash">
+            <summary>
+            Gets or sets the file hash.
+            </summary>
+            <value>The file hash.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.From">
+            <summary>
+            Gets or sets from.
+            </summary>
+            <value>From.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.Until">
+            <summary>
+            Gets or sets the until.
+            </summary>
+            <value>The until.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.ChuncksSize">
+            <summary>
+            Gets or sets the size of the chuncks.
+            </summary>
+            <value>The size of the chuncks.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.Created">
+            <summary>
+            Gets or sets the created.
+            </summary>
+            <value>The created.</value>
+        </member>
+        <member name="P:QuickTools.QData.FileChoper.Metadata.IsEncrypted">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QTester.FileChoper.Metadata"/> is encrypted.
+            </summary>
+            <value><c>true</c> if is encrypted; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.Metadata.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.</returns>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.GetFileIndex(System.String)">
+            <summary>
+            Gets the index of the file.
+            </summary>
+            <returns>The file index.</returns>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.GetFileName(System.String)">
+            <summary>
+            Gets the name of the file.
+            </summary>
+            <returns>The file name.</returns>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.Filter(System.String,System.String[])">
+            <summary>
+            Filter the specified fileName and returns the one that meet the cratieriea.
+            </summary>
+            <returns>The filter.</returns>
+            <param name="fileName">File name.</param>
+            <param name="files">Files.</param>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.ReadMetadata(System.String)">
+            <summary>
+            Reads the metadata.
+            </summary>
+            <returns>The metadata.</returns>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.Join(System.String)">
+            <summary>
+            Join the specified file from the row files
+            </summary>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QData.FileChoper.Chop(System.String)">
+            <summary>
+            Ripe the specified file into the chuncks provided 
+            </summary>
+            <param name="file">File.</param>
+        </member>
         <member name="T:QuickTools.QIO.FilesMaper">
             <summary>
             This is a class developed to assit to be able to retroactively read files and directories 
@@ -3258,9 +3434,10 @@
             <param name="srcfilename">Srcfilename.</param>
             <param name="destfilename">Destfilename.</param>
         </member>
-        <member name="M:QuickTools.QIO.Binary.CopyBinaryFile(System.String,System.String,System.Action)">
+        <member name="M:QuickTools.QIO.Binary.CopyBinaryFile(System.String,System.String,System.Action{System.Int32,System.Int32})">
             <summary>
-            Copies the binary file.
+            Copies the binary file while runs a provided action Method to handle the current status of the transfer
+            and the action method takes the current value and the goal value in it 
             </summary>
             <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
             <param name="srcfilename">Srcfilename.</param>
