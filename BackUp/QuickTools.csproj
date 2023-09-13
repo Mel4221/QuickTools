@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-   <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
-    <PropertyGroup>
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{45BBD18E-98E5-4C79-A3A9-227732E85875}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2007.0</PackageVersion>
+    <PackageVersion>2006.5</PackageVersion>
     <Authors>MBV</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -58,9 +58,6 @@
     <Compile Include="QConsole\Emulation\QVim_Fields.cs" />
     <Compile Include="QConsole\Emulation\QVim_Methods_Actions.cs" />
     <Compile Include="QConsole\Emulation\QVim_Methods_Conditionals.cs" />
-    <Compile Include="QConsole\Options_Constructors.cs" />
-    <Compile Include="QConsole\Options_Fields.cs" />
-    <Compile Include="QConsole\Options_NewDisplay.cs" />
     <Compile Include="QConsole\ShellInput.cs" />
     <Compile Include="QCore\Get_Console_Command_ls.cs" />
     <Compile Include="QCore\GlobalSuppressions.cs" />
@@ -78,10 +75,8 @@
     <Compile Include="QData\DataCacher.cs" />
     <Compile Include="QData\Error.cs" />
     <Compile Include="QData\KeyManager.cs" />
-    <Compile Include="QData\VirtualStack.cs" />
     <Compile Include="QIO\FilesMaper_Constructors.cs" />
     <Compile Include="QIO\FilesMaper_Fields.cs" />
-    <Compile Include="QIO\FileTrimer.cs" />
     <Compile Include="QIO\InputParser.cs" />
     <Compile Include="QConsole\LoopInput.cs" />
     <Compile Include="QConsole\Options.cs" />
@@ -107,7 +102,6 @@
     <Compile Include="QNet\DownloadManager.cs" />
     <Compile Include="QNet\QServer.cs" />
     <Compile Include="QNet\QHttp.cs" />
-    <Compile Include="QNet\QShare.cs" />
     <Compile Include="QSecurity\Decryptor.cs" />
     <Compile Include="QSecurity\Encryptor.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_ReadInfo.cs" />
@@ -118,7 +112,7 @@
     <Compile Include="QIO\Binary_Read_Write.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\QBox.cs" />
-    <Compile Include="QIO\RowPack.cs" />
+    <Compile Include="QIO\Pack.cs" />
     <Compile Include="QCore\Make.cs" />
     <Compile Include="QCore\Get_FileSize.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_MakeTrojanFile.cs" />
@@ -129,9 +123,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="QIO\Binary_ReadBytes.cs" />
     <Compile Include="QIO\Binary_Constructors.cs" />
-    <Compile Include="QIO\FileShreder.cs" />
-    <Compile Include="QIO\FileChoper_Fields.cs" />
-    <Compile Include="QIO\FileChoper_Methods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="clown.ico" />
@@ -149,5 +140,5 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-      <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
 </Project>

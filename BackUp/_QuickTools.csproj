@@ -1,0 +1,98 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QColors\colorWithParam.cs" />
+    <Compile Include="QColors\colorNoParam.cs" />
+    <Compile Include="QConsole\Emulation\QVim.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Constructors.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Fields.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Actions.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Conditionals.cs" />
+    <Compile Include="QConsole\ShellInput.cs" />
+    <Compile Include="QCore\Get_Console_Command_ls.cs" />
+    <Compile Include="QCore\GlobalSuppressions.cs" />
+    <Compile Include="QCore\Check.cs" />
+    <Compile Include="QCore\Get.cs" />
+    <Compile Include="QCore\IRandom.cs" />
+    <Compile Include="QCore\IConvert.cs" />
+    <Compile Include="QCore\printList.cs" />
+    <Compile Include="QConsole\ArrayWalker.cs" />
+    <Compile Include="QConsole\ArrowsKey.cs" />
+    <Compile Include="QConsole\CInput.cs" />
+    <Compile Include="QConsole\CInputPartial.cs" />
+    <Compile Include="QConsole\console.cs" />
+    <Compile Include="QConsole\QProgressBar.cs" />
+    <Compile Include="QData\DataCacher.cs" />
+    <Compile Include="QData\Error.cs" />
+    <Compile Include="QData\KeyManager.cs" />
+    <Compile Include="QIO\FilesMaper_Constructors.cs" />
+    <Compile Include="QIO\FilesMaper_Fields.cs" />
+    <Compile Include="QIO\InputParser.cs" />
+    <Compile Include="QConsole\LoopInput.cs" />
+    <Compile Include="QConsole\Options.cs" />
+    <Compile Include="QConsole\Panel.cs" />
+    <Compile Include="QConsole\QInput.cs" />
+    <Compile Include="QData\MiniDB_Methods.cs" />
+    <Compile Include="QData\DB.cs" />
+    <Compile Include="QData\MiniDB_Constructors.cs" />
+    <Compile Include="QData\MiniDB_Fields.cs" />
+    <Compile Include="QData\QSettings.cs" />
+    <Compile Include="QData\user.cs" />
+    <Compile Include="QData\XmlHelper.cs" />
+    <Compile Include="QIO\Binary.cs" />
+    <Compile Include="QIO\Binary_Dumper.cs" />
+    <Compile Include="QIO\RecursiveFileSearch.cs" />
+    <Compile Include="QIO\Log.cs" />
+    <Compile Include="QIO\FilesMaper.cs" />
+    <Compile Include="QIO\reader.cs" />
+    <Compile Include="QIO\QZip.cs" />
+    <Compile Include="QIO\QZipArchive.cs" />
+    <Compile Include="QIO\writer.cs" />
+    <Compile Include="QMath\QMath.cs" />
+    <Compile Include="QNet\DownloadManager.cs" />
+    <Compile Include="QNet\QServer.cs" />
+    <Compile Include="QNet\QHttp.cs" />
+    <Compile Include="QSecurity\Decryptor.cs" />
+    <Compile Include="QSecurity\Encryptor.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_ReadInfo.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_RemovePayload.cs" />
+    <Compile Include="QSecurity\LowEncrypter.cs" />
+    <Compile Include="QSecurity\SecureBinary.cs" />
+    <Compile Include="QSecurity\Traductor.cs" />
+    <Compile Include="QIO\Binary_Read_Write.cs" />
+    <Compile Include="QIO\Binary_Fields.cs" />
+    <Compile Include="QIO\QBox.cs" />
+    <Compile Include="QIO\Pack.cs" />
+    <Compile Include="QCore\Make.cs" />
+    <Compile Include="QCore\Get_FileSize.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_MakeTrojanFile.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Fields.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Method_PullTrojanFile.cs" />
+    <Compile Include="QIO\BytesBinder.cs" />
+    <Compile Include="QSecurity\FalseIO\Trojan_Constructors.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="QIO\Binary_ReadBytes.cs" />
+    <Compile Include="QIO\Binary_Constructors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="clown.ico" />
+    <Content Include="setting.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QCore\encrypter.intent" />
+    <None Include="QCore\notes-from-tester.txt" />
+    <None Include="QCore\Decriptor.intent" />
+    <None Include="QCore\setting.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

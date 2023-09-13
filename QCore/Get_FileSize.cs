@@ -24,7 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.IO; 
+using System.IO;
+using QuickTools.QIO;
+
 namespace QuickTools.QCore
       {
       public partial class Get
@@ -178,8 +180,53 @@ namespace QuickTools.QCore
 
                   return fileSize;
                   }
+
+
+        /// <summary>
+        /// Gets or sets the printing speed; 
+        /// </summary>
+        /// <value>The human delay.</value>
+        public static int HumanDelay { get; set; } = 500;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QCore.Get"/> allow debbuger.
+        /// </summary>
+        /// <value><c>true</c> if allow debbuger; otherwise, <c>false</c>.</value>
+        public static bool AllowDebbuger { get; set; } = false; 
+        /// <summary>
+        /// Get the total file size of all the files provided
+        /// </summary>
+        /// <returns>The size.</returns>
+        /// <param name="files">Files.</param>
+        public static string FileSize(string[] files)
+        {
+            int size, current, goal;
+            byte[] bytes;
+            string status;
+            size = 0;
+            current = 0;
+            goal = files.Length - 1;
+
+            foreach (string file in files)
+            {
+                bytes = Binary.Reader(file);
+                size += bytes.Length;
+                status = $"Evaluating Size: {Get.FileNameFromPath(file)} [{Get.Status(current, goal)}]";
+               
+                if (AllowDebbuger)
+                {
+                    Get.Yellow(status);
+                    int time = HumanDelay < 200 ? 200 : HumanDelay;
+                    Get.WaitTime(time - 200);
+                }
+                current++;
             }
 
- 
+            bytes = new byte[size];
+            return Get.FileSize(bytes);
+        }
+    }
+
+            
 
       }
