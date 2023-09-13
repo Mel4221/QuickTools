@@ -20,6 +20,7 @@ using System.Linq;
 using QuickTools.QConsole;
 using System.Security.Cryptography;
 using System.Collections;
+using System.Diagnostics; 
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -40,7 +41,55 @@ namespace QuickTools.QCore
     /// </summary>
     public partial class Get : Color
     {
+        
+        /// <summary>
+        /// Open a file 
+        /// </summary>
+        /// <param name="file"></param>
+        public static void Open(string file)
+        {
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = file;
+            Process.Start(info);
+        }
 
+        /// <summary>
+        /// Open a file with the given arguments
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        public static void Open(string file,string arguments)
+        {
+
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = file;
+            info.Arguments = arguments; 
+            Process.Start(info);
+        }
+
+        /// <summary>
+        /// Open a file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        /// <param name="waitForExit"></param>
+        public static void Open(string file, string arguments,bool waitForExit)
+        {
+            if (arguments == "" || arguments == " ") arguments = null; 
+            ProcessStartInfo info = new ProcessStartInfo();
+            Process process = new Process(); 
+            info.FileName = file;
+            info.Arguments = arguments;
+            process.StartInfo = info;
+
+            process.Start(); 
+            
+            if (waitForExit)
+            {
+                process.WaitForExit();
+            }
+
+        }
 
         /// <summary>
         /// Returns an array of the given input
