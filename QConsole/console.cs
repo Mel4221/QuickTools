@@ -79,7 +79,9 @@ namespace QuickTools.QConsole
       //            }
       //      }
       //}
-      //python && perl && R
+
+        
+      
       /// <summary>
       /// Write to the console the specified input.
       /// </summary>

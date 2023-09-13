@@ -1898,7 +1898,7 @@
         </member>
         <member name="M:QuickTools.QCore.IConvert.ToType`1.ListToArray(System.Collections.Generic.List{`0})">
             <summary>
-            
+            Returns an array on the given List  with the given type
             </summary>
             <returns></returns>
             <param name="list"></param>

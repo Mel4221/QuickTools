@@ -1,33 +1,4 @@
-<<<<<<< HEAD
-﻿/*
-This Contains all the shortcuts for the Alerts
-and events of colors for the display of the 
-text. 
-important Date : today i have change the class name from "Do static class"
-to "Get static class" due to some not sence ideas behing the idea of doing stuff
-it is nothing related with the performance but more with relation with the 
-action that it creates DATE OF UPDATE : 03/11/2022
-*/
-using System;
-//using System.Security;            // has to be implemented 
-using System.Threading;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using QuickTools.QIO;
-using QuickTools.QColors;
-using System.Diagnostics;
-using System.Linq;
-using QuickTools.QConsole;
-using System.Security.Cryptography;
-using System.Collections;
-using System.Diagnostics; 
-//using System.Security.Permissions;// it has to be implemented
-
-namespace QuickTools.QCore
-{
-
-
+/*
 
     ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
@@ -35,75 +6,6 @@ namespace QuickTools.QCore
     ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
 
-    /// <summary>
-    /// Get The bigest class In Quicktools
-    /// does multiple stuff and contains must of the 
-    /// tools that started this Project.
-    /// </summary>
-    public partial class Get : Color
-    {
-        
-        /// <summary>
-        /// Open a file 
-        /// </summary>
-        /// <param name="file"></param>
-        public static void Open(string file)
-        {
-            ProcessStartInfo info = new ProcessStartInfo();
-            info.FileName = file;
-            Process.Start(info);
-        }
-
-        /// <summary>
-        /// Open a file with the given arguments
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="arguments"></param>
-        public static void Open(string file,string arguments)
-        {
-
-            ProcessStartInfo info = new ProcessStartInfo();
-            info.FileName = file;
-            info.Arguments = arguments; 
-            Process.Start(info);
-        }
-
-        /// <summary>
-        /// Open a file
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="arguments"></param>
-        /// <param name="waitForExit"></param>
-        public static void Open(string file, string arguments,bool waitForExit)
-        {
-            if (arguments == "" || arguments == " ") arguments = null; 
-            ProcessStartInfo info = new ProcessStartInfo();
-            Process process = new Process(); 
-            info.FileName = file;
-            info.Arguments = arguments;
-            process.StartInfo = info;
-
-            process.Start(); 
-            
-            if (waitForExit)
-            {
-                process.WaitForExit();
-            }
-
-        }
-
-        /// <summary>
-        /// Returns an array of the given input
-        /// </summary>
-        /// <param name="label"></param>
-        /// <returns></returns>
-        public static string[] LoopInput(string label)
-        {
-            string[] input;
-            string line = null;
-            List<string> text = new List<string>();
-            while (true)
-=======
 ﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
@@ -431,7 +333,6 @@ namespace QuickTools.QCore
             /// <returns>The code from file.</returns>
             /// <param name="fileName">File name.</param>
             public static double HashCodeFromFile(string fileName) 
->>>>>>> 97cf9074bcb98ed82b0e0545ffe3241572864f37
             {
             if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
