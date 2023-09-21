@@ -1,3 +1,4 @@
+
 ﻿//
 // ${Melquiceded Balbi Villanueva}
 //
@@ -116,7 +117,7 @@ namespace QuickTools.QCore
             }
 
             /// <summary>
-            /// 
+            /// Returns an array on the given List  with the given type
             /// </summary>
             /// <returns></returns>
             /// <param name="list"></param>
@@ -201,7 +202,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The to array.</returns>
         /// <param name="words">Words.</param>
-        public static string[] TextToArray(string words) => ArrayJutifyer(words.Split('\t'));
+        public static string[] TextToArray(string words) => ArrayJutifyer(words.Split(' '));
 
         /// <summary>
         /// Creates a row string with space in between of words to devide each word from the array
@@ -636,7 +637,7 @@ namespace QuickTools.QCore
             }
         }
 
-
+       
         /// <summary>
         /// Strings to bytes array.
         /// </summary>
@@ -692,6 +693,6 @@ namespace QuickTools.QCore
             }
 
         }
-
+            
     }
 }

@@ -1,4 +1,4 @@
-﻿using QuickTools.QCore;
+using QuickTools.QCore;
 using QuickTools.QIO;
 using System;
 using System.Collections.Generic;
