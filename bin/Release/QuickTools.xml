@@ -857,11 +857,11 @@
         </member>
         <member name="M:QuickTools.QConsole.QProgressBar.Display(System.Int32,System.Int32,System.String)">
             <summary>
-            Display the specified current, goal and dots.
+            Display the specified current, goal and consoleTitle.
             </summary>
             <param name="current">Current.</param>
             <param name="goal">Goal.</param>
-            <param name="dots">Dots.</param>
+            <param name="consoleTitle">Console title.</param>
         </member>
         <member name="M:QuickTools.QConsole.QProgressBar.Display(System.Int32,System.Int32,System.String,System.String)">
             <summary>
@@ -4222,18 +4222,35 @@
             Download manager.
             </summary>
         </member>
+        <member name="P:QuickTools.QNet.DownloadManager.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
         <member name="M:QuickTools.QNet.DownloadManager.DownloadFile(System.String,System.String)">
             <summary>
             Downloads the file.
             </summary>
             <param name="address">Address.</param>
-            <param name="location">Location.</param>
+            <param name="fileName">Location.</param>
         </member>
         <member name="P:QuickTools.QNet.DownloadManager.DownloadCompleted">
             <summary>
             Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
             </summary>
             <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:QuickTools.QNet.DownloadManager.ProgressBar">
+            <summary>
+            The progress bar.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.DownloadManager.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
         </member>
         <member name="M:QuickTools.QNet.DownloadManager.DownloadFile">
             <summary>

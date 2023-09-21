@@ -444,11 +444,12 @@ namespace QuickTools.QCore
 
             // initialize an array to store the bytes later 
             byte[] array = new byte[arrayLength];
+            Random rand = new Random();
             //RowBytes = ""; //making sure that the RowBytes are empty 
             // loop to full the array based on the Length
             for (int value = 0; value < array.Length; value++)
             {
-                Random rand = new Random();
+
                 int min = 0;
                 int max = 250;
                 // create a random number based on the 
@@ -458,7 +459,7 @@ namespace QuickTools.QCore
                 byte finalNumber = Convert.ToByte(number);
                 // adding the bytes 
                 array[value] = finalNumber;
-                RowBytes.Append(array[value] + ",");
+                //RowBytes.Append(array[value] + ",");
                 //RowBytes += array[value]+","; 
             }
             return array;
@@ -524,7 +525,7 @@ namespace QuickTools.QCore
                     byte finalNumber = Convert.ToByte(number);
                     // adding the bytes 
                     array[value] = finalNumber;
-                    RowBytes.Append(array[value] + ",");
+                    //RowBytes.Append(array[value] + ",");
                     //RowBytes += array[value]+","; 
                     if (printStatus == true)
                     {

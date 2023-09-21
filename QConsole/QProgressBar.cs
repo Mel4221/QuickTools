@@ -84,7 +84,45 @@
 
                   }
 
-            void Dots(string status)
+        /// <summary>
+        /// Display the specified current, goal and consoleTitle.
+        /// </summary>
+        /// <param name="current">Current.</param>
+        /// <param name="goal">Goal.</param>
+        /// <param name="consoleTitle">Console title.</param>
+        public void Display(int current, int goal,string consoleTitle)
+        {
+
+            //Console.SetCursorPosition(0, 0); 
+
+
+            Get.Title(consoleTitle); 
+            string status = Get.Status(current, goal);
+            if (this.currentPorcent == status)
+            {
+                return;
+            }
+            if (this.currentPorcent != status)
+            {
+                this.currentPorcent = status;
+                Get.Clear();
+            }
+            Get.Label(status);
+            Get.Write("[");
+            Get.Green();
+            Get.Write(dots);
+            Get.Reset();
+            if (current == goal)
+            {
+                Get.Write("]\n");
+            }
+
+            Dots(status);
+
+
+
+        }
+        void Dots(string status)
             {
                   int porcent = int.Parse(status.Replace("%", "")) / this.DotsCount;
                   dots.Clear();
@@ -95,7 +133,7 @@
 
             }
 
-
+        /*
             /// <summary>
             /// Display the specified current, goal and dots.
             /// </summary>
@@ -120,7 +158,7 @@
                   this.DotsType = dots; 
                   this.Dots(status);
             }
-
+            */
             /// <summary>
             /// Display the specified current, goal, dots and label.
             /// </summary>

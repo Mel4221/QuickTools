@@ -26,9 +26,7 @@
 using System;
 using System.IO;
 using QuickTools.QCore;
-
-
-
+using QuickTools.QConsole; 
 namespace QuickTools.QIO
 {
       /// <summary>
@@ -114,7 +112,7 @@ namespace QuickTools.QIO
                   }
 
 
-
+           // private static QProgressBar bar = new QProgressBar(); 
             /// <summary>
             /// Creates a file full of zeros of the given GB size 
             /// for what reason , i mean is here so just use it on what you consider the best 
@@ -123,11 +121,13 @@ namespace QuickTools.QIO
             /// <param name="GbSize">Gb size.</param>
             public static void CreateZeroFile(string fileName , int GbSize)
                   {
-                  if(File.Exists(fileName))
+            throw new Exception("This Function has been disabled due to stability reasons");
+
+            if (File.Exists(fileName))
                         {
                         File.Delete(fileName);
                         }
-                  if(!File.Exists(fileName))
+                    if(!File.Exists(fileName))
                         {
                         using(FileStream create = File.Create(fileName))
                               {
@@ -135,23 +135,22 @@ namespace QuickTools.QIO
                               }
                         }
 
-                  int gb = GbSize * 1024;
+                  int gb = GbSize * 1024 * 1024;
                   using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
                         {
-                        byte[] bytes = Get.Bytes(IRandom.RandomText(1024 * 1024));
+                        byte[] bytes = new byte[gb];
                         
                         BinaryWriter binary = new BinaryWriter(fs);
                         QColors.Color.Green($"Making Zero File:");
                         QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
-
-                        Get.WaitTime(2);
-                        for(int rounds = 0 ; rounds < gb ; rounds++)
+                      
+                         for(int rounds = 0 ; rounds < gb ; rounds++)
                               {
 
-                              binary.Write(bytes , 0 , bytes.Length);
-                              Get.Green(Get.Status(rounds , gb)); 
+                                binary.Write(bytes , 0 , bytes.Length);
+                                //Get.Green(Get.Status(rounds , gb)); 
+                                //bar.Display(rounds, gb - 1); 
                               }
-                        QuickTools.QCore.Get.Ok();
                         }
 
                   }

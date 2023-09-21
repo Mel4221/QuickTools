@@ -37,22 +37,28 @@ namespace QuickTools.QNet
       public class DownloadManager
       {
             private volatile bool _completed;
-     
-            /// <summary>
-            /// Downloads the file.
-            /// </summary>
-            /// <param name="address">Address.</param>
-            /// <param name="location">Location.</param>
-            public void DownloadFile(string address, string location)
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
+        /// </summary>
+        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        public bool AllowDebugger { get; set; } = false; 
+        /// <summary>
+        /// Downloads the file.
+        /// </summary>
+        /// <param name="address">Address.</param>
+        /// <param name="fileName">Location.</param>
+        public void DownloadFile(string address, string fileName)
             {
              
                   WebClient client = new WebClient();
-                  Uri Uri = new Uri(address);
+            client.UseDefaultCredentials = true;
+
+            Uri Uri = new Uri(address);
                   _completed = false;
 
                   client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                   client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
-                  client.DownloadFileAsync(Uri, location);
+                  client.DownloadFileAsync(Uri,fileName);
 
             }
 
@@ -62,24 +68,36 @@ namespace QuickTools.QNet
             /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
             public bool DownloadCompleted { get { return _completed; } }
 
-            private QProgressBar ProgressBar;
-
-            private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+            /// <summary>
+            /// The progress bar.
+            /// </summary>
+            public QProgressBar ProgressBar;
+            /// <summary>
+            /// Gets or sets the status.
+            /// </summary>
+            /// <value>The status.</value>
+            public string Status { get; set; }
+        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            this.Status = e.ProgressPercentage.ToString(); 
+            if (this.AllowDebugger)
             {
-                 this.ProgressBar = new QProgressBar();
-                  ProgressBar.Display(e.ProgressPercentage, 100);
+                this.ProgressBar = new QProgressBar();
+                ProgressBar.Display(e.ProgressPercentage, 100);
+
             }
+
+        }
 
             private void Completed(object sender, AsyncCompletedEventArgs e)
             {
                   if (e.Cancelled == true)
                   {
-                        Console.WriteLine("Download has been canceled.");
+                        if(this.AllowDebugger)Console.WriteLine("Download has been canceled.");
+                        return; 
                   }
-                  else
-                  {
-                        Console.WriteLine("Download completed!");
-                  }
+                  if(this.AllowDebugger)Console.WriteLine("Download completed!");
+                 
 
                   _completed = true;
             }
@@ -99,26 +117,48 @@ namespace QuickTools.QNet
                         throw new ArgumentException("Incorrect Arguments Were provided  or JUST NOT PROVIDED AT ALL ");
                   }
                   WebClient client = new WebClient();
-                  Uri Uri = new Uri(address);
+            client.UseDefaultCredentials = true;
+
+            Uri Uri = new Uri(address);
                   _completed = false;
 
                   client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                   client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
                   client.DownloadFileAsync(Uri, location);
-
-                  Get.Wait(); 
-                  Environment.Exit(0); 
+                
             }
 
 
+        public void DownloadFile(bool waitToFinish)
+        {
+            if (address == "" || location == "")
+            {
+                throw new ArgumentException("Incorrect Arguments Were provided  or JUST NOT PROVIDED AT ALL ");
+            }
+            WebClient client = new WebClient();
+            client.UseDefaultCredentials = true; 
+            Uri Uri = new Uri(address);
+            _completed = false;
+
+            client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
+            client.DownloadFileAsync(Uri, location);
+            if (waitToFinish)
+            {
+                while (!this.DownloadCompleted)
+                {
+
+                }
+            }
+        }
 
 
 
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.DownloadManager"/> class.
-            /// </summary>
-            public DownloadManager()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.DownloadManager"/> class.
+        /// </summary>
+        public DownloadManager()
             {
 
             }

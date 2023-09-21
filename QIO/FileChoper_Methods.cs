@@ -95,7 +95,14 @@ namespace QuickTools.QData
             string[] files;
             path = Get.FolderFromPath(file);
             files = new FilesMaper().GetFiles(path);
-            Print.List(files); 
+            
+            /*
+            name = GetFileName(file);
+            id = GetFileIndex(file);
+            Get.Wait($"{name} {id} {files} {path}");
+            */
+            //Print.List(files); 
+
 
 
 
@@ -182,6 +189,7 @@ namespace QuickTools.QData
                 format = $"{this.OutputPath}{Get.FileNameFromPath(file)}_{buffer}{this.FileExtention}";
                 Binary.Writer(format, this.BinaryObj.BufferList[buffer]);
                 current++;
+
                 this.CurrentStatus = status;
                 if (this.AllowDebuger)
                 {
