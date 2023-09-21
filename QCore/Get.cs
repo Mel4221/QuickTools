@@ -611,7 +611,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The from path.</returns>
         /// <param name="path">Path.</param>
-        public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
+        public static string FolderFromPath(string path) => $"{path.Substring(path.LastIndexOf(Get.Slash())+1)}";
 
         public static void PrintDisks()
         {
