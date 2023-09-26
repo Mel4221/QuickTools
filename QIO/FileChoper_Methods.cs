@@ -124,7 +124,7 @@ namespace QuickTools.QData
             meta.Created = DateTime.Now.ToString(); 
 
             manager.FileName = $"{this.OutputPath}{Get.FileNameFromPath(file)}";
-            manager.FileExt = this.ChopFileExtention;
+            //manager.FileExt = this.ChopFileExtention;
 
             keys.Add(new Key()
             {

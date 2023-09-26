@@ -45,7 +45,7 @@
             public int DotsCount = 10; 
 
             private string currentPorcent;
-
+           
             /// <summary>
             /// Display the specified current and goal.
             /// </summary>
@@ -57,7 +57,7 @@
                   //Console.SetCursorPosition(0, 0); 
                    
                        
-
+                        
                         string status = Get.Status(current , goal);
                         if(this.currentPorcent == status)
                         {
@@ -79,10 +79,9 @@
                                     }
 
                               Dots(status);
+  
 
-
-
-                  }
+        }
 
         /// <summary>
         /// Display the specified current, goal and consoleTitle.

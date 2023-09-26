@@ -575,15 +575,88 @@ namespace QuickTools.QCore
 
         }
 
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="action">Action.</param>
+        public static void Wait(Action action)
+        {
+            int x, y;
+            x = 1;
+            y = 1;
+            char ch = '-';
+            string label = "Plase Wait";
+            Thread work = new Thread(() => { action(); });
+            work.Start();
+            while (work.IsAlive)
+            {
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+                Get.WaitTime(100);
+                Console.SetCursorPosition(x, y);
+                Console.Write($"{label} [{ch}]");
+            }
+            Get.WriteL("\nDone");
+        }
+
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="action">Action.</param>
+        public static void Wait(string label, Action action)
+        {
+            int x, y;
+            x = 1;
+            y = 1;
+            char ch = '-';
+
+            Thread work = new Thread(() => { action(); });
+            work.Start();
+            while (work.IsAlive)
+            {
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+                Get.WaitTime(100);
+                Console.SetCursorPosition(x, y);
+                Console.Write($"{label} [{ch}]");
+            }
+            Get.WriteL("\nDone");
+        }
 
 
-
-            /// <summary>
-            /// Removes the file name extention.
-            /// </summary>
-            /// <returns>The file name extention.</returns>
-            /// <param name="fileName">File name.</param>
-            public static string RemoveFileNameExtention(string fileName)
+        /// <summary>
+        /// Removes the file name extention.
+        /// </summary>
+        /// <returns>The file name extention.</returns>
+        /// <param name="fileName">File name.</param>
+        public static string RemoveFileNameExtention(string fileName)
             {
                   return fileName.Substring(0, fileName.IndexOf('.'));
             }

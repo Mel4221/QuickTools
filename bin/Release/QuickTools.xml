@@ -1111,6 +1111,19 @@
             </summary>
             <returns>string path </returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.Wait(System.Action)">
+            <summary>
+            Wait the specified  action to finish and prints this label while waits and a wating simbol 
+            </summary>
+            <param name="action">Action.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Wait(System.String,System.Action)">
+            <summary>
+            Wait the specified  action to finish and prints this label while waits and a wating simbol 
+            </summary>
+            <param name="label">Label.</param>
+            <param name="action">Action.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.RemoveFileNameExtention(System.String)">
             <summary>
             Removes the file name extention.
@@ -2169,6 +2182,40 @@
             contains the format for the the key >
             </summary>
         </member>
+        <member name="P:QuickTools.QData.Key.IsEmpty">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
+            </summary>
+            <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyTerminatorChar">
+            <summary>
+            The key terminator char.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyAssingChar">
+            <summary>
+            The key assing char.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
+        </member>
         <member name="M:QuickTools.QData.Key.ToString(System.String)">
             <summary>
             this returns the text into 2 main formats html and json 
@@ -2183,10 +2230,18 @@
             provides the file name for the file containing the keys
             </summary>
         </member>
-        <member name="P:QuickTools.QData.KeyManager.FileExt">
+        <member name="M:QuickTools.QData.KeyManager.GetKey(System.String)">
             <summary>
-            Provides the file extention for the key File 
+            Gets the key.
             </summary>
+            <returns>The key.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.KeyManager.AddKey(QuickTools.QData.Key)">
+            <summary>
+            Adds a new key to the list 
+            </summary>
+            <param name="key">Key.</param>
         </member>
         <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.String,System.Collections.Generic.List{QuickTools.QData.Key})">
             <summary>
