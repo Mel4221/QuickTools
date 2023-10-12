@@ -46,11 +46,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\QuickTools.xml</DocumentationFile>
     <RegisterForComInterop>true</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>setting.ico</ApplicationIcon>
-    </PropertyGroup>
-  
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QColors\colorWithParam.cs" />
@@ -145,7 +145,6 @@
     <None Include="QCore\Decriptor.intent" />
     <None Include="QCore\setting.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
