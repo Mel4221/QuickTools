@@ -10,7 +10,7 @@
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <PackageId>QuickTools</PackageId>
-    <PackageVersion>2007.0</PackageVersion>
+    <PackageVersion>3000.0</PackageVersion>
     <Authors>MBV</Authors>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
@@ -49,7 +49,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>setting.ico</ApplicationIcon>
-  </PropertyGroup>
+    </PropertyGroup>
+  
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QColors\colorWithParam.cs" />
@@ -144,6 +145,7 @@
     <None Include="QCore\Decriptor.intent" />
     <None Include="QCore\setting.ico" />
   </ItemGroup>
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
