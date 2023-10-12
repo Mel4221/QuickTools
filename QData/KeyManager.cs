@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using QuickTools.QCore; 
 using System.IO; 
 namespace QuickTools.QData
 {
@@ -69,10 +68,33 @@ namespace QuickTools.QData
         }
     }
 
+
+    /// <summary>
+    /// This object creates key files to store data in a key value format for example
+    /// KeyName=Value; 
+    /// and allow you also to modify the style on how it should be formated such as 
+    /// KeyName>Value|
+    /// </summary>
     public class KeyManager : Key
     {
         private StringBuilder builder = new StringBuilder();
-        private List<Key> Keys { get; set; } = new List<Key>(); 
+
+        /// <summary>
+        /// This are the keys that are buffered when you either cal <see cref="LoadKeys"/> or <see cref="ReadKeys"/>
+        /// </summary>
+        /// <value>The keys.</value>
+        public List<Key> Keys { get; set; } = new List<Key>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
+        /// repeted keys.
+        /// </summary>
+        /// <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
+        public bool CheckForNotRepetedKeys { get; set; } = false; 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
         public KeyManager(string fileName)
         {
             if(fileName != "" || fileName != null)
@@ -80,6 +102,10 @@ namespace QuickTools.QData
                 this.FileName = fileName; 
             }
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
+        /// </summary>
         public KeyManager()
         {
           
@@ -94,6 +120,29 @@ namespace QuickTools.QData
             Default,
             Html,
             Json
+        }
+
+
+
+        /// <summary>
+        /// Deletes the key file along with all it's data
+        /// </summary>
+        public void Drop()
+        {
+            if (File.Exists(this.FileName))
+            {
+                File.Delete(this.FileName); 
+            }
+        }
+        /// <summary>
+        /// Create the Key File
+        /// </summary>
+        public void Create()
+        {
+            if (!File.Exists(this.FileName))
+            {
+                File.Create(this.FileName); 
+            }
         }
         /// <summary>
         /// Gets the key.
@@ -119,13 +168,41 @@ namespace QuickTools.QData
         }
 
         /// <summary>
+        /// Loads the keys from the file 
+        /// </summary>
+        public void LoadKeys()
+        {
+            this.Keys = this.ReadKeys();
+        }
+
+        /// <summary>
+        /// Saves the current Buffer keys 
+        /// </summary>
+        public void SaveKeys()
+        {
+            this.WriteKeys(this.Keys);
+        }
+        /// <summary>
         /// Adds a new key to the list 
         /// </summary>
         /// <param name="key">Key.</param>
         public void AddKey(Key key)
         {
-            this.Keys = this.ReadKeys();
+            if (CheckForNotRepetedKeys)
+            {
+                foreach (Key k in this.Keys)
+                {
+                    if (key.Name == k.Name)
+                    {
+                        throw new Exception("Key Already Set");
+                    }
+                }
+            }
+       
+            this.Keys.Add(key);
 
+
+            /*
             if (key.Name != null || key.Name == "")
             {
                 throw new Exception("Key name is empty");
@@ -136,31 +213,39 @@ namespace QuickTools.QData
             }
             else
             {
-                this.WriteKeys(this.Keys);
+                
+
+                ///this.WriteKeys(this.Keys);
             }
+            */
+
 
         }
+
         public void UpdateKey(Key key)
         {
-            this.Keys = this.ReadKeys();
+            //this.Keys = this.ReadKeys();
             for(int item = 0; item<this.Keys.Count; item++)
             {
                 if(key.Name == this.Keys[item].Name)
                 {
                     this.Keys[item].Value = key.Value;
-                    this.WriteKeys(this.Keys); 
+                    //this.WriteKeys(this.Keys); 
                     return;
                 }
             }
-            this.AddKey(key); 
+            //throw new Exception($"Key {key.Name} Not Found"); 
+            //this.AddKey(key); 
         }
 
         public void DeleteKey(Key key)
         {
+            /*
             if (key.Name != null || key.Name == "")
             {
                 throw new Exception("Key name is empty");
             }
+            */
             this.Keys = this.ReadKeys();
             for (int item = 0; item < this.Keys.Count; item++)
             {

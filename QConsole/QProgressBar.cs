@@ -83,6 +83,15 @@
 
         }
 
+
+       
+        /// <summary>
+        /// Reset this instance.
+        /// </summary>
+        public void Reset()
+        {
+            this.currentPorcent = ""; 
+        }
         /// <summary>
         /// Display the specified current, goal and consoleTitle.
         /// </summary>

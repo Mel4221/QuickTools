@@ -50,7 +50,7 @@ namespace QuickTools.QIO
 
 
             string path = CreateLogDir();
-            string file = path + name + ".xml";
+            string file = path + name + ".log";
             using (MiniDB db = new MiniDB(file))
             {
                 if (!File.Exists(file))
@@ -58,10 +58,8 @@ namespace QuickTools.QIO
                     db.Create();
                 }
                 db.Load();
-
-
-                db.AddKey("log", matter, DateTime.Now);
-
+                db.AddKeyOnHot("log", matter, DateTime.Now);
+                db.HotRefresh(); 
 
 
             }

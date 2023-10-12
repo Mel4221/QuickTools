@@ -146,10 +146,11 @@ namespace QuickTools.QIO
                               {
                                     string fileName = this.FilesData[file].FileName.Substring(this.FilesData[file].FileName.LastIndexOf('/') + 1);
 
-                                    db.AddKey(fileName, this.FilesData[file].FileBytes, "FILE");
+                                    db.AddKeyOnHot(fileName, this.FilesData[file].FileBytes, "FILE");
 
                                     Get.Title(Get.Status(file, this.FilesData.Count - 1));
                               }
+                              db.HotRefresh();
                               Get.Yellow($"Building... {this.ArchiveName}");
                               Get.WaitTime(1000);
 
@@ -187,10 +188,11 @@ namespace QuickTools.QIO
                                     int n = 0; 
                                     FilesData.ForEach((item) => 
                                           {
-                                                db.AddKey(item.FileName, $"FILE NO: {n+1} Hash: {item.FileHash}");
+                                                db.AddKeyOnHot(item.FileName, $"FILE NO: {n+1} Hash: {item.FileHash}",null);
                                                 n++; 
 
                                           });
+                                    db.HotRefresh(); 
                               }
 
                         }

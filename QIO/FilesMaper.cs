@@ -147,7 +147,7 @@ namespace QuickTools.QIO
         /// This search recursivly for files that match the given file extention
         /// </summary>
         /// <returns></returns>
-        public List<string> MapOnlyFiles(string fileExtention)
+         List<string> MapOnlyFiles(string fileExtention)
         {
 
             if (fileExtention == null || fileExtention == "" )

@@ -54,7 +54,7 @@ namespace QuickTools.QData
                   this.Load();
             }
        
-
+       
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
             /// </summary>
@@ -73,81 +73,82 @@ namespace QuickTools.QData
                   this.Load();
 
             }
+        /*
+           /// <summary>
+           /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
+           /// </summary>
+           /// <param name="dbName">Db name.</param>
+           /// <param name="keyName">Key name.</param>
+           /// <param name="relationOrType">Relation or type.</param>
+           public MiniDB(string dbName, string keyName, string relationOrType)
+           {
+                 KeysName = keyName;
+                 RelationOrType = relationOrType;
+                 ID = 1000;
+                 DBName = Path + dbName;
+                 this.Load();
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
-            /// </summary>
-            /// <param name="dbName">Db name.</param>
-            /// <param name="keyName">Key name.</param>
-            /// <param name="relationOrType">Relation or type.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType)
-            {
-                  KeysName = keyName;
-                  RelationOrType = relationOrType;
-                  ID = 1000;
-                  DBName = Path + dbName;
-                  this.Load();
+           }
 
-            }
+           /// <summary>
+           /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
+           /// </summary>
+           /// <param name="dbName">Db name.</param>
+           /// <param name="keyName">Key name.</param>
+           /// <param name="relationOrType">Relation or type.</param>
+           /// <param name="defaultPath">If set to <c>true</c> default path.</param>
+           public MiniDB(string dbName, string keyName, string relationOrType, bool defaultPath)
+           {
+                 KeysName = keyName;
+                 RelationOrType = relationOrType;
+                 ID = 1000;
+                 if (defaultPath)
+                 {
+                       Path = Get.DataPath("db/"); 
+                 }
+                 DBName = Path + dbName;
+                 this.Load();
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
-            /// </summary>
-            /// <param name="dbName">Db name.</param>
-            /// <param name="keyName">Key name.</param>
-            /// <param name="relationOrType">Relation or type.</param>
-            /// <param name="defaultPath">If set to <c>true</c> default path.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType, bool defaultPath)
-            {
-                  KeysName = keyName;
-                  RelationOrType = relationOrType;
-                  ID = 1000;
-                  if (defaultPath)
-                  {
-                        Path = Get.DataPath("db/"); 
-                  }
-                  DBName = Path + dbName;
-                  this.Load();
-
-            }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
-            /// </summary>
-            /// <param name="dbName">Db name.</param>
-            /// <param name="keyName">Key name.</param>
-            /// <param name="relationOrType">Relation or type.</param>
-            /// <param name="id">Identifier.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType, int id)
-            {
-                  KeysName = keyName;
-                  RelationOrType = relationOrType;
-                  ID = id;
-                  DBName = Path+dbName;
-                  this.Load();
-
-
-            }
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
-            /// </summary>
-            /// <param name="dbName">Db name.</param>
-            /// <param name="keyName">Key name.</param>
-            /// <param name="relationOrType">Relation or type.</param>
-            /// <param name="id">Identifier.</param>
-            /// <param name="allowRepeatedKeys">If set to <c>true</c> allow repeated keys.</param>
-            public MiniDB(string dbName, string keyName, string relationOrType, int id, bool allowRepeatedKeys)
-            {
-                  DBName = dbName;
-                  KeysName = keyName;
-                  RelationOrType = relationOrType;
-                  ID = id;
-                  AllowRepeatedKeys = allowRepeatedKeys;
-                  this.Load();
+           }
+           /// <summary>
+           /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
+           /// </summary>
+           /// <param name="dbName">Db name.</param>
+           /// <param name="keyName">Key name.</param>
+           /// <param name="relationOrType">Relation or type.</param>
+           /// <param name="id">Identifier.</param>
+           public MiniDB(string dbName, string keyName, string relationOrType, int id)
+           {
+                 KeysName = keyName;
+                 RelationOrType = relationOrType;
+                 ID = id;
+                 DBName = Path+dbName;
+                 this.Load();
 
 
-            }
+           }
+
+           /// <summary>
+           /// Initializes a new instance of the <see cref="T:QuickTools.MiniDB"/> class.
+           /// </summary>
+           /// <param name="dbName">Db name.</param>
+           /// <param name="keyName">Key name.</param>
+           /// <param name="relationOrType">Relation or type.</param>
+           /// <param name="id">Identifier.</param>
+           /// <param name="allowRepeatedKeys">If set to <c>true</c> allow repeated keys.</param>
+           public MiniDB(string dbName, string keyName, string relationOrType, int id, bool allowRepeatedKeys)
+           {
+                 DBName = dbName;
+                 KeysName = keyName;
+                 RelationOrType = relationOrType;
+                 ID = id;
+                 AllowRepeatedKeys = allowRepeatedKeys;
+                 this.Load();
 
 
-      }
+           }
+       */
+
+
+    }
 }

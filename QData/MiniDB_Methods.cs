@@ -45,76 +45,63 @@ namespace QuickTools.QData
 
 
             private bool Init { get; set; }
-            /// <summary>
-            /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
-            /// below i provide the benefits from using  this method 
-            /// Minutes: 2 Seconds: 28 Milliseconds: 354
-            /// Minutes: 3 Seconds: 53 Milliseconds: 761
-            /// Minutes: 5 Seconds: 34 Milliseconds: 55
-            /// with no repeated initialization
-            /// Minutes: 6 Seconds: 47 Milliseconds: 990
-            /// with repatead inizialation
-            /// </summary>
-            /// <returns><c>true</c>, if key was added, <c>false</c> otherwise.</returns>
-            /// <param name="key">Key.</param>
-            /// <param name="value">Value.</param>
-            /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-            public bool AddKey(object key, object value,bool autoLoad)
+        /// <summary>
+        /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
+        /// below i provide the benefits from using  this method 
+        /// Minutes: 2 Seconds: 28 Milliseconds: 354
+        /// Minutes: 3 Seconds: 53 Milliseconds: 761
+        /// Minutes: 5 Seconds: 34 Milliseconds: 55
+        /// with no repeated initialization
+        /// Minutes: 6 Seconds: 47 Milliseconds: 990
+        /// with repatead inizialation
+        /// </summary>
+        /// <returns><c>true</c>, if key was added, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
+          bool AddKey(object key, object value, bool autoLoad)
+        {
+
+            try
             {
-                  bool keyAdded = false;
+                this.AddKeyOnHot(key, value, null);
+                if (autoLoad)
+                {
+                    this.RefreshDB();
+                }
+          
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }   
 
-
-                  if (autoLoad == true)
-                  {
-                        this.Load();
-                  }
-                  if ((AllowRepeatedKeys == false) && (RelationOrType == "NULL") &&  (ID  <= 0))
-                  {
-                        throw new Exception("RelationOrType is required or the AllowRepeatedKeys is Set to False or ID is not provided or set to 0");
-                  }
-                  if(Init == false)
-                  {
-                        Document = new XmlDocument();
-                        Document.Load(DBName);
-                        Init = true; 
-                  }
-                        ID++;
-                        XmlNode root = Document.FirstChild;
-                        XmlElement element = Document.CreateElement(KeysName);
-                        //key:relationship:hash
-                        element.SetAttribute("Value", $"[{key}:{RelationOrType}:{ID}]{value}");
-                        root.AppendChild(element);
-                        Document.Save(DBName);
-            
-
-                  keyAdded = true;
-                  if(autoLoad == true)
-                  {
-                        this.Load();
-                  }
-                  return keyAdded;
-
+        /// <summary>
+        /// Clear this Database by calling this.DataBase.Clear() <see cref="DataBase"/>.
+        /// </summary>
+        public void Clear()
+            {
+                this.DataBase.Clear(); 
             }
 
-
-
-            private void FeedBack(object value)
-            {
-                  if (this.Interactive)
-                  {
-                        Get.Yellow($"Info: {value} \n");
-                  }
-            }
-
-            /// <summary>
-            /// Adds the key on hot and you later desides when to write it to the db file 
-            /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
-            /// addition 
-            /// </summary>
-            /// <param name="key">Key.</param>
-            /// <param name="value">Value.</param>
-            /// <param name="relation">Relation.</param>
-            public void AddKeyOnHot(object key, object value,object relation)
+        /// <summary>
+        /// Saves the changes that are in the <see cref="DataBase"/>
+        /// </summary>
+        public void SaveChanges()
+        {
+            this.RefreshDB();
+        }
+        /// <summary>
+        /// Adds the key on hot and you later desides when to write it to the db file 
+        /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
+        /// addition 
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        /// <param name="relation">Relation.</param>
+        public void AddKeyOnHot(object key, object value,object relation)
             {
                   this.ID++;
                   this.DataBase.Add(new DB()
@@ -135,6 +122,8 @@ namespace QuickTools.QData
             /// </summary>
             public void HotRefresh()
             {
+            this.RefreshDB();
+            /*
                   container.Append("<DATA>\n");
                   for(int index =0;index<this.DataBase.Count; index++)
                   {
@@ -142,6 +131,7 @@ namespace QuickTools.QData
                   }
                   container.Append("</DATA>\n");
                   Writer.Write(this.DBName,container.ToString());
+            */
             }
 
             /// <summary>
@@ -159,8 +149,23 @@ namespace QuickTools.QData
             /// <param name="value">Value.</param>
             /// <param name="relation">Relation.</param>
             /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-            public bool AddKey(object key, object value,object relation,bool autoLoad)
+             bool AddKey(object key, object value,object relation,bool autoLoad)
             {
+            try
+            {
+                this.AddKeyOnHot(key, value, relation);
+                if (autoLoad)
+                {
+                    this.RefreshDB();
+                }
+                return true; 
+            }
+            catch
+            {
+                return false;
+            }
+
+            /*
                   bool keyAdded = false;
 
 
@@ -193,44 +198,30 @@ namespace QuickTools.QData
                         this.Load();
                   }
                   return keyAdded;
-
-            }
+            */
+        }
             /// <summary>
             /// Adds the key to the database 
             /// </summary>
             /// <returns><c>true</c>, if key was added, <c>false</c> otherwise.</returns>
             /// <param name="key">Key.</param>
             /// <param name="value">Value.</param>
-            public bool AddKey(object key, object value)
+             bool AddKey(object key, object value)
             {
-                  bool keyAdded = false;
-                //_AddKey
-
-                  if(ResentLoaded == false)
-                  {
-                        this.Load();
-                  }
-                  if ((this.GetKey(key) != null))
-                   {
-                        if (AllowRepeatedKeys == false) return keyAdded;
-
-                  }
-
-                  ID++;
-                  Document = new XmlDocument();
-                  Document.Load(DBName);
-                  XmlNode root = Document.FirstChild;
-                  XmlElement element = Document.CreateElement(KeysName);
-                  //key:relationship:hash
-                  element.SetAttribute("Value", $"[{key}:{RelationOrType}:{ID}]{value}");
-                  root.AppendChild(element);
-                  Document.Save(DBName);
-                  keyAdded = true; 
-                  this.Load();
-
-                  return keyAdded; 
-
+            try
+            {
+                this.AddKeyOnHot(key, value, null);
+            
+                    this.RefreshDB();
+               
+                return true;
             }
+            catch
+            {
+                return false;
+            }
+
+        }
 
 
 
@@ -242,7 +233,7 @@ namespace QuickTools.QData
             /// <param name="key">Key.</param>
             /// <param name="value">Value.</param>
             /// <param name="relation">Relation.</param>
-            public DB AddKey(string key, string value, string relation)
+             DB AddKey(string key, string value, string relation)
             {
                
 
@@ -262,7 +253,7 @@ namespace QuickTools.QData
                         Key = key,
                         Relation = RelationOrType,
                         Id = ID,
-                        Value = Value 
+                        Value = null 
                   };
 
             }
@@ -273,9 +264,21 @@ namespace QuickTools.QData
             /// <param name="key">Key.</param>
             /// <param name="value">Value.</param>
             /// <param name="relationOrType">Relation or type.</param>
-            public bool AddKey(object key, object value, object relationOrType)
+           public bool AddKey(object key, object value, object relationOrType)
             {
+            try
+            {
+                this.AddKeyOnHot(key, value, relationOrType);
+                this.RefreshDB();
 
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            /*
                   bool keyAdded = false;
 
 
@@ -299,8 +302,9 @@ namespace QuickTools.QData
                   this.Load();
 
 
-                  return keyAdded; 
-            }
+                  return keyAdded;
+            */
+        }
 
             /// <summary>
             /// Gets the key and returns the result
@@ -325,7 +329,7 @@ namespace QuickTools.QData
             /// </summary>
             /// <returns>The key object.</returns>
             /// <param name="key">Key.</param>
-            public DB GetKeyObject(object key)
+             DB GetKeyObject(object key)
             {
                   try
                   {
@@ -340,8 +344,11 @@ namespace QuickTools.QData
                   }
                   catch 
                   {
-                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new DB(); 
+                if (this.AllowDebuger)
+                {
+                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                }
+                           return new DB(); 
                   }
             }
 
@@ -367,10 +374,14 @@ namespace QuickTools.QData
                         }
                         return temp;
                   }
-                  catch 
-                  {
-                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new List<DB>();
+                  catch
+            {
+                if (this.AllowDebuger)
+                {
+                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+
+                }
+                return new List<DB>();
                   }
             }
 
@@ -476,10 +487,14 @@ namespace QuickTools.QData
 
                         return temp;
                   }
-                  catch 
-                  {
-                        Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new List<DB>();
+                  catch
+            {
+                if (this.AllowDebuger)
+                {
+                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+
+                }
+                return new List<DB>();
                   }
             }
          
@@ -628,7 +643,56 @@ namespace QuickTools.QData
             /// </summary>
              bool RefreshDB()
             {
-                  bool refreshed = false; 
+                  bool refreshed = false;
+           
+            /* try
+            {
+                //ID : Key : Value : Relation
+                */
+                List<Key> keys = new List<Key>(); 
+                for(int item = 0; item < this.DataBase.Count; item++)
+                {
+                    keys.Add(new Key() { 
+                        Name = "ID",
+                        Value = this.DataBase[item].Id.ToString()
+                    });
+                    keys.Add(new Key()
+                    {
+                        Name = "Key",
+                        Value = this.DataBase[item].Key
+                    });
+                    keys.Add(new Key()
+                    {
+                        Name = "Value",
+                        Value = this.DataBase[item].Value
+                    });
+                    keys.Add(new Key()
+                    {
+                        Name = "Relation",
+                        Value = this.DataBase[item].Relation
+                    });
+                }
+                if (this.AllowDebuger)
+                {
+                keys.ForEach((obj) => Get.Write(obj.ToString()));
+                Get.Yellow($"Keys Count: [{keys.Count}]");
+                }
+                this.DataManager.FileName = this.DBName; 
+                //new KeyManager().WriteKeys(keys);  
+                this.DataManager.WriteKeys(keys); 
+
+
+                refreshed = true; 
+                return refreshed; 
+            /*
+            }
+            catch
+            {
+                return refreshed;
+            }
+    */
+
+            /*
                   XmlWriterSettings settings = new XmlWriterSettings();
                   settings.Indent = true;
                   settings.IndentChars = ("    ");
@@ -656,15 +720,97 @@ namespace QuickTools.QData
                         Document.Save(DBName);
                   }
                   refreshed  = this.Load();
-                  return refreshed; 
-            }
+            */
+        }
             /// <summary>
             /// Loads the data base 
             /// </summary>
             public bool Load()
+        {
+            if (!File.Exists(this.DBName)) 
             {
-                  ResentLoaded = true; 
-                  DataBase = new List<DB>();
+                this.Create(); 
+                return false; 
+            }
+            if(this.DBName == "" || this.DBName == null)
+            {
+                return false; 
+            }
+                 this.ResentLoaded = true; 
+                  this.DataBase = new List<DB>();
+                  this.DataManager = new KeyManager(this.DBName);
+                  this.DataManager.LoadKeys();
+                  int sw = 0;
+                  DB db = new DB();
+ 
+            try
+            {
+                //Key : Value : Relation : Id
+                //ID : Key : Value : Relation
+                for (int key = 0; key < this.DataManager.Keys.Count; key++)
+                {
+                    switch (sw)
+                    {
+                        case 0:
+
+                            db.Id = int.Parse(this.DataManager.Keys[key].Value);
+                            sw++;
+                            break;
+                        case 1:
+                            db.Key = this.DataManager.Keys[key].Value;
+                            sw++;
+                            break;
+                        case 2:
+                            db.Value = this.DataManager.Keys[key].Value;
+                            sw++;
+                            break;
+                        case 3:
+                            db.Relation = this.DataManager.Keys[key].Value;
+                            this.DataBase.Add(new DB()
+                            {
+                                Key = db.Key,
+                                Value = db.Value,
+                                Id = db.Id,
+                                Relation = db.Relation
+                            });
+                            if (this.AllowDebuger)
+                            {
+                                Get.WriteL($"Loading Keys: [{Get.Status(key,this.DataManager.Keys.Count-1)}] {db.ToString()}");
+                            }
+                            db.Clear();
+                            sw = 0;
+                            this.ID++; 
+                            break;
+                    }
+                }
+                return true; 
+            }
+            catch(Exception ex)
+            {
+                Log.Event("MiniDB_Error",$"There was an error while loading the Database info:\n{ex}");
+                return false; 
+            }
+            /*
+        try
+        {
+
+            return true; 
+        }
+        catch
+        {
+            return false; 
+        }
+        */
+
+
+
+
+
+
+
+
+
+            /*
                   try
                   {
                         using (XmlReader reader = XmlReader.Create(DBName))
@@ -690,10 +836,10 @@ namespace QuickTools.QData
 
                                                       row = reader.GetAttribute(0);
 
-                                                      /*
+                                                      
                                                           this clear the line of the key to get at the end the key , value relation and id 
                                                           is a step by fases and a kind of hard to read but it works                                       
-                                                      */
+                                                      //Key : Value : Relation : Id
                                                       key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
                                                       value = row.Substring(row.IndexOf("]") + 1);
                                                       relationFase = row.Substring(row.IndexOf(":") + 1);
@@ -731,18 +877,21 @@ namespace QuickTools.QData
                   {
                         return false; 
                   }
-            }
+            */
+        }
 
             /// <summary>
             /// Load the specified database
             /// </summary>
             /// <param name="db">Db.</param>
-            public bool Load(object db)
+            public bool Load(string db)
             {
-                  ResentLoaded = true; 
-                  DBName = db.ToString();
-                  DataBase = new List<DB>();
-                  bool loaded = false;
+            this.DBName = db;
+            return this.Load(); 
+                      
+                   
+
+            /*
                   try
                   {
                         using (XmlReader reader = XmlReader.Create(DBName))
@@ -768,10 +917,10 @@ namespace QuickTools.QData
 
                                                       row = reader.GetAttribute(0);
 
-                                                      /*
+                                                      
                                                           this clear the line of the key to get at the end the key , value relation and id 
                                                           is a step by fases and a kind of hard to read but it works                                       
-                                                      */
+                                                      
                                                       key = row.Substring(row.IndexOf("[") + 1, row.IndexOf(":") - 1);
                                                       value = row.Substring(row.IndexOf("]") + 1);
                                                       relationFase = row.Substring(row.IndexOf(":") + 1);
@@ -805,6 +954,7 @@ namespace QuickTools.QData
 
 
                         }
+                      
                         loaded = true; 
                         return loaded;
                   }catch
@@ -812,46 +962,45 @@ namespace QuickTools.QData
                         loaded = false; 
                         return loaded;    
                   }
-            }
+                    */
+            
+        }
 
-            /// <summary>
-            /// Create the specified Database if returns true it means it was created sucessfully
-            /// if ir returns false is that there is already a db named like that 
-            /// </summary>
-            /// <param name="dbName">Db name.</param>
-            public bool Create(string dbName)
+        /// <summary>
+        /// Create the specified Database if returns true it means it was created sucessfully
+        /// if ir returns false is that there is already a db named like that 
+        /// </summary>
+        /// <param name="dbName">Db name.</param>
+        public bool Create(string dbName)
             {
-                  bool created = this.Load(dbName);
-
-                  if (created == true)
-                        return false; 
-                  if(created == false)
-                  {
-                        Writer.Write(dbName, "");
-                  }
-
-
-
-
-                  DBName = dbName;
-                  XmlWriterSettings settings = new XmlWriterSettings();
-                  settings.Indent = true;
-                  settings.IndentChars = ("    ");
-                  settings.CloseOutput = true;
-                  settings.OmitXmlDeclaration = true;
-
-                  //Get.Wait(dbName); 
-                  using (XmlWriter writer = XmlWriter.Create(dbName, settings))
-                  {
-                        writer.WriteStartElement("DATA");
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-
-                        writer.Flush();
-                  }
-
-                  return true; 
+            if (!File.Exists(dbName))
+            {
+                Writer.Write(dbName,"");
+                this.DBName = dbName; 
             }
+            return true; 
+
+
+            /*
+
+            DBName = dbName;
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = ("    ");
+            settings.CloseOutput = true;
+            settings.OmitXmlDeclaration = true;
+
+            //Get.Wait(dbName); 
+            using (XmlWriter writer = XmlWriter.Create(dbName, settings))
+            {
+                  writer.WriteStartElement("DATA");
+                  writer.WriteEndElement();
+                  writer.WriteEndDocument();
+
+                  writer.Flush();
+            }
+            */
+             }
 
 
 
@@ -863,34 +1012,33 @@ namespace QuickTools.QData
             {
                   string dbName = DBName;
 
-                  bool created = this.Load(dbName);
-                  if (created == true)
-                        return false;
-                  if (created == false)
-                  {
-                        Writer.Write(dbName, "");
-                  }
+            if (!File.Exists(dbName))
+            {
+                Writer.Write(dbName, "");
+                this.DBName = dbName;
+
+            }
+            return true;
+            /*
 
 
+            DBName = dbName;
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = ("    ");
+            settings.CloseOutput = true;
+            settings.OmitXmlDeclaration = true;
 
+            //Get.Wait(dbName); 
+            using (XmlWriter writer = XmlWriter.Create(dbName, settings))
+            {
+                  writer.WriteStartElement("DATA");
+                  writer.WriteEndElement();
+                  writer.WriteEndDocument();
 
-                  DBName = dbName;
-                  XmlWriterSettings settings = new XmlWriterSettings();
-                  settings.Indent = true;
-                  settings.IndentChars = ("    ");
-                  settings.CloseOutput = true;
-                  settings.OmitXmlDeclaration = true;
-
-                  //Get.Wait(dbName); 
-                  using (XmlWriter writer = XmlWriter.Create(dbName, settings))
-                  {
-                        writer.WriteStartElement("DATA");
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-
-                        writer.Flush();
-                  }
-                  return true; 
+                  writer.Flush();
+            }*/
+            return true; 
             }
 
 
@@ -931,11 +1079,11 @@ namespace QuickTools.QData
                   return removed;
             }
 
-            /// <summary>
-            /// Removes all by value.
-            /// </summary>
-            /// <param name="value">Value.</param>
-            public void RemoveAllByValue(string value)
+        /// <summary>
+        /// Removes all by valuePath.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        public void RemoveAllByValue(string value)
             {
                   this.Load();
                   List<DB> temp = new List<DB>();
@@ -1253,25 +1401,27 @@ namespace QuickTools.QData
             {
                   try
                   {
-                       
-                        using (MiniDB db = new MiniDB(this.DBName))
-                        {
-                              for (int x = 0; x <db.DataBase.Count; x++)
-                              {
-                                    if(db.DataBase[x].Value == value)
-                                    {
-                                          return db.DataBase[x]; 
-                                    }
-                              }
-                     
-                        }
-                        return new DB(); 
-                  }
+                       foreach(DB db in this.DataBase)
+                {
+                    if(db.Value == value)
+                    {
+                        return db; 
+                    }
+                }
+                return new DB()
+                {
+                    IsEmpty = true
+                }; 
+
+            }
                   catch 
                   {
                         Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                        return new DB();
-                  }
+                return new DB()
+                {
+                    IsEmpty = true
+                };
+            }
             }
 
             /// <summary>
@@ -1295,8 +1445,11 @@ namespace QuickTools.QData
                               }
 
                         }
-                        return new DB();
-                  }
+                return new DB()
+                {
+                    IsEmpty = true
+                };
+            }
                   catch
                   {
                         Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");

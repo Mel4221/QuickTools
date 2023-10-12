@@ -332,22 +332,46 @@ namespace QuickTools.QCore
             /// </summary>
             /// <returns>The code from file.</returns>
             /// <param name="fileName">File name.</param>
-            public static double HashCodeFromFile(string fileName) 
+            public static long HashCodeFromFile(string fileName) 
             {
             if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
-            double hash = 0;
+            long hash = 0;
             Binary binary = new Binary();
             binary.ReadBytes(fileName); 
 
             foreach(byte[] bytes in binary.BufferList)
             {
-                hash += Get.HashCode(bytes);
+                hash += long.Parse(Get.HashCode(bytes).ToString());
             }
 
-            return hash; 
+            return hash;
             }
-                
+
+        /// <summary>
+        /// Hashs the code from file.
+        /// </summary>
+        /// <returns>The code from file.</returns>
+        /// <param name="fileName">File name.</param>
+        /// <param name="smallFiles">If set to <c>true</c> small files.</param>
+        public static long HashCodeFromFile(string fileName,bool smallFiles)
+        {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            if( int.Parse(Get.FileSize(fileName,SizeType.IntConvertible)) >= int.MaxValue)
+            {
+                FileStream stream = new FileStream(fileName, FileMode.Open);
+                BinaryReader binary = new BinaryReader(stream);
+                byte[] bytes = new byte[102400]; 
+                for(int b = 0; b < 102400; b++)
+                {
+                   bytes[b] = binary.ReadByte();
+                }
+                return long.Parse(Get.HashCode(bytes).ToString()); 
+            }
+            return long.Parse(Get.HashCode(Binary.Reader(fileName)).ToString());
+        }
+
 
         /// <summary>
         /// This Creates a hash code based on the given input 
@@ -605,7 +629,7 @@ namespace QuickTools.QCore
                         ch = '-';
                         break;
                 }
-                Get.WaitTime(100);
+                Get.WaitTime(Get.Number!=0?Get.Number:100);
                 Console.SetCursorPosition(x, y);
                 Console.Write($"{label} [{ch}]");
             }

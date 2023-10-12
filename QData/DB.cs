@@ -29,41 +29,57 @@ namespace QuickTools.QData
               /// <summary>
             /// DB object in which the values are formated and stored
             /// </summary>
-            public class DB
+         public class DB
             {
     
-            /// <summary>
-            /// Gets or sets the key.
-            /// </summary>
-            /// <value>The key.</value>
-            public string Key { get; set; }
+        /// <summary>
+        /// Clear this instance
+        /// </summary>
+            public void Clear()
+        {
+            this.Key = null;
+            this.Value = null;
+            this.Relation = null;
+            this.Id = 0; 
+        }
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>The key.</value>
+        public string Key { get; set; } = null;
 
-                  /// <summary>
-                  /// Gets or sets the value.
-                  /// </summary>
-                  /// <value>The value.</value>
-                  public string Value { get; set; }
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
+        public string Value { get; set; } = null;
 
-                  /// <summary>
-                  /// Gets or sets the relation.
-                  /// </summary>
-                  /// <value>The relation.</value>
-                  public string Relation { get; set; }
+        /// <summary>
+        /// Gets or sets the relation.
+        /// </summary>
+        /// <value>The relation.</value>
+        public string Relation { get; set; } = null;
 
-                  /// <summary>
-                  /// Gets or sets the identifier.
-                  /// </summary>
-                  /// <value>The identifier.</value>
-                  public int Id { get; set; }
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public int Id { get; set; } = 0;
 
-                  /// <summary>
-                  /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.
-                  /// </summary>
-                  /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.</returns>
-                  public override string ToString()
-                  {
-                        return $"Id: {Id} Key: {Key} Value: {Value} Relation: {Relation} ";
-                  }
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.DB"/> is empty.
+        /// </summary>
+        /// <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
+        public bool IsEmpty { get; set; } = false; 
+
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.</returns>
+        public override string ToString()
+      {
+            return $"Id: {Id} Key: {Key} Value: {Value} Relation: {Relation} ";
+      }
 
 
                   /// <summary>
@@ -78,9 +94,6 @@ namespace QuickTools.QData
                         array[1] = Key;
                         array[2] = Value;
                         array[3] = Relation;
-
-
-
                         return array;
                   }
                   /// <summary>
@@ -97,8 +110,13 @@ namespace QuickTools.QData
                               case "json":
                                     obj = $"[ \n 'ID': {Id}, \n 'Key': {Key}, \n 'Value': {Value}, \n 'Relation': {Relation}\n]".Replace("'", '"'.ToString()).Replace("[", "{").Replace("]", "}");
                                     break;
-
-                              case "xml":
+                                case "qkey":
+                                    obj = $"ID={Id};\n" +
+                                    	$"KEY={Key};\n"+
+                                        $"VALUE={Value};\n" +
+                                        $"RELATION={Relation};\n"; 
+                                    break;
+                                   case "xml":
                                     obj = $"<?xml version='1.0' encoding='UTF - 8'?>\n" +
                                           "<DATA> \n" +
                                                 $" <ID> {Id} </ID> \n" +
@@ -126,6 +144,7 @@ namespace QuickTools.QData
 
                         return obj;
                   }
+
 
             }
 
