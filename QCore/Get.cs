@@ -1,3 +1,11 @@
+/*
+
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    /////////////////*this is were the Class Get Starts *//////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+
 ﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
@@ -20,6 +28,7 @@ using System.Linq;
 using QuickTools.QConsole;
 using System.Security.Cryptography;
 using System.Collections;
+using System.Diagnostics; 
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -41,6 +50,57 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
+
+
+
+        /// <summary>
+        /// Open a file 
+        /// </summary>
+        /// <param name="file"></param>
+        public static void Open(string file)
+        {
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = file;
+            Process.Start(info);
+        }
+
+        /// <summary>
+        /// Open a file with the given arguments
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        public static void Open(string file,string arguments)
+        {
+
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = file;
+            info.Arguments = arguments; 
+            Process.Start(info);
+        }
+
+        /// <summary>
+        /// Open a file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        /// <param name="waitForExit"></param>
+        public static void Open(string file, string arguments,bool waitForExit)
+        {
+            if (arguments == "" || arguments == " ") arguments = null; 
+            ProcessStartInfo info = new ProcessStartInfo();
+            Process process = new Process(); 
+            info.FileName = file;
+            info.Arguments = arguments;
+            process.StartInfo = info;
+
+            process.Start(); 
+            
+            if (waitForExit)
+            {
+                process.WaitForExit();
+            }
+
+        }
 
         /// <summary>
         /// Returns an array of the given input
@@ -266,16 +326,61 @@ namespace QuickTools.QCore
             return Environment.NewLine;
         }
 
-
-
+            
             /// <summary>
-            /// This Creates a hash code based on the given input 
-            /// be carefull using this as a security method since 
-            /// this macanisim is too simple and it could be broken easely
+            /// Gets a hash code from a file no matter the size
             /// </summary>
-            /// <returns>The code.</returns>
-            /// <param name="bytes">Bytes.</param>
-            public static double HashCode(byte[] bytes)
+            /// <returns>The code from file.</returns>
+            /// <param name="fileName">File name.</param>
+            public static long HashCodeFromFile(string fileName) 
+            {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            long hash = 0;
+            Binary binary = new Binary();
+            binary.ReadBytes(fileName); 
+
+            foreach(byte[] bytes in binary.BufferList)
+            {
+                hash += long.Parse(Get.HashCode(bytes).ToString());
+            }
+
+            return hash;
+            }
+
+        /// <summary>
+        /// Hashs the code from file.
+        /// </summary>
+        /// <returns>The code from file.</returns>
+        /// <param name="fileName">File name.</param>
+        /// <param name="smallFiles">If set to <c>true</c> small files.</param>
+        public static long HashCodeFromFile(string fileName,bool smallFiles)
+        {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            if( int.Parse(Get.FileSize(fileName,SizeType.IntConvertible)) >= int.MaxValue)
+            {
+                FileStream stream = new FileStream(fileName, FileMode.Open);
+                BinaryReader binary = new BinaryReader(stream);
+                byte[] bytes = new byte[102400]; 
+                for(int b = 0; b < 102400; b++)
+                {
+                   bytes[b] = binary.ReadByte();
+                }
+                return long.Parse(Get.HashCode(bytes).ToString()); 
+            }
+            return long.Parse(Get.HashCode(Binary.Reader(fileName)).ToString());
+        }
+
+
+        /// <summary>
+        /// This Creates a hash code based on the given input 
+        /// be carefull using this as a security method since 
+        /// this macanisim is too simple and it could be broken easely
+        /// </summary>
+        /// <returns>The code.</returns>
+        /// <param name="bytes">Bytes.</param>
+        public static double HashCode(byte[] bytes)
                   {
                   if(bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
 
@@ -402,8 +507,7 @@ namespace QuickTools.QCore
         {
 
 
-                        milliSecondsOrseconds = milliSecondsOrseconds * 1000; 
-                 
+                  
                   try
             {
 
@@ -436,6 +540,7 @@ namespace QuickTools.QCore
 
 
                   }
+
         /// <summary>
         /// This does the same thing than WaitTime with param but it actually
         /// has a different name 
@@ -444,11 +549,11 @@ namespace QuickTools.QCore
         public static void _(int sleepTime)
         {
 
-                  try
+                        try
                         {
-                        Thread.Sleep(sleepTime);
+                            Thread.Sleep(sleepTime);
                         }
-                  catch(Exception e) 
+                        catch(Exception e) 
                         {
                               Get.Wrong(e);
                         }
@@ -494,15 +599,88 @@ namespace QuickTools.QCore
 
         }
 
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="action">Action.</param>
+        public static void Wait(Action action)
+        {
+            int x, y;
+            x = 1;
+            y = 1;
+            char ch = '-';
+            string label = "Plase Wait";
+            Thread work = new Thread(() => { action(); });
+            work.Start();
+            while (work.IsAlive)
+            {
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+                Get.WaitTime(Get.Number!=0?Get.Number:100);
+                Console.SetCursorPosition(x, y);
+                Console.Write($"{label} [{ch}]");
+            }
+            Get.WriteL("\nDone");
+        }
+
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="action">Action.</param>
+        public static void Wait(string label, Action action)
+        {
+            int x, y;
+            x = 1;
+            y = 1;
+            char ch = '-';
+
+            Thread work = new Thread(() => { action(); });
+            work.Start();
+            while (work.IsAlive)
+            {
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+                Get.WaitTime(100);
+                Console.SetCursorPosition(x, y);
+                Console.Write($"{label} [{ch}]");
+            }
+            Get.WriteL("\nDone");
+        }
 
 
-
-            /// <summary>
-            /// Removes the file name extention.
-            /// </summary>
-            /// <returns>The file name extention.</returns>
-            /// <param name="fileName">File name.</param>
-            public static string RemoveFileNameExtention(string fileName)
+        /// <summary>
+        /// Removes the file name extention.
+        /// </summary>
+        /// <returns>The file name extention.</returns>
+        /// <param name="fileName">File name.</param>
+        public static string RemoveFileNameExtention(string fileName)
             {
                   return fileName.Substring(0, fileName.IndexOf('.'));
             }
@@ -530,7 +708,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The from path.</returns>
         /// <param name="path">Path.</param>
-        public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
+        public static string FolderFromPath(string path) => $"{path.Substring(path.LastIndexOf(Get.Slash())+1)}";
 
         public static void PrintDisks()
         {
@@ -692,47 +870,31 @@ namespace QuickTools.QCore
             return relative;
         }
         /// <summary>
-        /// This method allows you to get the clear path fixed to the operating system that you 
+        /// This method allows you to get the clear path fixed tto the operating system that you 
         /// are working with in this case windows and linux are the only one  that this has being tested 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string FixPath(string path)
-        {
-            string clearPath, str;
-            clearPath = "";
-            str = null;
-            int current, goal;
-            goal = path.Length;
-            for (current = 0; current < goal; current++)
-            {
-                str = path[current].ToString();
-                if (path[current].ToString() == @"\" || path[current].ToString() == "/")
-                {
-                    str = Get.Slash();
-                }
-                clearPath += str;
-            }
+        public static string FixPath(string path) => Get.IsWindow() == true ? path.Replace("/", Get.Slash()) : path.Replace(@"\", Get.Slash()); 
+       
 
-            return clearPath;
-        }
-
+        
+        /// <summary>
+        /// Ises the window.
+        /// </summary>
+        /// <returns><c>true</c>, if window was ised, <c>false</c> otherwise.</returns>
         public static bool IsWindow()
         {
-            bool isWindow = true;
+
             string[] info = IConvert.TextToArray(System.Environment.OSVersion.ToString());
             //Microsoft Windows NT 6.2.9200.0
-            if (info[0] == "Microsoft")
+            if (info[0][0] == 'M')
             {
-                return isWindow;
-            }if (info[1] == "Windows")
-            {
-                return isWindow;
+                return true;
             }
             else
             {
-                isWindow = false;
-                return isWindow; 
+                return false;
             }
         }
 
@@ -1465,12 +1627,12 @@ character in order for it to return a valid name
            /// Clears the after the content given 
            /// </summary>
            /// <param name="content">Content.</param>
-            public static void ClearAfter(object content)
+             static void ClearAfter(object content)
             {
                   string message = content.ToString();
-
+            throw new NotImplementedException("This Method is currently not mantained");
                   Console.SetCursorPosition(0, 0);
-                  Console.Write(new CInput().Tabs(message.Length));
+                  //Console.Write(new CInput().Tabs(message.Length));
                   Console.SetCursorPosition(0, 0);
                   Console.Write(content); 
             }

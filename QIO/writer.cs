@@ -41,9 +41,10 @@ namespace QuickTools.QIO
                                            writer.WriteLine(data); 
                                 }
                             }else{
-                              
-                                    Options.Label = "The current File does not Exist : '"+file+"' Would you like to create it ?";    
-                                    var option = new Options(true||false);
+
+                                Options option = new Options(true||false);
+                                option.Label = "The current File does not Exist : '"+file+"' Would you like to create it ?";    
+                                  
                                      
                                     if(option.Pick() == 0)
                                     {
@@ -157,10 +158,10 @@ namespace QuickTools.QIO
                                   using(FileStream fs = File.Create(fileName)){}
                                    WriteFile(fileName,data); 
                                     }else{
-                                        
-                                        
-                                Options.Label = "This File Exist '"+fileName+"' Would you like to override it?"; 
-                                var app = new Options(true); 
+
+                    Options app = new Options(true);
+
+                    app.Label = "This File Exist '"+fileName+"' Would you like to override it?"; 
                                         
                                        
                                        if(app.Pick() == 0)

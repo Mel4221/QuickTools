@@ -1,0 +1,4 @@
+#!/bin/bash
+rm *.nupkg
+cp bin/Release/QuickTools.dll bin/Debug/QuickTools.dll
+nuget pack QuickTools.csproj

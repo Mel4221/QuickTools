@@ -26,9 +26,7 @@
 using System;
 using System.IO;
 using QuickTools.QCore;
-
-
-
+using QuickTools.QConsole; 
 namespace QuickTools.QIO
 {
       /// <summary>
@@ -114,7 +112,7 @@ namespace QuickTools.QIO
                   }
 
 
-
+           // private static QProgressBar bar = new QProgressBar(); 
             /// <summary>
             /// Creates a file full of zeros of the given GB size 
             /// for what reason , i mean is here so just use it on what you consider the best 
@@ -123,11 +121,13 @@ namespace QuickTools.QIO
             /// <param name="GbSize">Gb size.</param>
             public static void CreateZeroFile(string fileName , int GbSize)
                   {
-                  if(File.Exists(fileName))
+            throw new Exception("This Function has been disabled due to stability reasons");
+
+            if (File.Exists(fileName))
                         {
                         File.Delete(fileName);
                         }
-                  if(!File.Exists(fileName))
+                    if(!File.Exists(fileName))
                         {
                         using(FileStream create = File.Create(fileName))
                               {
@@ -135,23 +135,22 @@ namespace QuickTools.QIO
                               }
                         }
 
-                  int gb = GbSize * 1024;
+                  int gb = GbSize * 1024 * 1024;
                   using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
                         {
-                        byte[] bytes = Get.Bytes(IRandom.RandomText(1024 * 1024));
+                        byte[] bytes = new byte[gb];
                         
                         BinaryWriter binary = new BinaryWriter(fs);
                         QColors.Color.Green($"Making Zero File:");
                         QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
-
-                        Get.WaitTime(2);
-                        for(int rounds = 0 ; rounds < gb ; rounds++)
+                      
+                         for(int rounds = 0 ; rounds < gb ; rounds++)
                               {
 
-                              binary.Write(bytes , 0 , bytes.Length);
-                              Get.Green(Get.Status(rounds , gb)); 
+                                binary.Write(bytes , 0 , bytes.Length);
+                                //Get.Green(Get.Status(rounds , gb)); 
+                                //bar.Display(rounds, gb - 1); 
                               }
-                        QuickTools.QCore.Get.Ok();
                         }
 
                   }
@@ -236,14 +235,16 @@ namespace QuickTools.QIO
                   return true;
             }
 
-            /// <summary>
-            /// Copies the binary file.
-            /// </summary>
-            /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
-            /// <param name="srcfilename">Srcfilename.</param>
-            /// <param name="destfilename">Destfilename.</param>
-            /// <param name="Status">Status.</param>
-            public static bool CopyBinaryFile(string srcfilename, string destfilename, Action Status)
+
+        /// <summary>
+        /// Copies the binary file while runs a provided action Method to handle the current status of the transfer
+        /// and the action method takes the current value and the goal value in it 
+        /// </summary>
+        /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
+        /// <param name="srcfilename">Srcfilename.</param>
+        /// <param name="destfilename">Destfilename.</param>
+        /// <param name="Status">Status.</param>
+        public static bool CopyBinaryFile(string srcfilename, string destfilename, Action<int,int> Status)
             {
                   if (!File.Exists(srcfilename))
                   {
@@ -255,10 +256,15 @@ namespace QuickTools.QIO
                   FileStream output = File.Open(destfilename, FileMode.Create);
                   BinaryReader binaryReader = new BinaryReader(input);
                   BinaryWriter binaryWriter = new BinaryWriter(output);
+                    int current, goal;
+            current = 0; 
+            goal = int.Parse(input.Length.ToString())-1; ; 
+              
                   while (true)
                   {
                         byte[] buffer = new byte[10240];
                         int num = binaryReader.Read(buffer, 0, 10240);
+
                         if (num <= 0)
                         {
                               break;
@@ -268,19 +274,64 @@ namespace QuickTools.QIO
                         {
                               break;
                         }
-                        Status();
+                        Status(current,goal);
+              
+                    current++; 
                   }
                   binaryReader.Close();
                   binaryWriter.Close();
                   return true;
             }
-            /// <summary>
-            /// Copies the text file.
-            /// </summary>
-            /// <returns><c>true</c>, if text file was copyed, <c>false</c> otherwise.</returns>
-            /// <param name="srcfilename">Srcfilename.</param>
-            /// <param name="destfilename">Destfilename.</param>
-            public static bool CopyTextFile(string srcfilename, string destfilename)
+        
+        public static bool CopyBinaryFile(string srcfilename, string destfilename, bool allowDebbuger)
+        {
+            if (!File.Exists(srcfilename))
+            {
+                Console.WriteLine("Could not find the Source file");
+                return false;
+            }
+            new FileInfo(srcfilename);
+            Stream input = File.Open(srcfilename, FileMode.Open);
+            FileStream output = File.Open(destfilename, FileMode.Create);
+            BinaryReader binaryReader = new BinaryReader(input);
+            BinaryWriter binaryWriter = new BinaryWriter(output);
+            int current, goal;
+            current = 0;
+            goal = int.Parse(input.Length.ToString()) - 1; ;
+
+            while (true)
+            {
+                byte[] buffer = new byte[10240];
+                int num = binaryReader.Read(buffer, 0, 10240);
+
+                if (num <= 0)
+                {
+                    break;
+                }
+                binaryWriter.Write(buffer, 0, num);
+                if (num < 10240)
+                {
+                    break;
+                }
+                if (allowDebbuger) 
+                {
+                    Get.Yellow($"Copying... {srcfilename} to {destfilename} [{Get.Status(current,goal)}]"); 
+                }
+
+
+                current++;
+            }
+            binaryReader.Close();
+            binaryWriter.Close();
+            return true;
+        }
+        /// <summary>
+        /// Copies the text file.
+        /// </summary>
+        /// <returns><c>true</c>, if text file was copyed, <c>false</c> otherwise.</returns>
+        /// <param name="srcfilename">Srcfilename.</param>
+        /// <param name="destfilename">Destfilename.</param>
+        public static bool CopyTextFile(string srcfilename, string destfilename)
             {
                   if (!File.Exists(srcfilename))
                   {
@@ -336,10 +387,18 @@ namespace QuickTools.QIO
                   {
                         throw new IOException("The File was moved but it is Curropted");
                   }
+                    if(Get.HashCode(pointA) == Get.HashCode(pointB))
+            {
+                File.Delete(pointA);
+                return wasSucessfull;
+            }
+            else
+            {
 
-                  File.Delete(pointA);
+                wasSucessfull = false; 
+            }
 
-                  return wasSucessfull;
+            return wasSucessfull;
             }
 
 
@@ -350,13 +409,13 @@ namespace QuickTools.QIO
         /// <param name="file">File.</param>
         public static byte[] Reader(string file)
         {         
-            int fileLengh = File.ReadAllBytes(file).Length;
-            byte[] bytes = new byte[fileLengh];
+             
             using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
             {
+                byte[] bytes = new byte[fs.Length]; 
                   using (BinaryReader reader = new BinaryReader(fs))
                   {
-                        reader.Read(bytes, 0, fileLengh);
+                        reader.Read(bytes, 0, bytes.Length);
                         return bytes;
                   }
             }

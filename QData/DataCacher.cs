@@ -21,10 +21,12 @@ namespace QuickTools.QData
         /// </summary>
         public string Path { get; set; }
 
+
         /// <summary>
-        /// contains the Cache file 
+        /// contains the Cache file
+        /// QuickToolsCache.xml
         /// </summary>
-        public readonly string CacheFile = "QuickToolsCache.xml";
+        public string CacheFile { get; set; } = "QuickToolsCache.xml";
 
         /// <summary>
         /// Cache the given data 
@@ -108,12 +110,28 @@ namespace QuickTools.QData
         /// </summary>
         public DataCacher()
         {
-            this.ClearCache();
+            //this.ClearCache();
+            
             this.Path = Get.DataPath("cache");
-            settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
-            settings.Create();
+            this.settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
+            this.settings.Create();
+            this.settings.Load();
 
         }
+        public DataCacher(bool clearCache)
+        {
+            if (clearCache)
+            {
+                this.ClearCache();
+            }
+
+            this.Path = Get.DataPath("cache");
+            this.settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
+            this.settings.Create();
+            this.settings.Load();
+
+        }
+
 
     }
 }

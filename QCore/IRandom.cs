@@ -83,6 +83,25 @@ namespace QuickTools.QCore
       '+','`','~'
       };
 
+        /// <summary>
+        /// Contains all the chars from Uppoercase ,lowercases and symbols 
+        /// </summary>
+        public static readonly Char[] Chars = {'!', '@', '%', '^', '&', '*', '=', '?', '.', ')', '(', '_', '+',
+'-', '*', '/',
+      '+','`','~','0', '1', '2', '3','4','5','6','7','8','9','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+'N',
+      'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+'n',
+      'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+      };
+
+
+
+        /// <summary>
+        /// Returns a Random char it could be anything from a letter , number or a symbol
+        /// </summary>
+        /// <value>The random char.</value>
+        public static Char RandomChar => IRandom.Chars[IRandom.RandomInt(0, IRandom.Chars.Length)]; 
 
         /// <summary>
         /// Contains an array of all the numbers allwed on the  IRandom
@@ -444,11 +463,12 @@ namespace QuickTools.QCore
 
             // initialize an array to store the bytes later 
             byte[] array = new byte[arrayLength];
+            Random rand = new Random();
             //RowBytes = ""; //making sure that the RowBytes are empty 
             // loop to full the array based on the Length
             for (int value = 0; value < array.Length; value++)
             {
-                Random rand = new Random();
+
                 int min = 0;
                 int max = 250;
                 // create a random number based on the 
@@ -458,7 +478,7 @@ namespace QuickTools.QCore
                 byte finalNumber = Convert.ToByte(number);
                 // adding the bytes 
                 array[value] = finalNumber;
-                RowBytes.Append(array[value] + ",");
+                //RowBytes.Append(array[value] + ",");
                 //RowBytes += array[value]+","; 
             }
             return array;
@@ -524,7 +544,7 @@ namespace QuickTools.QCore
                     byte finalNumber = Convert.ToByte(number);
                     // adding the bytes 
                     array[value] = finalNumber;
-                    RowBytes.Append(array[value] + ",");
+                    //RowBytes.Append(array[value] + ",");
                     //RowBytes += array[value]+","; 
                     if (printStatus == true)
                     {

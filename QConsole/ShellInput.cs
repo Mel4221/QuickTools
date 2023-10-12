@@ -312,9 +312,10 @@ namespace QuickTools.QConsole
 
         /// <summary>
         /// Initialization from the class
+        ///System.Environment.UserName System.Environment.MachineName
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="machineName"></param>
+        /// <param name="userName">System.Environment.UserName</param>
+        /// <param name="machineName">System.Environment.MachineName</param>
         public ShellInput(string userName,string machineName)
         {
             this.UserName = userName;
@@ -330,13 +331,14 @@ namespace QuickTools.QConsole
             this.SimbolTextColor = ConsoleColor.White;
 
         }
-        
+
         /// <summary>
         ///Initialize the instance 
+        ///System.Environment.UserName System.Environment.MachineName
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="machineName"></param>
-        /// <param name="currentPath"></param>
+        /// <param name="userName">System.Environment.UserName</param>
+        /// <param name="machineName">System.Environment.MachineName</param>
+        /// <param name="currentPath">CurrentPath</param>
         public ShellInput(string userName, string machineName,string currentPath)
         {
             this.UserName = userName;

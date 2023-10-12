@@ -28,63 +28,67 @@ using System.Xml;
 using System.Collections.Generic;
 namespace QuickTools.QData
 {
-      public partial class MiniDB:DB
+      public partial class MiniDB
       {
 
 
-        
-
-       
-
-            /// <summary>
-            /// Gets or sets the DBN ame.
-            /// </summary>
-            /// <value>The DBN ame.</value>
-            public string DBName { get; set; }
+        /// <summary>
+        /// Gets or sets the DBN ame.
+        /// </summary>
+        /// <value>The DBN ame.</value>
+        public string DBName { get; set; } = "";
 
             /// <summary>
             /// Gets or sets the name of the keys.
             /// </summary>
             /// <value>The name of the keys.</value>
-            public string KeysName { get; set; }
+            public string KeysName { get; set; } = "";
 
-            /// <summary>
-            /// Gets or sets the type of the relation or.
-            /// </summary>
-            /// <value>The type of the relation or.</value>
-            public string RelationOrType { get; set; }
+        /// <summary>
+        /// Gets or sets the type of the relation or.
+        /// </summary>
+        /// <value>The type of the relation or.</value>
+        public string RelationOrType { get; set; } = "";
 
-            /// <summary>
-            /// Gets or sets a value indicating whether this <see cref="T:QuickTools.MiniDB"/> allow repeated keys.
-            /// </summary>
-            /// <value><c>true</c> if allow repeated keys; otherwise, <c>false</c>.</value>
-            public bool AllowRepeatedKeys { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.MiniDB"/> allow repeated keys.
+        /// </summary>
+        /// <value><c>true</c> if allow repeated keys; otherwise, <c>false</c>.</value>
+        public bool AllowRepeatedKeys { get; set; } = false;
 
 
-            /// <summary>
-            /// Gets or sets a value indicating whether this <see cref="T:QuickTools.MiniDB"/> is interactive.
-            /// </summary>
-            /// <value><c>true</c> if interactive; otherwise, <c>false</c>.</value>
-            public bool Interactive { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.MiniDB"/> is interactive.
+        /// </summary>
+        /// <value><c>true</c> if interactive; otherwise, <c>false</c>.</value>
+        public bool Interactive { get; set; } = false; 
 
             /// <summary>
             /// Gets or sets the path.
             /// </summary>
             /// <value>The path.</value>
-            public string Path { get; set;  }
+            public string Path { get; set; } = "";
 
-            private bool ResentLoaded { get; set;  }
+        private bool ResentLoaded { get; set; } = false;
 
-            /// <summary>
-            /// Gets or sets the identifier.
-            /// </summary>
-            /// <value>The identifier.</value>
-            public int ID { get; set; }
-            XmlDocument Document;
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public int ID { get; set; } = 0;
+    
+        XmlDocument Document; // deprecated
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.MiniDB"/> allow debuger.
+        /// </summary>
+        /// <value><c>true</c> if allow debuger; otherwise, <c>false</c>.</value>
+        public bool AllowDebuger { get; set; } = false;
 
-            /// <summary>
-            /// Contains the Database from the program
-            /// </summary>
-            public List<DB> DataBase;
-      }
+        /// <summary>
+        /// Contains the Database from the program
+        /// </summary>
+        public List<DB> DataBase { get; set; } = new List<DB>();
+
+        private KeyManager DataManager { get; set; } = new KeyManager(); 
+    }
 }
