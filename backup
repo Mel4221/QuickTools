@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir ../_QuickTools
+cp -r * ../_QuickTools/
