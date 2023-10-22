@@ -116,8 +116,7 @@ namespace QuickTools.QCore
          */
 
         // this is the random selector 
-        static Random ranOrder = new Random();
-
+   
         /// <summary>
         /// Generate a Random Passord with a max 9 digits
         /// </summary>
@@ -125,34 +124,34 @@ namespace QuickTools.QCore
         public static string Password()
         {                        // this one will generate a minimum passowrd of 9 digits 
             StringBuilder password = new StringBuilder();
-            Random lower, upper, symbol, number;
-
-            lower = new Random();
-            upper = new Random();
-            symbol = new Random();
-            number = new Random();
+          
 
             // this will change the order of the password
 
             for (int PassWordLengh = 0; PassWordLengh < 9; PassWordLengh++)
             {
-                int order = ranOrder.Next(0, 4);
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
+                int order = rand.Next(0, 4);
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[lower.Next(0, LowerCase.Length)]);
+                        password.Append(LowerCase[rand.Next(0, LowerCase.Length)]);
                         break;
                     case 1:
-                        password.Append(UpperCase[upper.Next(0, UpperCase.Length)]);
+                        password.Append(UpperCase[rand.Next(0, UpperCase.Length)]);
                         break;
                     case 2:
-                        password.Append(Symbols[symbol.Next(0, Symbols.Length)]);
+                        password.Append(Symbols[rand.Next(0, Symbols.Length)]);
                         break;
                     case 3:
-                        password.Append(Numbers[number.Next(0, Numbers.Length)]);
+                        password.Append(Numbers[rand.Next(0, Numbers.Length)]);
                         break;
                     default:
-                        password.Append(Numbers[number.Next(0, Numbers.Length)]);
+                        password.Append(Numbers[rand.Next(0, Numbers.Length)]);
                         break;
 
                 }
@@ -180,36 +179,31 @@ namespace QuickTools.QCore
 
 
             string password = "";
-            Random lower, upper, number;
-
-            lower = new Random();
-            upper = new Random();
-            //symbol = new Random ();
-            number = new Random();
+            
 
             // this will change the order of the password
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = ranOrder.Next(0, 4);
+                int order = rand.Next(0, 4);
 
                 switch (order)
                 {
                     case 0:
-                        password += LowerCase[lower.Next(0, 26)];
+                        password += LowerCase[rand.Next(0, 26)];
 
                         break;
                     case 1:
-                        password += UpperCase[upper.Next(0, 26)];
+                        password += UpperCase[rand.Next(0, 26)];
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password += Numbers[number.Next(0, 10)];
+                        password += Numbers[rand.Next(0, 10)];
                         break;
                     default:
-                        password += Numbers[number.Next(0, 10)];
+                        password += Numbers[rand.Next(0, 10)];
                         break;
 
                 }
@@ -218,7 +212,7 @@ namespace QuickTools.QCore
             return password.Replace(" ", "");
         }
 
-
+        
         /// <summary>
         /// The random text counter.
         /// </summary>
@@ -239,36 +233,36 @@ namespace QuickTools.QCore
             }
 
             StringBuilder password = new StringBuilder();
-            Random lower, upper, number;
-
-            lower = new Random();
-            upper = new Random();
-            //symbol = new Random ();
-            number = new Random();
+        
 
             // this will change the order of the password
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = ranOrder.Next(0, 4);
+                int order = rand.Next(0, 4);
 
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[lower.Next(0, 26)]);
+                        password.Append(LowerCase[rand.Next(0, 26)]);
 
                         break;
                     case 1:
-                        password.Append(UpperCase[upper.Next(0, 26)]);
+                        password.Append(UpperCase[rand.Next(0, 26)]);
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password.Append(Numbers[number.Next(0, 10)]);
+                        password.Append(Numbers[rand.Next(0, 10)]);
                         break;
                     default:
-                        password.Append(Numbers[number.Next(0, 10)]);
+                        password.Append(Numbers[rand.Next(0, 10)]);
                         break;
 
                 }
@@ -300,36 +294,36 @@ namespace QuickTools.QCore
             }
 
             StringBuilder password = new StringBuilder();
-            Random lower, upper, number;
 
-            lower = new Random();
-            upper = new Random();
-            //symbol = new Random ();
-            number = new Random();
+            
 
             // this will change the order of the password
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = ranOrder.Next(0, 4);
-
+                int order = rand.Next(0, 4);
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[lower.Next(0, 26)]);
+                        password.Append(LowerCase[rand.Next(0, 26)]);
 
                         break;
                     case 1:
-                        password.Append(UpperCase[upper.Next(0, 26)]);
+                        password.Append(UpperCase[rand.Next(0, 26)]);
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password.Append(Numbers[number.Next(0, 10)]);
+                        password.Append(Numbers[rand.Next(0, 10)]);
                         break;
                     default:
-                        password.Append(Numbers[number.Next(0, 10)]);
+                        password.Append(Numbers[rand.Next(0, 10)]);
                         break;
 
                 }
@@ -353,36 +347,36 @@ namespace QuickTools.QCore
         {                       // this one will generate a minimum passowrd of 9 digits 
 
             string password = "";
-            Random lower, upper, symbol, number;
-
-            lower = new Random();
-            upper = new Random();
-            symbol = new Random();
-            number = new Random();
+           
 
             // this will change the order of the password
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = ranOrder.Next(0, 4);
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
+                int order = rand.Next(0, 4);
 
                 switch (order)
                 {
                     case 0:
-                        password += LowerCase[lower.Next(0, 26)];
+                        password += LowerCase[rand.Next(0, 26)];
 
                         break;
                     case 1:
-                        password += UpperCase[upper.Next(0, 26)];
+                        password += UpperCase[rand.Next(0, 26)];
                         break;
                     case 2:
-                        password += Symbols[symbol.Next(0, 14)];
+                        password += Symbols[rand.Next(0, 14)];
                         break;
                     case 3:
-                        password += Numbers[number.Next(0, 10)];
+                        password += Numbers[rand.Next(0, 10)];
                         break;
                     default:
-                        password += Numbers[number.Next(0, 10)];
+                        password += Numbers[rand.Next(0, 10)];
                         break;
 
                 }
@@ -404,14 +398,17 @@ namespace QuickTools.QCore
         public static int Pin()
         {
             string password = "".Replace(" ", "");
-            Random number = new Random();
 
             // this will change the order of the password
 
             for (int pin = 0; pin < 4; pin++)
             {
-
-                password += Numbers[number.Next(0, 9)];
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
+                password += Numbers[rand.Next(0, 9)];
             }
             pin = int.Parse(password);
 
@@ -429,16 +426,24 @@ namespace QuickTools.QCore
 
                 return "Invalid pin length";
             }
-
+            if (!RandomOpen)
+            {
+                rand = new Random();
+                RandomOpen = true;
+            }
             string password = "".Replace(" ", "");
-            Random number = new Random();
 
             // this will change the order of the password
 
             for (int pin = 0; pin < Level; pin++)
             {
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
 
-                password += Numbers[number.Next(0, 9)];
+                password += Numbers[rand.Next(0, 9)];
             }
 
             return password;
@@ -463,11 +468,15 @@ namespace QuickTools.QCore
 
             // initialize an array to store the bytes later 
             byte[] array = new byte[arrayLength];
-            Random rand = new Random();
             //RowBytes = ""; //making sure that the RowBytes are empty 
             // loop to full the array based on the Length
             for (int value = 0; value < array.Length; value++)
             {
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
 
                 int min = 0;
                 int max = 250;
@@ -513,7 +522,11 @@ namespace QuickTools.QCore
 
                 for (int value = 0; value < half; value++)
                 {
-                    Random rand = new Random();
+                    if (!RandomOpen)
+                    {
+                        rand = new Random();
+                        RandomOpen = true;
+                    }
                     int min = 0;
                     int max = 250;
                     // create a random number based on the 
@@ -534,7 +547,11 @@ namespace QuickTools.QCore
             b = new Thread(() => {
                 for (int value = half; value < total; value++)
                 {
-                    Random rand = new Random();
+                    if (!RandomOpen)
+                    {
+                        rand = new Random();
+                        RandomOpen = true;
+                    }
                     int min = 0;
                     int max = 250;
                     // create a random number based on the 
@@ -591,7 +608,11 @@ namespace QuickTools.QCore
 
             for (int value = 0; value < array.Length; value++)
             {
-                Random rand = new Random();
+                if (!RandomOpen)
+                {
+                    rand = new Random();
+                    RandomOpen = true;
+                }
                 int min = minimumRange;
                 int max = maximumRange;
 
@@ -604,6 +625,11 @@ namespace QuickTools.QCore
 
             return array;
         }
+
+
+
+        private static bool RandomOpen = false;
+        private static Random rand;
 
         /// <summary>
         /// Create a random number based on the rules that are passed 
@@ -620,13 +646,16 @@ namespace QuickTools.QCore
             }
 
             // string password = "".Replace(" ", "");
-            Random number = new Random();
+            if(RandomOpen == false)
+            {
+                RandomOpen = true;
+                rand = new Random();
+            }
+
+            int number = rand.Next(from, until);
 
 
-            int rand = number.Next(from, until);
-
-
-            return rand;
+            return number;
         }
 
 
@@ -644,7 +673,11 @@ namespace QuickTools.QCore
         /// <returns>Single Byte</returns>
         static public byte RandomByte()
         {
-            Random rand = new Random();
+            if (!RandomOpen)
+            {
+                 rand = new Random();
+                 RandomOpen = true; 
+            }
             int min = 0;
             int max = 250;
 

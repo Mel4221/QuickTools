@@ -71,6 +71,11 @@ using QuickTools.QCore;
         public bool SecureProtocol = false;
 
         /// <summary>
+        /// allow to see more information about the steps that the server is handeling
+        /// </summary>
+        public bool AllowDebugger { get; set; } = false; 
+
+        /// <summary>
         /// Gets or sets the request URL.
         /// </summary>
         /// <value>The request URL.</value>
@@ -183,11 +188,7 @@ using QuickTools.QCore;
             /// </summary>
         public List<ResponseHeader> ResponseHeaders= new List<ResponseHeader>();
         
-            /// <summary>
-            /// 
-            /// </summary>
-        public Func<List<ResponseHeader>> SetResponseHeadersList = () => { return new List<ResponseHeader>(); }; 
-
+          
                   
 
                   /// <summary>
@@ -206,14 +207,19 @@ using QuickTools.QCore;
                         HttpListenerContext context = listener.GetContext();
                         HttpListenerRequest request = context.Request;
                         HttpListenerResponse response = context.Response;
-                        List<ResponseHeader> headers = SetResponseHeadersList();
+                        List<ResponseHeader> headers = ResponseHeaders;
                         if (headers.Count > 0)
                         {
                             foreach (var header in headers)
                             {
                                 response.Headers.Add(header.Key, header.Value);
-                            }
-                        }
+                    if (this.AllowDebugger)
+                    {
+                        Get.Yellow($"ResponseHeaders Key: [{header.Key}] Value: [{header.Value}]");
+                    }
+
+                }
+            }
 
                         this.RequestUrl = request.RawUrl.Substring(1);
                   byte[] buffer = ResponseFunction(request);

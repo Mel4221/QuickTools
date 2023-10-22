@@ -4426,6 +4426,11 @@
             </summary>
             <value><c>true</c> if secure protocol; otherwise, <c>false</c>.</value>
         </member>
+        <member name="P:QuickTools.QNet.QServer.AllowDebugger">
+            <summary>
+            allow to see more information about the steps that the server is handeling
+            </summary>
+        </member>
         <member name="P:QuickTools.QNet.QServer.RequestUrl">
             <summary>
             Gets or sets the request URL.
@@ -4495,11 +4500,6 @@
         <member name="F:QuickTools.QNet.QServer.ResponseHeaders">
             <summary>
             The response headers.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QNet.QServer.SetResponseHeadersList">
-            <summary>
-            
             </summary>
         </member>
         <member name="M:QuickTools.QNet.QServer.Listen">
