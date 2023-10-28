@@ -4,56 +4,6 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationIcon>setting.ico</ApplicationIcon>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>QuickTools Library</Title>
-    <Description>About
-This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
-    <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://github.com/Mel4221/QuickTools</PackageProjectUrl>
-    <PackageIcon>setting.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/Mel4221/QuickTools/</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>tool security database data files manager console QuickTools</PackageTags>
-    <PackageReleaseNotes>This version was ported to the .NET7 due to some issues while trying to keep it on the .net Freamwork version , this version 
-contains the same list of benefits from the previus one , and some extra updates on the fallowing 
-MiniDB : bugs fixed , 
-KeyManager:  allwos to controll  data on a Key and value format ,
-Hash Fuctions for files and data builtin , 
-and more bugs were fixed </PackageReleaseNotes>
-    <AssemblyVersion>3000.0.0</AssemblyVersion>
-    <FileVersion>2.7.0.0</FileVersion>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
-    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
-    <EnableNETAnalyzers>False</EnableNETAnalyzers>
-    <AnalysisLevel>latest-minimum</AnalysisLevel>
-    <Version>3000.0.0</Version>
-    <Authors>QuickTools_MBV </Authors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="setting.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="setting.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
 
 </Project>
