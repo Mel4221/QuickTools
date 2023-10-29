@@ -4431,6 +4431,11 @@
             allow to see more information about the steps that the server is handeling
             </summary>
         </member>
+        <member name="P:QuickTools.QNet.QServer.PrintResponseFunctionStatus">
+            <summary>
+            prints the responseFunctions actual data
+            </summary>
+        </member>
         <member name="P:QuickTools.QNet.QServer.RequestUrl">
             <summary>
             Gets or sets the request URL.

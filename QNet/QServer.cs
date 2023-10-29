@@ -73,7 +73,12 @@ using QuickTools.QCore;
         /// <summary>
         /// allow to see more information about the steps that the server is handeling
         /// </summary>
-        public bool AllowDebugger { get; set; } = false; 
+        public bool AllowDebugger { get; set; } = false;
+
+        /// <summary>
+        /// prints the responseFunctions actual data
+        /// </summary>
+        public static bool PrintResponseFunctionStatus { get; set; } = false; 
 
         /// <summary>
         /// Gets or sets the request URL.
@@ -84,7 +89,7 @@ using QuickTools.QCore;
         /// <summary>
         /// The response function.
         /// </summary>
-        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { return new byte[0]; };
+        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { if (PrintResponseFunctionStatus) Get.Yellow($"Response Function: {item.RawUrl}"); return new byte[0]; };
          
         /// <summary>
         /// Converts to html.
@@ -213,15 +218,19 @@ using QuickTools.QCore;
                             foreach (var header in headers)
                             {
                                 response.Headers.Add(header.Key, header.Value);
-                    if (this.AllowDebugger)
-                    {
-                        Get.Yellow($"ResponseHeaders Key: [{header.Key}] Value: [{header.Value}]");
-                    }
+                                if (this.AllowDebugger)
+                                {
+                                    Get.Yellow($"ResponseHeaders Key: [{header.Key}] Value: [{header.Value}]");
+                                }
 
-                }
-            }
-
-                        this.RequestUrl = request.RawUrl.Substring(1);
+                            }
+                        }
+            /*
+              what this says is that it will give to the response function as anrgument the actual
+            request url just in case if the request is given as aparameter such as 
+              http://localhost:4251/?exit-request=mel
+             */
+                 this.RequestUrl = request.RawUrl.Substring(1);
                   byte[] buffer = ResponseFunction(request);
                   response.ContentLength64 = buffer.Length;
 
