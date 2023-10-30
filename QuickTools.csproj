@@ -23,7 +23,7 @@ KeyManager:  allwos to controll  data on a Key and value format ,
 Hash Fuctions for files and data builtin , 
 and more bugs were fixed </PackageReleaseNotes>
     <AssemblyVersion>3000.0.0</AssemblyVersion>
-    <FileVersion>2.7.0.0</FileVersion>
+    <FileVersion>3000.0.0</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
