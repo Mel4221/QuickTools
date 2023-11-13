@@ -46,6 +46,7 @@ namespace QuickTools.QData
             /// <param name="dbName">Db name.</param>
             public MiniDB(string dbName)
             {
+                  
                   DBName = dbName;
                   KeysName = "Key";
                   RelationOrType = "NULL";

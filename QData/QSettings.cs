@@ -38,12 +38,15 @@ namespace QuickTools.QData
       /// it actually works pretty well and it is very simple to use 
       /// </summary>
       public class QSettings
-      {     
+      {
 
-            /// <summary>
-            /// Sedttigns Object
-            /// </summary>
-            public class Settings
+        /*
+            Start Fields
+         */
+        /// <summary>
+        /// Sedttigns Object
+        /// </summary>
+        public class Settings
             {
                   /// <summary>
                   /// Gets or sets the key.
@@ -56,48 +59,44 @@ namespace QuickTools.QData
                   /// </summary>
                   /// <value>The value.</value>
                   public string Value { get; set; }
-            }
+                    
+                    /// <summary>
+                    /// contains the group name of the setting to create a relationship between them
+                    /// </summary>
+                  public string Group { get; set; } = "Setting";
 
-            /// <summary>
-            /// Gets or sets the default path.
-            /// </summary>
-            /// <value>The default path.</value>
-            public string DefaultPath { get; set; }
-            /// <summary>
-            /// This contains the list of keys in the settings file 
-            /// </summary>
-            public List<string> Keys;
+        }
 
-            /// <summary>
-            /// This Will contain the values from the settings file 
-            /// </summary>
-            public List<string> Values;
+
+
 
             /// <summary>
             /// This will contains the list of settings
             /// </summary>
-            public List<Settings> SettingsList; 
-
+            public List<Settings> SettingsList { get; set; } = new List<Settings>(); 
+            /// <summary>
+            /// contains the mini db for the settings 
+            /// </summary>
+            private MiniDB SettingsDB { get; set; } = new MiniDB();
             /// <summary>
             /// Gets or sets the name of the file.
             /// </summary>
             /// <value>The name of the file.</value>
-            public string FileName { get; set; }
-
+            public string FileName { get; set; } = null;
+            
             /// <summary>
-            /// Gets or sets the name of the element.
+            /// Allow to print to the console the current status of the internal MiniDB
             /// </summary>
-            /// <value>The name of the element.</value>
-            public string ElementName { get; set; }
+            public bool AllowDebugger { get; set; } = false; 
 
             /// <summary>
             /// Gets or sets the name of the group of tags in the settings 
             /// </summary>
             /// <value>The name of the group.</value>
-            public string GroupName { get; set; }
 
-            private XmlDocument Document;
-
+            /*
+                End Fields
+             */
 
             /// <summary>
             /// Create the specified settings file with the given name .
@@ -105,34 +104,16 @@ namespace QuickTools.QData
             /// <returns> true if created was sucessfull otherwise flase </returns>
             public bool Create()
             {
-                  if(FileName == null || FileName == "")
-                  {
-                        // throw new Exception("File name not spesified yet"); 
-                        return false; 
-                  }
-                  if (File.Exists(FileName))
-                  {
-                        return false; 
-                        //throw new Exception($"{FileName} Already Exist"); 
-                  }
-
-                  XmlWriterSettings settings = new XmlWriterSettings();
-                  settings.Indent = true;
-                  settings.IndentChars = ("    ");
-                  settings.CloseOutput = true;
-                  settings.OmitXmlDeclaration = true;
-
-                  using (XmlWriter writer = XmlWriter.Create(FileName, settings))
-                  {
-
-
-                        writer.WriteStartElement(GroupName);
-
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                        writer.Flush();
-                  }
-                  return true;
+                if(this.FileName == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.SettingsDB = new MiniDB(this.FileName);
+                    this.SettingsDB.Create(); 
+                    return true; 
+                }
             }
 
 
@@ -141,50 +122,24 @@ namespace QuickTools.QData
             /// </summary>
             public void Load()
             {
-                  Keys = new List<string>();
-                  Values = new List<string>();
-                  SettingsList = new List<Settings>();
-                  var obj = new Settings(); 
-
-                  using (XmlReader reader = XmlReader.Create(FileName))
-                  {
-
-
-                        while (reader.Read())
-                        {
-
-
-                              if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
-                              {
-                                    if (reader.HasAttributes)
-                                    {
-
-                                          if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
-                                          {
-
-                                                // Get.Green($"{reader.Name} {reader.GetAttribute(0)}");
-                                                string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
-                                                string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1); 
-                                                Keys.Add(key);
-                                                Values.Add(value);
-
-                                                SettingsList.Add(new Settings()
-                                                {
-                                                      Key = key,
-                                                      Value = value
-                                                });
-
-                                          }
-                                    }
-
-                              }
-
-
-                        }
-                  }
-
-
-
+               if(this.FileName != null)
+            {
+                this.SettingsList = new List<Settings>(); 
+                this.SettingsDB = new MiniDB(this.FileName);
+                this.SettingsDB.AllowDebuger = this.AllowDebugger; 
+                this.SettingsDB.Load();
+                List<DB> db = this.SettingsDB.DataBase;
+                for (int item = 0; item < db.Count; item++)
+                {
+                    this.SettingsList.Add(new Settings() 
+                    {
+                        Key = db[item].Key,
+                        Value = db[item].Value,
+                        Group = db[item].Relation
+                    });
+                }
+            }
+             
             }
 
 
@@ -194,53 +149,27 @@ namespace QuickTools.QData
             /// <param name="fileName">File name.</param>
             public void Load(string fileName)
             {
-
-                  Keys = new List<string>();
-                  Values = new List<string>();
-                  SettingsList = new List<Settings>();
-                  //Settings obj = new Settings();
-
-
-                  using (XmlReader reader = XmlReader.Create(FileName))
-                  {
-
-
-                        while (reader.Read())
-                        {
-
-
-                              if ((reader.NodeType == XmlNodeType.Element) && reader.Name != "")//(reader.Name.IndexOf("DATE") == 0))
-                              {
-                                    if (reader.HasAttributes)
-                                    {
-
-                                          if (reader.GetAttribute(0).IndexOf("[") == 0 && reader.GetAttribute(0).IndexOf("]") > 0)
-                                          {
-
-                                                string key = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("[") + 1, reader.GetAttribute(0).IndexOf("]") - 1);
-                                                string value = reader.GetAttribute(0).Substring(reader.GetAttribute(0).IndexOf("]") + 1);
-
-                                                Keys.Add(key);
-                                                Values.Add(value);
-
-                                                SettingsList.Add(new Settings() {
-                                                      Key = key,
-                                                      Value = value
-                                                });
-                                          }
-                                    }
-
-                              }
-
-
-                        }
-                  }
-
-
-
+                this.FileName = fileName;
+                this.Load(); 
             }
-
-
+            
+            /// <summary>
+            /// retuns true if it find the given key setting
+            /// </summary>
+            /// <param name="setting"></param>
+            /// <returns></returns>
+            public bool Exist(string setting)
+            {
+                this.Load();
+                foreach(Settings item in this.SettingsList)
+                {
+                    if(item.Key == setting)
+                    {
+                        return true; 
+                    }
+                }
+                return false; 
+            }
             /// <summary>
             /// Adds the setting with the given key and value 
             /// </summary>
@@ -248,122 +177,84 @@ namespace QuickTools.QData
             /// <param name="value">Value.</param>
             public void AddSetting(string key, object value)
             {
-                  //Get.Wait(this.GetSetting(key));
-                  if (this.GetSetting(key) != null)
-                  {
-                        throw new Exception("This Key already exist");
-                  }
-                
-
-                        Document = new XmlDocument();
-                        Document.Load(FileName);
-                        XmlNode root = Document.FirstChild;
-                        XmlElement element = Document.CreateElement(ElementName);
-                        element.SetAttribute(key, $"[{key}]{value}");
-                        root.AppendChild(element);
-                        Document.Save(FileName);
-                        this.Load();
-
-               
+                 this.AddSetting(key, value, "Setting"); 
             }
 
-            /// <summary>
-            /// Get the setting value from the key 
-            /// </summary>
-            /// <returns>The setting.</returns>
-            /// <param name="key">Key.</param>
-            public string GetSetting(string key)
+        /// <summary>
+        /// Adds the setting with the given key and value  + a group
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="group"></param>
+        public void AddSetting(string key, object value,string group)
             {
-                  this.Load();
-                  string setting = null;
-
-                  for (int value = 0; value < Keys.Count; value++)
-                  {
-                        if (Keys[value] == key)
-                        {
-                              return Values[value];
-                        }
-                  }
-
-                  return setting;
+                this.Load();
+                if (this.Exist(key))
+                {
+                    return;
+                }
+                this.SettingsList.Add(new Settings()
+                {
+                    Key = key,
+                    Value = value.ToString(),
+                    Group = group
+                });
+                this.Refresh();
             }
-
-            /// <summary>
-            /// Removes the setting from the setting file 
-            /// </summary>
-            /// <param name="key">Key.</param>
-            public void RemoveSetting(string key)
+        /// <summary>
+        /// Get the setting value from the key 
+        /// </summary>
+        /// <returns>The setting.</returns>
+        /// <param name="key">Key.</param>
+        public string GetSetting(string key)
             {
-
-                  List<string> tempKeys = new List<string>();
-                  List<string> tempValues = new List<string>();
-
-                  XmlWriterSettings settings = new XmlWriterSettings();
-                  settings.Indent = true;
-                  settings.IndentChars = ("    ");
-                  settings.CloseOutput = true;
-                  settings.OmitXmlDeclaration = true;
-                  this.Load();
-
-                  using (XmlWriter writer = XmlWriter.Create(FileName, settings))
-                  {
-                        writer.WriteStartElement(GroupName);
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                        writer.Flush();
-                  }
-
-                  for (int value = 0; value < Keys.Count; value++)
-                  {
-                        if (Keys[value] != key)
+                  this.Load(); 
+                  foreach(Settings setting in this.SettingsList)
+                    {
+                        if(setting.Key == key)
                         {
-                              tempKeys.Add(Keys[value]);
-                              tempValues.Add(Values[value]);
+                            return setting.Value; 
                         }
-                  }
-
-                  Values = tempValues;
-                  Keys = tempKeys;
-                  this.Refresh();
+                    }
+                  return null;
             }
+
+        /// <summary>
+        /// Removes the setting from the setting file 
+        /// </summary>
+        /// <param name="key">Key.</param>
+        public void RemoveSetting(string key)
+        {
+            this.Load();
+            for (int item = 0; item < this.SettingsList.Count; item++)
+            {
+                        if (this.SettingsList[item].Key == key)
+                        {
+                            this.SettingsList.RemoveAt(item);
+                            return; 
+                        }
+            }
+            this.Refresh();
+        }
 
             /// <summary>
             /// Refresh the settings values
             /// </summary>
             public void Refresh()
             {
-                  XmlWriterSettings settings = new XmlWriterSettings();
-                  settings.Indent = true;
-                  settings.IndentChars = ("    ");
-                  settings.CloseOutput = true;
-                  settings.OmitXmlDeclaration = true;
-
-                  using (XmlWriter writer = XmlWriter.Create(FileName, settings))
-                  {
-
-
-                        writer.WriteStartElement("Settings");
-
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                        writer.Flush();
-                  }
-
-                  for (int value = 0; value < Keys.Count; value++)
-                  {
-
-                        Document = new XmlDocument();
-                        Document.Load(FileName);
-                        XmlNode root = Document.FirstChild;
-                        XmlElement element = Document.CreateElement(ElementName);
-
-                        element.SetAttribute(Keys[value], $"[{Keys[value]}]{Values[value]}");
-                        root.AppendChild(element);
-                        Document.Save(FileName);
-
-                  }
-
-                  this.Load();
+                List<DB> db = new List<DB>();
+                foreach(Settings setting in this.SettingsList)
+                {
+                    db.Add(new DB()
+                    {
+                        Key = setting.Key,
+                        Value = setting.Value,
+                        Relation = setting.Group
+                    });
+                }
+                this.SettingsDB.DataBase.Clear(); 
+                this.SettingsDB.DataBase = db;
+                this.SettingsDB.SaveChanges(); 
             }
 
             /// <summary>
@@ -373,52 +264,20 @@ namespace QuickTools.QData
             /// <param name="newValue">New value.</param>
             public void UpdateSetting(string setting, object newValue)
             {
-                  this.Load();
-                  for (int value = 0; value < Keys.Count; value++)
-                  {
-                        if (Keys[value] == setting)
-                        {
-
-                              Values[value] = newValue.ToString();
-                              this.Refresh();
-                                return; 
-                    
-                        }
-                  }
-            throw new Exception("Setting Not Found"); 
-
-            }
-        
-
-
-
-        /// <summary>
-        /// This version actually adds the setting if it does not find it 
-        /// </summary>
-        /// <param name="setting"></param>
-        /// <param name="newValue"></param>
-        /// <param name="addIfNotExiist"></param>
-        public void UpdateSetting(string setting, object newValue, bool addIfNotExiist)
-        {
             this.Load();
-            
-            for (int value = 0; value < Keys.Count; value++)
+            for (int item = 0; item < this.SettingsList.Count; item++)
             {
-                if (Keys[value] == setting)
+                if (this.SettingsList[item].Key == setting)
                 {
-
-                    Values[value] = newValue.ToString();
-                    this.Refresh();
+                    this.SettingsList[item].Value = newValue.ToString(); 
                     return;
-
                 }
             }
-            if(addIfNotExiist == true)
-            {
-                this.AddSetting(setting,newValue);
-            }
-
+            this.Refresh(); 
         }
+        
+
+ 
 
         /// <summary>
         /// Delete the settings file
@@ -440,15 +299,9 @@ namespace QuickTools.QData
         /// </summary>
         public QSettings()
             {
-                  ElementName = "Setting";
-                  GroupName = "Settings";
-            this.DefaultPath = Get.DataPath("settings");
-            FileName = $"{this.DefaultPath}Settings.xml";
+ 
 
-                  //Create();
-
-
-                  }
+            }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
             /// with only the file name 
@@ -457,78 +310,21 @@ namespace QuickTools.QData
             public QSettings(string fileName)
             {
 
-                  if (!fileName.Contains("."))
-                  {
-                        fileName += ".xml";
-                  }
-                  FileName = fileName; 
-                  ElementName = "Setting";
-                  GroupName = "Settings";
-            this.DefaultPath = Get.DataPath("settings");
-            this.FileName = $"{this.DefaultPath}{fileName}";
                   //Create();
 
 
-                  }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-            /// <param name="elementName">Element name.</param>
-            public QSettings(string fileName,string elementName)
-            {
-                  if (!fileName.Contains("."))
-                  {
-                        fileName += ".xml";
-                  }
-                  FileName = fileName;
-                  ElementName = elementName; 
-                  GroupName = "Settings";
-            this.DefaultPath = Get.DataPath("settings");
-            this.FileName = $"{this.DefaultPath}{fileName}";
-
-
-
-                  }
-            /// <summary>
-            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
-            /// The settings will have to be manually ajusted 
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-            /// <param name="groupName">Group name.</param>
-            /// <param name="elementName">Element name.</param>
-            public QSettings(string fileName, string groupName, string elementName)
-            {
-                 // this.Create();
-                  FileName = fileName;
-                  ElementName = elementName;
-                  GroupName = groupName;
-                  this.DefaultPath = Get.DataPath("settings");
-                  this.FileName = $"{this.DefaultPath}{fileName}";
-
-
-
             }
-
-        /// <summary>
-        /// Initalize instance 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="groupName"></param>
-        /// <param name="elementName"></param>
-        /// <param name="defaultPath"></param>
-        public QSettings(string fileName, string groupName, string elementName,string defaultPath)
-        {
-            // this.Create();
-            FileName = fileName;
-            ElementName = elementName;
-            GroupName = groupName;
-            this.DefaultPath = defaultPath;
-            this.FileName = $"{this.DefaultPath}{fileName}";
-
-
-
-        }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="groupName">Element name.</param>
+            public QSettings(string fileName,string groupName)
+            {
+              
+            }
+    
+           
 
 
     }

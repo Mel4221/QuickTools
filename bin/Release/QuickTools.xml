@@ -1130,6 +1130,14 @@
             </summary>
             <param name="action">Action.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.Wait(System.String,System.Boolean)">
+            <summary>
+            This version of Get.Wait is designed to be inside a loop 
+            and be updated as the loop goes through it 
+            </summary>
+            <param name="label"></param>
+            <param name="ignored"></param>
+        </member>
         <member name="M:QuickTools.QCore.Get.Wait(System.String,System.Action)">
             <summary>
             Wait the specified  action to finish and prints this label while waits and a wating simbol 
@@ -1256,6 +1264,12 @@
             Returns the Number taken by the fallowing
             Get.Input();
             Get.NumberInput(); 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QCore.Get.LongNumber">
+            <summary>
+            Holds the value of long numbers for operations that require long operations 
+            such as <see cref="M:QuickTools.QCore.Get.FileSize(System.String)"/>
             </summary>
         </member>
         <member name="F:QuickTools.QCore.Get.input">
@@ -1496,6 +1510,21 @@
             Gets an input without showing it on the screen
             </summary>
             <returns>The password.</returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Password(System.String,System.Boolean)">
+            <summary>
+            gets the input of a passwords and check to make sure that is the same 2 times
+            </summary>
+            <param name="label"></param>
+            <param name="repeat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Password(System.String)">
+            <summary>
+            Gets the input of a private password and return it 
+            </summary>
+            <param name="label"></param>
+            <returns></returns>
         </member>
         <member name="M:QuickTools.QCore.Get.NotFound(System.Object)">
             <summary>
@@ -2121,11 +2150,6 @@
             provides a diferent way to cache the data on a way that the data does get deleted right after if is not required
             </summary>
         </member>
-        <member name="P:QuickTools.QData.DataCacher.Path">
-            <summary>
-            contains the path to get to the cache
-            </summary>
-        </member>
         <member name="P:QuickTools.QData.DataCacher.CacheFile">
             <summary>
             contains the Cache file
@@ -2332,13 +2356,6 @@
             </summary>
             <param name="keys">Keys.</param>
         </member>
-        <member name="M:QuickTools.QData.KeyManager.ReadKeys(System.String)">
-            <summary>
-            Reads the keys from the provided file
-            </summary>
-            <returns>The keys.</returns>
-            <param name="keyFile">Key file.</param>
-        </member>
         <member name="T:QuickTools.QData.Variable">
             <summary>
             this is a class that represent a variable wich contains it's name and value
@@ -2360,6 +2377,12 @@
             Contains the value of the variable
             </summary>
         </member>
+        <member name="P:QuickTools.QData.Variable.Buffer">
+            <summary>
+            This inplementation was added to allwo the virtual stack
+            to hold binary data insede of it aswell 
+            </summary>
+        </member>
         <member name="P:QuickTools.QData.Variable.IsConstant">
             <summary>
             Contains the property that make the object to be treated as a contant
@@ -2368,6 +2391,11 @@
         <member name="P:QuickTools.QData.Variable.IsFunction">
             <summary>
             Defines if the variable is a function
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Variable.IsEmpty">
+            <summary>
+            Identify that the current variable is empty
             </summary>
         </member>
         <member name="M:QuickTools.QData.Variable.ToString">
@@ -2386,6 +2414,32 @@
             <summary>
             By default the name is "Stack.dump"
             </summary>
+        </member>
+        <member name="M:QuickTools.QData.VirtualStack.GetIndex">
+            <summary>
+            Gets the current varialble count and subtract 1 and returns the value of the Variables list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QData.VirtualStack.VirtualStackSize">
+            <summary>
+            Returns the size of the current stack
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QData.VirtualStack.Exist(QuickTools.QData.Variable)">
+            <summary>
+            finds if the given variable exist
+            </summary>
+            <param name="variable"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QData.VirtualStack.SetVariable(QuickTools.QData.Variable)">
+            <summary>
+            Set the variable with the given value
+            </summary>
+            <param name="variable"></param>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="M:QuickTools.QData.VirtualStack.GetVariable(System.String)">
             <summary>
@@ -2409,12 +2463,6 @@
             <param name="value"></param>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:QuickTools.QData.VirtualStack.SetVariable(QuickTools.QData.Variable)">
-            <summary>
-            Set the variable with the given value
-            </summary>
-            <param name="variable"></param>
-        </member>
         <member name="M:QuickTools.QData.VirtualStack.SetConstant(System.String,System.String)">
             <summary>
             Set a constant value that can not be change allong the program life
@@ -2422,6 +2470,12 @@
             <param name="variable"></param>
             <param name="value"></param>
             <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:QuickTools.QData.VirtualStack.Free(System.String)">
+            <summary>
+            Free the variable from  the virtual stack
+            </summary>
+            <param name="variable"></param>
         </member>
         <member name="M:QuickTools.QData.VirtualStack.Flush">
             <summary>
@@ -2928,25 +2982,19 @@
             </summary>
             <value>The value.</value>
         </member>
-        <member name="P:QuickTools.QData.QSettings.DefaultPath">
+        <member name="P:QuickTools.QData.QSettings.Settings.Group">
             <summary>
-            Gets or sets the default path.
-            </summary>
-            <value>The default path.</value>
-        </member>
-        <member name="F:QuickTools.QData.QSettings.Keys">
-            <summary>
-            This contains the list of keys in the settings file 
+            contains the group name of the setting to create a relationship between them
             </summary>
         </member>
-        <member name="F:QuickTools.QData.QSettings.Values">
-            <summary>
-            This Will contain the values from the settings file 
-            </summary>
-        </member>
-        <member name="F:QuickTools.QData.QSettings.SettingsList">
+        <member name="P:QuickTools.QData.QSettings.SettingsList">
             <summary>
             This will contains the list of settings
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.QSettings.SettingsDB">
+            <summary>
+            contains the mini db for the settings 
             </summary>
         </member>
         <member name="P:QuickTools.QData.QSettings.FileName">
@@ -2955,17 +3003,10 @@
             </summary>
             <value>The name of the file.</value>
         </member>
-        <member name="P:QuickTools.QData.QSettings.ElementName">
+        <member name="P:QuickTools.QData.QSettings.AllowDebugger">
             <summary>
-            Gets or sets the name of the element.
+            Allow to print to the console the current status of the internal MiniDB
             </summary>
-            <value>The name of the element.</value>
-        </member>
-        <member name="P:QuickTools.QData.QSettings.GroupName">
-            <summary>
-            Gets or sets the name of the group of tags in the settings 
-            </summary>
-            <value>The name of the group.</value>
         </member>
         <member name="M:QuickTools.QData.QSettings.Create">
             <summary>
@@ -2984,12 +3025,27 @@
             </summary>
             <param name="fileName">File name.</param>
         </member>
+        <member name="M:QuickTools.QData.QSettings.Exist(System.String)">
+            <summary>
+            retuns true if it find the given key setting
+            </summary>
+            <param name="setting"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QData.QSettings.AddSetting(System.String,System.Object)">
             <summary>
             Adds the setting with the given key and value 
             </summary>
             <param name="key">Key.</param>
             <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.QSettings.AddSetting(System.String,System.Object,System.String)">
+            <summary>
+            Adds the setting with the given key and value  + a group
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="group"></param>
         </member>
         <member name="M:QuickTools.QData.QSettings.GetSetting(System.String)">
             <summary>
@@ -3015,14 +3071,6 @@
             </summary>
             <param name="setting">Setting.</param>
             <param name="newValue">New value.</param>
-        </member>
-        <member name="M:QuickTools.QData.QSettings.UpdateSetting(System.String,System.Object,System.Boolean)">
-            <summary>
-            This version actually adds the setting if it does not find it 
-            </summary>
-            <param name="setting"></param>
-            <param name="newValue"></param>
-            <param name="addIfNotExiist"></param>
         </member>
         <member name="M:QuickTools.QData.QSettings.DeleteSettingsFile">
             <summary>
@@ -3050,25 +3098,7 @@
             Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
             </summary>
             <param name="fileName">File name.</param>
-            <param name="elementName">Element name.</param>
-        </member>
-        <member name="M:QuickTools.QData.QSettings.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
-            The settings will have to be manually ajusted 
-            </summary>
-            <param name="fileName">File name.</param>
-            <param name="groupName">Group name.</param>
-            <param name="elementName">Element name.</param>
-        </member>
-        <member name="M:QuickTools.QData.QSettings.#ctor(System.String,System.String,System.String,System.String)">
-            <summary>
-            Initalize instance 
-            </summary>
-            <param name="fileName"></param>
-            <param name="groupName"></param>
-            <param name="elementName"></param>
-            <param name="defaultPath"></param>
+            <param name="groupName">Element name.</param>
         </member>
         <member name="T:QuickTools.QData.User">
             <summary>
@@ -4693,6 +4723,48 @@
             The secure class is a class that uses the Aes tecnology to encrypt data by using
             a public key and a 
             </summary>
+        </member>
+        <member name="P:QuickTools.QSecurity.Secure.PrintingTime">
+            <summary>
+            set the printing time speed
+            </summary>
+        </member>
+        <member name="P:QuickTools.QSecurity.Secure.OutFile">
+            <summary>
+            Set an out file for the EncryptFile method
+            </summary>
+        </member>
+        <member name="P:QuickTools.QSecurity.Secure.AllowDebugger">
+            <summary>
+            Allows to print information about the setatus of the 
+            methods in use
+            </summary>
+        </member>
+        <member name="P:QuickTools.QSecurity.Secure.CurrentStatus">
+            <summary>
+            display the current status of the function
+            </summary>
+        </member>
+        <member name="M:QuickTools.QSecurity.Secure.EncryptFile(System.String,System.String,System.Byte[])">
+            <summary>
+            Encrypt a file with the given password and iv key
+            </summary>
+            <param name="file"></param>
+            <param name="password"></param>
+            <param name="iv"></param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:QuickTools.QSecurity.Secure.DecryptFile(System.String,System.String,System.Byte[])">
+            <summary>
+            Decrypt the file with the given information 
+            </summary>
+            <param name="file"></param>
+            <param name="password"></param>
+            <param name="iv"></param>
+            <exception cref="T:System.IO.FileNotFoundException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Exception">Invalid Password Exseption</exception>
         </member>
         <member name="M:QuickTools.QSecurity.Secure.Decrypt(System.Byte[],System.Object,System.Byte[])">
             <summary>

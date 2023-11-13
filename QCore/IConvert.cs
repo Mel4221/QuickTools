@@ -370,10 +370,10 @@ namespace QuickTools.QCore
             {
                 if (showDebuger == true)
                 {
-                    Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
+                    Color.Yellow("It Looks like the array was too Big and you ran out of memory \n" + ex);
 
                 }
-                return str1.ToString() + str2.ToString();
+                return null;
             }
 
 
@@ -489,7 +489,7 @@ namespace QuickTools.QCore
             {
                 if (showDebuger == true)
                 {
-                    Color.Yellow("It Looks like the array was empty and it can not be converted \n" + ex);
+                    Color.Yellow("It Looks like the array was too Big and you ran out of memory \n" + ex);
 
                 }
                 return null;

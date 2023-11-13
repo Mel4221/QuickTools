@@ -23,8 +23,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
 using QuickTools.QIO;
+ 
 namespace QuickTools.QCore
       {
 
@@ -39,6 +39,11 @@ namespace QuickTools.QCore
                   /// <param name="directoryName">Directory name.</param>
                   public static void Directory(string directoryName)
                   {
+                        if(System.IO.Directory.Exists(directoryName))
+                        {
+                            Get.Red($"The directory '{directoryName}' already exist!!!");
+                            return;
+                        }                        
                         System.IO.Directory.CreateDirectory(directoryName); 
                   }
 
@@ -48,7 +53,12 @@ namespace QuickTools.QCore
             /// <param name="fileName">File name.</param>
                   public static void File(string fileName)
                   {
-                        System.IO.File.Create(fileName); 
+			            if (System.IO.File.Exists(fileName))
+			            {
+				            Get.Red($"The File '{fileName}' already exist!!!");
+				            return;
+			            }
+			            System.IO.File.Create(fileName); 
                   }
             /// <summary>
             /// File the specified fileName and content.
@@ -57,7 +67,7 @@ namespace QuickTools.QCore
             /// <param name="content">Content.</param>
                   public static void File(string fileName,byte[] content)
                   {
-                        Binary.Write(fileName , content , 0 , content.Length); 
+                        Binary.Writer(fileName , content); 
                   }
             }     
       }

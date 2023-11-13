@@ -16,17 +16,14 @@ namespace QuickTools.QData
     public class DataCacher
     {
         private QSettings settings;
-        /// <summary>
-        /// contains the path to get to the cache
-        /// </summary>
-        public string Path { get; set; }
+ 
 
 
         /// <summary>
         /// contains the Cache file
         /// QuickToolsCache.xml
         /// </summary>
-        public string CacheFile { get; set; } = "QuickToolsCache.xml";
+        public string CacheFile { get; set; } = "QuickTools.cache";
 
         /// <summary>
         /// Cache the given data 
@@ -112,8 +109,8 @@ namespace QuickTools.QData
         {
             //this.ClearCache();
             
-            this.Path = Get.DataPath("cache");
-            this.settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
+            
+            this.settings = new QSettings(this.CacheFile);
             this.settings.Create();
             this.settings.Load();
 
@@ -125,8 +122,8 @@ namespace QuickTools.QData
                 this.ClearCache();
             }
 
-            this.Path = Get.DataPath("cache");
-            this.settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
+          
+            this.settings = new QSettings(this.CacheFile);
             this.settings.Create();
             this.settings.Load();
 

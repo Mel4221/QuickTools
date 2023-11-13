@@ -1,8 +1,8 @@
-﻿using QuickTools.QIO;
-using System;
+﻿using System;
+using System.IO; 
 using System.Collections.Generic;
 using System.Text;
-using System.IO; 
+using QuickTools.QCore;
 namespace QuickTools.QData
 {
 
@@ -11,6 +11,7 @@ namespace QuickTools.QData
     /// </summary>
     public class Key
     {
+     
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
@@ -77,6 +78,8 @@ namespace QuickTools.QData
     /// </summary>
     public class KeyManager : Key
     {
+
+        
         private StringBuilder builder = new StringBuilder();
 
         /// <summary>
@@ -84,22 +87,23 @@ namespace QuickTools.QData
         /// </summary>
         /// <value>The keys.</value>
         public List<Key> Keys { get; set; } = new List<Key>();
-
+        public List<Error> Errors { get; set; }
+        public bool AllowDebugger { get; set; } = false; 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
         /// repeted keys.
         /// </summary>
         /// <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
-        public bool CheckForNotRepetedKeys { get; set; } = false; 
+        public bool CheckForNotRepetedKeys { get; set; } = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
         /// </summary>
         /// <param name="fileName">File name.</param>
         public KeyManager(string fileName)
         {
-            if(fileName != "" || fileName != null)
+            if (fileName != "" || fileName != null)
             {
-                this.FileName = fileName; 
+                this.FileName = fileName;
             }
         }
 
@@ -108,13 +112,13 @@ namespace QuickTools.QData
         /// </summary>
         public KeyManager()
         {
-          
+
         }
         /// <summary>
         /// provides the file name for the file containing the keys
         /// </summary>
         public string FileName { get; set; } = "KeyFile.qkey";
-        
+
         enum KeyFormat
         {
             Default,
@@ -131,7 +135,7 @@ namespace QuickTools.QData
         {
             if (File.Exists(this.FileName))
             {
-                File.Delete(this.FileName); 
+                File.Delete(this.FileName);
             }
         }
         /// <summary>
@@ -141,7 +145,7 @@ namespace QuickTools.QData
         {
             if (!File.Exists(this.FileName))
             {
-                File.Create(this.FileName); 
+                File.Create(this.FileName);
             }
         }
         /// <summary>
@@ -152,9 +156,9 @@ namespace QuickTools.QData
         public Key GetKey(string key)
         {
             this.Keys = this.ReadKeys();
-            foreach(Key k in this.Keys)
+            foreach (Key k in this.Keys)
             {
-                if(k.Name == key)
+                if (k.Name == key)
                 {
                     return k;
                 }
@@ -164,7 +168,7 @@ namespace QuickTools.QData
                 Name = null,
                 Value = null,
                 IsEmpty = true
-            }; 
+            };
         }
 
         /// <summary>
@@ -198,7 +202,7 @@ namespace QuickTools.QData
                     }
                 }
             }
-       
+
             this.Keys.Add(key);
 
 
@@ -225,9 +229,9 @@ namespace QuickTools.QData
         public void UpdateKey(Key key)
         {
             //this.Keys = this.ReadKeys();
-            for(int item = 0; item<this.Keys.Count; item++)
+            for (int item = 0; item<this.Keys.Count; item++)
             {
-                if(key.Name == this.Keys[item].Name)
+                if (key.Name == this.Keys[item].Name)
                 {
                     this.Keys[item].Value = key.Value;
                     //this.WriteKeys(this.Keys); 
@@ -251,7 +255,7 @@ namespace QuickTools.QData
             {
                 if (key.Name == this.Keys[item].Name)
                 {
-                    this.Keys.RemoveAt(item); 
+                    this.Keys.RemoveAt(item);
                     this.WriteKeys(this.Keys);
                     return;
                 }
@@ -260,14 +264,14 @@ namespace QuickTools.QData
 
         private bool Exist(Key key)
         {
-            foreach(Key k in this.Keys)
+            foreach (Key k in this.Keys)
             {
-                if(k.Name == key.Name)
+                if (k.Name == key.Name)
                 {
-                    return true; 
+                    return true;
                 }
             }
-            return false; 
+            return false;
         }
         void WriteKeys(List<Key> keys, KeyFormat format)
         {
@@ -284,7 +288,7 @@ namespace QuickTools.QData
             keys.ForEach((key) => {
                 this.builder.Append($"{key.Name}{key.KeyAssingChar}{key.Value}{key.KeyTerminatorChar}\n");
             });
-            Writer.Write(fileName, this.builder.ToString());
+            File.WriteAllText(fileName, this.builder.ToString());
         }
 
         /// <summary>
@@ -296,7 +300,7 @@ namespace QuickTools.QData
             keys.ForEach((key) => {
                 this.builder.Append($"{key.Name}{key.KeyAssingChar}{key.Value}{key.KeyTerminatorChar}\n");
             });
-            Writer.Write(this.FileName, this.builder.ToString());
+            File.WriteAllText(this.FileName, this.builder.ToString());
         }
         List<Key> ReadKeys(string input, KeyFormat format)
         {
@@ -304,75 +308,35 @@ namespace QuickTools.QData
             return keys;
         }
 
-       /// <summary>
-       /// Reads the keys from the provided file
-       /// </summary>
-       /// <returns>The keys.</returns>
-       /// <param name="keyFile">Key file.</param>
-        public List<Key> ReadKeys(string keyFile)
+        public List<Key> ReadKeys(string file)
         {
-            if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
-            try
-            { 
-                List<Key> keys = new List<Key>();
-                string key, temp, input; 
-                char term, assing;
-                key = "";
-                temp = "";
-                input = Reader.Read(keyFile); 
-                term = this.KeyTerminatorChar;
-                assing = this.KeyAssingChar;
-
-                for (int ch = 0; ch<input.Length; ch++)
-                {
-                    if (input[ch] == assing)
-                    {
-                        key = temp;
-                        temp = "";
-                    }
-                    if (input[ch] == term)
-                    {
-                        keys.Add(new Key()
-                        {
-                            Name = key.Replace(" ", "").Replace("\n","").Replace("\t",""),
-                            Value = temp
-                        });
-                        //Get.Wait($"{key} : {temp}"); 
-                        temp = "";
-                    }
-                    if (input[ch] != assing && input[ch] != term)
-                    {
-                        temp += input[ch];
-                    }
-
-                }
-
-                this.FileName = keyFile;
-                return keys;
-            }
-            catch
-            {
-                throw new Exception("The Keys were not on the correct format or damaged");
-            }
+            this.FileName = file;
+            return this.ReadKeys();
         }
-
         public List<Key> ReadKeys()
         {
             string keyFile = this.FileName; 
             if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
-            try
-            {
+            int ch = 0; 
+          
                 List<Key> keys = new List<Key>();
-                string key, temp, input;
+                this.Errors = new List<Error>();
+                string key, temp, input, str; 
                 char term, assing;
                 key = "";
                 temp = "";
-                input = Reader.Read(keyFile);
+                input = File.ReadAllText(keyFile);
                 term = this.KeyTerminatorChar;
                 assing = this.KeyAssingChar;
-
-                for (int ch = 0; ch < input.Length; ch++)
+                
+                for (ch = 0; ch < input.Length; ch++)
                 {
+                try
+                {
+                    if (AllowDebugger)
+                    {
+                        Get.Wait($"Status: [{Get.Status(ch,input.Length-1)}] Keys: [{keys.Count}]", true);
+                    }
                     if (input[ch] == assing)
                     {
                         key = temp;
@@ -392,16 +356,33 @@ namespace QuickTools.QData
                     {
                         temp += input[ch];
                     }
+                    }catch(Exception ex)
+                    {
+                    this.Errors.Add(new Error()
+                    {
+                        Message = ex.Message,
+                        Type = $"The Keys were not on the correct format or damaged At the Index: {ch} From: {input.Length}" +
+                        $"\n Key={key} Temp={temp} KeysCount={keys.Count}"
 
+                    });
                 }
+
+            }
+            //        }
+            //catch(Exception ex)
+            //{
+            //    this.Errors.Add(new Error()
+            //    {
+            //        Message = ex.Message,
+            //        Type = $"The Keys were not on the correct format or damaged At the Sector: {ch}"
+            //    })
+            //    //throw new Exception();
+            //}
 
                 this.FileName = keyFile;
                 return keys;
-            }
-            catch
-            {
-                throw new Exception("The Keys were not on the correct format or damaged");
-            }
+        
+            
         }
     }
 }

@@ -183,7 +183,9 @@ namespace QuickTools.QCore
                     {
                         Get.Yellow();
                         Get.Write($" {File.GetLastWriteTime(files[file]).ToString(dateFormat)} ");
-
+                        GC.Collect();
+                        Get.White();
+                        Get.Write($" {Get.FileSize(files[file])} ");
                         string f = $" {Get.FileNameFromPath(files[file])} ";
                         switch (Get.FileExention(files[file]))
                         {

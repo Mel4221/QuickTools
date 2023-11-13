@@ -44,7 +44,6 @@ namespace QuickTools.QData
 
 
 
-            private bool Init { get; set; }
         /// <summary>
         /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
         /// below i provide the benefits from using  this method 
@@ -59,7 +58,7 @@ namespace QuickTools.QData
         /// <param name="key">Key.</param>
         /// <param name="value">Value.</param>
         /// <param name="autoLoad">If set to <c>true</c> auto load.</param>
-          bool AddKey(object key, object value, bool autoLoad)
+         public bool AddKey(object key, object value, bool autoLoad)
         {
 
             try
@@ -67,7 +66,7 @@ namespace QuickTools.QData
                 this.AddKeyOnHot(key, value, null);
                 if (autoLoad)
                 {
-                    this.RefreshDB();
+                    this.SaveChanges();
                 }
           
                 return true;
@@ -109,12 +108,13 @@ namespace QuickTools.QData
                         Id = this.ID,
                         Key = key.ToString(),
                         Value = value.ToString(),
-                        Relation = relation.ToString()
+                        Relation = relation.ToString(),
+                        IsEmpty = false//this was always supposed to be here but it seems i forgot that i had to add it 
                   });
 
             }
 
-            private StringBuilder container = new StringBuilder(); 
+            //private StringBuilder container = new StringBuilder(); 
             /// <summary>
             /// This saves the Database that is on memory to the database file 
             /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
@@ -736,10 +736,16 @@ namespace QuickTools.QData
             {
                 return false; 
             }
-                 this.ResentLoaded = true; 
+                  this.ResentLoaded = true; 
                   this.DataBase = new List<DB>();
                   this.DataManager = new KeyManager(this.DBName);
+                  this.DataManager.AllowDebugger = this.AllowDebuger; 
                   this.DataManager.LoadKeys();
+            ///to makes sure that we return if the keys count is cero
+            if(this.DataManager.Keys.Count == 0)
+            {
+                return false; 
+            }
                   int sw = 0;
                   DB db = new DB();
  

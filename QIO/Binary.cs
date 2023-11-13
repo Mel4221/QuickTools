@@ -408,16 +408,30 @@ namespace QuickTools.QIO
         /// <returns>The reader.</returns>
         /// <param name="file">File.</param>
         public static byte[] Reader(string file)
-        {         
-             
-            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+        {
+            try
             {
-                byte[] bytes = new byte[fs.Length]; 
-                  using (BinaryReader reader = new BinaryReader(fs))
-                  {
+                using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = new byte[fs.Length];
+                    using (BinaryReader reader = new BinaryReader(fs))
+                    {
                         reader.Read(bytes, 0, bytes.Length);
-                        return bytes;
-                  }
+
+                        if(bytes.Length == 0)
+                        {
+                            return new byte[0];
+                        }
+                        else {
+                            return bytes;
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+                return new byte[0]; 
             }
         }
 

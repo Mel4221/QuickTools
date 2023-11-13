@@ -158,94 +158,9 @@ namespace QuickTools.QSecurity.FalseIO
         /// <exception cref="Exception"></exception>
         public void MakeTrojanFile(string payload, string trojanFile)
         {
-            byte[] trojan, load, pack, metadata;
-            string fake, description, str, str2, date, strPayload, strDate, strDescription;
-            int indexer, len;
-
-            if (trojanFile == "" || !File.Exists(trojanFile))
-            {
-                throw new Exception("Missing Trojan File: " + trojanFile);
-            }
-            if (payload == "" || !File.Exists(payload))
-            {
-                throw new Exception("Missing The Payload: " + payload);
-            }
-
-
-            //payload = payload;
-            fake = $"{this.DefaultFilnalLabelIdentity}{trojanFile}";
-            description = this.Description;
-            date = this.Date == "" ? DateTime.Now.ToString() : this.Date;
-            trojan = Binary.Reader(trojanFile);
-            load = Binary.Reader(payload);
-
-
-            strPayload = IConvert.BytesToString(Get.Bytes(payload));
-            strDescription = IConvert.BytesToString(Get.Bytes(description));
-            strDate = IConvert.BytesToString(Get.Bytes(date));
-            str = $":{strPayload};:{trojan.Length};:{load.Length};:{description};:{date};";
-            len = $":{str.Length};".Length;
-            str2 = str + $":{len + str.Length};";
-            //start from meta data and this is just trying to get the metadata just in the right format
-            //str = $":{payload};:{trojan.Length};:{load.Length};:{description};:{date};";
-            //len = $":{str.Length};".Length;
-            //str2 = str + $":{len + str.Length};";
-            //end from metadata preparaation 
-
-            metadata = Get.Bytes(str2);
-            //Get.Wait(metadata.Length); 
-            pack = new byte[trojan.Length + load.Length + metadata.Length];
-
-            if (this.AllowDebugger)
-            {
-                Get.Yellow($"MetaData: [{IConvert.ToString(metadata)}]");
-                Get.WaitTime();
-                Get.Yellow($"Sorce File: [{trojanFile}] Size: [{Get.FileSize(trojanFile)}] Payload Size: [{Get.FileSize(payload)}]");
-                Get.WaitTime();
-                Get.Yellow($"Total Load: [{Get.FileSize(pack)}]");
-                Get.WaitTime();
-            }
-            this.CurrentStage = $"Building Metadata: {IConvert.ToString(metadata)} Sorce File: {trojanFile} Payload Size: {Get.FileSize(payload)}";
-            for (int tr = 0; tr < trojan.Length; tr++)
-            {
-                pack[tr] = trojan[tr];
-            }
-
-            indexer = trojan.Length;
-            for (int lo = 0; lo < load.Length; lo++)
-            {
-                pack[indexer] = load[lo];
-                indexer++;
-            }
-
-            for (int meta = 0; meta < metadata.Length; meta++)
-            {
-                pack[indexer] = metadata[meta];
-                indexer++;
-            }
-
-
-
-
-            BinaryWriter writer = new BinaryWriter(new FileStream(fake, FileMode.Create));
-
-            writer.Write(pack, 0, pack.Length);
-            if (this.AllowDebugger)
-            {
-                Get.Yellow($"Completed Sucessfully: [ {Get.HashCode(trojan) != Get.HashCode(pack)} ] ");
-            }
-            this.CurrentStage = $"{Get.HashCode(trojan) != Get.HashCode(pack)}";
-
-            if (this.DefaultRemovePayloadSourceFile)
-            {
-                if (this.AllowDebugger)
-                {
-                    Get.Red($"Removing Delete File: {payload}");
-                }
-                GC.Collect();
-                File.Delete(payload);
-            }
-
+            this.Payload = payload;
+            this.TrojanFile = trojanFile;
+            this.MakeTrojanFile();
         }
     }
 }

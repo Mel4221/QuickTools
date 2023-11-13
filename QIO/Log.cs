@@ -18,7 +18,7 @@ namespace QuickTools.QIO
 
         private static string CreateLogDir()
         {
-            string logsDir = null;
+            string logsDir;
             logsDir = Get.DataPath("logs");
             return logsDir;
         }
@@ -49,7 +49,7 @@ namespace QuickTools.QIO
 
 
 
-            string path = CreateLogDir();
+            string path = "";
             string file = path + name + ".log";
             using (MiniDB db = new MiniDB(file))
             {
@@ -91,7 +91,7 @@ namespace QuickTools.QIO
 
 
 
-            string path = CreateLogDir();
+            string path = "";
             string file = path + nameOfThefile + ".log";
 
             using (FileStream stream = new FileStream(file, FileMode.Append, FileAccess.Write))

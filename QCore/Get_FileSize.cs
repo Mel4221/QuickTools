@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 using System;
 using System.IO;
+using System.IO.Pipes;
+using System.Linq;
 using QuickTools.QIO;
 
 namespace QuickTools.QCore
@@ -68,6 +70,7 @@ namespace QuickTools.QCore
                   {
                   string fileSize = null;
                   var fileStream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
+                  Get.LongNumber = fileStream.Length;
                   switch(size)
                         {
                         case SizeType.GB:
@@ -100,7 +103,9 @@ namespace QuickTools.QCore
                   {
                   string fileSize = null;
                   var fileStream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
-                         if((fileStream.Length / 1024 / 1024 / 1024) != 0 )
+            Get.LongNumber = fileStream.Length;
+
+            if ((fileStream.Length / 1024 / 1024 / 1024) != 0 )
                         {
                         fileSize = $"{fileStream.Length / 1024 / 1024 / 1024}GB";
                         return fileSize; 
@@ -131,7 +136,9 @@ namespace QuickTools.QCore
         /// <param name="length">the length of the file with it's given Data Size such as GB , MB ,KB or B </param>
         public static string FileSize(long length)
         {
-            string fileSize = null; 
+            string fileSize = null;
+            Get.LongNumber = length;
+
             if ((length / 1024 / 1024 / 1024) != 0)
             {
                 fileSize = $"{length / 1024 / 1024 / 1024}GB";
@@ -159,24 +166,26 @@ namespace QuickTools.QCore
         /// <param name="buffer">Buffer.</param>
         public static string FileSize(byte[] buffer)
                   {
-                  string fileSize = null;
-                  var fileStream = IConvert.ToString(buffer); 
-                  if((fileStream.Length / 1024 / 1024 / 1024) != 0)
+            string fileSize;
+        
+            Get.LongNumber =  buffer.Length;
+
+            if ((buffer.Length / 1024 / 1024 / 1024) != 0)
                         {
-                        fileSize = $"{fileStream.Length / 1024 / 1024 / 1024}GB";
+                        fileSize = $"{buffer.Length / 1024 / 1024 / 1024}GB";
                         return fileSize;
                         }
-                  if((fileStream.Length / 1024 / 1024) != 0)
+                  if((buffer.Length / 1024 / 1024) != 0)
                         {
-                        fileSize = $"{fileStream.Length / 1024 / 1024 }MB";
+                        fileSize = $"{buffer.Length / 1024 / 1024 }MB";
                         return fileSize;
                         }
-                  if((fileStream.Length / 1024) != 0)
+                  if((buffer.Length / 1024) != 0)
                         {
-                        fileSize = $"{fileStream.Length / 1024 }KB";
+                        fileSize = $"{buffer.Length / 1024 }KB";
                         return fileSize;
                         }
-                  fileSize = $"{fileStream.Length }B";
+                  fileSize = $"{buffer.Length }B";
 
                   return fileSize;
                   }
@@ -200,30 +209,18 @@ namespace QuickTools.QCore
         /// <param name="files">Files.</param>
         public static string FileSize(string[] files)
         {
-            int size, current, goal;
-            byte[] bytes;
-            string status;
-            size = 0;
-            current = 0;
-            goal = files.Length - 1;
-
-            foreach (string file in files)
+            long size = 0; 
+            foreach(string file in files)
             {
-                bytes = Binary.Reader(file);
-                size += bytes.Length;
-                status = $"Evaluating Size: {Get.FileNameFromPath(file)} [{Get.Status(current, goal)}]";
-               
-                if (AllowDebbuger)
+                if (File.Exists(file))
                 {
-                    Get.Yellow(status);
-                    int time = HumanDelay < 200 ? 200 : HumanDelay;
-                    Get.WaitTime(time - 200);
+                    size += new FileStream(file, FileMode.Open).Length;
+                    GC.Collect();
                 }
-                current++;
+           
             }
-
-            bytes = new byte[size];
-            return Get.FileSize(bytes);
+            Get.LongNumber = size; 
+            return Get.FileSize(size);
         }
     }
 
