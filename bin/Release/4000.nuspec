@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata minClientVersion="">
+    <id>4000</id>
+    <version>4000.0.0</version>
+    <title>QuickTools</title>
+    <authors>MBV</authors>
+    <owners>MBV</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Mel4221/QuickTools/tree/testing</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</iconUrl>
+    <description>This is a C# Library Design to contain an array of tools for console applications and any other project that wish to just to get their projects running</description>
+    <summary>This is a C# Library Design to contain an array of tools for console applications and any other project that wish to just to get their projects running</summary>
+    <releaseNotes>MiniDB not stable</releaseNotes>
+    <copyright></copyright>
+    <language></language>
+    <tags>Tools Encrypt Decrypt Security Files Console</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.7" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.7" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.7" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="/home/mel/Documents/csharp/QuickTools/bin/Release/QuickTools.dll" target="lib/net47/QuickTools.dll" />
+    <file src="/home/mel/Documents/csharp/QuickTools/bin/Release/QuickTools.xml" target="lib/net47/QuickTools.xml" />
+  </files>
+</package>
