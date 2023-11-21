@@ -49,13 +49,13 @@ namespace QuickTools.QData
                   /// Gets or sets the key.
                   /// </summary>
                   /// <value>The key.</value>
-                  public string Key { get; set; }
+                  public string Key { get; set; } = string.Empty;
 
                   /// <summary>
                   /// Gets or sets the value.
                   /// </summary>
                   /// <value>The value.</value>
-                  public string Value { get; set; }
+                  public string Value { get; set; } = string.Empty; 
             }
 
             /// <summary>
@@ -66,17 +66,17 @@ namespace QuickTools.QData
             /// <summary>
             /// This contains the list of keys in the settings file 
             /// </summary>
-            public List<string> Keys;
+            public List<string> Keys {get;set;} = new List<string>();
 
             /// <summary>
             /// This Will contain the values from the settings file 
             /// </summary>
-            public List<string> Values;
+            public List<string> Values{get;set;} = new List<string>();
 
             /// <summary>
             /// This will contains the list of settings
             /// </summary>
-            public List<Settings> SettingsList; 
+            public List<Settings> SettingsList{get;set;} = new List<Settings>();
 
             /// <summary>
             /// Gets or sets the name of the file.

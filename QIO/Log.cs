@@ -18,7 +18,7 @@ namespace QuickTools.QIO
 
         private static string CreateLogDir()
         {
-            string logsDir = null;
+            string logsDir;
             logsDir = Get.DataPath("logs");
             return logsDir;
         }

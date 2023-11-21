@@ -1,59 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <ApplicationIcon>setting.ico</ApplicationIcon>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>QuickTools Library</Title>
-    <Description>About
-This is my first C# Libreary and this has been created in the C# languague to try to help reduce the amout of code required to create simple tools</Description>
-    <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://github.com/Mel4221/QuickTools</PackageProjectUrl>
-    <PackageIcon>setting.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/Mel4221/QuickTools/</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>tool security database data files manager console QuickTools</PackageTags>
-    <PackageReleaseNotes>This version was ported to the .NET7 due to some issues while trying to keep it on the .net Freamwork version , this version 
-contains the same list of benefits from the previus one , and some extra updates on the fallowing 
-MiniDB : bugs fixed , 
-KeyManager:  allwos to controll  data on a Key and value format ,
-Hash Fuctions for files and data builtin , 
-and more bugs were fixed </PackageReleaseNotes>
-    <AssemblyVersion>3000.0.0</AssemblyVersion>
-    <FileVersion>3000.0.0</FileVersion>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
-    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
-    <EnableNETAnalyzers>False</EnableNETAnalyzers>
-    <AnalysisLevel>latest-minimum</AnalysisLevel>
-    <Version>3000.0.0</Version>
-    <Authors>QuickTools_MBV </Authors>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA97AED0-0FDE-40D3-8BF2-E8F5C918E632}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>QuickTools</RootNamespace>
+    <AssemblyName>QuickTools</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
   <ItemGroup>
-    <Content Include="setting.png" />
+    <Reference Include="System" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Include="setting.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
+    <Compile Include="MyClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

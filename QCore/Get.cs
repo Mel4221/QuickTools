@@ -708,7 +708,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The from path.</returns>
         /// <param name="path">Path.</param>
-        public static string FolderFromPath(string path) => $"{path.Substring(path.LastIndexOf(Get.Slash())+1)}";
+        public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash()))}{Get.Slash()}";
 
         public static void PrintDisks()
         {
@@ -932,7 +932,7 @@ namespace QuickTools.QCore
                 case true:
                     path = @"\";
                     break;
-                case false:
+                default:
                     path = "/";
                     break; 
             }
@@ -1021,8 +1021,7 @@ namespace QuickTools.QCore
             try
             {
 
-                byte[] keyBytes = null;
-
+                byte[] keyBytes;
                 keyBytes = Reader.ReadStoredBytes(keyFile);
 
 
@@ -1033,7 +1032,7 @@ namespace QuickTools.QCore
             {
 
                 Get.Alert("Either the key was not founded or there is not such a key ");
-                return null;
+                return new byte[]{};
             }
 
         }
@@ -1048,7 +1047,7 @@ namespace QuickTools.QCore
             try
             {
 
-                byte[] keyBytes = null;
+                byte[] keyBytes;
 
                 keyBytes = Reader.ReadStoredBytes(path);
 
@@ -1060,7 +1059,7 @@ namespace QuickTools.QCore
             {
 
                 Get.Alert("Either the key was not founded or there is not such a key ");
-                return null;
+                return new byte[]{};
             }
 
         }
@@ -1242,13 +1241,13 @@ character in order for it to return a valid name
         /// Gets or sets the char.
         /// </summary>
         /// <value>The char.</value>
-        public static string Char { get; set; }
+        public static string Char { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the modifier.
         /// </summary>
         /// <value>The modifier.</value>
-        public static string Modifier { get; set; }
+        public static string Modifier { get; set; } =string.Empty;
 
 
         /// <summary>
@@ -1372,17 +1371,17 @@ character in order for it to return a valid name
             /// Gets or sets the text.
             /// </summary>
             /// <value>The text.</value>
-            public string Text { get; set; }
+            public string Text { get; set; } = string.Empty;
             /// <summary>
             /// Gets or sets the number.
             /// </summary>
             /// <value>The number.</value>
-            public int Number { get; set; }
+            public int Number { get; set; } = 0;
             /// <summary>
             /// Gets or sets a value indicating whether this <see cref="T:QuickTools.Get.InputType"/> is bool.
             /// </summary>
             /// <value><c>true</c> if bool; otherwise, <c>false</c>.</value>
-            public bool Bool { get; set; }
+            public bool Bool { get; set; } = false;
             /// <summary>
             /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.Get.InputType"/>.
             /// </summary>
