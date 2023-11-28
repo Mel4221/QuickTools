@@ -664,17 +664,65 @@
             The dots count that will be displaid
             </summary>
         </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.Label">
+            <summary>
+            Contains the Text in which the Display will be printed
+            </summary>
+            <value>The label.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.X">
+            <summary>
+            Gets or sets the x value in which the <see cref="M:System.Console.SetCursorPosition(System.Int32,System.Int32)"/> will be printing the text 
+            </summary>
+            <value>The x.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.Y">
+            <summary>
+            Gets or sets the y value in which the <see cref="M:System.Console.SetCursorPosition(System.Int32,System.Int32)"/> will be printing the text 
+            </summary>
+            <value>The y.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.BackGroundColorForLabel">
+            <summary>
+            Gets or sets the back ground color for label.
+            </summary>
+            <value>The back ground color for label.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.BackGroundColorForDots">
+            <summary>
+            Gets or sets the back ground color for dots.
+            </summary>
+            <value>The back ground color for dots.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.ForeColorForLabel">
+            <summary>
+            Gets or sets the fore color for label.
+            </summary>
+            <value>The fore color for label.</value>
+        </member>
+        <member name="P:QuickTools.QConsole.QProgressBar.ForeColorForDots">
+            <summary>
+            Gets or sets the fore color for dots.
+            </summary>
+            <value>The fore color for dots.</value>
+        </member>
+        <member name="M:QuickTools.QConsole.QProgressBar.Reset">
+            <summary>
+            Reset the StartDots , Label , Status.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.QProgressBar.Display(System.String)">
+            <summary>
+            Display the specified status with dots
+            </summary>
+            <param name="status">Status.</param>
+        </member>
         <member name="M:QuickTools.QConsole.QProgressBar.Display(System.Int32,System.Int32)">
             <summary>
             Display the specified current and goal.
             </summary>
             <param name="current">Current.</param>
             <param name="goal">Goal.</param>
-        </member>
-        <member name="M:QuickTools.QConsole.QProgressBar.Reset">
-            <summary>
-            Reset this instance.
-            </summary>
         </member>
         <member name="M:QuickTools.QConsole.QProgressBar.Display(System.Int32,System.Int32,System.String)">
             <summary>
