@@ -379,6 +379,8 @@ namespace QuickTools.QCore
         /// This Creates a hash code based on the given input 
         /// be carefull using this as a security method since 
         /// this macanisim is too simple and it could be broken easely
+        /// The method is taking X and the seed and multiplying it by each
+        /// byte of the array like on the fallowing way X += seed * bytes[i] + item
         /// </summary>
         /// <returns>The code.</returns>
         /// <param name="bytes">Bytes.</param>
@@ -710,6 +712,7 @@ namespace QuickTools.QCore
             /// <param name="path">Path.</param>
             public static string FileNameFromPath(string path)
             {
+                  if (!path.Contains('/') && !Path.Contains('\\')) return path; 
                   return path.Substring(path.LastIndexOf(Get.Slash()) + 1);
             }
 
@@ -720,7 +723,10 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static string FileExention(string file) => file.Substring(file.LastIndexOf(".") + 1);
 
-
+        /// <summary>
+        /// makes the console to beep 
+        /// </summary>
+        public static void Beep() => Console.Beep();
         /// <summary>
         /// Gets the path from the given file 
         /// </summary>

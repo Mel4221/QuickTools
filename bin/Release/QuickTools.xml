@@ -1110,6 +1110,8 @@
             This Creates a hash code based on the given input 
             be carefull using this as a security method since 
             this macanisim is too simple and it could be broken easely
+            The method is taking X and the seed and multiplying it by each
+            byte of the array like on the fallowing way X += seed * bytes[i] + item
             </summary>
             <returns>The code.</returns>
             <param name="bytes">Bytes.</param>
@@ -1233,6 +1235,11 @@
             </summary>
             <param name="file"></param>
             <returns></returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Beep">
+            <summary>
+            makes the console to beep 
+            </summary>
         </member>
         <member name="M:QuickTools.QCore.Get.FolderFromPath(System.String)">
             <summary>

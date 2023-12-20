@@ -70,6 +70,7 @@ namespace QuickTools.QData
         /// By default the name is "Stack.dump"
         /// </summary>
         public string DumpFileName { get; set; } = "Stack.dump";
+
         private List<Variable> Variables { get; set; } = new List<Variable>();
 
 

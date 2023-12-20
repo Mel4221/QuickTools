@@ -34,7 +34,7 @@ namespace QuickTools.QIO
       /// <summary>
       /// Create a type of box which will be containing files similar to winrar or zip
       /// </summary>
-      public class QBox
+      class QBox
       {
 
             /// <summary>

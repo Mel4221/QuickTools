@@ -29,6 +29,9 @@ using QuickTools.QConsole;
 using QuickTools.QCore;
 using System.ComponentModel;
 
+using System.IO;
+using System.Security.Policy;
+
 namespace QuickTools.QNet
 {
       /// <summary>
@@ -36,7 +39,31 @@ namespace QuickTools.QNet
       /// </summary>
       public class DownloadManager
       {
-            private volatile bool _completed;
+
+
+		public void MyDownloadFile(string webUrl, string outputFilePath)
+		{
+            Uri url = new Uri(webUrl); 
+			const int BUFFER_SIZE = 16 * 1024;
+			using (var outputFileStream = File.Create(outputFilePath, BUFFER_SIZE))
+			{
+				var req = WebRequest.Create(url);
+				using (var response = req.GetResponse())
+				{
+					using (var responseStream = response.GetResponseStream())
+					{
+						var buffer = new byte[BUFFER_SIZE];
+						int bytesRead;
+						do
+						{
+							bytesRead = responseStream.Read(buffer, 0, BUFFER_SIZE);
+							outputFileStream.Write(buffer, 0, bytesRead);
+						} while (bytesRead > 0);
+					}
+				}
+			}
+		}
+		private volatile bool _completed;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
         /// </summary>
@@ -49,43 +76,48 @@ namespace QuickTools.QNet
         /// <param name="fileName">Location.</param>
         public void DownloadFile(string address, string fileName)
             {
-             
-                  WebClient client = new WebClient();
-            client.UseDefaultCredentials = true;
 
-            Uri Uri = new Uri(address);
-                  _completed = false;
+            using (WebClient client = new WebClient())
+            {
+                client.UseDefaultCredentials = true;
 
-                  client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                  client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
-                  client.DownloadFileAsync(Uri,fileName);
+                Uri Uri = new Uri(address);
+                _completed = false;
+
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
+
+                client.DownloadFileAsync(Uri, fileName);
+                while (client.IsBusy) { }
+            }
 
             }
 
-            /// <summary>
-            /// Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
-            /// </summary>
-            /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
-            public bool DownloadCompleted { get { return _completed; } }
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
+        /// </summary>
+        /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
+        public bool DownloadCompleted { get { return _completed; } } 
 
             /// <summary>
             /// The progress bar.
             /// </summary>
-            public QProgressBar ProgressBar;
-            /// <summary>
-            /// Gets or sets the status.
-            /// </summary>
-            /// <value>The status.</value>
-            public string Status { get; set; }
+             QProgressBar ProgressBar;
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>The status.</value>
+        public string Status { get; set; } = "not-started"; 
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             this.Status = e.ProgressPercentage.ToString(); 
             if (this.AllowDebugger)
             {
-                this.ProgressBar = new QProgressBar();
-                ProgressBar.Display(e.ProgressPercentage, 100);
+                //this.ProgressBar = new QProgressBar();
+                //ProgressBar.Display(e.ProgressPercentage, 100);
+                this.Status =e.ProgressPercentage.ToString();
 
-            }
+			}
 
         }
 
@@ -93,10 +125,10 @@ namespace QuickTools.QNet
             {
                   if (e.Cancelled == true)
                   {
-                        if(this.AllowDebugger)Console.WriteLine("Download has been canceled.");
+                        //if(this.AllowDebugger)Console.WriteLine("Download has been canceled.");
                         return; 
                   }
-                  if(this.AllowDebugger)Console.WriteLine("Download completed!");
+                  //if(this.AllowDebugger)Console.WriteLine("Download completed!");
                  
 
                   _completed = true;
