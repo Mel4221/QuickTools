@@ -3704,6 +3704,12 @@
             </summary>
             <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         </member>
+        <member name="P:QuickTools.QIO.QZip.Status">
+            <summary>
+            Gets or sets the status of the current state of the Action either Zip or UnZip are suported
+            </summary>
+            <value>The status.</value>
+        </member>
         <member name="M:QuickTools.QIO.QZip.Zip(System.String,System.String[])">
             <summary>
             Zip the specified archiveName and files.
@@ -4469,6 +4475,13 @@
             Download manager.
             </summary>
         </member>
+        <member name="M:QuickTools.QNet.DownloadManager.MyDownloadFile(System.String,System.String)">
+            <summary>
+            Mies the download file.
+            </summary>
+            <param name="webUrl">Web URL.</param>
+            <param name="outputFilePath">Output file path.</param>
+        </member>
         <member name="P:QuickTools.QNet.DownloadManager.AllowDebugger">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
@@ -4487,11 +4500,6 @@
             Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
             </summary>
             <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="F:QuickTools.QNet.DownloadManager.ProgressBar">
-            <summary>
-            The progress bar.
-            </summary>
         </member>
         <member name="P:QuickTools.QNet.DownloadManager.Status">
             <summary>

@@ -40,7 +40,11 @@ namespace QuickTools.QNet
       public class DownloadManager
       {
 
-
+        /// <summary>
+        /// Mies the download file.
+        /// </summary>
+        /// <param name="webUrl">Web URL.</param>
+        /// <param name="outputFilePath">Output file path.</param>
 		public void MyDownloadFile(string webUrl, string outputFilePath)
 		{
             Uri url = new Uri(webUrl); 
@@ -97,13 +101,11 @@ namespace QuickTools.QNet
         /// Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
         /// </summary>
         /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
-        public bool DownloadCompleted { get { return _completed; } } 
+        public bool DownloadCompleted { get { return _completed; } }
 
-            /// <summary>
-            /// The progress bar.
-            /// </summary>
-             QProgressBar ProgressBar;
-        /// <summary>
+        QProgressBar ProgressBar = new QProgressBar(); 
+
+         /// <summary>
         /// Gets or sets the status.
         /// </summary>
         /// <value>The status.</value>
@@ -113,8 +115,7 @@ namespace QuickTools.QNet
             this.Status = e.ProgressPercentage.ToString(); 
             if (this.AllowDebugger)
             {
-                //this.ProgressBar = new QProgressBar();
-                //ProgressBar.Display(e.ProgressPercentage, 100);
+                this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
                 this.Status =e.ProgressPercentage.ToString();
 
 			}
