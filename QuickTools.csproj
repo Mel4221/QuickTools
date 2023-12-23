@@ -123,6 +123,7 @@
     <Folder Include="QConsole\" />
     <Folder Include="QCore\" />
     <Folder Include="QConsole\Emulation\" />
+    <Folder Include="QData\Metadata\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QCore\Decriptor.intent" />
