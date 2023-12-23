@@ -37,6 +37,7 @@ namespace QuickTools.QIO
       public partial class FilesMaper
       {
 
+          
 
             /// <summary>
             /// Gets the files from the given path

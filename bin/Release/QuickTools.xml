@@ -3698,6 +3698,26 @@
             Compress a list of files given on the Initialization
             </summary>
         </member>
+        <member name="P:QuickTools.QIO.QZip.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.QZip"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QIO.QZip.Zip(System.String,System.String[])">
+            <summary>
+            Zip the specified archiveName and files.
+            </summary>
+            <param name="archiveName">Archive name.</param>
+            <param name="files">Files.</param>
+        </member>
+        <member name="M:QuickTools.QIO.QZip.UnZip(System.String,System.String)">
+            <summary>
+            Uns the zip.
+            </summary>
+            <param name="archive">Archive.</param>
+            <param name="outPath">Out path.</param>
+        </member>
         <member name="M:QuickTools.QIO.QZip.DecompressList">
             <summary>
             Decompresses the list of files
