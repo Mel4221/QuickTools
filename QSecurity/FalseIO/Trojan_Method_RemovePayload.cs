@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QuickTools.QCore;
 using QuickTools.QIO;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace QuickTools.QSecurity.FalseIO
 {
+
+    /// <summary>
+    /// Trojan is a safe way to insert a file inside another and being able to 
+    /// remove it from it later
+    /// </summary>
     public partial class Trojan
     {
+
+        /// <summary>
+        /// Removes the payload from the given trojan file
         /// </summary>
+        /// <param name="trojanFile">Trojan file.</param>
         public void RemovePayload(string trojanFile)
         {
 

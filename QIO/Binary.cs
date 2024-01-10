@@ -121,39 +121,47 @@ namespace QuickTools.QIO
             /// <param name="GbSize">Gb size.</param>
             public static void CreateZeroFile(string fileName , int GbSize)
                   {
-            throw new Exception("This Function has been disabled due to stability reasons");
+            throw new Exception("This Function has been disabled due to realabilty reasons");
 
-            if (File.Exists(fileName))
-                        {
-                        File.Delete(fileName);
-                        }
-                    if(!File.Exists(fileName))
-                        {
-                        using(FileStream create = File.Create(fileName))
-                              {
+            /*
+                  if (File.Exists(fileName))
+                {
+                File.Delete(fileName);
+                }
+            if(!File.Exists(fileName))
+                {
+                using(FileStream create = File.Create(fileName))
+                      {
 
-                              }
-                        }
+                      }
+                }
 
-                  int gb = GbSize * 1024 * 1024;
-                  using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
-                        {
-                        byte[] bytes = new byte[gb];
-                        
-                        BinaryWriter binary = new BinaryWriter(fs);
-                        QColors.Color.Green($"Making Zero File:");
-                        QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
-                      
-                         for(int rounds = 0 ; rounds < gb ; rounds++)
-                              {
+          int gb = GbSize * 1024 * 1024;
+          using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
+                {
+                byte[] bytes = new byte[gb];
 
-                                binary.Write(bytes , 0 , bytes.Length);
-                                //Get.Green(Get.Status(rounds , gb)); 
-                                //bar.Display(rounds, gb - 1); 
-                              }
-                        }
+                BinaryWriter binary = new BinaryWriter(fs);
+                QColors.Color.Green($"Making Zero File:");
+                QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
 
-                  }
+                 for(int rounds = 0 ; rounds < gb ; rounds++)
+                      {
+
+                        binary.Write(bytes , 0 , bytes.Length);
+                        //Get.Green(Get.Status(rounds , gb)); 
+                        //bar.Display(rounds, gb - 1); 
+                      }
+                }
+            */
+
+        }
+        /// <summary>
+        /// Creates the zero file.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="GbSize">Gb size.</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
         public static void CreateZeroFile(string fileName, int GbSize,bool allowDebugger)
         {
             if (File.Exists(fileName))
@@ -282,7 +290,15 @@ namespace QuickTools.QIO
                   binaryWriter.Close();
                   return true;
             }
-        
+
+
+        /// <summary>
+        /// Copies the binary file.
+        /// </summary>
+        /// <returns><c>true</c>, if binary file was copyed, <c>false</c> otherwise.</returns>
+        /// <param name="srcfilename">Srcfilename.</param>
+        /// <param name="destfilename">Destfilename.</param>
+        /// <param name="allowDebbuger">If set to <c>true</c> allow debbuger.</param>
         public static bool CopyBinaryFile(string srcfilename, string destfilename, bool allowDebbuger)
         {
             if (!File.Exists(srcfilename))

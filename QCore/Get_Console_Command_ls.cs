@@ -52,6 +52,9 @@ namespace QuickTools.QCore
                             case "iso":
                             case "rar":
                             case "zip":
+                            case "tar":
+                            case "gz":
+                            case "xyz":
                                 Get.Red();
                                 Get.Write(f);
                                 break;
@@ -69,6 +72,9 @@ namespace QuickTools.QCore
                             case "css":
                             case "js":
                             case "cs":
+                            case "c":
+                            case "cc":
+                            case "h":
                                 Color.Yellow();
                                 Get.Write(f);
                                 break;
@@ -93,9 +99,65 @@ namespace QuickTools.QCore
                             case "bmp":
                             case "ico":
                             case "svg":
+                            case "odt":
+                            case "rtf":
+                            case "tex":
+                            case "wpd":
+                            case "aae":
+                            case "csv":
+                            case "key":
+                            case "mpp":
+                            case "obb":
+                            case "ppt":
+                            case "pptx":
+                            case "rpt":
+                            case "aif":
+                            case "flac":
+                            case "mid":
+                            case "wav":
+                            case "wma":
+                            case "3gp":
+                            case "asf":
+                            case "m4v":
+                            case "mpg":
+                            case "srt":
+                            case "swf":
+                            case "ts":
+                            case "3dm":
+                            case "bl":
+                            case "dae":
+                            case "fbx":
+                            case "max":
+                            case "obj":
+                            case "dcm":
+                            case "dds":
+                            case "djvu":
+                            case "heic":
+                            case "psd":
+                            case "tga":
+                            case "tif":
+                            case "ai":
+                            case "cdr":
+                            case "emf":
+                            case "eps":
+                            case "ps":
+                            case "sk":
+                            case "vs":
+                            case "indd":
+                            case "ox":
+                            case "pmd":
+                            case "pub":
+                            case "qxp":
+                            case "xps":
                                 Get.Pink();
                                 Get.Write(f);
-                                break; 
+                                break;
+                            case "dll":
+                            case "lib":
+                            case "jlv":
+                                Get.Red();
+                                Get.Write(f);
+                                break;
                             default:
                                 Get.White();
                                 Get.Write(f);

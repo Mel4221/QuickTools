@@ -83,11 +83,21 @@ namespace QuickTools.QData
         private StringBuilder builder = new StringBuilder();
 
         /// <summary>
-        /// This are the keys that are buffered when you either cal <see cref="LoadKeys"/> or <see cref="ReadKeys"/>
+        /// This are the keys that are buffered when you either cal/>
         /// </summary>
         /// <value>The keys.</value>
         public List<Key> Keys { get; set; } = new List<Key>();
+
+        /// <summary>
+        /// Gets or sets the errors.
+        /// </summary>
+        /// <value>The errors.</value>
         public List<Error> Errors { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
+        /// </summary>
+        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         public bool AllowDebugger { get; set; } = false; 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
@@ -225,7 +235,10 @@ namespace QuickTools.QData
 
 
         }
-
+        /// <summary>
+        /// Updates the key.
+        /// </summary>
+        /// <param name="key">Key.</param>
         public void UpdateKey(Key key)
         {
             //this.Keys = this.ReadKeys();
@@ -307,12 +320,21 @@ namespace QuickTools.QData
             List<Key> keys = new List<Key>();
             return keys;
         }
-
+        /// <summary>
+        /// Reads the keys.
+        /// </summary>
+        /// <returns>The keys.</returns>
+        /// <param name="file">File.</param>
         public List<Key> ReadKeys(string file)
         {
             this.FileName = file;
             return this.ReadKeys();
         }
+
+        /// <summary>
+        /// Reads the keys.
+        /// </summary>
+        /// <returns>The keys.</returns>
         public List<Key> ReadKeys()
         {
             string keyFile = this.FileName; 
@@ -321,7 +343,7 @@ namespace QuickTools.QData
           
                 List<Key> keys = new List<Key>();
                 this.Errors = new List<Error>();
-                string key, temp, input, str; 
+                string key, temp, input; 
                 char term, assing;
                 key = "";
                 temp = "";

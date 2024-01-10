@@ -509,13 +509,13 @@ namespace QuickTools.QCore
             //RowBytes = ""; //making sure that the RowBytes are empty 
             // loop to full the array based on the Length
             Thread a, b;
-            int half, total, current, goal;
+            int half, total, goal;
             string sta, sta2; 
             
             total = arrayLength; 
             half = total / 2;
             goal = total;
-            current = 0;
+           // current = 0;
             sta = null;
             sta2 = null;
             a = new Thread(() => {

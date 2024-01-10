@@ -67,7 +67,7 @@ namespace QuickTools.QSecurity
                 if(bytes.Length == 0)
                 {
                     throw new Exception("The File is enpty");
-                    return; 
+                   // return; 
                 }
 
                 message = $"File Size: {Get.FileSize(bytes)} & Converting to String Format...";

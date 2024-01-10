@@ -25,12 +25,9 @@ using QuickTools.QIO;
 using QuickTools.QColors;
 using System.Diagnostics;
 using System.Linq;
-using QuickTools.QConsole;
 using System.Security.Cryptography;
 using System.Collections;
-using System.Diagnostics;
-using System.Configuration;
-using System.Reflection.Emit;
+
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
@@ -111,7 +108,6 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static string[] LoopInput(string label)
         {
-            string[] input;
             string line = null;
             List<string> text = new List<string>();
             while (true)
@@ -306,7 +302,6 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static double StatusNumber(object current, object goal)
         {
-            string status = null;
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
             double s = Math.Round(c / g, 2) * 100;

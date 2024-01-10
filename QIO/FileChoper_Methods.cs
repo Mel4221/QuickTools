@@ -91,7 +91,7 @@ namespace QuickTools.QData
         public void Join(string file)
         {
             if (!File.Exists(file)) throw new FileNotFoundException($"The {file} was not found"); 
-            string id, name, path;
+            string  path;
             string[] files;
             path = Get.FolderFromPath(file);
             files = new FilesMaper().GetFiles(path);
