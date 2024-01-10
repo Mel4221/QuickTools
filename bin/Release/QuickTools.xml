@@ -4402,53 +4402,69 @@
         </member>
         <member name="T:QuickTools.QIO.FileShreder">
             <summary>
-            This Class provides the methods to be able to delete a file by rewritting pregenerated text over it
-            of the size of the file then delete it as a way to clear the data from it permanetly
+            This is a class that provides a way to destroy a file to avoid 
+            the file to be restored to its normal form 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.#ctor">
+            <summary>
+            Inizilize the instance
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.#ctor(System.String)">
+            <summary>
+            Initilize the instance with a file name 
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.#ctor(System.String[])">
+            <summary>
+            initilize
+            </summary>
+            <param name="files"></param>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.FileName">
+            <summary>
+            Contains the File Name of the file that will be destroied 
             </summary>
         </member>
         <member name="P:QuickTools.QIO.FileShreder.Files">
             <summary>
-            Gets or sets the files.
-            </summary>
-            <value>The files.</value>
-        </member>
-        <member name="P:QuickTools.QIO.FileShreder.AllowDebbuger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FileShreder"/> allow debbuger.
-            </summary>
-            <value><c>true</c> if allow debbuger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QIO.FileShreder.Status">
-            <summary>
-            Gets or sets the status.
-            </summary>
-            <value>The status.</value>
-        </member>
-        <member name="P:QuickTools.QIO.FileShreder.HumanDelay">
-            <summary>
-            Gets or sets the human delay which allows the printing time to be slower 
-            to be audited if required and by default is set to 500 seconds
-            </summary>
-            <value>The human delay.</value>
-        </member>
-        <member name="M:QuickTools.QIO.FileShreder.EvalSize(System.String[])">
-            <summary>
-            Evaluetes the total size of files that will be deleted but coudl messure also the 
-            size of all the files selected or provided
-            </summary>
-            <returns>The size.</returns>
-            <param name="files">Files.</param>
-        </member>
-        <member name="M:QuickTools.QIO.FileShreder.Delete">
-            <summary>
-            Delete all the files listed on <see cref="T:QuickTools.QIO.FileShreder.Files"/>
+            Contains the fiiles that will be handeled
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.FileShreder.#ctor(System.String[])">
+        <member name="F:QuickTools.QIO.FileShreder.CurrentStatus">
             <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QIO.FileShreder"/> class.
+            contains the current status of the Process
             </summary>
-            <param name="files">Files.</param>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.AllowDebugger">
+            <summary>
+            Allow to set debuggers 
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Erros">
+            <summary>
+            Contains the list of erros 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.Shread(System.String)">
+            <summary>
+            Allow to shread a fiele and make it un restorable 
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.Shread(System.String[])">
+            <summary>
+            Allow to shread a fiele and make it un restorable 
+            </summary>
+            <param name="files"></param>
+        </member>
+        <member name="M:QuickTools.QIO.FileShreder.Shread">
+            <summary>
+            Allow to shread a fiele and make it un restorable 
+            </summary>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="P:QuickTools.QNet.QShare.Server">
             <summary>
