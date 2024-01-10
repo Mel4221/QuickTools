@@ -355,6 +355,7 @@ namespace QuickTools.QData
                 {
                 try
                 {
+                   
                     if (AllowDebugger)
                     {
                         Get.Wait($"Status: [{Get.Status(ch,input.Length-1)}] Keys: [{keys.Count}]", true);
