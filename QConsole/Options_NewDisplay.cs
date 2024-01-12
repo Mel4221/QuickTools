@@ -10,6 +10,9 @@ namespace QuickTools.QConsole
 {
     public partial class Options
     {
+        /// <summary>
+        /// Display this instance.
+        /// </summary>
         public void _Display()
         {
             Get.Clear();

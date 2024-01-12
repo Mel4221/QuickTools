@@ -26,6 +26,11 @@ namespace QuickTools.QConsole.Emulation
             return has;
         }
 
+        /// <summary>
+        /// Hases the shift.
+        /// </summary>
+        /// <returns><c>true</c>, if shift was hased, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
         public bool HasShift(KeyInfo key)
         {
             if (key.Modifiers == "Shift")
@@ -37,7 +42,11 @@ namespace QuickTools.QConsole.Emulation
                 return false;
             }
         }
-
+        /// <summary>
+        /// Hases the shift and control.
+        /// </summary>
+        /// <returns><c>true</c>, if shift and control was hased, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
         public bool HasShiftAndControl(KeyInfo key)
         {
             bool hasBoth = false;
@@ -50,6 +59,11 @@ namespace QuickTools.QConsole.Emulation
 
         }
 
+        /// <summary>
+        /// Hases the control.
+        /// </summary>
+        /// <returns><c>true</c>, if control was hased, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
         public bool HasControl(KeyInfo key)
         {
             bool hasControl = false;
@@ -60,6 +74,11 @@ namespace QuickTools.QConsole.Emulation
             return hasControl;
         }
 
+        /// <summary>
+        /// Hases the simbol.
+        /// </summary>
+        /// <returns><c>true</c>, if simbol was hased, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
         public bool HasSimbol(KeyInfo key)
         {
             char input = key.KeyChar;
@@ -83,7 +102,11 @@ namespace QuickTools.QConsole.Emulation
             }
             return true;
         }
-
+        /// <summary>
+        /// Hases the command.
+        /// </summary>
+        /// <returns><c>true</c>, if command was hased, <c>false</c> otherwise.</returns>
+        /// <param name="key">Key.</param>
         public bool HasCommand(KeyInfo key)
         {
             bool isCommand = true;

@@ -34,7 +34,10 @@ namespace QuickTools.QIO
       public class RecursiveFileSearch
       {
             static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();
-
+            /// <summary>
+            /// Search the specified directoy.
+            /// </summary>
+            /// <param name="directoy">Directoy.</param>
             public void Search(string directoy)
                   {
                   // Start with drives if you have to search the entire computer.
@@ -62,6 +65,9 @@ namespace QuickTools.QIO
                   Console.WriteLine("Press any key");
                   Console.ReadKey();
                   }
+            /// <summary>
+            /// Search this instance.
+            /// </summary>
             public static void Search()
             {
                   // Start with drives if you have to search the entire computer.
@@ -92,7 +98,10 @@ namespace QuickTools.QIO
                   Console.WriteLine("Press any key");
                   Console.ReadKey();
             }
-
+            /// <summary>
+            /// Walks the directory tree.
+            /// </summary>
+            /// <param name="root">Root.</param>
           public  static void WalkDirectoryTree(DirectoryInfo root)
             {
                   FileInfo[] files = null;

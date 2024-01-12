@@ -161,7 +161,10 @@ namespace QuickTools.QNet
                 
             }
 
-
+        /// <summary>
+        /// Downloads the file.
+        /// </summary>
+        /// <param name="waitToFinish">If set to <c>true</c> wait to finish.</param>
         public void DownloadFile(bool waitToFinish)
         {
             if (address == "" || location == "")

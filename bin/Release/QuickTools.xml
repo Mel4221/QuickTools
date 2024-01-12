@@ -661,6 +661,11 @@
             </summary>
             <value><c>true</c> if testing; otherwise, <c>false</c>.</value>
         </member>
+        <member name="M:QuickTools.QConsole.Options._Display">
+            <summary>
+            Display this instance.
+            </summary>
+        </member>
         <member name="T:QuickTools.QConsole.QProgressBar">
             <summary>
             Creates a ProgressBar that is used on console application
@@ -890,11 +895,77 @@
              <param name="machineName">System.Environment.MachineName</param>
              <param name="currentPath">CurrentPath</param>
         </member>
+        <member name="T:QuickTools.QConsole.Emulation.QVim">
+            <summary>
+            QVim is a atempt to create a simpler version of vim on c#
+            </summary>
+        </member>
         <member name="M:QuickTools.QConsole.Emulation.QVim.Capture">
             <summary>
             Capture this instance.
             </summary>
             <returns>The capture.</returns>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.EvaluateKey(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Evaluates the key.
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.Start">
+            <summary>
+            Start this instance.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QConsole.Emulation.QVim"/> class.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.EscapeKeyPressed">
+            <summary>
+            The escape key pressed.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.Row">
+            <summary>
+            The row.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.Column">
+            <summary>
+            The column.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.CharsList">
+            <summary>
+            The chars list.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.RowsList">
+            <summary>
+            The rows list.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.ColumnsList">
+            <summary>
+            The columns list.
+            </summary>
+        </member>
+        <member name="T:QuickTools.QConsole.Emulation.QVim.CursorPosition">
+            <summary>
+            Cursor position.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.CursorPosition.X">
+            <summary>
+            The x.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QConsole.Emulation.QVim.CursorPosition.Y">
+            <summary>
+            The y.
+            </summary>
         </member>
         <member name="T:QuickTools.QConsole.Emulation.QVim.KeyInfo">
             <summary>
@@ -929,7 +1000,7 @@
             <summary>
             Exeute the given commmand 
             rmemeber adding the Execute case command here only will not automatically run it 
-            you first have to add it to the <see cref="!:Tester.QVim.HasCommand(KeyInfo)"/>
+            you first have to add it to the KeyInfo
             for it to be added first as a condition then you can add it here  
             </summary>
             <param name="key"></param>
@@ -946,6 +1017,41 @@
             </summary>
             <param name="key"></param>
             <returns></returns>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasShift(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Hases the shift.
+            </summary>
+            <returns><c>true</c>, if shift was hased, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasShiftAndControl(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Hases the shift and control.
+            </summary>
+            <returns><c>true</c>, if shift and control was hased, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasControl(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Hases the control.
+            </summary>
+            <returns><c>true</c>, if control was hased, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasSimbol(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Hases the simbol.
+            </summary>
+            <returns><c>true</c>, if simbol was hased, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QConsole.Emulation.QVim.HasCommand(QuickTools.QConsole.Emulation.QVim.KeyInfo)">
+            <summary>
+            Hases the command.
+            </summary>
+            <returns><c>true</c>, if command was hased, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
         </member>
         <member name="T:QuickTools.QCore.Check">
             <summary>
@@ -1277,6 +1383,11 @@
             <returns>The from path.</returns>
             <param name="path">Path.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.PrintDisks">
+            <summary>
+            Prints the disks.
+            </summary>
+        </member>
         <member name="M:QuickTools.QCore.Get.RelativePath(System.String)">
             <summary>
             Gets the relative path from the given path by taking your current path in consideration
@@ -1295,8 +1406,9 @@
             <summary>
             Gets the relative path from the given path by taking your current path in consideration
             </summary>
-            <param name="path"></param>
-            <returns>the relative path string </returns>
+            <returns>The path.</returns>
+            <param name="path">Path.</param>
+            <param name="currentPath">Current path.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.FixPath(System.String)">
             <summary>
@@ -1318,6 +1430,12 @@
             </summary>
             <returns></returns>
             <param name="newDirectory"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Slash">
+            <summary>
+            Returns the Slash '/' apropiet for the current OS in use
+            </summary>
+            <returns>The slash.</returns>
         </member>
         <member name="M:QuickTools.QCore.Get.SaveKey">
             <summary>
@@ -2307,6 +2425,12 @@
             Contains the Database from the program
             </summary>
         </member>
+        <member name="P:QuickTools.QData.MiniDB.DataManager">
+            <summary>
+            Gets or sets the data manager.
+            </summary>
+            <value>The data manager.</value>
+        </member>
         <member name="M:QuickTools.QData.MiniDB.AddKey(System.Object,System.Object,System.Boolean)">
             <summary>
             Adds the key but mainly turns on or off the loaded which could help on speed up write time 
@@ -2696,6 +2820,12 @@
             Initialise the class
             </summary>
         </member>
+        <member name="M:QuickTools.QData.DataCacher.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.DataCacher"/> class.
+            </summary>
+            <param name="clearCache">If set to <c>true</c> clear cache.</param>
+        </member>
         <member name="T:QuickTools.QData.User">
             <summary>
             This class simplified the creation of a regular login for a console application
@@ -2805,6 +2935,12 @@
             <summary>
             Gets or set the Exception 
             </summary>
+        </member>
+        <member name="M:QuickTools.QData.Error.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Error"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Error"/>.</returns>
         </member>
         <member name="T:QuickTools.QData.DB">
             <summary>
@@ -3169,6 +3305,12 @@
             </summary>
             <param name="key">Key.</param>
         </member>
+        <member name="M:QuickTools.QData.KeyManager.DeleteKey(QuickTools.QData.Key)">
+            <summary>
+            Deletes the key.
+            </summary>
+            <param name="key">Key.</param>
+        </member>
         <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.String,System.Collections.Generic.List{QuickTools.QData.Key})">
             <summary>
             Writes the keys to the provide file 
@@ -3490,6 +3632,23 @@
             Recursive file search.
             </summary>
         </member>
+        <member name="M:QuickTools.QIO.RecursiveFileSearch.Search(System.String)">
+            <summary>
+            Search the specified directoy.
+            </summary>
+            <param name="directoy">Directoy.</param>
+        </member>
+        <member name="M:QuickTools.QIO.RecursiveFileSearch.Search">
+            <summary>
+            Search this instance.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.RecursiveFileSearch.WalkDirectoryTree(System.IO.DirectoryInfo)">
+            <summary>
+            Walks the directory tree.
+            </summary>
+            <param name="root">Root.</param>
+        </member>
         <member name="T:QuickTools.QIO.QBox">
             <summary>
             Create a type of box which will be containing files similar to winrar or zip
@@ -3688,6 +3847,63 @@
             <param name="origen">Origen.</param>
             <param name="destination">Destination.</param>
         </member>
+        <member name="T:QuickTools.QIO.FileTrimer">
+            <summary>
+            File trimer.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileTrimer.NewFileLabel">
+            <summary>
+            Gets or sets the new file label.
+            </summary>
+            <value>The new file label.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FileTrimer.NewFileName">
+            <summary>
+            Gets or sets the new name of the file.
+            </summary>
+            <value>The new name of the file.</value>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.Trim(System.String,System.Int32,System.Int32)">
+            <summary>
+            Trim the specified file, start and end.
+            </summary>
+            <param name="file">File.</param>
+            <param name="start">Start.</param>
+            <param name="end">End.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.Trim(System.Int32,System.Int32)">
+            <summary>
+            Trim the specified start and end.
+            </summary>
+            <param name="start">Start.</param>
+            <param name="end">End.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.Trim(System.String)">
+            <summary>
+            Trim the specified fileName.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.FileTrimer"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.FileTrimer"/> class.
+            </summary>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FileTrimer.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QIO.FileTrimer"/> class.
+            </summary>
+            <param name="file">File.</param>
+            <param name="start">Start.</param>
+            <param name="end">End.</param>
+        </member>
         <member name="T:QuickTools.QIO.QZip">
             <summary>
             QZip is 
@@ -3776,6 +3992,11 @@
             </summary>
             <param name="archiveName">Archive name.</param>
             <param name="files">Files.</param>
+        </member>
+        <member name="F:QuickTools.QIO.QZip.Errors">
+            <summary>
+            Contains the list of error .
+            </summary>
         </member>
         <member name="M:QuickTools.QIO.QZip.UnZip(System.String,System.String)">
             <summary>
@@ -4133,6 +4354,36 @@
             <summary>
             set the file extention , and the default is set to be row
             </summary>
+        </member>
+        <member name="M:QuickTools.QIO.RowPack.PackFileWithPassword(System.String,System.Object)">
+            <summary>
+            Packs the file with password.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="password">Password.</param>
+        </member>
+        <member name="M:QuickTools.QIO.RowPack.PackFileWithPassword(System.String,System.Object,System.Boolean)">
+            <summary>
+            Packs the file with password.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="password">Password.</param>
+            <param name="removeSourceFile">If set to <c>true</c> remove source file.</param>
+        </member>
+        <member name="M:QuickTools.QIO.RowPack.UnPackWithPassword(System.String,System.Object)">
+            <summary>
+            Uns the pack with password.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="password">Password.</param>
+        </member>
+        <member name="M:QuickTools.QIO.RowPack.UnPackWithPassword(System.String,System.Object,System.Boolean)">
+            <summary>
+            Uns the pack with password.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="password">Password.</param>
+            <param name="removeSourceFile">If set to <c>true</c> remove source file.</param>
         </member>
         <member name="M:QuickTools.QIO.RowPack.PackFile(System.String,System.Boolean)">
             <summary>
@@ -4732,6 +4983,12 @@
             Downloads the file.
             </summary>
         </member>
+        <member name="M:QuickTools.QNet.DownloadManager.DownloadFile(System.Boolean)">
+            <summary>
+            Downloads the file.
+            </summary>
+            <param name="waitToFinish">If set to <c>true</c> wait to finish.</param>
+        </member>
         <member name="M:QuickTools.QNet.DownloadManager.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.DownloadManager"/> class.
@@ -4870,7 +5127,8 @@
             <summary>
             Listen for a request and does not return the request the string clear request  
             </summary>
-            <param name="ListenUntilFunctionIsMeet"></param>
+            <param name="ListenUntilFunctionIsMeet">Listen until function is meet.</param>
+            <param name="response">Response.</param>
         </member>
         <member name="M:QuickTools.QNet.QServer.#ctor(System.String,System.Int32,System.Boolean)">
             <summary>
@@ -5413,6 +5671,106 @@
             <summary>
             Pulls the payload from trojan File
             </summary>
+        </member>
+        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.PullPayloadFromTrojan(System.String)">
+            <summary>
+            Pulls the payload from trojan.
+            </summary>
+            <param name="trojanFile">Trojan file.</param>
+        </member>
+        <member name="T:FilesTransferer">
+            <summary>
+            Creates an object that allow to transfer files and return or print the status of the transfer 
+            </summary>
+        </member>
+        <member name="M:FilesTransferer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+        </member>
+        <member name="M:FilesTransferer.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        </member>
+        <member name="M:FilesTransferer.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="chuckSize">Chuck size.</param>
+        </member>
+        <member name="M:FilesTransferer.#ctor(System.Boolean,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+            <param name="chuckSize">Chuck size.</param>
+        </member>
+        <member name="P:FilesTransferer.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
+        </member>
+        <member name="P:FilesTransferer.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:FilesTransferer.WaitToAcknolegeTransfer">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> wait to acknolege transfer.
+            </summary>
+            <value><c>true</c> if wait to acknolege transfer; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:FilesTransferer.ChuckSize">
+            <summary>
+            The size of the chuck and the default value is 1024 * 1024 * 64 = 670302208B or 64MB
+            </summary>
+        </member>
+        <member name="P:FilesTransferer.Buffer">
+            <summary>
+            Gets or sets the buffer.
+            </summary>
+            <value>The buffer.</value>
+        </member>
+        <member name="P:FilesTransferer.Source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+            <value>The source.</value>
+        </member>
+        <member name="P:FilesTransferer.Target">
+            <summary>
+            Gets or sets the target.
+            </summary>
+            <value>The target.</value>
+        </member>
+        <member name="M:FilesTransferer.TransferFile">
+            <summary>
+            Transfer this the file from the source to the given target directory.
+            </summary>
+        </member>
+        <member name="M:FilesTransferer.TransferFile(System.String,System.String)">
+            <summary>
+            Transfer the specified source and target.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
+        </member>
+        <member name="M:FilesTransferer.TransferDirectory">
+            <summary>
+            Transfers the directory.
+            </summary>
+        </member>
+        <member name="M:FilesTransferer.TransferDirectory(System.String,System.String)">
+            <summary>
+            Transfers the directory.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
         </member>
     </members>
 </doc>

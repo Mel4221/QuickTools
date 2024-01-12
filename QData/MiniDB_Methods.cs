@@ -741,7 +741,7 @@ namespace QuickTools.QData
                   this.DataManager = new KeyManager(this.DBName);
                   this.DataManager.AllowDebugger = this.AllowDebuger; 
                   this.DataManager.LoadKeys();
-            ///to makes sure that we return if the keys count is cero
+            //to makes sure that we return if the keys count is cero
             if(this.DataManager.Keys.Count == 0)
             {
                 return false; 

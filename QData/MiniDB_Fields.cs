@@ -89,6 +89,10 @@ namespace QuickTools.QData
         /// </summary>
         public List<DB> DataBase { get; set; } = new List<DB>();
 
+        /// <summary>
+        /// Gets or sets the data manager.
+        /// </summary>
+        /// <value>The data manager.</value>
         public KeyManager DataManager { get; set; } = new KeyManager(); 
     }
 }

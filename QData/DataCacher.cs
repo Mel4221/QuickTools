@@ -1,9 +1,5 @@
 ﻿using QuickTools.QCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QuickTools.QIO;
 using System.IO;
 
@@ -115,6 +111,10 @@ namespace QuickTools.QData
             this.settings.Load();
 
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QData.DataCacher"/> class.
+        /// </summary>
+        /// <param name="clearCache">If set to <c>true</c> clear cache.</param>
         public DataCacher(bool clearCache)
         {
             if (clearCache)

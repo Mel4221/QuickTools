@@ -15,6 +15,10 @@ using System.Collections;
 using System.Threading;
 namespace QuickTools.QConsole.Emulation
 {
+
+    /// <summary>
+    /// QVim is a atempt to create a simpler version of vim on c#
+    /// </summary>
     public partial class QVim
     {
 
@@ -42,7 +46,10 @@ namespace QuickTools.QConsole.Emulation
 
      
 
-
+        /// <summary>
+        /// Evaluates the key.
+        /// </summary>
+        /// <param name="key">Key.</param>
         public void EvaluateKey(KeyInfo key)
         {
             //Get.Wait(key.ToString());
@@ -50,7 +57,7 @@ namespace QuickTools.QConsole.Emulation
             ////Get.Yellow(this.HasControl(key));
             if (this.HasArrows(key))
             {
-                /// process the arrow direction depending on the direction 
+                // process the arrow direction depending on the direction 
                 this.RunArrowsFunctions(key);
 
                 return;
@@ -99,7 +106,9 @@ namespace QuickTools.QConsole.Emulation
 
 
         }
-
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
         public void Start()
         {
 

@@ -89,10 +89,7 @@ namespace QuickTools.QData
             /// </summary>
             public bool AllowDebugger { get; set; } = false; 
 
-            /// <summary>
-            /// Gets or sets the name of the group of tags in the settings 
-            /// </summary>
-            /// <value>The name of the group.</value>
+            
 
             /*
                 End Fields

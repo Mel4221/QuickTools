@@ -119,6 +119,7 @@
     <Compile Include="QSecurity\FalseIO\Trojan_Method_RemovePayload.cs" />
     <Compile Include="QSecurity\FalseIO\Trojan_Method_PullTrojanFile.cs" />
     <Compile Include="QCore\Print_list.cs" />
+    <Compile Include="QIO\FilesTransferer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

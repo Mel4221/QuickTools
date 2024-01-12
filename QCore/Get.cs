@@ -783,6 +783,9 @@ namespace QuickTools.QCore
             }
          }
 
+        /// <summary>
+        /// Prints the disks.
+        /// </summary>
         public static void PrintDisks()
         {
 
@@ -901,8 +904,9 @@ namespace QuickTools.QCore
         /// <summary>
         /// Gets the relative path from the given path by taking your current path in consideration
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns>the relative path string </returns>
+        /// <returns>The path.</returns>
+        /// <param name="path">Path.</param>
+        /// <param name="currentPath">Current path.</param>
         public static string RelativePath(string path ,string currentPath)
         {
             string relative, slash, fullPath, newPath;
@@ -997,6 +1001,11 @@ namespace QuickTools.QCore
         private static string qtDir =$"data{Slash()}qt{Slash()}keys{Slash()}";
         private static string keyFile = qtDir + "secure.key";
 
+
+        /// <summary>
+        /// Returns the Slash '/' apropiet for the current OS in use
+        /// </summary>
+        /// <returns>The slash.</returns>
         public static string Slash()
         {
             string path = null;

@@ -40,6 +40,11 @@ namespace QuickTools.QIO
             /// </summary>
             public string FileExtention = "rowpack";
            
+        /// <summary>
+        /// Packs the file with password.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="password">Password.</param>
             public void PackFileWithPassword(string fileName , object password)
             {
                 byte[] bytes = Binary.Reader(fileName);
@@ -47,6 +52,12 @@ namespace QuickTools.QIO
                 byte[] encrypted = new Secure().Encrypt(str,new Secure().CreatePassword(password), new Secure().CreatePassword(password));
                 Writer.Write($"{fileName}.{this.FileExtention}", IConvert.BytesToString(encrypted));
             }
+        /// <summary>
+        /// Packs the file with password.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="password">Password.</param>
+        /// <param name="removeSourceFile">If set to <c>true</c> remove source file.</param>
         public void PackFileWithPassword(string fileName, object password,bool removeSourceFile)
         {
             byte[] bytes, encrypted;
@@ -75,6 +86,11 @@ namespace QuickTools.QIO
             }
         }
 
+        /// <summary>
+        /// Uns the pack with password.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="password">Password.</param>
         public void UnPackWithPassword(string fileName,object password)
         {
             string data, str; 
@@ -85,6 +101,12 @@ namespace QuickTools.QIO
             decrypted = IConvert.StringToBytesArray(str);
             Binary.Writer(fileName.Substring(0, fileName.LastIndexOf('.')), decrypted); 
         }
+        /// <summary>
+        /// Uns the pack with password.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="password">Password.</param>
+        /// <param name="removeSourceFile">If set to <c>true</c> remove source file.</param>
         public void UnPackWithPassword(string fileName, object password,bool removeSourceFile)
         {
             string data, str;

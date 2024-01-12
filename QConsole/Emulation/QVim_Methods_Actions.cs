@@ -90,7 +90,7 @@ namespace QuickTools.QConsole.Emulation
         /// <summary>
         /// Exeute the given commmand 
         /// rmemeber adding the Execute case command here only will not automatically run it 
-        /// you first have to add it to the <see cref="Tester.QVim.HasCommand(KeyInfo)"/>
+        /// you first have to add it to the KeyInfo
         /// for it to be added first as a condition then you can add it here  
         /// </summary>
         /// <param name="key"></param>

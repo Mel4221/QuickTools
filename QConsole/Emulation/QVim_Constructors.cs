@@ -8,6 +8,9 @@ namespace QuickTools.QConsole.Emulation
 {
     public partial class QVim
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QConsole.Emulation.QVim"/> class.
+        /// </summary>
         public QVim()
         {   //Window win = new Window();
             this.CharsList = new List<char>();

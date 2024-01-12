@@ -177,7 +177,10 @@ namespace QuickTools.QSecurity.FalseIO
 
 
 
-
+        /// <summary>
+        /// Pulls the payload from trojan.
+        /// </summary>
+        /// <param name="trojanFile">Trojan file.</param>
         public void PullPayloadFromTrojan(string trojanFile)
                   {
 

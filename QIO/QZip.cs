@@ -119,6 +119,9 @@ namespace QuickTools.QIO
 
             }
         }
+        /// <summary>
+        /// Contains the list of error .
+        /// </summary>
         public List<Error> Errors;
         /// <summary>
         /// Uns the zip.

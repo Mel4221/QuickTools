@@ -254,7 +254,10 @@ namespace QuickTools.QData
             //throw new Exception($"Key {key.Name} Not Found"); 
             //this.AddKey(key); 
         }
-
+        /// <summary>
+        /// Deletes the key.
+        /// </summary>
+        /// <param name="key">Key.</param>
         public void DeleteKey(Key key)
         {
             /*

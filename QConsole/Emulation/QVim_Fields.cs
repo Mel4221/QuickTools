@@ -8,15 +8,42 @@ namespace QuickTools.QConsole.Emulation
 {
     public partial class QVim
     {
+        /// <summary>
+        /// The escape key pressed.
+        /// </summary>
         public bool EscapeKeyPressed;
+        /// <summary>
+        /// The row.
+        /// </summary>
         public int Row;
+        /// <summary>
+        /// The column.
+        /// </summary>
         public int Column;
+        /// <summary>
+        /// The chars list.
+        /// </summary>
         public List<char> CharsList;
+        /// <summary>
+        /// The rows list.
+        /// </summary>
         public List<int> RowsList;
+        /// <summary>
+        /// The columns list.
+        /// </summary>
         public List<int> ColumnsList; 
+        /// <summary>
+        /// Cursor position.
+        /// </summary>
         public struct CursorPosition
         {
+            /// <summary>
+            /// The x.
+            /// </summary>
             public static int X = 0;
+            /// <summary>
+            /// The y.
+            /// </summary>
             public static int Y = 0; 
         }
         

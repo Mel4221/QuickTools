@@ -257,7 +257,8 @@ using QuickTools.QCore;
         /// <summary>
         /// Listen for a request and does not return the request the string clear request  
         /// </summary>
-        /// <param name="ListenUntilFunctionIsMeet"></param>
+        /// <param name="ListenUntilFunctionIsMeet">Listen until function is meet.</param>
+        /// <param name="response">Response.</param>
         public void Listen(Func<HttpListenerRequest, HttpListenerResponse, bool> ListenUntilFunctionIsMeet, HttpListenerResponse response)
         {
             
