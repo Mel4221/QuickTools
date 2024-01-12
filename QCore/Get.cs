@@ -49,7 +49,30 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
-
+        /// <summary>
+        /// Gets estimated time on compleation. 
+        /// </summary>
+        /// <param name="sw"></param>
+        /// <param name="counter"></param>
+        /// <param name="counterGoal"></param>
+        /// <returns></returns>
+        public static TimeSpan ETA(Stopwatch sw, long counter, long counterGoal)
+        {
+            /* this is based off of:
+             * (TimeTaken / linesProcessed) * linesLeft=timeLeft
+             * so we have
+             * (10/100) * 200 = 20 Seconds now 10 seconds go past
+             * (20/100) * 200 = 40 Seconds left now 10 more seconds and we process 100 more lines
+             * (30/200) * 100 = 15 Seconds and now we all see why the copy file dialog jumps from 3 hours to 30 minutes :-)
+             * 
+             * pulled from http://stackoverflow.com/questions/473355/calculate-time-remaining/473369#473369
+             */
+            if (counter == 0) return TimeSpan.Zero;
+            float elapsedMin = ((float)sw.ElapsedMilliseconds / 1000) / 60;
+            float minLeft = (elapsedMin / counter) * (counterGoal - counter); //see comment a
+            TimeSpan ret = TimeSpan.FromMinutes(minLeft);
+            return ret;
+        }
 
 
         /// <summary>
@@ -149,6 +172,23 @@ namespace QuickTools.QCore
             Get.WriteL("");
         }
 
+        /// <summary>
+        /// Print the specified key,  and value with a separator
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="separator">Separator.</param>
+        /// <param name="value">Value.</param>
+        public static void Print(object key,object separator,object value)
+        {
+            Get.WriteL("");
+            Get.Green();
+            Get.Write($" {key} ");
+            Get.Reset();
+            Get.Write(separator);
+            Get.Yellow();
+            Get.Write($" {value} ");
+            Get.WriteL("");
+        }
 
 
         /// <summary>
@@ -727,7 +767,21 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The from path.</returns>
         /// <param name="path">Path.</param>
-        public static string FolderFromPath(string path) => $"{path.Substring(path.LastIndexOf(Get.Slash())+1)}";
+        public static string FolderFromPath(string path)
+        {
+            if(path[path.Length-1] == Get.Slash()[0])
+            {
+                return path;
+            }
+            if (System.IO.Path.HasExtension(path))
+            {
+                return path.Substring(0 ,path.LastIndexOf(Get.Slash()[0]));
+            }
+            else
+            {
+                return path + Get.Slash(); 
+            }
+         }
 
         public static void PrintDisks()
         {
@@ -1653,12 +1707,14 @@ character in order for it to return a valid name
            /// <param name="content">Content.</param>
              static void ClearAfter(object content)
             {
-                  string message = content.ToString();
-            throw new NotImplementedException("This Method is currently not mantained");
+                string message = content.ToString(); 
+                throw new NotImplementedException("This Method is currently not mantained");
+                  /*
                   Console.SetCursorPosition(0, 0);
                   //Console.Write(new CInput().Tabs(message.Length));
                   Console.SetCursorPosition(0, 0);
                   Console.Write(content); 
+                  */
             }
                        
 

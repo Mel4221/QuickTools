@@ -59,9 +59,7 @@ namespace QuickTools.QConsole
             }
 
       }
-      /// <summary>
-      /// Write to the console the specified input.
-      /// </summary>
+      
       //  class System
       //{
       //      /// <summary>

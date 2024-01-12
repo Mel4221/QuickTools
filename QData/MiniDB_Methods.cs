@@ -1044,7 +1044,6 @@ namespace QuickTools.QData
 
                   writer.Flush();
             }*/
-            return true; 
             }
 
 

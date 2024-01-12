@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using QuickTools.QCore;
 using QuickTools.QData;
 using System.IO;
+using QuickTools.QColors; 
 namespace QuickTools.QIO
 {
 
@@ -85,7 +86,7 @@ namespace QuickTools.QIO
 		/// <summary>
 		/// Allow to shread a fiele and make it un restorable 
 		/// </summary>
-		/// <exception cref="Exception"></exception>
+		/// <exception cref="Exception">No Files were provided</exception>
 		public void Shread()
 		{
 			string[] files = new string[] { };
@@ -108,14 +109,14 @@ namespace QuickTools.QIO
 			if (this.AllowDebugger)
 			{
 				Print.List(files);
-				Get.Yellow($"Files: {files.Length}");
+				Color.Yellow($"Files: {files.Length}");
 				Get.WaitTime();
 			}
 			for (int file = 0; file < files.Length; file++)
 			{
 				try
 				{
-					if (this.AllowDebugger) Get.Yellow();
+					if (this.AllowDebugger) Color.Yellow();
 					byte[] buffer = new byte[0];
 
 					if(!this.AllowDebugger)
@@ -130,14 +131,14 @@ namespace QuickTools.QIO
 						});
 					}
 
-					if (this.AllowDebugger) Get.Yellow($"Buffer Size: [{Get.FileSize(buffer)}]");
+					if (this.AllowDebugger) Color.Yellow($"Buffer Size: [{Get.FileSize(buffer)}]");
 					GC.Collect();
 					current = file;
 					status = $"Destroing File: [{files[file]}] [{Get.Status(current, goal)}]";
 					this.CurrentStatus = status;
 					if (this.AllowDebugger)
 					{
-					  Get.Red(status);
+					  Color.Red(status);
 					}
 					using (BinaryWriter binary = new BinaryWriter(new FileStream(files[file], FileMode.OpenOrCreate, FileAccess.Write)))
 					{
@@ -157,26 +158,27 @@ namespace QuickTools.QIO
 						Message = ex.Message,
 						Type = $"The File Failed to be Shreded: [{files[file]}]\n{ex}"
 					});
-					if (this.AllowDebugger) Get.Red($"Failed to be Destroied: {files[file]}");
+					if (this.AllowDebugger) Color.Red($"Failed to be Destroied: {files[file]}");
 				}
 			}
 			if (this.AllowDebugger)
 			{
-				Get.Green($"Files Sucessfully Destroied: {files.Length - this.Erros.Count}");
+				Color.Green($"Files Sucessfully Destroied: {files.Length - this.Erros.Count}");
 				if (this.Erros.Count > 0)
 				{
-					this.Erros.ForEach(item => Get.Red(item.ToString()));
-					Get.Red($"Failed To Be Destroied: {this.Erros.Count}");
+					this.Erros.ForEach(item => QColors.Color.Red(item.ToString()));
+					Color.Red($"Failed To Be Destroied: {this.Erros.Count}");
 
 				}
 				Get.Wait($"Done!!!");
 			}
 		}
-		/// <summary>
-		/// This Class provides the methods to be able to delete a file by rewritting pregenerated text over it
-		/// of the size of the file then delete it as a way to clear the data from it permanetly
-		/// </summary>
-		/*
+
+        /*
+		 *        /// <summary>
+        /// This Class provides the methods to be able to delete a file by rewritting pregenerated text over it
+        /// of the size of the file then delete it as a way to clear the data from it permanetly
+        /// </summary>       
 		public class FileShreder
 		{
 
@@ -330,5 +332,5 @@ namespace QuickTools.QIO
 
 	}
 	*/
-	}
+    }
 }

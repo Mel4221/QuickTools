@@ -577,6 +577,12 @@
             <param name="labelTextColor"></param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
+        <member name="P:QuickTools.QConsole.Options.ExitTrigerFunction">
+            <summary>
+            Gets or sets the exit triger function.
+            </summary>
+            <value>The exit triger function.</value>
+        </member>
         <member name="F:QuickTools.QConsole.Options.SelectorR">
             <summary>
             This Control the Right simbol from the selector and the default simbol is ">"
@@ -648,6 +654,12 @@
             <summary>
             Current Selection
             </summary>
+        </member>
+        <member name="P:QuickTools.QConsole.Options.Testing">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QConsole.Options"/> is testing.
+            </summary>
+            <value><c>true</c> if testing; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:QuickTools.QConsole.QProgressBar">
             <summary>
@@ -993,6 +1005,15 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.ETA(System.Diagnostics.Stopwatch,System.Int64,System.Int64)">
+            <summary>
+            Gets estimated time on compleation. 
+            </summary>
+            <param name="sw"></param>
+            <param name="counter"></param>
+            <param name="counterGoal"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.Open(System.String)">
             <summary>
             Open a file 
@@ -1027,6 +1048,14 @@
             </summary>
             <param name="key"></param>
             <param name="value"></param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.Print(System.Object,System.Object,System.Object)">
+            <summary>
+            Print the specified key,  and value with a separator
+            </summary>
+            <param name="key">Key.</param>
+            <param name="separator">Separator.</param>
+            <param name="value">Value.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.PrintSystemVars(System.Collections.IDictionary)">
             <summary>
@@ -3062,7 +3091,7 @@
         </member>
         <member name="P:QuickTools.QData.KeyManager.Keys">
             <summary>
-            This are the keys that are buffered when you either cal <see cref="M:QuickTools.QData.KeyManager.LoadKeys"/> or <see cref="M:QuickTools.QData.KeyManager.ReadKeys(System.String,QuickTools.QData.KeyManager.KeyFormat)"/>
+            This are the keys that are buffered when you either cal/>
             </summary>
             <value>The keys.</value>
         </member>
@@ -4512,7 +4541,7 @@
             <summary>
             Allow to shread a fiele and make it un restorable 
             </summary>
-            <exception cref="T:System.Exception"></exception>
+            <exception cref="T:System.Exception">No Files were provided</exception>
         </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>

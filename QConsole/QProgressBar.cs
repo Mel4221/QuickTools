@@ -105,33 +105,57 @@ using System;
         /// <param name="status">Status.</param>
         public void Display(string status)
         {
-            if (!this.Started)
+            try
             {
-                Console.BackgroundColor = this.BackGroundColorForLabel;
-                Console.ForegroundColor = this.ForeColorForLabel;
-                Console.Write($"{this.Label} ");
-                Get.Reset();
-                Console.Write('[');
-                this.X = Console.CursorLeft;
-            }
-            // Get.Wait($"{status} {Get.Number}");
-            this.Started = true;
-            if (this.Status[0] != status[0])
-            {
-                this.Status = status;
-                Get.Title(status);
-
-                Console.SetCursorPosition(this.X, this.Y);
-                StrDots += this.DotsType;
-                Console.BackgroundColor = this.BackGroundColorForDots;
-                Console.ForegroundColor = this.ForeColorForDots;
-                Console.Write(StrDots);
-                if (status == "100%")
+                /*
+                if (!this.Started)
                 {
+                    Console.BackgroundColor = this.BackGroundColorForLabel;
+                    Console.ForegroundColor = this.ForeColorForLabel;
+                    Console.Write($"{this.Label} ");
                     Get.Reset();
-                    Console.Write(']');
-                    Console.Write(Environment.NewLine);
+                    Console.Write('[');
+                    this.X = Console.CursorLeft;
                 }
+                */
+                // Get.Wait($"{status} {Get.Number}");
+                this.Started = true;
+                if (this.Status != status)
+                {
+                    Console.SetCursorPosition(1, this.Y);
+                    Console.BackgroundColor = this.BackGroundColorForLabel;
+                    Console.ForegroundColor = this.ForeColorForLabel;
+                    Console.Write($"{this.Label} ");
+                    Get.Reset();
+                    Console.Write('[');
+                    this.X = Console.CursorLeft;
+                    Get.Title(status);
+
+
+
+                    Console.SetCursorPosition(this.X, this.Y);
+                    if (this.Status[0] != status[0])
+                    {
+                        StrDots += this.DotsType;
+                    }
+
+                    Console.BackgroundColor = this.BackGroundColorForDots;
+                    Console.ForegroundColor = this.ForeColorForDots;
+                    Console.Write(StrDots);
+                    this.Status = status;
+
+                    if (status == "100%")
+                    {
+                        Get.Reset();
+                        Console.Write(']');
+                        Console.Write(Environment.NewLine);
+                    }
+                }
+            }catch
+            {
+                Get.Clear();
+                Get.Box($"The Screen is Too Small");
+                Console.Beep();
             }
 
         }

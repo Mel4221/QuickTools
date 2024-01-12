@@ -317,6 +317,7 @@ namespace QuickTools.QIO
 
             while (true)
             {
+                
                 byte[] buffer = new byte[10240];
                 int num = binaryReader.Read(buffer, 0, 10240);
 
