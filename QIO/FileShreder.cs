@@ -53,10 +53,38 @@ namespace QuickTools.QIO
 		/// </summary>
 		public string CurrentStatus = "Not-Started";
 
-		/// <summary>
-		/// Allow to set debuggers 
-		/// </summary>
-		public bool AllowDebugger { get; set; } = false;
+        /// <summary>
+        /// Progress.
+        /// </summary>
+        public static class Progress 
+        {  
+            /// <summary>
+            /// The current. status of the Progress
+            /// </summary>
+            public static int Current { get; set; }
+
+            /// <summary>
+            /// The goal that needs to be meet
+            /// </summary>
+            public static int Goal { get; set; }
+
+            /// <summary>
+            /// Gets or sets the text progress.
+            /// </summary>
+            /// <value>The text progress.</value>
+            public static string TextProgress { get; set; }
+
+            /// <summary>
+            /// Gets or sets the text status.
+            /// </summary>
+            /// <value>The text status.</value>
+            public static string TextStatus { get; set; }
+        }
+
+        /// <summary>
+        /// Allow to set debuggers 
+        /// </summary>
+        public bool AllowDebugger { get; set; } = false;
 
 		/// <summary>
 		/// Contains the list of erros 
@@ -118,16 +146,29 @@ namespace QuickTools.QIO
 				{
 					if (this.AllowDebugger) Color.Yellow();
 					byte[] buffer = new byte[0];
+                    int length;
+                    long len;
+                    length = 0;
+                    len = File.Open(files[file], FileMode.Open).Length;
+                    //GC.Collect();
+                    if (len > int.MaxValue / 2)
+                    {
+                        length = int.MaxValue / 2 / 2;
+                    }
+                    if (len < int.MaxValue / 2)
+                    {
+                        length = int.Parse(len.ToString());
+                    }
 
-					if(!this.AllowDebugger)
+                    if (!this.AllowDebugger)
 					{
-						buffer = Get.Bytes(IRandom.RandomText(int.Parse(Binary.Reader(files[file]).Length.ToString())));
+                        buffer = Get.Bytes(IRandom.RandomText(length));
 					}
 					if (this.AllowDebugger)
 					{
 						Get.Wait($"{files[file]} Building Random Buffer...", () =>
 						{
-							buffer = Get.Bytes(IRandom.RandomText(int.Parse(Binary.Reader(files[file]).Length.ToString())));
+                            buffer = Get.Bytes(IRandom.RandomText(length));
 						});
 					}
 
@@ -136,7 +177,13 @@ namespace QuickTools.QIO
 					current = file;
 					status = $"Destroing File: [{files[file]}] [{Get.Status(current, goal)}]";
 					this.CurrentStatus = status;
-					if (this.AllowDebugger)
+
+                    Progress.Current = file;
+                    Progress.Goal = goal;
+                    Progress.TextProgress = Get.Status(current, goal);
+                    Progress.TextStatus = status;
+
+                    if (this.AllowDebugger)
 					{
 					  Color.Red(status);
 					}

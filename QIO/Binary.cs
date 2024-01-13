@@ -120,41 +120,36 @@ namespace QuickTools.QIO
             /// <param name="fileName">File name.</param>
             /// <param name="GbSize">Gb size.</param>
             public static void CreateZeroFile(string fileName , int GbSize)
-                  {
-            throw new Exception("This Function has been disabled due to realabilty reasons");
-
-            /*
-                  if (File.Exists(fileName))
+            {
+            //throw new Exception("This Function has been disabled due to realabilty reasons");
+            try
+            {
+                GC.Collect();
+                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
-                File.Delete(fileName);
+
+
+                    int size = GbSize * 1024 * 1024 * 1024;
+                    if (size > int.MaxValue)
+                    {
+                        size = int.MaxValue - 1;
+                    }
+                    byte[] buffer = new byte[size];
+                    using (BinaryWriter binary = new BinaryWriter(stream))
+                    {
+
+                        Get.Wait($"Creatting {fileName} Size: [{Get.FileSize(size)}] Please Wait...", () =>
+                        {
+                            binary.Write(buffer, 0, buffer.Length);
+
+                        });
+                        Get.Ok();
+                    }
                 }
-            if(!File.Exists(fileName))
-                {
-                using(FileStream create = File.Create(fileName))
-                      {
-
-                      }
-                }
-
-          int gb = GbSize * 1024 * 1024;
-          using(FileStream fs = new FileStream(fileName , FileMode.Append , FileAccess.Write))
-                {
-                byte[] bytes = new byte[gb];
-
-                BinaryWriter binary = new BinaryWriter(fs);
-                QColors.Color.Green($"Making Zero File:");
-                QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
-
-                 for(int rounds = 0 ; rounds < gb ; rounds++)
-                      {
-
-                        binary.Write(bytes , 0 , bytes.Length);
-                        //Get.Green(Get.Status(rounds , gb)); 
-                        //bar.Display(rounds, gb - 1); 
-                      }
-                }
-            */
-
+            }catch(Exception ex)
+            {
+                Get.Red($"Something Failed while creatting the Zero File more info: \n\n{ex}");
+            }
         }
         /// <summary>
         /// Creates the zero file.
@@ -164,45 +159,7 @@ namespace QuickTools.QIO
         /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
         public static void CreateZeroFile(string fileName, int GbSize,bool allowDebugger)
         {
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
-            if (!File.Exists(fileName))
-            {
-                using (FileStream create = File.Create(fileName))
-                {
-
-                }
-            }
-
-            int gb = GbSize * 1024;
-            using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
-            {
-                byte[] bytes = Get.Bytes(IRandom.RandomText(1024 * 1024));
-
-                BinaryWriter binary = new BinaryWriter(fs);
-                if (allowDebugger)
-                {
-                    QColors.Color.Green($"Making Zero File:");
-                    QColors.Color.Green($"File: {fileName} Size: {GbSize}GB");
-                }
-
-                Get.WaitTime(2);
-                for (int rounds = 0; rounds < gb; rounds++)
-                {
-
-                    binary.Write(bytes, 0, bytes.Length);
-                    if (allowDebugger)
-                    {
-                        Get.Green(Get.Status(rounds, gb));
-                        QuickTools.QCore.Get.Ok();
-
-
-                    }
-                }
-            }
-
+            Binary.CreateZeroFile(fileName, GbSize); 
         }
 
         /// <summary>

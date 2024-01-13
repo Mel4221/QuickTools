@@ -4766,6 +4766,33 @@
             contains the current status of the Process
             </summary>
         </member>
+        <member name="T:QuickTools.QIO.FileShreder.Progress">
+            <summary>
+            Progress.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Progress.Current">
+            <summary>
+            The current. status of the Progress
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Progress.Goal">
+            <summary>
+            The goal that needs to be meet
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Progress.TextProgress">
+            <summary>
+            Gets or sets the text progress.
+            </summary>
+            <value>The text progress.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FileShreder.Progress.TextStatus">
+            <summary>
+            Gets or sets the text status.
+            </summary>
+            <value>The text status.</value>
+        </member>
         <member name="P:QuickTools.QIO.FileShreder.AllowDebugger">
             <summary>
             Allow to set debuggers 
