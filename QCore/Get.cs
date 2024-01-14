@@ -623,8 +623,7 @@ namespace QuickTools.QCore
         /// <returns>string path </returns>
         public static string DataPath()
         {
-
-            string folder = $"{Get.Path}data{Slash()}qt{Slash()}";
+            string folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Slash()}qt{Slash()}";
             if (Directory.Exists(folder) == true)
             {
                 return folder;
@@ -983,7 +982,7 @@ namespace QuickTools.QCore
             public static string DataPath(string newDirectory)
         {
             string bar = Slash();
-            string folder = $"{Get.Path}data{bar}qt{bar}{newDirectory}{Slash()}";
+            string folder = $"{DataPath()}{newDirectory}{Slash()}";
             if (Directory.Exists(folder) == true)
             {
                 return folder;
@@ -998,7 +997,7 @@ namespace QuickTools.QCore
         }
 
         //   private static string path = Get.Path;
-        private static string qtDir =$"data{Slash()}qt{Slash()}keys{Slash()}";
+        private static string qtDir =$"{DataPath()}qt{Slash()}keys{Slash()}";
         private static string keyFile = qtDir + "secure.key";
 
 
