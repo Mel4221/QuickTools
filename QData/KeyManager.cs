@@ -346,10 +346,12 @@ namespace QuickTools.QData
           
                 List<Key> keys = new List<Key>();
                 this.Errors = new List<Error>();
-                string key, temp, input; 
+                //string key, temp, input;
+                string key, input;
+                StringBuilder temp;
                 char term, assing;
                 key = "";
-                temp = "";
+                temp = new StringBuilder(); 
                 input = File.ReadAllText(keyFile);
                 term = this.KeyTerminatorChar;
                 assing = this.KeyAssingChar;
@@ -361,26 +363,26 @@ namespace QuickTools.QData
                    
                     if (AllowDebugger)
                     {
-                        Get.Wait($"Status: [{Get.Status(ch,input.Length-1)}] Keys: [{keys.Count}]", true);
+                        Get.Wait($"Loading Keys Please Wait... Status: [{Get.Status(ch,input.Length-1)}] Keys: [{keys.Count}]", true);
                     }
                     if (input[ch] == assing)
                     {
-                        key = temp;
-                        temp = "";
+                        key = temp.ToString();
+                        temp.Clear();
                     }
                     if (input[ch] == term)
                     {
                         keys.Add(new Key()
                         {
                             Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
-                            Value = temp
+                            Value = temp.ToString()
                         });
                         //Get.Wait($"{key} : {temp}"); 
-                        temp = "";
+                        temp.Clear();
                     }
                     if (input[ch] != assing && input[ch] != term)
                     {
-                        temp += input[ch];
+                        temp.Append(input[ch]);
                     }
                     }catch(Exception ex)
                     {

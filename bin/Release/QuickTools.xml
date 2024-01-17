@@ -1111,6 +1111,28 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="P:QuickTools.QCore.Get.CurrentColorSelection">
+            <summary>
+            Gets or sets the current color selection.
+            </summary>
+            <value>The current color selection.</value>
+        </member>
+        <member name="M:QuickTools.QCore.Get.PrintMultiColors(System.String)">
+            <summary>
+            Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
+            acording to the numbers from 0 to 6
+            </summary>
+            <param name="text">Text.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.PrintRGB(System.String)">
+            <summary>
+            Prints the text using the 3 colors of the RGB  
+            Depending on the <see cref="P:QuickTools.QCore.Get.CurrentColorSelection"/>
+            so if CurrentColorSelection is from 0 to 2 it will 
+            set the color as such 0 = Red 1 = Green  2 Blue
+            </summary>
+            <param name="text">Text.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.ETA(System.Diagnostics.Stopwatch,System.Int64,System.Int64)">
             <summary>
             Gets estimated time on compleation. 
@@ -2414,7 +2436,7 @@
             </summary>
             <value>The identifier.</value>
         </member>
-        <member name="P:QuickTools.QData.MiniDB.AllowDebuger">
+        <member name="P:QuickTools.QData.MiniDB.AllowDebugger">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.MiniDB"/> allow debuger.
             </summary>
@@ -4973,13 +4995,6 @@
             Download manager.
             </summary>
         </member>
-        <member name="M:QuickTools.QNet.DownloadManager.MyDownloadFile(System.String,System.String)">
-            <summary>
-            Mies the download file.
-            </summary>
-            <param name="webUrl">Web URL.</param>
-            <param name="outputFilePath">Output file path.</param>
-        </member>
         <member name="P:QuickTools.QNet.DownloadManager.AllowDebugger">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
@@ -5005,16 +5020,22 @@
             </summary>
             <value>The status.</value>
         </member>
+        <member name="P:QuickTools.QNet.DownloadManager.Address">
+            <summary>
+            Gets or sets the address for the file that wish to download
+            </summary>
+            <value>The address.</value>
+        </member>
+        <member name="P:QuickTools.QNet.DownloadManager.FileName">
+            <summary>
+            Gets or sets the name of the file for the file downloaded
+            </summary>
+            <value>The name of the file.</value>
+        </member>
         <member name="M:QuickTools.QNet.DownloadManager.DownloadFile">
             <summary>
             Downloads the file.
             </summary>
-        </member>
-        <member name="M:QuickTools.QNet.DownloadManager.DownloadFile(System.Boolean)">
-            <summary>
-            Downloads the file.
-            </summary>
-            <param name="waitToFinish">If set to <c>true</c> wait to finish.</param>
         </member>
         <member name="M:QuickTools.QNet.DownloadManager.#ctor">
             <summary>
@@ -5301,6 +5322,49 @@
             <summary>
             Releases all resource used by the <see cref="T:QuickTools.Net.QHttp"/> object.
             </summary>
+        </member>
+        <member name="P:QuickTools.QNet.UploadManager.Address">
+            <summary>
+            Gets or sets the address for the file to be uploaded
+            </summary>
+            <value>The address.</value>
+        </member>
+        <member name="P:QuickTools.QNet.UploadManager.FileName">
+            <summary>
+            Gets or sets the name of the file for the file that wish to be uploaded
+            </summary>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:QuickTools.QNet.UploadManager.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.UploadManager"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QNet.UploadManager.UploadFile(System.String,System.String)">
+            <summary>
+            Uploads the file.
+            </summary>
+            <param name="address">Address.</param>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="P:QuickTools.QNet.UploadManager.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="M:QuickTools.QNet.UploadManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QNet.UploadManager"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QNet.UploadManager.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QNet.UploadManager"/> class.
+            </summary>
+            <param name="addresss">Addresss.</param>
+            <param name="fileName">File name.</param>
         </member>
         <member name="T:QuickTools.QSecurity.Secure">
             <summary>

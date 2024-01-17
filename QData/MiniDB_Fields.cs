@@ -82,7 +82,7 @@ namespace QuickTools.QData
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.MiniDB"/> allow debuger.
         /// </summary>
         /// <value><c>true</c> if allow debuger; otherwise, <c>false</c>.</value>
-        public bool AllowDebuger { get; set; } = false;
+        public bool AllowDebugger { get; set; } = false;
 
         /// <summary>
         /// Contains the Database from the program

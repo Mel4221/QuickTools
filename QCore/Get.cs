@@ -50,6 +50,104 @@ namespace QuickTools.QCore
     {
 
         /// <summary>
+        /// Gets or sets the current color selection.
+        /// </summary>
+        /// <value>The current color selection.</value>
+        public static int CurrentColorSelection { get; set; } = 0; 
+
+
+        /// <summary>
+        /// Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
+        /// acording to the numbers from 0 to 6
+        /// </summary>
+        /// <param name="text">Text.</param>
+        public static void PrintMultiColors(string text)
+        {
+            int color = CurrentColorSelection; 
+            foreach (char t in text)
+            {
+                switch (color)
+                {
+                    case 0:
+                        Color.Red();
+                        Get.Write(t);
+                        color = 1;
+                        break;
+                    case 1:
+                        Color.Green();
+                        Get.Write(t);
+                        color = 2;
+                        break;
+                    case 2:
+                        Color.Blue();
+                        Get.Write(t);
+                        color = 3;
+                        break;
+                    case 3:
+                        Color.Cyan();
+                        Get.Write(t);
+                        color = 4;
+                        break;
+                    case 4:
+                        Color.Pink();
+                        Get.Write(t);
+                        color = 5;
+                        break;
+                    case 5:
+                        Color.Yellow();
+                        Get.Write(t);
+                        color = 6;
+                        break;
+                    default:
+                        Color.Gray();
+                        Get.Write(t);
+                        color = 0;
+                        break;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Prints the text using the 3 colors of the RGB  
+        /// Depending on the <see cref="CurrentColorSelection"/>
+        /// so if CurrentColorSelection is from 0 to 2 it will 
+        /// set the color as such 0 = Red 1 = Green  2 Blue
+        /// </summary>
+        /// <param name="text">Text.</param>
+        public static void PrintRGB(string text)
+        {
+            int color = CurrentColorSelection;
+            foreach (char t in text)
+            {
+                switch (color)
+                {
+                    case 0:
+                        Get.Red();
+                        Get.Write(t);
+                        color = 1;
+                        break;
+                    case 1:
+                        Get.Green();
+                        Get.Write(t);
+                        color = 2;
+                        break;
+                    case 2:
+                        Get.Blue();
+                        Get.Write(t);
+                        color = 0;
+                        break;
+                    default:
+                        Get.Red();
+                        Get.Write(t);
+                        CurrentColorSelection = IRandom.RandomInt(0, 2); 
+                        break; 
+                }
+            }
+
+        }
+
+        /// <summary>
         /// Gets estimated time on compleation. 
         /// </summary>
         /// <param name="sw"></param>

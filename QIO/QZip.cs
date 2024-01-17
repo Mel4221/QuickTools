@@ -87,36 +87,39 @@ namespace QuickTools.QIO
         /// <param name="files">Files.</param>
         public void Zip(string archiveName , string[] files)
         {
-            using (var stream = File.OpenWrite(archiveName))
-            using (ZipArchive archive = new ZipArchive(stream, System.IO.Compression.ZipArchiveMode.Create))
+            using (FileStream stream = new FileStream(archiveName,FileMode.Create,FileAccess.Write))
             {
-                int current, goal;
-                string status; 
-                current = 0;
-                goal = files.Length - 1; 
-                foreach (var item in files)
+                using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create))
                 {
-                    try
+                    int current, goal;
+                    string status;
+                    current = 0;
+                    goal = files.Length - 1;
+                    foreach (var item in files)
                     {
-                        archive.CreateEntryFromFile(item, Get.FileNameFromPath(item), CompressionLevel.Optimal);
-                        current++;
-                        status = $"{Get.FileNameFromPath(item)} [OK] [{Get.Status(current, goal)}]";
-                        this.Status = status;
-                        if (this.AllowDebugger)
+                        try
                         {
-                            Get.Yellow(status);
+                            archive.CreateEntryFromFile(item, Get.FileNameFromPath(item), CompressionLevel.Optimal);
+                            current++;
+                            status = $"{Get.FileNameFromPath(item)} [OK] [{Get.Status(current, goal)}]";
+                            this.Status = status;
+                            if (this.AllowDebugger)
+                            {
+                                Get.Yellow(status);
+                            }
                         }
-                    }catch(Exception ex)
+                        catch (Exception ex)
+                        {
+                            this.Errors.Add(new Error() { Message = ex.Message, Type = $"Failed To Zip {Get.FileNameFromPath(item)} Due to: \n {ex}" });
+                        }
+
+                    }
+                    if (this.AllowDebugger && this.Errors.Count > 0)
                     {
-                        this.Errors.Add(new Error() { Message = ex.Message, Type = $"Failed To Zip {Get.FileNameFromPath(item)} Due to: \n {ex}" });
+                        this.Errors.ForEach(item => Get.Red(item.ToString()));
                     }
 
                 }
-                if (this.AllowDebugger && this.Errors.Count > 0)
-                {
-                    this.Errors.ForEach(item => Get.Red(item.ToString()));
-                }
-
             }
         }
         /// <summary>

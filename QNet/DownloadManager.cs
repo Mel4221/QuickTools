@@ -34,17 +34,15 @@ using System.Security.Policy;
 
 namespace QuickTools.QNet
 {
-      /// <summary>
-      /// Download manager.
-      /// </summary>
-      public class DownloadManager
+   
+    /// <summary>
+    /// Download manager.
+    /// </summary>
+    public class DownloadManager
       {
+            
 
-        /// <summary>
-        /// Mies the download file.
-        /// </summary>
-        /// <param name="webUrl">Web URL.</param>
-        /// <param name="outputFilePath">Output file path.</param>
+        /*
 		public void MyDownloadFile(string webUrl, string outputFilePath)
 		{
             Uri url = new Uri(webUrl); 
@@ -67,6 +65,7 @@ namespace QuickTools.QNet
 				}
 			}
 		}
+        */
 		private volatile bool _completed;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
@@ -87,7 +86,7 @@ namespace QuickTools.QNet
 
                 Uri Uri = new Uri(address);
                 _completed = false;
-
+                                                    
                 client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                 client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
 
@@ -117,7 +116,6 @@ namespace QuickTools.QNet
             {
                 this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
                 this.Status =e.ProgressPercentage.ToString();
-
 			}
 
         }
@@ -137,14 +135,23 @@ namespace QuickTools.QNet
 
 
 
-
-            private string address { get; set; }
-            private string location { get; set; }
+            /// <summary>
+            /// Gets or sets the address for the file that wish to download
+            /// </summary>
+            /// <value>The address.</value>
+            public string Address { get; set; }
+            /// <summary>
+            /// Gets or sets the name of the file for the file downloaded
+            /// </summary>
+            /// <value>The name of the file.</value>
+            public string FileName { get; set; }
             /// <summary>
             /// Downloads the file.
             /// </summary>
             public void DownloadFile()
             {
+            this.DownloadFile(this.Address, this.FileName);
+            /*
                   if (address == "" || location == "")
                   {
                         throw new ArgumentException("Incorrect Arguments Were provided  or JUST NOT PROVIDED AT ALL ");
@@ -158,14 +165,11 @@ namespace QuickTools.QNet
                   client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
                   client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
                   client.DownloadFileAsync(Uri, location);
-                
+                */
             }
 
-        /// <summary>
-        /// Downloads the file.
-        /// </summary>
-        /// <param name="waitToFinish">If set to <c>true</c> wait to finish.</param>
-        public void DownloadFile(bool waitToFinish)
+            /*
+            public void DownloadFile(bool waitToFinish)
         {
             if (address == "" || location == "")
             {
@@ -188,7 +192,7 @@ namespace QuickTools.QNet
             }
         }
 
-
+        */
 
 
         /// <summary>
@@ -206,8 +210,8 @@ namespace QuickTools.QNet
             /// <param name="fileName">File name.</param>
             public DownloadManager(string url, string fileName)
             {
-                  this.address = url;
-                  this.location = fileName; 
+                  this.Address = url;
+                  this.FileName = fileName; 
             }
       }
 }

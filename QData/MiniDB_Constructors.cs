@@ -52,7 +52,7 @@ namespace QuickTools.QData
                   RelationOrType = "NULL";
                   ID = 1000;
                   DBName = Path + dbName; 
-                  this.Load();
+                  //this.Load();
             }
        
        

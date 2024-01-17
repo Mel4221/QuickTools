@@ -344,7 +344,7 @@ namespace QuickTools.QData
                   }
                   catch 
                   {
-                if (this.AllowDebuger)
+                if (this.AllowDebugger)
                 {
                     Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                 }
@@ -376,7 +376,7 @@ namespace QuickTools.QData
                   }
                   catch
             {
-                if (this.AllowDebuger)
+                if (this.AllowDebugger)
                 {
                     Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
 
@@ -489,7 +489,7 @@ namespace QuickTools.QData
                   }
                   catch
             {
-                if (this.AllowDebuger)
+                if (this.AllowDebugger)
                 {
                     Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
 
@@ -672,7 +672,7 @@ namespace QuickTools.QData
                         Value = this.DataBase[item].Relation
                     });
                 }
-                if (this.AllowDebuger)
+                if (this.AllowDebugger)
                 {
                 keys.ForEach((obj) => Get.Write(obj.ToString()));
                 Get.Yellow($"Keys Count: [{keys.Count}]");
@@ -739,7 +739,7 @@ namespace QuickTools.QData
                   this.ResentLoaded = true; 
                   this.DataBase = new List<DB>();
                   this.DataManager = new KeyManager(this.DBName);
-                  this.DataManager.AllowDebugger = this.AllowDebuger; 
+                  this.DataManager.AllowDebugger = this.AllowDebugger; 
                   this.DataManager.LoadKeys();
             //to makes sure that we return if the keys count is cero
             if(this.DataManager.Keys.Count == 0)
@@ -779,7 +779,7 @@ namespace QuickTools.QData
                                 Id = db.Id,
                                 Relation = db.Relation
                             });
-                            if (this.AllowDebuger)
+                            if (this.AllowDebugger)
                             {
                                 Get.WriteL($"Loading Keys: [{Get.Status(key,this.DataManager.Keys.Count-1)}] {db.ToString()}");
                             }

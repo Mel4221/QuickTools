@@ -13,7 +13,7 @@ namespace QuickTools.QConsole
         /// <summary>
         /// Display this instance.
         /// </summary>
-        public void _Display()
+         void _Display()
         {
             Get.Clear();
             // HERE IS THE REGULAR DISPLAY OF  THE OPTIONS

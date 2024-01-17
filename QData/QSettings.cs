@@ -123,7 +123,7 @@ namespace QuickTools.QData
             {
                 this.SettingsList = new List<Settings>(); 
                 this.SettingsDB = new MiniDB(this.FileName);
-                this.SettingsDB.AllowDebuger = this.AllowDebugger; 
+                this.SettingsDB.AllowDebugger = this.AllowDebugger; 
                 this.SettingsDB.Load();
                 List<DB> db = this.SettingsDB.DataBase;
                 for (int item = 0; item < db.Count; item++)

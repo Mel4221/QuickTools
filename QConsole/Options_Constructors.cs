@@ -15,7 +15,7 @@ namespace QuickTools.QConsole
         /// </summary>
         public Options()
         {
-            ClearOptions();
+          //  ClearOptions();
         }
 
 
@@ -26,7 +26,7 @@ namespace QuickTools.QConsole
         /// <param name="options">Options.</param>
         public Options(string[] options)
         {
-            ClearOptions();
+           // ClearOptions();
             Count = options.Length;
             Color.Yellow(Label);
             foreach (string option in options)
@@ -56,7 +56,7 @@ namespace QuickTools.QConsole
         public Options(string[] options, bool Simple)
         {
 
-            ClearOptions();
+           // ClearOptions();
 
             if (Simple == true)
             {
@@ -98,7 +98,7 @@ namespace QuickTools.QConsole
         public Options(List<object> options)
         {
 
-            ClearOptions();
+            //ClearOptions();
             Color.Yellow(Label);
             Count = options.Count;
 
@@ -132,21 +132,16 @@ namespace QuickTools.QConsole
         public Options(bool type)
         {
 
-            ClearOptions();
+          //  ClearOptions();
 
             if (type == false)
             {
-                string[] option = { "No", "Yes" };
-#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
-                new Options(option);
-#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
+                this.OptionList  = new List<string>()
+                { "No", "Yes" };
             }
             if (type == true)
             {
-                string[] option = { "Yes", "No" };
-#pragma warning disable RECS0026 // Possible unassigned object created by 'new'
-                new Options(option);
-#pragma warning restore RECS0026 // Possible unassigned object created by 'new'
+                this.OptionList = new List<string>(){ "Yes", "No" };
             }
         }
 
@@ -162,7 +157,7 @@ namespace QuickTools.QConsole
             switch (typeOfOptions.ToLower())
             {
                 case "list":
-                    ClearOptions();
+                    //ClearOptions();
                     SelectorL = "";
                     SelectorR = "";
                     Color.Yellow(Label);
