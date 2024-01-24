@@ -3,6 +3,10 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using QuickTools.QCore;
+using QuickTools.QIO;
+using System.Threading;
+using QuickTools.QConsole;
+
 namespace QuickTools.QData
 {
 
@@ -36,6 +40,8 @@ namespace QuickTools.QData
         /// The key assing char.
         /// </summary>
         public char KeyAssingChar { get; set; }  = '=';
+        
+
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
         /// </summary>
@@ -69,21 +75,38 @@ namespace QuickTools.QData
         }
     }
 
+    public partial class QKeyManager : IDisposable
+    {
 
+    }
     /// <summary>
     /// This object creates key files to store data in a key value format for example
     /// KeyName=Value; 
     /// and allow you also to modify the style on how it should be formated such as 
     /// KeyName>Value|
     /// </summary>
-    public class KeyManager : Key
+    public partial class QKeyManager :Key
     {
 
-        
-        private StringBuilder builder = new StringBuilder();
+
+        //private StringBuilder builder = new StringBuilder();
 
         /// <summary>
-        /// This are the keys that are buffered when you either cal/>
+        /// Gets or sets the current status.
+        /// </summary>
+        /// <value>The current status.</value>
+        public string CurrentStatus { get; set; }
+
+        /// <summary>
+        /// Gets or sets the QKey version.
+        /// </summary>
+        /// <value>The QK ey version.</value>
+        public int QKeyId { get; set; } = IRandom.Pin(); 
+
+        private readonly string QKey_Id_Key = "QKEYID";
+
+        /// <summary>
+        /// This are the keys that are buffered when you the ReadKeys method is called/>
         /// </summary>
         /// <value>The keys.</value>
         public List<Key> Keys { get; set; } = new List<Key>();
@@ -109,7 +132,7 @@ namespace QuickTools.QData
         /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
         /// </summary>
         /// <param name="fileName">File name.</param>
-        public KeyManager(string fileName)
+        public QKeyManager(string fileName)
         {
             if (fileName != "" || fileName != null)
             {
@@ -120,14 +143,14 @@ namespace QuickTools.QData
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
         /// </summary>
-        public KeyManager()
+        public QKeyManager()
         {
 
         }
         /// <summary>
         /// provides the file name for the file containing the keys
         /// </summary>
-        public string FileName { get; set; } = "KeyFile.qkey";
+        public string FileName { get; set; } = Get.DataPath("db")+ "KeyFile.qkey";
 
         enum KeyFormat
         {
@@ -148,6 +171,25 @@ namespace QuickTools.QData
                 File.Delete(this.FileName);
             }
         }
+
+
+        /// <summary>
+        /// Creates the on data path.
+        /// </summary>
+        public void CreateOnDataPath() => this.CreateOnDataPath(this.FileName); 
+
+        /// <summary>
+        /// Creates the on data path.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        public void CreateOnDataPath(string fileName)
+        {
+            fileName = Get.DataPath("db") + fileName; 
+            if (!File.Exists(fileName))
+            {
+                File.Create(fileName);
+            }
+        }
         /// <summary>
         /// Create the Key File
         /// </summary>
@@ -163,17 +205,17 @@ namespace QuickTools.QData
         /// </summary>
         /// <returns>The key.</returns>
         /// <param name="key">Key.</param>
-        public Key GetKey(string key)
+        public  Key GetKey(string key)
         {
             this.Keys = this.ReadKeys();
             foreach (Key k in this.Keys)
             {
                 if (k.Name == key)
                 {
-                    return k;
+                    return  k;
                 }
             }
-            return new Key()
+            return  new Key()
             {
                 Name = null,
                 Value = null,
@@ -186,7 +228,7 @@ namespace QuickTools.QData
         /// </summary>
         public void LoadKeys()
         {
-            this.Keys = this.ReadKeys();
+            this.ReadKeys();
         }
 
         /// <summary>
@@ -194,13 +236,37 @@ namespace QuickTools.QData
         /// </summary>
         public void SaveKeys()
         {
-            this.WriteKeys(this.Keys);
+            List<Key> _ = this.Keys;
+            ref List<Key> keys = ref _; 
+            this.WriteKeys(ref keys);
         }
+
+     
+        /// <summary>
+        /// Adds the key.
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        public void AddKey(string key, string value)
+        {
+            if (CheckForNotRepetedKeys)
+            {
+                foreach (Key k in this.Keys)
+                {
+                    if (key == k.Name)
+                    {
+                        throw new Exception("Key Already Set");
+                    }
+                }
+            }
+            this.Keys.Add(new Key() { Name=key,Value=value});
+        }
+
         /// <summary>
         /// Adds a new key to the list 
         /// </summary>
         /// <param name="key">Key.</param>
-        public void AddKey(Key key)
+        public void AddKey(ref Key key)
         {
             if (CheckForNotRepetedKeys)
             {
@@ -212,7 +278,6 @@ namespace QuickTools.QData
                     }
                 }
             }
-
             this.Keys.Add(key);
 
 
@@ -266,19 +331,26 @@ namespace QuickTools.QData
                 throw new Exception("Key name is empty");
             }
             */
-            this.Keys = this.ReadKeys();
+            //this.Keys = this.ReadKeys();
             for (int item = 0; item < this.Keys.Count; item++)
             {
                 if (key.Name == this.Keys[item].Name)
                 {
                     this.Keys.RemoveAt(item);
-                    this.WriteKeys(this.Keys);
+                    List<Key> _ = this.Keys; 
+                    this.WriteKeys(ref _);
                     return;
                 }
             }
         }
 
-        private bool Exist(Key key)
+
+        /// <summary>
+        /// Exist the specified key.
+        /// </summary>
+        /// <returns>The exist.</returns>
+        /// <param name="key">Key.</param>
+        public bool Exist(ref Key key)
         {
             foreach (Key k in this.Keys)
             {
@@ -289,40 +361,129 @@ namespace QuickTools.QData
             }
             return false;
         }
-        void WriteKeys(List<Key> keys, KeyFormat format)
-        {
 
+        public int Get_QKey_Version() => Get_QKey_Version(this.FileName);
+
+        public int Get_QKey_Version(string fileName)
+        {
+            int version = 0;
+            if (!File.Exists(this.FileName))
+            {
+                return version; 
+            }
+            string textVersion = File.ReadAllLines(fileName)[0];
+            string temp = "";
+            foreach (char ch in textVersion)
+            {
+                if (Get.IsNumber(ch))
+                {
+                    temp += ch;
+                }
+            }
+            int.TryParse(temp, out version); 
+            return version;
         }
 
+
         /// <summary>
-        /// Writes the keys to the provide file 
+        /// Matchs the identifier.
+        /// </summary>
+        /// <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
+        public bool MatchId() => this.MatchId(this.FileName);
+
+
+        
+         /// <summary>
+         /// Matchs the identifier.
+         /// </summary>
+         /// <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
+         /// <param name="fileName">File name.</param>
+        public bool MatchId(string fileName)
+        {
+          
+            if(this.QKeyId == this.Get_QKey_Version(fileName))
+            {
+                return true; 
+            }else
+            {
+                return false; 
+            }
+            //int version = int.Parse(textVersion.Substring(textVersion.IndexOf('='),textVersion.IndexOf(';')); 
+         }
+
+
+        /// <summary>
+        /// Writes the keys to the given file
         /// </summary>
         /// <param name="fileName">File name.</param>
         /// <param name="keys">Keys.</param>
-        public void WriteKeys(string fileName, List<Key> keys)
+        public void WriteKeys(string fileName, ref List<Key> keys)
         {
-            keys.ForEach((key) => {
-                this.builder.Append($"{key.Name}{key.KeyAssingChar}{key.Value}{key.KeyTerminatorChar}\n");
-            });
-            File.WriteAllText(fileName, this.builder.ToString());
+            //this.builder = new StringBuilder();
+            if (keys.Count == 0) throw new ArgumentException("No Keys were provided!!!");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
+            using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                int isFirst, current, goal;
+                byte[] buffer = new byte[0];
+                long indexer = 0;
+                isFirst = 0;
+                current = 0;
+                goal = keys.Count;
+                QProgressBar bar = new QProgressBar(); 
+
+                         
+                    using (BinaryWriter writer = new BinaryWriter(stream))
+                    {
+                    for (int item = 0; item < keys.Count; item++)
+                    {
+                        this.CurrentStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
+                        if (this.AllowDebugger)
+                        {
+                            bar.Label = this.CurrentStatus;
+                            bar.Display(Get.Status(current, goal));
+                        }
+                        if (isFirst == 1)
+                        {
+                            buffer = Get.Bytes($"{keys[item].Name}{keys[item].KeyAssingChar}{keys[item].Value}{keys[item].KeyTerminatorChar}\n");
+                            writer.Write(buffer, 0, buffer.Length);
+                        }
+                        if (isFirst == 0)
+                        {
+                            buffer = Get.Bytes($"{QKey_Id_Key}{keys[0].KeyAssingChar}{this.QKeyId}{keys[0].KeyTerminatorChar}\n");
+                            writer.Write(buffer, 0, buffer.Length);
+                            isFirst = 1;
+                        }
+                     
+                        indexer += buffer.Length;
+                        current++;
+                        stream.Seek(indexer, SeekOrigin.Begin);
+
+                    }
+                }
+                   
+               
+            }
+            //this.builder.Append();
+           
+            //File.WriteAllText(fileName, this.builder.ToString());
+            /*
+            using (FileStream stream = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+            { 
+                byte[] buffer = Get.Bytes(this.builder.ToString());
+                stream.Write(buffer, 0, buffer.Length);
+            }
+            */
         }
 
         /// <summary>
         /// Writes the keys.
         /// </summary>
         /// <param name="keys">Keys.</param>
-        public void WriteKeys(List<Key> keys)
-        {
-            keys.ForEach((key) => {
-                this.builder.Append($"{key.Name}{key.KeyAssingChar}{key.Value}{key.KeyTerminatorChar}\n");
-            });
-            File.WriteAllText(this.FileName, this.builder.ToString());
-        }
-        List<Key> ReadKeys(string input, KeyFormat format)
-        {
-            List<Key> keys = new List<Key>();
-            return keys;
-        }
+        public void WriteKeys(ref List<Key> keys) => this.WriteKeys(this.FileName, ref keys); 
+        
+        
+      
         /// <summary>
         /// Reads the keys.
         /// </summary>
@@ -342,28 +503,35 @@ namespace QuickTools.QData
         {
             string keyFile = this.FileName; 
             if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
-            int ch = 0; 
-          
-                List<Key> keys = new List<Key>();
+            int ch = 0;
+                Check check = new Check();
+                check.Start(); 
                 this.Errors = new List<Error>();
+                this.Keys.Clear(); 
                 //string key, temp, input;
                 string key, input;
                 StringBuilder temp;
                 char term, assing;
+                bool idLoaded = false; 
                 key = "";
                 temp = new StringBuilder(); 
-                input = File.ReadAllText(keyFile);
+                input = IConvert.ToString(Binary.Reader(keyFile));
+               
                 term = this.KeyTerminatorChar;
                 assing = this.KeyAssingChar;
                 
+                QProgressBar bar = new QProgressBar();
+
                 for (ch = 0; ch < input.Length; ch++)
                 {
                 try
                 {
-                   
+
+                    this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
                     if (AllowDebugger)
                     {
-                        Get.Wait($"Loading Keys Please Wait... Status: [{Get.Status(ch,input.Length-1)}] Keys: [{keys.Count}]", true);
+                        bar.Label = this.CurrentStatus;
+                        bar.Display(Get.Status(ch, input.Length));
                     }
                     if (input[ch] == assing)
                     {
@@ -372,11 +540,16 @@ namespace QuickTools.QData
                     }
                     if (input[ch] == term)
                     {
-                        keys.Add(new Key()
+                        if (idLoaded)
                         {
-                            Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
-                            Value = temp.ToString()
-                        });
+                            this.Keys.Add(new Key()
+                            {
+                                Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
+                                Value = temp.ToString()
+                            });
+                        }
+                        idLoaded = true; 
+
                         //Get.Wait($"{key} : {temp}"); 
                         temp.Clear();
                     }
@@ -390,7 +563,7 @@ namespace QuickTools.QData
                     {
                         Message = ex.Message,
                         Type = $"The Keys were not on the correct format or damaged At the Index: {ch} From: {input.Length}" +
-                        $"\n Key={key} Temp={temp} KeysCount={keys.Count}"
+                        $"\n Key={key} Temp={temp} KeysCount={this.Keys.Count}"
 
                     });
                 }
@@ -408,9 +581,48 @@ namespace QuickTools.QData
             //}
 
                 this.FileName = keyFile;
-                return keys;
-        
-            
+                if(this.AllowDebugger)
+                {
+                    Get.Box($"Execution Time: {check.Stop()}"); 
+                }
+            return this.Keys;
+
+
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~QKeyManager() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

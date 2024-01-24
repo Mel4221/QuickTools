@@ -1111,12 +1111,6 @@
             tools that started this Project.
             </summary>
         </member>
-        <member name="P:QuickTools.QCore.Get.CurrentColorSelection">
-            <summary>
-            Gets or sets the current color selection.
-            </summary>
-            <value>The current color selection.</value>
-        </member>
         <member name="M:QuickTools.QCore.Get.PrintMultiColors(System.String)">
             <summary>
             Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
@@ -1127,7 +1121,7 @@
         <member name="M:QuickTools.QCore.Get.PrintRGB(System.String)">
             <summary>
             Prints the text using the 3 colors of the RGB  
-            Depending on the <see cref="P:QuickTools.QCore.Get.CurrentColorSelection"/>
+            Depending on the 
             so if CurrentColorSelection is from 0 to 2 it will 
             set the color as such 0 = Red 1 = Green  2 Blue
             </summary>
@@ -1135,7 +1129,9 @@
         </member>
         <member name="M:QuickTools.QCore.Get.ETA(System.Diagnostics.Stopwatch,System.Int64,System.Int64)">
             <summary>
-            Gets estimated time on compleation. 
+            Gets estimated time on compleation 
+            Based on a solution from StackOverflow Entirely
+            http://stackoverflow.com/questions/473355/calculate-time-remaining/473369#473369
             </summary>
             <param name="sw"></param>
             <param name="counter"></param>
@@ -1247,12 +1243,17 @@
             </summary>
             <returns>The corresponding line for the console</returns>
         </member>
-        <member name="M:QuickTools.QCore.Get.HashCodeFromFile(System.String)">
+        <member name="P:QuickTools.QCore.Get.AllowDebugger">
             <summary>
-            Gets a hash code from a file no matter the size
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QCore.Get"/> allow debugger.
             </summary>
-            <returns>The code from file.</returns>
-            <param name="fileName">File name.</param>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QCore.Get.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
         </member>
         <member name="M:QuickTools.QCore.Get.HashCodeFromFile(System.String,System.Boolean)">
             <summary>
@@ -1260,7 +1261,14 @@
             </summary>
             <returns>The code from file.</returns>
             <param name="fileName">File name.</param>
-            <param name="smallFiles">If set to <c>true</c> small files.</param>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.HashCodeFromFile(System.String)">
+            <summary>
+            Gets a hash code from a file no matter the size
+            </summary>
+            <returns>The code from file.</returns>
+            <param name="fileName">File name.</param>
         </member>
         <member name="M:QuickTools.QCore.Get.HashCode(System.Byte[])">
             <summary>
@@ -1940,6 +1948,13 @@
             <param name="fileName">File name.</param>
             <param name="size">Size.</param>
         </member>
+        <member name="M:QuickTools.QCore.Get.FileLength(System.String)">
+            <summary>
+            Gets the file length.
+            </summary>
+            <returns>The length.</returns>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.FileSize(System.String)">
             <summary>
             gets Files the size.
@@ -2400,6 +2415,23 @@
             </summary>
             <value>The DBN ame.</value>
         </member>
+        <member name="F:QuickTools.QData.MiniDB.MiniDB_Version">
+            <summary>
+            The mini db version.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.MiniDB.MiniDB_MaxSize">
+            <summary>
+            Gets or sets the size of the mini db max.
+            </summary>
+            <value>The size of the mini db max.</value>
+        </member>
+        <member name="P:QuickTools.QData.MiniDB.MiniDB_Metadata">
+            <summary>
+            Gets or sets the mini db metadata.
+            </summary>
+            <value>The mini db metadata.</value>
+        </member>
         <member name="P:QuickTools.QData.MiniDB.KeysName">
             <summary>
             Gets or sets the name of the keys.
@@ -2521,15 +2553,6 @@
             <param name="key">Key.</param>
             <param name="value">Value.</param>
         </member>
-        <member name="M:QuickTools.QData.MiniDB.AddKey(System.String,System.String,System.String)">
-            <summary>
-            Adds the key and returns the value that was added
-            </summary>
-            <returns>The key.</returns>
-            <param name="key">Key.</param>
-            <param name="value">Value.</param>
-            <param name="relation">Relation.</param>
-        </member>
         <member name="M:QuickTools.QData.MiniDB.AddKey(System.Object,System.Object,System.Object)">
             <summary>
             Adds the key.
@@ -2543,13 +2566,6 @@
             Gets the key and returns the result
             </summary>
             <returns>The key.</returns>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.GetKeyObject(System.Object)">
-            <summary>
-            Gets the key and returns the DB Object.
-            </summary>
-            <returns>The key object.</returns>
             <param name="key">Key.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.GetKeys(System.Object)">
@@ -2579,6 +2595,14 @@
             </summary>
             <returns>The find.</returns>
             <param name="cratiria">Cratiria.</param>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.UpdateKeyValue(System.String,System.Object)">
+            <summary>
+            Updates the key value.
+            </summary>
+            <returns><c>true</c>, if key value was updated, <c>false</c> otherwise.</returns>
+            <param name="key">Key.</param>
+            <param name="newValue">New value.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.UpdateKeyValue(System.Int32,System.Object)">
             <summary>
@@ -2671,104 +2695,6 @@
             Removes  all by identifier.
             </summary>
             <param name="id">Identifier.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.IsRelated(System.String,System.String,System.Object)">
-            <summary>
-            Ises the related.
-            </summary>
-            <returns><c>true</c>, if related was ised, <c>false</c> otherwise.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="value">Value.</param>
-            <param name="relation">Relation.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.IsRelated(System.String,System.Object)">
-            <summary>
-            Ises the related.
-            </summary>
-            <returns><c>true</c>, if related was ised, <c>false</c> otherwise.</returns>
-            <param name="value">Value.</param>
-            <param name="relation">Relation.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectAllByValue(System.String,System.String)">
-            <summary>
-            Selects all by value.
-            </summary>
-            <returns>The all by value.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="contains">Contains.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectAllByValue(System.String)">
-            <summary>
-            Selects all by value.
-            </summary>
-            <returns> all that contains the value.</returns>
-            <param name="contains">Contains.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereKey(System.Object)">
-            <summary>
-            Selects the where key.
-            </summary>
-            <returns>The where key.</returns>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelecAlltWhereKey(System.Object)">
-            <summary>
-            Selecs the allt where key.
-            </summary>
-            <returns>The allt where key.</returns>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereKey(System.String,System.String)">
-            <summary>
-            Selects the where key.
-            </summary>
-            <returns>The where key.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereValue(System.String,System.String)">
-            <summary>
-            Selects the where value.
-            </summary>
-            <returns>The where value.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereValue(System.String)">
-            <summary>
-            Selects the where value.
-            </summary>
-            <returns>The where value.</returns>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereRelation(System.String)">
-            <summary>
-            Selects the where relation.
-            </summary>
-            <returns>The where relation.</returns>
-            <param name="relation">Relation.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereId(System.Int32)">
-            <summary>
-            Selects the where identifier.
-            </summary>
-            <returns>The where identifier.</returns>
-            <param name="Id">Identifier.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectAllByRelation(System.String,System.String)">
-            <summary>
-            Selects all by relation.
-            </summary>
-            <returns>The all by relation.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="relation">Relation.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectAllByRelation(System.Object)">
-            <summary>
-            Selects all by relation.
-            </summary>
-            <returns>The all by relation.</returns>
-            <param name="relation">Relation.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.Dispose">
             <summary>
@@ -3191,174 +3117,6 @@
             Set this instance.
             </summary>
         </member>
-        <member name="T:QuickTools.QData.Key">
-            <summary>
-            contains the format for the the key >
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.Key.IsEmpty">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
-            </summary>
-            <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-            <value>The value.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.KeyTerminatorChar">
-            <summary>
-            The key terminator char.
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.Key.KeyAssingChar">
-            <summary>
-            The key assing char.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.Key.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
-        </member>
-        <member name="M:QuickTools.QData.Key.ToString(System.String)">
-            <summary>
-            this returns the text into 2 main formats html and json 
-            it will return the formatinto a key and value that will be understood by html
-            and also by json engine 
-            </summary>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
-        <member name="T:QuickTools.QData.KeyManager">
-            <summary>
-            This object creates key files to store data in a key value format for example
-            KeyName=Value; 
-            and allow you also to modify the style on how it should be formated such as 
-            KeyName>Value|
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.KeyManager.Keys">
-            <summary>
-            This are the keys that are buffered when you either cal/>
-            </summary>
-            <value>The keys.</value>
-        </member>
-        <member name="P:QuickTools.QData.KeyManager.Errors">
-            <summary>
-            Gets or sets the errors.
-            </summary>
-            <value>The errors.</value>
-        </member>
-        <member name="P:QuickTools.QData.KeyManager.AllowDebugger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
-            </summary>
-            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QData.KeyManager.CheckForNotRepetedKeys">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
-            repeted keys.
-            </summary>
-            <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
-            </summary>
-            <param name="fileName">File name.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.KeyManager.FileName">
-            <summary>
-            provides the file name for the file containing the keys
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.Drop">
-            <summary>
-            Deletes the key file along with all it's data
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.Create">
-            <summary>
-            Create the Key File
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.GetKey(System.String)">
-            <summary>
-            Gets the key.
-            </summary>
-            <returns>The key.</returns>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.LoadKeys">
-            <summary>
-            Loads the keys from the file 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.SaveKeys">
-            <summary>
-            Saves the current Buffer keys 
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.AddKey(QuickTools.QData.Key)">
-            <summary>
-            Adds a new key to the list 
-            </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.UpdateKey(QuickTools.QData.Key)">
-            <summary>
-            Updates the key.
-            </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.DeleteKey(QuickTools.QData.Key)">
-            <summary>
-            Deletes the key.
-            </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.String,System.Collections.Generic.List{QuickTools.QData.Key})">
-            <summary>
-            Writes the keys to the provide file 
-            </summary>
-            <param name="fileName">File name.</param>
-            <param name="keys">Keys.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.WriteKeys(System.Collections.Generic.List{QuickTools.QData.Key})">
-            <summary>
-            Writes the keys.
-            </summary>
-            <param name="keys">Keys.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.ReadKeys(System.String)">
-            <summary>
-            Reads the keys.
-            </summary>
-            <returns>The keys.</returns>
-            <param name="file">File.</param>
-        </member>
-        <member name="M:QuickTools.QData.KeyManager.ReadKeys">
-            <summary>
-            Reads the keys.
-            </summary>
-            <returns>The keys.</returns>
-        </member>
         <member name="T:QuickTools.QData.QSettings">
             <summary>
             QSettings helps to create a settings model based on xml 
@@ -3649,6 +3407,224 @@
             </summary>
             <param name="file">File.</param>
         </member>
+        <member name="T:QuickTools.QData.Key">
+            <summary>
+            contains the format for the the key >
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Key.IsEmpty">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
+            </summary>
+            <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyTerminatorChar">
+            <summary>
+            The key terminator char.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyAssingChar">
+            <summary>
+            The key assing char.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString(System.String)">
+            <summary>
+            this returns the text into 2 main formats html and json 
+            it will return the formatinto a key and value that will be understood by html
+            and also by json engine 
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="T:QuickTools.QData.QKeyManager">
+            <summary>
+            This object creates key files to store data in a key value format for example
+            KeyName=Value; 
+            and allow you also to modify the style on how it should be formated such as 
+            KeyName>Value|
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.QKeyId">
+            <summary>
+            Gets or sets the QKey version.
+            </summary>
+            <value>The QK ey version.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.Keys">
+            <summary>
+            This are the keys that are buffered when you the ReadKeys method is called/>
+            </summary>
+            <value>The keys.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.Errors">
+            <summary>
+            Gets or sets the errors.
+            </summary>
+            <value>The errors.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.CheckForNotRepetedKeys">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
+            repeted keys.
+            </summary>
+            <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.FileName">
+            <summary>
+            provides the file name for the file containing the keys
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.Drop">
+            <summary>
+            Deletes the key file along with all it's data
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.CreateOnDataPath">
+            <summary>
+            Creates the on data path.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.CreateOnDataPath(System.String)">
+            <summary>
+            Creates the on data path.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.Create">
+            <summary>
+            Create the Key File
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.GetKey(System.String)">
+            <summary>
+            Gets the key.
+            </summary>
+            <returns>The key.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.LoadKeys">
+            <summary>
+            Loads the keys from the file 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.SaveKeys">
+            <summary>
+            Saves the current Buffer keys 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.AddKey(System.String,System.String)">
+            <summary>
+            Adds the key.
+            </summary>
+            <param name="key">Key.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.AddKey(QuickTools.QData.Key@)">
+            <summary>
+            Adds a new key to the list 
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.UpdateKey(QuickTools.QData.Key)">
+            <summary>
+            Updates the key.
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.DeleteKey(QuickTools.QData.Key)">
+            <summary>
+            Deletes the key.
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.Exist(QuickTools.QData.Key@)">
+            <summary>
+            Exist the specified key.
+            </summary>
+            <returns>The exist.</returns>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.MatchId">
+            <summary>
+            Matchs the identifier.
+            </summary>
+            <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.MatchId(System.String)">
+            <summary>
+            Matchs the identifier.
+            </summary>
+            <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.WriteKeys(System.String,System.Collections.Generic.List{QuickTools.QData.Key}@)">
+            <summary>
+            Writes the keys to the given file
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="keys">Keys.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.WriteKeys(System.Collections.Generic.List{QuickTools.QData.Key}@)">
+            <summary>
+            Writes the keys.
+            </summary>
+            <param name="keys">Keys.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.ReadKeys(System.String)">
+            <summary>
+            Reads the keys.
+            </summary>
+            <returns>The keys.</returns>
+            <param name="file">File.</param>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.ReadKeys">
+            <summary>
+            Reads the keys.
+            </summary>
+            <returns>The keys.</returns>
+        </member>
         <member name="T:QuickTools.QIO.RecursiveFileSearch">
             <summary>
             Recursive file search.
@@ -3670,87 +3646,6 @@
             Walks the directory tree.
             </summary>
             <param name="root">Root.</param>
-        </member>
-        <member name="T:QuickTools.QIO.QBox">
-            <summary>
-            Create a type of box which will be containing files similar to winrar or zip
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.OperatorOpen">
-            <summary>
-            The operator open.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.OperatorClose">
-            <summary>
-            The operator close.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.AllowDebugger">
-            <summary>
-            The allow debugger.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.FileLength">
-            <summary>
-            The length of the file.
-            </summary>
-        </member>
-        <member name="T:QuickTools.QIO.QBox.Block">
-            <summary>
-            Block.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.Block.Key">
-            <summary>
-            The key.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.Block.Value">
-            <summary>
-            The value.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.Block.Relation">
-            <summary>
-            The relation.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.Block.ID">
-            <summary>
-            The identifier.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QIO.QBox.Block.ToDB">
-            <summary>
-            Tos the db.
-            </summary>
-            <returns>The db.</returns>
-        </member>
-        <member name="F:QuickTools.QIO.QBox.Blocks">
-            <summary>
-            The blocks.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QIO.QBox.GetText(System.Byte[])">
-            <summary>
-            Gets the text.
-            </summary>
-            <returns>The text.</returns>
-            <param name="bytes">Bytes.</param>
-        </member>
-        <member name="M:QuickTools.QIO.QBox.PrintText(System.Byte[])">
-            <summary>
-            Prints the text.
-            </summary>
-            <returns>The text.</returns>
-            <param name="bytes">Bytes.</param>
-        </member>
-        <member name="M:QuickTools.QIO.QBox.ReadBlocks(System.String)">
-            <summary>
-            Reads the blocks.
-            </summary>
-            <param name="fileName">File name.</param>
         </member>
         <member name="T:QuickTools.QIO.FilesMaper">
             <summary>
@@ -4295,6 +4190,25 @@
             </summary>
             <param name="file">File.</param>
             <param name="bytes">Bytes.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Append(System.String,System.Byte[],System.Int64)">
+            <summary>
+            Append the specified fileName, bytes and seek.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="bytes">Bytes.</param>
+            <param name="seek">Seek.</param>
+        </member>
+        <member name="M:QuickTools.QIO.Binary.Append(System.String,System.Byte[],System.Int32,System.Int32,System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Append the specified fileName, bytes, index, count, seek and origin.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="bytes">Bytes.</param>
+            <param name="index">Index.</param>
+            <param name="count">Count.</param>
+            <param name="seek">Seek.</param>
+            <param name="origin">Origin.</param>
         </member>
         <member name="M:QuickTools.QIO.Binary.Write(System.String,System.Byte[],System.Int32,System.Int32)">
             <summary>
@@ -4842,6 +4756,101 @@
             Allow to shread a fiele and make it un restorable 
             </summary>
             <exception cref="T:System.Exception">No Files were provided</exception>
+        </member>
+        <member name="T:QuickTools.QIO.FilesTransferer">
+            <summary>
+            Creates an object that allow to transfer files and return or print the status of the transfer 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="chuckSize">Chuck size.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.#ctor(System.Boolean,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
+            </summary>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+            <param name="chuckSize">Chuck size.</param>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.WaitToAcknolegeTransfer">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> wait to acknolege transfer.
+            </summary>
+            <value><c>true</c> if wait to acknolege transfer; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="F:QuickTools.QIO.FilesTransferer.ChuckSize">
+            <summary>
+            The size of the chuck and the default value is 1024 * 1024 * 64 = 670302208B or 64MB
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.Buffer">
+            <summary>
+            Gets or sets the buffer.
+            </summary>
+            <value>The buffer.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.Source">
+            <summary>
+            Gets or sets the source.
+            </summary>
+            <value>The source.</value>
+        </member>
+        <member name="P:QuickTools.QIO.FilesTransferer.Target">
+            <summary>
+            Gets or sets the target.
+            </summary>
+            <value>The target.</value>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferFile">
+            <summary>
+            Transfer this the file from the source to the given target directory.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferFile(System.String,System.String)">
+            <summary>
+            Transfer the specified source and target.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory">
+            <summary>
+            Transfers the directory.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory(System.String,System.String)">
+            <summary>
+            Transfers the directory.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
+            <exception cref="T:System.NotImplementedException">since is not completed yet</exception>
         </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>
@@ -5768,100 +5777,6 @@
             Pulls the payload from trojan.
             </summary>
             <param name="trojanFile">Trojan file.</param>
-        </member>
-        <member name="T:FilesTransferer">
-            <summary>
-            Creates an object that allow to transfer files and return or print the status of the transfer 
-            </summary>
-        </member>
-        <member name="M:FilesTransferer.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-            </summary>
-        </member>
-        <member name="M:FilesTransferer.#ctor(System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-            </summary>
-            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-        </member>
-        <member name="M:FilesTransferer.#ctor(System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-            </summary>
-            <param name="chuckSize">Chuck size.</param>
-        </member>
-        <member name="M:FilesTransferer.#ctor(System.Boolean,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-            </summary>
-            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-            <param name="chuckSize">Chuck size.</param>
-        </member>
-        <member name="P:FilesTransferer.CurrentStatus">
-            <summary>
-            Gets or sets the current status.
-            </summary>
-            <value>The current status.</value>
-        </member>
-        <member name="P:FilesTransferer.AllowDebugger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> allow debugger.
-            </summary>
-            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:FilesTransferer.WaitToAcknolegeTransfer">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> wait to acknolege transfer.
-            </summary>
-            <value><c>true</c> if wait to acknolege transfer; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="F:FilesTransferer.ChuckSize">
-            <summary>
-            The size of the chuck and the default value is 1024 * 1024 * 64 = 670302208B or 64MB
-            </summary>
-        </member>
-        <member name="P:FilesTransferer.Buffer">
-            <summary>
-            Gets or sets the buffer.
-            </summary>
-            <value>The buffer.</value>
-        </member>
-        <member name="P:FilesTransferer.Source">
-            <summary>
-            Gets or sets the source.
-            </summary>
-            <value>The source.</value>
-        </member>
-        <member name="P:FilesTransferer.Target">
-            <summary>
-            Gets or sets the target.
-            </summary>
-            <value>The target.</value>
-        </member>
-        <member name="M:FilesTransferer.TransferFile">
-            <summary>
-            Transfer this the file from the source to the given target directory.
-            </summary>
-        </member>
-        <member name="M:FilesTransferer.TransferFile(System.String,System.String)">
-            <summary>
-            Transfer the specified source and target.
-            </summary>
-            <param name="source">Source.</param>
-            <param name="target">Target.</param>
-        </member>
-        <member name="M:FilesTransferer.TransferDirectory">
-            <summary>
-            Transfers the directory.
-            </summary>
-        </member>
-        <member name="M:FilesTransferer.TransferDirectory(System.String,System.String)">
-            <summary>
-            Transfers the directory.
-            </summary>
-            <param name="source">Source.</param>
-            <param name="target">Target.</param>
         </member>
     </members>
 </doc>

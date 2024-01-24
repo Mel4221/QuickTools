@@ -124,13 +124,19 @@ namespace QuickTools.QData
                 this.SettingsList = new List<Settings>(); 
                 this.SettingsDB = new MiniDB(this.FileName);
                 this.SettingsDB.AllowDebugger = this.AllowDebugger; 
+
                 this.SettingsDB.Load();
+
                 List<DB> db = this.SettingsDB.DataBase;
+                if(db.Count == 0)
+                {
+                    return; 
+                }
                 for (int item = 0; item < db.Count; item++)
                 {
                     this.SettingsList.Add(new Settings() 
                     {
-                        Key = db[item].Key,
+                        Key   = db[item].Key,
                         Value = db[item].Value,
                         Group = db[item].Relation
                     });
@@ -251,6 +257,7 @@ namespace QuickTools.QData
                 }
                 this.SettingsDB.DataBase.Clear(); 
                 this.SettingsDB.DataBase = db;
+                this.SettingsDB.DBName = this.FileName; 
                 this.SettingsDB.SaveChanges(); 
             }
 

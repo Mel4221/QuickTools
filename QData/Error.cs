@@ -24,7 +24,7 @@ namespace QuickTools.QData
         /// <summary>
         /// This set or get the ID and as default is set to  <see cref="QuickTools.QCore.IRandom.RandomText(double)"/>
         /// </summary>
-        public   string ID = IRandom.RandomText(64); 
+        public string ID = IRandom.RandomText(64); 
         /// <summary>
         /// Gets or set the Exception 
         /// </summary>

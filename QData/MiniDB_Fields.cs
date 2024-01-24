@@ -38,11 +38,28 @@ namespace QuickTools.QData
         /// <value>The DBN ame.</value>
         public string DBName { get; set; } = "";
 
-            /// <summary>
-            /// Gets or sets the name of the keys.
-            /// </summary>
-            /// <value>The name of the keys.</value>
-            public string KeysName { get; set; } = "";
+        /// <summary>
+        /// The mini db version.
+        /// </summary>
+        public readonly string MiniDB_Version = "1.0.0.2";
+
+        /// <summary>
+        /// Gets or sets the size of the mini db max.
+        /// </summary>
+        /// <value>The size of the mini db max.</value>
+        public int MiniDB_MaxSize { get; set; } = 0;
+
+        /// <summary>
+        /// Gets or sets the mini db metadata.
+        /// </summary>
+        /// <value>The mini db metadata.</value>
+        public string MiniDB_Metadata { get; set; } = ""; 
+
+        /// <summary>
+        /// Gets or sets the name of the keys.
+        /// </summary>
+        /// <value>The name of the keys.</value>
+        public string KeysName { get; set; } = "";
 
         /// <summary>
         /// Gets or sets the type of the relation or.
@@ -93,6 +110,6 @@ namespace QuickTools.QData
         /// Gets or sets the data manager.
         /// </summary>
         /// <value>The data manager.</value>
-        public KeyManager DataManager { get; set; } = new KeyManager(); 
+        public QKeyManager DataManager { get; set; } = new QKeyManager(); 
     }
 }

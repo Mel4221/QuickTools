@@ -93,12 +93,27 @@ namespace QuickTools.QCore
                   }
 
 
+
+        /// <summary>
+        /// Gets the file length.
+        /// </summary>
+        /// <returns>The length.</returns>
+        /// <param name="fileName">File name.</param>
+        public static long FileLength(string fileName)
+        {
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"File Not Founded at the given Path: {fileName}");
+            long length = 0;
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                length = stream.Length;
+            }
+            return length; 
+        }
         /// <summary>
         /// gets Files the size.
         /// </summary>
         /// <returns>the length of the file with it's given Data Size such as GB , MB ,KB or B.</returns>
         /// <param name="fileName">File name.</param>
-
         public static string FileSize(string fileName)
                   {
                   string fileSize = null;

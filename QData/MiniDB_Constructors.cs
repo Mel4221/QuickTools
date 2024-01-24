@@ -26,7 +26,7 @@
 
 
 using QuickTools.QCore;
-namespace QuickTools.QData
+namespace QuickTools.QData 
 {
       public partial class MiniDB
       {
@@ -68,10 +68,10 @@ namespace QuickTools.QData
                   ID = 1000;
                   if (defaultPath)
                   {
-                        Path = Get.DataPath("db/");
+                        Path = Get.DataPath("db");
                   }
                   DBName = Path + dbName;
-                  this.Load();
+                  //this.Load();
 
             }
         /*

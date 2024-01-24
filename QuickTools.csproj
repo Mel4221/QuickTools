@@ -77,7 +77,6 @@
     <Compile Include="QData\VirtualStack.cs" />
     <Compile Include="QData\XmlHelper.cs" />
     <Compile Include="QData\MiniDB_Methods.cs" />
-    <Compile Include="QData\KeyManager.cs" />
     <Compile Include="QData\QSettings.cs" />
     <Compile Include="QIO\RecursiveFileSearch.cs" />
     <Compile Include="QIO\QBox.cs" />
@@ -121,6 +120,7 @@
     <Compile Include="QCore\Print_list.cs" />
     <Compile Include="QIO\FilesTransferer.cs" />
     <Compile Include="QNet\UploadManager.cs" />
+    <Compile Include="QData\QKeyManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

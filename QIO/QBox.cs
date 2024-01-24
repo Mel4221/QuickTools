@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using QuickTools.QCore;
@@ -31,12 +32,106 @@ using QuickTools.QData;
 
 namespace QuickTools.QIO
 {
+    public class QBox
+    {
+        public string QBoxName { get; set; } = "Pack.qbox";
+        public string FileName { get; set; } = "";
+        public string[] Files { get; set; } = { };
+        public bool AllowDebugger { get; set; } = false; 
+        private MiniDB FilesDB { get; set; } 
+
+        private void Echo(string info)
+        {
+            if(this.AllowDebugger)
+            {
+                Get.Yellow(info); 
+            }
+        }
+
+        private void BuildFilesDB()
+        {
+            this.FilesDB = new MiniDB(this.QBoxName + ".db");
+            this.FilesDB.AllowDebugger = this.AllowDebugger;
+
+            this.FilesDB.Drop();
+            this.FilesDB.Create();
+            string hash, subFile, size;
+            long index, length;
+            index = 0;
+            Echo("Building Metadata...");
+            if (this.AllowDebugger)Print.List(this.Files);
+            foreach(string file in this.Files)
+            {
+                hash = new Get().HashCodeFromFile(file,this.AllowDebugger).ToString();
+                subFile = file.Substring(file.LastIndexOf(Get.Slash()[0]));
+                size = Get.FileSize(file);
+                length = Get.FileLength(file);
+
+                this.FilesDB.AddKeyOnHot("FILE",subFile, hash);
+                this.FilesDB.AddKeyOnHot("HASH",hash,subFile);
+                this.FilesDB.AddKeyOnHot("SIZE", size,hash);
+                this.FilesDB.AddKeyOnHot("LENGTH",length, hash);
+                this.FilesDB.AddKeyOnHot("INDEX", index, hash);
+                this.FilesDB.AddKeyOnHot("DATE",DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), hash);
+                index += length + 1;
+
+
+                //0 1 2 3 4 5 6 7 8 9
+                //                   
+            }
+            this.FilesDB.SaveChanges();
+        }
+        public void Pack()
+        {
+            if(this.Files.Length == 0)
+            {
+                if(File.Exists(FileName))
+                {
+                    this.Files = new string[] { this.FileName };
+                }
+            }
+            this.BuildFilesDB(); 
+
+            for(int file = 0; file < this.Files.Length; file++)
+            {
+
+            }
+
+        }
+
+        /*
+            1 2 3 4
+                    1 2 3 5          
+        */
+
+        public QBox()
+        {
+
+        }
+        public QBox(string fileName)
+        {
+            this.FileName = fileName;
+        }
+        public QBox(ref string[] files)
+        {
+            this.Files = files;
+        }
+        public QBox(string qboxName ,ref string[] files)
+        {
+            this.QBoxName = qboxName;
+            this.Files = files;
+        }
+    }
+}
+/*
+namespace QuickTools.QIO
+{
       /// <summary>
       /// Create a type of box which will be containing files similar to winrar or zip
       /// </summary>
       class QBox
       {
-
+        /*
             /// <summary>
             /// The operator open.
             /// </summary>
@@ -197,3 +292,4 @@ namespace QuickTools.QIO
 
       }
 }
+*/

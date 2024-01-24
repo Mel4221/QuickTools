@@ -73,7 +73,7 @@ namespace QuickTools.QData
         public Metadata ReadMetadata(string file)
         {
             Metadata meta = new Metadata();
-            KeyManager manager = new KeyManager();
+            QKeyManager manager = new QKeyManager();
             List<Key> keys = manager.ReadKeys(file);
             meta.FileName = keys[0].Value;
             meta.FileHash = keys[1].Value;
@@ -112,7 +112,7 @@ namespace QuickTools.QData
         {
         
             Metadata meta = new Metadata();
-            KeyManager manager = new KeyManager();
+            QKeyManager manager = new QKeyManager();
             List<Key> keys = new List<Key>();
 
 
@@ -161,7 +161,7 @@ namespace QuickTools.QData
                 Name = "IsEncrypted",
                 Value = meta.IsEncrypted.ToString(),
             });
-            manager.WriteKeys(keys); 
+            manager.WriteKeys(ref keys); 
         }
 
         /// <summary>

@@ -475,13 +475,41 @@ namespace QuickTools.QIO
             }
 
             /// <summary>
-            /// Write the specified file with the given  bytes,  from the given position  until the given position 
+            /// Append the specified fileName, bytes and seek.
             /// </summary>
             /// <param name="fileName">File name.</param>
             /// <param name="bytes">Bytes.</param>
-            /// <param name="from">From.</param>
-            /// <param name="until">Until.</param>
-            public static void Write(string fileName ,byte[] bytes , int from , int until)
+            /// <param name="seek">Seek.</param>
+            public static void Append(string fileName, byte[] bytes,long seek) => Append(fileName,bytes,0,bytes.Length,seek,SeekOrigin.Begin);
+            /// <summary>
+            /// Append the specified fileName, bytes, index, count, seek and origin.
+            /// </summary>
+            /// <param name="fileName">File name.</param>
+            /// <param name="bytes">Bytes.</param>
+            /// <param name="index">Index.</param>
+            /// <param name="count">Count.</param>
+            /// <param name="seek">Seek.</param>
+            /// <param name="origin">Origin.</param>
+            public static void Append(string fileName,byte[] bytes ,int index,int count,long seek,SeekOrigin origin)
+            {
+                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                {
+                    stream.Seek(seek,origin);
+                    using (BinaryWriter writer = new BinaryWriter(stream))
+                    {
+                        writer.Write(bytes,index, count);
+                    }
+                }
+            }
+
+        /// <summary>
+        /// Write the specified file with the given  bytes,  from the given position  until the given position 
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="bytes">Bytes.</param>
+        /// <param name="from">From.</param>
+        /// <param name="until">Until.</param>
+        public static void Write(string fileName ,byte[] bytes , int from , int until)
                  {
                   BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create,FileAccess.Write));
                   writer.Write(bytes , from , until);

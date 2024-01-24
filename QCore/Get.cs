@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Collections;
+using QuickTools.QConsole;
 
 //using System.Security.Permissions;// it has to be implemented
 
@@ -49,12 +50,6 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
-        /// <summary>
-        /// Gets or sets the current color selection.
-        /// </summary>
-        /// <value>The current color selection.</value>
-        public static int CurrentColorSelection { get; set; } = 0; 
-
 
         /// <summary>
         /// Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
@@ -63,7 +58,7 @@ namespace QuickTools.QCore
         /// <param name="text">Text.</param>
         public static void PrintMultiColors(string text)
         {
-            int color = CurrentColorSelection; 
+            int color = 0; 
             foreach (char t in text)
             {
                 switch (color)
@@ -98,7 +93,7 @@ namespace QuickTools.QCore
                         Get.Write(t);
                         color = 6;
                         break;
-                    default:
+                    case 6:
                         Color.Gray();
                         Get.Write(t);
                         color = 0;
@@ -110,14 +105,14 @@ namespace QuickTools.QCore
 
         /// <summary>
         /// Prints the text using the 3 colors of the RGB  
-        /// Depending on the <see cref="CurrentColorSelection"/>
+        /// Depending on the 
         /// so if CurrentColorSelection is from 0 to 2 it will 
         /// set the color as such 0 = Red 1 = Green  2 Blue
         /// </summary>
         /// <param name="text">Text.</param>
         public static void PrintRGB(string text)
         {
-            int color = CurrentColorSelection;
+            int color = 0;
             foreach (char t in text)
             {
                 switch (color)
@@ -137,18 +132,16 @@ namespace QuickTools.QCore
                         Get.Write(t);
                         color = 0;
                         break;
-                    default:
-                        Get.Red();
-                        Get.Write(t);
-                        CurrentColorSelection = IRandom.RandomInt(0, 2); 
-                        break; 
+                  
                 }
             }
 
         }
 
         /// <summary>
-        /// Gets estimated time on compleation. 
+        /// Gets estimated time on compleation 
+        /// Based on a solution from StackOverflow Entirely
+        /// http://stackoverflow.com/questions/473355/calculate-time-remaining/473369#473369
         /// </summary>
         /// <param name="sw"></param>
         /// <param name="counter"></param>
@@ -156,7 +149,9 @@ namespace QuickTools.QCore
         /// <returns></returns>
         public static TimeSpan ETA(Stopwatch sw, long counter, long counterGoal)
         {
-            /* this is based off of:
+            /* Copied Direcly from StackOverflow
+             * 
+             * this is based off of:
              * (TimeTaken / linesProcessed) * linesLeft=timeLeft
              * so we have
              * (10/100) * 200 = 20 Seconds now 10 seconds go past
@@ -179,8 +174,10 @@ namespace QuickTools.QCore
         /// <param name="file"></param>
         public static void Open(string file)
         {
-            ProcessStartInfo info = new ProcessStartInfo();
-            info.FileName = file;
+            ProcessStartInfo info = new ProcessStartInfo()
+            {
+                FileName = file
+            };
             Process.Start(info);
         }
 
@@ -461,37 +458,205 @@ namespace QuickTools.QCore
             return Environment.NewLine;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QCore.Get"/> allow debugger.
+        /// </summary>
+        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        public static bool AllowDebugger { get; set; } = false;
 
         /// <summary>
-        /// Gets a hash code from a file no matter the size
+        /// Gets or sets the current status.
         /// </summary>
-        /// <returns>The code from file.</returns>
-        /// <param name="fileName">File name.</param>
-        public static long HashCodeFromFile(string fileName)
-        {
-            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
-            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
-            long hash = 0;
-            Binary binary = new Binary();
-            binary.ReadBytes(fileName);
+        /// <value>The current status.</value>
+        public static string CurrentStatus { get; set; } = "Nothing-Started"; 
 
-            foreach (byte[] bytes in binary.BufferList)
-            {
-                hash += long.Parse(Get.HashCode(bytes).ToString());
-            }
-
-            return hash;
-        }
 
         /// <summary>
         /// Hashs the code from file.
         /// </summary>
         /// <returns>The code from file.</returns>
         /// <param name="fileName">File name.</param>
-        /// <param name="smallFiles">If set to <c>true</c> small files.</param>
-        public static long HashCodeFromFile(string fileName, bool smallFiles)
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        public double HashCodeFromFile(string fileName,bool allowDebugger)
         {
             if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            double hash = 0;
+
+
+            using (FileStream streamOpen = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                BinaryReader binaryReader = new BinaryReader(streamOpen);
+                Stopwatch sw = new Stopwatch();
+                Check check = new Check();
+                QProgressBar bar = new QProgressBar();
+                TimeSpan time;
+                check.Start();
+                // this.ChuckSize = this.ChuckSize > streamOpen.Length ? int.Parse(streamOpen.Length.ToString()) : this.ChuckSize;
+                sw.Start();
+                long current, goal;
+                int chunck;
+                string status, eta;
+                byte[] buffer;
+                goal = streamOpen.Length;
+                current = 0;
+                chunck = 1024 * 1024 * 64;
+                if (chunck > streamOpen.Length)
+                {
+                    chunck = int.Parse(streamOpen.Length.ToString());
+                }
+                while (current < goal)
+                {
+
+                    time = Get.ETA(sw, current, goal - 1);
+                    eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
+                    eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
+                    eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
+                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ChuckSize: [{Get.FileSize(chunck)}] ETA: [{eta}] Computing Hash: [{hash}]";
+                    CurrentStatus = status;
+
+                    if (allowDebugger == true)
+                    {
+
+                        bar.Label = status;
+                        bar.Display(Get.Status(current, goal + 2));
+                        //Get.Green(status);
+                    }
+
+                    streamOpen.Seek(current, SeekOrigin.Begin);
+
+                    buffer = new byte[chunck];
+                    binaryReader.Read(buffer, 0, buffer.Length);
+
+
+                    // streamWrite.Seek(current, SeekOrigin.Begin);
+                    //binaryWriter = new BinaryWriter(streamWrite);
+                    //binaryWriter.Write(this.Buffer, 0, this.Buffer.Length);
+                    hash += Get.HashCode(buffer);
+                    current += chunck;
+                    // Get.Yellow(current); 
+
+
+                }
+                /*
+                status = $"Done!!! {target}";
+                if (this.AllowDebugger)
+                {
+                    Get.Print($"{source}", "->", $"{target}");
+                    Get.Green($"Done!!!");
+                    Get.Yellow($"Transfer Time: {check.Stop()}");
+                    if (WaitToAcknolegeTransfer)
+                    {
+                        Get.Wait();
+                    }
+                }
+                */
+            }
+
+
+
+
+            return hash;
+        }
+
+        /// <summary>
+        /// Gets a hash code from a file no matter the size
+        /// </summary>
+        /// <returns>The code from file.</returns>
+        /// <param name="fileName">File name.</param>
+        public static double HashCodeFromFile(string fileName)
+        {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            double hash = 0;
+
+
+            using (FileStream streamOpen = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                    BinaryReader binaryReader = new BinaryReader(streamOpen);
+                    Stopwatch sw = new Stopwatch();
+                    Check check = new Check();
+                    QProgressBar bar = new QProgressBar();
+                    TimeSpan time;
+                    check.Start();
+                   // this.ChuckSize = this.ChuckSize > streamOpen.Length ? int.Parse(streamOpen.Length.ToString()) : this.ChuckSize;
+                    sw.Start();
+                    long current, goal;
+                    int chunck; 
+                    string status, eta;
+                    byte[] buffer;
+                    goal = streamOpen.Length;
+                    current = 0;
+                    chunck = 1024 * 1024 * 64; 
+                    if(chunck > streamOpen.Length)
+                    {
+                        chunck = int.Parse(streamOpen.Length.ToString());
+                    }
+                    while (current < goal)
+                    {
+
+                        time = Get.ETA(sw, current, goal - 1);
+                        eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
+                        eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
+                        eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
+                        status = $"Reading... {fileName} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal+2)}] ChuckSize: [{Get.FileSize(chunck)}] ETA: [{eta}] Computing Hash: [{hash}]";
+                        CurrentStatus = status;
+                        /*
+                        if (AllowDebugger == true)
+                        {
+
+                            bar.Label = status;
+                            bar.Display(Get.Status(current, goal+2 ));
+                            
+                        //Get.Green(status);
+                        }
+                        */
+
+                        streamOpen.Seek(current, SeekOrigin.Begin);
+
+                        buffer  = new byte[chunck];
+                        binaryReader.Read(buffer, 0, buffer.Length);
+
+
+                        // streamWrite.Seek(current, SeekOrigin.Begin);
+                        //binaryWriter = new BinaryWriter(streamWrite);
+                        //binaryWriter.Write(this.Buffer, 0, this.Buffer.Length);
+                         hash += Get.HashCode(buffer);  
+                         current += chunck;
+                        // Get.Yellow(current); 
+
+
+                    }
+                    /*
+                    status = $"Done!!! {target}";
+                    if (this.AllowDebugger)
+                    {
+                        Get.Print($"{source}", "->", $"{target}");
+                        Get.Green($"Done!!!");
+                        Get.Yellow($"Transfer Time: {check.Stop()}");
+                        if (WaitToAcknolegeTransfer)
+                        {
+                            Get.Wait();
+                        }
+                    }
+                    */
+                }
+
+
+
+
+            return hash;
+        }
+
+
+        /*
+        public static double HashCodeFromFile(string fileName, bool smallFiles)
+        {
+            return  HashCodeFromFile(fileName); 
+            /*
+                        if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
             if (int.Parse(Get.FileSize(fileName, SizeType.IntConvertible)) >= int.MaxValue)
             {
@@ -505,7 +670,10 @@ namespace QuickTools.QCore
                 return long.Parse(Get.HashCode(bytes).ToString());
             }
             return long.Parse(Get.HashCode(Binary.Reader(fileName)).ToString());
+
+
         }
+        */
 
 
         /// <summary>
@@ -622,15 +790,7 @@ namespace QuickTools.QCore
         {
             if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
 
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(text);
-            double x = 0;
-            double seed = 7;
-
-            for (int item = 0; item < bytes.Length; item++)
-            {
-                x += ((seed * bytes[item]) + item);
-            }
-            return x;
+           return HashCode(System.Text.Encoding.ASCII.GetBytes(text));
         }
 
         /// <summary>
