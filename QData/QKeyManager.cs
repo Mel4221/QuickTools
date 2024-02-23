@@ -337,7 +337,7 @@ namespace QuickTools.QData
                 if (key.Name == this.Keys[item].Name)
                 {
                     this.Keys.RemoveAt(item);
-                    List<Key> _ = this.Keys; 
+                    List<Key> _ =  this.Keys; 
                     this.WriteKeys(ref _);
                     return;
                 }
@@ -385,6 +385,8 @@ namespace QuickTools.QData
         }
 
 
+
+
         /// <summary>
         /// Matchs the identifier.
         /// </summary>
@@ -422,6 +424,8 @@ namespace QuickTools.QData
             //this.builder = new StringBuilder();
             if (keys.Count == 0) throw new ArgumentException("No Keys were provided!!!");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
+            List<Key> stats = new List<Key>();
+
             using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
                 int isFirst, current, goal;
@@ -435,6 +439,18 @@ namespace QuickTools.QData
                          
                     using (BinaryWriter writer = new BinaryWriter(stream))
                     {
+                    /*
+                        i had to add a way to keep a control
+                        on where does the QKey starts and where it ends
+                        so the way to fix it was to add one , but at first
+                        it was writting on top of previus written areas so 
+                        the indexer had to be moved foward the length of the 
+                        start tag                    
+                    */
+                    buffer = Get.Bytes($"#START#\n");
+                    writer.Write(buffer, 0, buffer.Length);
+                    indexer += buffer.Length;
+                    stream.Seek(indexer, SeekOrigin.Begin);
                     for (int item = 0; item < keys.Count; item++)
                     {
                         this.CurrentStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
@@ -442,6 +458,7 @@ namespace QuickTools.QData
                         {
                             bar.Label = this.CurrentStatus;
                             bar.Display(Get.Status(current, goal));
+                            stats.Add(new Key() { Name = "status", Value = CurrentStatus});
                         }
                         if (isFirst == 1)
                         {
@@ -460,9 +477,12 @@ namespace QuickTools.QData
                         stream.Seek(indexer, SeekOrigin.Begin);
 
                     }
+                    buffer = Get.Bytes($"#END#\n");
+                    writer.Write(buffer, 0, buffer.Length);
+                    stats.ForEach(item => Get.Write($"{item.ToString()}\n"));
                 }
-                   
-               
+
+
             }
             //this.builder.Append();
            
@@ -495,6 +515,19 @@ namespace QuickTools.QData
             return this.ReadKeys();
         }
 
+        public bool IsInternalCmd(string cmd)
+        { 
+            switch(cmd)
+            {
+                case "START":
+                case "END":
+                    return true; 
+                default:
+                    return false; 
+            }
+        }
+
+
         /// <summary>
         /// Reads the keys.
         /// </summary>
@@ -512,7 +545,8 @@ namespace QuickTools.QData
                 string key, input;
                 StringBuilder temp;
                 char term, assing;
-                bool idLoaded = false; 
+                bool idLoaded;
+                idLoaded = false; 
                 key = "";
                 temp = new StringBuilder(); 
                 input = IConvert.ToString(Binary.Reader(keyFile));

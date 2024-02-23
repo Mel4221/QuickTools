@@ -84,10 +84,13 @@ using System;
             /// <value>The fore color for dots.</value>
             public ConsoleColor ForeColorForDots { get; set; } = ConsoleColor.Green;
 
+            
             private string Status { get; set; } = " ";
             private string StrDots { get; set; } = "";
             private bool Started { get; set; } = false;
             private string currentPorcent;
+            private bool completed { get; set; } = false;
+
         /// <summary>
         /// Reset the StartDots , Label , Status.
         /// </summary>
@@ -98,6 +101,19 @@ using System;
             this.Status = " ";
             this.currentPorcent = "";
         }
+
+        /// <summary>
+        /// Clear this instance.
+        /// </summary>
+        public void Clear()
+        {
+            for (int x = 1; x < Console.BufferWidth; x++)
+            {
+                Console.SetCursorPosition(x, this.Y);
+                Get.Write(" ");
+            }
+        }
+
 
         /// <summary>
         /// Display the specified status with dots
@@ -119,9 +135,12 @@ using System;
                 }
                 */
                 // Get.Wait($"{status} {Get.Number}");
+                //if (completed) { this.Clear(); this.completed = false; }
                 this.Started = true;
+              
                 if (this.Status != status)
                 {
+                   
                     Console.SetCursorPosition(1, this.Y);
                     Console.BackgroundColor = this.BackGroundColorForLabel;
                     Console.ForegroundColor = this.ForeColorForLabel;
@@ -149,6 +168,9 @@ using System;
                         Get.Reset();
                         Console.Write(']');
                         Console.Write(Environment.NewLine);
+                        this.completed = true;
+                       
+
                     }
                 }
             }catch

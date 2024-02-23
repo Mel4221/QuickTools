@@ -336,12 +336,13 @@ namespace QuickTools.QCore
 
                 back.Start();
 
-
+                string str = "";
                 while (true)
                 {
                     status = $"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}";
-                    if (showDebuger == true)
+                    if (showDebuger == true && str != status)
                     {
+                        str = status;
                         Get.Green(status);
                     }
 
@@ -352,8 +353,9 @@ namespace QuickTools.QCore
                         foward.Abort();
                         back.Abort();
                         status = $"Completed:  Thread A:[{trigerA}] Thread B:[{trigerB}] Breaker:[{breaker}] Length:[{len}]"; 
-                        if (showDebuger == true)
+                        if (showDebuger == true && str != status)
                         {
+                            str = status;
                             Get.Yellow(status);
                         }
                         break;
@@ -364,6 +366,7 @@ namespace QuickTools.QCore
                     //breaker++;
 
                 }
+                GC.Collect();
                 return str1.ToString() + str2.ToString();
             }
             catch (Exception ex)
@@ -455,12 +458,13 @@ namespace QuickTools.QCore
                 
                 back.Start();
 
-
+                string str = "";
                 while (true)
                 {
                     status = $"Buffer Size: {Get.FileSize(array)} Status: {Get.Status(f, half)}";
-                    if (showDebuger == true)
+                    if (showDebuger == true && str != status)
                     {
+                        str = status;
                         Get.Green(status);
                     }
 
@@ -483,6 +487,7 @@ namespace QuickTools.QCore
                     //breaker++;
 
                 }
+                GC.Collect();
                 return str1.ToString() + str2.ToString();
             }
             catch (Exception ex)
@@ -637,7 +642,84 @@ namespace QuickTools.QCore
             }
         }
 
-       
+
+
+        /// <summary>
+        /// Strings to bytes array.
+        /// </summary>
+        /// <returns>The to bytes array.</returns>
+        /// <param name="rowString">Row string.</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        public static byte[] StringToBytesArray(string rowString , bool allowDebugger)
+        {
+            string current = "";
+            List<byte> temp = new List<byte>();
+            try
+            {
+                //go around to the current bug that it has if it starts
+                //with , it will regect the format
+                if (rowString[0] == ',')
+                {
+                    rowString = rowString.Substring(1);
+                }
+                //go around to the current bug that it has if it starts
+                //with , it will regect the format
+                if (rowString[rowString.Length - 1] != ',')
+                {
+                    rowString += ",";
+                }
+                //maknig sure that there is not spaces in it 
+                rowString = rowString.Replace(" ", "");
+                string status, str;
+                str = "";
+                status = "";
+
+                for (int value = 0; value < rowString.Length; value++)
+                {
+                    status = $"Converting to Binary Format: [{Get.Status(value,rowString.Length)}]";
+                    if(allowDebugger && str != status)
+                    {
+                        str = status;
+                        Get.Green(status);
+                    }
+                    if (rowString[value] != ',')
+                    {
+                        current += rowString[value];
+
+                    }
+                    if (rowString[value] == ',')
+                    {
+                        try
+                        {
+                            temp.Add(Convert.ToByte(current));
+                        }
+                        catch (Exception ex)
+                        {
+                            Color.Yellow("It Looks like the row string could not be converted to bytes \n" + ex);
+                            throw;
+                        }
+
+                        current = "";
+
+                    }
+                }
+                //byte[] array = new byte[temp.Count];
+                /*
+                for (int back = 0; back < temp.Count; back++)
+                {
+                    array[back] = Convert.ToByte(temp[back]);
+                }
+                */
+                GC.Collect();
+                return temp.ToArray();
+            }
+            catch (Exception ex)
+            {
+                Color.Yellow("It Looks like the row string could not be converted to bytes \n" + ex);
+                throw ex;// new byte[100];// just to give it a value not really that it does anything special 
+            }
+
+        }
         /// <summary>
         /// Strings to bytes array.
         /// </summary>
@@ -646,7 +728,7 @@ namespace QuickTools.QCore
         public static byte[] StringToBytesArray(string rowString)
         {
             string current = "";
-            List<string> temp = new List<string>();
+            List<byte> temp = new List<byte>();
             try
             {
                 //go around to the current bug that it has if it starts
@@ -673,18 +755,29 @@ namespace QuickTools.QCore
                     }
                     if (rowString[value] == ',')
                     {
-                        temp.Add(current);
+                        try
+                        {
+                            temp.Add(Convert.ToByte(current));
+                        }
+                        catch(Exception ex) 
+                        {
+                            Color.Yellow("It Looks like the row string could not be converted to bytes \n" + ex);
+                            throw;
+                        }
+
                         current = "";
+
                     }
                 }
-                byte[] array = new byte[temp.Count];
-
+                //byte[] array = new byte[temp.Count];
+                /*
                 for (int back = 0; back < temp.Count; back++)
                 {
                     array[back] = Convert.ToByte(temp[back]);
                 }
-
-                return array;
+                */
+                GC.Collect();
+                return temp.ToArray();
             }
             catch (Exception ex)
             {

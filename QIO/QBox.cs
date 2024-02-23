@@ -50,6 +50,7 @@ namespace QuickTools.QIO
 
         private void BuildFilesDB()
         {
+            if (!this.QBoxName.Contains(".")) this.QBoxName += ".qbox"; 
             this.FilesDB = new MiniDB(this.QBoxName + ".db");
             this.FilesDB.AllowDebugger = this.AllowDebugger;
 
@@ -60,6 +61,7 @@ namespace QuickTools.QIO
             index = 0;
             Echo("Building Metadata...");
             if (this.AllowDebugger)Print.List(this.Files);
+
             foreach(string file in this.Files)
             {
                 hash = new Get().HashCodeFromFile(file,this.AllowDebugger).ToString();
@@ -75,11 +77,14 @@ namespace QuickTools.QIO
                 this.FilesDB.AddKeyOnHot("DATE",DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), hash);
                 index += length + 1;
 
-
                 //0 1 2 3 4 5 6 7 8 9
                 //                   
             }
             this.FilesDB.SaveChanges();
+            if (this.AllowDebugger)
+            {
+                Get.Ok(); 
+            }
         }
         public void Pack()
         {

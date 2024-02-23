@@ -506,6 +506,7 @@ namespace QuickTools.QCore
                 {
                     chunck = int.Parse(streamOpen.Length.ToString());
                 }
+               // Get.Wait(CurrentStatus ,() => { 
                 while (current < goal)
                 {
 
@@ -513,14 +514,16 @@ namespace QuickTools.QCore
                     eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
                     eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
                     eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
-                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ChuckSize: [{Get.FileSize(chunck)}] ETA: [{eta}] Computing Hash: [{hash}]";
+                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}] Hash: [{hash}]";
                     CurrentStatus = status;
 
                     if (allowDebugger == true)
                     {
 
                         bar.Label = status;
-                        bar.Display(Get.Status(current, goal + 2));
+                        //bar.Clear();
+                        bar.Display(Get.Status(current, goal ));
+                        //bar.Display(int.Parse(current.ToString()), int.Parse(goal.ToString()));
                         //Get.Green(status);
                     }
 
@@ -539,6 +542,7 @@ namespace QuickTools.QCore
 
 
                 }
+               // });
                 /*
                 status = $"Done!!! {target}";
                 if (this.AllowDebugger)
@@ -754,7 +758,7 @@ namespace QuickTools.QCore
             if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
             if (length == 0) length = text.Length;
             //if (length )
-
+            //System.Text.UnicodeEncoding.ASCII.GetBytes(text)
             byte[] bytes = new byte[length];
             byte[] str = System.Text.Encoding.ASCII.GetBytes(text); ;
             double x = 0;
@@ -1928,50 +1932,29 @@ character in order for it to return a valid name
 
             static int X;
             static int Y;
-            /// <summary>
-            /// This method started as a shurtcut from <see cref="System.Console.Clear"/>
-            /// But not any longer this method now Clear every single <see cref="System.Char"/>
-            /// in the console and uses inside to for loops and as reference to get the widows size <see cref="System.Console.BufferWidth"/>
-            /// and <see cref="System.Console.BufferHeight"/> and to remove the chars <see cref="System.Console.SetCursorPosition(int, int)"/>
-            /// </summary>
-            /// <param name="F">If set to <c>true</c> f.</param>
-            public static void Clear(bool F)
+        public static void Clear(bool everything)
+        {
+            if (!everything) return;         
+            int x, y;
+            x = Console.BufferWidth;
+            y = Console.BufferHeight;
+            for (int xx = 0; xx < x; xx++)
             {
-                  X = Console.BufferWidth;
-                  Y = Console.BufferHeight;
-                  for (int x = 0; x < X; x++)
-                  {
-                        int y = 0;
-                        while (y < Y)
-                        {
-                              Console.CursorVisible = false;                              
-                              Console.SetCursorPosition(x, y);
-                              Console.Write(" ");
-                              y++;
-                        }
-                  }
-                  for (int y = 0; y < Y; y++)
-                  {
-                        int x = 0;
-                        while (x < X)
-                        {
-                              Console.CursorVisible = false;
-                              Console.SetCursorPosition(x, y);
-                              Console.Write(" ");
-                              x++;
-                        }
-                  }
-                                   
-                  Console.SetCursorPosition(0,0);
-
+                for (int yy = 0; yy < y; yy++)
+                {
+                    Console.SetCursorPosition(xx, yy);
+                    Get.Write(" ");
+                }
             }
-                       
-                       
-           /// <summary>
-           /// Clears the after the content given 
-           /// </summary>
-           /// <param name="content">Content.</param>
-             static void ClearAfter(object content)
+            Console.SetCursorPosition(1, 1);           
+        }
+
+
+        /// <summary>
+        /// Clears the after the content given 
+        /// </summary>
+        /// <param name="content">Content.</param>
+        static void ClearAfter(object content)
             {
                 string message = content.ToString(); 
                 throw new NotImplementedException("This Method is currently not mantained");

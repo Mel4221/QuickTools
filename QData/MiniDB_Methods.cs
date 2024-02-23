@@ -64,7 +64,7 @@ namespace QuickTools.QData
 
             try
             {
-                this.AddKeyOnHot(key, value, null);
+                this.AddKeyOnHot(key, value, this.RelationOrType);
                 if (autoLoad)
                 {
                     this.SaveChanges();
@@ -93,10 +93,15 @@ namespace QuickTools.QData
         {
             this.RefreshDB();
         }
+
+
+
+
+
+
         /// <summary>
         /// Adds the key on hot and you later desides when to write it to the db file 
         /// is important to keep in mind that the hot add don't have any effect if the Refresh is not fallowed after the 
-        /// addition 
         /// </summary>
         /// <param name="key">Key.</param>
         /// <param name="value">Value.</param>
@@ -104,6 +109,20 @@ namespace QuickTools.QData
         public void AddKeyOnHot(object key, object value, object relation)
         {
             this.ID++;
+            /*
+            if(key.ToString().Contains(this.DataManager.KeyAssingChar) || key.ToString().Contains(this.DataManager.KeyTerminatorChar))
+            {
+                throw new InvalidDataException($"The Key: {key} Contains an Invalid Character Please Convert it to BytesString");
+            }
+            if (value.ToString().Contains(this.DataManager.KeyAssingChar) || value.ToString().Contains(this.DataManager.KeyTerminatorChar))
+            {
+                throw new InvalidDataException($"The Value: {value} Contains an Invalid Character Please Convert it to BytesString");
+            }
+            if (relation.ToString().Contains(this.DataManager.KeyAssingChar) || relation.ToString().Contains(this.DataManager.KeyTerminatorChar))
+            {
+                throw new InvalidDataException($"The Relation: {key} Contains an Invalid Character Please Convert it to BytesString");
+            }
+            */
             this.DataBase.Add(new DB()
             {
                 Id = this.ID,
@@ -674,28 +693,28 @@ namespace QuickTools.QData
                 keys.Add(new Key()
                 {
                     Name = "Key",
-                    Value = this.DataBase[item].Key
+                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Key))
                 });
                 keys.Add(new Key()
                 {
                     Name = "Value",
-                    Value = this.DataBase[item].Value
+                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Value))
                 });
                 keys.Add(new Key()
                 {
                     Name = "Relation",
-                    Value = this.DataBase[item].Relation
+                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Relation))
                 });
             }
-            if (this.AllowDebugger)
-            {
-                keys.ForEach((obj) => Get.Write(obj.ToString()));
-                Get.Yellow($"Keys Count: [{keys.Count}]");
-            }
+          
             this.DataManager.FileName = this.DBName;
             //new KeyManager().WriteKeys(keys);  
             this.DataManager.WriteKeys(ref keys);
-            
+            if (this.AllowDebugger)
+            {
+                // keys.ForEach((obj) => Get.Write(obj.ToString()));
+                Get.Yellow($"\nWritten Keys Count:  [{keys.Count}]");
+            }
 
             refreshed = true;
             return refreshed;
@@ -788,10 +807,10 @@ namespace QuickTools.QData
                             db.Relation = this.DataManager.Keys[key].Value;
                             this.DataBase.Add(new DB()
                             {
-                                Key = db.Key,
-                                Value = db.Value,
+                                Key = IConvert.ToString(IConvert.StringToBytesArray(db.Key)),
+                                Value = IConvert.ToString(IConvert.StringToBytesArray(db.Value)),
                                 Id = db.Id,
-                                Relation = db.Relation
+                                Relation = IConvert.ToString(IConvert.StringToBytesArray(db.Relation))
                             });
                             if (this.AllowDebugger)
                             {
