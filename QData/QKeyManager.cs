@@ -158,8 +158,86 @@ namespace QuickTools.QData
             Html,
             Json
         }
+        /// <summary>
+        /// Tos the key list.
+        /// </summary>
+        /// <returns>The key list.</returns>
+        /// <param name="text">Text.</param>
+        public List<Key> ToKeyList(string text)
+        {
+            // string keyFile = this.FileName;
+            //if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
+            int ch = 0;
+            Check check = new Check();
+            check.Start();
+            this.Errors = new List<Error>();
+            this.Keys.Clear();
+            //string key, temp, input;
+            string key, input;
+            StringBuilder temp;
+            char term, assing;
+            bool idLoaded;
+            idLoaded = false;
+            key = "";
+            temp = new StringBuilder();
+            input = text;//IConvert.ToString(Binary.Reader(keyFile));
 
+            term = this.KeyTerminatorChar;
+            assing = this.KeyAssingChar;
 
+            QProgressBar bar = new QProgressBar();
+
+            for (ch = 0; ch < input.Length; ch++)
+            {
+                try
+                {
+
+                    this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    if (AllowDebugger)
+                    {
+                        bar.Label = this.CurrentStatus;
+                        bar.Display(Get.Status(ch, input.Length));
+                    }
+                    if (input[ch] == assing)
+                    {
+                        key = temp.ToString();
+                        temp.Clear();
+                    }
+                    if (input[ch] == term)
+                    {
+                        if (idLoaded)
+                        {
+                            this.Keys.Add(new Key()
+                            {
+                                Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
+                                Value = temp.ToString()
+                            });
+                        }
+                        idLoaded = true;
+
+                        //Get.Wait($"{key} : {temp}"); 
+                        temp.Clear();
+                    }
+                    if (input[ch] != assing && input[ch] != term)
+                    {
+                        temp.Append(input[ch]);
+                    }
+                   // return this.Keys;
+                }
+                catch (Exception ex)
+                {
+                    this.Errors.Add(new Error()
+                    {
+                        Message = ex.Message,
+                        Type = $"The Keys were not on the correct format or damaged At the Index: {ch} From: {input.Length}" +
+                        $"\n Key={key} Temp={temp} KeysCount={this.Keys.Count}"
+
+                    });
+                }
+            }
+            return this.Keys;
+
+        }
 
         /// <summary>
         /// Deletes the key file along with all it's data

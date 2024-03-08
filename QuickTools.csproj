@@ -121,6 +121,7 @@
     <Compile Include="QIO\FilesTransferer.cs" />
     <Compile Include="QNet\UploadManager.cs" />
     <Compile Include="QData\QKeyManager.cs" />
+    <Compile Include="QNet\QService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

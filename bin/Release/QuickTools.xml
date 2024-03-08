@@ -3519,6 +3519,13 @@
             provides the file name for the file containing the keys
             </summary>
         </member>
+        <member name="M:QuickTools.QData.QKeyManager.ToKeyList(System.String)">
+            <summary>
+            Tos the key list.
+            </summary>
+            <returns>The key list.</returns>
+            <param name="text">Text.</param>
+        </member>
         <member name="M:QuickTools.QData.QKeyManager.Drop">
             <summary>
             Deletes the key file along with all it's data
@@ -5377,6 +5384,100 @@
             </summary>
             <param name="addresss">Addresss.</param>
             <param name="fileName">File name.</param>
+        </member>
+        <member name="T:QuickTools.QNet.Service">
+            <summary>
+            Defines the Service object
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.Service.ID">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>The identifier.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Info">
+            <summary>
+            Gets or sets the info.
+            </summary>
+            <value>The info.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Current">
+            <summary>
+            Gets or sets the current.
+            </summary>
+            <value>The current.</value>
+        </member>
+        <member name="P:QuickTools.QNet.Service.Goal">
+            <summary>
+            Gets or sets the goal.
+            </summary>
+            <value>The goal.</value>
+        </member>
+        <member name="M:QuickTools.QNet.Service.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QNet.Service"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QNet.Service"/>.</returns>
+        </member>
+        <member name="T:QuickTools.QNet.QService">
+            <summary>
+            QService is a method wich provides funtionalities
+            to share information along other programs through 
+            an standard api
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QService.QServiceThread">
+            <summary>
+            The Thread  for the service manager
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QService.Server">
+            <summary>
+            Gets or sets the server.
+            </summary>
+            <value>The server.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.ExitRequest">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> exit request.
+            </summary>
+            <value><c>true</c> if exit request; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.Services">
+            <summary>
+            Gets or sets the services.
+            </summary>
+            <value>The services.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.AllowDeubbuger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> allow deubbuger.
+            </summary>
+            <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QNet.QService.Start">
+            <summary>
+            Start this instance.
+            </summary>
         </member>
         <member name="T:QuickTools.QSecurity.Secure">
             <summary>
