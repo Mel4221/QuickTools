@@ -1201,7 +1201,8 @@ namespace QuickTools.QData
         /// </summary>
         /// <param name="id">Identifier.</param>
         public void RemoveAllbyId(int id)
-        {
+        {   
+            
             // this.Load();
             List<DB> temp = new List<DB>();
             //this.Load();
