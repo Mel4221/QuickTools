@@ -122,6 +122,13 @@
     <Compile Include="QNet\UploadManager.cs" />
     <Compile Include="QData\QKeyManager.cs" />
     <Compile Include="QNet\QService.cs" />
+    <Compile Include="QNet\QService_Fields.cs" />
+    <Compile Include="QNet\Service.cs" />
+    <Compile Include="QCore\QuickToolsStandars.cs" />
+    <Compile Include="QData\QKeyManager_Fields.cs" />
+    <Compile Include="QData\Key.cs" />
+    <Compile Include="QConsole\ShellInput_Fields.cs" />
+    <Compile Include="QConsole\ShellInput_Constructors.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

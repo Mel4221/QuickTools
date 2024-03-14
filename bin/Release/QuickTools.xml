@@ -778,6 +778,26 @@
             Creates a shell and returns the input as a plain text 
             </summary>
         </member>
+        <member name="M:QuickTools.QConsole.ShellInput.StartInput">
+            <summary>
+            Start the shell mode 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.String})">
+            <summary>
+            Start the shell mode 
+            </summary>
+            <param name="inputFunctionType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.ConsoleKeyInfo})">
+            <summary>
+            please avoid using this verions 
+            </summary>
+            <param name="KeyPressCallBack"></param>
+            <returns></returns>
+        </member>
         <member name="F:QuickTools.QConsole.ShellInput.UserName">
             <summary>
             set the user name 
@@ -862,26 +882,6 @@
             <summary>
             the background color 
             </summary>
-        </member>
-        <member name="M:QuickTools.QConsole.ShellInput.StartInput">
-            <summary>
-            Start the shell mode 
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.String})">
-            <summary>
-            Start the shell mode 
-            </summary>
-            <param name="inputFunctionType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:QuickTools.QConsole.ShellInput.StartInput(System.Func{System.ConsoleKeyInfo})">
-            <summary>
-            please avoid using this verions 
-            </summary>
-            <param name="KeyPressCallBack"></param>
-            <returns></returns>
         </member>
         <member name="M:QuickTools.QConsole.ShellInput.#ctor(System.String,System.String)">
              <summary>
@@ -1259,6 +1259,12 @@
             Gets or sets the current status.
             </summary>
             <value>The current status.</value>
+        </member>
+        <member name="P:QuickTools.QCore.Get.PublicID">
+            <summary>
+            Gets or sets the public identifier.
+            </summary>
+            <value>The public identifier.</value>
         </member>
         <member name="M:QuickTools.QCore.Get.HashCodeFromFile(System.String,System.Boolean)">
             <summary>
@@ -2478,6 +2484,12 @@
             </summary>
             <value><c>true</c> if allow debuger; otherwise, <c>false</c>.</value>
         </member>
+        <member name="P:QuickTools.QData.MiniDB.DubuggerMode">
+            <summary>
+            Gets or sets the dubugger mode.
+            </summary>
+            <value>The dubugger mode.</value>
+        </member>
         <member name="P:QuickTools.QData.MiniDB.DataBase">
             <summary>
             Contains the Database from the program
@@ -2488,6 +2500,17 @@
             Gets or sets the data manager.
             </summary>
             <value>The data manager.</value>
+        </member>
+        <member name="P:QuickTools.QData.MiniDB.Format">
+            <summary>
+            Gets or sets the format.
+            </summary>
+            <value>The format.</value>
+        </member>
+        <member name="T:QuickTools.QData.MiniDB.MiniDB_Format">
+            <summary>
+            MiniDB Format.
+            </summary>
         </member>
         <member name="M:QuickTools.QData.MiniDB.AddKey(System.Object,System.Object,System.Boolean)">
             <summary>
@@ -2698,6 +2721,29 @@
             Removes  all by identifier.
             </summary>
             <param name="id">Identifier.</param>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.SelectWhereKeyAndRelation(System.Object,System.Object)">
+            <summary>
+            Selects  where key and relation equal to the given value.
+            </summary>
+            <returns>The where key and relation.</returns>
+            <param name="key">Key.</param>
+            <param name="relation">Relation.</param>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.SelectWhereKeyAndValue(System.Object,System.Object)">
+            <summary>
+            Selects the where key and value.
+            </summary>
+            <returns>The where key and value.</returns>
+            <param name="key">Key.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.SelectWhereKey(System.Object)">
+            <summary>
+            Selects  where the key equals to the value given.
+            </summary>
+            <returns>The where key.</returns>
+            <param name="value">Value.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.Dispose">
             <summary>
@@ -3410,54 +3456,6 @@
             </summary>
             <param name="file">File.</param>
         </member>
-        <member name="T:QuickTools.QData.Key">
-            <summary>
-            contains the format for the the key >
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.Key.IsEmpty">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
-            </summary>
-            <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-            <value>The value.</value>
-        </member>
-        <member name="P:QuickTools.QData.Key.KeyTerminatorChar">
-            <summary>
-            The key terminator char.
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.Key.KeyAssingChar">
-            <summary>
-            The key assing char.
-            </summary>
-        </member>
-        <member name="M:QuickTools.QData.Key.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
-        </member>
-        <member name="M:QuickTools.QData.Key.ToString(System.String)">
-            <summary>
-            this returns the text into 2 main formats html and json 
-            it will return the formatinto a key and value that will be understood by html
-            and also by json engine 
-            </summary>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
         <member name="T:QuickTools.QData.QKeyManager">
             <summary>
             This object creates key files to store data in a key value format for example
@@ -3465,43 +3463,6 @@
             and allow you also to modify the style on how it should be formated such as 
             KeyName>Value|
             </summary>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.CurrentStatus">
-            <summary>
-            Gets or sets the current status.
-            </summary>
-            <value>The current status.</value>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.QKeyId">
-            <summary>
-            Gets or sets the QKey version.
-            </summary>
-            <value>The QK ey version.</value>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.Keys">
-            <summary>
-            This are the keys that are buffered when you the ReadKeys method is called/>
-            </summary>
-            <value>The keys.</value>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.Errors">
-            <summary>
-            Gets or sets the errors.
-            </summary>
-            <value>The errors.</value>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.AllowDebugger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
-            </summary>
-            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QData.QKeyManager.CheckForNotRepetedKeys">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
-            repeted keys.
-            </summary>
-            <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
         </member>
         <member name="M:QuickTools.QData.QKeyManager.#ctor(System.String)">
             <summary>
@@ -3519,7 +3480,7 @@
             provides the file name for the file containing the keys
             </summary>
         </member>
-        <member name="M:QuickTools.QData.QKeyManager.ToKeyList(System.String)">
+        <member name="M:QuickTools.QData.QKeyManager.ToKeyList(System.String,QuickTools.QData.Key)">
             <summary>
             Tos the key list.
             </summary>
@@ -3596,6 +3557,19 @@
             <returns>The exist.</returns>
             <param name="key">Key.</param>
         </member>
+        <member name="M:QuickTools.QData.QKeyManager.Get_QKey_Version">
+            <summary>
+            Gets the QKey version.
+            </summary>
+            <returns>The QK ey version.</returns>
+        </member>
+        <member name="M:QuickTools.QData.QKeyManager.Get_QKey_Version(System.String)">
+            <summary>
+            Gets the QKey version.
+            </summary>
+            <returns>The QK ey version.</returns>
+            <param name="fileName">File name.</param>
+        </member>
         <member name="M:QuickTools.QData.QKeyManager.MatchId">
             <summary>
             Matchs the identifier.
@@ -3634,6 +3608,91 @@
             Reads the keys.
             </summary>
             <returns>The keys.</returns>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.CurrentStatus">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+            <value>The current status.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.QKeyId">
+            <summary>
+            Gets or sets the QKey version.
+            </summary>
+            <value>The QK ey version.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.Keys">
+            <summary>
+            This are the keys that are buffered when you the ReadKeys method is called/>
+            </summary>
+            <value>The keys.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.Errors">
+            <summary>
+            Gets or sets the errors.
+            </summary>
+            <value>The errors.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.CheckForNotRepetedKeys">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
+            repeted keys.
+            </summary>
+            <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:QuickTools.QData.Key">
+            <summary>
+            contains the format for the the key >
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Key.IsEmpty">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
+            </summary>
+            <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyTerminatorChar">
+            <summary>
+            The key terminator char.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Key.KeyAssingChar">
+            <summary>
+            The key assing char.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
+        </member>
+        <member name="M:QuickTools.QData.Key.ToString(System.String)">
+            <summary>
+            this returns the text into 2 main formats html and json 
+            it will return the formatinto a key and value that will be understood by html
+            and also by json engine 
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
         </member>
         <member name="T:QuickTools.QIO.RecursiveFileSearch">
             <summary>
@@ -5385,6 +5444,64 @@
             <param name="addresss">Addresss.</param>
             <param name="fileName">File name.</param>
         </member>
+        <member name="T:QuickTools.QNet.QService">
+            <summary>
+            QService is a method wich provides funtionalities
+            to share information along other programs through 
+            an standard api
+            </summary>
+        </member>
+        <member name="M:QuickTools.QNet.QService.MakeRequest(System.Collections.Generic.List{QuickTools.QData.Key})">
+            <summary>
+            Makes the request.
+            </summary>
+            <param name="keys">Keys.</param>
+        </member>
+        <member name="M:QuickTools.QNet.QService.Start">
+            <summary>
+            Start this instance.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QNet.QService.QServiceThread">
+            <summary>
+            The Thread  for the service manager
+            </summary>
+        </member>
+        <member name="P:QuickTools.QNet.QService.Server">
+            <summary>
+            Gets or sets the server.
+            </summary>
+            <value>The server.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.ExitRequest">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> exit request.
+            </summary>
+            <value><c>true</c> if exit request; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.Services">
+            <summary>
+            Gets or sets the services.
+            </summary>
+            <value>The services.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> allow deubbuger.
+            </summary>
+            <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QNet.QService.Port">
+            <summary>
+            Gets or sets the port.
+            </summary>
+            <value>The port.</value>
+        </member>
+        <member name="F:QuickTools.QNet.QService.PublicID">
+            <summary>
+            The public identifier for each function that is being executed 
+            </summary>
+        </member>
         <member name="T:QuickTools.QNet.Service">
             <summary>
             Defines the Service object
@@ -5432,52 +5549,17 @@
             </summary>
             <value>The goal.</value>
         </member>
+        <member name="P:QuickTools.QNet.Service.Buffer">
+            <summary>
+            Gets or sets the buffer size of the service request
+            </summary>
+            <value>The buffer.</value>
+        </member>
         <member name="M:QuickTools.QNet.Service.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QNet.Service"/>.
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QNet.Service"/>.</returns>
-        </member>
-        <member name="T:QuickTools.QNet.QService">
-            <summary>
-            QService is a method wich provides funtionalities
-            to share information along other programs through 
-            an standard api
-            </summary>
-        </member>
-        <member name="F:QuickTools.QNet.QService.QServiceThread">
-            <summary>
-            The Thread  for the service manager
-            </summary>
-        </member>
-        <member name="P:QuickTools.QNet.QService.Server">
-            <summary>
-            Gets or sets the server.
-            </summary>
-            <value>The server.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.ExitRequest">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> exit request.
-            </summary>
-            <value><c>true</c> if exit request; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.Services">
-            <summary>
-            Gets or sets the services.
-            </summary>
-            <value>The services.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.AllowDeubbuger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> allow deubbuger.
-            </summary>
-            <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="M:QuickTools.QNet.QService.Start">
-            <summary>
-            Start this instance.
-            </summary>
         </member>
         <member name="T:QuickTools.QSecurity.Secure">
             <summary>

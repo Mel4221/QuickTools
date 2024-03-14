@@ -94,7 +94,7 @@ namespace QuickTools.QIO
             string transfer_info = Get.DataPath("temp") + Get.Slash() + Get.FileNameFromPath(target) + ".transfer_info";//+= ".transfer_info";
             MiniDB db = new MiniDB(transfer_info);
             Get.Yellow($"Computing a Hascode for the File: {source}");
-            string fileHash = Get.HashCodeFromFile(source).ToString();
+            string fileHash = new Get().HashCodeFromFile(source,true).ToString();
 
 
             //GC.Collect(); 

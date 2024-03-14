@@ -102,6 +102,11 @@ namespace QuickTools.QData
         public bool AllowDebugger { get; set; } = false;
 
         /// <summary>
+        /// Gets or sets the dubugger mode.
+        /// </summary>
+        /// <value>The dubugger mode.</value>
+        public int DubuggerMode { get; set; } = 0; 
+        /// <summary>
         /// Contains the Database from the program
         /// </summary>
         public List<DB> DataBase { get; set; } = new List<DB>();
@@ -110,6 +115,22 @@ namespace QuickTools.QData
         /// Gets or sets the data manager.
         /// </summary>
         /// <value>The data manager.</value>
-        public QKeyManager DataManager { get; set; } = new QKeyManager(); 
+        public QKeyManager DataManager { get; set; } = new QKeyManager();
+
+
+        /// <summary>
+        /// Gets or sets the format.
+        /// </summary>
+        /// <value>The format.</value>
+        public MiniDB_Format Format { get; set; } = MiniDB_Format.Default; 
+
+        /// <summary>
+        /// MiniDB Format.
+        /// </summary>
+        public enum MiniDB_Format
+        {
+            Default,
+            Compress
+        }
     }
 }

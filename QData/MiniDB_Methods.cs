@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using QuickTools.QCore;
 
 using QuickTools.QIO;
+using QuickTools.QConsole;
 
 namespace QuickTools.QData
 {
@@ -682,34 +683,38 @@ namespace QuickTools.QData
             {
                 //ID : Key : Value : Relation
                 */
+
+           
             List<Key> keys = new List<Key>();
             for (int item = 0; item < this.DataBase.Count; item++)
             {
                 keys.Add(new Key()
                 {
-                    Name = "ID",
+                    Name = this.Format == MiniDB_Format.Default ? "ID" : "I" ,
                     Value = this.DataBase[item].Id.ToString()
                 });
                 keys.Add(new Key()
                 {
-                    Name = "Key",
-                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Key))
+                    Name = this.Format == MiniDB_Format.Default ? "KEY": "K", 
+                    Value = this.DataBase[item].Key//IConvert.BytesToString(Get.Bytes(this.DataBase[item].Key))
                 });
                 keys.Add(new Key()
                 {
-                    Name = "Value",
-                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Value))
+                    Name = this.Format == MiniDB_Format.Default ? "VALUE":"V",
+                    Value = this.DataBase[item].Value//IConvert.BytesToString(Get.Bytes(this.DataBase[item].Value))
                 });
                 keys.Add(new Key()
                 {
-                    Name = "Relation",
-                    Value = IConvert.BytesToString(Get.Bytes(this.DataBase[item].Relation))
+                    Name = this.Format == MiniDB_Format.Default ? "RELATION": "R",
+                    Value = this.DataBase[item].Relation//IConvert.BytesToString(Get.Bytes(this.DataBase[item].Relation))
                 });
             }
           
             this.DataManager.FileName = this.DBName;
             //new KeyManager().WriteKeys(keys);  
-            this.DataManager.WriteKeys(ref keys);
+
+                this.DataManager.WriteKeys(ref keys);
+            
             if (this.AllowDebugger)
             {
                 // keys.ForEach((obj) => Get.Write(obj.ToString()));
@@ -761,21 +766,24 @@ namespace QuickTools.QData
         /// </summary>
         public bool Load()
         {
+            if (string.IsNullOrEmpty(this.DBName))
+            {
+                return false;
+            }
             if (!File.Exists(this.DBName))
             {
                 this.Create();
                 return false;
             }
-            if (string.IsNullOrEmpty(this.DBName))
-            {
-                return false;
-            }
+           
             this.ResentLoaded = true;
             this.DataBase = new List<DB>();
             this.DataManager = new QKeyManager(this.DBName);
             this.DataManager.AllowDebugger = this.AllowDebugger;
             this.DataManager.LoadKeys();
+            QProgressBar bar = new QProgressBar(); 
             //to makes sure that we return if the keys count is cero
+            Get.Yellow(this.DataManager.Keys.Count); 
             if (this.DataManager.Keys.Count == 0)
             {
                 return false;
@@ -785,6 +793,7 @@ namespace QuickTools.QData
 
             try
             {
+                //Get.Wait(this.DataManager.Keys[0]);
                 //Key : Value : Relation : Id
                 //ID : Key : Value : Relation
                 for (int key = 0; key < this.DataManager.Keys.Count; key++)
@@ -792,7 +801,20 @@ namespace QuickTools.QData
                     switch (sw)
                     {
                         case 0:
-                            db.Id = int.Parse(this.DataManager.Keys[key].Value);
+                            bool isNumber = Get.IsNumber(this.DataManager.Keys[key].Value);
+                            if (isNumber)
+                            {
+                                db.Id = int.Parse(this.DataManager.Keys[key].Value);
+                            }
+                            if (!isNumber)
+                            {
+                                if (this.AllowDebugger)
+                                {
+                                    Get.Red($"Wrong format expected ID but fail to be a number at Key Count: {key}");
+                                    Get.Beep();
+                                }
+                           
+                            }
                             sw++;
                             break;
                         case 1:
@@ -807,14 +829,23 @@ namespace QuickTools.QData
                             db.Relation = this.DataManager.Keys[key].Value;
                             this.DataBase.Add(new DB()
                             {
-                                Key = IConvert.ToString(IConvert.StringToBytesArray(db.Key)),
-                                Value = IConvert.ToString(IConvert.StringToBytesArray(db.Value)),
                                 Id = db.Id,
-                                Relation = IConvert.ToString(IConvert.StringToBytesArray(db.Relation))
+                                Key = db.Key,//IConvert.ToString(IConvert.StringToBytesArray(db.Key)),
+                                Value = db.Value,//IConvert.ToString(IConvert.StringToBytesArray(db.Value)),
+                                Relation = db.Relation//IConvert.ToString(IConvert.StringToBytesArray(db.Relation))
                             });
                             if (this.AllowDebugger)
                             {
-                                Get.WriteL($"Loading Keys: [{Get.Status(key, this.DataManager.Keys.Count - 1)}] {db.ToString()}");
+                                switch(this.DubuggerMode)
+                                {
+                                    case 0:
+                                        bar.Label = $"Parsing To MiniDB Format... [{key}]";
+                                        bar.Display(Get.Status(key, this.DataManager.Keys.Count));
+                                        break;
+                                     default:
+                                        Get.WriteL($"Parsing Keys: [{Get.Status(key, this.DataManager.Keys.Count - 1)}] {db.ToString()}");
+                                        break; 
+                                }
                             }
                             db.Clear();
                             sw = 0;
@@ -1315,8 +1346,64 @@ namespace QuickTools.QData
    */
 
 
+        /// <summary>
+        /// Selects  where key and relation equal to the given value.
+        /// </summary>
+        /// <returns>The where key and relation.</returns>
+        /// <param name="key">Key.</param>
+        /// <param name="relation">Relation.</param>
+        public virtual DB SelectWhereKeyAndRelation(object key, object relation)
+        {
+            try
+            {
+                for (int db = 0; db < this.DataBase.Count; db++)
+                {
+                    if (DataBase[db].Key == key.ToString() &&
+                        DataBase[db].Value == relation.ToString())
+                    {
+                        return DataBase[db];
+                    }
+                }
+                return new DB();
+            }
+            catch
+            {
+                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                return new DB();
+            }
+        }
 
-        /*
+        /// <summary>
+        /// Selects the where key and value.
+        /// </summary>
+        /// <returns>The where key and value.</returns>
+        /// <param name="key">Key.</param>
+        /// <param name="value">Value.</param>
+        public virtual DB SelectWhereKeyAndValue(object key , object value)
+        {
+            try
+            {
+                for (int db = 0; db < this.DataBase.Count; db++)
+                {
+                    if (DataBase[db].Key == key.ToString() && 
+                        DataBase[db].Value == value.ToString())
+                    {
+                        return DataBase[db];
+                    }
+                }
+                return new DB();
+            }
+            catch
+            {
+                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                return new DB();
+            }
+        }
+        /// <summary>
+        /// Selects  where the key equals to the value given.
+        /// </summary>
+        /// <returns>The where key.</returns>
+        /// <param name="value">Value.</param>
         public virtual DB SelectWhereKey(object value)
         {
               try
@@ -1337,10 +1424,9 @@ namespace QuickTools.QData
               }
         }
 
-    */
+   
 
 
-        /*
         public virtual List<DB> SelecAlltWhereKey(object value)
         {
               try
@@ -1528,7 +1614,7 @@ namespace QuickTools.QData
                     return new List<DB>();
               }
         }
-    */
+   
 
 
 

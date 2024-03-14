@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO; 
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using QuickTools.QCore;
@@ -10,131 +10,28 @@ using QuickTools.QConsole;
 namespace QuickTools.QData
 {
 
-    /// <summary>
-    /// contains the format for the the key >
-    /// </summary>
-    public class Key
-    {
-     
+   
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Key"/> is empty.
-        /// </summary>
-        /// <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
-        public bool IsEmpty { get; set; } = false; 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public string Name { get; set; } = null;
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        public string Value { get; set; } = null;
-        /// <summary>
-        /// The key terminator char.
-        /// </summary>
-        public char KeyTerminatorChar { get; set; } = ';';
-        /// <summary>
-        /// The key assing char.
-        /// </summary>
-        public char KeyAssingChar { get; set; }  = '=';
-        
-
-        /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.
-        /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Key"/>.</returns>
-        public override string ToString()
-        {
-            return $"Key{this.KeyAssingChar}{this.Name}{this.KeyTerminatorChar}Value{this.KeyAssingChar}{this.Value}{this.KeyTerminatorChar}";
-        }
-
-        /// <summary>
-        /// this returns the text into 2 main formats html and json 
-        /// it will return the formatinto a key and value that will be understood by html
-        /// and also by json engine 
-        /// </summary>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public string ToString(string format)
-        {
-            switch (format)
-            {
-                case "html":
-                    return $"<Key='{this.Name}'Value='{this.Value}'/>".Replace("'", '"'.ToString());
-                case "json":
-                    return "{\n" +
-                        $"\t'{this.Name}':".Replace("'", '"'.ToString())+
-                        $"{this.Value}\n" +
-                        "}";
-                default:
-                    return this.ToString();
-            }
-        }
-    }
-
-    public partial class QKeyManager : IDisposable
-    {
-
-    }
+   
     /// <summary>
     /// This object creates key files to store data in a key value format for example
     /// KeyName=Value; 
     /// and allow you also to modify the style on how it should be formated such as 
     /// KeyName>Value|
     /// </summary>
-    public partial class QKeyManager :Key
+    public partial class QKeyManager : Key
     {
 
 
-        //private StringBuilder builder = new StringBuilder();
 
-        /// <summary>
-        /// Gets or sets the current status.
-        /// </summary>
-        /// <value>The current status.</value>
-        public string CurrentStatus { get; set; }
 
-        /// <summary>
-        /// Gets or sets the QKey version.
-        /// </summary>
-        /// <value>The QK ey version.</value>
-        public int QKeyId { get; set; } = IRandom.Pin(); 
-
-        private readonly string QKey_Id_Key = "QKEYID";
-
-        /// <summary>
-        /// This are the keys that are buffered when you the ReadKeys method is called/>
-        /// </summary>
-        /// <value>The keys.</value>
-        public List<Key> Keys { get; set; } = new List<Key>();
-
-        /// <summary>
-        /// Gets or sets the errors.
-        /// </summary>
-        /// <value>The errors.</value>
-        public List<Error> Errors { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
-        /// </summary>
-        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        public bool AllowDebugger { get; set; } = false; 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
-        /// repeted keys.
-        /// </summary>
-        /// <value><c>true</c> if check for not repeted keys; otherwise, <c>false</c>.</value>
-        public bool CheckForNotRepetedKeys { get; set; } = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QData.KeyManager"/> class.
         /// </summary>
         /// <param name="fileName">File name.</param>
         public QKeyManager(string fileName)
         {
-            if (fileName != "" || fileName != null)
+            if (!string.IsNullOrEmpty(fileName))
             {
                 this.FileName = fileName;
             }
@@ -150,7 +47,7 @@ namespace QuickTools.QData
         /// <summary>
         /// provides the file name for the file containing the keys
         /// </summary>
-        public string FileName { get; set; } = Get.DataPath("db")+ "KeyFile.qkey";
+        public string FileName { get; set; } = Get.DataPath("db") + "KeyFile.qkey";
 
         enum KeyFormat
         {
@@ -158,20 +55,23 @@ namespace QuickTools.QData
             Html,
             Json
         }
+
+
+
         /// <summary>
         /// Tos the key list.
         /// </summary>
         /// <returns>The key list.</returns>
         /// <param name="text">Text.</param>
-        public List<Key> ToKeyList(string text)
+        public static List<Key> ToKeyList(string text, Key type)
         {
             // string keyFile = this.FileName;
             //if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
             int ch = 0;
             Check check = new Check();
             check.Start();
-            this.Errors = new List<Error>();
-            this.Keys.Clear();
+            //StaticErrors = new List<Error>();
+            List<Key> keys = new List<Key>();
             //string key, temp, input;
             string key, input;
             StringBuilder temp;
@@ -182,8 +82,8 @@ namespace QuickTools.QData
             temp = new StringBuilder();
             input = text;//IConvert.ToString(Binary.Reader(keyFile));
 
-            term = this.KeyTerminatorChar;
-            assing = this.KeyAssingChar;
+            term = type.KeyTerminatorChar;
+            assing = type.KeyAssingChar;
 
             QProgressBar bar = new QProgressBar();
 
@@ -192,12 +92,14 @@ namespace QuickTools.QData
                 try
                 {
 
-                    this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    //CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    /*
                     if (AllowDebugger)
                     {
                         bar.Label = this.CurrentStatus;
                         bar.Display(Get.Status(ch, input.Length));
                     }
+                    */
                     if (input[ch] == assing)
                     {
                         key = temp.ToString();
@@ -207,7 +109,7 @@ namespace QuickTools.QData
                     {
                         if (idLoaded)
                         {
-                            this.Keys.Add(new Key()
+                            keys.Add(new Key()
                             {
                                 Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
                                 Value = temp.ToString()
@@ -222,10 +124,11 @@ namespace QuickTools.QData
                     {
                         temp.Append(input[ch]);
                     }
-                   // return this.Keys;
+                    // return this.Keys;
                 }
-                catch (Exception ex)
+                catch
                 {
+                    /*
                     this.Errors.Add(new Error()
                     {
                         Message = ex.Message,
@@ -233,9 +136,10 @@ namespace QuickTools.QData
                         $"\n Key={key} Temp={temp} KeysCount={this.Keys.Count}"
 
                     });
+                    */
                 }
             }
-            return this.Keys;
+            return keys;
 
         }
 
@@ -254,7 +158,7 @@ namespace QuickTools.QData
         /// <summary>
         /// Creates the on data path.
         /// </summary>
-        public void CreateOnDataPath() => this.CreateOnDataPath(this.FileName); 
+        public void CreateOnDataPath() => this.CreateOnDataPath(this.FileName);
 
         /// <summary>
         /// Creates the on data path.
@@ -262,7 +166,7 @@ namespace QuickTools.QData
         /// <param name="fileName">File name.</param>
         public void CreateOnDataPath(string fileName)
         {
-            fileName = Get.DataPath("db") + fileName; 
+            fileName = Get.DataPath("db") + fileName;
             if (!File.Exists(fileName))
             {
                 File.Create(fileName);
@@ -283,17 +187,17 @@ namespace QuickTools.QData
         /// </summary>
         /// <returns>The key.</returns>
         /// <param name="key">Key.</param>
-        public  Key GetKey(string key)
+        public Key GetKey(string key)
         {
             this.Keys = this.ReadKeys();
             foreach (Key k in this.Keys)
             {
                 if (k.Name == key)
                 {
-                    return  k;
+                    return k;
                 }
             }
-            return  new Key()
+            return new Key()
             {
                 Name = null,
                 Value = null,
@@ -315,11 +219,11 @@ namespace QuickTools.QData
         public void SaveKeys()
         {
             List<Key> _ = this.Keys;
-            ref List<Key> keys = ref _; 
+            ref List<Key> keys = ref _;
             this.WriteKeys(ref keys);
         }
 
-     
+
         /// <summary>
         /// Adds the key.
         /// </summary>
@@ -337,7 +241,7 @@ namespace QuickTools.QData
                     }
                 }
             }
-            this.Keys.Add(new Key() { Name=key,Value=value});
+            this.Keys.Add(new Key() { Name = key, Value = value });
         }
 
         /// <summary>
@@ -385,7 +289,7 @@ namespace QuickTools.QData
         public void UpdateKey(Key key)
         {
             //this.Keys = this.ReadKeys();
-            for (int item = 0; item<this.Keys.Count; item++)
+            for (int item = 0; item < this.Keys.Count; item++)
             {
                 if (key.Name == this.Keys[item].Name)
                 {
@@ -415,7 +319,7 @@ namespace QuickTools.QData
                 if (key.Name == this.Keys[item].Name)
                 {
                     this.Keys.RemoveAt(item);
-                    List<Key> _ =  this.Keys; 
+                    List<Key> _ = this.Keys;
                     this.WriteKeys(ref _);
                     return;
                 }
@@ -440,14 +344,23 @@ namespace QuickTools.QData
             return false;
         }
 
+        /// <summary>
+        /// Gets the QKey version.
+        /// </summary>
+        /// <returns>The QK ey version.</returns>
         public int Get_QKey_Version() => Get_QKey_Version(this.FileName);
 
+        /// <summary>
+        /// Gets the QKey version.
+        /// </summary>
+        /// <returns>The QK ey version.</returns>
+        /// <param name="fileName">File name.</param>
         public int Get_QKey_Version(string fileName)
         {
             int version = 0;
             if (!File.Exists(this.FileName))
             {
-                return version; 
+                return version;
             }
             string textVersion = File.ReadAllLines(fileName)[0];
             string temp = "";
@@ -458,7 +371,7 @@ namespace QuickTools.QData
                     temp += ch;
                 }
             }
-            int.TryParse(temp, out version); 
+            int.TryParse(temp, out version);
             return version;
         }
 
@@ -472,24 +385,25 @@ namespace QuickTools.QData
         public bool MatchId() => this.MatchId(this.FileName);
 
 
-        
-         /// <summary>
-         /// Matchs the identifier.
-         /// </summary>
-         /// <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
-         /// <param name="fileName">File name.</param>
+
+        /// <summary>
+        /// Matchs the identifier.
+        /// </summary>
+        /// <returns><c>true</c>, if identifier was matched, <c>false</c> otherwise.</returns>
+        /// <param name="fileName">File name.</param>
         public bool MatchId(string fileName)
         {
-          
-            if(this.QKeyId == this.Get_QKey_Version(fileName))
+
+            if (this.QKeyId == this.Get_QKey_Version(fileName))
             {
-                return true; 
-            }else
+                return true;
+            }
+            else
             {
-                return false; 
+                return false;
             }
             //int version = int.Parse(textVersion.Substring(textVersion.IndexOf('='),textVersion.IndexOf(';')); 
-         }
+        }
 
 
         /// <summary>
@@ -503,85 +417,102 @@ namespace QuickTools.QData
             if (keys.Count == 0) throw new ArgumentException("No Keys were provided!!!");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
             List<Key> stats = new List<Key>();
-
-            using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            try
             {
-                int isFirst, current, goal;
-                byte[] buffer = new byte[0];
-                long indexer = 0;
-                isFirst = 0;
-                current = 0;
-                goal = keys.Count;
-                QProgressBar bar = new QProgressBar(); 
+                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                {
+                    int current, goal;
+                    byte[] buffer = new byte[0];
+                    long indexer = 0;
+                    //isFirst = 0;
+                    current = 0;
+                    goal = keys.Count;
+                    QProgressBar bar = new QProgressBar();
 
-                         
+
                     using (BinaryWriter writer = new BinaryWriter(stream))
                     {
-                    /*
-                        i had to add a way to keep a control
-                        on where does the QKey starts and where it ends
-                        so the way to fix it was to add one , but at first
-                        it was writting on top of previus written areas so 
-                        the indexer had to be moved foward the length of the 
-                        start tag                    
-                    */
-                    buffer = Get.Bytes($"#START#\n");
-                    writer.Write(buffer, 0, buffer.Length);
-                    indexer += buffer.Length;
-                    stream.Seek(indexer, SeekOrigin.Begin);
-                    for (int item = 0; item < keys.Count; item++)
-                    {
-                        this.CurrentStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
-                        if (this.AllowDebugger)
-                        {
-                            bar.Label = this.CurrentStatus;
-                            bar.Display(Get.Status(current, goal));
-                            stats.Add(new Key() { Name = "status", Value = CurrentStatus});
-                        }
-                        if (isFirst == 1)
-                        {
-                            buffer = Get.Bytes($"{keys[item].Name}{keys[item].KeyAssingChar}{keys[item].Value}{keys[item].KeyTerminatorChar}\n");
-                            writer.Write(buffer, 0, buffer.Length);
-                        }
-                        if (isFirst == 0)
-                        {
-                            buffer = Get.Bytes($"{QKey_Id_Key}{keys[0].KeyAssingChar}{this.QKeyId}{keys[0].KeyTerminatorChar}\n");
-                            writer.Write(buffer, 0, buffer.Length);
-                            isFirst = 1;
-                        }
-                     
+                        /*
+                            i had to add a way to keep a control
+                            on where does the QKey starts and where it ends
+                            so the way to fix it was to add one , but at first
+                            it was writting on top of previus written areas so 
+                            the indexer had to be moved foward the length of the 
+                            start tag                    
+                        */
+                        //buffer = Get.Bytes($"#START#\n");
+                        //writer.Write(buffer, 0, buffer.Length);
+                        //indexer += buffer.Length;
+
+                        //Adding the default keyid to be able to be use depending on the situation
+                        buffer = Get.Bytes($"{QKey_Id_Key}{keys[0].KeyAssingChar}{this.QKeyId}{keys[0].KeyTerminatorChar}\n");
+                        writer.Write(buffer, 0, buffer.Length);
                         indexer += buffer.Length;
-                        current++;
                         stream.Seek(indexer, SeekOrigin.Begin);
 
+                        for (int item = 0; item < keys.Count; item++)
+                        {
+                            this.CurrentStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
+                            if (this.AllowDebugger)
+                            {
+                                bar.Label = this.CurrentStatus;
+                                bar.Display(Get.Status(current, goal));
+                                //stats.Add(new Key() { Name = "status", Value = CurrentStatus});
+                            }
+
+                            buffer = Get.Bytes($"{keys[item].Name}{keys[item].KeyAssingChar}{keys[item].Value}{keys[item].KeyTerminatorChar}\n");
+                            writer.Write(buffer, 0, buffer.Length);
+
+
+                            indexer += buffer.Length;
+                            current++;
+                            stream.Seek(indexer, SeekOrigin.Begin);
+
+                        }
+                        //buffer = Get.Bytes($"#END#\n");
+                        //writer.Write(buffer, 0, buffer.Length);
+                        //stats.ForEach(item => Get.Write($"{item.ToString()}\n"));
                     }
-                    buffer = Get.Bytes($"#END#\n");
-                    writer.Write(buffer, 0, buffer.Length);
-                    stats.ForEach(item => Get.Write($"{item.ToString()}\n"));
+
+
                 }
+                //this.builder.Append();
 
-
+                //File.WriteAllText(fileName, this.builder.ToString());
+                /*
+                using (FileStream stream = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+                { 
+                    byte[] buffer = Get.Bytes(this.builder.ToString());
+                    stream.Write(buffer, 0, buffer.Length);
+                }
+                */
             }
-            //this.builder.Append();
-           
-            //File.WriteAllText(fileName, this.builder.ToString());
-            /*
-            using (FileStream stream = new FileStream(fileName, FileMode.Append, FileAccess.Write))
-            { 
-                byte[] buffer = Get.Bytes(this.builder.ToString());
-                stream.Write(buffer, 0, buffer.Length);
+            catch (AccessViolationException e)
+            {
+                Thread.Sleep(10);
+                if (this.AllowDebugger)
+                {
+                    Get.Yellow(e.Message);
+                }
+                this.WriteKeys(fileName, ref keys);
             }
-            */
+            catch (Exception ex)
+            {
+                if (this.AllowDebugger)
+                {
+                    Get.Red(ex);
+                }
+            }
         }
 
         /// <summary>
         /// Writes the keys.
         /// </summary>
         /// <param name="keys">Keys.</param>
-        public void WriteKeys(ref List<Key> keys) => this.WriteKeys(this.FileName, ref keys); 
-        
-        
-      
+        public void WriteKeys(ref List<Key> keys) => this.WriteKeys(this.FileName, ref keys);
+
+
+
         /// <summary>
         /// Reads the keys.
         /// </summary>
@@ -590,20 +521,11 @@ namespace QuickTools.QData
         public List<Key> ReadKeys(string file)
         {
             this.FileName = file;
-            return this.ReadKeys();
+            this.Keys = this.ReadKeys();
+            return this.Keys;
         }
 
-        public bool IsInternalCmd(string cmd)
-        { 
-            switch(cmd)
-            {
-                case "START":
-                case "END":
-                    return true; 
-                default:
-                    return false; 
-            }
-        }
+
 
 
         /// <summary>
@@ -612,65 +534,110 @@ namespace QuickTools.QData
         /// <returns>The keys.</returns>
         public List<Key> ReadKeys()
         {
-            string keyFile = this.FileName; 
-            if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
-            int ch = 0;
-                Check check = new Check();
-                check.Start(); 
-                this.Errors = new List<Error>();
-                this.Keys.Clear(); 
-                //string key, temp, input;
-                string key, input;
-                StringBuilder temp;
-                char term, assing;
-                bool idLoaded;
-                idLoaded = false; 
-                key = "";
-                temp = new StringBuilder(); 
-                input = IConvert.ToString(Binary.Reader(keyFile));
-               
-                term = this.KeyTerminatorChar;
-                assing = this.KeyAssingChar;
-                
-                QProgressBar bar = new QProgressBar();
 
-                for (ch = 0; ch < input.Length; ch++)
-                {
+            string keyFile = this.FileName;
+            if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
+            Check check = new Check();
+            check.Start();
+            this.Errors = new List<Error>();
+            this.Keys.Clear();
+            //string key, temp, input;
+            string key, input;
+            StringBuilder temp;
+            int ch, current, is1Next; //., is2Next;
+            char term, assing;
+            bool idLoaded, isOpen, isNext;
+            idLoaded = false;
+            isOpen = false;
+            isNext = false;
+            current = 0;
+            is1Next = 0;
+            // int ch = 0;
+            //ch = 0; 
+            //isCMD = false;
+            key = "";
+            temp = new StringBuilder();
+            input = IConvert.ToString(Binary.Reader(keyFile));
+
+            term = this.KeyTerminatorChar;
+            assing = this.KeyAssingChar;
+
+            QProgressBar bar = new QProgressBar();
+
+            for (ch = 0; ch < input.Length; ch++)
+            {
                 try
                 {
-
+                    // Get.Write(input[ch]);
+                    current = ch;
                     this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
                     if (AllowDebugger)
                     {
                         bar.Label = this.CurrentStatus;
                         bar.Display(Get.Status(ch, input.Length));
                     }
-                    if (input[ch] == assing)
+                    if (input[ch] == assing && !isOpen)
                     {
                         key = temp.ToString();
                         temp.Clear();
+                        isOpen = true;
+                        current = IRandom.Pin();
+                       // Get.Blue($"Key Founded: [{key}]");
                     }
-                    if (input[ch] == term)
+                    if (input[ch] == term && input[ch + 1] == '\n')
                     {
+                        //Get.Wait($"{input[ch]} Next: {input[ch+1]} After: {input[ch+2]}");
+
                         if (idLoaded)
                         {
-                            this.Keys.Add(new Key()
+                            Key _ = new Key()
                             {
                                 Name = key.Replace(" ", "").Replace("\n", "").Replace("\t", ""),
                                 Value = temp.ToString()
-                            });
+                            };
+                            this.Keys.Add(_);
+                           // Get.Green($"KEY VALUE Aquired: {_.ToString()}");
                         }
-                        idLoaded = true; 
+                        if (!idLoaded)
+                        {
+                            idLoaded = true;
+                            int number;
+
+                            bool isValid = int.TryParse(temp.ToString(),out number);
+                            if (key != "QKEYID") isValid = false; 
+                            if (this.AllowDebugger)
+                            {
+                                switch(isValid)
+                                {
+                                    case true:
+                                                Get.Red($"ID LOADED [{temp}]");
+                                                this.QKeyId = number; 
+                                        break;
+                                    case false:
+                                                Get.Red($"\nFailed to load the QKEYID\n");
+                                                
+                                                Get.Beep();
+                                        break;
+                                }
+                            }
+                        }
 
                         //Get.Wait($"{key} : {temp}"); 
                         temp.Clear();
+                        isOpen = false;
+                        //is2Next = ch + 2;
+                        current = IRandom.Pin();
+
+
                     }
-                    if (input[ch] != assing && input[ch] != term)
+                    if (ch == current)//(input[ch] != assing && input[ch] != term)
                     {
+                       // Get.Yellow($"Appended Char: [{input[ch]}]");
                         temp.Append(input[ch]);
                     }
-                    }catch(Exception ex)
-                    {
+                }
+                catch (Exception ex)
+                {
                     this.Errors.Add(new Error()
                     {
                         Message = ex.Message,
@@ -692,11 +659,12 @@ namespace QuickTools.QData
             //    //throw new Exception();
             //}
 
-                this.FileName = keyFile;
-                if(this.AllowDebugger)
-                {
-                    Get.Box($"Execution Time: {check.Stop()}"); 
-                }
+            this.FileName = keyFile;
+            if (this.AllowDebugger)
+            {
+                Get.WriteL("\n");
+                Get.Box($"Execution Time: {check.Stop()}");
+            }
             return this.Keys;
 
 

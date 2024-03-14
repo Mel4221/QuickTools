@@ -96,7 +96,7 @@ using QuickTools.QCore;
         /// </summary>
         /// <returns>The to html.</returns>
         /// <param name="htmlContent">Html content.</param>
-        public byte[] ConvertToHtml(string htmlContent)
+        public static byte[] ConvertToHtml(string htmlContent)
         {
             string html = $"<!DOCTYPE html>" +
                           $"<html>" +
@@ -110,7 +110,7 @@ using QuickTools.QCore;
         /// <param name="htmlContenst"></param>
         /// <param name="javascriptContent"></param>
         /// <returns></returns>
-        public byte[] ConvertToHtml(string htmlContenst, string javascriptContent)
+        public static byte[] ConvertToHtml(string htmlContenst, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -131,7 +131,7 @@ using QuickTools.QCore;
             /// <param name="cssContent"></param>
             /// <param name="javascriptContent"></param>
             /// <returns></returns>
-            public byte[] ConvertToHtml(string htmlContent, string cssContent, string javascriptContent)
+            public static byte[] ConvertToHtml(string htmlContent, string cssContent, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -154,7 +154,7 @@ using QuickTools.QCore;
                   /// <param name="htmlFile">Html file.</param>
                   /// <param name="cssFile">Css file.</param>
                   /// <param name="javascriptFile">Javascript file.</param>
-                  public byte[] LoadFiles(string htmlFile,string cssFile,string javascriptFile)
+                  public static byte[] LoadFiles(string htmlFile,string cssFile,string javascriptFile)
                   {
                        if(!File.Exists(htmlFile) || !File.Exists(cssFile) || !File.Exists(javascriptFile))
                         {
@@ -169,7 +169,7 @@ using QuickTools.QCore;
             /// </summary>
             /// <returns>The to row.</returns>
             /// <param name="stringContent">String content.</param>
-            public byte[] ConvertToRow(string stringContent)
+            public static byte[] ConvertToRow(string stringContent)
         {
             return Encoding.ASCII.GetBytes(stringContent);
         }
@@ -208,7 +208,8 @@ using QuickTools.QCore;
                         HttpListener listener = new HttpListener();
                         listener.UnsafeConnectionNtlmAuthentication = SecureProtocol == false ? false : true;
                         listener.Prefixes.Add(this.Address);
-                        listener.Start();
+                      
+
                         HttpListenerContext context = listener.GetContext();
                         HttpListenerRequest request = context.Request;
                         HttpListenerResponse response = context.Response;
@@ -310,7 +311,7 @@ using QuickTools.QCore;
                   public QServer(string url)
                   {
 
-                        this.Port = 4251;
+                        this.Port = QuickToolsStandars.DefaultPortA;
                         this.URL = url;
                         string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
                         this.Address = $"{protocol}{this.URL}:{this.Port}/";
@@ -323,7 +324,7 @@ using QuickTools.QCore;
                   public QServer()
                   {
 
-                        this.Port = 4251;
+                        this.Port = QuickToolsStandars.DefaultPortA;
                         this.URL = "localhost";
                         string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
                         this.Address = $"{protocol}{this.URL}:{this.Port}/";

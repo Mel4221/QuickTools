@@ -468,9 +468,12 @@ namespace QuickTools.QCore
         /// Gets or sets the current status.
         /// </summary>
         /// <value>The current status.</value>
-        public static string CurrentStatus { get; set; } = "Nothing-Started"; 
-
-
+        public static string CurrentStatus { get; set; } = "Nothing-Started";
+        /// <summary>
+        /// Gets or sets the public identifier.
+        /// </summary>
+        /// <value>The public identifier.</value>
+        public string PublicID { get; set; } = IRandom.RandomText(QuickToolsStandars.PublicIDLength);
         /// <summary>
         /// Hashs the code from file.
         /// </summary>
@@ -514,7 +517,7 @@ namespace QuickTools.QCore
                     eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
                     eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
                     eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
-                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}] Hash: [{hash}]";
+                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}]";
                     CurrentStatus = status;
 
                     if (allowDebugger == true)
@@ -560,7 +563,10 @@ namespace QuickTools.QCore
 
 
 
-
+            if (allowDebugger)
+            {
+                Get.Yellow($"\nFile: [{fileName}] Hash: [{hash}]");
+            }
             return hash;
         }
 
@@ -893,7 +899,6 @@ namespace QuickTools.QCore
             else
             {
                 Directory.CreateDirectory(folder);
-
                 return folder;
             }
 
