@@ -783,7 +783,7 @@ namespace QuickTools.QData
             this.DataManager.LoadKeys();
             QProgressBar bar = new QProgressBar(); 
             //to makes sure that we return if the keys count is cero
-            Get.Yellow(this.DataManager.Keys.Count); 
+            //Get.Yellow(this.DataManager.Keys.Count); here is why you never leavs stuff behind 24h trying to find where those numbers where coming from 
             if (this.DataManager.Keys.Count == 0)
             {
                 return false;

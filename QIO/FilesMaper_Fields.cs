@@ -44,6 +44,8 @@ namespace QuickTools.QIO
         /// <summary>
         /// allows to print the status of the current file search 
         /// </summary>
-        public bool AllowDebugger; 
+        public bool AllowDebugger;
+
+
     }
 }

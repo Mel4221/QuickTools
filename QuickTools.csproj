@@ -88,12 +88,12 @@
     <Compile Include="QIO\RowPack.cs" />
     <Compile Include="QIO\reader.cs" />
     <Compile Include="QIO\FilesMaper.cs" />
-    <Compile Include="QIO\FileChoper_Fields.cs" />
+    <Compile Include="QIO\Deprecated_FileChoper_Fields.cs" />
     <Compile Include="QIO\QZip.cs" />
     <Compile Include="QIO\writer.cs" />
     <Compile Include="QIO\Binary.cs" />
     <Compile Include="QIO\Log.cs" />
-    <Compile Include="QIO\FileChoper_Methods.cs" />
+    <Compile Include="QIO\Deprecated_FileChoper_Methods.cs" />
     <Compile Include="QIO\InputParser.cs" />
     <Compile Include="QIO\Binary_Constructors.cs" />
     <Compile Include="QIO\Binary_ReadBytes.cs" />
@@ -129,13 +129,14 @@
     <Compile Include="QData\Key.cs" />
     <Compile Include="QConsole\ShellInput_Fields.cs" />
     <Compile Include="QConsole\ShellInput_Constructors.cs" />
+    <Compile Include="QIO\QMetadata.cs" />
+    <Compile Include="QIO\FilesTransferer_Fields.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />
     <Folder Include="QConsole\" />
     <Folder Include="QCore\" />
     <Folder Include="QConsole\Emulation\" />
-    <Folder Include="QData\Metadata\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QCore\Decriptor.intent" />

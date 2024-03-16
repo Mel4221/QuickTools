@@ -94,7 +94,7 @@ namespace QuickTools.QCore
                 return data;
             }
 
-
+   
 
 
             /// <summary>
@@ -243,7 +243,60 @@ namespace QuickTools.QCore
 
 
 
+        /// <summary>
+        /// Converts the text format to the type of size B,KB,MB,GB
+        /// </summary>
+        /// <returns>The data size.</returns>
+        /// <param name="size">Size.</param>
+        public static int ToDataSize(string size)
+        {
+            /*
+                10mb
+                1gb
+                55555b
+            */
+            if (Get.IsNumber(size))
+            {
+                return int.Parse(size);
+            }
+            string numbers, chars;
+            int n = 0;
+            numbers = "";
+            chars = "";
+            foreach (char ch in size)
+            {
+                switch (Get.IsNumber(ch))
+                {
+                    case true:
+                        numbers += ch;
+                        break;
+                    case false:
+                        if (ch != '.' && ch != ',') chars += ch;
+                        break;
+                }
+            }
+            chars = chars.ToLower();
+            n = int.Parse(numbers);
+            //Get.Yellow($"Numbers: [{numbers}] Chars: [{chars}]");
+            //Get.Green($"Clear Numbers: {n} Clear Chars: [{chars}]");
 
+            switch (chars)
+            {
+                case "b":
+                    return n;
+                case "kb":
+                    return n * 1024;
+                case "mb":
+                    return n * 1024 * 1024;
+                case "gb":
+                    if (n >= 2) return int.MaxValue;
+                    return n * 1024 * 1024 * 1024;
+                default:
+                    throw new Exception($"NOT SUPPORTED FORMAT [{chars}]");
+
+            }
+
+        }
 
 
 

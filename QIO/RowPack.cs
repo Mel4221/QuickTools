@@ -174,7 +174,7 @@ namespace QuickTools.QIO
                         File.Delete(fileName);
                         return;
                         }
-                  else
+                        else
                         {
                         throw new FileNotFoundException(fileName); 
                         }

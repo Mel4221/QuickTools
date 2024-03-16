@@ -2,7 +2,7 @@
 using QuickTools.QCore; 
 namespace QuickTools.QData
 {
-    public partial class FileChoper
+   internal  partial class FileChoper
     {
         /// <summary>
         /// Gets or sets the binary object.

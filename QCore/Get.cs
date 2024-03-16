@@ -517,7 +517,7 @@ namespace QuickTools.QCore
                     eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
                     eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
                     eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
-                    status = $"Reading... {fileName.Substring(fileName.LastIndexOf(Get.Slash()))} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}]";
+                    status = $"Reading... {fileName} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}]";
                     CurrentStatus = status;
 
                     if (allowDebugger == true)

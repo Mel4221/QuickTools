@@ -12,69 +12,10 @@ namespace QuickTools.QIO
     /// <summary>
     /// Creates an object that allow to transfer files and return or print the status of the transfer 
     /// </summary>
-    public class FilesTransferer
+    public partial class FilesTransferer
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-        /// </summary>
-        public FilesTransferer() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-        /// </summary>
-        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-        public FilesTransferer(bool allowDebugger) => this.AllowDebugger = allowDebugger;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-        /// </summary>
-        /// <param name="chuckSize">Chuck size.</param>
-        public FilesTransferer(int chuckSize) => this.ChuckSize = chuckSize;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
-        /// </summary>
-        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-        /// <param name="chuckSize">Chuck size.</param>
-        public FilesTransferer(bool allowDebugger, int chuckSize) { this.AllowDebugger = allowDebugger; this.ChuckSize = chuckSize; }
 
-
-        /// <summary>
-        /// Gets or sets the current status.
-        /// </summary>
-        /// <value>The current status.</value>
-        public string CurrentStatus { get; set; } = "Not-Started";
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> allow debugger.
-        /// </summary>
-        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        public bool AllowDebugger { get; set; } = false;
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> wait to acknolege transfer.
-        /// </summary>
-        /// <value><c>true</c> if wait to acknolege transfer; otherwise, <c>false</c>.</value>
-        public bool WaitToAcknolegeTransfer { get; set; } = true;
-        /// <summary>
-        /// The size of the chuck and the default value is 1024 * 1024 * 64 = 670302208B or 64MB
-        /// </summary>
-        public int ChuckSize = 1024 * 1024 * 64;
-        /// <summary>
-        /// Gets or sets the buffer.
-        /// </summary>
-        /// <value>The buffer.</value>
-        public byte[] Buffer { get; set; } = new byte[] { };
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>The source.</value>
-        public string Source { get; set; } = "Not-Set";
-        /// <summary>
-        /// Gets or sets the target.
-        /// </summary>
-        /// <value>The target.</value>
-        public string Target { get; set; } = "Not-Set";
-
-        /// <summary>
-        /// Transfer this the file from the source to the given target directory.
-        /// </summary>
-        public void TransferFile() => this.TransferFile(this.Source, this.Target);
+    
 
         /// <summary>
         /// Transfer the specified source and target.
@@ -93,6 +34,8 @@ namespace QuickTools.QIO
 
             string transfer_info = Get.DataPath("temp") + Get.Slash() + Get.FileNameFromPath(target) + ".transfer_info";//+= ".transfer_info";
             MiniDB db = new MiniDB(transfer_info);
+            Check check = new Check();
+
             Get.Yellow($"Computing a Hascode for the File: {source}");
             string fileHash = new Get().HashCodeFromFile(source,true).ToString();
 
@@ -123,28 +66,36 @@ namespace QuickTools.QIO
                     BinaryReader binaryReader = new BinaryReader(streamOpen);
                     BinaryWriter binaryWriter = new BinaryWriter(streamWrite);
                     Stopwatch sw = new Stopwatch();
-                    Check check = new Check();
                     QProgressBar bar = new QProgressBar();
                     TimeSpan time;
                     check.Start();
                     this.ChuckSize = this.ChuckSize > streamOpen.Length ? int.Parse(streamOpen.Length.ToString()) : this.ChuckSize;
+
                     sw.Start();
                     long current, goal;
-                    string status, eta;
+                    string  eta;
                     goal = streamOpen.Length;
                     current = 0;
 
                     while (current < goal)
                     {
+                        //this.FileMetadata.ChuncksSize = long.Parse(this.FileMetadata.ChuncksSize.ToString()) < (goal - current) ? this.FileMetadata.ChuncksSize : int.Parse(goal - current);
+                        /*
+                            If for some reason the current chuck remaining is actually smaller 
+                            than the current remaining bytes just set that to be the final chunck                                   
+                        */
+                        this.ChuckSize = long.Parse(this.ChuckSize.ToString()) < (goal - current)? this.ChuckSize : int.Parse((goal-current).ToString());
+
                         time = Get.ETA(sw, current, goal - 1);
                         eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
                         eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
                         eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
-                        status = $"Status: [{Get.Status(current, goal - 2)}] ChuckSize: [{Get.FileSize(this.ChuckSize)}] Transfered: [{Get.FileSize(current)} / {Get.FileSize(goal)}] ETA: [{eta}]";
-                        this.CurrentStatus = status;
+                        this.CurrentStatus = $"Status: [{Get.Status(current, goal - 2)}] RW: [{Get.FileSize(this.ChuckSize)}] Transfered: [{Get.FileSize(current)} / {Get.FileSize(goal)}] ETA: [{eta}]";
+                       // this.CurrentStatus = status;
+
                         if (this.AllowDebugger)
                         {
-                            bar.Label = status;
+                            bar.Label = this.CurrentStatus;
                             bar.Display(Get.Status(current, goal - 2));
                             //Get.Green(status);
                         }
@@ -172,20 +123,47 @@ namespace QuickTools.QIO
 
 
                     }
-                    status = $"Done!!! {target}";
-                    if (this.AllowDebugger)
-                    {
-                        Get.Print($"{source}", "->", $"{target}");
-                        Get.Green($"Done!!!");
-                        Get.Yellow($"Transfer Time: {check.Stop()}");
-                        if (WaitToAcknolegeTransfer)
-                        {
-                            Get.Wait();
-                        }
-                    }
+
+
+              
                 }
 
 
+            }
+            if (this.CheckFileIntegrity)
+            {
+                this.CurrentStatus = $"Checking File Integrity...";
+                if (this.AllowDebugger)
+                {
+                    try
+                    {
+                        Get.Reset();
+                        Get.WriteL("");
+                        Get.Wait(this.CurrentStatus,() => {
+                            this.Target_Hash = new Get().HashCodeFromFile(target, false).ToString();
+                        });
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if(!this.AllowDebugger)
+                {
+                    this.Target_Hash = new Get().HashCodeFromFile(target, false).ToString();
+                }
+            }
+            //this.CurrentStatus = $"Done!!!";
+
+            if (this.AllowDebugger)
+            {
+
+                Get.Print($"{source}", "->", $"{target}");
+                //Get.Green($"Done!!!");
+                Get.Yellow($"Transfer Time: {check.Stop()}");
+                this.CurrentStatus = this.CheckFileIntegrity == true ? $"Source Hash: [{fileHash}] Target Hash: [{this.Target_Hash}] MATCH: [{fileHash == this.Target_Hash}]" : "";
+                Get.Yellow(this.CurrentStatus);
+                return;
             }
 
         }

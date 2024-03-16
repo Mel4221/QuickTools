@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO; 
 using QuickTools.QIO;
-using QuickTools.QData; 
 using QuickTools.QCore;
 using System.Collections.Generic; 
 namespace QuickTools.QData
@@ -10,7 +9,7 @@ namespace QuickTools.QData
     /// This class take a file and devided into the given amount of files
     /// reducing the size of it into a very small chucks of itself
     /// </summary>
-    public partial class FileChoper
+    internal partial class FileChoper
     {
 
         /// <summary>
@@ -84,6 +83,8 @@ namespace QuickTools.QData
             meta.IsEncrypted = this.ToBool(keys[6].Value); 
             return meta; 
         }
+
+
         /// <summary>
         /// Join the specified file from the row files
         /// </summary>

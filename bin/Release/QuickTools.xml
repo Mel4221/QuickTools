@@ -2066,6 +2066,13 @@
             <param name="arrayOfWords"></param>
             <returns></returns>
         </member>
+        <member name="M:QuickTools.QCore.IConvert.ToDataSize(System.String)">
+            <summary>
+            Converts the text format to the type of size B,KB,MB,GB
+            </summary>
+            <returns>The data size.</returns>
+            <param name="size">Size.</param>
+        </member>
         <member name="F:QuickTools.QCore.IConvert.OpartionStatus">
             <summary>
             Provides's the access to the current status of the given opeartion 
@@ -4831,6 +4838,26 @@
             Creates an object that allow to transfer files and return or print the status of the transfer 
             </summary>
         </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferFile(System.String,System.String)">
+            <summary>
+            Transfer the specified source and target.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory">
+            <summary>
+            Transfers the directory.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory(System.String,System.String)">
+            <summary>
+            Transfers the directory.
+            </summary>
+            <param name="source">Source.</param>
+            <param name="target">Target.</param>
+            <exception cref="T:System.NotImplementedException">since is not completed yet</exception>
+        </member>
         <member name="M:QuickTools.QIO.FilesTransferer.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:FilesTransferer"/> class.
@@ -4867,11 +4894,11 @@
             </summary>
             <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QIO.FilesTransferer.WaitToAcknolegeTransfer">
+        <member name="P:QuickTools.QIO.FilesTransferer.CheckFileIntegrity">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:FilesTransferer"/> wait to acknolege transfer.
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesTransferer"/> check file integrity.
             </summary>
-            <value><c>true</c> if wait to acknolege transfer; otherwise, <c>false</c>.</value>
+            <value><c>true</c> if check file integrity; otherwise, <c>false</c>.</value>
         </member>
         <member name="F:QuickTools.QIO.FilesTransferer.ChuckSize">
             <summary>
@@ -4901,25 +4928,76 @@
             Transfer this the file from the source to the given target directory.
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.FilesTransferer.TransferFile(System.String,System.String)">
+        <member name="T:QuickTools.QIO.QMetadata">
             <summary>
-            Transfer the specified source and target.
-            </summary>
-            <param name="source">Source.</param>
-            <param name="target">Target.</param>
-        </member>
-        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory">
-            <summary>
-            Transfers the directory.
+            Contains the Metadata object 
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.FilesTransferer.TransferDirectory(System.String,System.String)">
+        <member name="P:QuickTools.QIO.QMetadata.Name">
             <summary>
-            Transfers the directory.
+            Gets or sets the name of the file.
             </summary>
-            <param name="source">Source.</param>
-            <param name="target">Target.</param>
-            <exception cref="T:System.NotImplementedException">since is not completed yet</exception>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.Hash">
+            <summary>
+            Gets or sets the file hash.
+            </summary>
+            <value>The file hash.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.From">
+            <summary>
+            Gets or sets from.
+            </summary>
+            <value>From.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.Until">
+            <summary>
+            Gets or sets the until.
+            </summary>
+            <value>The until.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.Length">
+            <summary>
+            Gets or sets the length of the file.
+            </summary>
+            <value>The length of the file.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.Size">
+            <summary>
+            Gets or sets the size of the file.
+            </summary>
+            <value>The size of the file.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.ChuncksSize">
+            <summary>
+            Gets or sets the size of the chuncks , by default is set to 10MB
+            </summary>
+            <value>The size of the chuncks.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.IsEncrypted">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QTester.FileChoper.Metadata"/> is encrypted.
+            </summary>
+            <value><c>true</c> if is encrypted; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+            <value>The last modified.</value>
+        </member>
+        <member name="P:QuickTools.QIO.QMetadata.Comment">
+            <summary>
+            Gets or sets the comment.
+            </summary>
+            <value>The comment.</value>
+        </member>
+        <member name="M:QuickTools.QIO.QMetadata.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.</returns>
         </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>
