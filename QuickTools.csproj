@@ -131,6 +131,8 @@
     <Compile Include="QConsole\ShellInput_Constructors.cs" />
     <Compile Include="QIO\QMetadata.cs" />
     <Compile Include="QIO\FilesTransferer_Fields.cs" />
+    <Compile Include="QCore\IConvert_StringToBytesArray.cs" />
+    <Compile Include="QCore\IConvert_BytesToString.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

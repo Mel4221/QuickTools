@@ -40,7 +40,18 @@ namespace QuickTools.QIO
         /// Gets or sets the size of the chuncks , by default is set to 10MB
         /// </summary>
         /// <value>The size of the chuncks.</value>
-        public int ChuncksSize { get; set; } = 1024*1024*10;
+        public int ChunksSize { get; set; } = 1024*1024*10;
+
+        /// <summary>
+        /// Gets or sets the chunks size on .
+        /// </summary>
+        /// <value>The chunks size on mb.</value>
+        public string ChunksGenericSize { get; set; } = String.Empty; 
+        /// <summary>
+        /// Gets or sets the chunk count.
+        /// </summary>
+        /// <value>The chunk count.</value>
+        public int ChunkCount { get; set; } = 0; 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QTester.FileChoper.Metadata"/> is encrypted.
         /// </summary>
@@ -65,13 +76,17 @@ namespace QuickTools.QIO
         {
             return $"File Name: {this.Name}\n" +
                    $"File Hash: {this.Hash}\n" +
+                   $"File Size: {this.Size}\n" +
+                   $"Chunk Generic Size: {this.ChunksGenericSize}\n" +
+                   $"Modified: {this.LastModified}\n" +
+                   $"Is Encrypted: {this.IsEncrypted}\n" +
+                   $"Comment: {this.Comment}\n" +
                    $"From: {this.From}\n" +
                    $"Until: {this.Until}\n" +
-                   	$"File Length: {this.Length}\n" +
-               		$"File Size: {this.Size}\n" +
-                   $"Chunck Size: {this.ChuncksSize}\n" +
-                   $"Is Encrypted: {this.IsEncrypted}\n" +
-                   	$"Comment: {this.Comment}";
+                   $"File Length: {this.Length}\n" +
+                   $"Chunk Size: {this.ChunksSize}\n" +
+                   $"Chunk Count: {this.ChunkCount}";
+
         }
     }
 }

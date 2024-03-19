@@ -25,6 +25,7 @@ namespace QuickTools.QIO
         public void TransferFile(string source, string target)
         {
 
+            this.CurrentStatus = $"{source}"+ "->"+$"{target}";
             if (this.AllowDebugger)
             {
                 Get.Print($"{source}", "->", $"{target}");
@@ -36,7 +37,8 @@ namespace QuickTools.QIO
             MiniDB db = new MiniDB(transfer_info);
             Check check = new Check();
 
-            Get.Yellow($"Computing a Hascode for the File: {source}");
+            this.CurrentStatus = $"Computing a Hascode for the File: {source}";
+            if (this.AllowDebugger)Get.Yellow(this.CurrentStatus);
             string fileHash = new Get().HashCodeFromFile(source,true).ToString();
 
 

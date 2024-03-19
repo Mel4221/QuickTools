@@ -124,7 +124,7 @@ namespace QuickTools.QSecurity
                     Get.WaitTime(PrintingTime);
                 }
 
-                Binary.Writer(file, binary);
+                Binary.Writer(file, Get.Bytes(IConvert.BytesToString(binary)));
                 message = $"{file} Sucessfully Encrypted!!! \nEncrypting Time: {check.Stop()}";
                 if (this.AllowDebugger)
                 {
@@ -159,8 +159,7 @@ namespace QuickTools.QSecurity
             }
             byte[] bytes, pass;
             string data, message;
-
-            bytes = Binary.Reader(file);
+            bytes = IConvert.StringToBytesArray(IConvert.ToString(Binary.Reader(file)),this.AllowDebugger);//binary.BufferList.ToArray();//IConvert.StringToBytesArray(Reader.Read(file));
             message = $"File Size: {Get.FileSize(bytes)} & Creatting password...";
             if (this.AllowDebugger)
             {

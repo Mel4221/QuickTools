@@ -189,7 +189,10 @@ namespace QuickTools.QData
         /// <param name="key">Key.</param>
         public Key GetKey(string key)
         {
-            this.Keys = this.ReadKeys();
+            if(this.Keys.Count == 0)
+            {
+                this.Keys = this.ReadKeys();
+            }
             foreach (Key k in this.Keys)
             {
                 if (k.Name == key)
@@ -413,14 +416,20 @@ namespace QuickTools.QData
         /// <param name="keys">Keys.</param>
         public void WriteKeys(string fileName, ref List<Key> keys)
         {
+
             //this.builder = new StringBuilder();
             if (keys.Count == 0) throw new ArgumentException("No Keys were provided!!!");
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
             List<Key> stats = new List<Key>();
             try
             {
+                GC.Collect();
                 using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
+                    if (stream.CanWrite)
+                    {
+                         //do something here 
+                    }
                     int current, goal;
                     byte[] buffer = new byte[0];
                     long indexer = 0;
@@ -487,20 +496,22 @@ namespace QuickTools.QData
                 }
                 */
             }
-            catch (AccessViolationException e)
-            {
-                Thread.Sleep(10);
-                if (this.AllowDebugger)
-                {
-                    Get.Yellow(e.Message);
-                }
-                this.WriteKeys(fileName, ref keys);
-            }
+            /*
+              catch (AccessViolationException e)
+              {
+                  Thread.Sleep(10);
+                  if (this.AllowDebugger)
+                  {
+                      Get.Yellow(e.Message);
+                  }
+                  this.WriteKeys(fileName, ref keys);
+              }  
+            */
             catch (Exception ex)
             {
                 if (this.AllowDebugger)
                 {
-                    Get.Red(ex);
+                    Get.Red(ex.Message);
                 }
             }
         }
