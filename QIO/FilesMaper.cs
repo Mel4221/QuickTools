@@ -77,102 +77,58 @@ namespace QuickTools.QIO
         public string[] GetDirs(string path) => Directory.GetDirectories(path);
             
 
-            private void ProcessDirectory(string targetDirectory)
-            {
-            if (this.AllowDebugger)
-            {
-                Get.Blue(targetDirectory);
-            }
 
-                this.Directories.Add(targetDirectory);
-
-                // Process the list of files found in the directory.
-            string[] fileEntries;
-            try
-            {
-                fileEntries = this.GetFiles(targetDirectory);
+         
 
 
-                foreach (string fileName in fileEntries)
-                {
-
-                    ProcessFile(fileName);
-                }
-
-                // Recurse into subdirectories of this directory.
-                try
-                {
-                    string[] subdirectoryEntries = this.GetDirs(targetDirectory);
-                    foreach (string subdirectory in subdirectoryEntries)
-                    {
-
-                        ProcessDirectory(subdirectory);
-                        // Get.Blue(subdirectory);
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string error = $"File Error: {ex.Message}";
-                    if (this.AllowDebugger)
-                    {
-                        Get.Red(error);
-                    }
-
-
-                    this.FileErrors.Add(error);
-
-                }
-            }
-            catch(Exception ex)
-            {
-                string error = $"Directory Error: {ex.Message}";
-                if (this.AllowDebugger)
-                {
-                    Get.Red(error);
-                }
-                this.DirectoriesError.Add(error);
-            }
+        private string[] Ignore { get; set; }
+        private void MatchCase(string path)
+        {
+           
         }
-              void ProcessFile(string path)
-            {
-            if (this.AllowDebugger)
-            {
-                Get.Yellow(path);
-            }
-              //  Get.Yellow(path);
-                this.Files.Add(path);
-            }
+        /// <summary>
+        /// Map the specified ignore.
+        /// </summary>
+        /// <param name="ignore">Ignore.</param>
+        void Map(string[] ignore)
+        {
+            this.Map();
+            this.Ignore = ignore;
+        }
+
 
         /// <summary>
         /// This search recursivly for files that match the given file extention
         /// </summary>
         /// <returns></returns>
-        public List<string> MapOnlyFiles(string fileExtention)
+        public List<string> MapOnlyFiles(string[] fileExtentiontypes)
         {
-
-            if (fileExtention == null || fileExtention == "" )
-            {
-                throw new ArgumentException($"The Given file extention is not valid {fileExtention} ");
-            }
-
+ 
             FilesMaper map = new FilesMaper(this.Path);
+
             List<string> files = new List<string>();
+
             map.Map();
            if(map.Files.Count != 0)
             {
                 for (int f = 0; f < map.Files.Count; f++)
                 {
-                    if (Get.FileExention(map.Files[f]) == Get.FileExention(fileExtention))
+                    foreach(string type in fileExtentiontypes)
                     {
-                        files.Add(map.Files[f]);
-                        if (this.AllowDebugger)
+                        if(type == Get.FileExention(map.Files[f]))
                         {
-                            Get.Yellow(map.Files[f]);
+                            files.Add(map.Files[f]);
+                            if (this.AllowDebugger)
+                            {
+                                Get.Yellow(map.Files[f]);
+                            }
+
                         }
                     }
+                 
                 }
             }
+            this.Files = files; 
             return files; 
         }
         /// <summary>
@@ -197,6 +153,7 @@ namespace QuickTools.QIO
                 }
                 foreach(string path in this.GetDirs(this.Path))
                 {
+                   
                     if (Directory.Exists(path))
                     {
                         ProcessDirectory(path);

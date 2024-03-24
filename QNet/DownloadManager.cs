@@ -95,6 +95,29 @@ namespace QuickTools.QNet
             }
 
             }
+        /// <summary>
+        /// Download the specified address, fileName and debugger.
+        /// </summary>
+        /// <param name="address">Address.</param>
+        /// <param name="fileName">File name.</param>
+        /// <param name="debugger">If set to <c>true</c> debugger.</param>
+        public static void Download(string address , string fileName, bool debugger)
+        {
+            using (WebClient client = new WebClient())
+            {
+                DownloadManager manager = new DownloadManager();
+                 client.UseDefaultCredentials = true;
+
+                Uri Uri = new Uri(address);
+                manager._completed = false;
+
+                client.DownloadFileCompleted += new AsyncCompletedEventHandler(manager.Completed);
+                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(manager.DownloadProgress);
+
+                client.DownloadFileAsync(Uri, fileName);
+                while (client.IsBusy) { }
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.

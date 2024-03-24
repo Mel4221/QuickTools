@@ -21,7 +21,16 @@ namespace QuickTools.QIO
         /// Collect All The Current Files Error that are encountered by the maper 
         /// </summary>
         public List<string> FileErrors;
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesMaper"/> ignore hidden files.
+        /// </summary>
+        /// <value><c>true</c> if ignore hidden files; otherwise, <c>false</c>.</value>
+        public bool IgnoreHiddenFiles { get; set; } = false;
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesMaper"/> ignore hidden directorys.
+        /// </summary>
+        /// <value><c>true</c> if ignore hidden directorys; otherwise, <c>false</c>.</value>
+        public bool IgnoreHiddenDirectorys { get; set; } = false; 
         /// <summary>
         /// Collect All The Current Files Error that are encountered by the maper 
         /// </summary>

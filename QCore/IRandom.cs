@@ -722,7 +722,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>byte[] array </returns>
         /// <param name="autoSave">If set to <c>true</c> auto save.</param>
-        public static byte[] RandomByteKey(bool autoSave)
+         static byte[] RandomByteKey(bool autoSave)
         {
             // if is not added the bool type will just return 
             // a full of 0 byes
@@ -739,7 +739,7 @@ namespace QuickTools.QCore
             // location data/qt/secure.key
             if (autoSave == true)
             {
-                Get.SaveKey();
+                //Get.SaveKey();
 
             }
 

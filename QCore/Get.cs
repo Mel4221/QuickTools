@@ -50,6 +50,65 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
+        /// <summary>
+        /// Gets the root depth.
+        /// </summary>
+        /// <returns>The root depth.</returns>
+        /// <param name="path">Path.</param>
+        public static int GetRootDepth(string path)
+        {
+            int depth;
+            depth = 0;
+            string temp = path;
+            if (string.IsNullOrEmpty(path)) throw new InvalidDataException($"The given path is either incomplete,missing or not well formated [{path}]");
+
+            if (path.Length == 1 && path[0] == Get.SlashChar()) return depth;
+
+            if (path[path.Length - 1] == Get.SlashChar())
+            {
+                temp = path.Substring(0, path.Length - 1);
+            }
+            foreach (char ch in temp)
+            {
+                depth++;
+            }
+            return depth;
+        }
+
+        /// <summary>
+        /// Gets the dir only.
+        /// </summary>
+        /// <returns>The dir only.</returns>
+        /// <param name="path">Path.</param>
+        public static string GetDirOnly(string path)
+        {
+            string dir = path;
+            if (string.IsNullOrEmpty(path)) throw new InvalidDataException($"The given path is either incomplete,missing or not well formated [{path}]");
+
+            if (path[path.Length - 1] == Get.SlashChar())
+            {
+                dir = path.Substring(0, path.Length - 1);
+            }
+            dir = dir.Substring(dir.LastIndexOf(Get.SlashChar()) + 1);
+            //Get.Red($"Dir: [{dir}]");
+            return dir;
+        }
+        /// <summary>
+        /// Gets the sub path.
+        /// </summary>
+        /// <returns>The sub path.</returns>
+        /// <param name="root">Root.</param>
+        /// <param name="fileOrDir">File or dir.</param>
+        public static string GetSubPath(string root, string fileOrDir)
+        {
+            string item, top;
+
+            item = fileOrDir;
+            top = GetDirOnly(root);
+            item = top + item.Substring(GetRootDepth(root));
+            return item;
+        }
+
 
         /// <summary>
         /// Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
@@ -1271,6 +1330,11 @@ namespace QuickTools.QCore
         /// <summary>
         /// Returns the Slash '/' apropiet for the current OS in use
         /// </summary>
+        /// <returns>The char.</returns>
+        public static char SlashChar() => Slash()[0];
+        /// <summary>
+        /// Returns the Slash '/' apropiet for the current OS in use
+        /// </summary>
         /// <returns>The slash.</returns>
         public static string Slash()
         {
@@ -1293,7 +1357,7 @@ namespace QuickTools.QCore
         /// and adding the parameter the bool true 
         /// for it to auto save the key 
         /// </summary>
-        public static void SaveKey()
+        static void SaveKey()
         {
             //string path, keyFile, qtDir;
 
@@ -1304,8 +1368,6 @@ namespace QuickTools.QCore
             }
             else
             {
-
-
                 using (FileStream file = File.Create(keyFile))
                 {
 
@@ -1317,8 +1379,6 @@ namespace QuickTools.QCore
                         }
                     }
                 }
-
-
             }
 
 

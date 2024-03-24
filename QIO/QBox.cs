@@ -32,7 +32,7 @@ using QuickTools.QData;
 
 namespace QuickTools.QIO
 {
-    public class QBox
+     class QBox
     {
         public string QBoxName { get; set; } = "Pack.qbox";
         public string FileName { get; set; } = "";
