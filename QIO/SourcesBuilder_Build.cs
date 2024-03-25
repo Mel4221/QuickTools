@@ -28,8 +28,9 @@ namespace QuickTools.QIO
             dirs = () =>
             {
                 List<Package.Directorys> d = new List<Package.Directorys>();
-                d.Add(new Package.Directorys() { Name = Get.GetDirOnly(this.Source) });
-                Get.Wait(Get.GetDirOnly(this.Source));
+                //adding the root direcotory or the sourcebuilder db name
+                //d.Add(new Package.Directorys() { Name = Get.GetDirOnly(this.Source) });
+                //Get.Wait(Get.GetDirOnly(this.Source));
                 this.Maper.Directories.ForEach((item) =>
                 {
                      
@@ -46,15 +47,17 @@ namespace QuickTools.QIO
             {
                 List<Package.Files> f = new List<Package.Files>();
                 this.Maper.Files.ForEach((item) => {
-                    length += new FileStream(item, FileMode.Open, FileAccess.Read).Length;
+                    long l = new FileStream(item, FileMode.Open, FileAccess.Read).Length;
+                    length += l;
 
-                     
+
                     //Get.Red($"FILE: [{_}]");
                     f.Add(new Package.Files()
                     {
                         Name = Get.GetSubPath(this.Source, item),//Get.GetSubPath(this.Source,item),
                         Hash = new Get().HashCodeFromFile(item, this.AllowDeubbuger).ToString(),
-                        Size = Get.FileSize(item)
+                        Size = Get.FileSize(item),
+                        Length = l.ToString() 
                     });
                 });
                 return f;

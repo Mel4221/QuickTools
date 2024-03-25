@@ -4868,6 +4868,12 @@
             </summary>
             <value>The hash.</value>
         </member>
+        <member name="P:QuickTools.QIO.Package.Files.Length">
+            <summary>
+            Gets or sets the length.
+            </summary>
+            <value>The length.</value>
+        </member>
         <member name="M:QuickTools.QIO.Package.Files.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Dependencys.Files"/>.

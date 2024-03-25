@@ -25,10 +25,15 @@ namespace QuickTools.QIO
                 /// <value>The hash.</value>
                 public string Hash { get; set; } = "NOT-GIVEN";
                 /// <summary>
+                /// Gets or sets the length.
+                /// </summary>
+                /// <value>The length.</value>
+                public string Length { get; set; } = "NOT-GIVEN";
+                /// <summary>
                 /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Dependencys.Files"/>.
                 /// </summary>
                 /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Dependencys.Files"/>.</returns>
-                public override string ToString() => $"FILE: [{this.Name}] SIZE: [{this.Size}] HASH: [{this.Hash}]";
+                public override string ToString() => $"FILE: [{this.Name}] SIZE: [{this.Size}] HASH: [{this.Hash}] LENGTH: [{this.Length}]";
                 /// <summary>
                 /// Clear this instance.
                 /// </summary>

@@ -52,7 +52,7 @@ namespace QuickTools.QIO
                     {
                         //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                         //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
-                        package.DependencyFiles.Add(file);
+                        //package.DependencyFiles.Add(file);
                         this.Packages.Add(package);
                         package = new Package(); 
                         //file.Clear();
@@ -88,6 +88,12 @@ namespace QuickTools.QIO
                             {
                                 package.DependencyDirs.Add(new Package.Directorys(){Name=db.DataBase[item].Value });
                             }
+                            /*
+                                db.AddKeyOnHot("DEPENDENCY-FILE", file.Name, package.Id);
+                                db.AddKeyOnHot("DEPENDENCY-HASH", file.Hash, file.Name);
+                                db.AddKeyOnHot("DEPENDENCY-SIZE", file.Size, file.Name);
+                                db.AddKeyOnHot("DEPENDENCY-LENGTH",file.Length, file.Name);
+                            */
                             if (db.DataBase[item].Key == "DEPENDENCY-FILE" && db.DataBase[item].Value != "")
                             {
                                 //file.Clear(); 
@@ -101,8 +107,11 @@ namespace QuickTools.QIO
                             if (db.DataBase[item].Key == "DEPENDENCY-SIZE")
                             {
                                 file.Size = db.DataBase[item].Value;
-                                package.DependencyFiles.Add(file);
                                 // file.Clear();
+                            }if(db.DataBase[item].Key == "DEPENDENCY-LENGTH")
+                            {
+                                file.Length = db.DataBase[item].Value;
+                                package.DependencyFiles.Add(file);
                             }
                             break;
 
@@ -110,7 +119,7 @@ namespace QuickTools.QIO
                 }
                 //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                 //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
-                package.DependencyFiles.Add(file);
+                //package.DependencyFiles.Add(file);
                 if(this.AllowDeubbuger)Get.Yellow($"Before Adding:\n{package.ToString()}");
                 //package.DependencyFiles.ForEach(item => Get.Yellow(item.ToString()));
                 this.Packages.Add(package);

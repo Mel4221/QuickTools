@@ -46,6 +46,7 @@ namespace QuickTools.QIO
                                 db.AddKeyOnHot("DEPENDENCY-FILE", file.Name, package.Id);
                                 db.AddKeyOnHot("DEPENDENCY-HASH", file.Hash, file.Name);
                                 db.AddKeyOnHot("DEPENDENCY-SIZE", file.Size, file.Name);
+                                db.AddKeyOnHot("DEPENDENCY-LENGTH",file.Length, file.Name);
 
                                 this.CurrentStatus = $"DEPENDENCY-FILE: [{file.Name}]";
                                 if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
