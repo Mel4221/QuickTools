@@ -3715,7 +3715,9 @@
         </member>
         <member name="M:QuickTools.QIO.FilesMaper.Map(System.String[])">
             <summary>
-            Map the specified ignore.
+            Search requirsively for files and ignore the given files 
+            that does not meet the file extention given it only requires
+            a file extention on the falowing way like {txt,pdf,xml}
             </summary>
             <param name="ignore">Ignore.</param>
         </member>
@@ -4902,92 +4904,126 @@
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
         </member>
-        <member name="T:QuickTools.QIO.SourcesBuilder">
+        <member name="T:QuickTools.QIO.BinBuilder">
             <summary>
             Sources builder.
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.SourcesBuilder.Add(QuickTools.QIO.Package)">
+        <member name="M:QuickTools.QIO.BinBuilder.Add(QuickTools.QIO.Package)">
             <summary>
             Add the specified package.
             </summary>
             <param name="package">Package.</param>
         </member>
-        <member name="M:QuickTools.QIO.SourcesBuilder.Delete(System.String)">
+        <member name="M:QuickTools.QIO.BinBuilder.Delete(System.String)">
             <summary>
             Delete the specified packageName.
             </summary>
             <param name="packageName">Package name.</param>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.FileName">
+        <member name="P:QuickTools.QIO.BinBuilder.FileName">
             <summary>
             Gets or sets the name of the file.
             </summary>
             <value>The name of the file.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.Source">
+        <member name="P:QuickTools.QIO.BinBuilder.Source">
             <summary>
             Gets or sets the source path.
             </summary>
             <value>The source path.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.AllowDeubbuger">
+        <member name="P:QuickTools.QIO.BinBuilder.AllowDeubbuger">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.SourcesBuilder"/> allow deubbuger.
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> allow deubbuger.
             </summary>
             <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.CurrentStatus">
+        <member name="P:QuickTools.QIO.BinBuilder.CurrentStatus">
             <summary>
             Gets or sets the current status.
             </summary>
             <value>The current status.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.DeletePrevious">
+        <member name="P:QuickTools.QIO.BinBuilder.DeletePrevious">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.SourcesBuilder"/> delete previous.
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> delete previous.
             </summary>
             <value><c>true</c> if delete previous; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.IgnoreHiddenFiles">
+        <member name="P:QuickTools.QIO.BinBuilder.IgnoreHiddenFiles">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesMaper"/> ignore hidden files.
             </summary>
             <value><c>true</c> if ignore hidden files; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.IgnoreHiddenDirectorys">
+        <member name="P:QuickTools.QIO.BinBuilder.IgnoreHiddenDirectorys">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesMaper"/> ignore hidden directorys.
             </summary>
             <value><c>true</c> if ignore hidden directorys; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.Maper">
+        <member name="P:QuickTools.QIO.BinBuilder.FilterFilesExtentions">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> filter files extentions.
+            </summary>
+            <value><c>true</c> if filter files extentions; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:QuickTools.QIO.BinBuilder.AllowedFilesExtentions">
+            <summary>
+            Gets or sets the allowed files extentions.
+            By default the only suported files are the fallowing: "txt","xml","dll","exe","clown","ico","html","js","css"
+            </summary>
+            <value>The allowed files extentions.</value>
+        </member>
+        <member name="P:QuickTools.QIO.BinBuilder.Maper">
             <summary>
             Gets or sets the maper.
             </summary>
             <value>The maper.</value>
         </member>
-        <member name="P:QuickTools.QIO.SourcesBuilder.Packages">
+        <member name="P:QuickTools.QIO.BinBuilder.Packages">
             <summary>
             Gets or sets the packages.
             </summary>
             <value>The packages.</value>
         </member>
-        <member name="M:QuickTools.QIO.SourcesBuilder.Load">
+        <member name="P:QuickTools.QIO.BinBuilder.SourceType">
+            <summary>
+            Gets or sets the type of the source.
+            </summary>
+            <value>The type of the source.</value>
+        </member>
+        <member name="T:QuickTools.QIO.BinBuilder.Sourcetype">
+            <summary>
+            Sources.
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.BinBuilder.Sourcetype.Github">
+            <summary>
+            From the regular github page
+            </summary>
+        </member>
+        <member name="F:QuickTools.QIO.BinBuilder.Sourcetype.Server">
+            <summary>
+            From a regular server.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.BinBuilder.Load">
             <summary>
             Load this instance.
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.SourcesBuilder.Build(QuickTools.QIO.Package)">
+        <member name="M:QuickTools.QIO.BinBuilder.Build(QuickTools.QIO.Package)">
             <summary>
             Build the Sources.
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.SourcesBuilder.ToString">
+        <member name="M:QuickTools.QIO.BinBuilder.ToString">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.SourcesBuilder"/>.
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.
             </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.SourcesBuilder"/>.</returns>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.</returns>
         </member>
         <member name="T:QuickTools.QIO.QMetadata">
             <summary>

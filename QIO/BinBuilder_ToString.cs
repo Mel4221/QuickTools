@@ -3,12 +3,12 @@ using System.Text;
 
 namespace QuickTools.QIO
 {
-    public partial class SourcesBuilder
+    public partial class BinBuilder
     {
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.SourcesBuilder"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.
         /// </summary>
-        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.SourcesBuilder"/>.</returns>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.</returns>
         public override string ToString()
         {
             Func<string> report = () => 

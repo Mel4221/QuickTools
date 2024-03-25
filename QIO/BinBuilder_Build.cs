@@ -6,7 +6,7 @@ using QuickTools.QCore;
 using QuickTools.QData;
 namespace QuickTools.QIO
 {
-    public partial class SourcesBuilder
+    public partial class BinBuilder
     {
 
         /// <summary>
@@ -21,7 +21,8 @@ namespace QuickTools.QIO
             this.Maper.AllowDebugger = this.AllowDeubbuger;
             this.Maper.IgnoreHiddenDirectorys = this.IgnoreHiddenDirectorys;
             this.Maper.IgnoreHiddenFiles = this.IgnoreHiddenFiles;
-            this.Maper.Map();
+            if (this.FilterFilesExtentions) this.Maper.Map(this.AllowedFilesExtentions);
+            if(!this.FilterFilesExtentions) this.Maper.Map();
             long length = 0;
             Func<List<Package.Files>> files;
             Func<List<Package.Directorys>> dirs;
@@ -29,7 +30,7 @@ namespace QuickTools.QIO
             {
                 List<Package.Directorys> d = new List<Package.Directorys>();
                 //adding the root direcotory or the sourcebuilder db name
-                //d.Add(new Package.Directorys() { Name = Get.GetDirOnly(this.Source) });
+                d.Add(new Package.Directorys() { Name = Get.GetDirOnly(this.Source) });
                 //Get.Wait(Get.GetDirOnly(this.Source));
                 this.Maper.Directories.ForEach((item) =>
                 {
@@ -46,11 +47,17 @@ namespace QuickTools.QIO
             files = () =>
             {
                 List<Package.Files> f = new List<Package.Files>();
+
                 this.Maper.Files.ForEach((item) => {
                     long l = new FileStream(item, FileMode.Open, FileAccess.Read).Length;
                     length += l;
 
-
+                    /*
+                     string path = Get.GetSubPath("/home/mel/Documents/csharp/QuickTools/", "/home/mel/Documents/csharp/QuickTools/bin");
+                    Get.Yellow($"Path: [{path}] Sub: [{path.Substring(path.IndexOf(Get.SlashChar())+1)}] " +
+                    $"Root: [{path.Substring(0,path.IndexOf(Get.SlashChar()))}]");
+            
+                    */
                     //Get.Red($"FILE: [{_}]");
                     f.Add(new Package.Files()
                     {

@@ -5,7 +5,7 @@ using QuickTools.QData;
 
 namespace QuickTools.QIO
 {
-    public partial class SourcesBuilder
+    public partial class BinBuilder
     {
         /// <summary>
         /// Gets or sets the name of the file.
@@ -18,7 +18,7 @@ namespace QuickTools.QIO
         /// <value>The source path.</value>
         public string Source { get; set; } = String.Empty;
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.SourcesBuilder"/> allow deubbuger.
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> allow deubbuger.
         /// </summary>
         /// <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
         public bool AllowDeubbuger { get; set; } = false;
@@ -28,7 +28,7 @@ namespace QuickTools.QIO
         /// <value>The current status.</value>
         public string CurrentStatus { get; set; } = String.Empty;
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.SourcesBuilder"/> delete previous.
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> delete previous.
         /// </summary>
         /// <value><c>true</c> if delete previous; otherwise, <c>false</c>.</value>
         public bool DeletePrevious { get; set; } = false;
@@ -43,6 +43,17 @@ namespace QuickTools.QIO
         /// <value><c>true</c> if ignore hidden directorys; otherwise, <c>false</c>.</value>
         public bool IgnoreHiddenDirectorys { get; set; } = true;
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> filter files extentions.
+        /// </summary>
+        /// <value><c>true</c> if filter files extentions; otherwise, <c>false</c>.</value>
+        public bool FilterFilesExtentions { get; set; } = true;
+        /// <summary>
+        /// Gets or sets the allowed files extentions.
+        /// By default the only suported files are the fallowing: "txt","xml","dll","exe","clown","ico","html","js","css"
+        /// </summary>
+        /// <value>The allowed files extentions.</value>
+        public string[] AllowedFilesExtentions { get; set; } = new string[] {"txt","xml","dll","exe","clown","ico","html","js","css"};
+        /// <summary>
         /// Gets or sets the maper.
         /// </summary>
         /// <value>The maper.</value>
@@ -52,5 +63,24 @@ namespace QuickTools.QIO
         /// </summary>
         /// <value>The packages.</value>
         public List<Package> Packages { get; set; } = new List<Package>();
+        /// <summary>
+        /// Gets or sets the type of the source.
+        /// </summary>
+        /// <value>The type of the source.</value>
+        public Sourcetype SourceType { get; set; } = Sourcetype.Github;
+        /// <summary>
+        /// Sources.
+        /// </summary>
+        public enum Sourcetype
+        {
+            /// <summary>
+            /// From the regular github page
+            /// </summary>
+            Github,
+            /// <summary>
+            /// From a regular server.
+            /// </summary>
+            Server
+        }
     }
 }

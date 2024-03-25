@@ -5,7 +5,7 @@ using QuickTools.QCore;
 using QuickTools.QData;
 namespace QuickTools.QIO
 {
-    public partial class SourcesBuilder
+    public partial class BinBuilder
     {
 
         /// <summary>

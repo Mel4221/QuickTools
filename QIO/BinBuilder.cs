@@ -9,7 +9,7 @@ namespace QuickTools.QIO
     /// <summary>
     /// Sources builder.
     /// </summary>
-    public partial class SourcesBuilder
+    public partial class BinBuilder
     {
          
         /// <summary>

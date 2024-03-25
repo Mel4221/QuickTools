@@ -82,18 +82,34 @@ namespace QuickTools.QIO
 
 
         private string[] Ignore { get; set; }
-        private void MatchCase(string path)
-        {
-           
-        }
+      
         /// <summary>
-        /// Map the specified ignore.
+        /// Search requirsively for files and ignore the given files 
+        /// that does not meet the file extention given it only requires
+        /// a file extention on the falowing way like {txt,pdf,xml}
         /// </summary>
         /// <param name="ignore">Ignore.</param>
-        void Map(string[] ignore)
+        public void Map(string[] ignore)
         {
             this.Map();
             this.Ignore = ignore;
+            List<string> files = new List<string>();
+            for(int f = 0; f < this.Files.Count; f++)
+            {
+                foreach (string type in this.Ignore)
+                {
+                    if (type == Get.FileExention(this.Files[f]))
+                    {
+                        files.Add(this.Files[f]);
+                        if (this.AllowDebugger)
+                        {
+                            Get.Yellow($"MATCH FILE EXTENTION: [{this.Files[f]}] TYPE: [{type}]");
+                        }
+
+                    }
+                }
+            }
+            this.Files = files; 
         }
 
 
@@ -103,24 +119,22 @@ namespace QuickTools.QIO
         /// <returns></returns>
         public List<string> MapOnlyFiles(string[] fileExtentiontypes)
         {
- 
-            FilesMaper map = new FilesMaper(this.Path);
 
+            this.Map();
             List<string> files = new List<string>();
 
-            map.Map();
-           if(map.Files.Count != 0)
+            if(this.Files.Count != 0)
             {
-                for (int f = 0; f < map.Files.Count; f++)
+                for (int f = 0; f < this.Files.Count; f++)
                 {
                     foreach(string type in fileExtentiontypes)
                     {
-                        if(type == Get.FileExention(map.Files[f]))
+                        if(type == Get.FileExention(this.Files[f]))
                         {
-                            files.Add(map.Files[f]);
+                            files.Add(this.Files[f]);
                             if (this.AllowDebugger)
                             {
-                                Get.Yellow(map.Files[f]);
+                                Get.Yellow($"MATCH: [{this.Files[f]}]");
                             }
 
                         }
