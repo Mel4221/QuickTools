@@ -143,6 +143,12 @@
     <Compile Include="QIO\FilesMaper_ProcessFiles.cs" />
     <Compile Include="QIO\FilesMaper_ProcessDirectorys.cs" />
     <Compile Include="QIO\FilesMaper_ContainHiddenItems.cs" />
+    <Compile Include="QIO\BinDownloader_Fields.cs" />
+    <Compile Include="QIO\BinDownloader_DownloadPackage.cs" />
+    <Compile Include="QIO\BinDownloader_DownloadSources.cs" />
+    <Compile Include="QIO\BinDownloader_CheckPackageInterity.cs" />
+    <Compile Include="QIO\BinDownloader_CreateDirectorys.cs" />
+    <Compile Include="QIO\BinDownloader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

@@ -40,7 +40,7 @@ namespace QuickTools.QNet
     /// </summary>
     public class DownloadManager
       {
-            
+
 
         /*
 		public void MyDownloadFile(string webUrl, string outputFilePath)
@@ -66,7 +66,86 @@ namespace QuickTools.QNet
 			}
 		}
         */
-		private volatile bool _completed;
+
+        /// <summary>
+        /// Download the specified url, file, length and allowDebugger.
+        /// </summary>
+        /// <param name="url">URL.</param>
+        /// <param name="file">File.</param>
+        /// <param name="length">Length.</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        public static void Download(string url, string file, int length, bool allowDebugger)
+        {
+            int bufferSize = length;
+            string filePath = file;
+
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+            int totalBytes = 0;
+            HttpWebRequest webRequest =
+                (HttpWebRequest)
+                HttpWebRequest.Create(url);
+            long contentLength = webRequest.GetResponse().ContentLength;
+            Console.WriteLine(totalBytes);
+
+            using (WebResponse webResponse = webRequest.GetResponse())
+            using (Stream reader = webResponse.GetResponseStream())
+            using (BinaryWriter fileWriter = new BinaryWriter(File.Create(filePath)))
+            {
+                int bytesRead = 0;
+                byte[] buffer = new byte[bufferSize];
+                do
+                {
+                    bytesRead = reader.Read(buffer, 0, buffer.Length);
+                    totalBytes += bytesRead;
+                    fileWriter.Write(buffer, 0, bytesRead);
+                    if (allowDebugger)
+                    {
+                        // Console.WriteLine("BytesRead: " + bytesRead + " -- TotalBytes: " + totalBytes);
+                        Get.Green(Get.Status(totalBytes, length));
+                    }
+
+                } while (bytesRead > 0);
+            }
+        }
+
+        /// <summary>
+        /// Download the specified url, file and length.
+        /// </summary>
+        /// <param name="url">URL.</param>
+        /// <param name="file">File.</param>
+        /// <param name="length">Length.</param>
+        public static void Download(string url, string file, int length)
+        {
+            int bufferSize = length;
+            string filePath = file;
+
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+            int totalBytes = 0;
+            HttpWebRequest webRequest =
+                (HttpWebRequest)
+                HttpWebRequest.Create(url);
+            long contentLength = webRequest.GetResponse().ContentLength;
+            Console.WriteLine(totalBytes);
+
+            using (WebResponse webResponse = webRequest.GetResponse())
+            using (Stream reader = webResponse.GetResponseStream())
+            using (BinaryWriter fileWriter = new BinaryWriter(File.Create(filePath)))
+            {
+                int bytesRead = 0;
+                byte[] buffer = new byte[bufferSize];
+                do
+                {
+                    bytesRead = reader.Read(buffer, 0, buffer.Length);
+                    totalBytes += bytesRead;
+                    fileWriter.Write(buffer, 0, bytesRead);
+                    Console.WriteLine("BytesRead: " + bytesRead + " -- TotalBytes: " + totalBytes);
+
+                } while (bytesRead > 0);
+            }
+        }
+        private volatile bool _completed;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.DownloadManager"/> allow debugger.
         /// </summary>

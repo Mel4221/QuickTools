@@ -36,8 +36,8 @@ namespace QuickTools.QIO
                         bar.Label = this.CurrentStatus;
                         bar.Display(Get.Status(item, db.DataBase.Count));
                     }
-                    Get.Red($"[{sw}]");
-                    Get.Yellow($"{package.ToString()}");
+                    //Get.Red($"[{sw}]");
+                    //Get.Yellow($"{package.ToString()}");
 
                     /*
                     db.AddKeyOnHot("NAME", package.Name, package.Id);
@@ -120,9 +120,12 @@ namespace QuickTools.QIO
                 //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                 //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
                 //package.DependencyFiles.Add(file);
-                if(this.AllowDeubbuger)Get.Yellow($"Before Adding:\n{package.ToString()}");
+                //if(this.AllowDeubbuger)Get.Yellow($"Before Adding:\n{package.ToString()}");
                 //package.DependencyFiles.ForEach(item => Get.Yellow(item.ToString()));
                 this.Packages.Add(package);
+                if (this.AllowDeubbuger) this.Packages.ForEach((item) => {
+                    Get.Yellow(item.ToString());
+                });
                 //Get.Wait(package.ToString()); 
                 /*
                 this.Packages.Add(new Package() 

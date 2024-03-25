@@ -5108,6 +5108,35 @@
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.</returns>
         </member>
+        <member name="P:QuickTools.QIO.BinDownloader.Errors">
+            <summary>
+            The errors.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QIO.BinDownloader.PrintDelay">
+            <summary>
+            Gets or sets the print delay.
+            </summary>
+            <value>The print delay.</value>
+        </member>
+        <member name="P:QuickTools.QIO.BinDownloader.OutPutPath">
+            <summary>
+            Gets or sets the out put path.
+            </summary>
+            <value>The out put path.</value>
+        </member>
+        <member name="P:QuickTools.QIO.BinDownloader.SourcesURL">
+            <summary>
+            The sources URL.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.BinDownloader.DownloadPackage(System.String)">
+            <summary>
+            Downloads the package.
+            </summary>
+            <param name="package">Package.</param>
+            <exception cref="T:System.Exception">Package not found exeption</exception>
+        </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>
             QMath is a Class that provides auto calculations using plain text to make calculations
@@ -5259,6 +5288,23 @@
             <summary>
             Download manager.
             </summary>
+        </member>
+        <member name="M:QuickTools.QNet.DownloadManager.Download(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Download the specified url, file, length and allowDebugger.
+            </summary>
+            <param name="url">URL.</param>
+            <param name="file">File.</param>
+            <param name="length">Length.</param>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        </member>
+        <member name="M:QuickTools.QNet.DownloadManager.Download(System.String,System.String,System.Int32)">
+            <summary>
+            Download the specified url, file and length.
+            </summary>
+            <param name="url">URL.</param>
+            <param name="file">File.</param>
+            <param name="length">Length.</param>
         </member>
         <member name="P:QuickTools.QNet.DownloadManager.AllowDebugger">
             <summary>

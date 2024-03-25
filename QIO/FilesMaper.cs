@@ -101,11 +101,12 @@ namespace QuickTools.QIO
                     if (type == Get.FileExention(this.Files[f]))
                     {
                         files.Add(this.Files[f]);
+                      
                         if (this.AllowDebugger)
                         {
                             Get.Yellow($"MATCH FILE EXTENTION: [{this.Files[f]}] TYPE: [{type}]");
                         }
-
+                        break;
                     }
                 }
             }
