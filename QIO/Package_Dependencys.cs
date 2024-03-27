@@ -55,10 +55,10 @@ namespace QuickTools.QIO
                 /// </summary>
                 /// <value>The name.</value>
                 public string Name { get; set; }
-            /// <summary>
-            /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
-            /// </summary>
-            /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
+                /// <summary>
+                /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
+                /// </summary>
+                /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
                 public override string ToString() => $"DIR: [{this.Name}]";
 
             }

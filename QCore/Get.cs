@@ -49,7 +49,24 @@ namespace QuickTools.QCore
     /// </summary>
     public partial class Get : Color
     {
-
+        /// <summary>
+        /// add at the end of the path an slash acording if it is missing one
+        /// </summary>
+        /// <returns>The if needs.</returns>
+        /// <param name="path">Path.</param>
+        public static string EndingSlash(string path)
+        {
+            string p = path;
+            if(string.IsNullOrEmpty(p) || string.IsNullOrWhiteSpace(p))
+            {
+                return p; 
+            }if(path.Length == 1)
+            {
+                return p;
+            }
+            p = p[p.Length - 1] == Get.SlashChar() ? p : p + Get.SlashChar();
+            return p; 
+        }
         /// <summary>
         /// Gets the root depth.
         /// </summary>

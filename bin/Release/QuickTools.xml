@@ -1116,6 +1116,13 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.EndingSlash(System.String)">
+            <summary>
+            add at the end of the path an slash acording if it is missing one
+            </summary>
+            <returns>The if needs.</returns>
+            <param name="path">Path.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.GetRootDepth(System.String)">
             <summary>
             Gets the root depth.
@@ -5108,6 +5115,11 @@
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QTester.FileChoper.Metadata"/>.</returns>
         </member>
+        <member name="T:QuickTools.QIO.BinDownloader">
+            <summary>
+            Bin downloader.
+            </summary>
+        </member>
         <member name="P:QuickTools.QIO.BinDownloader.Errors">
             <summary>
             The errors.
@@ -5115,27 +5127,45 @@
         </member>
         <member name="P:QuickTools.QIO.BinDownloader.PrintDelay">
             <summary>
-            Gets or sets the print delay.
+            Gets or sets the print delay for each function called .
             </summary>
             <value>The print delay.</value>
         </member>
         <member name="P:QuickTools.QIO.BinDownloader.OutPutPath">
             <summary>
-            Gets or sets the out put path.
+            Gets or sets the out put path for the package downloaded.
             </summary>
             <value>The out put path.</value>
         </member>
         <member name="P:QuickTools.QIO.BinDownloader.SourcesURL">
             <summary>
-            The sources URL.
+            This is the source used when the method DownloadSource is called to doenload the sources available
             </summary>
         </member>
         <member name="M:QuickTools.QIO.BinDownloader.DownloadPackage(System.String)">
             <summary>
-            Downloads the package.
+            Downloads the package from the given source listed , remember that 
+            if the FileName is not given you should call first DownloadSource to make sure
+            that you get a source to be able to download the package with 
             </summary>
             <param name="package">Package.</param>
             <exception cref="T:System.Exception">Package not found exeption</exception>
+        </member>
+        <member name="M:QuickTools.QIO.BinDownloader.DownloadSources">
+            <summary>
+            Downloads the sources fronm github if there are any available
+            the good thing is that if for some reason the source is not available in github
+            it could also be used to download the source from another server or provider
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.BinDownloader.CheckPackageIntegrity(QuickTools.QIO.Package@)">
+            <summary>
+            Checks the package integrity one by one but if it fails it does not mean that 
+            the package is currpted it just means that the package is not matching on the hash 
+            and it could be due to a recent update so if the current version of QuickTools in the testing version
+            or any other file has recent commits just disregard the red flag
+            </summary>
+            <param name="package">Package.</param>
         </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>

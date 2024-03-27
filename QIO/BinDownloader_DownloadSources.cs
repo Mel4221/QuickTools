@@ -6,7 +6,11 @@ namespace QuickTools.QIO
 {
     public partial class BinDownloader
     {
-
+        /// <summary>
+        /// Downloads the sources fronm github if there are any available
+        /// the good thing is that if for some reason the source is not available in github
+        /// it could also be used to download the source from another server or provider
+        /// </summary>
         public void DownloadSources()
         {
             if (string.IsNullOrEmpty(this.SourcesURL) || string.IsNullOrWhiteSpace(this.SourcesURL)) throw new Exception($"The given sources URL is not valid [{this.SourcesURL}]");

@@ -10,14 +10,16 @@ namespace QuickTools.QIO
     public partial class BinDownloader
     {
         /// <summary>
-        /// Downloads the package.
+        /// Downloads the package from the given source listed , remember that 
+        /// if the FileName is not given you should call first DownloadSource to make sure
+        /// that you get a source to be able to download the package with 
         /// </summary>
         /// <param name="package">Package.</param>
         /// <exception cref="Exception">Package not found exeption</exception>
         public void DownloadPackage(string package)
         {
 
-            if (this.Packages.Count == 0) throw new Exception($"The package database did not load any files are failed to be downloaded");
+            if (this.Packages.Count == 0) throw new Exception($"THE PACKAGE DATABASE DID NOT LOAD ANY PACKAGE");
 
             p = this.GetPackage(package);
 
@@ -39,12 +41,11 @@ namespace QuickTools.QIO
             {
                 try
                 {
-                    string file, link, dfile, root;
+                    string file, link, dfile;
                     file = p.DependencyFiles[item].Name;
                     link = url + file;
-                    root = p.Name;
-                    dfile = $"{this.OutPutPath}{root}{Get.SlashChar()}{file}";
-                    Get.Yellow($"FILE: [{file}]");
+                    dfile = $"{this.OutPutPath}{file}";
+                    Get.Yellow($"FILE: [{Get.FileNameFromPath(file)}]");
                     Get.Green($"LINK: [{link}]");
                     DownloadManager.Download(link, dfile, int.Parse(p.DependencyFiles[item].Length), this.AllowDeubbuger);
                     //bar.Label = $"DOWNLOAD IN PROGRESS: [{url + file}] STATUS: [{Get.Status(item, p.DependencyFiles.Count)}]";
@@ -79,8 +80,6 @@ namespace QuickTools.QIO
                 });
             }
             this.CheckPackageIntegrity(ref p);
-
-
 
             //Get.Title($"Dowloading... [{url}]");
             //downloadManager.DownloadFile(url, Get.FileNameFromPath(url));

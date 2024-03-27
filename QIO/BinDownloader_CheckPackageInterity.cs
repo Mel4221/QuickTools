@@ -5,6 +5,14 @@ namespace QuickTools.QIO
 {
     public partial class BinDownloader
     {
+
+        /// <summary>
+        /// Checks the package integrity one by one but if it fails it does not mean that 
+        /// the package is currpted it just means that the package is not matching on the hash 
+        /// and it could be due to a recent update so if the current version of QuickTools in the testing version
+        /// or any other file has recent commits just disregard the red flag
+        /// </summary>
+        /// <param name="package">Package.</param>
         public void CheckPackageIntegrity(ref Package package)
         {
             this.CurrentStatus = $"CHECKING PACKAGES INTEGRITY...";
@@ -14,12 +22,11 @@ namespace QuickTools.QIO
                 try
                 {
 
-                    string root, fhash, dhash, dfile, file, name;
-                    root = package.Name;
+                    string  fhash, dhash, dfile, file, name;
                     fhash = package.DependencyFiles[item].Hash;
                     file = package.DependencyFiles[item].Name;
-                    dfile = $"{this.OutPutPath}{root}{Get.SlashChar()}{file}";
-                    name = Get.FileNameFromPath(file);
+                    dfile = $"{this.OutPutPath}{file}";
+                    name = Get.FileNameFromPath(dfile);
                     dhash = new Get().HashCodeFromFile(dfile, this.AllowDeubbuger).ToString();
                     bool check = dhash == fhash;
                     string status = check == true ? "PASS" : "FAIL";

@@ -102,7 +102,7 @@ namespace QuickTools.QNet
                     if (allowDebugger)
                     {
                         // Console.WriteLine("BytesRead: " + bytesRead + " -- TotalBytes: " + totalBytes);
-                        Get.Green(Get.Status(totalBytes, length));
+                        Get.Green($"DOWNLOADING [{Get.Status(totalBytes, length)}] [{url}]");
                     }
 
                 } while (bytesRead > 0);
