@@ -56,6 +56,157 @@ namespace QuickTools.QData
             Json
         }
 
+        /// <summary>
+        /// Tos the key list.
+        /// </summary>
+        /// <returns>The key list.</returns>
+        /// <param name="text">Text.</param>
+        public static List<Key> ToKeyList(string text)
+        {
+
+            //if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
+            Check check = new Check();
+            check.Start();
+            //this.Errors = new List<Error>();
+            List<Key> keys = new List<Key>();
+            //this.Keys.Clear();
+            //string key, temp, input;
+            string key, input;
+            StringBuilder temp;
+            int ch, current; //., is2Next;
+            char term, assing;
+            bool idLoaded, isOpen;
+            idLoaded = false;
+            isOpen = false;
+            //isNext = false;
+            current = 0;
+            //is1Next = 0;
+            // int ch = 0;
+            //ch = 0; 
+            //isCMD = false;
+            key = "";
+            temp = new StringBuilder();
+            input = text;//IConvert.ToString(Binary.Reader(keyFile));
+
+            term = new Key().KeyTerminatorChar;
+            assing = new Key().KeyAssingChar;
+
+            QProgressBar bar = new QProgressBar();
+
+            for (ch = 0; ch < input.Length; ch++)
+            {
+                try
+                {
+                    // Get.Write(input[ch]);
+                    current = ch;
+                    ///this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    if (false)
+                    {
+                        //bar.Label = this.CurrentStatus;
+                        //bar.Display(Get.Status(ch, input.Length));
+                    }
+                    if (input[ch] == assing && !isOpen)
+                    {
+                        key = temp.ToString();
+                        temp.Clear();
+                        isOpen = true;
+                        current = IRandom.Pin();
+                        // Get.Blue($"Key Founded: [{key}]");
+                    }
+                    if (input[ch] == term && input[ch + 1] == '\n')
+                    {
+                        //Get.Wait($"{input[ch]} Next: {input[ch+1]} After: {input[ch+2]}");
+
+                        if (true)
+                        {
+                            key = key.Replace(" ", "").Replace("\n", "").Replace("\t", "");
+                            if (key != "#")
+                            {
+                                Key _ = new Key()
+                                {
+                                    Name = key,
+                                    Value = temp.ToString()
+                                };
+                                keys.Add(_);
+                            }
+                            // Get.Green($"KEY VALUE Aquired: {_.ToString()}");
+                        }
+                        /*
+                        if (!idLoaded)
+                        {
+                            idLoaded = true;
+                            int number;
+
+                            bool isValid = int.TryParse(temp.ToString(), out number);
+                            if (key != "QKEYID") isValid = false;
+                            if (false)
+                            {
+                                switch (isValid)
+                                {
+                                    case true:
+                                        Get.Red($"ID LOADED [{temp}]");
+                                        //this.QKeyId = number;
+                                        break;
+                                    case false:
+                                        Get.Red($"\nFailed to load the QKEYID\n");
+
+                                        Get.Beep();
+                                        break;
+                                }
+                            }
+                        }
+                        */
+
+                        //Get.Wait($"{key} : {temp}"); 
+                        temp.Clear();
+                        isOpen = false;
+                        //is2Next = ch + 2;
+                        current = IRandom.Pin();
+
+
+                    }
+                    if (ch == current)//(input[ch] != assing && input[ch] != term)
+                    {
+                        // Get.Yellow($"Appended Char: [{input[ch]}]");
+                        temp.Append(input[ch]);
+                    }
+                }
+                catch //(Exception ex)
+                {
+                    /*
+                    this.Errors.Add(new Error()
+                    {
+                        Message = ex.Message,
+                        Type = $"The Keys were not on the correct format or damaged At the Index: {ch} From: {input.Length}" +
+                        $"\n Key={key} Temp={temp} KeysCount={this.Keys.Count}"
+
+                    });
+                    */
+                }
+
+
+            }
+            //        }
+            //catch(Exception ex)
+            //{
+            //    this.Errors.Add(new Error()
+            //    {
+            //        Message = ex.Message,
+            //        Type = $"The Keys were not on the correct format or damaged At the Sector: {ch}"
+            //    })
+            //    //throw new Exception();
+            //}
+            /*
+            this.FileName = keyFile;
+            if (this.AllowDebugger)
+            {
+                Get.WriteL("\n");
+                Get.Box($"Execution Time: {check.Stop()}");
+            }
+            return this.Keys;
+            */
+            return keys;
+        }
 
 
         /// <summary>
@@ -63,6 +214,7 @@ namespace QuickTools.QData
         /// </summary>
         /// <returns>The key list.</returns>
         /// <param name="text">Text.</param>
+        /// <param name="type">Type.</param>
         public static List<Key> ToKeyList(string text, Key type)
         {
             // string keyFile = this.FileName;
@@ -418,7 +570,11 @@ namespace QuickTools.QData
         {
 
             //this.builder = new StringBuilder();
-            if (keys.Count == 0) throw new ArgumentException("No Keys were provided!!!");
+            if (keys.Count == 0) 
+            {
+                Binary.Writer(fileName, Get.Bytes($"{QKey_Id_Key}{keys[0].KeyAssingChar}{this.QKeyId}{keys[0].KeyTerminatorChar}\n"));
+                return;
+            }
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
             List<Key> stats = new List<Key>();
             try
@@ -555,14 +711,14 @@ namespace QuickTools.QData
             //string key, temp, input;
             string key, input;
             StringBuilder temp;
-            int ch, current, is1Next; //., is2Next;
+            int ch, current; //., is2Next;
             char term, assing;
-            bool idLoaded, isOpen, isNext;
+            bool idLoaded, isOpen;
             idLoaded = false;
             isOpen = false;
-            isNext = false;
+            //isNext = false;
             current = 0;
-            is1Next = 0;
+            //is1Next = 0;
             // int ch = 0;
             //ch = 0; 
             //isCMD = false;

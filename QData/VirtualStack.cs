@@ -163,10 +163,10 @@ namespace QuickTools.QData
 				if (this.Variables[item].Name == variable)
 				{
 					this.Variables[item].Value = newValue;
-					break;
+                    return;
 				}
 			}
-
+            this.SetVariable(variable, newValue);
         }
 
         /// <summary>

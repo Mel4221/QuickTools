@@ -46,7 +46,7 @@ namespace QuickTools.QIO
                     link = url + file;
                     dfile = $"{this.OutPutPath}{file}";
                     Get.Yellow($"FILE: [{Get.FileNameFromPath(file)}]");
-                    Get.Green($"LINK: [{link}]");
+                    Get.Blue($"LINK: [{link}]");
                     DownloadManager.Download(link, dfile, int.Parse(p.DependencyFiles[item].Length), this.AllowDeubbuger);
                     //bar.Label = $"DOWNLOAD IN PROGRESS: [{url + file}] STATUS: [{Get.Status(item, p.DependencyFiles.Count)}]";
                     //bar.Display(Get.Status(item, p.DependencyFiles.Count));

@@ -5,6 +5,7 @@ namespace QuickTools.QIO
 {
     public partial class BinBuilder
     {
+        /*
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.
         /// </summary>
@@ -32,5 +33,6 @@ namespace QuickTools.QIO
             };
             return report();
         }
+        */
     }
 }

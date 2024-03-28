@@ -17,8 +17,16 @@ namespace QuickTools.QIO
             if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
             using (MiniDB db = new MiniDB(this.FileName))
             {
+                db.AllowDebugger = this.AllowDeubbuger;
                 db.Create();
                 db.Load();
+                if(db.DataBase.Count == 0)
+                {
+                    this.CurrentStatus = $"FAILED TO LOAD ANY PCKAGES";
+                    if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
+                    return;
+                }
+
                 int sw = 0;
                 this.Packages.Clear(); 
                 Package package = new Package();

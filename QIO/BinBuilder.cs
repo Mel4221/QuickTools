@@ -35,25 +35,13 @@ namespace QuickTools.QIO
             this.CurrentStatus = $"The package has been added Sucessfully prcoess time: [{check.Stop()}]";
             if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
         }
-        /// <summary>
-        /// Delete the specified packageName.
-        /// </summary>
-        /// <param name="packageName">Package name.</param>
-        public void Delete(string packageName)
-        {
-            this.Load();
-            for(int item =0; item < this.Packages.Count; item++)
-            {
-                if(this.Packages[item].Name == packageName)
-                {
-                    this.Packages.RemoveAt(item);
-                    this.CurrentStatus = $"DELETING PACKAGE: [{this.Packages[item].ToString()}]";
+
+    }
+}
+
+/*
                     if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
                     Get.WaitTime(100);
                     this.Save();
-                    return;
-                }
-            }
-        }
-    }
-}
+
+    */

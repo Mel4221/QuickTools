@@ -149,6 +149,7 @@
     <Compile Include="QIO\BinDownloader_CheckPackageInterity.cs" />
     <Compile Include="QIO\BinDownloader_CreateDirectorys.cs" />
     <Compile Include="QIO\BinDownloader.cs" />
+    <Compile Include="QIO\BinBuilder_Delete.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

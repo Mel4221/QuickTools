@@ -13,7 +13,20 @@ namespace QuickTools.QIO
             using (MiniDB db = new MiniDB(this.FileName))
             {
                 db.Create();
-                db.AllowDebugger = true;
+                db.AllowDebugger = this.AllowDeubbuger;
+                if (this.Packages.Count == 0)
+                {
+                    Binary.Writer(this.FileName, 
+                    Get.Bytes(
+                        $"QKEYID{db.DataManager.KeyAssingChar}" +
+                    	$"{db.DataManager.QKeyId}" +
+                		$"{db.DataManager.KeyTerminatorChar}"));
+                    this.CurrentStatus = $"FAILED TO SAVE THE PCAKGES DUE TO SOURCES BEING EMPTY";
+                    if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
+                    return;
+                }
+
+
                 foreach (Package package in this.Packages)
                 {
                     if (package.Name != "")

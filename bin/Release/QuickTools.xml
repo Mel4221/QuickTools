@@ -3388,12 +3388,20 @@
             provides the file name for the file containing the keys
             </summary>
         </member>
+        <member name="M:QuickTools.QData.QKeyManager.ToKeyList(System.String)">
+            <summary>
+            Tos the key list.
+            </summary>
+            <returns>The key list.</returns>
+            <param name="text">Text.</param>
+        </member>
         <member name="M:QuickTools.QData.QKeyManager.ToKeyList(System.String,QuickTools.QData.Key)">
             <summary>
             Tos the key list.
             </summary>
             <returns>The key list.</returns>
             <param name="text">Text.</param>
+            <param name="type">Type.</param>
         </member>
         <member name="M:QuickTools.QData.QKeyManager.Drop">
             <summary>
@@ -4922,12 +4930,6 @@
             </summary>
             <param name="package">Package.</param>
         </member>
-        <member name="M:QuickTools.QIO.BinBuilder.Delete(System.String)">
-            <summary>
-            Delete the specified packageName.
-            </summary>
-            <param name="packageName">Package name.</param>
-        </member>
         <member name="P:QuickTools.QIO.BinBuilder.FileName">
             <summary>
             Gets or sets the name of the file.
@@ -5026,11 +5028,11 @@
             Build the Sources.
             </summary>
         </member>
-        <member name="M:QuickTools.QIO.BinBuilder.ToString">
+        <member name="M:QuickTools.QIO.BinBuilder.Delete(System.String)">
             <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.
+            Delete the specified packageName.
             </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.BinBuilder"/>.</returns>
+            <param name="packageName">Package name.</param>
         </member>
         <member name="T:QuickTools.QIO.QMetadata">
             <summary>

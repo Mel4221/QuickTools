@@ -15,14 +15,13 @@ namespace QuickTools.QIO
         /// <param name="package">Package.</param>
         public void CheckPackageIntegrity(ref Package package)
         {
-            this.CurrentStatus = $"CHECKING PACKAGES INTEGRITY...";
-            if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
-            for (int item = 0; item < package.DependencyFiles.Count; item++)
+            try
             {
-                try
+                this.CurrentStatus = $"CHECKING PACKAGES INTEGRITY...";
+                if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+                for (int item = 0; item < package.DependencyFiles.Count; item++)
                 {
-
-                    string  fhash, dhash, dfile, file, name;
+                    string fhash, dhash, dfile, file, name;
                     fhash = package.DependencyFiles[item].Hash;
                     file = package.DependencyFiles[item].Name;
                     dfile = $"{this.OutPutPath}{file}";
@@ -31,18 +30,28 @@ namespace QuickTools.QIO
                     bool check = dhash == fhash;
                     string status = check == true ? "PASS" : "FAIL";
 
-                    if (check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}]";
-                    if (!check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}] DUE TO DOES NOT MATCH THE HASH, EXPECTED: [{fhash}] CURRENT: [{dhash}]";
-                    if (check && this.AllowDeubbuger) Get.Green(this.CurrentStatus);
-                    if (!check && this.AllowDeubbuger) Get.Red(this.CurrentStatus);
-                    Get.WaitTime(this.PrintDelay);
-                }
-                catch
-                {
-                    this.CurrentStatus = $"[{item.ToString()}] HAS FAIL THE INTEGRITY CHECK";
-                    if (this.AllowDeubbuger) Get.Red(this.CurrentStatus);
+                    try
+                    {
+
+
+                        if (check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}]";
+                        if (!check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}] DUE TO DOES NOT MATCH THE HASH, EXPECTED: [{fhash}] CURRENT: [{dhash}]";
+                        if (check && this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+                        if (!check && this.AllowDeubbuger) Get.Red(this.CurrentStatus);
+                        Get.WaitTime(this.PrintDelay);
+                    }
+                    catch
+                    {
+                        this.CurrentStatus = $"[{name}] HAS FAIL THE INTEGRITY CHECK";
+                        if (this.AllowDeubbuger) Get.Red(this.CurrentStatus);
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
 
 
         }
