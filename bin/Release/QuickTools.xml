@@ -5226,6 +5226,13 @@
             </summary>
             <param name="package">Package.</param>
         </member>
+        <member name="M:QuickTools.QIO.BinDownloader.GetPackage(System.String)">
+            <summary>
+            Gets the package.
+            </summary>
+            <returns>The package.</returns>
+            <param name="package">Package.</param>
+        </member>
         <member name="T:QuickTools.QMath.QMath">
             <summary>
             QMath is a Class that provides auto calculations using plain text to make calculations

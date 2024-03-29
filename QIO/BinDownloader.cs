@@ -5,7 +5,12 @@ namespace QuickTools.QIO
     public partial class BinDownloader : BinBuilder
     {
 
-        private Package GetPackage(string package)
+        /// <summary>
+        /// Gets the package.
+        /// </summary>
+        /// <returns>The package.</returns>
+        /// <param name="package">Package.</param>
+        public Package GetPackage(string package)
         {
             foreach (Package p in this.Packages)
             {
