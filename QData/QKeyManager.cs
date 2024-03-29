@@ -617,10 +617,11 @@ namespace QuickTools.QData
 
                         for (int item = 0; item < keys.Count; item++)
                         {
-                            this.CurrentStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
+                            this.CurrentTextStatus = $"Writting Keys... Status: [{Get.Status(current, goal)}]";
+                            this.CurrentIntStatus = Get.StatusNumber(item, keys.Count); 
                             if (this.AllowDebugger)
                             {
-                                bar.Label = this.CurrentStatus;
+                                bar.Label = this.CurrentTextStatus;
                                 bar.Display(Get.Status(current, goal));
                                 //stats.Add(new Key() { Name = "status", Value = CurrentStatus});
                             }
@@ -737,10 +738,11 @@ namespace QuickTools.QData
                 {
                     // Get.Write(input[ch]);
                     current = ch;
-                    this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    this.CurrentTextStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    this.CurrentIntStatus = Get.StatusNumber(ch, input.Length); 
                     if (AllowDebugger)
                     {
-                        bar.Label = this.CurrentStatus;
+                        bar.Label = this.CurrentTextStatus;
                         bar.Display(Get.Status(ch, input.Length));
                     }
                     if (input[ch] == assing && !isOpen)
@@ -839,7 +841,10 @@ namespace QuickTools.QData
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
-
+        /// <summary>
+        /// Dispose the specified disposing.
+        /// </summary>
+        /// <param name="disposing">If set to <c>true</c> disposing.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -856,13 +861,9 @@ namespace QuickTools.QData
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~QKeyManager() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
+        /// <summary>
+        /// Releases all resource used by the <see cref="T:QuickTools.QData.QKeyManager"/> object.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.

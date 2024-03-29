@@ -100,6 +100,16 @@ namespace QuickTools.QData
         /// </summary>
         /// <value><c>true</c> if allow debuger; otherwise, <c>false</c>.</value>
         public bool AllowDebugger { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the current text status.
+        /// </summary>
+        /// <value>The current text status.</value>
+        public string CurrentTextStatus { get; set; } = "NOT-STARTED";
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
+        public int CurrentIntStatus { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the dubugger mode.
@@ -129,8 +139,14 @@ namespace QuickTools.QData
         /// </summary>
         public enum MiniDB_Format
         {
+            /// <summary>
+            /// The default.
+            /// </summary>
             Default,
-            Compress
+            /// <summary>
+            /// The compress.
+            /// </summary>
+                Compress
         }
     }
 }

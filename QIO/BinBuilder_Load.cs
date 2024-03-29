@@ -13,8 +13,8 @@ namespace QuickTools.QIO
         /// </summary>
         public void Load()
         {
-            this.CurrentStatus = $"LOADING...";
-            if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+            this.CurrentTextStatus = $"LOADING...";
+            if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
             using (MiniDB db = new MiniDB(this.FileName))
             {
                 db.AllowDebugger = this.AllowDeubbuger;
@@ -22,8 +22,8 @@ namespace QuickTools.QIO
                 db.Load();
                 if(db.DataBase.Count == 0)
                 {
-                    this.CurrentStatus = $"FAILED TO LOAD ANY PCKAGES";
-                    if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
+                    this.CurrentTextStatus = $"FAILED TO LOAD ANY PCKAGES";
+                    if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                     return;
                 }
 
@@ -38,10 +38,11 @@ namespace QuickTools.QIO
                 //Get.Wait(db.DataBase.Count);
                 for (int item = 0; item < db.DataBase.Count; item++)
                 {
-                    this.CurrentStatus = $"READING PACKAGES... {Get.Status(item, db.DataBase.Count)}";
+                    this.CurrentTextStatus = $"READING PACKAGES... {Get.Status(item, db.DataBase.Count)}";
+                    this.CurrentIntStatus = Get.StatusNumber(item, db.DataBase.Count);
                     if (this.AllowDeubbuger)
                     {
-                        bar.Label = this.CurrentStatus;
+                        bar.Label = this.CurrentTextStatus;
                         bar.Display(Get.Status(item, db.DataBase.Count));
                     }
                     //Get.Red($"[{sw}]");
@@ -152,8 +153,8 @@ namespace QuickTools.QIO
                 //file.Clear();
                 //files.Clear();
                 //dirs.Clear();
-                this.CurrentStatus = $"DONE";
-                if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+                this.CurrentTextStatus = $"DONE";
+                if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
             }
         }
     }

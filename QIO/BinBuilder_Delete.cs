@@ -17,8 +17,8 @@ namespace QuickTools.QIO
             this.Load();
             if (this.Packages.Count == 0)
             {
-                this.CurrentStatus = $"FAILED TO DELETE THE PACKAGE EITHER BECAUSE THE SOURCE GIVEN IS EMPTY OR BECAUSE IT WAS NOT ABLE TO LOAD ANY PACKAGES FROM IT";
-                if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
+                this.CurrentTextStatus = $"FAILED TO DELETE THE PACKAGE EITHER BECAUSE THE SOURCE GIVEN IS EMPTY OR BECAUSE IT WAS NOT ABLE TO LOAD ANY PACKAGES FROM IT";
+                if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                 return;
             }
             List<Package> packages = new List<Package>();
@@ -27,8 +27,9 @@ namespace QuickTools.QIO
             {
                 if (this.Packages[item].Name != packageName)
                 {
-                    this.CurrentStatus = $"SAVING PACKAGE: [{this.Packages[item].ToString()}]";
-                    if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+                    this.CurrentTextStatus = $"SAVING PACKAGE: [{this.Packages[item].ToString()}]";
+                    this.CurrentIntStatus = Get.StatusNumber(item, this.Packages.Count); 
+                    if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
                     Package p = new Package();
                     p = this.Packages[item];
                     packages.Add(p);

@@ -25,11 +25,11 @@ namespace QuickTools.QIO
 
             string url;
             url = p.Source;
-            this.CurrentStatus = $"Source: [{url}]";
-            if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+            this.CurrentTextStatus = $"Source: [{url}]";
+            if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
             url = this.ToRaw(url);
-            this.CurrentStatus = $"Creatting Directorys...";
-            if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+            this.CurrentTextStatus = $"Creatting Directorys...";
+            if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
             this.CreateDirectorys(ref p);
             //Get.Blue(blob);
 
@@ -45,8 +45,13 @@ namespace QuickTools.QIO
                     file = p.DependencyFiles[item].Name;
                     link = url + file;
                     dfile = $"{this.OutPutPath}{file}";
-                    Get.Yellow($"FILE: [{Get.FileNameFromPath(file)}]");
-                    Get.Blue($"LINK: [{link}]");
+                    if (this.AllowDeubbuger)
+                    {
+                        Get.Yellow($"FILE: [{Get.FileNameFromPath(file)}]");
+                        Get.Blue($"LINK: [{link}]");
+                    }
+                    this.CurrentIntStatus = Get.StatusNumber(item, p.DependencyFiles.Count);
+                    this.CurrentTextStatus = $"DOWNLOADING [%{this.CurrentIntStatus}] [{Get.FileNameFromPath(dfile)}]";
                     DownloadManager.Download(link, dfile, int.Parse(p.DependencyFiles[item].Length), this.AllowDeubbuger);
                     //bar.Label = $"DOWNLOAD IN PROGRESS: [{url + file}] STATUS: [{Get.Status(item, p.DependencyFiles.Count)}]";
                     //bar.Display(Get.Status(item, p.DependencyFiles.Count));
@@ -72,10 +77,10 @@ namespace QuickTools.QIO
 
             if (this.Errors.Count > 0)
             {
-                this.CurrentStatus = $"SOME PACKAGES HAS FAILED TO BE DOWNLOADED. TOTAL FAIL: [{this.Errors.Count}]";
+                this.CurrentTextStatus = $"SOME PACKAGES HAS FAILED TO BE DOWNLOADED. TOTAL FAIL: [{this.Errors.Count}]";
                 this.Errors.ForEach((error) =>
                 {
-                    this.CurrentStatus += $"\n{error.ToString()}";
+                    this.CurrentTextStatus += $"\n{error.ToString()}";
                     if (this.AllowDeubbuger) Get.Red(error.ToString());
                 });
             }

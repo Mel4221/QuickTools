@@ -34,17 +34,18 @@ namespace QuickTools.QIO
 
                 path = $"{this.OutPutPath}{package.DependencyDirs[item].Name}";
                 exist = Directory.Exists(path);
+                this.CurrentIntStatus = Get.StatusNumber(item, package.DependencyDirs.Count);
                 if (!exist)
                 {
                     GC.Collect();
-                    this.CurrentStatus = $"CREATING DEPENDECY DIR: [{path}]";
-                    if (this.AllowDeubbuger) Get.Blue(this.CurrentStatus);
+                    this.CurrentTextStatus = $"CREATING DEPENDECY DIR: [{path}]";
+                    if (this.AllowDeubbuger) Get.Blue(this.CurrentTextStatus);
                     Directory.CreateDirectory(path);
                     Get.WaitTime(this.PrintDelay);
                 }
                 if (exist)
                 {
-                    this.CurrentStatus = $"OMITTED ALREADY CREATED: [{path}]";
+                    this.CurrentTextStatus = $"OMITTED ALREADY CREATED: [{path}]";
                     if (this.AllowDeubbuger) Get.Blue();
                     Get.WaitTime(this.PrintDelay);
 

@@ -21,8 +21,8 @@ namespace QuickTools.QIO
                         $"QKEYID{db.DataManager.KeyAssingChar}" +
                     	$"{db.DataManager.QKeyId}" +
                 		$"{db.DataManager.KeyTerminatorChar}"));
-                    this.CurrentStatus = $"FAILED TO SAVE THE PCAKGES DUE TO SOURCES BEING EMPTY";
-                    if (this.AllowDeubbuger) Get.Red(this.CurrentStatus); 
+                    this.CurrentTextStatus = $"FAILED TO SAVE THE PCAKGES DUE TO SOURCES BEING EMPTY";
+                    if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                     return;
                 }
 
@@ -44,8 +44,8 @@ namespace QuickTools.QIO
                             foreach (Package.Directorys dir in package.DependencyDirs)
                             {
                                 db.AddKeyOnHot("DEPENDENCY-DIR", dir.Name, package.Id);
-                                this.CurrentStatus = $"DEPENDENCY-DIR: [{dir.Name}]";
-                                if (this.AllowDeubbuger) Get.Blue(this.CurrentStatus);
+                                this.CurrentTextStatus = $"DEPENDENCY-DIR: [{dir.Name}]";
+                                if (this.AllowDeubbuger) Get.Blue(this.CurrentTextStatus);
                             }
                         }
                         if (package.DependencyDirs.Count == 0)
@@ -61,8 +61,8 @@ namespace QuickTools.QIO
                                 db.AddKeyOnHot("DEPENDENCY-SIZE", file.Size, file.Name);
                                 db.AddKeyOnHot("DEPENDENCY-LENGTH",file.Length, file.Name);
 
-                                this.CurrentStatus = $"DEPENDENCY-FILE: [{file.Name}]";
-                                if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+                                this.CurrentTextStatus = $"DEPENDENCY-FILE: [{file.Name}]";
+                                if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
                             }
                         }
                         if (package.DependencyFiles.Count == 0)

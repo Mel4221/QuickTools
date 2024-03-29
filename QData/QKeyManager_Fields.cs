@@ -11,11 +11,8 @@ namespace QuickTools.QData
 
     public partial class QKeyManager : Key
     {
-        /// <summary>
-        /// Gets or sets the current status.
-        /// </summary>
-        /// <value>The current status.</value>
-        public string CurrentStatus { get; set; }
+       
+        //public string CurrentStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the QKey version.
@@ -42,6 +39,16 @@ namespace QuickTools.QData
         /// </summary>
         /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         public bool AllowDebugger { get; set; } = false;
+        /// <summary>
+        /// Gets or sets the current text status.
+        /// </summary>
+        /// <value>The current text status.</value>
+        public string CurrentTextStatus { get; set; } = "NOT-STARTED";
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
+        public int CurrentIntStatus { get; set; } = 0;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> check for not
         /// repeted keys.

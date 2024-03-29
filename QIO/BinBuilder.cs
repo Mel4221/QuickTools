@@ -22,8 +22,8 @@ namespace QuickTools.QIO
             {
                 if (File.Exists(this.FileName)) File.Delete(this.FileName);
             }
-            this.CurrentStatus = $"ADDING PACKAGE: [{package.ToString()}]";
-            if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+            this.CurrentTextStatus = $"ADDING PACKAGE: [{package.ToString()}]";
+            if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
             Check check = new Check();
             check.Start();
             this.Load();
@@ -32,8 +32,8 @@ namespace QuickTools.QIO
             //Get.Wait($"After Build: [{p.ToString()}]");
             this.Packages.Add(p);
             this.Save();
-            this.CurrentStatus = $"The package has been added Sucessfully prcoess time: [{check.Stop()}]";
-            if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+            this.CurrentTextStatus = $"The package has been added Sucessfully prcoess time: [{check.Stop()}]";
+            if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
         }
 
     }

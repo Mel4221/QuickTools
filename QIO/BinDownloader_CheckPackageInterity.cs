@@ -17,8 +17,8 @@ namespace QuickTools.QIO
         {
             try
             {
-                this.CurrentStatus = $"CHECKING PACKAGES INTEGRITY...";
-                if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+                this.CurrentTextStatus = $"CHECKING PACKAGES INTEGRITY...";
+                if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
                 for (int item = 0; item < package.DependencyFiles.Count; item++)
                 {
                     string fhash, dhash, dfile, file, name;
@@ -29,21 +29,21 @@ namespace QuickTools.QIO
                     dhash = new Get().HashCodeFromFile(dfile, this.AllowDeubbuger).ToString();
                     bool check = dhash == fhash;
                     string status = check == true ? "PASS" : "FAIL";
-
+                    this.CurrentIntStatus = Get.StatusNumber(item, package.DependencyFiles.Count);
                     try
                     {
 
 
-                        if (check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}]";
-                        if (!check) this.CurrentStatus = $"FILE: [{name}] CHECK: [{status}] DUE TO DOES NOT MATCH THE HASH, EXPECTED: [{fhash}] CURRENT: [{dhash}]";
-                        if (check && this.AllowDeubbuger) Get.Green(this.CurrentStatus);
-                        if (!check && this.AllowDeubbuger) Get.Red(this.CurrentStatus);
+                        if (check) this.CurrentTextStatus = $"FILE: [{name}] CHECK: [{status}]";
+                        if (!check) this.CurrentTextStatus = $"FILE: [{name}] CHECK: [{status}] DUE TO DOES NOT MATCH THE HASH, EXPECTED: [{fhash}] CURRENT: [{dhash}]";
+                        if (check && this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
+                        if (!check && this.AllowDeubbuger) Get.Red(this.CurrentTextStatus);
                         Get.WaitTime(this.PrintDelay);
                     }
                     catch
                     {
-                        this.CurrentStatus = $"[{name}] HAS FAIL THE INTEGRITY CHECK";
-                        if (this.AllowDeubbuger) Get.Red(this.CurrentStatus);
+                        this.CurrentTextStatus = $"[{name}] HAS FAIL THE INTEGRITY CHECK";
+                        if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus);
                     }
                 }
             }

@@ -7,6 +7,7 @@ namespace QuickTools.QIO
 {
     public partial class BinBuilder
     {
+
         /// <summary>
         /// Gets or sets the name of the file.
         /// </summary>
@@ -26,7 +27,12 @@ namespace QuickTools.QIO
         /// Gets or sets the current status.
         /// </summary>
         /// <value>The current status.</value>
-        public string CurrentStatus { get; set; } = String.Empty;
+        public string CurrentTextStatus { get; set; } = $"NOT-STARTED";
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
+        public int CurrentIntStatus { get; set; } = 0; 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> delete previous.
         /// </summary>

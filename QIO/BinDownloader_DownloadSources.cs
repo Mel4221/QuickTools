@@ -17,17 +17,20 @@ namespace QuickTools.QIO
             string path, file, size;
 
             path = Get.DataPath("sources");
-            this.CurrentStatus = $"CREATTING SOURCES PATH: [{path}]";
-            if (this.AllowDeubbuger) Get.Blue(this.CurrentStatus);
+            this.CurrentIntStatus = 50;
+            this.CurrentTextStatus = $"CREATTING SOURCES PATH: [{path}]";
+            if (this.AllowDeubbuger) Get.Blue(this.CurrentTextStatus);
             file = $"{path}ClownShell.sources";
             Get.Green($"ATTEMPTING TO DOWNLOAD: [{this.SourcesURL}]");
 
             DownloadManager.Download(this.SourcesURL, file, this.AllowDeubbuger);
             size = Get.FileSize(file);
             if (size == "0B") throw new Exception($"SOMETHIG WENT WRONG WHILE TRYING TO DOWNLOAD: [{this.SourcesURL}] FILE SIZE: [{size}]");
-            this.CurrentStatus = $"SOURCES FILE DOWNLOADED SUCESSFULLY FILE: [{file}] SIZE: {size}";
-            if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+            this.CurrentTextStatus = $"SOURCES FILE DOWNLOADED SUCESSFULLY FILE: [{file}] SIZE: {size}";
+            if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
             this.FileName = file;
+            this.CurrentIntStatus = 100;
+            return;
         }
     }
 }

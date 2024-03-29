@@ -36,7 +36,7 @@ namespace QuickTools.QIO
                 link = $"{link}/raw/{branch}/";
                 Get.Green($"Conbined: [{link}]");
             }
-            this.CurrentStatus = $"LINK: {link}";
+            this.CurrentTextStatus = $"LINK: {link}";
             //Get.Yellow(link);
             return link;
         }

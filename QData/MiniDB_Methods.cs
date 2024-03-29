@@ -708,6 +708,8 @@ namespace QuickTools.QData
                     Name = this.Format == MiniDB_Format.Default ? "RELATION": "R",
                     Value = this.DataBase[item].Relation//IConvert.BytesToString(Get.Bytes(this.DataBase[item].Relation))
                 });
+                this.CurrentIntStatus = Get.StatusNumber(item, this.DataBase.Count);//int.Parse(Get.Status(item,this.DataBase.Count).Replace($"%",""));
+                this.CurrentTextStatus = $"Writting... [{Get.Status(item,this.DataBase.Count)}]";
             }
           
             this.DataManager.FileName = this.DBName;
@@ -843,7 +845,8 @@ namespace QuickTools.QData
                                         bar.Display(Get.Status(key, this.DataManager.Keys.Count));
                                         break;
                                      default:
-                                        Get.WriteL($"Parsing Keys: [{Get.Status(key, this.DataManager.Keys.Count - 1)}] {db.ToString()}");
+                                        this.CurrentTextStatus = $"Parsing Keys: [{Get.Status(key, this.DataManager.Keys.Count - 1)}] {db.ToString()}";
+                                        Get.WriteL(this.CurrentTextStatus);
                                         break; 
                                 }
                             }
@@ -852,6 +855,7 @@ namespace QuickTools.QData
                             this.ID++;
                             break;
                     }
+                    this.CurrentIntStatus = Get.StatusNumber(key, this.DataManager.Keys.Count);//int.Parse(Get.Status(key, this.DataManager.Keys.Count).Replace("%",""));
                 }
                 return true;
             }

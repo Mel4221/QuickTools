@@ -511,14 +511,12 @@ namespace QuickTools.QCore
         /// <param name="current"></param>
         /// <param name="goal"></param>
         /// <returns></returns>
-        public static double StatusNumber(object current, object goal)
+        public static int  StatusNumber(object current, object goal)
         {
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
             double s = Math.Round(c / g, 2) * 100;
-
-            return s;
-
+            return int.Parse(s.ToString());
         }
         /*
          Console.BufferHeight
@@ -545,6 +543,16 @@ namespace QuickTools.QCore
         /// </summary>
         /// <value>The current status.</value>
         public static string CurrentStatus { get; set; } = "Nothing-Started";
+        /// <summary>
+        /// Gets or sets the current text status.
+        /// </summary>
+        /// <value>The current text status.</value>
+        public string CurrentTextStatus { get; set; } = "Nothing-Started";
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
+        public int CurrentIntStatus { get; set; } = 0;
         /// <summary>
         /// Gets or sets the public identifier.
         /// </summary>
@@ -600,6 +608,8 @@ namespace QuickTools.QCore
                     {
 
                         bar.Label = status;
+                        this.CurrentTextStatus = status;
+                        this.CurrentIntStatus =Get.StatusNumber(current,goal) ;//int.Parse(Get.Status(current, goal).Replace("%",""));
                         //bar.Clear();
                         bar.Display(Get.Status(current, goal ));
                         //bar.Display(int.Parse(current.ToString()), int.Parse(goal.ToString()));

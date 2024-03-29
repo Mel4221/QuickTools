@@ -15,8 +15,8 @@ namespace QuickTools.QIO
         private Package Build(Package package)
         {
             if (!Directory.Exists(this.Source)) throw new DirectoryNotFoundException($"Source Path was not found: [{this.Source}]");
-            this.CurrentStatus = $"Building in progress...";
-            if (this.AllowDeubbuger) Get.Yellow(this.CurrentStatus);
+            this.CurrentTextStatus = $"Building in progress...";
+            if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
             this.Maper = new FilesMaper(this.Source);
             this.Maper.AllowDebugger = this.AllowDeubbuger;
             this.Maper.IgnoreHiddenDirectorys = this.IgnoreHiddenDirectorys;
@@ -82,8 +82,8 @@ namespace QuickTools.QIO
                 Size = Get.FileSize(length),
                 Description = package.Description
             };
-            this.CurrentStatus = $"Dependencys Build Sucessfully:\n{p.ToString()}";
-            if (this.AllowDeubbuger) Get.Green(this.CurrentStatus);
+            this.CurrentTextStatus = $"Dependencys Build Sucessfully:\n{p.ToString()}";
+            if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
 
             return p;
         }
