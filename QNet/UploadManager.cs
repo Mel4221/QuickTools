@@ -6,6 +6,9 @@ using QuickTools.QCore;
 
 namespace QuickTools.QNet
 {
+    /// <summary>
+    /// Upload manager.
+    /// </summary>
     public class UploadManager
     {
 
@@ -28,7 +31,7 @@ namespace QuickTools.QNet
 
 
 
-        private volatile bool _completed;
+        //private volatile bool _completed;
 
         /// <summary>
         /// Uploads the file.
@@ -43,7 +46,7 @@ namespace QuickTools.QNet
                 client.UseDefaultCredentials = true;
 
                 Uri Uri = new Uri(address);
-                _completed = false;
+               // _completed = false;
                 //AsyncCompletedEventHandler
                 client.UploadFileCompleted += new UploadFileCompletedEventHandler(Completed);
                 client.UploadProgressChanged += new UploadProgressChangedEventHandler(UploadProgressChanged);
@@ -80,7 +83,7 @@ namespace QuickTools.QNet
             //if(this.AllowDebugger)Console.WriteLine("Download completed!");
 
 
-            _completed = true;
+           // _completed = true;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QNet.UploadManager"/> class.

@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QData;
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {
       
         private void Save()
         {
-            using (MiniDB db = new MiniDB(this.FileName))
+            using (QKeyManager db = new QKeyManager(this.FileName))
             {
                 db.Create();
                 db.AllowDebugger = this.AllowDeubbuger;
                 if (this.Packages.Count == 0)
                 {
+                    /*
                     Binary.Writer(this.FileName, 
-                    Get.Bytes(
+                    
+                        Get.Bytes(
                         $"QKEYID{db.DataManager.KeyAssingChar}" +
                     	$"{db.DataManager.QKeyId}" +
                 		$"{db.DataManager.KeyTerminatorChar}"));
+                    */
                     this.CurrentTextStatus = $"FAILED TO SAVE THE PCAKGES DUE TO SOURCES BEING EMPTY";
                     if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                     return;
@@ -31,35 +34,36 @@ namespace QuickTools.QIO
                 {
                     if (package.Name != "")
                     {
-                        db.AddKeyOnHot("NAME", package.Name, package.Id);
-                        db.AddKeyOnHot("ID", package.Id, package.Name);
-                        db.AddKeyOnHot("SIZE", package.Size, package.Id);
-                        db.AddKeyOnHot("CREATOR", package.Creator, package.Id);
-                        db.AddKeyOnHot("DESCRIPTION", package.Description, package.Id);
-                        db.AddKeyOnHot("DATE", package.Date, package.Id);
-                        db.AddKeyOnHot("SOURCE", package.Source, package.Id);
+                        db.AddKey("NAME", package.Name);
+                        db.AddKey("ID", package.Id);
+                        db.AddKey("SIZE", package.Size);
+                        db.AddKey("CREATOR", package.Creator);
+                        db.AddKey("DESCRIPTION", package.Description);
+                        db.AddKey("DATE", package.Date);
+                        db.AddKey("SOURCE", package.Source);
+                        db.AddKey("BRANCH", package.Branch);
                         //Get.Wait($"{package.ToString()}");
                         if (package.DependencyDirs.Count > 0)
                         {
                             foreach (Package.Directorys dir in package.DependencyDirs)
                             {
-                                db.AddKeyOnHot("DEPENDENCY-DIR", dir.Name, package.Id);
+                                db.AddKey("DEPENDENCY-DIR", dir.Name);
                                 this.CurrentTextStatus = $"DEPENDENCY-DIR: [{dir.Name}]";
                                 if (this.AllowDeubbuger) Get.Blue(this.CurrentTextStatus);
                             }
                         }
                         if (package.DependencyDirs.Count == 0)
                         {
-                            db.AddKeyOnHot("DEPENDENCY-DIR", "", package.Id);
+                            db.AddKey("DEPENDENCY-DIR", "");
                         }
                         if (package.DependencyFiles.Count > 0)
                         {
                             foreach (Package.Files file in package.DependencyFiles)
                             {
-                                db.AddKeyOnHot("DEPENDENCY-FILE", file.Name, package.Id);
-                                db.AddKeyOnHot("DEPENDENCY-HASH", file.Hash, file.Name);
-                                db.AddKeyOnHot("DEPENDENCY-SIZE", file.Size, file.Name);
-                                db.AddKeyOnHot("DEPENDENCY-LENGTH",file.Length, file.Name);
+                                db.AddKey("DEPENDENCY-FILE", file.Name);
+                                db.AddKey("DEPENDENCY-HASH", file.Hash);
+                                db.AddKey("DEPENDENCY-SIZE", file.Size);
+                                db.AddKey("DEPENDENCY-LENGTH",file.Length);
 
                                 this.CurrentTextStatus = $"DEPENDENCY-FILE: [{file.Name}]";
                                 if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
@@ -67,12 +71,12 @@ namespace QuickTools.QIO
                         }
                         if (package.DependencyFiles.Count == 0)
                         {
-                            db.AddKeyOnHot("DEPENDENCY-FILE", "", package.Id);
+                            db.AddKey("DEPENDENCY-FILE", "");
                         }
                     }
                    
                 }
-                db.SaveChanges();
+                db.SaveKeys();
                 this.Packages.Clear();
             }
         }

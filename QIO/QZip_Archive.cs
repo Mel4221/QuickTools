@@ -44,6 +44,7 @@ namespace QuickTools.QIO
                   private string ArchiveName;
                   private List<string> FilesList;
                   private List<FileInfo> FilesData;
+                
 
                   /// <summary>
                   /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QZip.Archive"/> create build list.

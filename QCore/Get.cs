@@ -2021,10 +2021,11 @@ character in order for it to return a valid name
                   Console.Clear();                 
             }
 
-
-            static int X;
-            static int Y;
-        public static void Clear(bool everything)
+        /// <summary>
+        /// Clear the specified everything.
+        /// </summary>
+        /// <param name="everything">If set to <c>true</c> everything.</param>
+                     public static void Clear(bool everything)
         {
             if (!everything) return;         
             int x, y;

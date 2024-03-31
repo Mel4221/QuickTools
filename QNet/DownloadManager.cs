@@ -159,19 +159,19 @@ namespace QuickTools.QNet
         public void DownloadFile(string address, string fileName)
             {
 
-            using (WebClient client = new WebClient())
-            {
-                client.UseDefaultCredentials = true;
+                using (WebClient client = new WebClient())
+                {
+                    client.UseDefaultCredentials = true;
 
-                Uri Uri = new Uri(address);
-                _completed = false;
-                                                    
-                client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
+                    Uri Uri = new Uri(address);
+                    _completed = false;
+                                                        
+                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgress);
 
-                client.DownloadFileAsync(Uri, fileName);
-                while (client.IsBusy) { }
-            }
+                    client.DownloadFileAsync(Uri, fileName);
+                    while (client.IsBusy) { }
+                }
 
             }
         /// <summary>

@@ -37,13 +37,7 @@ namespace QuickTools.QIO
       /// </summary>
       public partial class QZip
       {
-            private string FileName;
-            private string Prefix = ".zip"; 
-            private readonly List<string> FileList;
-
-
-            private void Check() {if (this.FileName.Length == 0)throw new Exception("The file was not provided "); }
-
+           
            
 
             /// <summary>
@@ -69,17 +63,7 @@ namespace QuickTools.QIO
                   }
             }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.QZip"/> allow debugger.
-        /// </summary>
-        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
-        public bool AllowDebugger { get; set; } = false;
 
-        /// <summary>
-        /// Gets or sets the status of the current state of the Action either Zip or UnZip are suported
-        /// </summary>
-        /// <value>The status.</value>
-        public string Status { get; set; } = "not-started";
         /// <summary>
         /// Zip the specified archiveName and files.
         /// </summary>
@@ -101,8 +85,9 @@ namespace QuickTools.QIO
                         {
                             archive.CreateEntryFromFile(item, Get.FileNameFromPath(item), CompressionLevel.Optimal);
                             current++;
+                            this.CurrentIntStatus = Get.StatusNumber(current, goal); 
                             status = $"{Get.FileNameFromPath(item)} [OK] [{Get.Status(current, goal)}]";
-                            this.Status = status;
+                            this.CurrentTextStatus = status;
                             if (this.AllowDebugger)
                             {
                                 Get.Yellow(status);
@@ -148,7 +133,8 @@ namespace QuickTools.QIO
                         entry.ExtractToFile(Path.Combine(outPath, entry.FullName),true);
                         current++;
                         status = $"{entry.FullName} [OK] [{Get.Status(current, goal)}]";
-                        this.Status = status;
+                        this.CurrentIntStatus = Get.StatusNumber(current, goal); 
+                        this.CurrentTextStatus = status;
                         if (this.AllowDebugger)
                         {
                             Get.Yellow(status);

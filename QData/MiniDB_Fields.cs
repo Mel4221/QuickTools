@@ -94,7 +94,7 @@ namespace QuickTools.QData
         /// <value>The identifier.</value>
         public int ID { get; set; } = 0;
     
-        XmlDocument Document; // deprecated
+        //XmlDocument Document; // deprecated
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.MiniDB"/> allow debuger.
         /// </summary>

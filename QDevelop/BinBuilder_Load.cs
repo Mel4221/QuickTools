@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QData;
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {
@@ -15,12 +15,12 @@ namespace QuickTools.QIO
         {
             this.CurrentTextStatus = $"LOADING...";
             if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
-            using (MiniDB db = new MiniDB(this.FileName))
+            using (QKeyManager db = new QKeyManager(this.FileName))
             {
                 db.AllowDebugger = this.AllowDeubbuger;
                 db.Create();
-                db.Load();
-                if(db.DataBase.Count == 0)
+                db.ReadKeys();
+                if(db.Keys.Count == 0)
                 {
                     this.CurrentTextStatus = $"FAILED TO LOAD ANY PCKAGES";
                     if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
@@ -36,14 +36,14 @@ namespace QuickTools.QIO
                 //List<string> files, dirs;
 
                 //Get.Wait(db.DataBase.Count);
-                for (int item = 0; item < db.DataBase.Count; item++)
+                for (int item = 0; item < db.Keys.Count; item++)
                 {
-                    this.CurrentTextStatus = $"READING PACKAGES... {Get.Status(item, db.DataBase.Count)}";
-                    this.CurrentIntStatus = Get.StatusNumber(item, db.DataBase.Count);
+                    this.CurrentTextStatus = $"READING PACKAGES... {Get.Status(item, db.Keys.Count)}";
+                    this.CurrentIntStatus = Get.StatusNumber(item, db.Keys.Count);
                     if (this.AllowDeubbuger)
                     {
                         bar.Label = this.CurrentTextStatus;
-                        bar.Display(Get.Status(item, db.DataBase.Count));
+                        bar.Display(Get.Status(item, db.Keys.Count));
                     }
                     //Get.Red($"[{sw}]");
                     //Get.Yellow($"{package.ToString()}");
@@ -57,7 +57,7 @@ namespace QuickTools.QIO
                     db.AddKeyOnHot("DATE", package.Date, package.Id);
                     db.AddKeyOnHot("SOURCE", package.Source, package.Id);
                     */
-                    if (sw == 7 && db.DataBase[item].Key == "NAME")
+                    if (sw == 8 && db.Keys[item].Name == "NAME")
                     {
                         //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                         //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
@@ -72,30 +72,33 @@ namespace QuickTools.QIO
                     switch (sw)
                     {
                         case 0:
-                            package.Name = db.DataBase[item].Value; sw++;
+                            package.Name = db.Keys[item].Value; sw++;
                             break;
                         case 1:
-                            package.Id = db.DataBase[item].Value; sw++;
+                            package.Id = db.Keys[item].Value; sw++;
                             break;
                         case 2:
-                            package.Size = db.DataBase[item].Value; sw++;
+                            package.Size = db.Keys[item].Value; sw++;
                             break;
                         case 3:
-                            package.Creator = db.DataBase[item].Value; sw++;
+                            package.Creator = db.Keys[item].Value; sw++;
                             break;
                         case 4:
-                            package.Description = db.DataBase[item].Value; sw++;
+                            package.Description = db.Keys[item].Value; sw++;
                             break;
                         case 5:
-                            package.Date = db.DataBase[item].Value; sw++;
+                            package.Date = db.Keys[item].Value; sw++;
                             break;
                         case 6:
-                            package.Source = db.DataBase[item].Value; sw++;
+                            package.Source = db.Keys[item].Value; sw++;
+                            break;
+                        case 7:
+                            package.Branch = db.Keys[item].Value; sw++;
                             break;
                         default:
-                            if (db.DataBase[item].Key == "DEPENDENCY-DIR" && db.DataBase[item].Value != "")
+                            if (db.Keys[item].Name == "DEPENDENCY-DIR" && db.Keys[item].Value != "")
                             {
-                                package.DependencyDirs.Add(new Package.Directorys(){Name=db.DataBase[item].Value });
+                                package.DependencyDirs.Add(new Package.Directorys(){Name=db.Keys[item].Value });
                             }
                             /*
                                 db.AddKeyOnHot("DEPENDENCY-FILE", file.Name, package.Id);
@@ -103,37 +106,37 @@ namespace QuickTools.QIO
                                 db.AddKeyOnHot("DEPENDENCY-SIZE", file.Size, file.Name);
                                 db.AddKeyOnHot("DEPENDENCY-LENGTH",file.Length, file.Name);
                             */
-                            if (db.DataBase[item].Key == "DEPENDENCY-FILE" && db.DataBase[item].Value != "")
+                            if (db.Keys[item].Name == "DEPENDENCY-FILE" && db.Keys[item].Value != "")
                             {
                                 //file.Clear(); 
                                 file = new Package.Files(); 
-                                file.Name = db.DataBase[item].Value;
+                                file.Name = db.Keys[item].Value;
                             }
-                            if (db.DataBase[item].Key == "DEPENDENCY-HASH")
+                            if (db.Keys[item].Name == "DEPENDENCY-HASH")
                             {
-                                file.Hash = db.DataBase[item].Value;
+                                file.Hash = db.Keys[item].Value;
                             }
-                            if (db.DataBase[item].Key == "DEPENDENCY-SIZE")
+                            if (db.Keys[item].Name == "DEPENDENCY-SIZE")
                             {
-                                file.Size = db.DataBase[item].Value;
+                                file.Size = db.Keys[item].Value;
                                 // file.Clear();
-                            }if(db.DataBase[item].Key == "DEPENDENCY-LENGTH")
+                            }if(db.Keys[item].Name == "DEPENDENCY-LENGTH")
                             {
-                                file.Length = db.DataBase[item].Value;
+                                file.Length = db.Keys[item].Value;
                                 package.DependencyFiles.Add(file);
                             }
                             break;
 
                     }
+                    //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                 }
-                //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
-                //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
                 //package.DependencyFiles.Add(file);
+                //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
                 //if(this.AllowDeubbuger)Get.Yellow($"Before Adding:\n{package.ToString()}");
                 //package.DependencyFiles.ForEach(item => Get.Yellow(item.ToString()));
                 this.Packages.Add(package);
                 if (this.AllowDeubbuger) this.Packages.ForEach((item) => {
-                    Get.Yellow(item.ToString());
+                    Get.Yellow($"\n{item.ToString()}");
                 });
                 //Get.Wait(package.ToString()); 
                 /*

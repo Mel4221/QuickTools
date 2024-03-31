@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {

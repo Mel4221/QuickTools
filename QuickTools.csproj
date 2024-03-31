@@ -81,7 +81,6 @@
     <Compile Include="QIO\RecursiveFileSearch.cs" />
     <Compile Include="QIO\FilesMaper_Fields.cs" />
     <Compile Include="QIO\FileTrimer.cs" />
-    <Compile Include="QIO\QZip_Archive.cs" />
     <Compile Include="QIO\Binary_Fields.cs" />
     <Compile Include="QIO\FilesMaper_Constructors.cs" />
     <Compile Include="QIO\reader.cs" />
@@ -131,31 +130,33 @@
     <Compile Include="QSecurity\Secure_Constructurs.cs" />
     <Compile Include="QSecurity\Secure_DecryptFile.cs" />
     <Compile Include="QSecurity\Secure_Decrypt.cs" />
-    <Compile Include="QIO\Package.cs" />
-    <Compile Include="QIO\BinBuilder.cs" />
-    <Compile Include="QIO\BinBuilder_Fields.cs" />
     <Compile Include="QIO\QMetadata.cs" />
-    <Compile Include="QIO\BinBuilder_Save.cs" />
-    <Compile Include="QIO\BinBuilder_Load.cs" />
-    <Compile Include="QIO\Package_Dependencys.cs" />
-    <Compile Include="QIO\BinBuilder_Build.cs" />
-    <Compile Include="QIO\BinBuilder_ToString.cs" />
     <Compile Include="QIO\FilesMaper_ProcessFiles.cs" />
     <Compile Include="QIO\FilesMaper_ProcessDirectorys.cs" />
     <Compile Include="QIO\FilesMaper_ContainHiddenItems.cs" />
-    <Compile Include="QIO\BinDownloader_Fields.cs" />
-    <Compile Include="QIO\BinDownloader_DownloadPackage.cs" />
-    <Compile Include="QIO\BinDownloader_DownloadSources.cs" />
-    <Compile Include="QIO\BinDownloader_CheckPackageInterity.cs" />
-    <Compile Include="QIO\BinDownloader_CreateDirectorys.cs" />
-    <Compile Include="QIO\BinDownloader.cs" />
-    <Compile Include="QIO\BinBuilder_Delete.cs" />
+    <Compile Include="QDevelop\BinBuilder.cs" />
+    <Compile Include="QDevelop\BinBuilder_Build.cs" />
+    <Compile Include="QDevelop\BinBuilder_Delete.cs" />
+    <Compile Include="QDevelop\BinBuilder_Fields.cs" />
+    <Compile Include="QDevelop\BinBuilder_Load.cs" />
+    <Compile Include="QDevelop\BinBuilder_Save.cs" />
+    <Compile Include="QDevelop\BinBuilder_ToString.cs" />
+    <Compile Include="QDevelop\BinDownloader.cs" />
+    <Compile Include="QDevelop\BinDownloader_CheckPackageInterity.cs" />
+    <Compile Include="QDevelop\BinDownloader_CreateDirectorys.cs" />
+    <Compile Include="QDevelop\BinDownloader_DownloadPackage.cs" />
+    <Compile Include="QDevelop\BinDownloader_DownloadSources.cs" />
+    <Compile Include="QDevelop\BinDownloader_Fields.cs" />
+    <Compile Include="QDevelop\Package.cs" />
+    <Compile Include="QDevelop\Package_Dependencys.cs" />
+    <Compile Include="QIO\QZip_Fields.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />
     <Folder Include="QConsole\" />
     <Folder Include="QCore\" />
     <Folder Include="QConsole\Emulation\" />
+    <Folder Include="QDevelop\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QCore\Decriptor.intent" />

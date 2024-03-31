@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QData;
-namespace QuickTools.QIO
+using QuickTools.QIO;
+
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {

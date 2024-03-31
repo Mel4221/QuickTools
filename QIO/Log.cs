@@ -49,7 +49,7 @@ namespace QuickTools.QIO
 
 
 
-            string path = "";
+            string path = CreateLogDir();
             string file = path + name + ".log";
             using (MiniDB db = new MiniDB(file))
             {
@@ -91,7 +91,7 @@ namespace QuickTools.QIO
 
 
 
-            string path = "";
+            string path = CreateLogDir();
             string file = path + nameOfThefile + ".log";
 
             using (FileStream stream = new FileStream(file, FileMode.Append, FileAccess.Write))

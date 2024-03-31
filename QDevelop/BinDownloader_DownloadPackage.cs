@@ -5,7 +5,7 @@ using QuickTools.QCore;
 using QuickTools.QConsole;
 using System.Collections.Generic;
 
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinDownloader
     {
@@ -27,7 +27,7 @@ namespace QuickTools.QIO
             url = p.Source;
             this.CurrentTextStatus = $"Source: [{url}]";
             if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);
-            url = this.ToRaw(url);
+            url = this.GetLink(ref p,url); //this.ToRaw(url);
             this.CurrentTextStatus = $"Creatting Directorys...";
             if (this.AllowDeubbuger) Get.Yellow(this.CurrentTextStatus);
             this.CreateDirectorys(ref p);

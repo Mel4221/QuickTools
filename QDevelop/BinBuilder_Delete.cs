@@ -4,7 +4,9 @@ using System.IO;
 using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QData;
-namespace QuickTools.QIO
+using QuickTools.QIO;
+
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {
@@ -18,7 +20,8 @@ namespace QuickTools.QIO
             if (this.Packages.Count == 0)
             {
                 this.CurrentTextStatus = $"FAILED TO DELETE THE PACKAGE EITHER BECAUSE THE SOURCE GIVEN IS EMPTY OR BECAUSE IT WAS NOT ABLE TO LOAD ANY PACKAGES FROM IT";
-                if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
+                Writer.Write(this.FileName, "");                
+                 if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                 return;
             }
             List<Package> packages = new List<Package>();

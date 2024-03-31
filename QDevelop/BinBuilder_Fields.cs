@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using QuickTools.QCore;
 using QuickTools.QData;
+using QuickTools.QIO;
 
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
     {
@@ -33,11 +34,6 @@ namespace QuickTools.QIO
         /// </summary>
         /// <value>The current int status.</value>
         public int CurrentIntStatus { get; set; } = 0; 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.BinBuilder"/> delete previous.
-        /// </summary>
-        /// <value><c>true</c> if delete previous; otherwise, <c>false</c>.</value>
-        public bool DeletePrevious { get; set; } = false;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QIO.FilesMaper"/> ignore hidden files.
         /// </summary>

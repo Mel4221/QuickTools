@@ -75,8 +75,8 @@ namespace QuickTools.QData
             StringBuilder temp;
             int ch, current; //., is2Next;
             char term, assing;
-            bool idLoaded, isOpen;
-            idLoaded = false;
+            bool  isOpen;
+            //idLoaded = false;
             isOpen = false;
             //isNext = false;
             current = 0;
@@ -99,7 +99,7 @@ namespace QuickTools.QData
                 {
                     // Get.Write(input[ch]);
                     current = ch;
-                    ///this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
+                    //this.CurrentStatus = $"Loading Keys Please Wait... Status: [{Get.Status(ch, input.Length - 1)}] Keys: [{this.Keys.Count}]";
                     if (false)
                     {
                         //bar.Label = this.CurrentStatus;

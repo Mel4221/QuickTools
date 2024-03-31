@@ -1,6 +1,6 @@
 ﻿using System;
 using QuickTools.QCore;
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinDownloader : BinBuilder
     {
@@ -12,16 +12,26 @@ namespace QuickTools.QIO
         /// <param name="package">Package.</param>
         public Package GetPackage(string package)
         {
-            foreach (Package p in this.Packages)
+            foreach (Package _p in this.Packages)
             {
-                if (p.Name == package)
+                if (_p.Name == package)
                 {
-                    return p;
+                    return _p;
                 }
             }
             throw new Exception($"Package [{package}] NotFound!!!");
         }
-        private string ToRaw(string url)
+
+    
+          string GetLink(ref Package package ,string link)
+        {
+            string url, branch;
+            branch = package.Branch;
+            url = $"{link.Substring(0, link.LastIndexOf('.'))}/raw/{branch}/";
+            return url;
+        }
+        /*
+        public string ToRaw(string url)
         {
             string link, branch;
             link = url;
@@ -45,5 +55,6 @@ namespace QuickTools.QIO
             //Get.Yellow(link);
             return link;
         }
+        */
     }
 }

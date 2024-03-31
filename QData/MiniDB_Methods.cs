@@ -1430,7 +1430,11 @@ namespace QuickTools.QData
 
    
 
-
+        /// <summary>
+        /// Selecs the allt where key.
+        /// </summary>
+        /// <returns>The allt where key.</returns>
+        /// <param name="value">Value.</param>
         public virtual List<DB> SelecAlltWhereKey(object value)
         {
               try
@@ -1453,7 +1457,12 @@ namespace QuickTools.QData
               }
         }
 
-
+        /// <summary>
+        /// Selects the where key.
+        /// </summary>
+        /// <returns>The where key.</returns>
+        /// <param name="dbName">Db name.</param>
+        /// <param name="value">Value.</param>
         public virtual List<DB> SelectWhereKey(string dbName , string value)
         {
               try
@@ -1470,7 +1479,12 @@ namespace QuickTools.QData
               }
         }
 
-
+        /// <summary>
+        /// Selects the where value.
+        /// </summary>
+        /// <returns>The where value.</returns>
+        /// <param name="dbName">Db name.</param>
+        /// <param name="value">Value.</param>
         public virtual DB SelectWhereValue(string dbName , string value)
         {
               try
@@ -1496,7 +1510,11 @@ namespace QuickTools.QData
               }
         }
 
-
+        /// <summary>
+        /// Selects the where value.
+        /// </summary>
+        /// <returns>The where value.</returns>
+        /// <param name="value">Value.</param>
         public virtual DB SelectWhereValue(string value)
         {
               try
@@ -1523,7 +1541,11 @@ namespace QuickTools.QData
             };
         }
         }
-
+        /// <summary>
+        /// Selects the where relation.
+        /// </summary>
+        /// <returns>The where relation.</returns>
+        /// <param name="relation">Relation.</param>
       public virtual DB SelectWhereRelation(string relation)
         {
               try
@@ -1553,7 +1575,11 @@ namespace QuickTools.QData
         }
 
 
-
+        /// <summary>
+        /// Selects the where identifier.
+        /// </summary>
+        /// <returns>The where identifier.</returns>
+        /// <param name="Id">Identifier.</param>
         public virtual DB SelectWhereId(int Id)
         {
               try
@@ -1579,7 +1605,12 @@ namespace QuickTools.QData
         }
 
 
-
+        /// <summary>
+        /// Selects all by relation.
+        /// </summary>
+        /// <returns>The all by relation.</returns>
+        /// <param name="dbName">Db name.</param>
+        /// <param name="relation">Relation.</param>
         public virtual List<DB> SelectAllByRelation(string dbName, string relation)
         {
               try
@@ -1599,7 +1630,11 @@ namespace QuickTools.QData
               }
         }
 
-
+        /// <summary>
+        /// Selects all by relation.
+        /// </summary>
+        /// <returns>The all by relation.</returns>
+        /// <param name="relation">Relation.</param>
         public virtual List<DB> SelectAllByRelation(object relation)
         {
               try

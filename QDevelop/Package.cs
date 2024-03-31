@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic; 
 using QuickTools.QCore;
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     /// <summary>
     /// Contains the Package object in which it could contain all the references
@@ -9,6 +9,7 @@ namespace QuickTools.QIO
     /// </summary>
     public partial class Package
     {
+
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -45,6 +46,11 @@ namespace QuickTools.QIO
         /// <value>The source.</value>
         public string Source { get; set; } = String.Empty;
         /// <summary>
+        /// Gets or sets the branch by default is set to main
+        /// </summary>
+        /// <value>The branch.</value>
+        public string Branch { get; set; } = $"main";
+        /// <summary>
         /// Gets or sets the dependency files.
         /// </summary>
         /// <value>The dependency files.</value>
@@ -69,6 +75,7 @@ namespace QuickTools.QIO
                    $"DESCRIPTION: [{this.Description}]\n" +
                    $"DATE: [{this.Date}]\n" +
                    $"SOURCE: [{this.Source}]\n" +
+               	   $"BRANCH: [{this.Branch}]\n" +
                    $"DEPENDENCY-FILES: [{this.DependencyFiles.Count}]\n" +
                    $"DEPENDENCY-DIRS: [{this.DependencyDirs.Count}]\n";
         }

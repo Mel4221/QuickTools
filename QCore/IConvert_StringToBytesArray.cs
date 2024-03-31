@@ -70,7 +70,7 @@ namespace QuickTools.QCore
             else
             {
                 string[] vectors = new string[] { };
-                int length, quater; 
+                int length; 
                 length = rowString.Length;
 
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using QuickTools.QCore;
 
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class BinDownloader
     {

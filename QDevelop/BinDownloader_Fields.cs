@@ -2,7 +2,7 @@
 using QuickTools.QData; 
 using System.Collections.Generic;
 
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     /// <summary>
     /// Bin downloader.

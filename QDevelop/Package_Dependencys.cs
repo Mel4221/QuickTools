@@ -1,5 +1,5 @@
 ﻿using System;
-namespace QuickTools.QIO
+namespace QuickTools.QDevelop
 {
     public partial class Package
     {
