@@ -26,12 +26,12 @@ namespace QuickTools.QDevelop
                     file = package.DependencyFiles[item].Name;
                     dfile = $"{this.OutPutPath}{file}";
                     name = Get.FileNameFromPath(dfile);
-                    dhash = new Get().HashCodeFromFile(dfile, this.AllowDeubbuger).ToString();
-                    bool check = dhash == fhash;
-                    string status = check == true ? "PASS" : "FAIL";
-                    this.CurrentIntStatus = Get.StatusNumber(item, package.DependencyFiles.Count);
-                    try
+                  try
                     {
+                        dhash = new Get().HashCodeFromFile(dfile, this.AllowDeubbuger).ToString();
+                        bool check = dhash == fhash;
+                        string status = check == true ? "PASS" : "FAIL";
+                        this.CurrentIntStatus = Get.StatusNumber(item, package.DependencyFiles.Count);
 
 
                         if (check) this.CurrentTextStatus = $"FILE: [{name}] CHECK: [{status}]";

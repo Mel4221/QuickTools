@@ -7,6 +7,14 @@ namespace QuickTools.QDevelop
     public partial class BinDownloader
     {
         /// <summary>
+        /// Downloads the sources and load them.
+        /// </summary>
+        public void DownloadSourcesAndLoad()
+        {
+            this.DownloadSources();
+            this.Load(); 
+        }
+        /// <summary>
         /// Downloads the sources fronm github if there are any available
         /// the good thing is that if for some reason the source is not available in github
         /// it could also be used to download the source from another server or provider

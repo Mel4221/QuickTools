@@ -26,9 +26,15 @@ namespace QuickTools.QDevelop
           string GetLink(ref Package package ,string link)
         {
             string url, branch;
+            url = "";
             branch = package.Branch;
-            url = $"{link.Substring(0, link.LastIndexOf('.'))}/raw/{branch}/";
-            return url;
+            Get.Pink($"[{package.Name}] [{package.Branch}]");
+            if (this.AllowDeubbuger) Get.Red(package.ToString()); 
+            this.CurrentTextStatus = $"BRANCH: [{branch}]";
+            if(this.AllowDeubbuger)Get.Red(this.CurrentIntStatus);
+           
+                url = $"{link.Substring(0, link.LastIndexOf('.'))}/raw/{branch}/";
+            return url; 
         }
         /*
         public string ToRaw(string url)

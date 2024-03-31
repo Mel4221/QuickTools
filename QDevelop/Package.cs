@@ -91,6 +91,7 @@ namespace QuickTools.QDevelop
             this.Description = string.Empty;
             this.Date = string.Empty;
             this.Source = string.Empty;
+            this.Branch = string.Empty;
             this.DependencyFiles = new List<Files>();
             this.DependencyDirs = new List<Directorys>(); 
 

@@ -6132,6 +6132,11 @@
             <param name="package">Package.</param>
             <exception cref="T:System.Exception">Package not found exeption</exception>
         </member>
+        <member name="M:QuickTools.QDevelop.BinDownloader.DownloadSourcesAndLoad">
+            <summary>
+            Downloads the sources and load them.
+            </summary>
+        </member>
         <member name="M:QuickTools.QDevelop.BinDownloader.DownloadSources">
             <summary>
             Downloads the sources fronm github if there are any available

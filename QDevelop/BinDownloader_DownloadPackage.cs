@@ -41,12 +41,14 @@ namespace QuickTools.QDevelop
             {
                 try
                 {
-                    string file, link, dfile;
+                    string file, link, dfile, branch; 
                     file = p.DependencyFiles[item].Name;
-                    link = url + file;
+                    branch = p.Branch; 
+                    link = $"{url}{file}";
                     dfile = $"{this.OutPutPath}{file}";
                     if (this.AllowDeubbuger)
                     {
+                        Get.Pink($"URL: [{url}]");
                         Get.Yellow($"FILE: [{Get.FileNameFromPath(file)}]");
                         Get.Blue($"LINK: [{link}]");
                     }
