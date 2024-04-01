@@ -82,7 +82,8 @@ namespace QuickTools.QDevelop
                 DependencyDirs = dirs(),
                 DependencyFiles = files(),
                 Size = Get.FileSize(length),
-                Description = package.Description
+                Description = package.Description,
+                Branch = package.Branch
             };
             this.CurrentTextStatus = $"Dependencys Build Sucessfully:\n{p.ToString()}";
             if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);

@@ -3,11 +3,28 @@ namespace QuickTools.QDevelop
 {
     public partial class Package
     {
-
+        /// <summary>
+        /// Directorys.
+        /// </summary>
+        public class Directorys
+        {
             /// <summary>
-            /// Files.
+            /// Gets or sets the name.
             /// </summary>
-            public class Files
+            /// <value>The name.</value>
+            public string Name { get; set; }
+            /// <summary>
+            /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
+            /// </summary>
+            /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
+            public override string ToString() => $"DIR: [{this.Name}]";
+
+        }
+
+        /// <summary>
+        /// Files.
+        /// </summary>
+        public class Files
             {
                 /// <summary>
                 /// Gets or sets the name.
@@ -45,23 +62,7 @@ namespace QuickTools.QDevelop
                 }
 
         }
-            /// <summary>
-            /// Directorys.
-            /// </summary>
-            public class Directorys
-            {
-                /// <summary>
-                /// Gets or sets the name.
-                /// </summary>
-                /// <value>The name.</value>
-                public string Name { get; set; }
-                /// <summary>
-                /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
-                /// </summary>
-                /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
-                public override string ToString() => $"DIR: [{this.Name}]";
 
-            }
 
  
     }

@@ -6243,6 +6243,23 @@
             Clear this instance.
             </summary>
         </member>
+        <member name="T:QuickTools.QDevelop.Package.Directorys">
+            <summary>
+            Directorys.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QDevelop.Package.Directorys.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="M:QuickTools.QDevelop.Package.Directorys.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
+        </member>
         <member name="T:QuickTools.QDevelop.Package.Files">
             <summary>
             Files.
@@ -6282,23 +6299,6 @@
             <summary>
             Clear this instance.
             </summary>
-        </member>
-        <member name="T:QuickTools.QDevelop.Package.Directorys">
-            <summary>
-            Directorys.
-            </summary>
-        </member>
-        <member name="P:QuickTools.QDevelop.Package.Directorys.Name">
-            <summary>
-            Gets or sets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="M:QuickTools.QDevelop.Package.Directorys.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.
-            </summary>
-            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package.Directorys"/>.</returns>
         </member>
     </members>
 </doc>

@@ -57,17 +57,21 @@ namespace QuickTools.QDevelop
                     db.AddKeyOnHot("DATE", package.Date, package.Id);
                     db.AddKeyOnHot("SOURCE", package.Source, package.Id);
                     */
-                    if (sw == 8 && db.Keys[item].Name == "NAME")
+                    if (db.Keys[item].Name == "NAME")
                     {
                         //package.DependencyFiles = files.Count > 0 ? files.ToArray() : new string[] { };
                         //package.DependencyDirs = dirs.Count > 0 ? dirs.ToArray() : new string[] { };
                         //package.DependencyFiles.Add(file);
-                        this.Packages.Add(package);
-                        package = new Package(); 
-                        //file.Clear();
-                        //files.Clear();
-                        //dirs.Clear();
-                        sw = 0;
+                        if (!string.IsNullOrEmpty(package.Name))
+                        {
+                            this.Packages.Add(package);
+                            package = new Package();
+                            //file.Clear();
+                            //files.Clear();
+                            //dirs.Clear();
+                            sw = 0;
+                        }
+                
                     }
                     switch (sw)
                     {

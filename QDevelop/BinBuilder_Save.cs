@@ -32,8 +32,10 @@ namespace QuickTools.QDevelop
 
                 foreach (Package package in this.Packages)
                 {
-                    if (package.Name != "")
+                    if (!string.IsNullOrEmpty(package.Name) && 
+                        !string.IsNullOrWhiteSpace(package.Name))
                     {
+                        if (this.AllowDeubbuger) Get.Green(package.ToString()); 
                         db.AddKey("NAME", package.Name);
                         db.AddKey("ID", package.Id);
                         db.AddKey("SIZE", package.Size);
