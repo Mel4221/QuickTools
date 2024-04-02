@@ -1116,6 +1116,18 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="P:QuickTools.QCore.Get.StartupDBFile">
+            <summary>
+            Gets or sets the startup DBF ile.
+            </summary>
+            <value>The startup DBF ile.</value>
+        </member>
+        <member name="M:QuickTools.QCore.Get.StartUpPath">
+            <summary>
+            Starts up path.
+            </summary>
+            <returns>The up path.</returns>
+        </member>
         <member name="M:QuickTools.QCore.Get.EndingSlash(System.String)">
             <summary>
             add at the end of the path an slash acording if it is missing one
@@ -1395,6 +1407,13 @@
             </summary>
             <returns>Returns the current path</returns>
         </member>
+        <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
+            <summary>
+            Create a data path if is not created and creates the directory given as a parameter
+            </summary>
+            <returns></returns>
+            <param name="newDirectory"></param>
+        </member>
         <member name="F:QuickTools.QCore.Get.Path">
             <summary>
             Abstraction for Directory.GetCurrentDirectory(); 
@@ -1505,13 +1524,6 @@
             Ises the window.
             </summary>
             <returns><c>true</c>, if window was ised, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:QuickTools.QCore.Get.DataPath(System.String)">
-            <summary>
-            Create a data path if is not created and creates the directory given as a parameter
-            </summary>
-            <returns></returns>
-            <param name="newDirectory"></param>
         </member>
         <member name="M:QuickTools.QCore.Get.SlashChar">
             <summary>

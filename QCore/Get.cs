@@ -49,6 +49,22 @@ namespace QuickTools.QCore
     /// </summary>
     public partial class Get : Color
     {
+
+
+
+        /// <summary>
+        /// Gets or sets the startup DBF ile.
+        /// </summary>
+        /// <value>The startup DBF ile.</value>
+        public static string StartupDBFile { get; set; } = $"{Get.DataPath("db")}startup.db";
+        /// <summary>
+        /// Starts up path.
+        /// </summary>
+        /// <returns>The up path.</returns>
+        public static string StartUpPath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+        }
         /// <summary>
         /// add at the end of the path an slash acording if it is missing one
         /// </summary>
@@ -963,6 +979,27 @@ namespace QuickTools.QCore
         }
 
         /// <summary>
+        /// Create a data path if is not created and creates the directory given as a parameter
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="newDirectory"></param>
+        public static string DataPath(string newDirectory)
+        {
+            string bar = Slash();
+            string folder = $"{DataPath()}{newDirectory}{Slash()}";
+            if (Directory.Exists(folder) == true)
+            {
+                return folder;
+            }
+            else
+            {
+                Directory.CreateDirectory(folder);
+
+                return folder;
+            }
+
+        }
+        /// <summary>
         /// Abstraction for Directory.GetCurrentDirectory(); 
         /// returns the current string path 
         /// </summary>
@@ -1100,7 +1137,7 @@ namespace QuickTools.QCore
             public static string FileNameFromPath(string path)
             {
                   if (!path.Contains('/') && !Path.Contains('\\')) return path; 
-                  return path.Substring(path.LastIndexOf(Get.Slash()) + 1);
+                  return path.Substring(path.LastIndexOf(Get.SlashChar()) + 1);
             }
 
         /// <summary>
@@ -1108,7 +1145,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static string FileExention(string file) => file.Substring(file.LastIndexOf(".") + 1);
+        public static string FileExention(string file) => file.Substring(file.LastIndexOf('.') + 1);
 
         /// <summary>
         /// makes the console to beep 
@@ -1327,27 +1364,7 @@ namespace QuickTools.QCore
             }
         }
 
-            /// <summary>
-            /// Create a data path if is not created and creates the directory given as a parameter
-            /// </summary>
-            /// <returns></returns>
-            /// <param name="newDirectory"></param>
-            public static string DataPath(string newDirectory)
-        {
-            string bar = Slash();
-            string folder = $"{DataPath()}{newDirectory}{Slash()}";
-            if (Directory.Exists(folder) == true)
-            {
-                return folder;
-            }
-            else
-            {
-                Directory.CreateDirectory(folder);
 
-                return folder;
-            }
-
-        }
 
         //   private static string path = Get.Path;
         private static string qtDir =$"{DataPath()}qt{Slash()}keys{Slash()}";

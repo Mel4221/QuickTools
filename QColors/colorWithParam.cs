@@ -1,5 +1,4 @@
 using System;
-using QuickTools.QCore;
 namespace QuickTools.QColors
 {
       public partial class Color
@@ -22,7 +21,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// White the specified text.
@@ -32,7 +31,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
 
                   /// <summary>
@@ -43,7 +42,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// <seealso cref="Gray(object)"/>
@@ -53,7 +52,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Blue the specified text.
@@ -63,7 +62,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
 
                   /// <summary>
@@ -75,7 +74,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Green the specified text and tabs.
@@ -93,7 +92,7 @@ namespace QuickTools.QColors
                         }
 
                         Console.WriteLine(tabSpaces + text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Black the specified text and tabs.
@@ -111,7 +110,7 @@ namespace QuickTools.QColors
                         }
 
                         Console.WriteLine(tabSpaces + text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Black the specified msg.
@@ -151,7 +150,7 @@ namespace QuickTools.QColors
                         }
 
                         Console.WriteLine(tabSpaces + text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
 
                   /// <summary>
@@ -162,7 +161,7 @@ namespace QuickTools.QColors
                   {
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Backs the yellow.
@@ -173,7 +172,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Backs the red.
@@ -184,7 +183,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Backs the blue.
@@ -195,7 +194,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.Blue;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   ///  Set the color of the background on pink or magenta 
@@ -206,7 +205,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.Magenta;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Backs the green.
@@ -217,7 +216,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.Green;
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                      /// <summary>
                      /// set the back color on white and the text on black 
@@ -228,7 +227,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(text);
-                        Get.Reset();
+                        Console.ResetColor();
                   }
                   /// <summary>
                   /// Border the specified content.
@@ -241,19 +240,19 @@ namespace QuickTools.QColors
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
                         {
                               Color.Yellow();
-                              Get.Write(simbol);
+                              Console.Write(simbol);
                               underLine += simbol;
                         }
 
-                        Get.W("");// this write an space
-                        Get.Write(simbol); // this write a single char
-                        Get.Reset();    // reset the color 
-                        Get.Write(" " + content + " "); // write the content 
+                        Console.WriteLine("");// this write an space
+                        Console.Write(simbol); // this write a single char
+                        Console.ResetColor();    // reset the color 
+                        Console.Write(" " + content + " "); // write the content 
                         Color.Yellow(); // get the yellow color again 
-                        Get.Write(simbol);
-                        Get.W("");          // more space 
-                        Get.W(underLine);
-                  }
+                        Console.Write(simbol);
+                        Console.WriteLine("");          // more space 
+                        Console.WriteLine(underLine);
+        }
                   /// <summary>
                   /// Border the specified content and simbol.
                   /// </summary>
@@ -266,17 +265,17 @@ namespace QuickTools.QColors
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
                         {
                               Color.Yellow();
-                              Get.Write(simbol);
+                              Console.Write(simbol);
                               underLine += simbol;
                         }
-                        Get.W("");// this write an space
-                        Get.Write(simbol); // this write a single char
-                        Get.Reset();    // reset the color 
-                        Get.Write(" " + content + " "); // write the content 
+                        Console.WriteLine("");// this write an space
+                        Console.Write(simbol); // this write a single char
+                        Console.ResetColor();    // reset the color 
+                        Console.Write(" " + content + " "); // write the content 
                         Color.Yellow(); // get the yellow color again 
-                        Get.Write(simbol);
-                        Get.W("");          // more space 
-                        Get.W(underLine);
+                        Console.Write(simbol);
+                        Console.WriteLine("");          // more space 
+                        Console.WriteLine(underLine);
                   }
                   /// <summary>
                   /// Set the specified color of the content with the textColor and backgroundColor provided 
@@ -289,7 +288,7 @@ namespace QuickTools.QColors
                         Console.BackgroundColor = backgroundColor;
                         Console.ForegroundColor = textColor;
                         Console.WriteLine(content);
-                        Get.Reset();                        
+                        Console.ResetColor();                        
                   }
                          
                          /// <summary>
@@ -303,7 +302,7 @@ namespace QuickTools.QColors
                         Console.ForegroundColor = (ConsoleColor)textColor;
                         Console.BackgroundColor = (ConsoleColor)backgroundColor;
                         Console.WriteLine(content);                        
-                        Get.Reset();                        
+                        Console.ResetColor();                        
                   }
 
             }

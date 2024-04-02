@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QData;
+using QuickTools.QIO; 
 namespace QuickTools.QDevelop
 {
     public partial class BinBuilder
@@ -25,6 +26,7 @@ namespace QuickTools.QDevelop
                 		$"{db.DataManager.KeyTerminatorChar}"));
                     */
                     this.CurrentTextStatus = $"FAILED TO SAVE THE PCAKGES DUE TO SOURCES BEING EMPTY";
+                    try { Writer.Write(this.FileName, ""); } catch(Exception ex){ this.CurrentTextStatus = $"FAILED TO WRITE NOTHING TO THE SOUCES FILE: [{this.FileName}] DUE TO: {ex}"; }
                     if (this.AllowDeubbuger) Get.Red(this.CurrentTextStatus); 
                     return;
                 }
