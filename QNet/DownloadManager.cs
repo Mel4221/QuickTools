@@ -40,7 +40,8 @@ namespace QuickTools.QNet
     /// </summary>
     public class DownloadManager
       {
-
+        public string CurrentTextStatus { get; set; } = string.Empty;   
+        public int CurrentIntStatus { get; set; }
 
         /*
 		public void MyDownloadFile(string webUrl, string outputFilePath)
@@ -206,18 +207,15 @@ namespace QuickTools.QNet
 
         QProgressBar ProgressBar = new QProgressBar(); 
 
-         /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>The status.</value>
-        public string Status { get; set; } = "not-started"; 
+            
+
         private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.Status = e.ProgressPercentage.ToString(); 
+            this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.FileName}]";
+            this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
             if (this.AllowDebugger)
             {
                 this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
-                this.Status =e.ProgressPercentage.ToString();
 			}
 
         }
