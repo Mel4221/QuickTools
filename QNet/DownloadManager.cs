@@ -216,10 +216,14 @@ namespace QuickTools.QNet
         {
             this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.FileName}]";
             this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
+            char ch = 'A';
             if (this.AllowDebugger)
             {
-                this.ProgressBar.Label = this.CurrentTextStatus;
-                this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
+                if(this.CurrentIntStatus.ToString()[0] != ch)
+                {
+                    ch = this.CurrentIntStatus.ToString()[0];
+					Get.Green(this.CurrentTextStatus);
+				}
 			}
 
         }
