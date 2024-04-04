@@ -113,8 +113,6 @@
     <Compile Include="QIO\FilesTransferer.cs" />
     <Compile Include="QNet\UploadManager.cs" />
     <Compile Include="QData\QKeyManager.cs" />
-    <Compile Include="QNet\QService.cs" />
-    <Compile Include="QNet\QService_Fields.cs" />
     <Compile Include="QNet\Service.cs" />
     <Compile Include="QCore\QuickToolsStandars.cs" />
     <Compile Include="QData\QKeyManager_Fields.cs" />

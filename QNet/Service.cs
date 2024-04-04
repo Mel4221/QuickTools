@@ -5,7 +5,7 @@ namespace QuickTools.QNet
     /// <summary>
     /// Defines the Service object
     /// </summary>
-    public class Service
+    public class QService
     {
         /// <summary>
         /// Gets or sets the identifier.

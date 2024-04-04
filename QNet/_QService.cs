@@ -3,11 +3,11 @@ using System.Net;
 using System.Threading;
 using QuickTools.QCore;
 using System.Collections.Generic;
-using QuickTools.QData; 
+using QuickTools.QData;
 namespace QuickTools.QNet
 {
 
-
+    /*
     /// <summary>
     /// QService is a method wich provides funtionalities
     /// to share information along other programs through 
@@ -39,8 +39,7 @@ namespace QuickTools.QNet
                 1w2e3r5tu78d MV SHARE "moving file from a to b" 0% 0 100 128292
                 1w2e3r5tu78d MV UPDATE "moving file from a to b" 45% 45 100 128292
                 1w2e3r5tu78d MV GET "moving file from a to b" 0% 0 100 128292
-            */
-
+            
         }
 
         private void CheckForExitCommand(string cmd)
@@ -102,4 +101,6 @@ namespace QuickTools.QNet
 
 
     }
+}
+*/
 }

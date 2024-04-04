@@ -684,7 +684,7 @@ namespace QuickTools.QData
                 //ID : Key : Value : Relation
                 */
 
-           
+            if (!File.Exists(this.DBName)) this.Create();
             List<Key> keys = new List<Key>();
             for (int item = 0; item < this.DataBase.Count; item++)
             {
@@ -1047,24 +1047,17 @@ namespace QuickTools.QData
         /// <param name="dbName">Db name.</param>
         public bool Create(string dbName)
         {
-            if (!File.Exists(dbName))
+            try
             {
-                using (FileStream stream = new FileStream(dbName, FileMode.Create, FileAccess.Write))
-                {
-                    try
-                    {
-
-                        stream.Write(new byte[] { }, 0, 0);
-                        return true;
-                    }
-                    catch
-                    {
-                        return false;
-                    }
-                }
+                this.DataManager.AllowDebugger = this.AllowDebugger;
+                this.DataManager.FileName = dbName;
+                this.DataManager.Create();
+                return true; 
             }
-            return true;
-
+            catch
+            {
+                return false;
+            }
 
             /*
 

@@ -4,6 +4,7 @@ using QuickTools.QCore;
 using System.Collections.Generic; 
 namespace QuickTools.QNet
 { 
+    /*
     public partial class QService
     {
         /// <summary>
@@ -42,4 +43,5 @@ namespace QuickTools.QNet
         /// </summary>
         public string PublicID = IRandom.RandomText(QuickToolsStandars.PublicIDLength); 
     }
+    */
 }

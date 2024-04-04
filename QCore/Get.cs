@@ -28,6 +28,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Collections;
 using QuickTools.QConsole;
+using System.Net.NetworkInformation;
 
 //using System.Security.Permissions;// it has to be implemented
 
@@ -49,9 +50,108 @@ namespace QuickTools.QCore
     /// </summary>
     public partial class Get : Color
     {
+        /// <summary>
+        /// Waits the while busy.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileBusy(string fileName,bool printwaitloop, Action action)
+        {
+            bool status;
+            if (printwaitloop)
+            {
+                Get.Wait(() => 
+                {
+                    while (true)
+                    { 
+                        status = Get.IsFileBusy(fileName);
+                        Get.Green(status);
+                        if (!status)
+                        {
+                            break; 
+                        }
+                    }
+                });
+                action();
+                return;
+            }
+            else
+            {
+                while (true)
+                {
+                    status = Get.IsFileBusy(fileName);
+                    Get.Red(status); 
+                    if (!status)
+                    {
+                        break;
+                    }
+                }
+                action();
+            }
 
 
+        }
 
+        /// <summary>
+        /// Ises the file busy.
+        /// </summary>
+        /// <returns><c>true</c>, if file busy was ised, <c>false</c> otherwise.</returns>
+        /// <param name="fileName">File name.</param>
+        public static bool IsFileBusy(string fileName)
+        {
+            try
+            {
+                if (!File.Exists(fileName)) return false;
+                FileInfo file = new FileInfo(fileName);
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    stream.Close();
+                }
+                //file is not locked
+                return false;
+
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+
+        }
+        /// <summary>
+        /// Check if either the computer has internet or not by calling google.com and it will return yes if it does 
+        /// maximum timeout is 1000ms
+        /// </summary>
+        /// <returns><c>true</c>, if internet was hased, <c>false</c> otherwise.</returns>
+        public static bool HasInternet()
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                String host = "google.com";
+                byte[] buffer = new byte[32];
+                int timeout = 1000;
+                PingOptions pingOptions = new PingOptions();
+                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Prograns the files path.
+        /// </summary>
+        /// <returns>The files path.</returns>
+        public static string ProgranFilesPath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles);
+        }
         /// <summary>
         /// Gets or sets the startup DBF ile.
         /// </summary>

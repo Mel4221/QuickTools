@@ -1,18 +1,17 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using QuickTools.QConsole;
 using QuickTools.QCore;
 using QuickTools.QIO;
-using System.Threading;
-using QuickTools.QConsole;
 
 namespace QuickTools.QData
 {
 
-   
 
-   
+
+
     /// <summary>
     /// This object creates key files to store data in a key value format for example
     /// KeyName=Value; 
@@ -278,7 +277,7 @@ namespace QuickTools.QData
                     }
                     // return this.Keys;
                 }
-                catch
+                catch(Exception)
                 {
                     /*
                     this.Errors.Add(new Error()
@@ -329,10 +328,10 @@ namespace QuickTools.QData
         /// </summary>
         public void Create()
         {
-            if (!File.Exists(this.FileName))
+            Get.WaitWhileBusy(this.FileName, this.AllowDebugger, () =>
             {
-                File.Create(this.FileName);
-            }
+                Binary.Writer(this.FileName, new byte[] { });
+            });            
         }
         /// <summary>
         /// Gets the key.
@@ -560,7 +559,7 @@ namespace QuickTools.QData
             //int version = int.Parse(textVersion.Substring(textVersion.IndexOf('='),textVersion.IndexOf(';')); 
         }
 
-
+   
         /// <summary>
         /// Writes the keys to the given file
         /// </summary>
@@ -580,6 +579,13 @@ namespace QuickTools.QData
             try
             {
                 GC.Collect();
+                this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{fileName}]";
+
+                if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus,() => 
+                {
+                    while (Get.IsFileBusy(fileName)) { }
+                });
+                if (!this.AllowDebugger) { while (Get.IsFileBusy(fileName)) { } }
                 using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     if (stream.CanWrite)
@@ -707,6 +713,13 @@ namespace QuickTools.QData
             if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
             Check check = new Check();
             check.Start();
+            this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{keyFile}]";
+ 
+            if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus, () =>
+            {
+                while (Get.IsFileBusy(keyFile)) { }
+            });
+            if (!this.AllowDebugger) { while (Get.IsFileBusy(keyFile)) { } }
             this.Errors = new List<Error>();
             this.Keys.Clear();
             //string key, temp, input;

@@ -1116,6 +1116,34 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.WaitWhileBusy(System.String,System.Boolean,System.Action)">
+            <summary>
+            Waits the while busy.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
+            <param name="action">Action.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.IsFileBusy(System.String)">
+            <summary>
+            Ises the file busy.
+            </summary>
+            <returns><c>true</c>, if file busy was ised, <c>false</c> otherwise.</returns>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.HasInternet">
+            <summary>
+            Check if either the computer has internet or not by calling google.com and it will return yes if it does 
+            maximum timeout is 1000ms
+            </summary>
+            <returns><c>true</c>, if internet was hased, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:QuickTools.QCore.Get.ProgranFilesPath">
+            <summary>
+            Prograns the files path.
+            </summary>
+            <returns>The files path.</returns>
+        </member>
         <member name="P:QuickTools.QCore.Get.StartupDBFile">
             <summary>
             Gets or sets the startup DBF ile.
@@ -3363,35 +3391,47 @@
             Set this instance.
             </summary>
         </member>
+        <member name="T:QuickTools.QData.Setting">
+            <summary>
+            Sedttigns Object
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.Setting.Name">
+            <summary>
+            Gets or sets the key.
+            </summary>
+            <value>The key.</value>
+        </member>
+        <member name="P:QuickTools.QData.Setting.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="P:QuickTools.QData.Setting.Group">
+            <summary>
+            contains the group name of the setting to create a relationship between them
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.Setting.IsEmpty">
+            <summary>
+            Ises the empty.
+            </summary>
+            <returns><c>true</c>, if empty was ised, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:QuickTools.QData.Setting.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Setting"/>.
+            </summary>
+            <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Setting"/>.</returns>
+        </member>
         <member name="T:QuickTools.QData.QSettings">
             <summary>
             QSettings helps to create a settings model based on xml 
             it actually works pretty well and it is very simple to use 
             </summary>
         </member>
-        <member name="T:QuickTools.QData.QSettings.Settings">
-            <summary>
-            Sedttigns Object
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.QSettings.Settings.Key">
-            <summary>
-            Gets or sets the key.
-            </summary>
-            <value>The key.</value>
-        </member>
-        <member name="P:QuickTools.QData.QSettings.Settings.Value">
-            <summary>
-            Gets or sets the value.
-            </summary>
-            <value>The value.</value>
-        </member>
-        <member name="P:QuickTools.QData.QSettings.Settings.Group">
-            <summary>
-            contains the group name of the setting to create a relationship between them
-            </summary>
-        </member>
-        <member name="P:QuickTools.QData.QSettings.SettingsList">
+        <member name="P:QuickTools.QData.QSettings.Settings">
             <summary>
             This will contains the list of settings
             </summary>
@@ -3411,6 +3451,18 @@
             <summary>
             Allow to print to the console the current status of the internal MiniDB
             </summary>
+        </member>
+        <member name="P:QuickTools.QData.QSettings.CurrentTextStatus">
+            <summary>
+            Gets or sets the current text status.
+            </summary>
+            <value>The current text status.</value>
+        </member>
+        <member name="P:QuickTools.QData.QSettings.CurrentIntStatus">
+            <summary>
+            Gets or sets the current int status.
+            </summary>
+            <value>The current int status.</value>
         </member>
         <member name="M:QuickTools.QData.QSettings.Create">
             <summary>
@@ -3440,16 +3492,22 @@
             <summary>
             Adds the setting with the given key and value 
             </summary>
-            <param name="key">Key.</param>
+            <param name="name">Key.</param>
             <param name="value">Value.</param>
         </member>
         <member name="M:QuickTools.QData.QSettings.AddSetting(System.String,System.Object,System.String)">
             <summary>
             Adds the setting with the given key and value  + a group
             </summary>
-            <param name="key"></param>
+            <param name="name"></param>
             <param name="value"></param>
             <param name="group"></param>
+        </member>
+        <member name="M:QuickTools.QData.QSettings.AddSetting(QuickTools.QData.Setting)">
+            <summary>
+            Adds the setting.
+            </summary>
+            <param name="setting">Setting.</param>
         </member>
         <member name="M:QuickTools.QData.QSettings.GetSetting(System.String)">
             <summary>
@@ -3458,16 +3516,18 @@
             <returns>The setting.</returns>
             <param name="key">Key.</param>
         </member>
+        <member name="M:QuickTools.QData.QSettings.GetSettingObject(System.String)">
+            <summary>
+            Gets the setting object.
+            </summary>
+            <returns>The setting object.</returns>
+            <param name="setting">Key name.</param>
+        </member>
         <member name="M:QuickTools.QData.QSettings.RemoveSetting(System.String)">
             <summary>
             Removes the setting from the setting file 
             </summary>
-            <param name="key">Key.</param>
-        </member>
-        <member name="M:QuickTools.QData.QSettings.Refresh">
-            <summary>
-            Refresh the settings values
-            </summary>
+            <param name="name">Key.</param>
         </member>
         <member name="M:QuickTools.QData.QSettings.UpdateSetting(System.String,System.Object)">
             <summary>
@@ -3476,6 +3536,12 @@
             <param name="setting">Setting.</param>
             <param name="newValue">New value.</param>
         </member>
+        <member name="M:QuickTools.QData.QSettings.UpdateSetting(QuickTools.QData.Setting)">
+            <summary>
+            Updates the setting.
+            </summary>
+            <param name="setting">Setting.</param>
+        </member>
         <member name="M:QuickTools.QData.QSettings.DeleteSettingsFile">
             <summary>
             Delete the settings file
@@ -3483,11 +3549,7 @@
         </member>
         <member name="M:QuickTools.QData.QSettings.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QSettings"/> class.
-            The fallowing settings are applied as default : 
-            FileName = "Settings.xml";
-            ElementName = "Setting";
-            GroupName = "Settings";
+            Initializes a new instance of the <see cref="T:QuickTools.QData.QSettings"/> class.
             </summary>
         </member>
         <member name="M:QuickTools.QData.QSettings.#ctor(System.String)">
@@ -5532,116 +5594,58 @@
         </member>
         <member name="T:QuickTools.QNet.QService">
             <summary>
-            QService is a method wich provides funtionalities
-            to share information along other programs through 
-            an standard api
-            </summary>
-        </member>
-        <member name="M:QuickTools.QNet.QService.MakeRequest(System.Collections.Generic.List{QuickTools.QData.Key})">
-            <summary>
-            Makes the request.
-            </summary>
-            <param name="keys">Keys.</param>
-        </member>
-        <member name="M:QuickTools.QNet.QService.Start">
-            <summary>
-            Start this instance.
-            </summary>
-        </member>
-        <member name="F:QuickTools.QNet.QService.QServiceThread">
-            <summary>
-            The Thread  for the service manager
-            </summary>
-        </member>
-        <member name="P:QuickTools.QNet.QService.Server">
-            <summary>
-            Gets or sets the server.
-            </summary>
-            <value>The server.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.ExitRequest">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> exit request.
-            </summary>
-            <value><c>true</c> if exit request; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.Services">
-            <summary>
-            Gets or sets the services.
-            </summary>
-            <value>The services.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.AllowDebugger">
-            <summary>
-            Gets or sets a value indicating whether this <see cref="T:QuickTools.QNet.QService"/> allow deubbuger.
-            </summary>
-            <value><c>true</c> if allow deubbuger; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QNet.QService.Port">
-            <summary>
-            Gets or sets the port.
-            </summary>
-            <value>The port.</value>
-        </member>
-        <member name="F:QuickTools.QNet.QService.PublicID">
-            <summary>
-            The public identifier for each function that is being executed 
-            </summary>
-        </member>
-        <member name="T:QuickTools.QNet.Service">
-            <summary>
             Defines the Service object
             </summary>
         </member>
-        <member name="P:QuickTools.QNet.Service.ID">
+        <member name="P:QuickTools.QNet.QService.ID">
             <summary>
             Gets or sets the identifier.
             </summary>
             <value>The identifier.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Name">
+        <member name="P:QuickTools.QNet.QService.Name">
             <summary>
             Gets or sets the name.
             </summary>
             <value>The name.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Type">
+        <member name="P:QuickTools.QNet.QService.Type">
             <summary>
             Gets or sets the type.
             </summary>
             <value>The type.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Info">
+        <member name="P:QuickTools.QNet.QService.Info">
             <summary>
             Gets or sets the info.
             </summary>
             <value>The info.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Status">
+        <member name="P:QuickTools.QNet.QService.Status">
             <summary>
             Gets or sets the status.
             </summary>
             <value>The status.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Current">
+        <member name="P:QuickTools.QNet.QService.Current">
             <summary>
             Gets or sets the current.
             </summary>
             <value>The current.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Goal">
+        <member name="P:QuickTools.QNet.QService.Goal">
             <summary>
             Gets or sets the goal.
             </summary>
             <value>The goal.</value>
         </member>
-        <member name="P:QuickTools.QNet.Service.Buffer">
+        <member name="P:QuickTools.QNet.QService.Buffer">
             <summary>
             Gets or sets the buffer size of the service request
             </summary>
             <value>The buffer.</value>
         </member>
-        <member name="M:QuickTools.QNet.Service.ToString">
+        <member name="M:QuickTools.QNet.QService.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QNet.Service"/>.
             </summary>

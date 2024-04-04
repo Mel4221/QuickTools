@@ -238,9 +238,11 @@ namespace QuickTools.QColors
                         string simbol = "*";
                         string underLine = "";
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
-                        {
-                              Color.Yellow();
-                              Console.Write(simbol);
+            {
+#pragma warning disable CS0436 // Type conflicts with imported type
+                Color.Yellow();
+#pragma warning restore CS0436 // Type conflicts with imported type
+                Console.Write(simbol);
                               underLine += simbol;
                         }
 
@@ -248,8 +250,10 @@ namespace QuickTools.QColors
                         Console.Write(simbol); // this write a single char
                         Console.ResetColor();    // reset the color 
                         Console.Write(" " + content + " "); // write the content 
-                        Color.Yellow(); // get the yellow color again 
-                        Console.Write(simbol);
+#pragma warning disable CS0436 // Type conflicts with imported type
+            Color.Yellow(); // get the yellow color again 
+#pragma warning restore CS0436 // Type conflicts with imported type
+            Console.Write(simbol);
                         Console.WriteLine("");          // more space 
                         Console.WriteLine(underLine);
         }
@@ -263,17 +267,21 @@ namespace QuickTools.QColors
 
                         string underLine = "";
                         for (int i = 0; i <= content.ToString().Length + 3; i++)
-                        {
-                              Color.Yellow();
-                              Console.Write(simbol);
+            {
+#pragma warning disable CS0436 // Type conflicts with imported type
+                Color.Yellow();
+#pragma warning restore CS0436 // Type conflicts with imported type
+                Console.Write(simbol);
                               underLine += simbol;
                         }
                         Console.WriteLine("");// this write an space
                         Console.Write(simbol); // this write a single char
                         Console.ResetColor();    // reset the color 
                         Console.Write(" " + content + " "); // write the content 
-                        Color.Yellow(); // get the yellow color again 
-                        Console.Write(simbol);
+#pragma warning disable CS0436 // Type conflicts with imported type
+            Color.Yellow(); // get the yellow color again 
+#pragma warning restore CS0436 // Type conflicts with imported type
+            Console.Write(simbol);
                         Console.WriteLine("");          // more space 
                         Console.WriteLine(underLine);
                   }
