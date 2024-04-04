@@ -31,6 +31,7 @@ using System.ComponentModel;
 
 using System.IO;
 using System.Security.Policy;
+using System.Runtime.CompilerServices;
 
 namespace QuickTools.QNet
 {
@@ -159,7 +160,8 @@ namespace QuickTools.QNet
         /// <param name="fileName">Location.</param>
         public void DownloadFile(string address, string fileName)
             {
-
+            this.Address = address;
+            this.FileName = fileName; 
                 using (WebClient client = new WebClient())
                 {
                     client.UseDefaultCredentials = true;
@@ -183,6 +185,7 @@ namespace QuickTools.QNet
         /// <param name="debugger">If set to <c>true</c> debugger.</param>
         public static void Download(string address , string fileName, bool debugger)
         {
+            
             using (WebClient client = new WebClient())
             {
                 DownloadManager manager = new DownloadManager();
@@ -215,7 +218,7 @@ namespace QuickTools.QNet
             this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
             if (this.AllowDebugger)
             {
-                this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
+                Get.Green(this.CurrentTextStatus);
 			}
 
         }
