@@ -218,7 +218,8 @@ namespace QuickTools.QNet
             this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
             if (this.AllowDebugger)
             {
-                Get.Green(this.CurrentTextStatus);
+                this.ProgressBar.Label = this.CurrentTextStatus;
+                this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
 			}
 
         }
