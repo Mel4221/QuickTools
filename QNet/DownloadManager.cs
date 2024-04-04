@@ -215,7 +215,7 @@ namespace QuickTools.QNet
 
 		private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.FileName}]";
+            this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.Address}]";
             this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
             if (this.AllowDebugger)
             {
