@@ -59,9 +59,7 @@ namespace QuickTools.QDevelop
         /// Gets or sets the dependency dirs.
         /// </summary>
         /// <value>The dependency dirs.</value>
-        public List<Directorys> DependencyDirs { get; set; } = new List<Directorys>(); 
-
-
+        public List<Directorys> DependencyDirs { get; set; } = new List<Directorys>();
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QIO.Package"/>.
         /// </summary>
