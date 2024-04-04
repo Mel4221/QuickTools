@@ -66,7 +66,7 @@ namespace QuickTools.QCore
                     while (true)
                     { 
                         status = Get.IsFileBusy(fileName);
-                        Get.Green(status);
+                        //Get.Green(status);
                         if (!status)
                         {
                             break; 
@@ -81,7 +81,7 @@ namespace QuickTools.QCore
                 while (true)
                 {
                     status = Get.IsFileBusy(fileName);
-                    Get.Red(status); 
+                    //Get.Red(status); 
                     if (!status)
                     {
                         break;
