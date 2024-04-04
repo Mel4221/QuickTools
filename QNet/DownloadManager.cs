@@ -208,15 +208,15 @@ namespace QuickTools.QNet
         /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
         public bool DownloadCompleted { get { return _completed; } }
 
-        QProgressBar ProgressBar = new QProgressBar(); 
+        QProgressBar ProgressBar = new QProgressBar();
 
-            
 
-        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+		char ch = ' ';
+
+		private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.FileName}]";
             this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
-            char ch = 'A';
             if (this.AllowDebugger)
             {
                 if(this.CurrentIntStatus.ToString()[0] != ch)
