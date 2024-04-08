@@ -627,11 +627,11 @@ namespace QuickTools.QData
 
             //this.Load(); 
             bool refreshed = false;
-            //if the id is bigger than the half of the collection
-            // it means that it should start by the end of the collection
+			//if the id is bigger than the half of the collection
+			// it means that it should start by the end of the collection
 
 
-            Get.Green("Forward");
+			if (this.AllowDebugger) Get.Green("Forward");
             for (int x = 0; x < DataBase.Count; x++)
             {
                 if (DataBase[x].Id == keyId)
@@ -1173,7 +1173,7 @@ namespace QuickTools.QData
                     temp.Add(DataBase[x]);
                 }
                 //Get.Red(DataBase[x].Relation); 
-                Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+               if(this.AllowDebugger) Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
             }
             this.DataBase.Clear();
             this.DataBase = temp;
@@ -1194,8 +1194,8 @@ namespace QuickTools.QData
                 {
                     temp.Add(DataBase[x]);
                 }
-                //Get.Red(DataBase[x].Relation); 
-                //   Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+				//Get.Red(DataBase[x].Relation); 
+				if (this.AllowDebugger) Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
             }
             this.DataBase.Clear();
             this.DataBase = temp;
