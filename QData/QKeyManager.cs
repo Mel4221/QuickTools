@@ -571,8 +571,8 @@ namespace QuickTools.QData
             //this.builder = new StringBuilder();
             if (keys.Count == 0) 
             {
-                Binary.Writer(fileName, Get.Bytes($"{QKey_Id_Key}{keys[0].KeyAssingChar}{this.QKeyId}{keys[0].KeyTerminatorChar}\n"));
-                return;
+				Binary.Writer(fileName, Get.Bytes($"{QKey_Id_Key}{this.KeyAssingChar}{this.QKeyId}{this.KeyTerminatorChar}\n"));
+				return;
             }
             if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
             List<Key> stats = new List<Key>();
