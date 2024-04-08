@@ -132,6 +132,7 @@ namespace QuickTools.QData
         public void Load()
         {
             this.SettingsDB = new MiniDB(this.FileName);
+            this.SettingsDB.AllowDebugger = this.AllowDebugger;
             this.Settings = new List<Setting>(); 
             this.SettingsDB.Load();
             if (this.SettingsDB.DataBase.Count == 0) return;
@@ -282,6 +283,7 @@ namespace QuickTools.QData
                             return;
                         }
                     }
+                this.AddSetting(setting);
             }
             /// <summary>
             /// Delete the settings file

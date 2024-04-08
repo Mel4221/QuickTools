@@ -32,7 +32,9 @@ namespace QuickTools.QDevelop
             Get.Green($"ATTEMPTING TO DOWNLOAD: [{this.SourcesURL}]");
 
             DownloadManager.Download(this.SourcesURL, file, this.AllowDeubbuger);
+           // while (Get.IsFileBusy(file)) { }
             size = Get.FileSize(file);
+            
             if (size == "0B") throw new Exception($"SOMETHIG WENT WRONG WHILE TRYING TO DOWNLOAD: [{this.SourcesURL}] FILE SIZE: [{size}]");
             this.CurrentTextStatus = $"SOURCES FILE DOWNLOADED SUCESSFULLY FILE: [{file}] SIZE: {size}";
             if (this.AllowDeubbuger) Get.Green(this.CurrentTextStatus);

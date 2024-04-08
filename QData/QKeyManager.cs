@@ -714,12 +714,13 @@ namespace QuickTools.QData
             Check check = new Check();
             check.Start();
             this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{keyFile}]";
- 
+            /*
             if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus, () =>
             {
                 while (Get.IsFileBusy(keyFile)) { }
             });
             if (!this.AllowDebugger) { while (Get.IsFileBusy(keyFile)) { } }
+            */
             this.Errors = new List<Error>();
             this.Keys.Clear();
             //string key, temp, input;
