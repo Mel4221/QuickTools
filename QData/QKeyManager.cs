@@ -301,7 +301,15 @@ namespace QuickTools.QData
         {
             if (File.Exists(this.FileName))
             {
-                File.Delete(this.FileName);
+                while(true)
+                {
+					if (!Get.IsFileBusy(this.FileName))
+					{
+						File.Delete(this.FileName);
+                        break;
+					}
+				}
+
             }
         }
 
@@ -331,7 +339,7 @@ namespace QuickTools.QData
             Get.WaitWhileBusy(this.FileName, this.AllowDebugger, () =>
             {
                 Binary.Writer(this.FileName, new byte[] { });
-            });            
+            });  // while         
         }
         /// <summary>
         /// Gets the key.
@@ -578,19 +586,29 @@ namespace QuickTools.QData
             List<Key> stats = new List<Key>();
             try
             {
-                GC.Collect();
-                this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{fileName}]";
+               // GC.Collect();
 
+                if(Get.IsFileBusy(fileName))this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{fileName}]";
                 if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus,() => 
                 {
-                    while (Get.IsFileBusy(fileName)) { }
+                    while (Get.IsFileBusy(fileName)) { 
+                    Get.WaitTime(
+                    IRandom.RandomInt(
+                    this.MinimumDelayTimeForResorsesToBeFree, 
+                    this.MaximumDelayTimeForResorsesToBeFree)); }
                 });
-                if (!this.AllowDebugger) { while (Get.IsFileBusy(fileName)) { } }
+                if (!this.AllowDebugger) { while (Get.IsFileBusy(fileName)) { 
+                Get.WaitTime(
+                IRandom.RandomInt(
+                this.MinimumDelayTimeForResorsesToBeFree,
+                this.MaximumDelayTimeForResorsesToBeFree)); 
+                } }
                 using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
-                    if (stream.CanWrite)
+                    if (!stream.CanWrite)
                     {
-                         //do something here 
+                        this.WriteKeys(fileName, ref keys);
+                        return;
                     }
                     int current, goal;
                     byte[] buffer = new byte[0];
@@ -676,8 +694,15 @@ namespace QuickTools.QData
                 {
                     Get.Red(ex.Message);
                 }
-            }
-        }
+                this.FailToWriteCount++;
+				//Get.WaitTime(
+				//IRandom.RandomInt(
+				//this.MinimumDelayTimeForResorsesToBeFree,
+				//this.MaximumDelayTimeForResorsesToBeFree));
+				this.WriteKeys(fileName, ref keys);
+
+			}
+		}
 
         /// <summary>
         /// Writes the keys.
@@ -714,13 +739,13 @@ namespace QuickTools.QData
             Check check = new Check();
             check.Start();
             this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{keyFile}]";
-            /*
+            
             if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus, () =>
             {
                 while (Get.IsFileBusy(keyFile)) { }
             });
             if (!this.AllowDebugger) { while (Get.IsFileBusy(keyFile)) { } }
-            */
+            
             this.Errors = new List<Error>();
             this.Keys.Clear();
             //string key, temp, input;
@@ -821,6 +846,7 @@ namespace QuickTools.QData
                 }
                 catch (Exception ex)
                 {
+
                     this.Errors.Add(new Error()
                     {
                         Message = ex.Message,
@@ -828,6 +854,8 @@ namespace QuickTools.QData
                         $"\n Key={key} Temp={temp} KeysCount={this.Keys.Count}"
 
                     });
+                    this.FailToReadCount++;
+                    this.ReadKeys();
                 }
 
             }
