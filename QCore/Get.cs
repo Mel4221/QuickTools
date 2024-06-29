@@ -66,7 +66,7 @@ namespace QuickTools.QCore
                     while (true)
                     { 
                         status = Get.IsFileBusy(fileName);
-                        Get.Green(status);
+                        //Get.Green(status);
                         if (!status)
                         {
                             break; 

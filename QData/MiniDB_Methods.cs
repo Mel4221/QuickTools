@@ -627,11 +627,11 @@ namespace QuickTools.QData
 
             //this.Load(); 
             bool refreshed = false;
-            //if the id is bigger than the half of the collection
-            // it means that it should start by the end of the collection
+			//if the id is bigger than the half of the collection
+			// it means that it should start by the end of the collection
 
 
-            Get.Green("Forward");
+			if (this.AllowDebugger) Get.Green("Forward");
             for (int x = 0; x < DataBase.Count; x++)
             {
                 if (DataBase[x].Id == keyId)
@@ -783,7 +783,9 @@ namespace QuickTools.QData
             this.DataManager = new QKeyManager(this.DBName);
             this.DataManager.AllowDebugger = this.AllowDebugger;
             this.DataManager.LoadKeys();
-            QProgressBar bar = new QProgressBar(); 
+			QProgressBar bar = new QProgressBar();
+
+			 
             //to makes sure that we return if the keys count is cero
             //Get.Yellow(this.DataManager.Keys.Count); here is why you never leavs stuff behind 24h trying to find where those numbers where coming from 
             if (this.DataManager.Keys.Count == 0)
@@ -1173,7 +1175,7 @@ namespace QuickTools.QData
                     temp.Add(DataBase[x]);
                 }
                 //Get.Red(DataBase[x].Relation); 
-                Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+               if(this.AllowDebugger) Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
             }
             this.DataBase.Clear();
             this.DataBase = temp;
@@ -1194,8 +1196,8 @@ namespace QuickTools.QData
                 {
                     temp.Add(DataBase[x]);
                 }
-                //Get.Red(DataBase[x].Relation); 
-                //   Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
+				//Get.Red(DataBase[x].Relation); 
+				if (this.AllowDebugger) Get.Green($" From: {DataBase.Count} Current: {x} Porcent: {Get.Status(x, DataBase.Count)}");
             }
             this.DataBase.Clear();
             this.DataBase = temp;

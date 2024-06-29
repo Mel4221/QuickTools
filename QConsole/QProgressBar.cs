@@ -62,7 +62,7 @@ using System;
             /// Gets or sets the y value in which the <see cref="System.Console.SetCursorPosition(int, int)"/> will be printing the text 
             /// </summary>
             /// <value>The y.</value>
-            public int Y { get; set; } = Console.CursorTop;
+            public int Y { get; set; } 
             /// <summary>
             /// Gets or sets the back ground color for label.
             /// </summary>
@@ -140,8 +140,8 @@ using System;
               
                 if (this.Status != status)
                 {
-                   
-                    Console.SetCursorPosition(1, this.Y);
+                    this.Y = Console.CursorTop;
+					Console.SetCursorPosition(1, this.Y);
                     Console.BackgroundColor = this.BackGroundColorForLabel;
                     Console.ForegroundColor = this.ForeColorForLabel;
                     Console.Write($"{this.Label} ");

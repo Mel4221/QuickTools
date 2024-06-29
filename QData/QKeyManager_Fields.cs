@@ -27,13 +27,27 @@ namespace QuickTools.QData
         /// </summary>
         /// <value>The keys.</value>
         public List<Key> Keys { get; set; } = new List<Key>();
-
         /// <summary>
-        /// Gets or sets the errors.
+        /// defines the mimimum time to wait for resorses to be free
         /// </summary>
-        /// <value>The errors.</value>
-        public List<Error> Errors { get; set; }
-
+        public int MinimumDelayTimeForResorsesToBeFree { get; set; } = 100;
+		/// <summary>
+		/// defines the maximum time to wait for resorses to be free
+		/// </summary>
+		public int MaximumDelayTimeForResorsesToBeFree { get; set; } = 500;
+		/// <summary>
+		/// Gets or sets the errors.
+		/// </summary>
+		/// <value>The errors.</value>
+		public List<Error> Errors { get; set; }
+        /// <summary>
+        /// Contains the fail to write count
+        /// </summary>
+        public int FailToWriteCount { get; set; } = 0;
+        /// <summary>
+        /// Contains the fail to read counts
+        /// </summary>
+        public int FailToReadCount { get; set; } = 0;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.KeyManager"/> allow debugger.
         /// </summary>

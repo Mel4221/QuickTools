@@ -31,6 +31,7 @@ using System.ComponentModel;
 
 using System.IO;
 using System.Security.Policy;
+using System.Runtime.CompilerServices;
 
 namespace QuickTools.QNet
 {
@@ -40,7 +41,8 @@ namespace QuickTools.QNet
     /// </summary>
     public class DownloadManager
       {
-
+        public string CurrentTextStatus { get; set; } = string.Empty;   
+        public int CurrentIntStatus { get; set; }
 
         /*
 		public void MyDownloadFile(string webUrl, string outputFilePath)
@@ -158,7 +160,8 @@ namespace QuickTools.QNet
         /// <param name="fileName">Location.</param>
         public void DownloadFile(string address, string fileName)
             {
-
+            this.Address = address;
+            this.FileName = fileName; 
                 using (WebClient client = new WebClient())
                 {
                     client.UseDefaultCredentials = true;
@@ -182,6 +185,7 @@ namespace QuickTools.QNet
         /// <param name="debugger">If set to <c>true</c> debugger.</param>
         public static void Download(string address , string fileName, bool debugger)
         {
+            
             using (WebClient client = new WebClient())
             {
                 DownloadManager manager = new DownloadManager();
@@ -204,20 +208,22 @@ namespace QuickTools.QNet
         /// <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
         public bool DownloadCompleted { get { return _completed; } }
 
-        QProgressBar ProgressBar = new QProgressBar(); 
+        QProgressBar ProgressBar = new QProgressBar();
 
-         /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>The status.</value>
-        public string Status { get; set; } = "not-started"; 
-        private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+
+		char ch = ' ';
+
+		private void DownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.Status = e.ProgressPercentage.ToString(); 
+            this.CurrentTextStatus =  $"DOWNLOADING: {Get.Status(e.ProgressPercentage, 100)} [{this.Address}]";
+            this.CurrentIntStatus = Get.StatusNumber(e.ProgressPercentage, 100);
             if (this.AllowDebugger)
             {
-                this.ProgressBar.Display(Get.Status(e.ProgressPercentage, 100));
-                this.Status =e.ProgressPercentage.ToString();
+                if(this.CurrentIntStatus.ToString()[0] != ch)
+                {
+                    ch = this.CurrentIntStatus.ToString()[0];
+					Get.Green(this.CurrentTextStatus);
+				}
 			}
 
         }

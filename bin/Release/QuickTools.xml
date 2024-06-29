@@ -3750,11 +3750,31 @@
             </summary>
             <value>The keys.</value>
         </member>
+        <member name="P:QuickTools.QData.QKeyManager.MinimumDelayTimeForResorsesToBeFree">
+            <summary>
+            defines the mimimum time to wait for resorses to be free
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.MaximumDelayTimeForResorsesToBeFree">
+            <summary>
+            defines the maximum time to wait for resorses to be free
+            </summary>
+        </member>
         <member name="P:QuickTools.QData.QKeyManager.Errors">
             <summary>
             Gets or sets the errors.
             </summary>
             <value>The errors.</value>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.FailToWriteCount">
+            <summary>
+            Contains the fail to write count
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.QKeyManager.FailToReadCount">
+            <summary>
+            Contains the fail to read counts
+            </summary>
         </member>
         <member name="P:QuickTools.QData.QKeyManager.AllowDebugger">
             <summary>
@@ -5234,12 +5254,6 @@
             Gets a value indicating whether this <see cref="T:QuickTools.DownloadManager"/> download completed.
             </summary>
             <value><c>true</c> if download completed; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:QuickTools.QNet.DownloadManager.Status">
-            <summary>
-            Gets or sets the status.
-            </summary>
-            <value>The status.</value>
         </member>
         <member name="P:QuickTools.QNet.DownloadManager.Address">
             <summary>
