@@ -23,7 +23,7 @@ namespace QuickTools.QMath
        // private bool HasSetter;
         private bool ActivePromp;
         private MiniDB VariablesDB;
-      //  private MiniDB HistoryDB;
+        //private MiniDB HistoryDB;
         /// <summary>
         /// Checks for Parentesis in the text given
         /// </summary>

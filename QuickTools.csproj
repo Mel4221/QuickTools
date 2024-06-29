@@ -9,8 +9,8 @@
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <PackageId>4000</PackageId>
-    <PackageVersion>4000</PackageVersion>
+    <PackageId>5000</PackageId>
+    <PackageVersion>5000</PackageVersion>
     <Authors>MBV</Authors>
     <PackageIconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</PackageIconUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/LICENSE</PackageLicenseUrl>

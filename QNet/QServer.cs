@@ -234,15 +234,16 @@ using QuickTools.QCore;
                  this.RequestUrl = request.RawUrl.Substring(1);
                   byte[] buffer = ResponseFunction(request);
                   response.ContentLength64 = buffer.Length;
-
-                  var thread = new Thread(() =>
-                  {
+                  
+                 // var thread = new Thread(() =>
+                  //{
                         Stream output = response.OutputStream;
                         output.Write(buffer , 0 , buffer.Length);
                         output.Close();
                         listener.Stop();
-                  });
-                  thread.Start(); 
+                  //});
+                  //thread.Start(); 
+                  /*
                         while(true)
                         {
                               if(thread.IsAlive == false)
@@ -250,6 +251,7 @@ using QuickTools.QCore;
                                     break; 
                               }
                         }
+                        */
 
                   return request; 
                   }

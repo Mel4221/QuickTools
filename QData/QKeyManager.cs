@@ -797,7 +797,6 @@ namespace QuickTools.QData
                                         break;
                                     case false:
                                                 Get.Red($"\nFailed to load the QKEYID\n");
-                                                
                                                 Get.Beep();
                                         break;
                                 }
