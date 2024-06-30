@@ -41,7 +41,15 @@ namespace QuickTools.QNet
     /// </summary>
     public class DownloadManager
       {
+        /// <summary>
+        /// Gets or sets the current text status.
+        /// </summary>
+        /// <value>The current text status.</value>
         public string CurrentTextStatus { get; set; } = string.Empty;   
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
         public int CurrentIntStatus { get; set; }
 
         /*

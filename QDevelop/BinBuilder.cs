@@ -8,7 +8,10 @@ using QuickTools.QIO;
 namespace QuickTools.QDevelop
 {
     /// <summary>
-    /// Sources builder.
+    /// Sources builder is a class that contains an array of methods
+    /// that will create a source file which contains all the
+    /// information related with a package for it's later to be use 
+    /// as a database for other packages.
     /// </summary>
     public partial class BinBuilder
     {

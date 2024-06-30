@@ -2388,6 +2388,12 @@
             <param name="minimumRange">Minimum range.</param>
             <param name="maximumRange">Maximum range.</param>
         </member>
+        <member name="F:QuickTools.QCore.IRandom.InternalRandom">
+            <summary>
+            Contains the Random class as an member of Irandom to hold
+            the random integers needed for the randomizer
+            </summary>
+        </member>
         <member name="M:QuickTools.QCore.IRandom.RandomInt(System.Int32,System.Int32)">
             <summary>
             Create a random number based on the rules that are passed 
@@ -5211,6 +5217,18 @@
             Download manager.
             </summary>
         </member>
+        <member name="P:QuickTools.QNet.DownloadManager.CurrentTextStatus">
+            <summary>
+            Gets or sets the current text status.
+            </summary>
+            <value>The current text status.</value>
+        </member>
+        <member name="P:QuickTools.QNet.DownloadManager.CurrentIntStatus">
+            <summary>
+            Gets or sets the current int status.
+            </summary>
+            <value>The current int status.</value>
+        </member>
         <member name="M:QuickTools.QNet.DownloadManager.Download(System.String,System.String,System.Int32,System.Boolean)">
             <summary>
             Download the specified url, file, length and allowDebugger.
@@ -6007,7 +6025,10 @@
         </member>
         <member name="T:QuickTools.QDevelop.BinBuilder">
             <summary>
-            Sources builder.
+            Sources builder is a class that contains an array of methods
+            that will create a source file which contains all the
+            information related with a package for it's later to be use 
+            as a database for other packages.
             </summary>
         </member>
         <member name="M:QuickTools.QDevelop.BinBuilder.Clear">

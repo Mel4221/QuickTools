@@ -132,26 +132,26 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
-                int order = rand.Next(0, 4);
+                int order = InternalRandom.Next(0, 4);
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[rand.Next(0, LowerCase.Length)]);
+                        password.Append(LowerCase[InternalRandom.Next(0, LowerCase.Length)]);
                         break;
                     case 1:
-                        password.Append(UpperCase[rand.Next(0, UpperCase.Length)]);
+                        password.Append(UpperCase[InternalRandom.Next(0, UpperCase.Length)]);
                         break;
                     case 2:
-                        password.Append(Symbols[rand.Next(0, Symbols.Length)]);
+                        password.Append(Symbols[InternalRandom.Next(0, Symbols.Length)]);
                         break;
                     case 3:
-                        password.Append(Numbers[rand.Next(0, Numbers.Length)]);
+                        password.Append(Numbers[InternalRandom.Next(0, Numbers.Length)]);
                         break;
                     default:
-                        password.Append(Numbers[rand.Next(0, Numbers.Length)]);
+                        password.Append(Numbers[InternalRandom.Next(0, Numbers.Length)]);
                         break;
 
                 }
@@ -185,25 +185,25 @@ namespace QuickTools.QCore
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = rand.Next(0, 4);
+                int order = InternalRandom.Next(0, 4);
 
                 switch (order)
                 {
                     case 0:
-                        password += LowerCase[rand.Next(0, 26)];
+                        password += LowerCase[InternalRandom.Next(0, 26)];
 
                         break;
                     case 1:
-                        password += UpperCase[rand.Next(0, 26)];
+                        password += UpperCase[InternalRandom.Next(0, 26)];
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password += Numbers[rand.Next(0, 10)];
+                        password += Numbers[InternalRandom.Next(0, 10)];
                         break;
                     default:
-                        password += Numbers[rand.Next(0, 10)];
+                        password += Numbers[InternalRandom.Next(0, 10)];
                         break;
 
                 }
@@ -239,30 +239,30 @@ namespace QuickTools.QCore
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = rand.Next(0, 4);
+                int order = InternalRandom.Next(0, 4);
 
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[rand.Next(0, 26)]);
+                        password.Append(LowerCase[InternalRandom.Next(0, 26)]);
 
                         break;
                     case 1:
-                        password.Append(UpperCase[rand.Next(0, 26)]);
+                        password.Append(UpperCase[InternalRandom.Next(0, 26)]);
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password.Append(Numbers[rand.Next(0, 10)]);
+                        password.Append(Numbers[InternalRandom.Next(0, 10)]);
                         break;
                     default:
-                        password.Append(Numbers[rand.Next(0, 10)]);
+                        password.Append(Numbers[InternalRandom.Next(0, 10)]);
                         break;
 
                 }
@@ -301,29 +301,29 @@ namespace QuickTools.QCore
 
             for (int PassWordLengh = 0; PassWordLengh < passwordLenght; PassWordLengh++)
             {
-                int order = rand.Next(0, 4);
+                int order = InternalRandom.Next(0, 4);
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
                 switch (order)
                 {
                     case 0:
-                        password.Append(LowerCase[rand.Next(0, 26)]);
+                        password.Append(LowerCase[InternalRandom.Next(0, 26)]);
 
                         break;
                     case 1:
-                        password.Append(UpperCase[rand.Next(0, 26)]);
+                        password.Append(UpperCase[InternalRandom.Next(0, 26)]);
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
-                        password.Append(Numbers[rand.Next(0, 10)]);
+                        password.Append(Numbers[InternalRandom.Next(0, 10)]);
                         break;
                     default:
-                        password.Append(Numbers[rand.Next(0, 10)]);
+                        password.Append(Numbers[InternalRandom.Next(0, 10)]);
                         break;
 
                 }
@@ -355,28 +355,28 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
-                int order = rand.Next(0, 4);
+                int order = InternalRandom.Next(0, 4);
 
                 switch (order)
                 {
                     case 0:
-                        password += LowerCase[rand.Next(0, 26)];
+                        password += LowerCase[InternalRandom.Next(0, 26)];
 
                         break;
                     case 1:
-                        password += UpperCase[rand.Next(0, 26)];
+                        password += UpperCase[InternalRandom.Next(0, 26)];
                         break;
                     case 2:
-                        password += Symbols[rand.Next(0, 14)];
+                        password += Symbols[InternalRandom.Next(0, 14)];
                         break;
                     case 3:
-                        password += Numbers[rand.Next(0, 10)];
+                        password += Numbers[InternalRandom.Next(0, 10)];
                         break;
                     default:
-                        password += Numbers[rand.Next(0, 10)];
+                        password += Numbers[InternalRandom.Next(0, 10)];
                         break;
 
                 }
@@ -405,10 +405,10 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
-                password += Numbers[rand.Next(0, 9)];
+                password += Numbers[InternalRandom.Next(0, 9)];
             }
             pin = int.Parse(password);
 
@@ -428,7 +428,7 @@ namespace QuickTools.QCore
             }
             if (!RandomOpen)
             {
-                rand = new Random();
+                InternalRandom = new Random();
                 RandomOpen = true;
             }
             string password = "".Replace(" ", "");
@@ -439,11 +439,11 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
 
-                password += Numbers[rand.Next(0, 9)];
+                password += Numbers[InternalRandom.Next(0, 9)];
             }
 
             return password;
@@ -474,7 +474,7 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
 
@@ -482,7 +482,7 @@ namespace QuickTools.QCore
                 int max = 250;
                 // create a random number based on the 
                 // size allowed for a byte 
-                int number = rand.Next(min, max);
+                int number = InternalRandom.Next(min, max);
                 // converting the number to bytes 
                 byte finalNumber = Convert.ToByte(number);
                 // adding the bytes 
@@ -524,14 +524,14 @@ namespace QuickTools.QCore
                 {
                     if (!RandomOpen)
                     {
-                        rand = new Random();
+                        InternalRandom = new Random();
                         RandomOpen = true;
                     }
                     int min = 0;
                     int max = 250;
                     // create a random number based on the 
                     // size allowed for a byte 
-                    int number = rand.Next(min, max);
+                    int number = InternalRandom.Next(min, max);
                     // converting the number to bytes 
                     byte finalNumber = Convert.ToByte(number);
                     // adding the bytes 
@@ -549,14 +549,14 @@ namespace QuickTools.QCore
                 {
                     if (!RandomOpen)
                     {
-                        rand = new Random();
+                        InternalRandom = new Random();
                         RandomOpen = true;
                     }
                     int min = 0;
                     int max = 250;
                     // create a random number based on the 
                     // size allowed for a byte 
-                    int number = rand.Next(min, max);
+                    int number = InternalRandom.Next(min, max);
                     // converting the number to bytes 
                     byte finalNumber = Convert.ToByte(number);
                     // adding the bytes 
@@ -610,13 +610,13 @@ namespace QuickTools.QCore
             {
                 if (!RandomOpen)
                 {
-                    rand = new Random();
+                    InternalRandom = new Random();
                     RandomOpen = true;
                 }
                 int min = minimumRange;
                 int max = maximumRange;
 
-                int number = rand.Next(min, max);
+                int number = InternalRandom.Next(min, max);
                 byte finalNumber = Convert.ToByte(number);
 
                 array[value] = finalNumber;
@@ -629,7 +629,12 @@ namespace QuickTools.QCore
 
 
         private static bool RandomOpen = false;
-        private static Random rand;
+
+        /// <summary>
+        /// Contains the Random class as an member of Irandom to hold
+        /// the random integers needed for the randomizer
+        /// </summary>
+        public static Random InternalRandom;
 
         /// <summary>
         /// Create a random number based on the rules that are passed 
@@ -649,10 +654,10 @@ namespace QuickTools.QCore
             if(RandomOpen == false)
             {
                 RandomOpen = true;
-                rand = new Random();
+                InternalRandom = new Random();
             }
 
-            int number = rand.Next(from, until);
+            int number = InternalRandom.Next(from, until);
 
 
             return number;
@@ -675,13 +680,13 @@ namespace QuickTools.QCore
         {
             if (!RandomOpen)
             {
-                 rand = new Random();
+                InternalRandom = new Random();
                  RandomOpen = true; 
             }
             int min = 0;
             int max = 250;
 
-            int number = rand.Next(min, max);
+            int number = InternalRandom.Next(min, max);
             byte finalNumber = Convert.ToByte(number);
             return finalNumber;
 
