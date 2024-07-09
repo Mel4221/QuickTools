@@ -50,20 +50,26 @@ namespace QuickTools.QData
         /// </summary>
         /// <returns>The parse.</returns>
         /// <param name="Collection">Collection.</param>
-        public MiniDB Parse(List<DB> Collection)
+        public static MiniDB Parse(List<DB> Collection)
         {
-            try
-            {
-                this.DataBase = Collection;
-                return this;
-            }
-            catch(Exception ex)
-            {
-                throw new Exception($"The Given Collection Was Not in the Correct format due to:  {ex}");
-            }
-          
+            MiniDB db = new MiniDB();
+            db.DataBase = Collection;
+            return db; 
         }
-
+        /// <summary>
+        /// Parse the specified MiniDBFile and Collection.
+        /// </summary>
+        /// <returns>The parse.</returns>
+        /// <param name="MiniDBFile">Mini DBF ile.</param>
+        /// <param name="Collection">Collection.</param>
+        public static MiniDB Parse(string MiniDBFile,List<DB> Collection)
+        {
+            MiniDB db = new MiniDB(MiniDBFile);
+            db.Create();
+            db.Load();
+            db.DataBase = Collection;
+            return db;
+        }
         /// <summary>
         /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 
         /// below i provide the benefits from using  this method 

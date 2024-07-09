@@ -2698,6 +2698,14 @@
             <returns>The parse.</returns>
             <param name="Collection">Collection.</param>
         </member>
+        <member name="M:QuickTools.QData.MiniDB.Parse(System.String,System.Collections.Generic.List{QuickTools.QData.DB})">
+            <summary>
+            Parse the specified MiniDBFile and Collection.
+            </summary>
+            <returns>The parse.</returns>
+            <param name="MiniDBFile">Mini DBF ile.</param>
+            <param name="Collection">Collection.</param>
+        </member>
         <member name="M:QuickTools.QData.MiniDB.AddKey(System.Object,System.Object,System.Boolean)">
             <summary>
             Adds the key but mainly turns on or off the loaded which could help on speed up write time 
