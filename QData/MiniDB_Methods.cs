@@ -45,6 +45,24 @@ namespace QuickTools.QData
     {
 
 
+        /// <summary>
+        /// Parse the specified Collection.
+        /// </summary>
+        /// <returns>The parse.</returns>
+        /// <param name="Collection">Collection.</param>
+        public MiniDB Parse(List<DB> Collection)
+        {
+            try
+            {
+                this.DataBase = Collection;
+                return this;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"The Given Collection Was Not in the Correct format due to:  {ex}");
+            }
+          
+        }
 
         /// <summary>
         /// Adds the key but mainly turns on or off the loaded which could help on speed up write time 

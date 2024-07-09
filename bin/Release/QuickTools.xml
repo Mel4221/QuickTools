@@ -2691,6 +2691,13 @@
             The compress.
             </summary>
         </member>
+        <member name="M:QuickTools.QData.MiniDB.Parse(System.Collections.Generic.List{QuickTools.QData.DB})">
+            <summary>
+            Parse the specified Collection.
+            </summary>
+            <returns>The parse.</returns>
+            <param name="Collection">Collection.</param>
+        </member>
         <member name="M:QuickTools.QData.MiniDB.AddKey(System.Object,System.Object,System.Boolean)">
             <summary>
             Adds the key but mainly turns on or off the loaded which could help on speed up write time 
