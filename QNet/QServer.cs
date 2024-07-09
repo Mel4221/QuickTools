@@ -89,7 +89,7 @@ using QuickTools.QCore;
         /// <summary>
         /// The response function.
         /// </summary>
-        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { if (PrintResponseFunctionStatus) Get.Yellow($"Response Function: {item.RawUrl}"); return new byte[0]; };
+        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { if (PrintResponseFunctionStatus) Get.Yellow($"Response Function: {item.RawUrl}"); return Get.Bytes("[NO RESPONSE FUNCTION SET]"); };
          
         /// <summary>
         /// Converts to html.

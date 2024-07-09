@@ -145,7 +145,9 @@ namespace QuickTools.QIO
 				try
 				{
 					if (this.AllowDebugger) Color.Yellow();
-					byte[] buffer = new byte[0];
+                    byte[] buffer;
+                    buffer = new byte[0];
+
                     int length;
                     long len;
                     length = 0;
@@ -153,23 +155,29 @@ namespace QuickTools.QIO
                     //GC.Collect();
                     if (len > int.MaxValue / 2)
                     {
-                        length = int.MaxValue / 2 / 2;
+                        length = int.MaxValue / 2;
+                        if (this.AllowDebugger) Get.Yellow($"BUFFER RESIZED TO: {Get.FileSize(length)}");
                     }
                     if (len < int.MaxValue / 2)
                     {
                         length = int.Parse(len.ToString());
+                        //if (this.AllowDebugger) Get.Yellow($"BUFFER RESIZED TO: {Get.FileSize(length)}");
                     }
-
+                    buffer = new byte[length];
+                    ref byte[] buff = ref buffer;
                     if (!this.AllowDebugger)
 					{
-                        buffer = Get.Bytes(IRandom.RandomText(length));
-					}
-					if (this.AllowDebugger)
+                        //buffer = Get.Bytes(IRandom.RandomText(length));
+
+                        buffer = IRandom.Buffer(ref buff);
+                    }
+                    if (this.AllowDebugger)
 					{
 						Get.Wait($"{files[file]} Building Random Buffer...", () =>
 						{
-                            buffer = Get.Bytes(IRandom.RandomText(length));
-						});
+                            ref byte[] buff2 = ref buffer;
+                            buffer = IRandom.Buffer(ref buff2);
+                        });
 					}
 
 					if (this.AllowDebugger) Color.Yellow($"Buffer Size: [{Get.FileSize(buffer)}]");

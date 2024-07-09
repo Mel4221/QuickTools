@@ -96,7 +96,20 @@ namespace QuickTools.QCore
       };
 
 
-
+        /// <summary>
+        /// Creates a random buffer based on the length of the given buffer
+        /// </summary>
+        /// <returns>The buffer.</returns>
+        /// <param name="buffer">Buffer.</param>
+        public static ref byte[] Buffer(ref byte[] buffer)
+        {
+            ref byte[] buff = ref buffer;
+            for(int foward = 0; foward < buff.Length; foward++)
+            {
+                buff[foward] = Get.Bytes(RandomChar)[0];
+            }
+            return ref buff;
+        }
         /// <summary>
         /// Returns a Random char it could be anything from a letter , number or a symbol
         /// </summary>

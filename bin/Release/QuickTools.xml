@@ -2292,6 +2292,13 @@
             Contains all the chars from Uppoercase ,lowercases and symbols 
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.IRandom.Buffer(System.Byte[]@)">
+            <summary>
+            Creates a random buffer based on the length of the given buffer
+            </summary>
+            <returns>The buffer.</returns>
+            <param name="buffer">Buffer.</param>
+        </member>
         <member name="P:QuickTools.QCore.IRandom.RandomChar">
             <summary>
             Returns a Random char it could be anything from a letter , number or a symbol
