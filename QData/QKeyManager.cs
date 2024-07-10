@@ -333,10 +333,12 @@ namespace QuickTools.QData
         /// </summary>
         public void Create()
         {
-            Get.WaitWhileBusy(this.FileName, this.AllowDebugger, () =>
-            {
-                Binary.Writer(this.FileName, new byte[] { });
-            });  // while         
+            Binary.Writer(this.FileName, new byte[] { });
+            /*
+                Get.WaitWhileBusy(this.FileName, this.AllowDebugger, () =>
+                {
+                });  // while     
+            */    
         }
         /// <summary>
         /// Gets the key.
