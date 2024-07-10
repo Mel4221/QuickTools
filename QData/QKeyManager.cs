@@ -700,12 +700,12 @@ namespace QuickTools.QData
                 {
                     Get.Red(ex.Message);
                 }
-                this.FailToWriteCount++;
+                //this.FailToWriteCount++;
 				//Get.WaitTime(
 				//IRandom.RandomInt(
 				//this.MinimumDelayTimeForResorsesToBeFree,
 				//this.MaximumDelayTimeForResorsesToBeFree));
-				this.WriteKeys(fileName, ref keys);
+				//this.WriteKeys(fileName, ref keys);
 
 			}
 		}
@@ -741,19 +741,14 @@ namespace QuickTools.QData
         {
 
             string keyFile = this.FileName;
-            if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
+           // if (!File.Exists(keyFile)) throw new FileNotFoundException($"The Key {keyFile} was not found or not exist");
             Check check = new Check();
             check.Start();
-            this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{keyFile}]";
+           // this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{keyFile}]";
             
-            if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus, () =>
-            {
-                if (Get.IsFileBusy(keyFile)) throw new Exception("File is currently in use by another Program");
-            });
-            if (!this.AllowDebugger)
-            {
-                if (Get.IsFileBusy(keyFile)) throw new Exception("File is currently in use by another Program");
-            }
+
+            if (Get.IsFileBusy(keyFile)) throw new Exception("File is currently in use by another Program");
+         
 
             this.Errors = new List<Error>();
             this.Keys.Clear();
@@ -863,7 +858,7 @@ namespace QuickTools.QData
 
                     });
                     this.FailToReadCount++;
-                    this.ReadKeys();
+                    //this.ReadKeys();
                 }
 
             }
