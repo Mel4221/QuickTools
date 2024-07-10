@@ -301,13 +301,10 @@ namespace QuickTools.QData
         {
             if (File.Exists(this.FileName))
             {
-                while(true)
-                {
-					if (!Get.IsFileBusy(this.FileName))
-					{
-						File.Delete(this.FileName);
-                        break;
-					}
+
+				if (!Get.IsFileBusy(this.FileName))
+				{
+					File.Delete(this.FileName);
 				}
 
             }
@@ -582,13 +579,14 @@ namespace QuickTools.QData
 				Binary.Writer(fileName, Get.Bytes($"{QKey_Id_Key}{this.KeyAssingChar}{this.QKeyId}{this.KeyTerminatorChar}\n"));
 				return;
             }
-            if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
+            //if (!File.Exists(fileName)) throw new FileNotFoundException($"The Key File was not Found!!! at the Given Path: {fileName}");
             List<Key> stats = new List<Key>();
             try
             {
                // GC.Collect();
 
                 if(Get.IsFileBusy(fileName))this.CurrentTextStatus = $"WAITTING FOR REASORSERS TO BE FREE: [{fileName}]";
+                /*
                 if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus,() => 
                 {
                     while (Get.IsFileBusy(fileName)) { 
@@ -597,12 +595,15 @@ namespace QuickTools.QData
                     this.MinimumDelayTimeForResorsesToBeFree, 
                     this.MaximumDelayTimeForResorsesToBeFree)); }
                 });
+
+
                 if (!this.AllowDebugger) { while (Get.IsFileBusy(fileName)) { 
                 Get.WaitTime(
                 IRandom.RandomInt(
                 this.MinimumDelayTimeForResorsesToBeFree,
                 this.MaximumDelayTimeForResorsesToBeFree)); 
                 } }
+                */
                 using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                 {
                     if (!stream.CanWrite)
@@ -742,10 +743,13 @@ namespace QuickTools.QData
             
             if (this.AllowDebugger) Get.Wait(this.CurrentTextStatus, () =>
             {
-                while (Get.IsFileBusy(keyFile)) { }
+                if (Get.IsFileBusy(keyFile)) throw new Exception("File is currently in use by another Program");
             });
-            if (!this.AllowDebugger) { while (Get.IsFileBusy(keyFile)) { } }
-            
+            if (!this.AllowDebugger)
+            {
+                if (Get.IsFileBusy(keyFile)) throw new Exception("File is currently in use by another Program");
+            }
+
             this.Errors = new List<Error>();
             this.Keys.Clear();
             //string key, temp, input;

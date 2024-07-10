@@ -807,7 +807,6 @@ namespace QuickTools.QData
             this.DataManager = new QKeyManager(this.DBName);
             this.DataManager.AllowDebugger = this.AllowDebugger;
             this.DataManager.LoadKeys();
-			QProgressBar bar = new QProgressBar();
 
 			 
             //to makes sure that we return if the keys count is cero
@@ -867,6 +866,7 @@ namespace QuickTools.QData
                                 switch(this.DubuggerMode)
                                 {
                                     case 0:
+                                        QProgressBar bar = new QProgressBar();
                                         bar.Label = $"Parsing To MiniDB Format... [{key}]";
                                         bar.Display(Get.Status(key, this.DataManager.Keys.Count));
                                         break;
