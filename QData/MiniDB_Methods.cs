@@ -1427,14 +1427,14 @@ namespace QuickTools.QData
         /// Selects  where the key equals to the value given.
         /// </summary>
         /// <returns>The where key.</returns>
-        /// <param name="value">Value.</param>
-        public virtual DB SelectWhereKey(object value)
+        /// <param name="key">Value.</param>
+        public virtual DB SelectWhereKey(object key)
         {
               try
               {
                     for(int db = 0; db < this.DataBase.Count; db++)
                     {
-                          if(DataBase[db].Key == value.ToString())
+                          if(DataBase[db].Key == key.ToString())
                           {
                                 return DataBase[db]; 
                           }
@@ -1448,21 +1448,47 @@ namespace QuickTools.QData
               }
         }
 
-   
+
 
         /// <summary>
         /// Selecs the allt where key.
         /// </summary>
         /// <returns>The allt where key.</returns>
         /// <param name="value">Value.</param>
-        public virtual List<DB> SelecAlltWhereKey(object value)
+        public virtual List<DB> SelecAlltWhereValue(object value)
+        {
+            try
+            {
+                List<DB> dbList = new List<DB>();
+                for (int db = 0; db < this.DataBase.Count; db++)
+                {
+                    if (DataBase[db].Value == value.ToString())
+                    {
+                        dbList.Add(DataBase[db]);
+                    }
+                }
+
+                return dbList;
+            }
+            catch
+            {
+                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                return new List<DB>();
+            }
+        }
+        /// <summary>
+        /// Selecs the allt where key.
+        /// </summary>
+        /// <returns>The allt where key.</returns>
+        /// <param name="key">Value.</param>
+        public virtual List<DB> SelecAlltWhereKey(object key)
         {
               try
               {
                     List<DB> dbList = new List<DB>(); 
                     for (int db = 0; db < this.DataBase.Count; db++)
                     {
-                          if (DataBase[db].Key == value.ToString())
+                          if (DataBase[db].Key == key.ToString())
                           {
                                 dbList.Add(DataBase[db]); 
                           }
@@ -1476,59 +1502,7 @@ namespace QuickTools.QData
                     return new List<DB>(); 
               }
         }
-
-        /// <summary>
-        /// Selects the where key.
-        /// </summary>
-        /// <returns>The where key.</returns>
-        /// <param name="dbName">Db name.</param>
-        /// <param name="value">Value.</param>
-        public virtual List<DB> SelectWhereKey(string dbName , string value)
-        {
-              try
-              {
-                    using (MiniDB db = new MiniDB(dbName))
-                    {
-                          return db.DataBase.Where(a => a.Key == value.ToString()).ToList();
-                    }
-              }
-              catch
-              {
-                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                    return new List<DB>();
-              }
-        }
-
-        /// <summary>
-        /// Selects the where value.
-        /// </summary>
-        /// <returns>The where value.</returns>
-        /// <param name="dbName">Db name.</param>
-        /// <param name="value">Value.</param>
-        public virtual DB SelectWhereValue(string dbName , string value)
-        {
-              try
-              {
-
-                    using (MiniDB db = new MiniDB(dbName))
-                    {
-                          for (int x = 0; x < db.DataBase.Count; x++)
-                          {
-                                if (db.DataBase[x].Value == value)
-                                {
-                                      return db.DataBase[x];
-                                }
-                          }
-
-                    }
-                    return new DB();
-              }
-              catch
-              {
-                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                    return new DB();
-              }
-        }
+ 
 
         /// <summary>
         /// Selects the where value.
@@ -1537,29 +1511,23 @@ namespace QuickTools.QData
         /// <param name="value">Value.</param>
         public virtual DB SelectWhereValue(string value)
         {
-              try
-              {
-                   foreach(DB db in this.DataBase)
+            try
             {
-                if(db.Value == value)
+                for (int item = 0; item < this.DataBase.Count; item++)
                 {
-                    return db; 
+                    if (this.DataBase[item].Value == value)
+                    {
+                        return this.DataBase[item];
+                    }
                 }
+                return new DB { IsEmpty = true };
             }
-            return new DB()
+            catch
             {
-                IsEmpty = true
-            }; 
+                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                return new DB();
+            }
 
-        }
-              catch 
-              {
-                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-            return new DB()
-            {
-                IsEmpty = true
-            };
-        }
         }
         /// <summary>
         /// Selects the where relation.
@@ -1568,30 +1536,22 @@ namespace QuickTools.QData
         /// <param name="relation">Relation.</param>
       public virtual DB SelectWhereRelation(string relation)
         {
-              try
-              {
-
-                    using (MiniDB db = new MiniDB(this.DBName))
-                    {
-                          for (int x = 0; x < db.DataBase.Count; x++)
-                          {
-                                if (db.DataBase[x].Relation == relation)
-                                {
-                                      return db.DataBase[x];
-                                }
-                          }
-
-                    }
-            return new DB()
+            try
             {
-                IsEmpty = true
-            };
-        }
-              catch
-              {
-                    Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                    return new DB();
-              }
+                for(int item = 0; item < this.DataBase.Count; item++)
+                {
+                    if(this.DataBase[item].Relation == relation)
+                    {
+                        return this.DataBase[item];
+                    }
+                }
+                return new DB { IsEmpty = true };
+            }
+            catch
+            {
+                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                return new DB();
+            }
         }
 
 
@@ -1635,17 +1595,22 @@ namespace QuickTools.QData
         {
               try
               {
-                    List<DB> listOfRelated;
-
-                    using (MiniDB db = new MiniDB(dbName))
+                List<DB> listOfRelated = new List<DB>();
+                    for(int item = 0; item < this.DataBase.Count; item++)
+                {
+                        if(this.DataBase[item].Relation == relation)
                     {
-                          listOfRelated = db.DataBase.Where(a => a.Relation == relation).ToList();
+                        listOfRelated.Add(this.DataBase[item]); 
                     }
-                    return listOfRelated;
-              }
+                }
+                return listOfRelated;
+            }
               catch 
               {
+                if (this.AllowDebugger)
+                {
                     Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                }
                     return new List<DB>();
               }
         }
@@ -1659,18 +1624,23 @@ namespace QuickTools.QData
         {
               try
               {
-                    List<DB> listOfRelated;
-
-                    using (MiniDB db = new MiniDB(this.DBName))
+                List<DB> listOfRelated = new List<DB>();
+                   for(int item =0; item < this.DataBase.Count; item ++)
+                {
+                    if (this.DataBase[item].Relation == relation.ToString())
                     {
-                          listOfRelated = db.DataBase.Where(a => a.Relation == relation.ToString()).ToList();
+                        listOfRelated.Add(this.DataBase[item]);
                     }
-                    return listOfRelated;
+                }
+                return listOfRelated;
               }
               catch 
               {
+                if (this.AllowDebugger)
+                {
                     Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
-                    return new List<DB>();
+                }
+                return new List<DB>();
               }
         }
    

@@ -2937,6 +2937,13 @@
             Selects  where the key equals to the value given.
             </summary>
             <returns>The where key.</returns>
+            <param name="key">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.SelecAlltWhereValue(System.Object)">
+            <summary>
+            Selecs the allt where key.
+            </summary>
+            <returns>The allt where key.</returns>
             <param name="value">Value.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.SelecAlltWhereKey(System.Object)">
@@ -2944,23 +2951,7 @@
             Selecs the allt where key.
             </summary>
             <returns>The allt where key.</returns>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereKey(System.String,System.String)">
-            <summary>
-            Selects the where key.
-            </summary>
-            <returns>The where key.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="value">Value.</param>
-        </member>
-        <member name="M:QuickTools.QData.MiniDB.SelectWhereValue(System.String,System.String)">
-            <summary>
-            Selects the where value.
-            </summary>
-            <returns>The where value.</returns>
-            <param name="dbName">Db name.</param>
-            <param name="value">Value.</param>
+            <param name="key">Value.</param>
         </member>
         <member name="M:QuickTools.QData.MiniDB.SelectWhereValue(System.String)">
             <summary>
