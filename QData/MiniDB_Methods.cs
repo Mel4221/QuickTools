@@ -119,10 +119,47 @@ namespace QuickTools.QData
             this.RefreshDB();
         }
 
-
-
-
-
+        /// <summary>
+        /// Update all where key match the given criatieries 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool UpdateAllWhereKey(DB key)
+        {
+            bool result = false;
+            for (int item = 0; item < this.DataBase.Count; item++)
+            {
+                if (this.DataBase[item].Key == key.Key)
+                {
+                    result = true;
+                    this.DataBase[item].Key = key.Key;
+                    this.DataBase[item].Value = key.Value;
+                    this.DataBase[item].Relation = key.Value;
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        /// Update the value where the first key matching the key is found 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool UpdateValueWhereKey(DB key)
+        {
+            bool result = false; 
+            for(int item = 0; item < this.DataBase.Count; item++)
+            {
+                  if(this.DataBase[item].Key == key.Key)
+                  {
+                        result = true;
+                        this.DataBase[item].Key = key.Key;
+                        this.DataBase[item].Value = key.Value;
+                        this.DataBase[item].Relation = key.Value;
+                    return result;
+                  }
+            }
+            return result; 
+        }
 
         /// <summary>
         /// Adds the key on hot and you later desides when to write it to the db file 
