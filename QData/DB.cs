@@ -78,7 +78,7 @@ namespace QuickTools.QData
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.MiniDB.DB"/>.</returns>
         public override string ToString()
       {
-            return $"Id: {Id} Key: {Key} Value: {Value} Relation: {Relation} ";
+            return $"Id: {this.Id} Key: {this.Key} Value: {this.Value} Relation: {this.Relation} IsEmpty: {this.IsEmpty}";
       }
 
 

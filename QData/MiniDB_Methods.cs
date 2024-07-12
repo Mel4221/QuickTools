@@ -134,7 +134,7 @@ namespace QuickTools.QData
                     result = true;
                     this.DataBase[item].Key = key.Key;
                     this.DataBase[item].Value = key.Value;
-                    this.DataBase[item].Relation = key.Value;
+                    this.DataBase[item].Relation = key.Relation;
                 }
             }
             return result;
@@ -154,11 +154,32 @@ namespace QuickTools.QData
                         result = true;
                         this.DataBase[item].Key = key.Key;
                         this.DataBase[item].Value = key.Value;
-                        this.DataBase[item].Relation = key.Value;
+                        this.DataBase[item].Relation = key.Relation;
                     return result;
                   }
             }
             return result; 
+        }
+
+        /// <summary>
+        /// Update the value where the first key matching the key is found 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool UpdateValueWhereKey(object key , object value)
+        {
+            bool result = false;
+            for (int item = 0; item < this.DataBase.Count; item++)
+            {
+                if (this.DataBase[item].Key == key.ToString())
+                {
+                    result = true;
+                    this.DataBase[item].Value = value.ToString(); 
+                    return result;
+                }
+            }
+            return result;
         }
 
         /// <summary>
@@ -436,8 +457,6 @@ namespace QuickTools.QData
         {
             try
             {
-
-
                 List<DB> temp = new List<DB>();
                 for (int x = 0; x < DataBase.Count; x++)
                 {
@@ -1420,16 +1439,16 @@ namespace QuickTools.QData
                 for (int db = 0; db < this.DataBase.Count; db++)
                 {
                     if (DataBase[db].Key == key.ToString() &&
-                        DataBase[db].Value == relation.ToString())
+                        DataBase[db].Relation == relation.ToString())
                     {
                         return DataBase[db];
                     }
                 }
-                return new DB();
+                return new DB() { IsEmpty=true };
             }
             catch
             {
-                Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
+                if(this.AllowDebugger)Get.Yellow($"NO VALUES OR VALUE WERE FOUNDED THAT MATCH THAT CRITERIA SO THE RETURNED VALUE WAS NULL \n YOU ALSO MAY GET AN EXCEPTION BUT IS NORMAL SINCE THE VALUE WAS NOT FOUNDED");
                 return new DB();
             }
         }
