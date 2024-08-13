@@ -2732,6 +2732,20 @@
             Saves the changes that are in the <see cref="P:QuickTools.QData.MiniDB.DataBase"/>
             </summary>
         </member>
+        <member name="M:QuickTools.QData.MiniDB.UpdateAllWhereKey(QuickTools.QData.DB)">
+            <summary>
+            Update all where key match the given criatieries 
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:QuickTools.QData.MiniDB.UpdateValueWhereKey(QuickTools.QData.DB)">
+            <summary>
+            Update the value where the first key matching the key is found 
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="M:QuickTools.QData.MiniDB.AddKeyOnHot(System.Object,System.Object,System.Object)">
             <summary>
             Adds the key on hot and you later desides when to write it to the db file 
