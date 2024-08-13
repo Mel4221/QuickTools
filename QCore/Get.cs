@@ -615,7 +615,7 @@ namespace QuickTools.QCore
             string status = null;
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
-            double s = Math.Round(c / g, 2) * 100;
+            double s = Math.Round(((c / g) * 100));
             status = $"{s}%";
             return status;
 
@@ -631,7 +631,7 @@ namespace QuickTools.QCore
         {
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
-            double s = Math.Round(c / g, 2) * 100;
+            double s = Math.Round(((c / g) * 100));
             return int.Parse(s.ToString());
         }
         /*

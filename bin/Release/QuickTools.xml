@@ -3868,6 +3868,50 @@
             <param name="format"></param>
             <returns></returns>
         </member>
+        <member name="T:QuickTools.QData.ClownSettings">
+            <summary>
+            Clown settings.
+            </summary>
+        </member>
+        <member name="P:QuickTools.QData.ClownSettings.Settings">
+            <summary>
+            Gets or sets the settings.
+            </summary>
+            <value>The settings.</value>
+        </member>
+        <member name="P:QuickTools.QData.ClownSettings.AllowDebugger">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ClownSettings"/> allow debugger.
+            </summary>
+            <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:QuickTools.QData.ClownSettings.GetSetting(System.Object)">
+            <summary>
+            Gets the setting.
+            </summary>
+            <returns>The setting.</returns>
+            <param name="setting">Setting.</param>
+        </member>
+        <member name="M:QuickTools.QData.ClownSettings.UpdateSetting(System.Object,System.Object)">
+            <summary>
+            Updates the setting.
+            </summary>
+            <param name="setting">Setting.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.ClownSettings.AddSetting(System.Object,System.Object)">
+            <summary>
+            Adds the setting.
+            </summary>
+            <param name="setting">Setting.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.ClownSettings.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ClownSettings"/> class.
+            </summary>
+            <param name="settingsFile">Settings file.</param>
+        </member>
         <member name="T:QuickTools.QIO.RecursiveFileSearch">
             <summary>
             Recursive file search.

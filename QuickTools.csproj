@@ -148,6 +148,7 @@
     <Compile Include="QDevelop\Package.cs" />
     <Compile Include="QDevelop\Package_Dependencys.cs" />
     <Compile Include="QIO\QZip_Fields.cs" />
+    <Compile Include="QData\ClownSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

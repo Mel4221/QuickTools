@@ -23,5 +23,5 @@ namespace QuickTools.QSecurity
             /// <param name="password">Password.</param>
             public string DecryptText(string text, object password) => this.Decrypt(IConvert.StringToBytesArray(text),CreatePassword(password), Get.KeyBytesSaved());
 
-     }
+    }  
 }
