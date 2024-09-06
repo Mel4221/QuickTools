@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 namespace QuickTools.QSecurity
 {
       /// <summary>
-      /// The Secure class works pretty well so far on text DO NOT USE IT ON BINARY DATA IT COULD BREAK 
+      /// The Secure class worksc    pretty well so far on text DO NOT USE IT ON BINARY DATA IT COULD BREAK 
       /// THE FILES    
       /// </summary>
     public partial class Secure 

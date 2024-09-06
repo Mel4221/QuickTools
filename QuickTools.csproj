@@ -36,6 +36,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="QDevelop\Package_Dependencys.cs" />
     <Compile Include="QIO\QZip_Fields.cs" />
     <Compile Include="QData\ClownSettings.cs" />
+    <Compile Include="QData\NJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

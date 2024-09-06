@@ -51,6 +51,31 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
         /// <summary>
+        /// Ises the divisble by.
+        /// </summary>
+        /// <returns><c>true</c>, if divisble by was ised, <c>false</c> otherwise.</returns>
+        /// <param name="numberA">Number a.</param>
+        /// <param name="numberB">Number b.</param>
+        public static bool IsDivisbleBy(object numberA,object numberB)
+        {
+            if (int.Parse(numberA.ToString()) % int.Parse(numberB.ToString()) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
+            }
+        }
+
+        /// <summary>
+        /// Ises the divisible by half.
+        /// </summary>
+        /// <returns><c>true</c>, if divisible by half was ised, <c>false</c> otherwise.</returns>
+        /// <param name="number">Number.</param>
+        public static bool IsDivisibleByHalf(object number) => Get.IsDivisbleBy(number, 2);
+       
+        /// <summary>
         /// Waits the while busy.
         /// </summary>
         /// <param name="fileName">File name.</param>

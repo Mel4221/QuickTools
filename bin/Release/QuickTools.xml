@@ -1116,6 +1116,21 @@
             tools that started this Project.
             </summary>
         </member>
+        <member name="M:QuickTools.QCore.Get.IsDivisbleBy(System.Object,System.Object)">
+            <summary>
+            Ises the divisble by.
+            </summary>
+            <returns><c>true</c>, if divisble by was ised, <c>false</c> otherwise.</returns>
+            <param name="numberA">Number a.</param>
+            <param name="numberB">Number b.</param>
+        </member>
+        <member name="M:QuickTools.QCore.Get.IsDivisibleByHalf(System.Object)">
+            <summary>
+            Ises the divisible by half.
+            </summary>
+            <returns><c>true</c>, if divisible by half was ised, <c>false</c> otherwise.</returns>
+            <param name="number">Number.</param>
+        </member>
         <member name="M:QuickTools.QCore.Get.WaitWhileBusy(System.String,System.Boolean,System.Action)">
             <summary>
             Waits the while busy.
@@ -3934,6 +3949,102 @@
             </summary>
             <param name="settingsFile">Settings file.</param>
         </member>
+        <member name="T:QuickTools.QData.NJson">
+            <summary>
+            Pretty much this is the class that gives us access to the 
+            basic functions from the Newtonsoft and it was named NJson
+            due to the name given to the DLL or library
+            </summary>
+        </member>
+        <member name="T:QuickTools.QData.NJson.Builder">
+            <summary>
+            Builder.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.Add(System.String,System.String)">
+            <summary>
+            Add the specified key and value to the json buffer
+            </summary>
+            <param name="key">Key.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.Add(QuickTools.QData.Key)">
+            <summary>
+            Add the specified key and value to the json buffer
+            </summary>
+            <param name="key">Key.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.GetJson">
+            <summary>
+            Gets the json.
+            </summary>
+            <returns>The json.</returns>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.Build(System.String)">
+            <summary>
+            Build the specified filePath.
+            </summary>
+            <param name="filePath">File path.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.NJson.Builder"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.NJson.Builder"/> class.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.NJson.GetKeys(System.Object)">
+            <summary>
+            Gets the keys.
+            </summary>
+            <returns>The keys.</returns>
+            <param name="property">Property.</param>
+        </member>
+        <member name="F:QuickTools.QData.NJson.JsonObject">
+            <summary>
+            The json object.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.NJson.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QData.NJson"/> class.
+            </summary>
+            <param name="filePath">File path.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.LoadJson">
+            <summary>
+            Loads the json.
+            </summary>
+        </member>
+        <member name="M:QuickTools.QData.NJson.GetValue(System.String)">
+            <summary>
+            Gets the value.
+            </summary>
+            <returns>The value.</returns>
+            <param name="path">Path.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.SetValue(System.String,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Sets the value.
+            </summary>
+            <param name="path">Path.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.UpdateValue(System.String,Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Updates the value.
+            </summary>
+            <param name="path">Path.</param>
+            <param name="newValue">New value.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.SaveJson">
+            <summary>
+            Saves the json.
+            </summary>
+        </member>
         <member name="T:QuickTools.QIO.RecursiveFileSearch">
             <summary>
             Recursive file search.
@@ -3959,6 +4070,17 @@
         <member name="T:QuickTools.QIO.FilesMaper">
             <summary>
             This is a class developed to assit to be able to retroactively read files and directories 
+            </summary>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.Dispose(System.Boolean)">
+            <summary>
+            Dispose the specified disposing.
+            </summary>
+            <param name="disposing">If set to <c>true</c> disposing.</param>
+        </member>
+        <member name="M:QuickTools.QIO.FilesMaper.Dispose">
+            <summary>
+            Releases all resource used by the <see cref="T:QuickTools.QIO.FilesMaper"/> object.
             </summary>
         </member>
         <member name="P:QuickTools.QIO.FilesMaper.DirectoryList">
@@ -5768,7 +5890,7 @@
             a public key and a 
             </summary>
             <summary>
-            The Secure class works pretty well so far on text DO NOT USE IT ON BINARY DATA IT COULD BREAK 
+            The Secure class worksc    pretty well so far on text DO NOT USE IT ON BINARY DATA IT COULD BREAK 
             THE FILES    
             </summary>
             <summary>
