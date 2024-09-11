@@ -210,6 +210,8 @@ namespace QuickTools.QCore
                         password += UpperCase[InternalRandom.Next(0, 26)];
                         break;
                     case 2:
+                        password += UpperCase[InternalRandom.Next(0, 26)];
+
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:
@@ -270,6 +272,8 @@ namespace QuickTools.QCore
                         break;
                     case 2:
                         // password += Symbols[symbol.Next (0, 14)];
+                        password.Append(UpperCase[InternalRandom.Next(0, 26)]);
+
                         break;
                     case 3:
                         password.Append(Numbers[InternalRandom.Next(0, 10)]);
@@ -330,6 +334,8 @@ namespace QuickTools.QCore
                         password.Append(UpperCase[InternalRandom.Next(0, 26)]);
                         break;
                     case 2:
+                        password.Append(UpperCase[InternalRandom.Next(0, 26)]);
+
                         // password += Symbols[symbol.Next (0, 14)];
                         break;
                     case 3:

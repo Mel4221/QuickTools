@@ -3961,6 +3961,12 @@
             Builder.
             </summary>
         </member>
+        <member name="P:QuickTools.QData.NJson.Builder.FilePath">
+            <summary>
+            Gets or sets the file path.
+            </summary>
+            <value>The file path.</value>
+        </member>
         <member name="M:QuickTools.QData.NJson.Builder.Add(System.String,System.String)">
             <summary>
             Add the specified key and value to the json buffer
@@ -3985,6 +3991,11 @@
             Build the specified filePath.
             </summary>
             <param name="filePath">File path.</param>
+        </member>
+        <member name="M:QuickTools.QData.NJson.Builder.Build">
+            <summary>
+            Build this instance.
+            </summary>
         </member>
         <member name="M:QuickTools.QData.NJson.Builder.#ctor">
             <summary>
