@@ -6034,53 +6034,44 @@
             <param name="password">Password.</param>
             <param name="iv">Iv.</param>
         </member>
-        <member name="T:QuickTools.QSecurity.FalseIO.Trojan">
+        <member name="T:QuickTools.QSecurity.Tricks.TPack">
             <summary>
             The Trojan class does not create a Virus or anything like creatting a maleware but it can create a file that will 
             look like a regular file but inside it it could contain the data given to it  as a payload. 
             The name of the class is Trojan Mainly for how a trojan virus will behave
             </summary>
             <summary>
-            Trojan is a safe way to insert a file inside another and being able to 
+            Tpack is a safe way to insert a file inside another and being able to 
             remove it from it later
             </summary>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
-            <param name="trojanFile"></param>
+            <param name="tpackFile"></param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
-            </summary>
-            <param name="payload">Payload.</param>
-            <param name="trojanFile">Trojan file.</param>
-        </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
             <param name="payload">Payload.</param>
-            <param name="indexStart">Index start.</param>
-            <param name="indexEnd">Index end.</param>
+            <param name="tpackFile">Trojan file.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
             <param name="payload">Payload.</param>
             <param name="indexStart">Index start.</param>
             <param name="indexEnd">Index end.</param>
-            <param name="description">Description.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
@@ -6088,9 +6079,8 @@
             <param name="indexStart">Index start.</param>
             <param name="indexEnd">Index end.</param>
             <param name="description">Description.</param>
-            <param name="date">Date.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
@@ -6099,9 +6089,8 @@
             <param name="indexEnd">Index end.</param>
             <param name="description">Description.</param>
             <param name="date">Date.</param>
-            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
             </summary>
@@ -6111,125 +6100,136 @@
             <param name="description">Description.</param>
             <param name="date">Date.</param>
             <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-            <param name="trojanFile">Trojan file.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ReadInfo">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.#ctor(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
+            </summary>
+            <param name="payload">Payload.</param>
+            <param name="indexStart">Index start.</param>
+            <param name="indexEnd">Index end.</param>
+            <param name="description">Description.</param>
+            <param name="date">Date.</param>
+            <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+            <param name="tpackFile">Trojan file.</param>
+        </member>
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.ReadInfo">
             <summary>
             reads the information from the trojan file  if there is any information in it 
             </summary>
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.Payload">
+        <member name="P:QuickTools.QSecurity.Tricks.TPack.Payload">
             <summary>
             Gets or sets the payload.
             </summary>
             <value>The payload.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.IndexStart">
+        <member name="P:QuickTools.QSecurity.Tricks.TPack.IndexStart">
             <summary>
             Gets or sets the index start.
             </summary>
             <value>The index start.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.IndexEnd">
+        <member name="P:QuickTools.QSecurity.Tricks.TPack.IndexEnd">
             <summary>
             Gets or sets the index end.
             </summary>
             <value>The index end.</value>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.Description">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.Description">
             <summary>
             Gets or sets the description.
             </summary>
             <value>The description.</value>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.Date">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.Date">
             <summary>
             Gets or sets the date.
             </summary>
             <value>The date.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.AllowDebugger">
+        <member name="P:QuickTools.QSecurity.Tricks.TPack.AllowDebugger">
             <summary>
             Gets or sets a value indicating whether this <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>
             allow debugger.
             </summary>
             <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         </member>
-        <member name="P:QuickTools.QSecurity.FalseIO.Trojan.TrojanFile">
+        <member name="P:QuickTools.QSecurity.Tricks.TPack.TPackFile">
             <summary>
             Gets or sets the trojan file.
             </summary>
             <value>The trojan file.</value>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.PorcentOfMaxBreak">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.PorcentOfMaxBreak">
             <summary>
             This Defines when it will understand that if has reached enought 
             intents to find the Payload , so it try to find it in the last 20% of the file as default
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultFilnalLabelIdentity">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.DefaultFilnalLabelIdentity">
             <summary>
             The filnal label identity is set as default (Trojan_+file) Example:  Trojan_FileName.txt
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultDeleteSourceFile">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.DefaultDeleteSourceFile">
             <summary>
             The default delete source payload.
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultRemovePayloadSourceFile">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.DefaultRemovePayloadSourceFile">
             <summary>
             deletes the payload file after being used
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.DefaultDeletePayloadFromFile">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.DefaultDeletePayloadFromFile">
             <summary>
             The default delete payload from file.
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.MetadData">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.MetadData">
             <summary>
             Coontains some information about the trojan file 
             </summary>
         </member>
-        <member name="F:QuickTools.QSecurity.FalseIO.Trojan.CurrentStage">
+        <member name="F:QuickTools.QSecurity.Tricks.TPack.CurrentStage">
             <summary>
             The current stage not-started means that no process is being reported 
             </summary>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.ToString">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.ToString">
             <summary>
             Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.
             </summary>
             <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/>.</returns>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.MakeTrojanFile">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.MakeTPackFile">
             <summary>
             Makes the trojan file.
             </summary>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.MakeTrojanFile(System.String,System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.MakeTrojanFile(System.String,System.String)">
             <summary>
             this method creates a trojan file 
             </summary>
             <param name="payload"></param>
-            <param name="trojanFile"></param>
+            <param name="tpackFile"></param>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.RemovePayload(System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.RemovePayload(System.String)">
             <summary>
             Removes the payload from the given trojan file
             </summary>
-            <param name="trojanFile">Trojan file.</param>
+            <param name="tpackFile">Trojan file.</param>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.PullPayloadFromTrojan">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.PullPayloadFromTPackFile">
             <summary>
             Pulls the payload from trojan File
             </summary>
         </member>
-        <member name="M:QuickTools.QSecurity.FalseIO.Trojan.PullPayloadFromTrojan(System.String)">
+        <member name="M:QuickTools.QSecurity.Tricks.TPack.PullPayloadFromTrojan(System.String)">
             <summary>
             Pulls the payload from trojan.
             </summary>

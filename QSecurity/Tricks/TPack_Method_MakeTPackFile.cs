@@ -28,7 +28,7 @@ using System.IO;
 using QuickTools.QCore;
 using QuickTools.QIO;
 
-namespace QuickTools.QSecurity.FalseIO
+namespace QuickTools.QSecurity.Tricks
 {
 
     /// <summary>
@@ -36,7 +36,7 @@ namespace QuickTools.QSecurity.FalseIO
     /// look like a regular file but inside it it could contain the data given to it  as a payload. 
     /// The name of the class is Trojan Mainly for how a trojan virus will behave
     /// </summary>
-    public partial class Trojan
+    public partial class TPack
     {
 
 
@@ -44,22 +44,22 @@ namespace QuickTools.QSecurity.FalseIO
         /// <summary>
         /// Makes the trojan file.
         /// </summary>
-        public void MakeTrojanFile()
+        public void MakeTPackFile()
         {
             byte[] trojan, load, pack, metadata;
             string file, payload, fake, description, str, str2, date, strPayload, strDate, strDescription;
             int indexer, len;
 
-            if (this.TrojanFile == "" || !File.Exists(this.TrojanFile))
+            if (this.TPackFile == "" || !File.Exists(this.TPackFile))
             {
-                throw new Exception("Missing Trojan File: " + this.TrojanFile);
+                throw new Exception("Missing Trojan File: " + this.TPackFile);
             }
             if (this.Payload == "" || !File.Exists(this.Payload))
             {
                 throw new Exception("Missing The Payload: " + this.Payload);
             }
 
-            file = this.TrojanFile;
+            file = this.TPackFile;
             payload = this.Payload;
             fake = $"{this.DefaultFilnalLabelIdentity}{file}";
             description = this.Description;
@@ -154,13 +154,13 @@ namespace QuickTools.QSecurity.FalseIO
         /// this method creates a trojan file 
         /// </summary>
         /// <param name="payload"></param>
-        /// <param name="trojanFile"></param>
+        /// <param name="tpackFile"></param>
         /// <exception cref="Exception"></exception>
-        public void MakeTrojanFile(string payload, string trojanFile)
+        public void MakeTrojanFile(string payload, string tpackFile)
         {
             this.Payload = payload;
-            this.TrojanFile = trojanFile;
-            this.MakeTrojanFile();
+            this.TPackFile = tpackFile;
+            this.MakeTPackFile();
         }
     }
 }

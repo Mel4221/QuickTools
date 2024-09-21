@@ -30,28 +30,28 @@ using QuickTools.QIO;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace QuickTools.QSecurity.FalseIO
-      {
+namespace QuickTools.QSecurity.Tricks
+{
 
-      public partial class Trojan
+      public partial class TPack
             {
                 /// <summary>
                 /// Pulls the payload from trojan File
                 /// </summary>
-            public  void PullPayloadFromTrojan()
+            public  void PullPayloadFromTPackFile()
                   {
 
                   byte[] payload;
-                  string trojanFile, metadata, str;
+                  string tpackFile, metadata, str;
                   int metadataLength, metaCounter;
                   bool open;
                   int len, breaker, maxBreak;
-                  if(this.TrojanFile == "" || !File.Exists(this.TrojanFile))
+                  if(this.TPackFile == "" || !File.Exists(this.TPackFile))
                   {
-                        throw new Exception("Missing or not found the trojan file: " + this.TrojanFile); 
+                        throw new Exception("Missing or not found the trojan file: " + this.TPackFile); 
                   }
-                  trojanFile = this.TrojanFile;
-                  payload = Binary.Reader(trojanFile);
+                  tpackFile = this.TPackFile;
+                  payload = Binary.Reader(tpackFile);
                   metadata = "";
                   str = "";
                   metadataLength = payload.Length - 1;
@@ -145,7 +145,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.WaitTime();
                         }
                   this.CurrentStage = $"Stage_3: Building Metadata";
-                  Trojan trojan = new Trojan()
+                  TPack trojan = new TPack()
                         {
                         Payload = info[0].Substring(1) ,
                         IndexStart = info[1] ,
@@ -161,12 +161,12 @@ namespace QuickTools.QSecurity.FalseIO
                   //Stage 4 Writting File
                   if(this.DefaultDeletePayloadFromFile == true)
                         {
-                              Binary.Write(trojanFile , payload , 0 , int.Parse(trojan.IndexStart));
+                              Binary.Write(tpackFile, payload , 0 , int.Parse(trojan.IndexStart));
                         }
                         if(this.DefaultDeleteSourceFile == true)
                         {
-                              Binary.Write(trojanFile , new byte[payload.Length] , 0 , payload.Length);
-                              File.Delete(trojanFile); 
+                              Binary.Write(tpackFile, new byte[payload.Length] , 0 , payload.Length);
+                              File.Delete(tpackFile); 
                         }
             //info[0].Substring(info[0].IndexOf("_") + 1, info[0].Length - 1)
            // string packfile = trojan.Payload.Substring(trojan.Payload.IndexOf("_") + 1, trojan.Payload.Length - 2);
@@ -288,7 +288,7 @@ namespace QuickTools.QSecurity.FalseIO
                         Get.WaitTime();
                         }
                   this.CurrentStage = $"Stage_3: Building Metadata";
-                  Trojan trojan = new Trojan()
+                  TPack trojan = new TPack()
                         {
                         Payload = info[0].Substring(1),
                         IndexStart = info[1] ,

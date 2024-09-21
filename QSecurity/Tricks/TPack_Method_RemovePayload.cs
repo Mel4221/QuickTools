@@ -4,21 +4,21 @@ using QuickTools.QCore;
 using QuickTools.QIO;
 using System.IO;
 
-namespace QuickTools.QSecurity.FalseIO
+namespace QuickTools.QSecurity.Tricks
 {
 
     /// <summary>
-    /// Trojan is a safe way to insert a file inside another and being able to 
+    /// Tpack is a safe way to insert a file inside another and being able to 
     /// remove it from it later
     /// </summary>
-    public partial class Trojan
+    public partial class TPack
     {
 
         /// <summary>
         /// Removes the payload from the given trojan file
         /// </summary>
-        /// <param name="trojanFile">Trojan file.</param>
-        public void RemovePayload(string trojanFile)
+        /// <param name="tpackFile">Trojan file.</param>
+        public void RemovePayload(string tpackFile)
         {
 
             byte[] payload;
@@ -26,13 +26,13 @@ namespace QuickTools.QSecurity.FalseIO
             int metadataLength, metaCounter;
             bool open; 
             int len, breaker, maxBreak;
-            this.TrojanFile = trojanFile; 
-            if (this.TrojanFile == "" || !File.Exists(this.TrojanFile))
+            this.TPackFile = tpackFile; 
+            if (this.TPackFile == "" || !File.Exists(this.TPackFile))
             {
-                throw new Exception("Missing or not found the trojan file: " + this.TrojanFile);
+                throw new Exception("Missing or not found the trojan file: " + this.TPackFile);
             }
            // trojanFile = this.TrojanFile;
-            payload = Binary.Reader(trojanFile);
+            payload = Binary.Reader(tpackFile);
             metadata = "";
             str = "";
             metadataLength = payload.Length - 1;
@@ -126,7 +126,7 @@ namespace QuickTools.QSecurity.FalseIO
                 Get.WaitTime();
             }
             this.CurrentStage = $"Stage_3: Building Metadata";
-            Trojan trojan = new Trojan()
+            TPack trojan = new TPack()
             {
                 Payload = info[0].Substring(1),
                 IndexStart = info[1],
@@ -143,12 +143,12 @@ namespace QuickTools.QSecurity.FalseIO
             //this.DefaultDeletePayloadFromFile = true;
             //if (this.DefaultDeletePayloadFromFile == true)
             //{
-                Binary.Write(trojanFile, payload, 0, int.Parse(trojan.IndexStart));
+                Binary.Write(tpackFile, payload, 0, int.Parse(trojan.IndexStart));
             //}
             if (this.DefaultDeleteSourceFile == true)
             {
-                Binary.Write(trojanFile, new byte[payload.Length], 0, payload.Length);
-                File.Delete(trojanFile);
+                Binary.Write(tpackFile, new byte[payload.Length], 0, payload.Length);
+                File.Delete(tpackFile);
             }
 
  

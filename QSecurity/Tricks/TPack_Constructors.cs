@@ -24,14 +24,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-namespace QuickTools.QSecurity.FalseIO
-      {
-      public partial class Trojan
+namespace QuickTools.QSecurity.Tricks
+{
+      public partial class TPack
             {
                   /// <summary>
                   /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
                   /// </summary>
-                  public Trojan()
+                  public TPack()
                   {
 
                   }
@@ -39,20 +39,20 @@ namespace QuickTools.QSecurity.FalseIO
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
         /// </summary>
-        /// <param name="trojanFile"></param>
-        public Trojan(string trojanFile)
+        /// <param name="tpackFile"></param>
+        public TPack(string tpackFile)
         {
-            this.TrojanFile = trojanFile;
+            this. TPackFile = tpackFile;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
         /// </summary>
         /// <param name="payload">Payload.</param>
-        /// <param name="trojanFile">Trojan file.</param>
-        public Trojan(string payload ,string trojanFile)
+        /// <param name="tpackFile">Trojan file.</param>
+        public TPack(string payload ,string tpackFile)
                   {
                         this.Payload = payload;
-                        this.TrojanFile = trojanFile;
+                        this. TPackFile = tpackFile;
                   }
             /// <summary>
             /// Initializes a new instance of the <see cref="T:QuickTools.QSecurity.FalseIO.Trojan"/> class.
@@ -60,7 +60,7 @@ namespace QuickTools.QSecurity.FalseIO
             /// <param name="payload">Payload.</param>
             /// <param name="indexStart">Index start.</param>
             /// <param name="indexEnd">Index end.</param>
-            public Trojan(string payload , string indexStart , string indexEnd)
+            public TPack(string payload , string indexStart , string indexEnd)
                   {
                   this.Payload = payload;
                   this.IndexStart = indexStart;
@@ -74,7 +74,7 @@ namespace QuickTools.QSecurity.FalseIO
             /// <param name="indexStart">Index start.</param>
             /// <param name="indexEnd">Index end.</param>
             /// <param name="description">Description.</param>
-                  public Trojan(string payload , string indexStart , string indexEnd , string description)
+                  public TPack(string payload , string indexStart , string indexEnd , string description)
                   {
                   this.Payload = payload;
                   this.IndexStart = indexStart;
@@ -91,7 +91,7 @@ namespace QuickTools.QSecurity.FalseIO
                   /// <param name="indexEnd">Index end.</param>
                   /// <param name="description">Description.</param>
                   /// <param name="date">Date.</param>
-                  public Trojan(string payload , string indexStart , string indexEnd , string description , string date)
+                  public TPack(string payload , string indexStart , string indexEnd , string description , string date)
                   {
                   this.Payload = payload;
                   this.IndexStart = indexStart;
@@ -109,7 +109,7 @@ namespace QuickTools.QSecurity.FalseIO
             /// <param name="description">Description.</param>
             /// <param name="date">Date.</param>
             /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-            public Trojan(string payload , string indexStart , string indexEnd , string description , string date , bool allowDebugger)
+            public TPack(string payload , string indexStart , string indexEnd , string description , string date , bool allowDebugger)
                   {
                   this.Payload = payload;
                   this.IndexStart = indexStart;
@@ -128,8 +128,8 @@ namespace QuickTools.QSecurity.FalseIO
             /// <param name="description">Description.</param>
             /// <param name="date">Date.</param>
             /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-            /// <param name="trojanFile">Trojan file.</param>
-            public Trojan(string payload , string indexStart , string indexEnd , string description , string date , bool allowDebugger , string trojanFile)
+            /// <param name="tpackFile">Trojan file.</param>
+            public TPack(string payload , string indexStart , string indexEnd , string description , string date , bool allowDebugger , string tpackFile)
                   {
                   this.Payload = payload;
                   this.IndexStart = indexStart;
@@ -137,7 +137,7 @@ namespace QuickTools.QSecurity.FalseIO
                   this.Description = description;
                   this.Date = date;
                   this.AllowDebugger = allowDebugger;
-                  this.TrojanFile = trojanFile;
+                  this.TPackFile = tpackFile;
                   }
             }
       }

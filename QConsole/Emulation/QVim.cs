@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Text;
-using System.IO;
-using QuickTools.QIO;
+
 using QuickTools.QCore;
-using QuickTools.QColors;
-using QuickTools.QData;
-using QuickTools.QNet;
-using QuickTools.QSecurity;
-using QuickTools.QSecurity.FalseIO;
-using QuickTools.QConsole;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Collections;
-using System.Threading;
+
 namespace QuickTools.QConsole.Emulation
 {
 

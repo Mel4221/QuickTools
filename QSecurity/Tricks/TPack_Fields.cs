@@ -25,10 +25,10 @@
 // THE SOFTWARE.
 using System;
  
-namespace QuickTools.QSecurity.FalseIO
-      {
-            public partial class Trojan
-            {
+namespace QuickTools.QSecurity.Tricks
+{
+            public partial class TPack
+    {
     
 
             /// <summary>
@@ -72,7 +72,7 @@ namespace QuickTools.QSecurity.FalseIO
                   /// Gets or sets the trojan file.
                   /// </summary>
                   /// <value>The trojan file.</value>
-                    public string TrojanFile { get; set; }
+                    public string TPackFile { get; set; }
             /// <summary>
             /// This Defines when it will understand that if has reached enought 
             /// intents to find the Payload , so it try to find it in the last 20% of the file as default

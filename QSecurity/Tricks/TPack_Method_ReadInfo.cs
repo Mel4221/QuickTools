@@ -31,9 +31,9 @@ using QuickTools.QIO;
 using System.Collections.Generic;
 
 
-namespace QuickTools.QSecurity.FalseIO
+namespace QuickTools.QSecurity.Tricks
 {
-    public partial class Trojan
+    public partial class TPack
     {
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace QuickTools.QSecurity.FalseIO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public Trojan ReadInfo()
+        public TPack ReadInfo()
         {
 
             byte[] payload;
@@ -49,11 +49,11 @@ namespace QuickTools.QSecurity.FalseIO
             int metadataLength, metaCounter;
             bool open;
             int len, breaker, maxBreak;
-            if (this.TrojanFile == "" || !File.Exists(this.TrojanFile))
+            if (this.TPackFile == "" || !File.Exists(this.TPackFile))
             {
-                throw new Exception("Missing or not found the trojan file: " + this.TrojanFile);
+                throw new Exception("Missing or not found the trojan file: " + this.TPackFile);
             }
-            trojanFile = this.TrojanFile;
+            trojanFile = this.TPackFile;
             payload = Binary.Reader(trojanFile);
             metadata = "";
             str = "";
@@ -151,13 +151,12 @@ namespace QuickTools.QSecurity.FalseIO
             // string str = file.Substring(file.IndexOf("_")+1,file.Length-1);
         
 
-            return new Trojan()
+            return new TPack()
             {
                 Payload = info[0].Substring(0),
                 IndexStart = info[1],
                 IndexEnd = info[2],
                 Description = info[3],
-              
             };
             
         }
