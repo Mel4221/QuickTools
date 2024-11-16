@@ -1,9 +1,9 @@
-﻿
+﻿using System;
 using System.IO;
 using QuickTools.QCore;
-using System.Text;
-
+using System.Linq;
 using QuickTools.QConsole;
+using System.Text;
 
 namespace QuickTools.QData.Bastard
 {
@@ -145,6 +145,7 @@ namespace QuickTools.QData.Bastard
 
             }
         }
+
 
     }
 }

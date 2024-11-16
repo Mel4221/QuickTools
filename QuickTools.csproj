@@ -157,10 +157,10 @@
     <Compile Include="QData\Bastard\ClownManager_Constructor.cs" />
     <Compile Include="QData\Bastard\ClownKey.cs" />
     <Compile Include="QData\Bastard\ClownManager_Methods.cs" />
-    <Compile Include="QData\Bastard\ClownManager_SoftLoad.cs" />
     <Compile Include="QData\Bastard\ClownManager_Fields.cs" />
     <Compile Include="QData\Bastard\ClownManager_Save.cs" />
     <Compile Include="QData\Bastard\ClownManager_Load.cs" />
+    <Compile Include="QData\Bastard\ClownManager_SoftLoad.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />
