@@ -50,6 +50,67 @@ namespace QuickTools.QCore
     /// </summary>
     public partial class Get : Color
     {
+
+        /// <summary>
+        /// RPs prints every word in a different color 
+        /// </summary>
+        /// <param name="text">Content.</param>
+        public static void RPrint(string text)
+        {
+            int color;
+            string[] content = text.Split(' ');
+            string word; 
+            for(int i = 0; i < content.Length; i++)
+            {
+                word = content[i];
+                color = IRandom.RandomInt(0, 7);
+                switch(color)
+                {
+                    case 0:
+                        Color.Red();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 1:
+                        Color.Pink();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 2:
+                        Color.Green();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 3:
+                        Color.Cyan();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 4:
+                        Color.Yellow();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 5:
+                        Color.Gray();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 6:
+                        Color.Blue();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 7:
+                        Color.White();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                }
+            }
+            Console.Write("\n");
+
+        }
         /// <summary>
         /// Ises the divisble by.
         /// </summary>

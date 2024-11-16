@@ -21,7 +21,7 @@ namespace QuickTools.QIO
             this.FileErrors = new List<string>();
             this.DirectoriesError = new List<string>();
             this.Path = null;
-    }
+        }
 
 
         /// <summary>

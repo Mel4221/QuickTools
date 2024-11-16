@@ -111,55 +111,95 @@ namespace QuickTools.QIO
                   return array;
                   }
 
-
-           // private static QProgressBar bar = new QProgressBar(); 
-            /// <summary>
-            /// Creates a file full of zeros of the given GB size 
-            /// for what reason , i mean is here so just use it on what you consider the best 
-            /// </summary>
-            /// <param name="fileName">File name.</param>
-            /// <param name="GbSize">Gb size.</param>
-            public static void CreateZeroFile(string fileName , int GbSize)
+        private static byte[] FillWithZeros(byte[] buffer)
+        {
+            byte[] buff = buffer; 
+            for(int b = 0; b < buffer.Length; b++)
+            {
+                buff[b] = 0;
+            }
+            return buff; 
+        }
+        // private static QProgressBar bar = new QProgressBar(); 
+        /// <summary>
+        /// Creates a file full of zeros of the given GB size 
+        /// for what reason , i mean is here so just use it on what you consider the best 
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="data_unit_size">it will convert the size to the letter given for example 200kb , 100mb , 2gb</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        /// <param name="data_unit_chunck_size">allow the chunck size to be set to the given data unit string</param>
+        public static void CreateZeroFile(string fileName , string data_unit_size,string data_unit_chunck_size, bool allowDebugger)
             {
             //throw new Exception("This Function has been disabled due to realabilty reasons");
             try
             {
-                GC.Collect();
-                using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
-                {
+                QProgressBar bar = new QProgressBar(); 
+                 if (File.Exists(fileName))File.Delete(fileName);
+                    long goal, current, size;
+                    int chunck;
+                    byte[] buffer;
+                    size = Get.DataUnitToLong(data_unit_size);
+                    goal = size;
+                    current = 0;
+                    chunck = int.Parse($"{Get.DataUnitToLong(data_unit_chunck_size)}");//1024 * 1024 * 100;
+                    buffer = new byte[chunck];
+                    buffer = Binary.FillWithZeros(buffer);
+                    
 
-
-                    int size = GbSize * 1024 * 1024 * 1024;
-                    if (size > int.MaxValue)
+                    while (true)
                     {
-                        size = int.MaxValue - 1;
-                    }
-                    byte[] buffer = new byte[size];
-                    using (BinaryWriter binary = new BinaryWriter(stream))
-                    {
+                        using (FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+                            {
+                                fs.Seek(current, SeekOrigin.Begin);
 
-                        Get.Wait($"Creatting {fileName} Size: [{Get.FileSize(size)}] Please Wait...", () =>
-                        {
-                            binary.Write(buffer, 0, buffer.Length);
+                                BinaryWriter binary = new BinaryWriter(fs);
+                                
+                                binary.Write(buffer, 0, buffer.Length);
+                                
+                                current += chunck;
+                                if (current >= goal)
+                                {
+                                    break;
+                                }
 
-                        });
-                        Get.Ok();
+                                if (allowDebugger)
+                                {
+                                    bar.Label = $"Writting please wait...: {Get.Status(current,goal)}";
+                                    bar.Display(Get.Status(current, goal));
+                                   // Get.Yellow($"Writting please wait..: {Get.Status(current, goal)}");
+                                }
+                               
+                            }
                     }
-                }
-            }catch(Exception ex)
+        
+                    
+
+                
+
+            }
+            catch(Exception ex)
             {
-                Get.Red($"Something Failed while creatting the Zero File more info: \n\n{ex}");
+                if (allowDebugger) Get.Red($"Something Failed while creatting the Zero File more info: \n\n{ex}");
             }
         }
+
+        /// <summary>
+        /// Creates the zero file with dubugger on or off with a default chunck size of 100MB
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="data_unit_size">Data unit size.</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        public static void CreateZeroFile(string fileName, string data_unit_size, bool allowDebugger) => Binary.CreateZeroFile(fileName, data_unit_size,"100mb", allowDebugger);
+
         /// <summary>
         /// Creates the zero file.
         /// </summary>
         /// <param name="fileName">File name.</param>
-        /// <param name="GbSize">Gb size.</param>
-        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
-        public static void CreateZeroFile(string fileName, int GbSize,bool allowDebugger)
+        /// <param name="data_unit_size">Gb size.</param>
+        public static void CreateZeroFile(string fileName, string data_unit_size)
         {
-            Binary.CreateZeroFile(fileName, GbSize); 
+            Binary.CreateZeroFile(fileName, data_unit_size, false); 
         }
 
         /// <summary>

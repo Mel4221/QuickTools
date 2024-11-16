@@ -57,8 +57,50 @@ namespace QuickTools.QCore
             /// <summary>
             /// byte
             /// </summary>
-            IntConvertible
+            IntConvertible,
 
+
+        }
+        /// <summary>
+        /// Takes the string filesize on the fallowing way 100b,200kb,300mb,400gb,500tb
+        /// </summary>
+        /// <returns>The unit to long.</returns>
+        /// <param name="data_unit_size">Data unit size.</param>
+        public static long DataUnitToLong(string data_unit_size)
+        {
+            string data_unit, temp_text, temp_number;
+            long length = 0;
+            data_unit = data_unit_size;
+            temp_text = "";
+            temp_number = ""; 
+            for (int ch = 0; ch < data_unit.Length;ch ++)
+            {
+                if (!Get.IsNumber($"{data_unit[ch]}"))
+                {
+                    temp_text += data_unit[ch];
+                }if (Get.IsNumber($"{data_unit[ch]}"))
+                {
+                    temp_number += data_unit[ch];
+                }
+            }
+            length = long.Parse(temp_number); 
+            switch(temp_text.ToLower())
+            {
+                case "tb":
+                    return length * 1024 * 1024 * 1024 * 1024;
+                case "gb":
+                    return length * 1024 * 1024 * 1024; 
+                 case "mb":
+                    return length * 1024 * 1024 ;
+                case "kb":
+                    return length * 1024 ;
+                case "b":
+                    return long.Parse(temp_number);
+                default:
+                    return length;
+                  
+            }
+          
         }
         /// <summary>
         /// Files the size.
@@ -69,6 +111,7 @@ namespace QuickTools.QCore
         public static string FileSize(string fileName , SizeType size)
                   {
                   string fileSize = null;
+
                   var fileStream = new FileStream(fileName , FileMode.Open , FileAccess.Read);
                   Get.LongNumber = fileStream.Length;
                   switch(size)

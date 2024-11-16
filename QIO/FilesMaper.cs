@@ -51,12 +51,12 @@ namespace QuickTools.QIO
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-            public string[] RetroMapFiles(string path)
-            {
-                this.Path = path;
-                this.Map();
-                return this.Files.ToArray(); 
-            }
+        public string[] RetroMapFiles(string path)
+        {
+            this.Path = path;
+            this.Map();
+            return this.Files.ToArray(); 
+        }
 
         /// <summary>
         /// Get all the directories retroactively from a path.

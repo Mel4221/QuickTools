@@ -66,7 +66,6 @@
     <Compile Include="QCore\Check.cs" />
     <Compile Include="QCore\Get.cs" />
     <Compile Include="QCore\Get_Console_Command_ls.cs" />
-    <Compile Include="QCore\Get_FileSize.cs" />
     <Compile Include="QCore\GlobalSuppressions.cs" />
     <Compile Include="QCore\IConvert.cs" />
     <Compile Include="QCore\IRandom.cs" />
@@ -153,6 +152,15 @@
     <Compile Include="QIO\QZip_Fields.cs" />
     <Compile Include="QData\ClownSettings.cs" />
     <Compile Include="QData\NJson.cs" />
+    <Compile Include="QCore\Get_FileSize.cs" />
+    <Compile Include="QCore\IConvert_MBytesToString.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Constructor.cs" />
+    <Compile Include="QData\Bastard\ClownKey.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Methods.cs" />
+    <Compile Include="QData\Bastard\ClownManager_SoftLoad.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Fields.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Save.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Load.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />
@@ -160,12 +168,14 @@
     <Folder Include="QCore\" />
     <Folder Include="QConsole\Emulation\" />
     <Folder Include="QDevelop\" />
+    <Folder Include="QData\Bastard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="QCore\Decriptor.intent" />
     <None Include="QCore\encrypter.intent" />
     <None Include="QCore\notes-from-tester.txt" />
     <None Include="QCore\setting.ico" />
+    <None Include="QCore\Get_FileSize_ia.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />

@@ -45,16 +45,16 @@ namespace QuickTools.QSecurity.Tricks
         {
 
             byte[] payload;
-            string trojanFile, metadata, str;
+            string tpackFile, metadata, str;
             int metadataLength, metaCounter;
             bool open;
             int len, breaker, maxBreak;
             if (this.TPackFile == "" || !File.Exists(this.TPackFile))
             {
-                throw new Exception("Missing or not found the trojan file: " + this.TPackFile);
+                throw new Exception("Missing or not found the tpack file: " + this.TPackFile);
             }
-            trojanFile = this.TPackFile;
-            payload = Binary.Reader(trojanFile);
+            tpackFile = this.TPackFile;
+            payload = Binary.Reader(tpackFile);
             metadata = "";
             str = "";
             metadataLength = payload.Length - 1;
@@ -83,16 +83,19 @@ namespace QuickTools.QSecurity.Tricks
                 metadataLength--;
                 breaker++;
                 //Get.Red($"Finding Metadata...Break: {breaker} Max: {payload.Length - (payload.Length - (payload.Length * 100) / 90) }"); 
-                Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
-                this.CurrentStage = $"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]";
-            }
+                if (this.AllowDebugger)
+                {
+                    Get.Red($"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]");
+                    this.CurrentStage = $"Finding Metadata Break: [{breaker}] MaxBreak: [{maxBreak}]";
+                }
+             }
 
             if (AllowDebugger)
             {
-                Get.Green($"Stage_1: Reading Metadata [{metadata}]");
+                Get.Green($"Stage_1: Reading Metadata [{metadata.Replace("\n","")}]");
                 Get.WaitTime();
             }
-            this.CurrentStage = $"Stage_1: Reading Metadata [{metadata}]";
+            this.CurrentStage = $"Stage_1: Reading Metadata [{metadata.Replace("\n", "")}]";
 
             //Stage 2 getting payload information 
             //getting the entired line of metadata 

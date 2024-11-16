@@ -33,7 +33,7 @@ namespace QuickTools.QDevelop
 
             DownloadManager.Download(this.SourcesURL, file, this.AllowDeubbuger);
            // while (Get.IsFileBusy(file)) { }
-            size = Get.FileSize(file);
+            size = Get.FileSize(file).ToString();
             
             if (size == "0B") throw new Exception($"SOMETHIG WENT WRONG WHILE TRYING TO DOWNLOAD: [{this.SourcesURL}] FILE SIZE: [{size}]");
             this.CurrentTextStatus = $"SOURCES FILE DOWNLOADED SUCESSFULLY FILE: [{file}] SIZE: {size}";
