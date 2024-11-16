@@ -10,6 +10,9 @@ namespace QuickTools.QData.Bastard
     public partial class ClownManager
     {
 
+        /// <summary>
+        /// Loads all the Key indexes 
+        /// </summary>
         public void SoftLoad()
         {
             if (!File.Exists(this.FileName)) throw new FileNotFoundException(this.FileName);

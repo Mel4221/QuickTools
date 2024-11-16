@@ -6,6 +6,9 @@ namespace QuickTools.QData.Bastard
 {
     public partial class ClownManager
     {
+        /// <summary>
+        /// Save this instance.
+        /// </summary>
         public void Save()
         {
 

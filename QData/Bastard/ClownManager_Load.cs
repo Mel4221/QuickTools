@@ -6,6 +6,9 @@ namespace QuickTools.QData.Bastard
 {
     public partial class ClownManager
     {
+        /// <summary>
+        /// Load this instance.
+        /// </summary>
         public void Load()
         {
             if (!File.Exists(this.FileName)) throw new FileNotFoundException(this.FileName);

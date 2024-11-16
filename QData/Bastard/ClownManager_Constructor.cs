@@ -2,6 +2,9 @@
 
 namespace QuickTools.QData.Bastard
 {
+    /// <summary>
+    /// Clown key.
+    /// </summary>
     public class ClownKey : Key
     {
         /// <summary>
@@ -23,13 +26,19 @@ namespace QuickTools.QData.Bastard
         /// </summary>
         /// <value>The buffer.</value>
         public byte[] Buffer { get; set; } = new byte[0];
-
+        /// <summary>
+        /// Hases the bytes.
+        /// </summary>
+        /// <returns><c>true</c>, if bytes was hased, <c>false</c> otherwise.</returns>
         public bool HasBytes()
         {
             return this.Buffer != null && this.Buffer.Length > 0;
         }
 
-
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Bastard.ClownKey"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Bastard.ClownKey"/>.</returns>
         public override string ToString()
         {
             return $"NAME: {this.Name} VALUE: {(this.Value == null ? "NOT-LOADED" : this.Value)} INDEX: {this.Index} LENGTH: {this.length}";

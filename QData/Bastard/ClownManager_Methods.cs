@@ -5,7 +5,19 @@ namespace QuickTools.QData.Bastard
 {
     public partial class ClownManager
     {
-
+        /// <summary>
+        /// Add the specified keys.
+        /// </summary>
+        /// <param name="key">Key.</param>
+        public virtual void Add(ClownKey key )
+        {
+            this.Keys.Add(key); 
+        }
+        /// <summary>
+        /// Gets the name of the all by.
+        /// </summary>
+        /// <returns>The all by name.</returns>
+        /// <param name="name">Name.</param>
         public virtual List<ClownKey> GetAllByName(string name)
         {
             List<ClownKey> clownKeys = new List<ClownKey>();
@@ -18,7 +30,11 @@ namespace QuickTools.QData.Bastard
             }
             return clownKeys;
         }
-
+        /// <summary>
+        /// Gets the key.
+        /// </summary>
+        /// <returns>The key.</returns>
+        /// <param name="name">Name.</param>
         public virtual ClownKey GetKey(string name)
         {
             for (int item = 0; item < this.Keys.Count; item++)
@@ -31,10 +47,20 @@ namespace QuickTools.QData.Bastard
             return new ClownKey();
         }
 
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <returns>The value.</returns>
+        /// <param name="name">Name.</param>
         public virtual string GetValue(string name)
         {
             return this.GetKey(name).Value;
         }
+        /// <summary>
+        /// Searchs the name of the all by.
+        /// </summary>
+        /// <returns>The all by name.</returns>
+        /// <param name="name">Name.</param>
         public virtual List<ClownKey> SearchAllByName(string name)
         {
             List<ClownKey> keys = new List<ClownKey>();
@@ -47,10 +73,19 @@ namespace QuickTools.QData.Bastard
             }
             return keys;
         }
+        /// <summary>
+        /// Updates the value.
+        /// </summary>
+        /// <param name="name">Name.</param>
+        /// <param name="value">Value.</param>
         public virtual void UpdateValue(string name, string value)
         {
-
+            throw new System.NotImplementedException("not implemented yet");
         }
+        /// <summary>
+        /// Updates the name of the key value by.
+        /// </summary>
+        /// <param name="key">Key.</param>
         public virtual void UpdateKeyValueByName(ClownKey key)
         {
             for (int item = 0; item < this.Keys.Count; item++)
