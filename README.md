@@ -78,7 +78,7 @@ IRandom or New or CreateRandom:
 
 > using QuickTools.QSecurity;
 
-> using QuickTools.QSecurity.FalseIO; 
+> using QuickTools.QSecurity.Tricks; // this one used to be named FalseIO 
 
 
 ...
