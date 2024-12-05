@@ -16,6 +16,8 @@ namespace QuickTools.QData.Bastard
         public void SoftLoad()
         {
             if (!File.Exists(this.FileName)) throw new FileNotFoundException(this.FileName);
+            this.TextStatus = $"Soft load initiated..: {this.FileName}";
+            if (this.AllowDebugger) Get.Yellow(this.TextStatus);
             using (FileStream stream = new FileStream(this.FileName, FileMode.Open))
             {
                 long current, goal, virtual_current, attemps;
@@ -36,7 +38,7 @@ namespace QuickTools.QData.Bastard
                     if (this.FailSafe == goal)
                     {
                         attemps++;
-                        Get.Red($"FailSafe Trigered..: Attempting: {attemps}/{this.MaxAttemps}");
+                        Console.WriteLine($"FailSafe Trigered..: Attempting: {attemps}/{this.MaxAttemps}");
                         if (attemps == this.MaxAttemps) break;
                     }
                     if (this.FailSafe != goal)
@@ -60,7 +62,9 @@ namespace QuickTools.QData.Bastard
                         {
                             //Get.Wait(key.ToString());
                             number_length = key.Length;
-                            clownKey.length = long.Parse(key.ToString());
+                            if (!Get.IsNumber(key.ToString())) 
+                            throw new InvalidDataException($"There was a data format error: key[{clownKey.Name}] index[{current}] key_index[{key_index}]");
+                            clownKey.Length = long.Parse(key.ToString());
 
 
                             clownKey.Value = null;
@@ -84,7 +88,7 @@ namespace QuickTools.QData.Bastard
                             // which would be 'n']\n in
                             // example1: lastnumber]nextline
                             // example2: [1234]abcd\n
-                            int value_length = int.Parse((clownKey.length).ToString());
+                            int value_length = int.Parse((clownKey.Length).ToString());
                             //jump to [length] or [value_length]
                             key_index += value_length > length ? length : value_length;
                             //Get.Red(key_index);
@@ -109,10 +113,10 @@ namespace QuickTools.QData.Bastard
 
 
                             virtual_current = clownKey.Name.Length +
-                                  clownKey.length +
+                                  clownKey.Length +
                                   number_length + 2 + this.NewLineLength();
                             //to 25
-
+                       
                             /*
                                 clownKey.Index = current +
                                    key_index +
@@ -121,14 +125,19 @@ namespace QuickTools.QData.Bastard
                             */
 
                             current += virtual_current;
+                            //this ensures that if is added manually 
+                            //it will have the correct index
+                            this.Indexer = current;//clownKey.Length + this.NewLineLength();
 
 
 
-                            this.TextStatus = ($"CURRENT: {current} GOAL: {goal} {Get.Status(current, goal)} KEY_INDEX: {key_index} VCURRENT: [{virtual_current}]");
+                            this.TextStatus = $"Soft loading..: [{Get.Status(current,goal)}]";
+
+                            //this.TextStatus = ($"CURRENT: {current} GOAL: {goal} {Get.Status(current, goal)} KEY_INDEX: {key_index} VCURRENT: [{virtual_current}]");
                             this.Keys.Add(clownKey);
                             //this.Keys.ForEach(item => Get.Cyan(item));
-                            if (this.AllowDebugger) Get.Cyan($"{clownKey} >>> CURRENT: {current} GOAL: {goal} {Get.Status(current, goal)} KEY_INDEX: {key_index} VCURRENT: [{virtual_current}]");
-
+                            //if (this.AllowDebugger) Get.Cyan($"{clownKey} >>> CURRENT: {current} GOAL: {goal} {Get.Status(current, goal)} KEY_INDEX: {key_index} VCURRENT: [{virtual_current}]");
+                            if (this.AllowDebugger) Get.Cyan(this.TextStatus);
                             // Get.WaitTime(1000);
                             clownKey = new ClownKey();
 

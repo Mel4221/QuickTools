@@ -326,7 +326,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <returns>The string.</returns>
         /// <param name="content">Content.</param>
-        public static string ToString(byte[] content) => Encoding.ASCII.GetString(content);
+        public static string ToString(byte[] content) => Encoding.UTF8.GetString(content);
 
 
 

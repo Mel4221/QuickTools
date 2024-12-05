@@ -35,8 +35,10 @@ using System.Net.NetworkInformation;
 namespace QuickTools.QCore
 {
 
-
-
+    /// <summary>
+    /// Just a short cut
+    /// </summary>
+    public class IGet : Get { }
     ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
     /////////////////*this is were the Class Get Starts *//////
@@ -135,14 +137,31 @@ namespace QuickTools.QCore
         /// <returns><c>true</c>, if divisible by half was ised, <c>false</c> otherwise.</returns>
         /// <param name="number">Number.</param>
         public static bool IsDivisibleByHalf(object number) => Get.IsDivisbleBy(number, 2);
-       
         /// <summary>
-        /// Waits the while busy.
+        /// Waits the while is busy.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileIsBusy(string fileName, Action action) => WaitWhileIsBusy(fileName, false, 1000, action);
+        /// <summary>
+        /// Waits for the file to stop being busy and 
+        /// if the file is not is busy waits a second and checks
+        /// again  but if is not busy calls the given function when 
+        /// is over.
         /// </summary>
         /// <param name="fileName">File name.</param>
         /// <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
         /// <param name="action">Action.</param>
-        public static void WaitWhileBusy(string fileName,bool printwaitloop, Action action)
+        public static void WaitWhileIsBusy(string fileName, bool printwaitloop, Action action) => WaitWhileIsBusy(fileName, printwaitloop, 1000, action);
+        /// <summary>
+        /// Waits for the file to stop being busy and 
+        /// calls the given function when is over.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
+        /// <param name="loopWait">Loop wait.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileIsBusy(string fileName,bool printwaitloop,int loopWait, Action action)
         {
             bool status;
             if (printwaitloop)
@@ -157,6 +176,7 @@ namespace QuickTools.QCore
                         {
                             break; 
                         }
+                        Get.WaitTime(loopWait);
                     }
                 });
                 action();
@@ -2649,7 +2669,7 @@ character in order for it to return a valid name
                         /// <param name="Object">Object.</param>
                   public static byte[] Bytes(object Object)
                   {
-                        return System.Text.Encoding.ASCII.GetBytes(Object.ToString());                  
+                        return System.Text.Encoding.UTF8.GetBytes(Object.ToString());                  
                   }
             /// <summary>
             /// Similar to Console.WriteLine(object); 

@@ -161,6 +161,7 @@
     <Compile Include="QData\Bastard\ClownManager_Save.cs" />
     <Compile Include="QData\Bastard\ClownManager_Load.cs" />
     <Compile Include="QData\Bastard\ClownManager_SoftLoad.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Add.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="QColors\" />

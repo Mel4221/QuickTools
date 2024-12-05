@@ -25,29 +25,31 @@ namespace QuickTools.QData.Bastard
                 for (int item = 0; item < this.Keys.Count; item++)
                 {
                     current = item;
+                    this.TextStatus = $"{Get.Status(current, goal)}";
                     if (this.AllowDebugger)
                     {
                         bar.Label = $"Loading Values...";
-                        bar.Display(Get.Status(current, goal));
+                        bar.Display(this.TextStatus);
+
                     }
                     ClownKey clownKey = this.Keys[item];
-                    buffer = new byte[clownKey.length];
+                    buffer = new byte[clownKey.Length];
                     stream.Seek(clownKey.Index, SeekOrigin.Begin);
                     BinaryReader reader = new BinaryReader(stream);
                     reader.Read(buffer, 0, buffer.Length);
-                    switch (this.LoadAsBytes)
+                    bool isBinary = this.Keys[item].Name[0]=='@';
+                    if (isBinary)
                     {
-                        case true:
-                            this.Keys[item].Buffer = buffer;
-                            break;
-                        case false:
-                            this.Keys[item].Value = IConvert.ToString(buffer);
-                            break;
+                        this.Keys[item].Buffer = buffer;
+                    }if(!isBinary)
+                    {
+                        this.Keys[item].Value = IConvert.ToString(buffer);
                     }
-
 
                 }
             }
+            this.TextStatus = $"Loading values Completed!!!";
+            if (this.AllowDebugger) Get.Yellow(this.TextStatus);
         }
     }
 }

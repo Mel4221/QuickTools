@@ -13,7 +13,8 @@ namespace QuickTools.QData.Bastard
         /// <summary>
         /// The keys.
         /// </summary>
-        public List<ClownKey> Keys = new List<ClownKey>();
+        private List<ClownKey> Keys = new List<ClownKey>();
+         
         /// <summary>
         /// Gets or sets the length of the buffer.
         /// </summary>
@@ -40,16 +41,6 @@ namespace QuickTools.QData.Bastard
         /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
         public bool AllowDebugger { get; set; } = false;
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Bastard.ClownManager"/> load as bytes.
-        /// </summary>
-        /// <value><c>true</c> if load as bytes; otherwise, <c>false</c>.</value>
-        public bool LoadAsBytes { get; set; } = false;
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QData.Bastard.ClownManager"/> save as bytes.
-        /// </summary>
-        /// <value><c>true</c> if save as bytes; otherwise, <c>false</c>.</value>
-        public bool SaveAsBytes { get; set; } = false;
-        /// <summary>
         /// Gets or sets the text status.
         /// </summary>
         /// <value>The text status.</value>
@@ -59,5 +50,10 @@ namespace QuickTools.QData.Bastard
         /// </summary>
         /// <value>The progress status.</value>
         public int ProgressStatus { get; set; } = 0;
+        /// <summary>
+        /// Gets or sets the indexer.
+        /// </summary>
+        /// <value>The indexer.</value>
+        public long Indexer { get; private set; } = 0; 
     }
 }
