@@ -1,0 +1,17 @@
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/QuickTools.deps.json
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/QuickTools.dll
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/QuickTools.pdb
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/Newtonsoft.Json.dll
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/Newtonsoft.Json.pdb
+/home/mel/Documents/csharp/QuickTools/bin/Release/net8.0/linux-x64/Newtonsoft.Json.xml
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.csproj.AssemblyReference.cache
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.GeneratedMSBuildEditorConfig.editorconfig
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.AssemblyInfoInputs.cache
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.AssemblyInfo.cs
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.csproj.CoreCompileInputs.cache
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.sourcelink.json
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.csproj.Up2Date
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.dll
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/refint/QuickTools.dll
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/QuickTools.pdb
+/home/mel/Documents/csharp/QuickTools/obj/Release/net8.0/linux-x64/ref/QuickTools.dll

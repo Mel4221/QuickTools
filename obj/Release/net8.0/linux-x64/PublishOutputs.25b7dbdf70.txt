@@ -1,0 +1,6 @@
+/home/mel/Documents/csharp/QuickTools/bin/linux/QuickTools.dll
+/home/mel/Documents/csharp/QuickTools/bin/linux/QuickTools.deps.json
+/home/mel/Documents/csharp/QuickTools/bin/linux/QuickTools.pdb
+/home/mel/Documents/csharp/QuickTools/bin/linux/Newtonsoft.Json.dll
+/home/mel/Documents/csharp/QuickTools/bin/linux/Newtonsoft.Json.pdb
+/home/mel/Documents/csharp/QuickTools/bin/linux/Newtonsoft.Json.xml

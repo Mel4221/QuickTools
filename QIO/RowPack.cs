@@ -49,7 +49,7 @@ namespace QuickTools.QIO
             {
                 byte[] bytes = Binary.Reader(fileName);
                 byte[] str = Get.Bytes(IConvert.BytesToString(bytes)); 
-                byte[] encrypted = new Secure().Encrypt(str,new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+                byte[] encrypted = new Secure().Encrypt(str,Secure.CreatePassword(password), Secure.CreatePassword(password));
                 Writer.Write($"{fileName}.{this.FileExtention}", IConvert.BytesToString(encrypted));
             }
         /// <summary>
@@ -72,7 +72,7 @@ namespace QuickTools.QIO
             try
             {
                 byte[] str = Get.Bytes(IConvert.BytesToString(bytes));
-                encrypted = new Secure().Encrypt(str, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+                encrypted = new Secure().Encrypt(str, Secure.CreatePassword(password), Secure.CreatePassword(password));
 
             }
             catch
@@ -97,7 +97,7 @@ namespace QuickTools.QIO
             byte[] bytes, decrypted;
             data = Reader.Read(fileName);
             bytes = IConvert.StringToBytesArray(data);
-            str = new Secure().Decrypt(bytes, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+            str = new Secure().Decrypt(bytes, Secure.CreatePassword(password), Secure.CreatePassword(password));
             decrypted = IConvert.StringToBytesArray(str);
             Binary.Writer(fileName.Substring(0, fileName.LastIndexOf('.')), decrypted); 
         }
@@ -113,7 +113,7 @@ namespace QuickTools.QIO
             byte[] bytes, decrypted;
             data = Reader.Read(fileName);
             bytes = IConvert.StringToBytesArray(data);
-            str = new Secure().Decrypt(bytes, new Secure().CreatePassword(password), new Secure().CreatePassword(password));
+            str = new Secure().Decrypt(bytes, Secure.CreatePassword(password), Secure.CreatePassword(password));
             decrypted = IConvert.StringToBytesArray(str);
             Binary.Writer(fileName.Substring(0, fileName.LastIndexOf('.')), decrypted);
             if (removeSourceFile == true)

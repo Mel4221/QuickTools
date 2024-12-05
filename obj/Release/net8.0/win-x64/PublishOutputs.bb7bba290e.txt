@@ -1,0 +1,6 @@
+/home/mel/Documents/csharp/QuickTools/bin/win/QuickTools.dll
+/home/mel/Documents/csharp/QuickTools/bin/win/QuickTools.deps.json
+/home/mel/Documents/csharp/QuickTools/bin/win/QuickTools.pdb
+/home/mel/Documents/csharp/QuickTools/bin/win/Newtonsoft.Json.dll
+/home/mel/Documents/csharp/QuickTools/bin/win/Newtonsoft.Json.pdb
+/home/mel/Documents/csharp/QuickTools/bin/win/Newtonsoft.Json.xml

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-rm -r ../_QuickTools
-mkdir ../_QuickTools
-cp -r * ../_QuickTools/
