@@ -71,6 +71,16 @@ using QuickTools.QCore;
         public bool SecureProtocol = false;
 
         /// <summary>
+        /// allow to see more information about the steps that the server is handeling
+        /// </summary>
+        public bool AllowDebugger { get; set; } = false;
+
+        /// <summary>
+        /// prints the responseFunctions actual data
+        /// </summary>
+        public static bool PrintResponseFunctionStatus { get; set; } = false; 
+
+        /// <summary>
         /// Gets or sets the request URL.
         /// </summary>
         /// <value>The request URL.</value>
@@ -79,15 +89,14 @@ using QuickTools.QCore;
         /// <summary>
         /// The response function.
         /// </summary>
-        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { return new byte[0]; };
-
-
+        public Func<HttpListenerRequest, byte[]> ResponseFunction = (item) => { if (PrintResponseFunctionStatus) Get.Yellow($"Response Function: {item.RawUrl}"); return Get.Bytes("[NO RESPONSE FUNCTION SET]"); };
+         
         /// <summary>
         /// Converts to html.
         /// </summary>
         /// <returns>The to html.</returns>
         /// <param name="htmlContent">Html content.</param>
-        public byte[] ConvertToHtml(string htmlContent)
+        public static byte[] ConvertToHtml(string htmlContent)
         {
             string html = $"<!DOCTYPE html>" +
                           $"<html>" +
@@ -101,7 +110,7 @@ using QuickTools.QCore;
         /// <param name="htmlContenst"></param>
         /// <param name="javascriptContent"></param>
         /// <returns></returns>
-        public byte[] ConvertToHtml(string htmlContenst, string javascriptContent)
+        public static byte[] ConvertToHtml(string htmlContenst, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -122,7 +131,7 @@ using QuickTools.QCore;
             /// <param name="cssContent"></param>
             /// <param name="javascriptContent"></param>
             /// <returns></returns>
-            public byte[] ConvertToHtml(string htmlContent, string cssContent, string javascriptContent)
+            public static byte[] ConvertToHtml(string htmlContent, string cssContent, string javascriptContent)
         {
             string html =
                   $"<!DOCTYPE html>" +
@@ -145,7 +154,7 @@ using QuickTools.QCore;
                   /// <param name="htmlFile">Html file.</param>
                   /// <param name="cssFile">Css file.</param>
                   /// <param name="javascriptFile">Javascript file.</param>
-                  public byte[] LoadFiles(string htmlFile,string cssFile,string javascriptFile)
+                  public static byte[] LoadFiles(string htmlFile,string cssFile,string javascriptFile)
                   {
                        if(!File.Exists(htmlFile) || !File.Exists(cssFile) || !File.Exists(javascriptFile))
                         {
@@ -160,7 +169,7 @@ using QuickTools.QCore;
             /// </summary>
             /// <returns>The to row.</returns>
             /// <param name="stringContent">String content.</param>
-            public byte[] ConvertToRow(string stringContent)
+            public static byte[] ConvertToRow(string stringContent)
         {
             return Encoding.ASCII.GetBytes(stringContent);
         }
@@ -184,11 +193,7 @@ using QuickTools.QCore;
             /// </summary>
         public List<ResponseHeader> ResponseHeaders= new List<ResponseHeader>();
         
-            /// <summary>
-            /// 
-            /// </summary>
-        public Func<List<ResponseHeader>> SetResponseHeadersList = () => { return new List<ResponseHeader>(); }; 
-
+          
                   
 
                   /// <summary>
@@ -203,31 +208,42 @@ using QuickTools.QCore;
                         HttpListener listener = new HttpListener();
                         listener.UnsafeConnectionNtlmAuthentication = SecureProtocol == false ? false : true;
                         listener.Prefixes.Add(this.Address);
-                        listener.Start();
+                      
+
                         HttpListenerContext context = listener.GetContext();
                         HttpListenerRequest request = context.Request;
                         HttpListenerResponse response = context.Response;
-                        List<ResponseHeader> headers = SetResponseHeadersList();
+                        List<ResponseHeader> headers = ResponseHeaders;
                         if (headers.Count > 0)
                         {
                             foreach (var header in headers)
                             {
                                 response.Headers.Add(header.Key, header.Value);
+                                if (this.AllowDebugger)
+                                {
+                                    Get.Yellow($"ResponseHeaders Key: [{header.Key}] Value: [{header.Value}]");
+                                }
+
                             }
                         }
-
-                        this.RequestUrl = request.RawUrl.Substring(1);
+            /*
+              what this says is that it will give to the response function as anrgument the actual
+            request url just in case if the request is given as aparameter such as 
+              http://localhost:4251/?exit-request=mel
+             */
+                 this.RequestUrl = request.RawUrl.Substring(1);
                   byte[] buffer = ResponseFunction(request);
                   response.ContentLength64 = buffer.Length;
-
-                  var thread = new Thread(() =>
-                  {
+                  
+                 // var thread = new Thread(() =>
+                  //{
                         Stream output = response.OutputStream;
                         output.Write(buffer , 0 , buffer.Length);
                         output.Close();
                         listener.Stop();
-                  });
-                  thread.Start(); 
+                  //});
+                  //thread.Start(); 
+                  /*
                         while(true)
                         {
                               if(thread.IsAlive == false)
@@ -235,19 +251,35 @@ using QuickTools.QCore;
                                     break; 
                               }
                         }
+                        */
 
                   return request; 
                   }
 
 
+        /// <summary>
+        /// Listen for a request and does not return the request the string clear request  
+        /// </summary>
+        /// <param name="ListenUntilFunctionIsMeet">Listen until function is meet.</param>
+        /// <param name="response">Response.</param>
+        public void Listen(Func<HttpListenerRequest, HttpListenerResponse, bool> ListenUntilFunctionIsMeet, HttpListenerResponse response)
+        {
+            
+            Func<HttpListenerRequest> F = () => { return Listen(); };
+            while (ListenUntilFunctionIsMeet(F(), response))
+            {
 
-                  /// <summary>
-                  /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
-                  /// </summary>
-                  /// <param name="url">URL.</param>
-                  /// <param name="port">Port.</param>
-                  /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
-                  public QServer(string url, int port, bool secureProtocol)
+            }
+            
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.Connector"/> class.
+        /// </summary>
+        /// <param name="url">URL.</param>
+        /// <param name="port">Port.</param>
+        /// <param name="secureProtocol">If set to <c>true</c> secure protocol.</param>
+        public QServer(string url, int port, bool secureProtocol)
                   {
 
 
@@ -281,7 +313,7 @@ using QuickTools.QCore;
                   public QServer(string url)
                   {
 
-                        this.Port = 4251;
+                        this.Port = QuickToolsStandars.DefaultPortA;
                         this.URL = url;
                         string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
                         this.Address = $"{protocol}{this.URL}:{this.Port}/";
@@ -294,7 +326,7 @@ using QuickTools.QCore;
                   public QServer()
                   {
 
-                        this.Port = 4251;
+                        this.Port = QuickToolsStandars.DefaultPortA;
                         this.URL = "localhost";
                         string protocol = this.SecureProtocol == true ? this.Protocol[0] : this.Protocol[1];
                         this.Address = $"{protocol}{this.URL}:{this.Port}/";

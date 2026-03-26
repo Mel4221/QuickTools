@@ -1,3 +1,11 @@
+/*
+
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    /////////////////*this is were the Class Get Starts *//////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+
 ﻿/*
 This Contains all the shortcuts for the Alerts
 and events of colors for the display of the 
@@ -17,16 +25,20 @@ using QuickTools.QIO;
 using QuickTools.QColors;
 using System.Diagnostics;
 using System.Linq;
-using QuickTools.QConsole;
 using System.Security.Cryptography;
 using System.Collections;
+using QuickTools.QConsole;
+using System.Net.NetworkInformation;
+
 //using System.Security.Permissions;// it has to be implemented
 
 namespace QuickTools.QCore
 {
 
-
-
+    /// <summary>
+    /// Just a short cut
+    /// </summary>
+    public class IGet : Get { }
     ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
     /////////////////*this is were the Class Get Starts *//////
@@ -41,15 +53,507 @@ namespace QuickTools.QCore
     public partial class Get : Color
     {
 
+        /// <summary>
+        /// RPs prints every word in a different color 
+        /// </summary>
+        /// <param name="text">Content.</param>
+        public static void RPrint(string text)
+        {
+            int color;
+            string[] content = text.Split(' ');
+            string word; 
+            for(int i = 0; i < content.Length; i++)
+            {
+                word = content[i];
+                color = IRandom.RandomInt(0, 7);
+                switch(color)
+                {
+                    case 0:
+                        Color.Red();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 1:
+                        Color.Pink();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 2:
+                        Color.Green();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 3:
+                        Color.Cyan();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 4:
+                        Color.Yellow();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 5:
+                        Color.Gray();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 6:
+                        Color.Blue();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                    case 7:
+                        Color.White();
+                        Console.Write($"{word} ");
+                        Get.Reset();
+                        break;
+                }
+            }
+            Console.Write("\n");
 
-        
+        }
+        /// <summary>
+        /// Ises the divisble by.
+        /// </summary>
+        /// <returns><c>true</c>, if divisble by was ised, <c>false</c> otherwise.</returns>
+        /// <param name="numberA">Number a.</param>
+        /// <param name="numberB">Number b.</param>
+        public static bool IsDivisbleBy(object numberA,object numberB)
+        {
+            if (int.Parse(numberA.ToString()) % int.Parse(numberB.ToString()) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
+            }
+        }
 
+        /// <summary>
+        /// Ises the divisible by half.
+        /// </summary>
+        /// <returns><c>true</c>, if divisible by half was ised, <c>false</c> otherwise.</returns>
+        /// <param name="number">Number.</param>
+        public static bool IsDivisibleByHalf(object number) => Get.IsDivisbleBy(number, 2);
+        /// <summary>
+        /// Waits the while is busy.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileIsBusy(string fileName, Action action) => WaitWhileIsBusy(fileName, false, 1000, action);
+        /// <summary>
+        /// Waits for the file to stop being busy and 
+        /// if the file is not is busy waits a second and checks
+        /// again  but if is not busy calls the given function when 
+        /// is over.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileIsBusy(string fileName, bool printwaitloop, Action action) => WaitWhileIsBusy(fileName, printwaitloop, 1000, action);
+        /// <summary>
+        /// Waits for the file to stop being busy and 
+        /// calls the given function when is over.
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="printwaitloop">If set to <c>true</c> printwaitloop.</param>
+        /// <param name="loopWait">Loop wait.</param>
+        /// <param name="action">Action.</param>
+        public static void WaitWhileIsBusy(string fileName,bool printwaitloop,int loopWait, Action action)
+        {
+            bool status;
+            if (printwaitloop)
+            {
+                Get.Wait(() => 
+                {
+                    while (true)
+                    { 
+                        status = Get.IsFileBusy(fileName);
+                        //Get.Green(status);
+                        if (!status)
+                        {
+                            break; 
+                        }
+                        Get.WaitTime(loopWait);
+                    }
+                });
+                action();
+                return;
+            }
+            else
+            {
+                while (true)
+                {
+                    status = Get.IsFileBusy(fileName);
+                    //Get.Red(status); 
+                    if (!status)
+                    {
+                        break;
+                    }
+                }
+                action();
+            }
+
+
+        }
+
+        /// <summary>
+        /// Ises the file busy.
+        /// </summary>
+        /// <returns><c>true</c>, if file busy was ised, <c>false</c> otherwise.</returns>
+        /// <param name="fileName">File name.</param>
+        public static bool IsFileBusy(string fileName)
+        {
+            try
+            {
+                if (!File.Exists(fileName)) return false;
+                FileInfo file = new FileInfo(fileName);
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    stream.Close();
+                }
+                //file is not locked
+                return false;
+
+            }
+            catch (IOException)
+            {
+                //the file is unavailable because it is:
+                //still being written to
+                //or being processed by another thread
+                //or does not exist (has already been processed)
+                return true;
+            }
+
+        }
+        /// <summary>
+        /// Check if either the computer has internet or not by calling google.com and it will return yes if it does 
+        /// maximum timeout is 1000ms
+        /// </summary>
+        /// <returns><c>true</c>, if internet was hased, <c>false</c> otherwise.</returns>
+        public static bool HasInternet()
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                String host = "google.com";
+                byte[] buffer = new byte[32];
+                int timeout = 1000;
+                PingOptions pingOptions = new PingOptions();
+                PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Prograns the files path.
+        /// </summary>
+        /// <returns>The files path.</returns>
+        public static string ProgranFilesPath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles);
+        }
+        /// <summary>
+        /// Gets or sets the startup DBF ile.
+        /// </summary>
+        /// <value>The startup DBF ile.</value>
+        public static string StartupDBFile { get; set; } = $"{Get.DataPath("db")}startup.db";
+        /// <summary>
+        /// Starts up path.
+        /// </summary>
+        /// <returns>The up path.</returns>
+        public static string StartUpPath()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+        }
+        /// <summary>
+        /// add at the end of the path an slash acording if it is missing one
+        /// </summary>
+        /// <returns>The if needs.</returns>
+        /// <param name="path">Path.</param>
+        public static string EndingSlash(string path)
+        {
+            string p = path;
+            if(string.IsNullOrEmpty(p) || string.IsNullOrWhiteSpace(p))
+            {
+                return p; 
+            }if(path.Length == 1)
+            {
+                return p;
+            }
+            p = p[p.Length - 1] == Get.SlashChar() ? p : p + Get.SlashChar();
+            return p; 
+        }
+        /// <summary>
+        /// Gets the root depth.
+        /// </summary>
+        /// <returns>The root depth.</returns>
+        /// <param name="path">Path.</param>
+        public static int GetRootDepth(string path)
+        {
+            int depth;
+            depth = 0;
+            string temp = path;
+            if (string.IsNullOrEmpty(path)) throw new InvalidDataException($"The given path is either incomplete,missing or not well formated [{path}]");
+
+            if (path.Length == 1 && path[0] == Get.SlashChar()) return depth;
+
+            if (path[path.Length - 1] == Get.SlashChar())
+            {
+                temp = path.Substring(0, path.Length - 1);
+            }
+            foreach (char ch in temp)
+            {
+                depth++;
+            }
+            return depth;
+        }
+
+        /// <summary>
+        /// Gets the dir only.
+        /// </summary>
+        /// <returns>The dir only.</returns>
+        /// <param name="path">Path.</param>
+        public static string GetDirOnly(string path)
+        {
+            string dir = path;
+            if (string.IsNullOrEmpty(path)) throw new InvalidDataException($"The given path is either incomplete,missing or not well formated [{path}]");
+
+            if (path[path.Length - 1] == Get.SlashChar())
+            {
+                dir = path.Substring(0, path.Length - 1);
+            }
+            dir = dir.Substring(dir.LastIndexOf(Get.SlashChar()) + 1);
+            //Get.Red($"Dir: [{dir}]");
+            return dir;
+        }
+        /// <summary>
+        /// Gets the sub path.
+        /// </summary>
+        /// <returns>The sub path.</returns>
+        /// <param name="root">Root.</param>
+        /// <param name="fileOrDir">File or dir.</param>
+        public static string GetSubPath(string root, string fileOrDir)
+        {
+            string item, top;
+
+            item = fileOrDir;
+            top = GetDirOnly(root);
+            item = top + item.Substring(GetRootDepth(root));
+            return item;
+        }
+
+
+        /// <summary>
+        /// Prints the text on multi colors as Red,Green,Blue,Cyan,Pink,Yellow,Gray 
+        /// acording to the numbers from 0 to 6
+        /// </summary>
+        /// <param name="text">Text.</param>
+        public static void PrintMultiColors(string text)
+        {
+            int color = 0; 
+            foreach (char t in text)
+            {
+                switch (color)
+                {
+                    case 0:
+                        Color.Red();
+                        Get.Write(t);
+                        color = 1;
+                        break;
+                    case 1:
+                        Color.Green();
+                        Get.Write(t);
+                        color = 2;
+                        break;
+                    case 2:
+                        Color.Blue();
+                        Get.Write(t);
+                        color = 3;
+                        break;
+                    case 3:
+                        Color.Cyan();
+                        Get.Write(t);
+                        color = 4;
+                        break;
+                    case 4:
+                        Color.Pink();
+                        Get.Write(t);
+                        color = 5;
+                        break;
+                    case 5:
+                        Color.Yellow();
+                        Get.Write(t);
+                        color = 6;
+                        break;
+                    case 6:
+                        Color.Gray();
+                        Get.Write(t);
+                        color = 0;
+                        break;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Prints the text using the 3 colors of the RGB  
+        /// Depending on the 
+        /// so if CurrentColorSelection is from 0 to 2 it will 
+        /// set the color as such 0 = Red 1 = Green  2 Blue
+        /// </summary>
+        /// <param name="text">Text.</param>
+        public static void PrintRGB(string text)
+        {
+            int color = 0;
+            foreach (char t in text)
+            {
+                switch (color)
+                {
+                    case 0:
+                        Get.Red();
+                        Get.Write(t);
+                        color = 1;
+                        break;
+                    case 1:
+                        Get.Green();
+                        Get.Write(t);
+                        color = 2;
+                        break;
+                    case 2:
+                        Get.Blue();
+                        Get.Write(t);
+                        color = 0;
+                        break;
+                  
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Gets estimated time on compleation 
+        /// Based on a solution from StackOverflow Entirely
+        /// http://stackoverflow.com/questions/473355/calculate-time-remaining/473369#473369
+        /// </summary>
+        /// <param name="sw"></param>
+        /// <param name="counter"></param>
+        /// <param name="counterGoal"></param>
+        /// <returns></returns>
+        public static TimeSpan ETA(Stopwatch sw, long counter, long counterGoal)
+        {
+            /* Copied Direcly from StackOverflow
+             * 
+             * this is based off of:
+             * (TimeTaken / linesProcessed) * linesLeft=timeLeft
+             * so we have
+             * (10/100) * 200 = 20 Seconds now 10 seconds go past
+             * (20/100) * 200 = 40 Seconds left now 10 more seconds and we process 100 more lines
+             * (30/200) * 100 = 15 Seconds and now we all see why the copy file dialog jumps from 3 hours to 30 minutes :-)
+             * 
+             * pulled from http://stackoverflow.com/questions/473355/calculate-time-remaining/473369#473369
+             */
+            if (counter == 0) return TimeSpan.Zero;
+            float elapsedMin = ((float)sw.ElapsedMilliseconds / 1000) / 60;
+            float minLeft = (elapsedMin / counter) * (counterGoal - counter); //see comment a
+            TimeSpan ret = TimeSpan.FromMinutes(minLeft);
+            return ret;
+        }
+
+
+        /// <summary>
+        /// Open a file 
+        /// </summary>
+        /// <param name="file"></param>
+        public static void Open(string file)
+        {
+            ProcessStartInfo info = new ProcessStartInfo()
+            {
+                FileName = file
+            };
+            Process.Start(info);
+        }
+
+        /// <summary>
+        /// Open a file with the given arguments
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        public static void Open(string file, string arguments)
+        {
+
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = file;
+            info.Arguments = arguments;
+            Process.Start(info);
+        }
+
+        /// <summary>
+        /// Open a file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="arguments"></param>
+        /// <param name="waitForExit"></param>
+        public static void Open(string file, string arguments, bool waitForExit)
+        {
+            if (arguments == "" || arguments == " ") arguments = null;
+            ProcessStartInfo info = new ProcessStartInfo();
+            Process process = new Process();
+            info.FileName = file;
+            info.Arguments = arguments;
+            process.StartInfo = info;
+
+            process.Start();
+
+            if (waitForExit)
+            {
+                process.WaitForExit();
+            }
+
+        }
+
+        /// <summary>
+        /// Returns an array of the given input
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        public static string[] LoopInput(string label)
+        {
+            string line = null;
+            List<string> text = new List<string>();
+            while (true)
+            {
+                line = Get.Input(label).Text;
+                if (line != "")
+                {
+                    text.Add(line);
+                }
+                if (line == "")
+                {
+                    break;
+                }
+            }
+            if (text.Count > 0)
+            {
+                return IConvert.ToType<string>.ToArray(text);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         /// <summary>
         /// Gets a value printed with it's key 
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public static void Print(object key , object value)
+        public static void Print(object key, object value)
         {
             Get.WriteL("");
             Get.Green();
@@ -61,6 +565,23 @@ namespace QuickTools.QCore
             Get.WriteL("");
         }
 
+        /// <summary>
+        /// Print the specified key,  and value with a separator
+        /// </summary>
+        /// <param name="key">Key.</param>
+        /// <param name="separator">Separator.</param>
+        /// <param name="value">Value.</param>
+        public static void Print(object key,object separator,object value)
+        {
+            Get.WriteL("");
+            Get.Green();
+            Get.Write($" {key} ");
+            Get.Reset();
+            Get.Write(separator);
+            Get.Yellow();
+            Get.Write($" {value} ");
+            Get.WriteL("");
+        }
 
 
         /// <summary>
@@ -80,7 +601,7 @@ namespace QuickTools.QCore
         /// </summary>
         /// <param name="variables"></param>
         /// <param name="fileToSaveThem"></param>
-        public static void PrintSystemVars(IDictionary variables,string fileToSaveThem)
+        public static void PrintSystemVars(IDictionary variables, string fileToSaveThem)
         {
             string SystemInfo = null;
             foreach (DictionaryEntry item in variables)
@@ -91,7 +612,7 @@ namespace QuickTools.QCore
             }
             if (fileToSaveThem == "" || fileToSaveThem == null)
             {
-                fileToSaveThem = $"{Get.Path}SystemInfo.txt"; 
+                fileToSaveThem = $"{Get.Path}SystemInfo.txt";
             }
             Writer.Write(fileToSaveThem, SystemInfo);
 
@@ -112,45 +633,45 @@ namespace QuickTools.QCore
         /// <returns>The chars.</returns>
         /// <param name="word">Word.</param>
         public static string FilterOnlyChars(string word)
-                  {
-                  string str = null;
-                  for(int ch = 0 ; ch < word.Length ; ch++)
-                        {
-                        foreach(var w in IRandom.LowerCase)
-                              {
-                              if(w == word[ch])
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        foreach(var w in IRandom.UpperCase)
-                              {
-                              if(w == word[ch])
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        foreach(var w in IRandom.Symbols)
-                              {
-                              if(w == word[ch])
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        foreach(var w in IRandom.Numbers)
-                              {
-                              if(w == word[ch])
-                                    {
-                                    str += word[ch];
-                                    break;
-                                    }
-                              }
-                        }
-                  return str;
-                  }
+        {
+            string str = null;
+            for (int ch = 0; ch < word.Length; ch++)
+            {
+                foreach (var w in IRandom.LowerCase)
+                {
+                    if (w == word[ch])
+                    {
+                        str += word[ch];
+                        break;
+                    }
+                }
+                foreach (var w in IRandom.UpperCase)
+                {
+                    if (w == word[ch])
+                    {
+                        str += word[ch];
+                        break;
+                    }
+                }
+                foreach (var w in IRandom.Symbols)
+                {
+                    if (w == word[ch])
+                    {
+                        str += word[ch];
+                        break;
+                    }
+                }
+                foreach (var w in IRandom.Numbers)
+                {
+                    if (w == word[ch])
+                    {
+                        str += word[ch];
+                        break;
+                    }
+                }
+            }
+            return str;
+        }
 
 
 
@@ -159,9 +680,9 @@ namespace QuickTools.QCore
         /// <see cref="System.Exception()"/>
         /// </summary>
         public static void Break()
-                  {
-                        throw new Exception("Task Completed");
-                  }
+        {
+            throw new Exception("Task Completed");
+        }
 
         /// <summary>
         /// Breaks any given loop by throwing an exception that if is not handled could throw an exception saying that the task failed sucessfully LOL
@@ -169,32 +690,25 @@ namespace QuickTools.QCore
         /// </summary>
         /// <param name="message">Message.</param>
         public static void Break(object message)
-                  {
-                        throw new Exception(message.ToString());
-                  }
-            /// <summary>
-            /// Loop the specified actionMethod forever or until an exception happens usually 
-            /// could be also ended when forced by <see cref="Get.Break()"/>
-            /// </summary>
-            /// <param name="actionMethod">Action method.</param>
-            public static void Loop(Action actionMethod)
         {
-                  try
-                        {
-                        while(true)
-                              {
-                                    actionMethod();
-                              }
-                        }
-                        catch
-                        {
-                            //Get.Write($"Message: {ex.Message}\n");
-                            return;
-                        }
-                  }
+            throw new Exception(message.ToString());
+        }
+        /// <summary>
+        /// Loop the specified actionMethod forever or until an exception happens usually 
+        /// could be also ended when forced by <see cref="Get.Break()"/>
+        /// </summary>
+        /// <param name="actionMethod">Action method.</param>
+        public static void Loop(Action actionMethod)
+        {
 
-        
-   
+            while (true)
+            {
+                actionMethod();
+            }
+        }
+
+
+
 
         /// <summary>
         /// Get the porcenrage status of the provided current time and goal 
@@ -207,10 +721,10 @@ namespace QuickTools.QCore
             string status = null;
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
-            double s = Math.Round(c / g, 2) * 100;
+            double s = Math.Round(((c / g) * 100));
             status = $"{s}%";
             return status;
-                 
+
         }
 
         /// <summary>
@@ -219,15 +733,12 @@ namespace QuickTools.QCore
         /// <param name="current"></param>
         /// <param name="goal"></param>
         /// <returns></returns>
-        public static double StatusNumber(object current, object goal)
+        public static int  StatusNumber(object current, object goal)
         {
-            string status = null;
             double c = Convert.ToDouble(current);
             double g = Convert.ToDouble(goal);
-            double s = Math.Round(c / g, 2) * 100;
-
-            return s;
-
+            double s = Math.Round(((c / g) * 100));
+            return int.Parse(s.ToString());
         }
         /*
          Console.BufferHeight
@@ -243,100 +754,340 @@ namespace QuickTools.QCore
             return Environment.NewLine;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:QuickTools.QCore.Get"/> allow debugger.
+        /// </summary>
+        /// <value><c>true</c> if allow debugger; otherwise, <c>false</c>.</value>
+        public static bool AllowDebugger { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the current status.
+        /// </summary>
+        /// <value>The current status.</value>
+        public static string CurrentStatus { get; set; } = "Nothing-Started";
+        /// <summary>
+        /// Gets or sets the current text status.
+        /// </summary>
+        /// <value>The current text status.</value>
+        public string CurrentTextStatus { get; set; } = "Nothing-Started";
+        /// <summary>
+        /// Gets or sets the current int status.
+        /// </summary>
+        /// <value>The current int status.</value>
+        public int CurrentIntStatus { get; set; } = 0;
+        /// <summary>
+        /// Gets or sets the public identifier.
+        /// </summary>
+        /// <value>The public identifier.</value>
+        public string PublicID { get; set; } = IRandom.RandomText(QuickToolsStandars.PublicIDLength);
+        /// <summary>
+        /// Hashs the code from file.
+        /// </summary>
+        /// <returns>The code from file.</returns>
+        /// <param name="fileName">File name.</param>
+        /// <param name="allowDebugger">If set to <c>true</c> allow debugger.</param>
+        public double HashCodeFromFile(string fileName,bool allowDebugger)
+        {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            double hash = 0;
 
 
-            /// <summary>
-            /// This Creates a hash code based on the given input 
-            /// be carefull using this as a security method since 
-            /// this macanisim is too simple and it could be broken easely
-            /// </summary>
-            /// <returns>The code.</returns>
-            /// <param name="bytes">Bytes.</param>
-            public static double HashCode(byte[] bytes)
-                  {
-                  if(bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
+            using (FileStream streamOpen = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
 
-                  double x = 0;
-                  double seed = 7;
+                BinaryReader binaryReader = new BinaryReader(streamOpen);
+                Stopwatch sw = new Stopwatch();
+                Check check = new Check();
+                QProgressBar bar = new QProgressBar();
+                TimeSpan time;
+                check.Start();
+                // this.ChuckSize = this.ChuckSize > streamOpen.Length ? int.Parse(streamOpen.Length.ToString()) : this.ChuckSize;
+                sw.Start();
+                long current, goal;
+                int chunck;
+                string status, eta;
+                byte[] buffer;
+                goal = streamOpen.Length;
+                current = 0;
+                chunck = 1024 * 1024 * 64;
+                if (chunck > streamOpen.Length)
+                {
+                    chunck = int.Parse(streamOpen.Length.ToString());
+                }
+               // Get.Wait(CurrentStatus ,() => { 
+                while (current < goal)
+                {
 
-                  for(int item = 0 ; item < bytes.Length ; item++)
+                    time = Get.ETA(sw, current, goal - 1);
+                    eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
+                    eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
+                    eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
+                    status = $"Reading... {fileName} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal + 2)}] ETA: [{eta}]";
+                    CurrentStatus = status;
+
+                    if (allowDebugger == true)
+                    {
+
+                        bar.Label = status;
+                        this.CurrentTextStatus = status;
+                        this.CurrentIntStatus =Get.StatusNumber(current,goal) ;//int.Parse(Get.Status(current, goal).Replace("%",""));
+                        //bar.Clear();
+                        bar.Display(Get.Status(current, goal ));
+                        //bar.Display(int.Parse(current.ToString()), int.Parse(goal.ToString()));
+                        //Get.Green(status);
+                    }
+
+                    streamOpen.Seek(current, SeekOrigin.Begin);
+
+                    buffer = new byte[chunck];
+                    binaryReader.Read(buffer, 0, buffer.Length);
+
+
+                    // streamWrite.Seek(current, SeekOrigin.Begin);
+                    //binaryWriter = new BinaryWriter(streamWrite);
+                    //binaryWriter.Write(this.Buffer, 0, this.Buffer.Length);
+                    hash += Get.HashCode(buffer);
+                    current += chunck;
+                    // Get.Yellow(current); 
+
+
+                }
+               // });
+                /*
+                status = $"Done!!! {target}";
+                if (this.AllowDebugger)
+                {
+                    Get.Print($"{source}", "->", $"{target}");
+                    Get.Green($"Done!!!");
+                    Get.Yellow($"Transfer Time: {check.Stop()}");
+                    if (WaitToAcknolegeTransfer)
+                    {
+                        Get.Wait();
+                    }
+                }
+                */
+            }
+
+
+
+            if (allowDebugger)
+            {
+                Get.Yellow($"\nFile: [{fileName}] Hash: [{hash}]");
+            }
+            return hash;
+        }
+
+        /// <summary>
+        /// Gets a hash code from a file no matter the size
+        /// </summary>
+        /// <returns>The code from file.</returns>
+        /// <param name="fileName">File name.</param>
+        public static double HashCodeFromFile(string fileName)
+        {
+            if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            double hash = 0;
+
+
+            using (FileStream streamOpen = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+
+                    BinaryReader binaryReader = new BinaryReader(streamOpen);
+                    Stopwatch sw = new Stopwatch();
+                    Check check = new Check();
+                    QProgressBar bar = new QProgressBar();
+                    TimeSpan time;
+                    check.Start();
+                   // this.ChuckSize = this.ChuckSize > streamOpen.Length ? int.Parse(streamOpen.Length.ToString()) : this.ChuckSize;
+                    sw.Start();
+                    long current, goal;
+                    int chunck; 
+                    string status, eta;
+                    byte[] buffer;
+                    goal = streamOpen.Length;
+                    current = 0;
+                    chunck = 1024 * 1024 * 64; 
+                    if(chunck > streamOpen.Length)
+                    {
+                        chunck = int.Parse(streamOpen.Length.ToString());
+                    }
+                    while (current < goal)
+                    {
+
+                        time = Get.ETA(sw, current, goal - 1);
+                        eta = time.Hours == 0 ? "" : $"{time.Hours}h ";
+                        eta += time.Minutes == 0 ? "" : $"{time.Minutes}m";
+                        eta += time.Seconds == 0 ? "" : $" {time.Seconds}s";
+                        status = $"Reading... {fileName} [{Get.FileSize(current)} / {Get.FileSize(goal)}]  Status: [{Get.Status(current, goal+2)}] ChuckSize: [{Get.FileSize(chunck)}] ETA: [{eta}] Computing Hash: [{hash}]";
+                        CurrentStatus = status;
+                        /*
+                        if (AllowDebugger == true)
                         {
-                        x += ((seed * bytes[item]) + item);
+
+                            bar.Label = status;
+                            bar.Display(Get.Status(current, goal+2 ));
+                            
+                        //Get.Green(status);
                         }
-                  return x;
+                        */
 
-                  }
+                        streamOpen.Seek(current, SeekOrigin.Begin);
+
+                        buffer  = new byte[chunck];
+                        binaryReader.Read(buffer, 0, buffer.Length);
 
 
-                  /// <summary>
-                  /// Hashs the code256.
-                  /// </summary>
-                  /// <returns>The code256.</returns>
-                  /// <param name="bytes">Bytes.</param>
-                  public static string HashCode256(byte[] bytes)
-                  {
-                        string strHash = null;
-                        using(SHA256 sha = SHA256.Create())
+                        // streamWrite.Seek(current, SeekOrigin.Begin);
+                        //binaryWriter = new BinaryWriter(streamWrite);
+                        //binaryWriter.Write(this.Buffer, 0, this.Buffer.Length);
+                         hash += Get.HashCode(buffer);  
+                         current += chunck;
+                        // Get.Yellow(current); 
+
+
+                    }
+                    /*
+                    status = $"Done!!! {target}";
+                    if (this.AllowDebugger)
+                    {
+                        Get.Print($"{source}", "->", $"{target}");
+                        Get.Green($"Done!!!");
+                        Get.Yellow($"Transfer Time: {check.Stop()}");
+                        if (WaitToAcknolegeTransfer)
                         {
-                        byte[] hash = sha.ComputeHash(bytes);
-                        foreach(var ch in hash)
-                              {
-                              strHash += ch;  
-                              }
+                            Get.Wait();
                         }
-                  return strHash;
-                  }
+                    }
+                    */
+                }
 
-                  /// <summary>
-                  /// Hashs the code256.
-                  /// </summary>
-                  /// <returns>The code256.</returns>
-                  /// <param name="content">Content.</param>
-                  public static string HashCode256(object content)
-                  {
-                  string strHash = null;
-                  byte[] bytes = IConvert.ToASCII(content); 
-                  using(SHA256 sha = SHA256.Create())
-                        {
-                        byte[] hash = sha.ComputeHash(bytes);
-                        foreach(var ch in hash)
-                              {
-                              strHash += ch;
-                              }
-                        }
-                  return strHash;
-                  }
-            /// <summary>
-            /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>
-            /// which measn that is not secure enough so if you need encription
-            /// please refer to <see cref="QuickTools.QSecurity.Secure"/>
-            /// </summary>
-            /// <param name="text"></param>
-            /// <param name="length"></param>
-            /// <returns></returns>
-            /// <exception cref="ArgumentNullException"></exception>
-            public static double HashCode(string text,int length)
+
+
+
+            return hash;
+        }
+
+
+        /*
+        public static double HashCodeFromFile(string fileName, bool smallFiles)
+        {
+            return  HashCodeFromFile(fileName); 
+            /*
+                        if (fileName == null || fileName == "") throw new ArgumentException("No File Name provided");
+            if (!File.Exists(fileName)) throw new FileNotFoundException($"The File could not be found: {fileName}");
+            if (int.Parse(Get.FileSize(fileName, SizeType.IntConvertible)) >= int.MaxValue)
+            {
+                FileStream stream = new FileStream(fileName, FileMode.Open);
+                BinaryReader binary = new BinaryReader(stream);
+                byte[] bytes = new byte[102400];
+                for (int b = 0; b < 102400; b++)
+                {
+                    bytes[b] = binary.ReadByte();
+                }
+                return long.Parse(Get.HashCode(bytes).ToString());
+            }
+            return long.Parse(Get.HashCode(Binary.Reader(fileName)).ToString());
+
+
+        }
+        */
+
+
+        /// <summary>
+        /// This Creates a hash code based on the given input 
+        /// be carefull using this as a security method since 
+        /// this macanisim is too simple and it could be broken easely
+        /// The method is taking X and the seed and multiplying it by each
+        /// byte of the array like on the fallowing way X += seed * bytes[i] + item
+        /// </summary>
+        /// <returns>The code.</returns>
+        /// <param name="bytes">Bytes.</param>
+        public static double HashCode(byte[] bytes)
+        {
+            if (bytes == null || bytes.Length == 0) throw new ArgumentNullException("The Given Bytes was not a valid Bytes array");
+
+            double x = 0;
+            double seed = 7;
+
+            for (int item = 0; item < bytes.Length; item++)
+            {
+                x += ((seed * bytes[item]) + item);
+            }
+            return x;
+
+        }
+
+
+        /// <summary>
+        /// Hashs the code256.
+        /// </summary>
+        /// <returns>The code256.</returns>
+        /// <param name="bytes">Bytes.</param>
+        public static string HashCode256(byte[] bytes)
+        {
+            string strHash = null;
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hash = sha.ComputeHash(bytes);
+                foreach (var ch in hash)
+                {
+                    strHash += ch;
+                }
+            }
+            return strHash;
+        }
+
+        /// <summary>
+        /// Hashs the code256.
+        /// </summary>
+        /// <returns>The code256.</returns>
+        /// <param name="content">Content.</param>
+        public static string HashCode256(object content)
+        {
+            string strHash = null;
+            byte[] bytes = IConvert.ToASCII(content);
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hash = sha.ComputeHash(bytes);
+                foreach (var ch in hash)
+                {
+                    strHash += ch;
+                }
+            }
+            return strHash;
+        }
+        /// <summary>
+        /// This has the same level of security of <see cref="QuickTools.QCore.Get.HashCode(string)"/>
+        /// which measn that is not secure enough so if you need encription
+        /// please refer to <see cref="QuickTools.QSecurity.Secure"/>
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static double HashCode(string text, int length)
         {
 
             if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
             if (length == 0) length = text.Length;
             //if (length )
-
+            //System.Text.UnicodeEncoding.ASCII.GetBytes(text)
             byte[] bytes = new byte[length];
             byte[] str = System.Text.Encoding.ASCII.GetBytes(text); ;
             double x = 0;
             double seed = 7;
             int max = str.Length;
-            int indexer = 0; 
+            int indexer = 0;
             //filling
-            for(int f = 0; f <bytes.Length; f++)
+            for (int f = 0; f <bytes.Length; f++)
             {
-                if(indexer == max)
+                if (indexer == max)
                 {
-                    indexer = 0; 
+                    indexer = 0;
                 }
                 bytes[f] = str[indexer];
-                indexer++; 
+                indexer++;
             }
 
             //creating hash
@@ -357,15 +1108,7 @@ namespace QuickTools.QCore
         {
             if (text == null || text.Length == 0) throw new ArgumentNullException("The Given text was not valid");
 
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(text); 
-            double x = 0;
-            double seed = 7;
-
-            for (int item = 0; item < bytes.Length; item++)
-            {
-                x += ((seed * bytes[item]) + item);
-            }
-            return x;
+           return HashCode(System.Text.Encoding.ASCII.GetBytes(text));
         }
 
         /// <summary>
@@ -379,20 +1122,19 @@ namespace QuickTools.QCore
         {
 
 
-                        milliSecondsOrseconds = milliSecondsOrseconds * 1000; 
-                 
-                  try
+
+            try
             {
 
                 Thread.Sleep(milliSecondsOrseconds);
 
             }
-                  catch(Exception e)
-                        {
-                        Get.Wrong(e);
-                        }
+            catch (Exception e)
+            {
+                Get.Wrong(e);
+            }
 
-                  }
+        }
 
         /// <summary>
         /// Does the same than the waittime with no param 
@@ -406,13 +1148,14 @@ namespace QuickTools.QCore
                 Thread.Sleep(1000);
 
             }
-                  catch(Exception e)
-                        {
-                        Get.Wrong(e);
-                        }
+            catch (Exception e)
+            {
+                Get.Wrong(e);
+            }
 
 
-                  }
+        }
+
         /// <summary>
         /// This does the same thing than WaitTime with param but it actually
         /// has a different name 
@@ -421,14 +1164,14 @@ namespace QuickTools.QCore
         public static void _(int sleepTime)
         {
 
-                  try
-                        {
-                        Thread.Sleep(sleepTime);
-                        }
-                  catch(Exception e) 
-                        {
-                              Get.Wrong(e);
-                        }
+            try
+            {
+                Thread.Sleep(sleepTime);
+            }
+            catch (Exception e)
+            {
+                Get.Wrong(e);
+            }
         }
 
 
@@ -441,6 +1184,27 @@ namespace QuickTools.QCore
             return Path;
         }
 
+        /// <summary>
+        /// Create a data path if is not created and creates the directory given as a parameter
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="newDirectory"></param>
+        public static string DataPath(string newDirectory)
+        {
+            string bar = Slash();
+            string folder = $"{DataPath()}{newDirectory}{Slash()}";
+            if (Directory.Exists(folder) == true)
+            {
+                return folder;
+            }
+            else
+            {
+                Directory.CreateDirectory(folder);
+
+                return folder;
+            }
+
+        }
         /// <summary>
         /// Abstraction for Directory.GetCurrentDirectory(); 
         /// returns the current string path 
@@ -456,8 +1220,7 @@ namespace QuickTools.QCore
         /// <returns>string path </returns>
         public static string DataPath()
         {
-
-            string folder = $"{Get.Path}data{Slash()}qt{Slash()}";
+            string folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Slash()}qt{Slash()}";
             if (Directory.Exists(folder) == true)
             {
                 return folder;
@@ -465,21 +1228,109 @@ namespace QuickTools.QCore
             else
             {
                 Directory.CreateDirectory(folder);
-
                 return folder;
             }
 
         }
 
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="action">Action.</param>
+        public static void Wait(Action action) => Get.Wait("Plase Wait", action);
+
+        private static char _Char = '-';
 
 
+        private static int[] Vector = new int[] { };
+        /// <summary>
+        /// This version of Get.Wait is designed to be inside a loop 
+        /// and be updated as the loop goes through it 
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="ignored"></param>
+        public static void Wait(string label,bool ignored)
+        {
+            int x, y;
+            x = 0;
+            y = 0; 
+            if(Vector.Length == 2)
+            {
+                x = Vector[0];
+                y = Vector[1]; 
+            }if(Vector.Length == 0)
+            {
+                Vector = new int[] { Console.CursorLeft, Console.CursorTop };
+                x = Vector[0];
+                y = Vector[1];
+            }
+            char ch = _Char; 
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+            _Char = ch;
+            Get.WaitTime(100);
+            Console.SetCursorPosition(x, y);
+            Console.Write($"{label} [{ch}]");
+        }
 
-            /// <summary>
-            /// Removes the file name extention.
-            /// </summary>
-            /// <returns>The file name extention.</returns>
-            /// <param name="fileName">File name.</param>
-            public static string RemoveFileNameExtention(string fileName)
+        /// <summary>
+        /// Wait the specified  action to finish and prints this label while waits and a wating simbol 
+        /// </summary>
+        /// <param name="label">Label.</param>
+        /// <param name="action">Action.</param>
+        public static void Wait(string label, Action action)
+        {
+            int x, y;
+            x = Console.CursorLeft;
+            y = Console.CursorTop;
+            char ch = '-';
+
+            Thread work = new Thread(() => { action(); });
+            work.Start();
+            while (work.IsAlive)
+            {
+                switch (ch)
+                {
+                    case '-':
+                        ch = '\\';
+                        break;
+                    case '\\':
+                        ch = '|';
+                        break;
+                    case '|':
+                        ch = '/';
+                        break;
+                    case '/':
+                        ch = '-';
+                        break;
+                }
+                Get.WaitTime(100);
+                Console.SetCursorPosition(x, y);
+                Console.Write($"{label} [{ch}]");
+            }
+            Get.WriteL("\nDone");
+        }
+
+
+        /// <summary>
+        /// Removes the file name extention.
+        /// </summary>
+        /// <returns>The file name extention.</returns>
+        /// <param name="fileName">File name.</param>
+        public static string RemoveFileNameExtention(string fileName)
             {
                   return fileName.Substring(0, fileName.IndexOf('.'));
             }
@@ -491,7 +1342,8 @@ namespace QuickTools.QCore
             /// <param name="path">Path.</param>
             public static string FileNameFromPath(string path)
             {
-                  return path.Substring(path.LastIndexOf(Get.Slash()) + 1);
+                  if (!path.Contains('/') && !Path.Contains('\\')) return path; 
+                  return path.Substring(path.LastIndexOf(Get.SlashChar()) + 1);
             }
 
         /// <summary>
@@ -499,16 +1351,36 @@ namespace QuickTools.QCore
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public static string FileExention(string file) => file.Substring(file.LastIndexOf(".") + 1);
+        public static string FileExention(string file) => file.Substring(file.LastIndexOf('.') + 1);
 
-
+        /// <summary>
+        /// makes the console to beep 
+        /// </summary>
+        public static void Beep() => Console.Beep();
         /// <summary>
         /// Gets the path from the given file 
         /// </summary>
         /// <returns>The from path.</returns>
         /// <param name="path">Path.</param>
-        public static string FolderFromPath(string path) => $"{path.Substring(0,path.LastIndexOf(Get.Slash())+1)}";
+        public static string FolderFromPath(string path)
+        {
+            if(path[path.Length-1] == Get.Slash()[0])
+            {
+                return path;
+            }
+            if (System.IO.Path.HasExtension(path))
+            {
+                return path.Substring(0 ,path.LastIndexOf(Get.Slash()[0]));
+            }
+            else
+            {
+                return path + Get.Slash(); 
+            }
+         }
 
+        /// <summary>
+        /// Prints the disks.
+        /// </summary>
         public static void PrintDisks()
         {
 
@@ -627,8 +1499,9 @@ namespace QuickTools.QCore
         /// <summary>
         /// Gets the relative path from the given path by taking your current path in consideration
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns>the relative path string </returns>
+        /// <returns>The path.</returns>
+        /// <param name="path">Path.</param>
+        /// <param name="currentPath">Current path.</param>
         public static string RelativePath(string path ,string currentPath)
         {
             string relative, slash, fullPath, newPath;
@@ -669,76 +1542,50 @@ namespace QuickTools.QCore
             return relative;
         }
         /// <summary>
-        /// This method allows you to get the clear path fixed to the operating system that you 
+        /// This method allows you to get the clear path fixed tto the operating system that you 
         /// are working with in this case windows and linux are the only one  that this has being tested 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string FixPath(string path)
-        {
-            string clearPath, str;
-            clearPath = "";
-            str = null;
-            int current, goal;
-            goal = path.Length;
-            for (current = 0; current < goal; current++)
-            {
-                str = path[current].ToString();
-                if (path[current].ToString() == @"\" || path[current].ToString() == "/")
-                {
-                    str = Get.Slash();
-                }
-                clearPath += str;
-            }
+        public static string FixPath(string path) => Get.IsWindow() == true ? path.Replace("/", Get.Slash()) : path.Replace(@"\", Get.Slash()); 
+       
 
-            return clearPath;
-        }
-
+        
+        /// <summary>
+        /// Ises the window.
+        /// </summary>
+        /// <returns><c>true</c>, if window was ised, <c>false</c> otherwise.</returns>
         public static bool IsWindow()
         {
-            bool isWindow = true;
+
             string[] info = IConvert.TextToArray(System.Environment.OSVersion.ToString());
             //Microsoft Windows NT 6.2.9200.0
-            if (info[0] == "Microsoft")
+            if (info[0][0] == 'M')
             {
-                return isWindow;
-            }if (info[1] == "Windows")
-            {
-                return isWindow;
+                return true;
             }
             else
             {
-                isWindow = false;
-                return isWindow; 
+                return false;
             }
         }
 
-            /// <summary>
-            /// Create a data path if is not created and creates the directory given as a parameter
-            /// </summary>
-            /// <returns></returns>
-            /// <param name="newDirectory"></param>
-            public static string DataPath(string newDirectory)
-        {
-            string bar = Slash();
-            string folder = $"{Get.Path}data{bar}qt{bar}{newDirectory}{Slash()}";
-            if (Directory.Exists(folder) == true)
-            {
-                return folder;
-            }
-            else
-            {
-                Directory.CreateDirectory(folder);
 
-                return folder;
-            }
-
-        }
 
         //   private static string path = Get.Path;
-        private static string qtDir =$"data{Slash()}qt{Slash()}keys{Slash()}";
+        private static string qtDir =$"{DataPath()}qt{Slash()}keys{Slash()}";
         private static string keyFile = qtDir + "secure.key";
 
+
+        /// <summary>
+        /// Returns the Slash '/' apropiet for the current OS in use
+        /// </summary>
+        /// <returns>The char.</returns>
+        public static char SlashChar() => Slash()[0];
+        /// <summary>
+        /// Returns the Slash '/' apropiet for the current OS in use
+        /// </summary>
+        /// <returns>The slash.</returns>
         public static string Slash()
         {
             string path = null;
@@ -760,7 +1607,7 @@ namespace QuickTools.QCore
         /// and adding the parameter the bool true 
         /// for it to auto save the key 
         /// </summary>
-        public static void SaveKey()
+        static void SaveKey()
         {
             //string path, keyFile, qtDir;
 
@@ -771,8 +1618,6 @@ namespace QuickTools.QCore
             }
             else
             {
-
-
                 using (FileStream file = File.Create(keyFile))
                 {
 
@@ -784,8 +1629,6 @@ namespace QuickTools.QCore
                         }
                     }
                 }
-
-
             }
 
 
@@ -1040,6 +1883,11 @@ character in order for it to return a valid name
         /// Get.NumberInput(); 
         /// </summary>
         public static int Number = 0;
+        /// <summary>
+        /// Holds the value of long numbers for operations that require long operations 
+        /// such as <see cref="Get.FileSize(string)"/>
+        /// </summary>
+        public static long LongNumber { get; set; }
         ///<summary>
         /// Returns the text taken by
         /// Get.Input();
@@ -1396,60 +2244,42 @@ character in order for it to return a valid name
                   Console.Clear();                 
             }
 
-
-            static int X;
-            static int Y;
-            /// <summary>
-            /// This method started as a shurtcut from <see cref="System.Console.Clear"/>
-            /// But not any longer this method now Clear every single <see cref="System.Char"/>
-            /// in the console and uses inside to for loops and as reference to get the widows size <see cref="System.Console.BufferWidth"/>
-            /// and <see cref="System.Console.BufferHeight"/> and to remove the chars <see cref="System.Console.SetCursorPosition(int, int)"/>
-            /// </summary>
-            /// <param name="F">If set to <c>true</c> f.</param>
-            public static void Clear(bool F)
+        /// <summary>
+        /// Clear the specified everything.
+        /// </summary>
+        /// <param name="everything">If set to <c>true</c> everything.</param>
+                     public static void Clear(bool everything)
+        {
+            if (!everything) return;         
+            int x, y;
+            x = Console.BufferWidth;
+            y = Console.BufferHeight;
+            for (int xx = 0; xx < x; xx++)
             {
-                  X = Console.BufferWidth;
-                  Y = Console.BufferHeight;
-                  for (int x = 0; x < X; x++)
-                  {
-                        int y = 0;
-                        while (y < Y)
-                        {
-                              Console.CursorVisible = false;                              
-                              Console.SetCursorPosition(x, y);
-                              Console.Write(" ");
-                              y++;
-                        }
-                  }
-                  for (int y = 0; y < Y; y++)
-                  {
-                        int x = 0;
-                        while (x < X)
-                        {
-                              Console.CursorVisible = false;
-                              Console.SetCursorPosition(x, y);
-                              Console.Write(" ");
-                              x++;
-                        }
-                  }
-                                   
-                  Console.SetCursorPosition(0,0);
-
+                for (int yy = 0; yy < y; yy++)
+                {
+                    Console.SetCursorPosition(xx, yy);
+                    Get.Write(" ");
+                }
             }
-                       
-                       
-           /// <summary>
-           /// Clears the after the content given 
-           /// </summary>
-           /// <param name="content">Content.</param>
-            public static void ClearAfter(object content)
-            {
-                  string message = content.ToString();
+            Console.SetCursorPosition(1, 1);           
+        }
 
+
+        /// <summary>
+        /// Clears the after the content given 
+        /// </summary>
+        /// <param name="content">Content.</param>
+        static void ClearAfter(object content)
+            {
+                string message = content.ToString(); 
+                throw new NotImplementedException("This Method is currently not mantained");
+                  /*
                   Console.SetCursorPosition(0, 0);
-                  Console.Write(new CInput().Tabs(message.Length));
+                  //Console.Write(new CInput().Tabs(message.Length));
                   Console.SetCursorPosition(0, 0);
                   Console.Write(content); 
+                  */
             }
                        
 
@@ -1682,14 +2512,48 @@ character in order for it to return a valid name
         /// Gets an input without showing it on the screen
         /// </summary>
         /// <returns>The password.</returns>
-        public static string Password()
-        {
-            string password = null;
+        public static string Password() => Get.Password(""); 
 
+
+        /// <summary>
+        /// gets the input of a passwords and check to make sure that is the same 2 times
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="repeat"></param>
+        /// <returns></returns>
+        public static string Password(string label,bool repeat)
+        {
+            if (!repeat) return Get.Password(label);
+            string password; 
             while (true)
             {
-                // Get.Clear();                       
-                Console.SetCursorPosition(0, Console.CursorTop);
+                password = Get.Password(label); 
+                if(password == Get.Password($"{label} Again"))
+                {
+                    return password; 
+                }
+                else
+                {
+                    Get.Red($"The passwords does not match!!!");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the input of a private password and return it 
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        public static string Password(string label)
+        {
+            string password = null;
+            Get.White(label); 
+            while (true)
+            {
+                // Get.Clear();
+
+                Console.CursorVisible = false;
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.Black;
                 var word = Console.ReadKey();
@@ -1805,7 +2669,7 @@ character in order for it to return a valid name
                         /// <param name="Object">Object.</param>
                   public static byte[] Bytes(object Object)
                   {
-                        return System.Text.Encoding.ASCII.GetBytes(Object.ToString());                  
+                        return System.Text.Encoding.UTF8.GetBytes(Object.ToString());                  
                   }
             /// <summary>
             /// Similar to Console.WriteLine(object); 

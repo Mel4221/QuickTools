@@ -24,6 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Threading;
+
 namespace QuickTools.QIO
       {
       public partial class Binary
@@ -41,34 +43,31 @@ namespace QuickTools.QIO
                   public static byte[] Bind(byte[] bufferA , byte[] bufferB)
                   {
 
-                        byte[] binded, a, b;
-                        a = bufferA;
-                        b = bufferB;
-                        binded = new byte[a.Length + b.Length];
-                        int counter;
-                        bool isNext = false;
-                        counter = 0;
-                         for(int i = 0 ; i <binded.Length ; i++)
+                        byte[] binded;
+                        binded = new byte[bufferA.Length + bufferB.Length];
+                       
+                        Thread A,B;
+                        A = new Thread(() =>
                         {
-                              if(counter == a.Length)
-                              {
-                                    isNext = true;
-                                    counter = 0;
-                              }
-                              switch(isNext)
-                                    {
-                                    case true:
-                                          binded[i] = b[counter];
-                                          counter++;
-                                          break;
-                                    case false:
-                                          binded[i] = a[counter];
-                                          counter++;
-                                          break;
-                                    }
-                
-                        }
-
+                            for (int by = 0; by < bufferA.Length; by++)
+                            {
+                                binded[by] = bufferA[by];
+                            }
+                        });
+                        B = new Thread(() => {
+                            int index = bufferA.Length;
+                            for(int by = 0; by < bufferB.Length; by++)
+                            {
+                                binded[index] = bufferB[by];
+                                index++;
+                            }
+                        });
+                    A.Start();
+                    B.Start();
+                    while (A.IsAlive && B.IsAlive)
+                    {
+                        
+                    }
                   return binded; 
                   }
             }

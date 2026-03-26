@@ -24,11 +24,15 @@ namespace QuickTools.QData
         /// <summary>
         /// This set or get the ID and as default is set to  <see cref="QuickTools.QCore.IRandom.RandomText(double)"/>
         /// </summary>
-        public   string ID = IRandom.RandomText(64); 
+        public string ID = IRandom.RandomText(64); 
         /// <summary>
         /// Gets or set the Exception 
         /// </summary>
         public Exception ExceptionRecived { get; set; }
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Error"/>.
+        /// </summary>
+        /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:QuickTools.QData.Error"/>.</returns>
         public override string ToString()
         {
             return $"Error Type: {this.Type} \n Error Message: {this.Message} \n Error ID: {this.ID} \n {this.ExceptionRecived}";

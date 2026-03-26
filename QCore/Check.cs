@@ -38,19 +38,19 @@ namespace QuickTools.QCore
             /// Gets or sets the seconds.
             /// </summary>
             /// <value>The seconds.</value>
-            public object Seconds { get; set; }
+            public int Seconds { get; set; }
 
             /// <summary>
             /// Gets or sets the minutes.
             /// </summary>
             /// <value>The minutes.</value>
-            public object Minutes { get; set; }
+            public int Minutes { get; set; }
 
             /// <summary>
             /// Gets or sets the milliseconds.
             /// </summary>
             /// <value>The milliseconds.</value>
-            public object Milliseconds { get; set; }
+            public int Milliseconds { get; set; }
 
             /// <summary>
             /// Start this instance.
@@ -81,7 +81,12 @@ namespace QuickTools.QCore
                         Seconds = sw.Elapsed.Seconds;
                         Minutes = sw.Elapsed.Minutes;
                         Milliseconds = sw.Elapsed.Milliseconds;
-                        STringResults =  $"Minutes: {Minutes} Seconds: {Seconds} Milliseconds: {Milliseconds}";
+                        string m, s, ms;
+                        m = Minutes == 0 ? "" : $"{Minutes}m ";
+                        s = Seconds == 0 ? "" : $"{Seconds}s ";
+                        ms = Milliseconds == 0 ? "" : $"{Milliseconds}ms "; 
+                        
+                        STringResults =  $"{m}{s}{ms}";
                         sw = new Stopwatch(); 
                 return STringResults; 
             }

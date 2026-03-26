@@ -18,7 +18,7 @@ namespace QuickTools.QIO
 
         private static string CreateLogDir()
         {
-            string logsDir = null;
+            string logsDir;
             logsDir = Get.DataPath("logs");
             return logsDir;
         }
@@ -29,8 +29,8 @@ namespace QuickTools.QIO
         /// </summary>
         public static void ClearLogs()
         {
-            string path = CreateLogDir();
-            string[] logs = new FilesMaper().GetFiles(path);
+            string logsPath = CreateLogDir();
+            string[] logs = new FilesMaper().GetFiles(logsPath);
             foreach (string log in logs)
             {
                 if (File.Exists(log))
@@ -50,20 +50,14 @@ namespace QuickTools.QIO
 
 
             string path = CreateLogDir();
-            string file = path + name + ".xml";
+            string file = path + name + ".log";
             using (MiniDB db = new MiniDB(file))
             {
-                if (!File.Exists(file))
-                {
-                    db.Create();
-                }
+
+                db.Create();
                 db.Load();
-
-
-                db.AddKey("log", matter, DateTime.Now);
-
-
-
+                db.AddKeyOnHot("log", matter, DateTime.Now);
+                db.HotRefresh();
             }
 
 

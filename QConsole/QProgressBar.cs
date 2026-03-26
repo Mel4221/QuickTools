@@ -24,14 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
   using System.Text;
+using System;
       using QuickTools.QCore;
   namespace QuickTools.QConsole
 {
 
-      /// <summary>
-      /// Creates a ProgressBar that is used on console application
-      /// </summary>
-       public class QProgressBar
+
+
+    /// <summary>
+    /// Creates a ProgressBar that is used on console application
+    /// </summary>
+    public class QProgressBar
       {
             StringBuilder dots = new StringBuilder();
             /// <summary>
@@ -43,21 +46,153 @@
             /// The dots count that will be displaid
             /// </summary>
             public int DotsCount = 10; 
-
-            private string currentPorcent;
-
+            
             /// <summary>
-            /// Display the specified current and goal.
+            /// Contains the Text in which the Display will be printed
             /// </summary>
-            /// <param name="current">Current.</param>
-            /// <param name="goal">Goal.</param>
-            public void Display(int current , int goal)
+            /// <value>The label.</value>
+            public string Label { get; set; } = " ";
+            
+            /// <summary>
+            /// Gets or sets the x value in which the <see cref="System.Console.SetCursorPosition(int, int)"/> will be printing the text 
+            /// </summary>
+            /// <value>The x.</value>
+            public int X { get; set; } = 1;
+            /// <summary>
+            /// Gets or sets the y value in which the <see cref="System.Console.SetCursorPosition(int, int)"/> will be printing the text 
+            /// </summary>
+            /// <value>The y.</value>
+            public int Y { get; set; } 
+            /// <summary>
+            /// Gets or sets the back ground color for label.
+            /// </summary>
+            /// <value>The back ground color for label.</value>
+            public ConsoleColor BackGroundColorForLabel { get; set; } = ConsoleColor.Black;
+            /// <summary>
+            /// Gets or sets the back ground color for dots.
+            /// </summary>
+            /// <value>The back ground color for dots.</value>
+            public ConsoleColor BackGroundColorForDots { get; set; } = ConsoleColor.Black;
+            /// <summary>
+            /// Gets or sets the fore color for label.
+            /// </summary>
+            /// <value>The fore color for label.</value>
+            public ConsoleColor ForeColorForLabel { get; set; } = ConsoleColor.White;
+            /// <summary>
+            /// Gets or sets the fore color for dots.
+            /// </summary>
+            /// <value>The fore color for dots.</value>
+            public ConsoleColor ForeColorForDots { get; set; } = ConsoleColor.Green;
+
+            
+            private string Status { get; set; } = " ";
+            private string StrDots { get; set; } = "";
+            private bool Started { get; set; } = false;
+            private string currentPorcent;
+            private bool completed { get; set; } = false;
+
+        /// <summary>
+        /// Reset the StartDots , Label , Status.
+        /// </summary>
+        public void Reset()
+        {
+            this.StrDots = "";
+            this.Label = " ";
+            this.Status = " ";
+            this.currentPorcent = "";
+        }
+
+        /// <summary>
+        /// Clear this instance.
+        /// </summary>
+        public void Clear()
+        {
+            for (int x = 1; x < Console.BufferWidth; x++)
+            {
+                Console.SetCursorPosition(x, this.Y);
+                Get.Write(" ");
+            }
+        }
+
+
+        /// <summary>
+        /// Display the specified status with dots
+        /// </summary>
+        /// <param name="status">Status.</param>
+        public void Display(string status)
+        {
+            try
+            {
+                /*
+                if (!this.Started)
+                {
+                    Console.BackgroundColor = this.BackGroundColorForLabel;
+                    Console.ForegroundColor = this.ForeColorForLabel;
+                    Console.Write($"{this.Label} ");
+                    Get.Reset();
+                    Console.Write('[');
+                    this.X = Console.CursorLeft;
+                }
+                */
+                // Get.Wait($"{status} {Get.Number}");
+                //if (completed) { this.Clear(); this.completed = false; }
+                this.Started = true;
+              
+                if (this.Status != status)
+                {
+                    this.Y = Console.CursorTop;
+					Console.SetCursorPosition(1, this.Y);
+                    Console.BackgroundColor = this.BackGroundColorForLabel;
+                    Console.ForegroundColor = this.ForeColorForLabel;
+                    Console.Write($"{this.Label} ");
+                    Get.Reset();
+                    Console.Write('[');
+                    this.X = Console.CursorLeft;
+                    Get.Title(status);
+
+
+
+                    Console.SetCursorPosition(this.X, this.Y);
+                    if (this.Status[0] != status[0])
+                    {
+                        StrDots += this.DotsType;
+                    }
+
+                    Console.BackgroundColor = this.BackGroundColorForDots;
+                    Console.ForegroundColor = this.ForeColorForDots;
+                    Console.Write(StrDots);
+                    this.Status = status;
+
+                    if (status == "100%")
+                    {
+                        Get.Reset();
+                        Console.Write(']');
+                        Console.Write(Environment.NewLine);
+                        this.completed = true;
+                       
+
+                    }
+                }
+            }catch
+            {
+                Get.Clear();
+                Get.Box($"The Screen is Too Small");
+                Console.Beep();
+            }
+
+        }
+        /// <summary>
+        /// Display the specified current and goal.
+        /// </summary>
+        /// <param name="current">Current.</param>
+        /// <param name="goal">Goal.</param>
+        public void Display(int current , int goal)
                   {
 
                   //Console.SetCursorPosition(0, 0); 
                    
                        
-
+                        
                         string status = Get.Status(current , goal);
                         if(this.currentPorcent == status)
                         {
@@ -79,12 +214,51 @@
                                     }
 
                               Dots(status);
+  
+
+        }
+
+
+      
+        /// <summary>
+        /// Display the specified current, goal and consoleTitle.
+        /// </summary>
+        /// <param name="current">Current.</param>
+        /// <param name="goal">Goal.</param>
+        /// <param name="consoleTitle">Console title.</param>
+        public void Display(int current, int goal,string consoleTitle)
+        {
+
+            //Console.SetCursorPosition(0, 0); 
+
+
+            Get.Title(consoleTitle); 
+            string status = Get.Status(current, goal);
+            if (this.currentPorcent == status)
+            {
+                return;
+            }
+            if (this.currentPorcent != status)
+            {
+                this.currentPorcent = status;
+                Get.Clear();
+            }
+            Get.Label(status);
+            Get.Write("[");
+            Get.Green();
+            Get.Write(dots);
+            Get.Reset();
+            if (current == goal)
+            {
+                Get.Write("]\n");
+            }
+
+            Dots(status);
 
 
 
-                  }
-
-            void Dots(string status)
+        }
+        void Dots(string status)
             {
                   int porcent = int.Parse(status.Replace("%", "")) / this.DotsCount;
                   dots.Clear();
@@ -95,7 +269,7 @@
 
             }
 
-
+        /*
             /// <summary>
             /// Display the specified current, goal and dots.
             /// </summary>
@@ -120,7 +294,7 @@
                   this.DotsType = dots; 
                   this.Dots(status);
             }
-
+            */
             /// <summary>
             /// Display the specified current, goal, dots and label.
             /// </summary>

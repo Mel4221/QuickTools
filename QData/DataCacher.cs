@@ -1,9 +1,5 @@
 ﻿using QuickTools.QCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QuickTools.QIO;
 using System.IO;
 
@@ -16,15 +12,14 @@ namespace QuickTools.QData
     public class DataCacher
     {
         private QSettings settings;
-        /// <summary>
-        /// contains the path to get to the cache
-        /// </summary>
-        public string Path { get; set; }
+ 
+
 
         /// <summary>
-        /// contains the Cache file 
+        /// contains the Cache file
+        /// QuickToolsCache.xml
         /// </summary>
-        public readonly string CacheFile = "QuickToolsCache.xml";
+        public string CacheFile { get; set; } = "QuickTools.cache";
 
         /// <summary>
         /// Cache the given data 
@@ -108,12 +103,32 @@ namespace QuickTools.QData
         /// </summary>
         public DataCacher()
         {
-            this.ClearCache();
-            this.Path = Get.DataPath("cache");
-            settings = new QSettings(this.CacheFile, "DataCacher", "Data", this.Path);
-            settings.Create();
+            //this.ClearCache();
+            
+            
+            this.settings = new QSettings(this.CacheFile);
+            this.settings.Create();
+            this.settings.Load();
 
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:QuickTools.QData.DataCacher"/> class.
+        /// </summary>
+        /// <param name="clearCache">If set to <c>true</c> clear cache.</param>
+        public DataCacher(bool clearCache)
+        {
+            if (clearCache)
+            {
+                this.ClearCache();
+            }
+
+          
+            this.settings = new QSettings(this.CacheFile);
+            this.settings.Create();
+            this.settings.Load();
+
+        }
+
 
     }
 }

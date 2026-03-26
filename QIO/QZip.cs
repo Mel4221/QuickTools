@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using QuickTools.QCore;
+using QuickTools.QData; 
 
 namespace QuickTools.QIO
 {
@@ -36,12 +37,7 @@ namespace QuickTools.QIO
       /// </summary>
       public partial class QZip
       {
-            private string FileName;
-            private string Prefix = ".zip"; 
-            private readonly List<string> FileList;
-
-            private void Check() {if (this.FileName.Length == 0)throw new Exception("The file was not provided "); }
-
+           
            
 
             /// <summary>
@@ -68,10 +64,100 @@ namespace QuickTools.QIO
             }
 
 
-            /// <summary>
-            /// Decompresses the list of files
-            /// </summary>
-            public void DecompressList()
+        /// <summary>
+        /// Zip the specified archiveName and files.
+        /// </summary>
+        /// <param name="archiveName">Archive name.</param>
+        /// <param name="files">Files.</param>
+        public void Zip(string archiveName , string[] files)
+        {
+            using (FileStream stream = new FileStream(archiveName,FileMode.Create,FileAccess.Write))
+            {
+                using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create))
+                {
+                    int current, goal;
+                    string status;
+                    current = 0;
+                    goal = files.Length - 1;
+                    foreach (var item in files)
+                    {
+                        try
+                        {
+                            archive.CreateEntryFromFile(item, Get.FileNameFromPath(item), CompressionLevel.Optimal);
+                            current++;
+                            this.CurrentIntStatus = Get.StatusNumber(current, goal); 
+                            status = $"{Get.FileNameFromPath(item)} [OK] [{Get.Status(current, goal)}]";
+                            this.CurrentTextStatus = status;
+                            if (this.AllowDebugger)
+                            {
+                                Get.Yellow(status);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            this.Errors.Add(new Error() { Message = ex.Message, Type = $"Failed To Zip {Get.FileNameFromPath(item)} Due to: \n {ex}" });
+                        }
+
+                    }
+                    if (this.AllowDebugger && this.Errors.Count > 0)
+                    {
+                        this.Errors.ForEach(item => Get.Red(item.ToString()));
+                    }
+
+                }
+            }
+        }
+        /// <summary>
+        /// Contains the list of error .
+        /// </summary>
+        public List<Error> Errors;
+        /// <summary>
+        /// Uns the zip.
+        /// </summary>
+        /// <param name="archive">Archive.</param>
+        /// <param name="outPath">Out path.</param>
+        public void UnZip(string archive, string outPath)
+        {
+            this.Errors = new List<Error>();
+
+            using (ZipArchive unzip = ZipFile.OpenRead(archive))
+            {
+                string status;
+                int current, goal;
+                goal = unzip.Entries.Count - 1;
+                current = 0;
+                foreach (ZipArchiveEntry entry in unzip.Entries)
+                {
+                    try
+                    {
+                        entry.ExtractToFile(Path.Combine(outPath, entry.FullName),true);
+                        current++;
+                        status = $"{entry.FullName} [OK] [{Get.Status(current, goal)}]";
+                        this.CurrentIntStatus = Get.StatusNumber(current, goal); 
+                        this.CurrentTextStatus = status;
+                        if (this.AllowDebugger)
+                        {
+                            Get.Yellow(status);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        this.Errors.Add(new Error() { Message = ex.Message, Type = $"Failed To UnZip {entry.FullName} Due to: \n {ex}" });
+                    }
+                    if (this.AllowDebugger && this.Errors.Count > 0)
+                    {
+                        this.Errors.ForEach(item => Get.Red(item.ToString()));
+                    }
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decompresses the list of files
+        /// </summary>
+        public void DecompressList()
             {
                   if (FileList.Count == 0)
                   {

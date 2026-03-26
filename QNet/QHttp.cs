@@ -150,7 +150,7 @@ using System.ComponentModel;
 
                               if (RequireServerCerticate == false) ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                              HttpWebResponse response = null;
+                              HttpWebResponse response;
 
                               response = (HttpWebResponse)request.GetResponse();
                               
@@ -161,6 +161,17 @@ using System.ComponentModel;
                                     StreamReader reader = new StreamReader(stream);
                                     result = reader.ReadToEnd();
                               }
+                                this.Headers.Clear();
+                
+                              //foreach(HttpResponseHeader header in response.Headers)
+                              //  {
+                   
+                              //      this.Headers.Add(new Header()
+                              //      {
+                              //          Key = header[]
+                              //      });
+                              //  }   
+
                               return result;
 
                         }
