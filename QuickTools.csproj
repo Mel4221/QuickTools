@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.props')" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{264AC135-0E28-4D44-9BD8-CB6F10CF4C3D}</ProjectGuid>
+    <ProjectGuid>{AA97AED0-0FDE-40D3-8BF2-E8F5C918E632}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>QuickTools</RootNamespace>
     <AssemblyName>QuickTools</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <PackageId>QuickTools</PackageId>
-    <PackageVersion>2004.5</PackageVersion>
+    <PackageId>5000</PackageId>
+    <PackageVersion>5000</PackageVersion>
     <Authors>MBV</Authors>
-    <Description>Minimum updates to the current version </Description>
-    <PackOnBuild>true</PackOnBuild>
-    <PackageIconUrl>http://www.mbvapps.xyz/icon/setting.ico</PackageIconUrl>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageLicenseUrl>https://github.com/segmentio/is-url/blob/master/LICENSE-MIT</PackageLicenseUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIconUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/setting.ico</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Mel4221/QuickTools/testing/LICENSE</PackageLicenseUrl>
     <Owners>MBV</Owners>
-    <PackageProjectUrl>https://www.github.com/Mel4221/QuickTools/</PackageProjectUrl>
-    <PackageReleaseNotes>Just small updates related with stability</PackageReleaseNotes>
-    <Summary>C# Librarry</Summary>
-    <PackageTags>easy tool console color short encrypt secure write read </PackageTags>
+    <PackageProjectUrl>https://github.com/Mel4221/QuickTools/tree/testing</PackageProjectUrl>
+    <PackageReleaseNotes>MiniDB not stable</PackageReleaseNotes>
+    <Summary>This is a C# Library Design to contain an array of tools for console applications and any other project that wish to just to get their projects running</Summary>
+    <PackageTags>Tools Encrypt Decrypt Security Files Console</PackageTags>
     <Title>QuickTools</Title>
+    <Description>This is a C# Library Design to contain an array of tools for console applications and any other project that wish to just to get their projects running</Description>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -32,69 +30,154 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\QuickTools.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CustomCommands>
-      <CustomCommands>
-        <Command>
-          <type>BeforeBuild</type>
-        </Command>
-      </CustomCommands>
-    </CustomCommands>
-    <LangVersion>Latest</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="mscorlib" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="IRandom.cs" />
-    <Compile Include="colorNoParam.cs" />
-    <Compile Include="colorWithParam.cs" />
-    <Compile Include="user.cs" />
-    <Compile Include="Get.cs" />
-    <Compile Include="Traductor.cs" />
-    <Compile Include="reader.cs" />
-    <Compile Include="writer.cs" />
-    <Compile Include="Binary.cs" />
-    <Compile Include="console.cs" />
-    <Compile Include="logger.cs" />
-    <Compile Include="arrowKeysReader.cs" />
-    <Compile Include="LoopInput.cs" />
-    <Compile Include="NewImplementation.cs" />
-    <Compile Include="printList.cs" />
-    <Compile Include="OptionExt.cs" />
-    <Compile Include="DirecectionHandeler.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Decryptor.cs" />
-    <Compile Include="Encryptor.cs" />
-    <Compile Include="EmptyCSharpFile.cs" />
-    <Compile Include="Input.cs" />
-    <Compile Include="Panel.cs" />
-    <Compile Include="Binary.RW.cs" />
-    <Compile Include="BinaryReaderTester.cs" />
-    <Compile Include="XmlHelper.cs" />
-    <Compile Include="CacheHandeler.cs" />
-    <Compile Include="CacheHandeler.Read&amp;Write.cs" />
-    <Compile Include="QSettings.cs" />
-    <Compile Include="MiniDB_Methods.cs" />
-    <Compile Include="MiniDB_Fields.cs" />
-    <Compile Include="MiniDB_Constructors.cs" />
-    <Compile Include="Check.cs" />
-    <Compile Include="DB.cs" />
-</ItemGroup>
+    <Compile Include="QColors\colorNoParam.cs" />
+    <Compile Include="QColors\colorWithParam.cs" />
+    <Compile Include="QConsole\ArrayWalker.cs" />
+    <Compile Include="QConsole\ArrowsKey.cs" />
+    <Compile Include="QConsole\CInput.cs" />
+    <Compile Include="QConsole\CInputPartial.cs" />
+    <Compile Include="QConsole\console.cs" />
+    <Compile Include="QConsole\LoopInput.cs" />
+    <Compile Include="QConsole\Options.cs" />
+    <Compile Include="QConsole\Options_Constructors.cs" />
+    <Compile Include="QConsole\Options_Fields.cs" />
+    <Compile Include="QConsole\Options_NewDisplay.cs" />
+    <Compile Include="QConsole\Panel.cs" />
+    <Compile Include="QConsole\QInput.cs" />
+    <Compile Include="QConsole\QProgressBar.cs" />
+    <Compile Include="QConsole\ShellInput.cs" />
+    <Compile Include="QConsole\Emulation\QVim.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Constructors.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Fields.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Actions.cs" />
+    <Compile Include="QConsole\Emulation\QVim_Methods_Conditionals.cs" />
+    <Compile Include="QCore\Check.cs" />
+    <Compile Include="QCore\Get.cs" />
+    <Compile Include="QCore\Get_Console_Command_ls.cs" />
+    <Compile Include="QCore\GlobalSuppressions.cs" />
+    <Compile Include="QCore\IConvert.cs" />
+    <Compile Include="QCore\IRandom.cs" />
+    <Compile Include="QCore\Make.cs" />
+    <Compile Include="QData\MiniDB_Constructors.cs" />
+    <Compile Include="QData\DataCacher.cs" />
+    <Compile Include="QData\user.cs" />
+    <Compile Include="QData\Error.cs" />
+    <Compile Include="QData\DB.cs" />
+    <Compile Include="QData\MiniDB_Fields.cs" />
+    <Compile Include="QData\VirtualStack.cs" />
+    <Compile Include="QData\XmlHelper.cs" />
+    <Compile Include="QData\MiniDB_Methods.cs" />
+    <Compile Include="QData\QSettings.cs" />
+    <Compile Include="QIO\RecursiveFileSearch.cs" />
+    <Compile Include="QIO\FilesMaper_Fields.cs" />
+    <Compile Include="QIO\FileTrimer.cs" />
+    <Compile Include="QIO\Binary_Fields.cs" />
+    <Compile Include="QIO\FilesMaper_Constructors.cs" />
+    <Compile Include="QIO\reader.cs" />
+    <Compile Include="QIO\FilesMaper.cs" />
+    <Compile Include="QIO\QZip.cs" />
+    <Compile Include="QIO\writer.cs" />
+    <Compile Include="QIO\Binary.cs" />
+    <Compile Include="QIO\Log.cs" />
+    <Compile Include="QIO\InputParser.cs" />
+    <Compile Include="QIO\Binary_Constructors.cs" />
+    <Compile Include="QIO\Binary_ReadBytes.cs" />
+    <Compile Include="QIO\Binary_Dumper.cs" />
+    <Compile Include="QIO\BytesBinder.cs" />
+    <Compile Include="QIO\FileShreder.cs" />
+    <Compile Include="QIO\Binary_Read_Write.cs" />
+    <Compile Include="QMath\QMath.cs" />
+    <Compile Include="QNet\QShare.cs" />
+    <Compile Include="QNet\DownloadManager.cs" />
+    <Compile Include="QNet\QServer.cs" />
+    <Compile Include="QNet\QHttp.cs" />
+    <Compile Include="QSecurity\Secure_Encrypt.cs" />
+    <Compile Include="QSecurity\Secure_DecryptText.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Constructors.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Method_ReadInfo.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Fields.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Method_MakeTPackFile.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Method_RemovePayload.cs" />
+    <Compile Include="QSecurity\Tricks\TPack_Method_PullTPackFile.cs" />
+    <Compile Include="QCore\Print_list.cs" />
+    <Compile Include="QIO\FilesTransferer.cs" />
+    <Compile Include="QNet\UploadManager.cs" />
+    <Compile Include="QData\QKeyManager.cs" />
+    <Compile Include="QNet\Service.cs" />
+    <Compile Include="QCore\QuickToolsStandars.cs" />
+    <Compile Include="QData\QKeyManager_Fields.cs" />
+    <Compile Include="QData\Key.cs" />
+    <Compile Include="QConsole\ShellInput_Fields.cs" />
+    <Compile Include="QConsole\ShellInput_Constructors.cs" />
+    <Compile Include="QIO\FilesTransferer_Fields.cs" />
+    <Compile Include="QCore\IConvert_StringToBytesArray.cs" />
+    <Compile Include="QCore\IConvert_BytesToString.cs" />
+    <Compile Include="QSecurity\Secure_EncryptFile.cs" />
+    <Compile Include="QSecurity\Secure_CreatePassword.cs" />
+    <Compile Include="QSecurity\Secure_Fields.cs" />
+    <Compile Include="QSecurity\Secure_Constructurs.cs" />
+    <Compile Include="QSecurity\Secure_DecryptFile.cs" />
+    <Compile Include="QSecurity\Secure_Decrypt.cs" />
+    <Compile Include="QIO\QMetadata.cs" />
+    <Compile Include="QIO\FilesMaper_ProcessFiles.cs" />
+    <Compile Include="QIO\FilesMaper_ProcessDirectorys.cs" />
+    <Compile Include="QIO\FilesMaper_ContainHiddenItems.cs" />
+    <Compile Include="QDevelop\BinBuilder.cs" />
+    <Compile Include="QDevelop\BinBuilder_Build.cs" />
+    <Compile Include="QDevelop\BinBuilder_Delete.cs" />
+    <Compile Include="QDevelop\BinBuilder_Fields.cs" />
+    <Compile Include="QDevelop\BinBuilder_Load.cs" />
+    <Compile Include="QDevelop\BinBuilder_Save.cs" />
+    <Compile Include="QDevelop\BinBuilder_ToString.cs" />
+    <Compile Include="QDevelop\BinDownloader.cs" />
+    <Compile Include="QDevelop\BinDownloader_CheckPackageInterity.cs" />
+    <Compile Include="QDevelop\BinDownloader_CreateDirectorys.cs" />
+    <Compile Include="QDevelop\BinDownloader_DownloadPackage.cs" />
+    <Compile Include="QDevelop\BinDownloader_DownloadSources.cs" />
+    <Compile Include="QDevelop\BinDownloader_Fields.cs" />
+    <Compile Include="QDevelop\Package.cs" />
+    <Compile Include="QDevelop\Package_Dependencys.cs" />
+    <Compile Include="QIO\QZip_Fields.cs" />
+    <Compile Include="QData\ClownSettings.cs" />
+    <Compile Include="QData\NJson.cs" />
+    <Compile Include="QCore\Get_FileSize.cs" />
+    <Compile Include="QCore\IConvert_MBytesToString.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Constructor.cs" />
+    <Compile Include="QData\Bastard\ClownKey.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Methods.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Fields.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Save.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Load.cs" />
+    <Compile Include="QData\Bastard\ClownManager_SoftLoad.cs" />
+    <Compile Include="QData\Bastard\ClownManager_Add.cs" />
+  </ItemGroup>
   <ItemGroup>
-    <None Include="notes-from-tester.txt" />
-    <None Include="packages.config" />
-    <None Include="encrypter.intent" />
+    <Folder Include="QColors\" />
+    <Folder Include="QConsole\" />
+    <Folder Include="QCore\" />
+    <Folder Include="QConsole\Emulation\" />
+    <Folder Include="QDevelop\" />
+    <Folder Include="QData\Bastard\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QCore\Decriptor.intent" />
+    <None Include="QCore\encrypter.intent" />
+    <None Include="QCore\notes-from-tester.txt" />
+    <None Include="QCore\setting.ico" />
+    <None Include="QCore\Get_FileSize_ia.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />
+  <Import Project="packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
 </Project>
